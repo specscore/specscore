@@ -1,6 +1,6 @@
 # Feature: Decisions Index
 
-> [View in Synchestra Hub](https://hub.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Fdecisions-index) — graph, discussions, approvals
+> [View in Spec Studio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Fdecisions-index) — graph, discussions, approvals
 
 **Status:** Draft
 **Source Ideas:** decision-and-decisions-index
