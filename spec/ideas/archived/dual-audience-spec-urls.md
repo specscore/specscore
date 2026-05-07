@@ -102,7 +102,7 @@ No changes to authored specs, no changes to the adherence-footer rule, no backen
 - **Content additions:** `/for/ai-agents` page under `docs/for/ai-agents.md` (or similar), registered in `site-config.json`.
 - **Dependencies:** Depends on `adherence-footer-and-doc-type-registry`. That Idea defines the adherence-footer URL shape this Idea honors; it also defines the Document/Index Kind taxonomy that informs which pages belong in `llms.txt` (all Document and Index Kind entries; Meta and Structure entries get de-prioritized or omitted).
 
-## Open Questions
+## Outstanding Questions
 
 - **llms.txt scope** — should `llms-full.txt` include only specification pages, or also onboarding (`/install`, `/demo/todo-app`) and role-based guides (`/for/developers`, etc.)? Current lean: specs + install + demo. Role-based guides are situational and arguably noisy for an agent bootstrapping SpecScore context.
 - **"View as Markdown" placement** — sidebar section, below the page title, a kebab menu on the page header, or multiple? Design decision at implementation time.

@@ -81,7 +81,7 @@ No REQ↔Decision linking in MVP. No automatic migration from existing `Alternat
   - [Idea](../features/idea/README.md) — optional back-link: an Idea's `Alternatives Considered` section MAY note "Decisions produced: D-0007, D-0008" but this is not required and does not introduce a new managed field in MVP.
 - **Dependencies:** `feature`, `adherence-footer`, `document-types-registry`. Blocks nothing; purely additive.
 
-## Open Questions
+## Outstanding Questions
 
 - **Filename form: numbered-and-slugged (`0007-postgres-over-mongo.md`) or slug-only with a `**Number:**` header field?** Numbered-filename is the ADR convention and gives short citations. Slug-only preserves the existing SpecScore invariant. Recommend numbered-filename; flag as the biggest convention break on this Idea.
 - **Status lifecycle: `Proposed → Accepted → Superseded`, or also include `Deprecated` (no successor, just "don't follow this anymore")?** ADR community uses both. Recommend Deprecated be included — sometimes a decision expires without a replacement.
