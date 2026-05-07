@@ -153,7 +153,7 @@ Every feature README title MUST use the `# Feature: {Title}` format. The `Featur
 
 #### REQ: status-field
 
-A `**Status:**` field MUST appear immediately after the title. The value MUST be one of: `Draft`, `In Progress`, `Stable`, `Deprecated`.
+A `**Status:**` field MUST appear immediately after the title. The value MUST be one of: `Draft`, `Under Review`, `Approved`, `Implementing`, `Stable`, `Deprecated`.
 
 #### REQ: required-sections
 
@@ -210,26 +210,35 @@ When a feature has child directories (sub-features), its README MUST include a C
 
 ### Feature statuses
 
-| Status        | Description                                                                   |
-|---------------|-------------------------------------------------------------------------------|
-| `Draft`       | Feature is described at a high level; design decisions remain open             |
-| `In Progress` | Feature is actively being specified and/or implemented                         |
-| `Stable`      | Feature is fully specified and implemented; changes go through proposals       |
-| `Deprecated`  | Feature is being phased out; a successor or removal plan exists                |
+| Status         | Description                                                                              |
+|----------------|------------------------------------------------------------------------------------------|
+| `Draft`        | Feature is being authored; design decisions remain open. Not yet ready for review.        |
+| `Under Review` | Feature is presented for review (reviewer subagent and/or human reviewer).                |
+| `Approved`     | Feature has passed review; user has explicitly approved the spec.                         |
+| `Implementing` | Feature spec is approved; code is being written from it. Spec MAY still iterate in place. |
+| `Stable`       | Feature is fully specified and implemented; changes go through proposals.                 |
+| `Deprecated`   | Feature is being phased out; a successor or removal plan exists.                          |
 
 ```mermaid
 graph LR
     A["Draft"]
-    B["In Progress"]
-    C["Stable"]
-    D["Deprecated"]
+    B["Under Review"]
+    C["Approved"]
+    D["Implementing"]
+    E["Stable"]
+    F["Deprecated"]
 
-    A -->|design solidifies| B
-    B -->|spec + impl complete| C
-    C -->|superseded or removed| D
+    A -->|present for review| B
+    B -->|approved| C
+    A -->|approved (fast path)| C
+    C -->|build starts| D
+    D -->|spec + impl complete| E
+    E -->|superseded or removed| F
 ```
 
-These statuses describe the feature's **specification maturity**, not its implementation progress. A feature can be `Stable` in spec while its implementation is still in development — the spec is the source of truth for desired behavior.
+These statuses describe the feature's **specification maturity** primarily, but `Implementing` and `Stable` also signal implementation phase. A feature can be `Stable` in spec while its implementation is still in development — the spec is the source of truth for desired behavior.
+
+The `Draft → Under Review → Approved → Implementing` quartet aligns with the parallel quartet on [Idea](../idea/README.md) so that the early-and-mid lifecycle vocabulary is consistent across artifact types. Post-`Implementing` states diverge to match each artifact's natural terminal lifecycle (Idea → `Specified` → `Archived`; Feature → `Stable` → `Deprecated`). The shared `Implementing` state means "the work of making this real is in progress" in both contexts: for an Idea, that work includes specifying-then-implementing its Features; for a Feature, that work is writing code from the approved spec.
 
 ### Feature nesting and identification
 

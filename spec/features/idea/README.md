@@ -41,9 +41,9 @@ Key tenets inherited from the SDD skill family:
 - **Unsaved ideation is waste.** If a direction is worth discussing, it is worth a lint-clean artifact.
 - **Say no to 1,000 things.** The `Not Doing` section is load-bearing — an Idea without explicit exclusions is not an Idea.
 - **Types beat vibes.** An Idea that cannot pass `specscore lint` is not ready to be promoted.
-- **Stable IDs, mutable content.** The slug is a contract; the body is revised in place until the Idea is Specified or Archived.
+- **Stable IDs, mutable content.** The slug is a contract; the body is revised in place until the Idea reaches Specified or is Archived.
 
-Ideas are **living until promoted**. Once `status: Specified`, the artifact is effectively frozen — further changes belong in the downstream Features, not in the Idea.
+Ideas are **living until specified**. Once `status: Specified` (i.e., all referencing Features are Stable), the artifact is effectively frozen — further changes belong in the downstream Features, not in the Idea. While an Idea is `Implementing`, it MAY still be revised in place, since the work it describes is still in motion.
 
 ## Behavior
 
@@ -107,7 +107,7 @@ An Idea's canonical id is its filename without `.md` — the slug itself. There 
 
 #### REQ: promotes-to-managed
 
-The `**Promotes To:**` field is **managed state**. Tooling populates it when a Feature is created that references this Idea (see [REQ: feature-cross-reference](#req-feature-cross-reference)). Authors and authoring skills MUST NOT edit it manually. An Idea with `Status: Specified` MUST have a non-empty `**Promotes To:**`.
+The `**Promotes To:**` field is **managed state**. Tooling populates it when a Feature is created that references this Idea (see [REQ: feature-cross-reference](#req-feature-cross-reference)). Authors and authoring skills MUST NOT edit it manually. An Idea with `Status: Implementing` or `Status: Specified` MUST have a non-empty `**Promotes To:**`.
 
 ### Idea document structure
 
@@ -195,7 +195,8 @@ The `Problem Statement` section SHOULD contain exactly one "How Might We…" sen
 | `Draft` | First lint-clean write. Author is iterating. |
 | `Under Review` | Author has requested feedback from stakeholders. |
 | `Approved` | Recommended Direction has been approved; ready for promotion to Feature(s). |
-| `Specified` | At least one Feature in `spec/features/` lists this Idea in its `**Source Ideas:**` field. Tooling manages this transition — see [The Specified transition](#the-specified-transition). |
+| `Implementing` | At least one Feature in `spec/features/` lists this Idea in its `**Source Ideas:**` field, and at least one such Feature has not yet reached `Stable`. The work of turning this Idea into shipped product is in progress. Tooling manages this transition — see [The promotion transitions](#the-promotion-transitions). |
+| `Specified` | Every Feature in `spec/features/` that lists this Idea in `**Source Ideas:**` has reached `Status: Stable`. The Idea has been fully realized through its downstream Features and is effectively frozen. Tooling manages this transition. |
 | `Archived` | Idea was abandoned or superseded. File is moved to `spec/ideas/archived/<slug>.md`. |
 
 ```mermaid
@@ -203,25 +204,33 @@ graph LR
     A["Draft"]
     B["Under Review"]
     C["Approved"]
-    D["Specified"]
-    E["Archived"]
+    D["Implementing"]
+    E["Specified"]
+    F["Archived"]
 
     A -->|request feedback| B
     B -->|approved| C
-    A -->|approved| C
-    C -->|feature created| D
-    A -->|abandon| E
-    B -->|abandon| E
-    C -->|abandon| E
+    A -->|approved (fast path)| C
+    C -->|first Feature linked| D
+    D -->|all Features Stable| E
+    A -->|abandon| F
+    B -->|abandon| F
+    C -->|abandon| F
 ```
+
+The `Draft → Under Review → Approved → Implementing` quartet aligns with the parallel quartet on [Feature](../feature/README.md) so that early-and-mid lifecycle vocabulary is consistent across artifact types. The shared `Implementing` state means "the work of making this real is in progress" in both contexts.
 
 #### REQ: status-values
 
-The `**Status:**` value MUST be one of: `Draft`, `Under Review`, `Approved`, `Specified`, `Archived`. Any other value is a validation error.
+The `**Status:**` value MUST be one of: `Draft`, `Under Review`, `Approved`, `Implementing`, `Specified`, `Archived`. Any other value is a validation error.
 
-#### REQ: specified-requires-promotion
+#### REQ: implementing-requires-promotion
 
-An Idea with `Status: Specified` MUST have a non-empty `**Promotes To:**` list. The transition to `Specified` is driven by Feature creation, not by the author.
+An Idea with `Status: Implementing` MUST have a non-empty `**Promotes To:**` list. The transition to `Implementing` is driven by Feature creation, not by the author.
+
+#### REQ: specified-requires-all-stable
+
+An Idea with `Status: Specified` MUST have a non-empty `**Promotes To:**` list AND every referenced Feature in that list MUST have `Status: Stable`. If any referenced Feature is at `Draft`, `Under Review`, `Approved`, `Implementing`, or `Deprecated`, the Idea's status MUST be `Implementing` instead. The transition to `Specified` is driven by Feature stabilization, not by the author.
 
 #### REQ: archived-location
 
@@ -260,29 +269,33 @@ Cycles in `depends_on` (including mutual `depends_on` between two Ideas and long
 
 Every slug referenced in `**Related Ideas:**` MUST resolve to an Idea file under `spec/ideas/` or `spec/ideas/archived/`. Broken references are rejected by lint.
 
-### The Specified transition
+### The promotion transitions
 
-`Specified` is a **derived status**: it reflects the existence of at least one Feature that references the Idea. It is not a state the author chooses. Three mechanisms can drive the transition:
+Both `Implementing` and `Specified` are **derived statuses**: they reflect the existence and maturity of Features that reference the Idea. Neither is a state the author chooses. Three mechanisms can drive the transitions:
 
-1. **`specscore` CLI (authoritative).** `specscore idea sync` (equivalently `specscore lint --fix`) scans `spec/features/**/README.md` for `**Source Ideas:**` fields, recomputes every Idea's `**Promotes To:**`, and updates `**Status:**` accordingly. Running this command is the definitive way to reconcile Idea status.
-2. **Feature-creation tooling.** When `specscore feature new` (or an equivalent scaffolder) creates a Feature with `**Source Ideas:**`, it performs the same update on each referenced Idea in the same commit.
-3. **Synchestra (optional).** When Synchestra is present, it watches for Feature changes and performs the update automatically, emitting `idea.specified`. Standalone SpecScore users do not need Synchestra — the CLI is sufficient.
+1. **`specscore` CLI (authoritative).** `specscore idea sync` (equivalently `specscore lint --fix`) scans `spec/features/**/README.md` for `**Source Ideas:**` fields and the referenced Features' own `**Status:**` values, recomputes every Idea's `**Promotes To:**`, and updates `**Status:**` to either `Implementing` (any referenced Feature is non-Stable) or `Specified` (every referenced Feature is Stable). Running this command is the definitive way to reconcile Idea status.
+2. **Feature-creation and Feature-status-change tooling.** When `specscore feature new` (or an equivalent scaffolder) creates a Feature with `**Source Ideas:**`, or when a Feature transitions to or from `Stable`, it performs the same update on each referenced Idea in the same commit.
+3. **Synchestra (optional).** When Synchestra is present, it watches for Feature changes and performs the update automatically, emitting `idea.implementing` (on first link) and `idea.specified` (when all Features reach Stable). Standalone SpecScore users do not need Synchestra — the CLI is sufficient.
 
-**CI enforcement is strict.** `specscore lint` (without `--fix`) fails on any drift between a Feature's `**Source Ideas:**` entries and the corresponding Idea's `**Promotes To:**` / `**Status:**`. Contributors are expected to run `specscore lint --fix` locally before committing. If strictness proves too disruptive in practice, the severity can be relaxed in a future revision; the initial posture is strict because `lint --fix` makes compliance cheap.
+**CI enforcement is strict.** `specscore lint` (without `--fix`) fails on any drift between a Feature's `**Source Ideas:**` entries (or the referenced Features' `**Status:**` values) and the corresponding Idea's `**Promotes To:**` / `**Status:**`. Contributors are expected to run `specscore lint --fix` locally before committing. If strictness proves too disruptive in practice, the severity can be relaxed in a future revision; the initial posture is strict because `lint --fix` makes compliance cheap.
 
 #### REQ: sync-lint-strict
 
-`specscore lint` MUST fail (error severity) when an Idea's `**Promotes To:**` or derived `**Status:**` is inconsistent with the set of Features referencing it. `specscore lint --fix` MUST repair the drift by rewriting the Idea's header fields in place.
+`specscore lint` MUST fail (error severity) when an Idea's `**Promotes To:**` or derived `**Status:**` is inconsistent with the set of Features referencing it (and those Features' own `Status` values). `specscore lint --fix` MUST repair the drift by rewriting the Idea's header fields in place.
 
-Recomputation is symmetric: if every Feature referencing an Idea is removed or unlinks it, the Idea's `**Promotes To:**` becomes empty and `Status` drops back to `Approved`. An Idea is never "stuck" in `Specified` without a live referencing Feature.
+Recomputation is symmetric: if every Feature referencing an Idea is removed or unlinks it, the Idea's `**Promotes To:**` becomes empty and `Status` drops back to `Approved`. An Idea is never "stuck" in `Implementing` or `Specified` without a live referencing Feature.
+
+#### REQ: implementing-derivation
+
+`Status: Implementing` MUST be set if and only if (a) at least one Feature in `spec/features/` lists the Idea's slug in its `**Source Ideas:**` field, AND (b) at least one such referenced Feature has `Status` other than `Stable`. A tree where this invariant is violated is a lint error.
 
 #### REQ: specified-derivation
 
-`Status: Specified` MUST be set if and only if at least one Feature in `spec/features/` lists the Idea's slug in its `**Source Ideas:**` field. A tree where this invariant is violated is a lint error (rule enforces the check without requiring that the CLI be run).
+`Status: Specified` MUST be set if and only if (a) at least one Feature in `spec/features/` lists the Idea's slug in its `**Source Ideas:**` field, AND (b) every such referenced Feature has `Status: Stable`. A tree where this invariant is violated is a lint error.
 
-#### REQ: specified-not-author-set
+#### REQ: derived-status-not-author-set
 
-An author (human or skill) MUST NOT directly write `**Status:** Specified`. Attempting to do so produces a lint error unless the corresponding Feature references already exist.
+An author (human or skill) MUST NOT directly write `**Status:** Implementing` or `**Status:** Specified`. Attempting to do so produces a lint error unless the corresponding Feature references and Feature statuses match the derivation rules above.
 
 ### Recommended authoring workflow
 
