@@ -36,7 +36,7 @@ The Index section holds a table with one row per active Idea. Required columns:
 | Column | Meaning |
 |---|---|
 | Idea | Link to the Idea file — e.g. an Idea named `my-idea` links to `my-idea.md` |
-| Status | One of `Draft` \| `Under Review` \| `Approved` \| `Specified` — the Idea's current `**Status:**` value. `Archived` Ideas are NEVER listed here. |
+| Status | One of `Draft` \| `Under Review` \| `Approved` \| `Implementing` \| `Specified` — the Idea's current `**Status:**` value, mirrored from the Idea file. `Archived` Ideas are NEVER listed here. |
 | Date | The Idea's `**Date:**` field (`YYYY-MM-DD`) |
 | Owner | The Idea's `**Owner:**` field |
 | Promotes To | Comma-separated list of Feature slugs from the Idea's `**Promotes To:**` field — or `—` when empty. Managed by tooling via the Idea feature's sync mechanism. |
@@ -48,6 +48,12 @@ The Index table MUST include columns for Idea, Status, Date, Owner, and Promotes
 #### REQ: status-excludes-archived
 
 The Index table MUST NOT list any Idea whose `**Status:**` is `Archived`. Archived Ideas MUST appear only in `spec/ideas/archived/README.md`. This REQ refines the shared [Index#req:completeness](../index/README.md#req-completeness): the universe for completeness is active Ideas only. Moving an Idea to Archived triggers its removal from this index.
+
+#### REQ: index-row-tracks-idea
+
+Each row's `Status`, `Date`, `Owner`, and `Promotes To` cells MUST match the corresponding Idea file's `**Status:**`, `**Date:**`, `**Owner:**`, and `**Promotes To:**` fields exactly. The index is **derived state**, not a source of truth — when an Idea field changes (manually or via [`idea-sync-lint-strict`](../idea/README.md#req-feature-cross-reference) autofix), the index row MUST be re-synchronized.
+
+Drift between index cells and the underlying Idea file is a lint violation and MUST be repaired by `specscore spec lint --fix`. Authors MUST NOT edit index cells directly to express new state — the workflow is: edit the Idea file, then re-run `--fix` (or let the next CI lint cycle do it). This keeps the Idea file as the single writer for Idea-side state and prevents tools from racing the index.
 
 ### Adherence footer
 
@@ -77,6 +83,12 @@ The list-holding section uses the heading `## Index`. Other headings (e.g., `## 
 **Requirements:** ideas-index#req:index-columns, ideas-index#req:status-excludes-archived
 
 The Index table includes all required columns (Idea, Status, Date, Owner, Promotes To) and excludes Archived Ideas entirely.
+
+### AC: index-row-sync
+
+**Requirements:** ideas-index#req:index-row-tracks-idea
+
+Given an Idea whose `**Status:**` was updated (for example, by the [Idea](../idea/README.md) feature's `idea-sync-lint-strict` autofix bumping it from `Specified` to `Implementing` after a referencing Feature changed status), when the index README's row for that Idea still shows the old Status value, then `specscore spec lint` reports a row-sync violation, and `specscore spec lint --fix` rewrites the row's Status, Date, Owner, and Promotes To cells to match the Idea file. The same applies to drift in any of the other three tracked columns.
 
 ### AC: adherence-footer
 
