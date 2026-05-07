@@ -379,14 +379,14 @@ When a Feature is created or updated with a `**Source Ideas:**` entry, tooling:
 
 1. Resolves the link.
 2. Appends the Feature slug to each referenced Idea's `**Promotes To:**` list.
-3. Transitions any referenced Idea from `Status: Approved` to `Status: Specified`.
+3. Transitions any referenced Idea from `Status: Approved` to `Status: Implementing` (or to `Status: Specified` if the new Feature is itself created at `Status: Stable`).
 4. Optionally emits an `idea.specified` event (see [Synchestra events](https://github.com/synchestra-io/spec-studio/blob/main/skills/shared/synchestra-events.md)).
 
 When every Feature referencing an Idea is deleted or loses its reference, the Idea's `**Promotes To:**` is recomputed accordingly; if it becomes empty, tooling reverts `Status: Specified → Approved`.
 
 #### REQ: feature-cross-reference
 
-A Feature's `**Source Ideas:**` field MAY list zero or more Idea slugs. Each referenced Idea MUST exist and have `Status ∈ {Approved, Specified}`. Referencing an Idea that is `Draft`, `Under Review`, or `Archived` is a validation error.
+A Feature's `**Source Ideas:**` field MAY list zero or more Idea slugs. Each referenced Idea MUST exist and have `Status ∈ {Approved, Implementing, Specified}`. Referencing an Idea that is `Draft`, `Under Review`, or `Archived` is a validation error.
 
 ### Ideas and plans
 
@@ -433,7 +433,7 @@ An Idea carries a valid `# Idea: <Title>` header, the required body-metadata fie
 
 **Requirements:** idea#req:promotes-to-managed, idea#req:specified-requires-promotion, idea#req:specified-derivation, idea#req:specified-not-author-set, idea#req:feature-cross-reference
 
-Creating a Feature with `**Source Ideas:**` entries transitions each referenced Idea's status from `Approved` to `Specified` and appends the Feature slug to the Idea's `**Promotes To:**`. Removing every reference reverts the Idea to `Approved`. An author who writes `Status: Specified` without a matching Feature reference is rejected by lint.
+Creating a Feature with `**Source Ideas:**` entries transitions each referenced Idea to `Status: Implementing` (or directly to `Status: Specified` if the new Feature is itself `Stable`) and appends the Feature slug to the Idea's `**Promotes To:**`. Removing every reference reverts the Idea to `Approved`. An author who writes `Status: Implementing` or `Status: Specified` without matching Feature references (or matching Feature statuses for Specified) is rejected by lint.
 
 ### AC: archival
 

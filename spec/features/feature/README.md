@@ -296,7 +296,7 @@ When the field is present:
 
 - Its value MUST be either `—` (empty) or a comma-separated list of Idea slugs.
 - Every slug MUST resolve to an existing Idea file at `spec/ideas/<slug>.md` or `spec/ideas/archived/<slug>.md`.
-- Every referenced Idea MUST have `Status ∈ {Approved, Specified}`. Referencing an Idea with `Status` of `Draft`, `Under Review`, or `Archived` is a validation error.
+- Every referenced Idea MUST have `Status ∈ {Approved, Implementing, Specified}`. Referencing an Idea with `Status` of `Draft`, `Under Review`, or `Archived` is a validation error. `Implementing` is allowed because a Feature being added while an Idea is already mid-flight (other Features exist for it but not all are Stable) is a legitimate workflow.
 - The relationship is many-to-many: a Feature MAY list multiple Source Ideas, and the same Idea MAY appear in the `**Source Ideas:**` of multiple Features.
 
 #### REQ: source-ideas-drive-idea-status
@@ -396,7 +396,7 @@ Sections with no content use their prescribed placeholder text. Outstanding Ques
 
 **Requirements:** feature#req:source-ideas-field, feature#req:source-ideas-drive-idea-status
 
-A Feature MAY declare zero or more source Ideas via a `**Source Ideas:**` header field. Every listed slug resolves to an existing Idea with `Status ∈ {Approved, Specified}`; any other target (missing file, `Draft`, `Under Review`, or `Archived`) is rejected by lint. Adding or removing a slug triggers tooling to reconcile the referenced Idea's `**Promotes To:**` and `**Status:**` — Features never mutate Idea state directly.
+A Feature MAY declare zero or more source Ideas via a `**Source Ideas:**` header field. Every listed slug resolves to an existing Idea with `Status ∈ {Approved, Implementing, Specified}`; any other target (missing file, `Draft`, `Under Review`, or `Archived`) is rejected by lint. Adding or removing a slug triggers tooling to reconcile the referenced Idea's `**Promotes To:**` and `**Status:**` — Features never mutate Idea state directly.
 
 ## Outstanding Questions
 
