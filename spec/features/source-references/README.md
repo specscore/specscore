@@ -1,6 +1,6 @@
 # Feature: Source References
 
-> [View in Spec Studio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Fsource-references) — graph, discussions, approvals
+> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Fsource-references) — graph, discussions, approvals
 
 **Status:** Stable
 
@@ -22,7 +22,7 @@ Two concrete gaps exist:
 - **Language-agnostic** — the notation must work in any language's comment syntax. Detection requires a recognized comment prefix on the same line — no AST parsing, just a single-line regex match.
 - **Strict validation** — following Go's philosophy, references that point to non-existent resources are errors, not warnings. Invalid references are caught by linter, pre-commit hook, or PR check.
 - **Single prefix** — `specscore:` covers all resource types (features, plans, docs). One prefix to search, one parser to maintain, one convention to learn.
-- **Graceful cross-repo** — same-repo references omit host/org/repo for brevity. Cross-repo references append `@{host}/{org}/{repo}`. Host, org, and repo for the current context are inferred from git remote and can be overridden in project config.
+- **Graceful cross-repo** — same-repo references omit host/org/repo for brevity. Cross-repo references append `@{host}/{org}/{repo}`. Host, org, and repo for the current context are inferred from git remote and can be overridden in `specscore.yaml`.
 
 ## Behavior
 
@@ -194,10 +194,10 @@ The detection strategy MUST recognize exactly two reference forms: short notatio
 When a reference omits `@{host}/{org}/{repo}`, the current project's host, org, and repo must be inferred:
 
 1. **Git remote** — parse `origin` remote URL to extract `{host}`, `{org}`, and `{repo}`. This is the default. For example, `git@github.com:acme/myproject.git` yields `github.com/acme/myproject`.
-2. **Project config override** — `specscore-project.yaml` may declare explicit values that override git remote inference. This handles forks, mirrors, and non-standard remote names.
+2. **Project config override** — `specscore.yaml` may declare explicit values that override git remote inference. This handles forks, mirrors, and non-standard remote names.
 
 ```yaml
-# specscore-project.yaml
+# specscore.yaml
 project:
   host: github.com
   org: acme
@@ -210,7 +210,7 @@ When no `@{host}/{org}/{repo}` suffix is present and no project config override 
 
 #### REQ: config-override
 
-When `specscore-project.yaml` declares `project.host`, `project.org`, and `project.repo`, those values MUST override git remote inference for same-repo reference expansion.
+When `specscore.yaml` declares `project.host`, `project.org`, and `project.repo`, those values MUST override git remote inference for same-repo reference expansion.
 
 ### Validation
 
@@ -254,14 +254,14 @@ This enables bidirectional traceability: spec-to-spec via dependency sections, a
 ## Dependencies
 
 - [feature](../feature/README.md)
-- [project-definition](../project-definition/README.md)
+- [repo-config](../repo-config/README.md)
 
 ## Interaction with Other Features
 
 | Feature | Interaction |
 |---|---|
 | [Feature](../feature/README.md) | Source references point to features; dependency analysis tools consume them |
-| [Project Definition](../project-definition/README.md) | `specscore-project.yaml` provides org/repo override for resolution |
+| [Repo Config](../repo-config/README.md) | `specscore.yaml` provides `project.host`/`project.org`/`project.repo` overrides for git-remote inference |
 | [Plan](../plan/README.md) | Plans are a referenceable resource type |
 
 ## Acceptance Criteria

@@ -1,6 +1,6 @@
 # Feature: Document Types Registry
 
-> [View in Spec Studio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Fdocument-types-registry) — graph, discussions, approvals
+> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Fdocument-types-registry) — graph, discussions, approvals
 
 **Status:** Draft
 **Source Ideas:** adherence-footer-and-doc-type-registry
@@ -55,7 +55,7 @@ Every feature is classified into one of four Kinds. The Kind determines how lint
 
 The `Kind` column MUST be one of:
 
-- **`Document`** — Consumers write standalone files of this type. Has a non-empty `URL` and a non-empty `Consumer Path`. Examples: `feature`, `plan`, `idea`, `task`, `scenario`, `project-definition`.
+- **`Document`** — Consumers write standalone files of this type. Has a non-empty `URL` and a non-empty `Consumer Path`. Examples: `feature`, `plan`, `idea`, `task`, `scenario`, `repo-config`.
 - **`Index`** — A canonical aggregation README for a Document Kind. Lives at a well-known consumer path (e.g. `spec/plans/README.md`). Has a non-empty `URL` and a non-empty `Consumer Path`. The Document-Kind feature the Index aggregates MUST cross-reference the Index via the `Index` column. Example: `plans-index`.
 - **`Structure`** — Embedded inside another Document; not a standalone file. `Consumer Path` is `—`. `URL` MAY be present (for educational linking) or `—`. Examples: `requirement`, `acceptance-criteria`, `source-references`.
 - **`Meta`** — Defines SpecScore itself. Not authored by consumers. `Consumer Path` is `—`. `URL` is `—`. Examples: `adherence-footer`, `document-types-registry`.
@@ -140,7 +140,7 @@ Every feature directory has a registry row; every registry row points to a real 
 
 - Should the registry gain a `Spec Status` column distinct from the feature's own Status, or is the feature's Status column sufficient for both purposes?
 - Should `Consumer Path` accept multiple globs (for document types whose instances live in more than one location), or is single-glob-per-type sufficient forever?
-- Should consumer repos be allowed to extend the registry with custom document types (via a `spec/document-types.md` overlay or a project-definition field), and how would lint combine the base and overlay?
+- Should consumer repos be allowed to extend the registry with custom document types (via a `spec/document-types.md` overlay or a `specscore.yaml` field), and how would lint combine the base and overlay?
 - When a Document-Kind feature is renamed (e.g., `plan` → `development-plan`), does the URL change (breaking every existing consumer document) or stay stable (breaking the terminal-slug-equals-URL convention)? Current lean: favor URL stability; rename-without-URL-change requires an explicit registry entry decoupling the two.
 
 ---

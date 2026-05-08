@@ -1,6 +1,6 @@
 # Feature: Plan
 
-> [View in Spec Studio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Fplan) — graph, discussions, approvals
+> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Fplan) — graph, discussions, approvals
 
 **Status:** Stable
 
@@ -647,7 +647,7 @@ The AI considers these signals in order of priority:
 
 ## Project Configuration
 
-Planning settings are configured in the project definition file. See [Project Definition](../project-definition/README.md).
+Planning settings are configured in the repo config file. See [Repo Config](../repo-config/README.md).
 
 ### Adherence footer
 

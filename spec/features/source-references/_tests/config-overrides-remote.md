@@ -5,7 +5,7 @@
 ## Steps
 
 GIVEN the git remote `origin` URL is `git@github.com:dev-fork/myproject.git`
-AND `specscore-project.yaml` contains:
+AND `specscore.yaml` contains:
 ```yaml
 project:
   host: github.com

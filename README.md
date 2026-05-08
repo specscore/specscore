@@ -32,13 +32,13 @@ Full installation guide: [docs/installation.md](docs/installation.md). Source: <
 
 SpecScore provides a structured format for:
 
-- **Features** — user-facing capabilities with requirements and acceptance criteria
-- **Requirements** — scoped, testable conditions that define done
-- **Acceptance Criteria** — machine-readable conditions tied to features and tasks
-- **Plans** — ordered sequences of tasks that bridge specs to implementation
-- **Tasks** — atomic units of work assigned to agents or people
-- **Source References** — traceable links from specs to code and back
-- **Project Definition** — root configuration that ties a project together
+- **[Features](spec/features/feature/README.md)** — user-facing capabilities with requirements and acceptance criteria
+- **[Requirements](spec/features/requirement/README.md)** — scoped, testable conditions that define done
+- **[Acceptance Criteria](spec/features/acceptance-criteria/README.md)** — machine-readable conditions tied to features and tasks
+- **[Plans](spec/features/plan/README.md)** — ordered sequences of tasks that bridge specs to implementation
+- **[Tasks](spec/features/task/README.md)** — atomic units of work assigned to agents or people
+- **[Source References](spec/features/source-references/README.md)** — traceable links from specs to code and back
+- **[Repo Config](spec/features/repo-config/README.md)** — root configuration in `specscore.yaml` that ties a project together
 
 ---
 

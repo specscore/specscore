@@ -205,7 +205,7 @@ fields; no one has a view over it.
 Ship a single `specscore ideas stale` CLI command that prints a table of Ideas
 exceeding configurable age thresholds per status. No web UI, no daemon, no
 "dashboard". The command reads existing header fields, applies thresholds from
-`specscore-project.yaml`, and writes plain text plus optional JSON. Chosen over
+`specscore.yaml`, and writes plain text plus optional JSON. Chosen over
 a web dashboard because the bottleneck is surfacing information, not rendering
 it — a `grep`-able table composes with the user's existing tooling.
 
@@ -244,7 +244,7 @@ by the two design partners within one week of work.
 ## SpecScore Integration
 
 - **New Features this would create:** `ideas-stale-command`.
-- **Existing Features affected:** `project-definition` gains an optional
+- **Existing Features affected:** `repo-config` gains an optional
   `ideas.staleness` block for thresholds.
 - **Dependencies:** none — the command reads artifacts that already exist.
 

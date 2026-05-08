@@ -11,7 +11,7 @@ spec/
 │   ├── feature/          # Feature specification format
 │   ├── architecture/      # Architecture specification format
 │   ├── plan/              # Planning document format
-│   └── project-definition/# Project config and structure
+│   └── repo-config/       # Repo config (specscore.yaml)
 └── (more as SpecScore grows)
 ```
 

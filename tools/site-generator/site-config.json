@@ -69,15 +69,15 @@
       "llmsFull": true
     },
     {
-      "source": "spec/features/project-definition/README.md",
-      "slug": "project-definition-specification",
-      "title": "Project Definition Specification",
+      "source": "spec/features/repo-config/README.md",
+      "slug": "repo-config",
+      "title": "Repo Config",
       "nav": true,
-      "navLabel": "Project Definition",
+      "navLabel": "Repo Config",
       "navGroup": "Specification",
       "navOrder": 6,
       "llmsGroup": "Specifications",
-      "llmsDescription": "Top-level SpecScore project configuration — repository layout, project metadata, and the root spec anchor.",
+      "llmsDescription": "Repo-level SpecScore configuration in `specscore.yaml` — project identity, modules, viewer, related projects.",
       "llmsFull": true
     },
     {

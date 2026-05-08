@@ -1,6 +1,6 @@
 # Feature: Idea
 
-> [View in Spec Studio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Fidea) — graph, discussions, approvals
+> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Fidea) — graph, discussions, approvals
 
 **Status:** Conceptual
 
@@ -408,12 +408,12 @@ Every Idea document MUST end with an adherence footer per the [Adherence Footer 
 |---|---|
 | [Feature](../feature/README.md) | Features carry an optional `**Source Ideas:**` header field listing one or more Idea slugs. The relationship is many-to-many. Tooling uses this link to manage each Idea's `Status` and `Promotes To`. Requires a companion update to the Feature spec. |
 | [Plan](../plan/README.md) | No direct link. Plans reference Features; Features reference Ideas. |
-| [Project Definition](../project-definition/README.md) | `specscore-project.yaml` MAY declare whether Ideas are required before Features (policy knob, default off). |
+| [Repo Config](../repo-config/README.md) | `specscore.yaml` MAY declare whether Ideas are required before Features (policy knob, default off). |
 
 ## Dependencies
 
 - feature
-- project-definition
+- repo-config
 
 ## Acceptance Criteria
 

@@ -1,6 +1,6 @@
 # Feature: Adherence Footer
 
-> [View in Spec Studio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Fadherence-footer) — graph, discussions, approvals
+> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Fadherence-footer) — graph, discussions, approvals
 
 **Status:** Draft
 **Source Ideas:** adherence-footer-and-doc-type-registry
@@ -13,7 +13,7 @@ This feature defines the mechanism once: what the footer looks like, where it li
 
 ## Problem
 
-Without a shared mechanism, every Document-Kind feature re-specifies the footer rule in full — syntax, placement, bare-URL requirement, lint behavior, unversioned policy. The rule duplicates across `feature`, `plan`, `idea`, `task`, `scenario`, `project-definition`, and every Index-Kind feature. A policy change (e.g., "authors MAY reword the prose") requires editing N features. Worse, inconsistencies creep in — one feature insists the URL be bare while another quietly accepts Markdown links — and lint has no single definition to enforce against.
+Without a shared mechanism, every Document-Kind feature re-specifies the footer rule in full — syntax, placement, bare-URL requirement, lint behavior, unversioned policy. The rule duplicates across `feature`, `plan`, `idea`, `task`, `scenario`, and every Index-Kind feature. A policy change (e.g., "authors MAY reword the prose") requires editing N features. Worse, inconsistencies creep in — one feature insists the URL be bare while another quietly accepts Markdown links — and lint has no single definition to enforce against.
 
 The adherence footer is one of the most common structural rules in SpecScore. It deserves its own Meta-Kind feature.
 
@@ -98,7 +98,7 @@ A missing adherence footer in a document of a Document or Index Kind MUST be a l
 |---|---|
 | [Feature](../feature/README.md) | Feature READMEs carry an adherence footer per this mechanism. The Feature feature's local `REQ: adherence-footer` declares the URL `https://specscore.md/feature-specification`. |
 | [Document Types Registry](../document-types-registry/README.md) | The registry is the canonical source of each document type's footer URL. Lint cross-checks that every Document-Kind feature's local `REQ: adherence-footer` URL matches its registry row. |
-| [Plan](../plan/README.md), [Idea](../idea/README.md), [Task](../task/README.md), [Scenario](../scenario/README.md), [Project Definition](../project-definition/README.md), [Plans Index](../plans-index/README.md) | Each declares its consumer URL via a local two-line `REQ: adherence-footer` that delegates here. |
+| [Plan](../plan/README.md), [Idea](../idea/README.md), [Task](../task/README.md), [Scenario](../scenario/README.md), [Plans Index](../plans-index/README.md) | Each declares its consumer URL via a local two-line `REQ: adherence-footer` that delegates here. |
 
 ## Acceptance Criteria
 

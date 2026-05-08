@@ -1,6 +1,6 @@
 # SpecScore Features
 
-> [View in Spec Studio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures) — graph, discussions, approvals
+> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures) — graph, discussions, approvals
 
 Core features of the SpecScore specification framework. This table is the canonical [Document Types Registry](document-types-registry/README.md) — every SpecScore document type is listed here with its Kind, specification URL, and Consumer Path.
 
@@ -18,7 +18,7 @@ Core features of the SpecScore specification framework. This table is the canoni
 | [features-index](features-index/README.md) | Draft | Index | `https://specscore.md/features-index-specification` | `spec/features/README.md` | — | Canonical index of all top-level features in a repo |
 | [scenarios-index](scenarios-index/README.md) | Draft | Index | `https://specscore.md/scenarios-index-specification` | `spec/features/**/_tests/README.md` | — | Per-feature index of scenarios inside `_tests/` directories |
 | [task](task/README.md) | Stable | Document | `https://specscore.md/task-specification` | `spec/plans/**/tasks/*.md` | — | Discrete units of work within a plan |
-| [project-definition](project-definition/README.md) | Stable | Document | `https://specscore.md/project-definition-specification` | `specscore-spec-repo.yaml` | — | SpecScore project configuration and root structure |
+| [repo-config](repo-config/README.md) | Draft | Document | `https://specscore.md/repo-config` | `specscore.yaml` | — | SpecScore repo-level configuration: identity, modules, viewer, related projects |
 | [adherence-footer](adherence-footer/README.md) | Draft | Meta | — | — | — | The shared footer mechanism every Document-Kind feature delegates to |
 | [document-types-registry](document-types-registry/README.md) | Draft | Meta | — | — | — | This registry — canonical list of SpecScore document types |
 | [index](index/README.md) | Draft | Meta | — | — | — | Shared shape of every Index-Kind feature — required sections, completeness, footer delegation |
@@ -39,7 +39,7 @@ spec/features/
 ├── features-index/            # How to structure this features index
 ├── scenarios-index/           # How to structure per-feature scenarios indexes
 ├── task/                      # How to define discrete units of work within a plan
-├── project-definition/        # Project config and top-level structure
+├── repo-config/               # Repo-level config (specscore.yaml): identity, modules, viewer
 ├── adherence-footer/          # Shared footer mechanism
 ├── document-types-registry/   # Canonical list of document types (this registry)
 └── index/                     # Shared shape of every Index-Kind feature

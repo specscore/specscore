@@ -1,6 +1,6 @@
 # Feature: Feature
 
-> [View in Spec Studio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Ffeature) — graph, discussions, approvals
+> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Ffeature) — graph, discussions, approvals
 
 **Status:** Stable
 
@@ -356,7 +356,7 @@ For Synchestra integration, see [synchestra.io](https://synchestra.io) CLI docum
 
 ## Configuration
 
-Feature behavior is configured through the project definition file. See [Project Definition](../project-definition/README.md) for available settings.
+Feature behavior is configured through the repo config file. See [Repo Config](../repo-config/README.md) for available settings.
 
 ## Interaction with Other Features
 
