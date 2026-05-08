@@ -59,15 +59,16 @@ SpecScore is designed for every role on a product team:
 
 ## Ecosystem
 
-SpecScore is the foundation layer of a three-tool stack:
+SpecScore is the foundation layer of a multi-tool stack:
 
 | Tool | Role |
 |------|------|
 | **SpecScore** | Open specification format — the standard itself |
+| **SpecStudio** | Authors SpecScore artifacts through guided AI skills in Claude Code |
 | **Rehearse** | Validates and tests SpecScore specs automatically |
 | **Synchestra** | Orchestrates multi-agent execution of SpecScore specs |
 
-Use SpecScore standalone with any tool, or pair it with [Rehearse](https://github.com/synchestra-io/rehearse) and [Synchestra](https://synchestra.io) for a full spec-driven development lifecycle.
+Use SpecScore standalone with any tool, or pair it with [SpecStudio](https://github.com/synchestra-io/specstudio-skills), [Rehearse](https://github.com/synchestra-io/rehearse), and [Synchestra](https://synchestra.io) for a full spec-driven development lifecycle.
 
 See [docs/ecosystem.md](docs/ecosystem.md) for details.
 

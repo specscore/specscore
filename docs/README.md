@@ -4,11 +4,15 @@ User-facing explanations, guides, and tutorials for SpecScore.
 
 ## Contents
 
-| Directory | Description |
-|-----------|-------------|
+| Path | Description |
+|------|-------------|
+| [demo/](demo/) | Walkthroughs of example SpecScore projects |
+| [for/](for/) | Role-based guides (developers, product owners, QAs, BAs, PMs, architects, AI agents) |
 | [ideas/](ideas/README.md) | Pre-specification ideation artifacts and analysis |
 | [ideas/workflow.md](ideas/workflow.md) | Narrative guide to the Idea artifact, lifecycle, and three authoring paths |
 | [superpowers/](superpowers/README.md) | Documentation related to Superpowers integration |
+| [ecosystem.md](ecosystem.md) | How SpecScore, SpecStudio, Rehearse, and Synchestra fit together |
+| [installation.md](installation.md) | How to install and update the `specscore` CLI |
 
 ## Outstanding Questions
 

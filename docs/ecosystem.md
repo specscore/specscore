@@ -30,20 +30,32 @@ Orchestrates multi-agent work *across* specifications.
 
 [synchestra.io](https://synchestra.io)
 
+## SpecStudio — The Studio
+
+Authors specifications through guided AI workflows in your editor.
+
+- Claude Code plugin with skills for `ideate`, `specify`, and the rest of the spec-driven lifecycle
+- Gates implementation on lint-clean SpecScore artifacts that the user has explicitly approved
+- Turns vague ideas into testable specifications without leaving your IDE
+
+[specstudio-skills](https://github.com/synchestra-io/specstudio-skills)
+
 ## How They Fit Together
 
 ```
-Write specs with SpecScore
+Author specs with SpecStudio
          ↓
-Validate with Rehearse
+Validate format with SpecScore
          ↓
-Orchestrate with Synchestra
+Test specs with Rehearse
+         ↓
+Orchestrate execution with Synchestra
          ↓
 Agents coordinate using SpecScore as the shared protocol
 ```
 
 ## Each Tool Standalone, Better Together
 
-You don't need the full ecosystem. SpecScore works with any orchestration tool — Jira, Linear, your own scripts. Rehearse works in any project that uses SpecScore-formatted specs. Synchestra is optimized for SpecScore but is not required.
+You don't need the full ecosystem. SpecScore works with any orchestration tool — Jira, Linear, your own scripts. Rehearse works in any project that uses SpecScore-formatted specs. Synchestra is optimized for SpecScore but is not required. SpecStudio is one way to author SpecScore artifacts — you can write them by hand or with any other editor.
 
-The recommended path: start with SpecScore. Add Rehearse when you want automated validation. Add Synchestra when you need multi-agent coordination.
+The recommended path: start with SpecScore. Add SpecStudio when you want guided authoring in Claude Code. Add Rehearse when you want automated validation. Add Synchestra when you need multi-agent coordination.
