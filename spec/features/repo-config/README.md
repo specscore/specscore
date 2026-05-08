@@ -74,7 +74,38 @@ When `project.title` is omitted, the effective title is the basename of the repo
 
 #### REQ: project-repositories
 
-`project.repositories` is an OPTIONAL list of code repository URLs associated with this project. SpecScore CLI does not consume this list; it is metadata for downstream tools (e.g., orchestration platforms, viewers). The list MUST round-trip on read/write.
+`project.repositories` is an OPTIONAL list of repositories associated with this project. The list MUST round-trip on read/write. SpecScore validates the structural shape (entry shape, role enum, required `url` and non-empty `roles`) but does not act on the role values — interpretation is left to downstream orchestration tools (e.g., Synchestra). Every entry MUST be a role-tagged object per `repositories-entry-shape`; flat URL strings are not accepted.
+
+#### REQ: repositories-entry-shape
+
+Each entry in `project.repositories` is a YAML mapping (object) with the following fields. Flat scalar entries (URL strings, single tokens) are a hard error.
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `url` | yes | Repository URL or short-path (same forms accepted everywhere `project.repositories` entries are written) |
+| `roles` | yes | Non-empty list of role values; see `repositories-roles-list` and `repositories-roles-enum` |
+| `title` | no | Human-readable repository name |
+| `comment` | no | Free-form annotation |
+
+A mapping entry that is missing `url`, has an empty `roles` list, or has a missing `roles` field is a hard error. Unknown fields inside a role-tagged entry MUST round-trip unchanged per `unknown-fields-preserved`.
+
+#### REQ: repositories-roles-list
+
+`roles` is a mandatory, non-empty YAML sequence (list) of one or more role values. Omitting `roles`, providing it as an empty list (`roles: []`), or providing a scalar value (e.g., `roles: code` instead of `roles: [code]`) is each a hard error — the field is always a non-empty list. Duplicate role values within a single entry's `roles` list are de-duplicated by tools and SHOULD emit a lint advisory; they are not a hard error.
+
+#### REQ: repositories-roles-enum
+
+Each value in a `roles` list MUST be drawn from the canonical role enum:
+
+| Role | Meaning |
+|------|---------|
+| `code` | Source-code repository — scanned by code tooling for `specscore:` annotations |
+| `specification` | SpecScore-managed spec repository — has its own `specscore.yaml` and `spec/` tree |
+| `state` | Orchestrator state repository — managed by tools like Synchestra; not specscore-managed |
+| `docs` | Documentation-only repository |
+| `runner` | Remote runner / executor repository — referenced by orchestrator runner features |
+
+A repository entry MAY combine multiple roles (e.g., `roles: [specification, code]`) — a single repo often plays several roles. Unknown role values are a hard error. The enum is closed in v1; future additions require a SpecScore Feature revision.
 
 ### Related projects
 
@@ -198,7 +229,7 @@ planning:
 
 #### REQ: unknown-fields-preserved
 
-SpecScore MUST ignore unknown fields at the root, inside `project:`, and inside any module entry. Unknown fields MUST round-trip unchanged on read/write. They MUST NOT cause a validation warning or error.
+SpecScore MUST ignore unknown fields at the root, inside `project:`, inside any `project.repositories` entry, and inside any module entry. Unknown fields MUST round-trip unchanged on read/write. They MUST NOT cause a validation warning or error.
 
 ### Example
 
@@ -213,8 +244,19 @@ project:
   org: acme
   repo: service
   repositories:
-    - https://github.com/acme/service-api
-    - https://github.com/acme/service-web
+    - url: https://github.com/acme/service-api
+      title: Service API
+      roles: [code]
+    - url: https://github.com/acme/service-web
+      title: Service Web
+      roles: [code]
+    - url: https://github.com/acme/service-spec
+      title: Service Spec
+      comment: SpecScore-managed spec repo for the service
+      roles: [specification, code]
+    - url: https://github.com/acme/service-state
+      title: Service State
+      roles: [state]
 
 projects:
   - https://github.com/acme/platform
@@ -264,6 +306,22 @@ A file named `specscore.yaml` at the repository root with the exact schema-heade
 **Requirements:** repo-config#req:project-block-optional, repo-config#req:project-title-default, repo-config#req:source-reference-overrides, repo-config#req:project-repositories
 
 Project identity (title, host, org, repo) is inferred from the working directory and git remote when fields are omitted. Explicit values override inference. `project.repositories` round-trips without being interpreted by SpecScore tooling.
+
+### AC: repositories-role-tagged
+
+**Requirements:** repo-config#req:repositories-entry-shape, repo-config#req:repositories-roles-list, repo-config#req:repositories-roles-enum
+
+**Given** a `specscore.yaml` whose `project.repositories` is a list of role-tagged object entries (including at least one entry with multi-valued `roles`, e.g. `[specification, code]`, and at least one optional `title` / `comment` field)
+**When** tools load the config and round-trip it back to disk
+**Then** the on-disk bytes after the round-trip are identical to the input for every well-formed entry, every entry's `url`, `title`, `comment`, and `roles` list (including multi-valued combinations) is preserved, and any unknown fields inside an entry survive unchanged.
+
+### AC: repositories-shape-errors
+
+**Requirements:** repo-config#req:repositories-entry-shape, repo-config#req:repositories-roles-list, repo-config#req:repositories-roles-enum
+
+**Given** a `specscore.yaml` whose `project.repositories` contains any of the following malformed entries — a flat-string entry (e.g. `- https://example.com/repo`), an entry missing `url`, an entry with `roles:` omitted, an entry with `roles: []`, an entry with a scalar `roles: code` instead of a list, or an entry containing an unknown role value (e.g. `roles: [helm-chart]`)
+**When** tools load the config
+**Then** the load fails with a hard error that names the offending entry by its index and the violated REQ (one of `repositories-entry-shape`, `repositories-roles-list`, `repositories-roles-enum`); no implicit defaults are applied; the file is not silently rewritten.
 
 ### AC: related-projects-validated
 
