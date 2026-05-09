@@ -37,6 +37,43 @@ less get-cli.sh
 sh get-cli.sh
 ```
 
+## Quick install (Windows)
+
+Pick whichever channel fits your environment — all three install the same
+binary from the same [GitHub release](https://github.com/synchestra-io/specscore-cli/releases).
+
+### PowerShell (mirrors the `curl | sh` flow)
+
+```powershell
+powershell -c "irm https://specscore.md/get-cli.ps1 | iex"
+```
+
+The script detects your architecture, downloads the matching `.zip` from the
+latest release, verifies its SHA‑256 checksum, installs `specscore.exe` to
+`%LOCALAPPDATA%\Programs\specscore\bin`, and appends that directory to your
+**user** `PATH`. No admin rights required. Open a new terminal afterwards so
+the updated `PATH` takes effect.
+
+The installer reads the same environment variables as the Unix script:
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `SPECSCORE_VERSION` | `latest` | Release tag to install, e.g. `v0.1.0`. |
+| `SPECSCORE_INSTALL_DIR` | `%LOCALAPPDATA%\Programs\specscore\bin` | Directory to install the binary into. |
+
+### WinGet
+
+```powershell
+winget install Synchestra.SpecScore
+```
+
+### Scoop
+
+```powershell
+scoop bucket add synchestra https://github.com/synchestra-io/scoop-bucket
+scoop install specscore
+```
+
 ## Manual install
 
 1. Download the archive for your platform from the

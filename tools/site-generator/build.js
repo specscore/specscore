@@ -26,20 +26,29 @@ async function build() {
     join(OUTPUT, 'assets', 'style.css')
   );
 
-  // CLI installer script — served at /get-cli
-  // Source of truth: synchestra-io/specscore-cli/scripts/install.sh.
+  // CLI installer scripts — served at /get-cli (sh) and /get-cli.ps1 (PowerShell)
+  // Source of truth: synchestra-io/specscore-cli/scripts/install.{sh,ps1}.
   // Override the ref via SPECSCORE_CLI_REF (defaults to `main`) if the upstream
   // installer is broken and you need to pin to a known-good revision.
   {
     const cliRef = process.env.SPECSCORE_CLI_REF || 'main';
-    const installUrl = `https://raw.githubusercontent.com/synchestra-io/specscore-cli/${cliRef}/scripts/install.sh`;
-    const res = await fetch(installUrl);
-    if (!res.ok) {
-      throw new Error(`Failed to fetch install.sh from ${installUrl}: ${res.status} ${res.statusText}`);
+    const baseUrl = `https://raw.githubusercontent.com/synchestra-io/specscore-cli/${cliRef}/scripts`;
+
+    const installers = [
+      { src: 'install.sh',  out: 'get-cli',     mode: 0o755 },
+      { src: 'install.ps1', out: 'get-cli.ps1', mode: 0o644 },
+    ];
+
+    for (const { src, out, mode } of installers) {
+      const url = `${baseUrl}/${src}`;
+      const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error(`Failed to fetch ${src} from ${url}: ${res.status} ${res.statusText}`);
+      }
+      const body = await res.text();
+      await writeFile(join(OUTPUT, out), body, { mode });
+      console.log(`  ${out} (fetched from specscore-cli@${cliRef})`);
     }
-    const installScript = await res.text();
-    await writeFile(join(OUTPUT, 'get-cli'), installScript, { mode: 0o755 });
-    console.log(`  get-cli (fetched from specscore-cli@${cliRef})`);
   }
 
   console.log(`Building ${config.pages.length} pages...`);
