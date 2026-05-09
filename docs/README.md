@@ -6,7 +6,6 @@ User-facing explanations, guides, and tutorials for SpecScore.
 
 | Path | Description |
 |------|-------------|
-| [demo/](demo/) | Walkthroughs of example SpecScore projects |
 | [for/](for/) | Role-based guides (developers, product owners, QAs, BAs, PMs, architects, AI agents) |
 | [ideas/](ideas/README.md) | Pre-specification ideation artifacts and analysis |
 | [ideas/workflow.md](ideas/workflow.md) | Narrative guide to the Idea artifact, lifecycle, and three authoring paths |

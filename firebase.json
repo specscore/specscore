@@ -55,12 +55,6 @@
         ]
       },
       {
-        "source": "/demo/todo-app",
-        "headers": [
-          { "key": "Link", "value": "</demo/todo-app.md>; rel=\"alternate\"; type=\"text/markdown\"" }
-        ]
-      },
-      {
         "source": "**/*.md",
         "headers": [
           { "key": "Content-Type", "value": "text/markdown; charset=utf-8" }
@@ -70,6 +64,13 @@
         "source": "/get-cli",
         "headers": [
           { "key": "Content-Type", "value": "text/x-shellscript; charset=utf-8" },
+          { "key": "Cache-Control", "value": "public, max-age=300" }
+        ]
+      },
+      {
+        "source": "/get-cli.ps1",
+        "headers": [
+          { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
           { "key": "Cache-Control", "value": "public, max-age=300" }
         ]
       }

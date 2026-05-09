@@ -105,18 +105,6 @@
       "llmsFull": true
     },
     {
-      "source": "docs/demo/todo-app.md",
-      "slug": "demo/todo-app",
-      "title": "Demo: Todo App",
-      "nav": true,
-      "navLabel": "Demo Project",
-      "navGroup": "Getting Started",
-      "navOrder": 8,
-      "llmsGroup": "Getting Started",
-      "llmsDescription": "A worked-example SpecScore project — a Todo app spec tree demonstrating real-world structure and conventions.",
-      "llmsFull": true
-    },
-    {
       "source": "docs/for/developers.md",
       "slug": "for/developers",
       "title": "SpecScore for Developers",
