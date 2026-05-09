@@ -29,7 +29,7 @@ Guides live in `docs/`. Role-based guides are in `docs/for/`. Blog posts are in 
 
 ## Code Standards
 
-- `specscore spec lint` MUST pass on `spec/` and on every `examples/*/spec/`.
+- `specscore spec lint` MUST pass on `spec/`.
 - For website changes: `pnpm test` and `pnpm build` MUST pass inside `tools/site-generator/`.
 
 ## Pull Requests

@@ -9,10 +9,9 @@ This repository holds the SpecScore **specification format** and the public webs
 - `spec/` — technical source of truth for the SpecScore format (features, acceptance criteria, plans, project definition, source references). Linted via `specscore spec lint`.
 - `docs/` — user-facing explanations and role-based guides under `docs/for/`.
 - `blog/` — long-form articles published to the site.
-- `examples/` — example SpecScore projects; each `examples/*/spec/` is also linted in CI.
 - `tools/site-generator/` — Node.js (pnpm) static site builder for `https://specscore.md`.
 - `public/` — generated site output checked in for Firebase Hosting.
-- `.github/workflows/` — `dogfood.yml` (installs the released `specscore` binary and lints `spec/` + `examples/*/spec/`); `site-ci.yml` (builds and deploys the site).
+- `.github/workflows/` — `dogfood.yml` (installs the released `specscore` binary and lints `spec/`); `site-ci.yml` (builds and deploys the site).
 
 ## Build, test, and lint commands
 

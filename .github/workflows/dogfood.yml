@@ -4,12 +4,10 @@ on:
   push:
     paths:
       - 'spec/**'
-      - 'examples/**'
       - '.github/workflows/dogfood.yml'
   pull_request:
     paths:
       - 'spec/**'
-      - 'examples/**'
       - '.github/workflows/dogfood.yml'
   workflow_dispatch:
 
@@ -36,10 +34,3 @@ jobs:
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Lint spec tree
         run: specscore spec lint
-      - name: Lint example projects
-        run: |
-          for dir in examples/*/; do
-            if [ -d "$dir/spec" ]; then
-              (cd "$dir" && specscore spec lint)
-            fi
-          done

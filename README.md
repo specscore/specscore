@@ -74,6 +74,21 @@ See [docs/ecosystem.md](docs/ecosystem.md) for details.
 
 ---
 
+## Open-Source SpecScore Projects
+
+Projects that use SpecScore as their specification format:
+
+| Project | Description |
+|---------|-------------|
+| [synchestra-io/specscore](https://github.com/synchestra-io/specscore) | This repository — the SpecScore format is itself specified using SpecScore (see [`spec/`](spec/README.md)) |
+| [synchestra-io/spec-driven-todo-app](https://github.com/synchestra-io/spec-driven-todo-app) | A todo CLI specified end-to-end across all four SpecScore layers (Features, Requirements, Acceptance Criteria, Scenarios) |
+| [synchestra-io/synchestra](https://github.com/synchestra-io/synchestra) | The Synchestra orchestrator, specified using SpecScore |
+| [dal-go/dalgo](https://github.com/dal-go/dalgo) | _(planned)_ Go data access layer — SpecScore specification in progress |
+
+Adding your project? Open a PR.
+
+---
+
 ## Contributing
 
 Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) to get started.

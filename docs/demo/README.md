@@ -6,7 +6,7 @@ Walkthroughs of example SpecScore projects.
 
 | Path | Description |
 |------|-------------|
-| [todo-app.md](todo-app.md) | Walkthrough of the [`examples/todo-app/`](../../examples/todo-app/) project |
+| [todo-app.md](todo-app.md) | Walkthrough of the [`spec-driven-todo-app`](https://github.com/synchestra-io/spec-driven-todo-app) project |
 
 ## Outstanding Questions
 
