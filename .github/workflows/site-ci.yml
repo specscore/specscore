@@ -84,14 +84,14 @@ jobs:
           done
 
       - name: Authenticate to GCP
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         uses: google-github-actions/auth@v3
         with:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
 
       - name: Deploy to Firebase Hosting
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         env:
           NODE_NO_WARNINGS: 1
         run: pnpm --config.onlyBuiltDependencies='["protobufjs","re2"]' dlx firebase-tools@latest deploy --only hosting:specscore-org --non-interactive
