@@ -341,8 +341,10 @@ pre code {
 
 .copy-btn {
   position: absolute;
-  top: 0.35rem;
-  right: 0.35rem;
+  /* Center vertically inside .code-block — bottom gap always matches top gap
+     regardless of intrinsic button height. */
+  top: 50%;
+  right: 0.5rem;
   z-index: 2;
   display: inline-flex;
   align-items: center;
@@ -357,11 +359,11 @@ pre code {
   font-weight: 500;
   letter-spacing: 0.02em;
   line-height: 1;
-  padding: 0.25rem 0.7rem;
+  padding: 0.2rem 0.7rem;
   border-radius: 5px;
   cursor: pointer;
   opacity: 0.5;
-  transform: translateY(0);
+  transform: translateY(-50%);
   transition:
     opacity 0.18s ease,
     transform 0.18s ease,
@@ -394,11 +396,12 @@ pre code {
   background: var(--accent-light);
   box-shadow: 0 2px 8px -2px color-mix(in srgb, var(--accent) 35%, transparent);
   outline: none;
-  transform: translateY(-1px);
+  /* Combine the vertical centering (-50%) with the 1px lift on hover. */
+  transform: translateY(calc(-50% - 1px));
 }
 
 .copy-btn:active {
-  transform: translateY(0);
+  transform: translateY(-50%);
   box-shadow: none;
 }
 
