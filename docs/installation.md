@@ -101,11 +101,9 @@ scoop install specscore
 
 ## Build from source
 
-Requires [Go](https://go.dev/) 1.26 or newer:
+Requires [Go](https://go.dev/) 1.26 or newer. This installs the latest development build from `main` — may include changes not yet in a tagged release.
 
 ```bash
-# Installs the latest development build from main — may include changes
-# not yet in a tagged release.
 go install github.com/synchestra-io/specscore-cli/cmd/specscore@main
 ```
 
