@@ -107,7 +107,7 @@ Requires [Go](https://go.dev/) 1.26 or newer. This installs the latest developme
 go install github.com/synchestra-io/specscore-cli/cmd/specscore@main
 ```
 
-If you want a published release instead, use the install script at the top of this page. To pin a specific version when building from source, swap `@main` for a tag like `@v0.4.2`.
+If you want a published release instead, use the install script at the top of this page. To pin a specific version when building from source, swap `@main` for a tag like `@v0.4.2`, or use `@latest` to get the most recent tagged release.
 
 ## Verify the install
 
