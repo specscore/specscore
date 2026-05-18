@@ -19,7 +19,7 @@ This repository holds the SpecScore **specification format** and the public webs
 - `pnpm test` (run inside `tools/site-generator/`) — site-generator unit tests.
 - `pnpm build` (run inside `tools/site-generator/`) — produce `public/`.
 
-The `specscore` CLI is installed via `curl -fsSL https://specscore.md/get-cli | sh`; the dogfood workflow pins `SPECSCORE_VERSION` and uses the same install command.
+The `specscore` CLI is installed via `curl -fsSL https://specscore.md/install/get-cli | sh` (legacy `/get-cli` 301-redirects to `/install/get-cli`); the dogfood workflow pins `SPECSCORE_VERSION` and uses the same install command.
 
 ## Directory structure
 

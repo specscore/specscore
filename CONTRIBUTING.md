@@ -8,7 +8,7 @@ This repository holds the **specification format** and the public website. The `
 
 1. Fork the repository
 2. Clone your fork: `git clone https://github.com/<you>/specscore.git`
-3. Install the `specscore` CLI: `curl -fsSL https://specscore.md/get-cli | sh`
+3. Install the `specscore` CLI: `curl -fsSL https://specscore.md/install/get-cli | sh`
 4. Lint the spec tree: `specscore spec lint`
 
 If you also intend to work on the website, install [pnpm](https://pnpm.io) and run `pnpm install && pnpm test` inside `tools/site-generator/`.

@@ -3,7 +3,7 @@
 ## Quick install (macOS & Linux)
 
 ```bash
-curl -fsSL https://specscore.md/get-cli | sh
+curl -fsSL https://specscore.md/install/get-cli | sh
 ```
 
 The script detects your OS and architecture, downloads the matching archive
@@ -23,7 +23,7 @@ The installer reads two optional environment variables:
 Install a specific version into `~/.local/bin`:
 
 ```bash
-curl -fsSL https://specscore.md/get-cli | \
+curl -fsSL https://specscore.md/install/get-cli | \
   SPECSCORE_VERSION=v0.1.0 SPECSCORE_INSTALL_DIR="$HOME/.local/bin" sh
 ```
 
@@ -32,10 +32,19 @@ curl -fsSL https://specscore.md/get-cli | \
 If you prefer to review the script before piping it into a shell:
 
 ```bash
-curl -fsSL https://specscore.md/get-cli -o get-cli.sh
+curl -fsSL https://specscore.md/install/get-cli -o get-cli.sh
 less get-cli.sh
 sh get-cli.sh
 ```
+
+## Homebrew (macOS & Linux)
+
+```bash
+brew install synchestra-io/tap/specscore
+```
+
+This taps `synchestra-io/homebrew-tap` on first install and tracks new releases
+from there.
 
 ## Quick install (Windows)
 
@@ -45,7 +54,7 @@ binary from the same [GitHub release](https://github.com/synchestra-io/specscore
 ### PowerShell (mirrors the `curl | sh` flow)
 
 ```powershell
-powershell -c "irm https://specscore.md/get-cli.ps1 | iex"
+powershell -c "irm https://specscore.md/install/get-cli.ps1 | iex"
 ```
 
 The script detects your architecture, downloads the matching `.zip` from the

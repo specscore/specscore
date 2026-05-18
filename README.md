@@ -13,7 +13,7 @@ SpecScore is an open specification format that makes requirements machine-readab
 The CLI for working with SpecScore repositories is [`specscore-cli`](https://github.com/synchestra-io/specscore-cli):
 
 ```bash
-curl -fsSL https://specscore.md/get-cli | sh
+curl -fsSL https://specscore.md/install/get-cli | sh
 ```
 
 ```bash

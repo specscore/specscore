@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v6
       - name: Install specscore CLI
         run: |
-          curl -fsSL https://specscore.md/get-cli | \
+          curl -fsSL https://specscore.md/install/get-cli | \
             SPECSCORE_VERSION="${SPECSCORE_VERSION}" \
             SPECSCORE_INSTALL_DIR="$HOME/.local/bin" sh
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"

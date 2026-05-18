@@ -1,0 +1,12 @@
+# Cloudflare Pages redirects — companion to firebase.json "redirects".
+# Edit BOTH this file and firebase.json when adding/changing redirects.
+# This file is copied into public/_redirects by tools/site-generator/build.js
+# so Cloudflare Pages can find it at the publish-dir root.
+#
+# Syntax: https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Legacy CLI installer paths → canonical /install/* paths.
+# Any user, blog post, README, or script that still calls the old URLs keeps
+# working without breakage.
+/get-cli      /install/get-cli      301
+/get-cli.ps1  /install/get-cli.ps1  301

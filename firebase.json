@@ -2,7 +2,7 @@
   "hosting": {
     "site": "specscore-org",
     "public": "public",
-    "ignore": ["firebase.json", "**/.*"],
+    "ignore": ["firebase.json", "**/.*", "**/_headers", "**/_redirects"],
     "cleanUrls": true,
     "trailingSlash": false,
     "headers": [
@@ -61,19 +61,23 @@
         ]
       },
       {
-        "source": "/get-cli",
+        "source": "/install/get-cli",
         "headers": [
           { "key": "Content-Type", "value": "text/x-shellscript; charset=utf-8" },
           { "key": "Cache-Control", "value": "public, max-age=300" }
         ]
       },
       {
-        "source": "/get-cli.ps1",
+        "source": "/install/get-cli.ps1",
         "headers": [
           { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
           { "key": "Cache-Control", "value": "public, max-age=300" }
         ]
       }
+    ],
+    "redirects": [
+      { "source": "/get-cli",     "destination": "/install/get-cli",     "type": 301 },
+      { "source": "/get-cli.ps1", "destination": "/install/get-cli.ps1", "type": 301 }
     ]
   }
 }

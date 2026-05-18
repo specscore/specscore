@@ -1,0 +1,45 @@
+# Cloudflare Pages headers — companion to firebase.json
+# Edit BOTH this file and firebase.json when adding/changing headers.
+# This file is copied into public/_headers by tools/site-generator/build.js
+# so Cloudflare Pages can find it at the publish-dir root.
+#
+# Syntax: https://developers.cloudflare.com/pages/configuration/headers/
+
+# Serve every .md file as text/markdown (mirrors firebase.json "**/*.md")
+/*.md
+  Content-Type: text/markdown; charset=utf-8
+
+# Per-page Link: rel="alternate" for content negotiation (HTML ↔ Markdown)
+/specifications
+  Link: </specifications.md>; rel="alternate"; type="text/markdown"
+
+/feature-specification
+  Link: </feature-specification.md>; rel="alternate"; type="text/markdown"
+
+/plan-specification
+  Link: </plan-specification.md>; rel="alternate"; type="text/markdown"
+
+/task-specification
+  Link: </task-specification.md>; rel="alternate"; type="text/markdown"
+
+/acceptance-criteria-specification
+  Link: </acceptance-criteria-specification.md>; rel="alternate"; type="text/markdown"
+
+/project-definition-specification
+  Link: </project-definition-specification.md>; rel="alternate"; type="text/markdown"
+
+/source-references-specification
+  Link: </source-references-specification.md>; rel="alternate"; type="text/markdown"
+
+/install
+  Link: </install.md>; rel="alternate"; type="text/markdown"
+
+# CLI installer scripts (canonical paths; old /get-cli{,.ps1} are
+# 301-redirected to these in _redirects)
+/install/get-cli
+  Content-Type: text/x-shellscript; charset=utf-8
+  Cache-Control: public, max-age=300
+
+/install/get-cli.ps1
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=300

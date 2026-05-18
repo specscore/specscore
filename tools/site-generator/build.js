@@ -26,7 +26,10 @@ async function build() {
     join(OUTPUT, 'assets', 'style.css')
   );
 
-  // CLI installer scripts — served at /get-cli (sh) and /get-cli.ps1 (PowerShell)
+  // CLI installer scripts — served at /install/get-cli (sh) and
+  // /install/get-cli.ps1 (PowerShell). Old paths /get-cli and /get-cli.ps1
+  // are 301-redirected to the canonical URLs via firebase.json.
+  //
   // Source of truth: synchestra-io/specscore-cli/scripts/install.{sh,ps1}.
   // Override the ref via SPECSCORE_CLI_REF (defaults to `main`) if the upstream
   // installer is broken and you need to pin to a known-good revision.
@@ -35,9 +38,11 @@ async function build() {
     const baseUrl = `https://raw.githubusercontent.com/synchestra-io/specscore-cli/${cliRef}/scripts`;
 
     const installers = [
-      { src: 'install.sh',  out: 'get-cli',     mode: 0o755 },
-      { src: 'install.ps1', out: 'get-cli.ps1', mode: 0o644 },
+      { src: 'install.sh',  out: 'install/get-cli',     mode: 0o755 },
+      { src: 'install.ps1', out: 'install/get-cli.ps1', mode: 0o644 },
     ];
+
+    await mkdir(join(OUTPUT, 'install'), { recursive: true });
 
     for (const { src, out, mode } of installers) {
       const url = `${baseUrl}/${src}`;
@@ -174,6 +179,20 @@ async function build() {
   // --- llms.txt + llms-full.txt for AI agents ---
   await writeLlmsFiles(config, OUTPUT, ROOT);
   console.log('  llms.txt + llms-full.txt');
+
+  // --- Cloudflare Pages config (_headers, _redirects) ---
+  // Source-of-truth lives at the repo root; copy into the publish dir so
+  // Cloudflare Pages finds them. Firebase ignores these via firebase.json
+  // "ignore". Missing files are skipped silently — _redirects is optional.
+  for (const file of ['_headers', '_redirects']) {
+    const src = join(ROOT, file);
+    try {
+      await cp(src, join(OUTPUT, file));
+      console.log(`  ${file} (Cloudflare Pages config)`);
+    } catch (err) {
+      if (err.code !== 'ENOENT') throw err;
+    }
+  }
 
   console.log(`\nDone. Output: ${OUTPUT}`);
 }
