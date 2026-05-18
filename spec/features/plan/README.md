@@ -8,7 +8,7 @@
 
 A plan is a composite task -- a task that contains subtasks. It bridges feature specifications and change requests to executable work. Plans are mutable documents; snapshots provide immutable reference points for review, approval, and retrospective.
 
-There is one structural concept: the **task**. A task with children is a plan. A task without children is a leaf task. This is determined by structure, not declaration. Plans nest recursively -- there is no artificial depth limit.
+There is one structural concept: the **task**. A task with children is a plan. A task without children is a leaf task. This is determined by structure, not declaration. Plans nest recursively -- there is no artificial depth limit. The typed shape of a single Plan is captured in the co-located [plan entity](plan.entity.md).
 
 ## Contents
 

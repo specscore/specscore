@@ -8,7 +8,7 @@
 
 A feature is the atomic unit of product specification in SpecScore. It describes a capability the product should have — what it does, why it matters, and how it behaves. Features live in the spec repository under `spec/features/` as directories with a mandatory `README.md`. They can nest (sub-features), accept change requests via [proposals](../proposals/README.md), trigger [plans](../plan/README.md), and drive execution through task management tools.
 
-This specification defines the structure, metadata, lifecycle, and conventions that every feature must follow.
+This specification defines the structure, metadata, lifecycle, and conventions that every feature must follow. The typed shape of a single Feature is captured in the co-located [feature entity](feature.entity.md).
 
 ## Problem
 

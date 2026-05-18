@@ -8,7 +8,7 @@
 
 An idea is a **pre-spec, lintable one-pager** that captures a problem, a recommended direction, an MVP scope, and the assumptions that must hold for the direction to be worth pursuing. Ideas are the optional front-door to SpecScore: they refine a vague concept into something concrete enough to promote into one or more [Features](../feature/README.md).
 
-An idea artifact is a single file at `spec/ideas/<slug>.md` with typed YAML front-matter and a fixed section schema. Ideas can be authored manually, by AI agents, or — recommended — via the [`spec-studio:ideate`](https://github.com/synchestra-io/spec-studio) skill. The spec defines the artifact; it does not mandate the authoring workflow.
+An idea artifact is a single file at `spec/ideas/<slug>.md` with typed YAML front-matter and a fixed section schema. Ideas can be authored manually, by AI agents, or — recommended — via the [`spec-studio:ideate`](https://github.com/synchestra-io/spec-studio) skill. The spec defines the artifact; it does not mandate the authoring workflow. The typed shape of a single Idea is captured in the co-located [idea entity](idea.entity.md).
 
 ## Problem
 

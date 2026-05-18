@@ -8,7 +8,7 @@
 
 A task is the atomic unit of work in SpecScore. It is a leaf node -- actionable work that an agent or human picks up and completes. Tasks live as directories with a `README.md` and carry properties that describe their dependencies, acceptance criteria, status, and artifacts.
 
-A task with subtasks is called a **plan** -- this is determined by structure, not declaration. The task concept is the foundation of the unified plan/task model: one recursive concept that spans specification and execution.
+A task with subtasks is called a **plan** -- this is determined by structure, not declaration. The task concept is the foundation of the unified plan/task model: one recursive concept that spans specification and execution. The typed shape of a single Task is captured in the co-located [task entity](task.entity.md).
 
 ## Contents
 
