@@ -60,7 +60,8 @@ Specs that don't pass the linter don't get merged. The same gate you have for te
 ## Try It
 
 ```bash
-go install github.com/synchestra-io/specscore-cli/cmd/specscore@latest
+# Latest dev build from main (may be ahead of the most recent release).
+go install github.com/synchestra-io/specscore-cli/cmd/specscore@main
 specscore lint ./spec
 ```
 

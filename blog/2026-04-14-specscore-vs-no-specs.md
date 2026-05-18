@@ -47,7 +47,8 @@ You don't need to convert your entire backlog. You don't need to change your too
 ## Try It
 
 ```bash
-go install github.com/synchestra-io/specscore-cli/cmd/specscore@latest
+# Latest dev build from main (may be ahead of the most recent release).
+go install github.com/synchestra-io/specscore-cli/cmd/specscore@main
 specscore lint ./spec
 ```
 
