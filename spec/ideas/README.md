@@ -10,6 +10,7 @@ Archived Ideas are indexed separately at [archived/README.md](archived/README.md
 |------|--------|------|-------|-------------|
 | [adherence-footer-and-doc-type-registry](adherence-footer-and-doc-type-registry.md) | Implementing | 2026-04-20 | alexander.trakhimenok | adherence-footer, document-types-registry |
 | [decision-and-decisions-index](decision-and-decisions-index.md) | Implementing | 2026-04-20 | alexander.trakhimenok@gmail.com | decision, decisions-index |
+| [entity-and-property-definitions](entity-and-property-definitions.md) | Approved | 2026-05-18 | alexander.trakhimenok | — |
 | [shared-index-feature](shared-index-feature.md) | Implementing | 2026-04-20 | alexander.trakhimenok | index |
 
 ## Outstanding Questions
