@@ -163,9 +163,9 @@ Tasks 3, 4, and 5 are parallelisable once Task 2 lands.
 
 | Date | Git Hash | Action | Comment |
 |---|---|---|---|
-| 2026-05-18 | _pending_ | drafted | Initial plan write following Feature approval |
-| 2026-05-18 | _pending_ | checkpoint | Tasks 1–4 implemented in same session as draft. Property fixture (`spec/features/idea/email.property.md`), entity fixture (`spec/features/idea/user.entity.md`), Rehearse scenario stubs for all 12 ACs (6 each in `spec/features/{entity,property}/_tests/`), author guide (`docs/entities-and-properties.md`) with site-config entry and successful `pnpm build`. Task 5 (file CLI Issues on `synchestra-io/specscore-cli`) deferred to user direction. `specscore spec lint`: 0 violations. |
-| 2026-05-18 | _pending_ | approved | Plan approved by alexander.trakhimenok in same session as draft + checkpoint. CLI implementation work (Task 5) still deferred and tracked as outstanding. |
+| 2026-05-18 | `9e65e75` | drafted | Initial plan write following Feature approval |
+| 2026-05-18 | `9e65e75` | checkpoint | Tasks 1–4 implemented in same session as draft. Property fixture (`spec/features/idea/email.property.md`), entity fixture (`spec/features/idea/user.entity.md`), Rehearse scenario stubs for all 12 ACs (6 each in `spec/features/{entity,property}/_tests/`), author guide (`docs/entities-and-properties.md`) with site-config entry and successful `pnpm build`. Task 5 (file CLI Issues on `synchestra-io/specscore-cli`) deferred to user direction. `specscore spec lint`: 0 violations. |
+| 2026-05-18 | `9e65e75` | approved | Plan approved by alexander.trakhimenok in same session as draft + checkpoint. CLI implementation work (Task 5) still deferred and tracked as outstanding. |
 
 ---
 *This document follows the https://specscore.md/plan-specification*
