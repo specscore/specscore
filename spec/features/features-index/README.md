@@ -55,6 +55,12 @@ The features index lists **top-level features only** — directories directly un
 
 The Index table MUST list every top-level feature under `spec/features/` and MUST NOT list sub-features. Sub-features are surfaced through their parent Feature's own Contents section. This is a per-domain refinement of [Index#req:completeness](../index/README.md#req-completeness): the completeness universe is top-level features only.
 
+#### REQ: index-row-tracks-feature
+
+Each row's `Status` cell MUST match the corresponding feature's `**Status:**` value exactly. The index is **derived state**, not a source of truth — when a feature's `**Status:**` field changes (manually, or via a lifecycle-transition verb such as `specscore feature approve` per the [lifecycle-transitions](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/lifecycle-transitions/README.md) contract in the `specscore-cli` repo), the index row MUST be re-synchronized.
+
+Drift between the index `Status` cell and the underlying feature README's declared status is a lint violation and MUST be repaired by `specscore spec lint --fix` (via the `feature-index-row-sync` rule, the Feature-kind counterpart to `idea-index-row-sync`). Authors MUST NOT edit the index `Status` cell directly to express new state — the workflow is: edit the feature README's `**Status:**` line (or invoke the appropriate lifecycle verb), then re-run `--fix` (or let the next CI lint cycle do it). This keeps the feature README as the single writer for feature-side state and prevents tools from racing the index. The `Feature` and `Description` cells are hand-maintained and are NOT subject to row-sync — only `Status` is derived.
+
 ### Adherence footer
 
 #### REQ: adherence-footer
@@ -78,6 +84,12 @@ Every features-index document MUST end with an adherence footer per the [Adheren
 
 The Index table includes columns Feature, Status, Description in the required order, lists every top-level feature under `spec/features/`, and excludes sub-features.
 
+### AC: index-row-sync
+
+**Requirements:** features-index#req:index-row-tracks-feature
+
+Given a feature whose `**Status:**` was updated (for example, by `specscore feature approve` bumping it from `Draft` to `Approved`, or by a hand-edit changing `Stable` to `Deprecated`), when the features-index README's row for that feature still shows the old `Status` value, then `specscore spec lint` reports a `feature-index-row-sync` violation, and `specscore spec lint --fix` rewrites the row's `Status` cell to match the feature README's declared status. The same applies whenever the feature README's `**Status:**` and the index row drift apart in either direction. The `Feature` link and `Description` cells are NOT rewritten by the fix.
+
 ### AC: adherence-footer
 
 **Requirements:** features-index#req:adherence-footer
@@ -89,6 +101,7 @@ Every features index ends with a footer containing the bare URL `https://specsco
 - Should the features index sort feature rows by a stable rule (alphabetical, Status then name, creation order), or is sort order a project choice? Current position: project choice.
 - When a feature is `Deprecated`, should it continue to appear in the main Index table or move to a dedicated "Deprecated" sub-section? Current position: remain in the main table with `Deprecated` in the Status cell.
 - Should the features index support grouping features into categories (e.g., via intermediate `### Category` subheadings between Contents and the table)? Current position: no — flat listing keeps the shape consistent across repos; narrative grouping belongs in the optional header prose.
+- Should the features index track additional columns analogous to [ideas-index](../ideas-index/README.md) (`Date`, `Owner`), so `feature-index-row-sync` covers more than just `Status`? Current position: `Status` only — feature READMEs do not carry `Date` or `Owner` fields in the front-matter today, so there is nothing to sync beyond `Status`. Revisit if feature front-matter gains those fields.
 
 ---
 *This document follows the https://specscore.md/feature-specification*

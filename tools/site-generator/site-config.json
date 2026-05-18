@@ -184,6 +184,18 @@
       "navLabel": "Ecosystem",
       "navGroup": "Resources",
       "navOrder": 20
+    },
+    {
+      "source": "docs/entities-and-properties.md",
+      "slug": "entities-and-properties",
+      "title": "Entities and Properties",
+      "nav": true,
+      "navLabel": "Entities & Properties",
+      "navGroup": "Resources",
+      "navOrder": 21,
+      "llmsGroup": "Reference",
+      "llmsDescription": "Author guide for the entity and property Doc-Kinds — typed business data with YAML-frontmatter source of truth, ref-based property reuse, and additive-only inheritance.",
+      "llmsFull": true
     }
   ],
   "externalLinks": [

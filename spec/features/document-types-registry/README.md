@@ -3,7 +3,7 @@
 > [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Fdocument-types-registry) — graph, discussions, approvals
 
 **Status:** Draft
-**Source Ideas:** adherence-footer-and-doc-type-registry
+**Source Ideas:** adherence-footer-and-doc-type-registry, entity-and-property-definitions
 
 ## Summary
 
@@ -41,7 +41,7 @@ The Contents table in SpecScore's `spec/features/README.md` MUST include, at min
 | Status | features-index | The feature's spec status (`Draft` \| `In Progress` \| `Stable` \| `Deprecated` \| `Conceptual`) |
 | Kind | registry overlay | One of: `Document` \| `Index` \| `Structure` \| `Meta` (see [Kind taxonomy](#kind-taxonomy)) |
 | URL | registry overlay | The bare specification URL, or `—` for Kinds that have none (see [REQ: url-per-kind](#req-url-per-kind)) |
-| Consumer Path | registry overlay | Glob of where instances live in consumer repos (e.g. `spec/plans/**/README.md`), or `—` when no consumer instances exist |
+| Consumer Path | registry overlay | Glob, or comma-separated list of globs, of where instances live in consumer repos (e.g. `spec/plans/**/README.md`, or `spec/features/**/*.entity.md, spec/features/**/*.property.md`), or `—` when no consumer instances exist. See [REQ: consumer-path-per-kind](#req-consumer-path-per-kind) for the per-Kind rules. |
 | Index | registry overlay | Relative link to the companion Index-Kind feature, or `—` when none |
 | Description | features-index | One-line human summary |
 
@@ -72,10 +72,12 @@ For every feature row:
 
 For every feature row:
 
-- `Kind = Document` → `Consumer Path` MUST be a glob describing where instances of this type live in consumer repos (e.g. `spec/plans/**/README.md`, `spec/ideas/*.md`).
-- `Kind = Index` → `Consumer Path` MUST be the single path where the canonical index lives (e.g. `spec/plans/README.md`).
+- `Kind = Document` → `Consumer Path` MUST be one glob OR a comma-separated list of two-or-more globs describing where instances of this type live in consumer repos (e.g. `spec/plans/**/README.md`, `spec/ideas/*.md`, or `spec/features/**/*.entity.md, spec/features/**/*.property.md`). Multiple globs are permitted only when a single glob cannot capture every legitimate instance location for the same Document Kind — most Kinds use a single glob.
+- `Kind = Index` → `Consumer Path` MUST be the single path where the canonical index lives (e.g. `spec/plans/README.md`). Multiple paths are NOT permitted — an Index Kind has exactly one canonical location.
 - `Kind = Structure` → `Consumer Path` MUST be `—`.
 - `Kind = Meta` → `Consumer Path` MUST be `—`.
+
+When `Consumer Path` is a comma-separated list, every consumer of the registry (lint walkers, the `specscore` CLI's glob expansion, doc renderers) MUST treat the cell as the union of the listed globs. Whitespace around commas is permitted.
 
 ### Top-level placement for Document and Index Kinds
 
@@ -109,6 +111,7 @@ A Document-Kind or Index-Kind feature MUST have a `REQ: adherence-footer` in its
 | [Feature](../feature/README.md) | Every feature has a row in the combined features-index + registry table. Cross-checks between each feature's declared specification URL and its registry row catch drift. |
 | [Adherence Footer](../adherence-footer/README.md) | The registry's `URL` column is cross-checked against each Document/Index-Kind feature's local `REQ: adherence-footer` URL. Drift is a lint error. |
 | [Plans Index](../plans-index/README.md) | Plans-Index is an `Index` Kind whose `URL` is `https://specscore.md/plans-index-specification` and whose `Consumer Path` is `spec/plans/README.md`. Its row in the registry demonstrates the Index Kind conventions. |
+| [Entity](../entity/README.md), [Property](../property/README.md) | Both are Document Kinds whose `Consumer Path` lists two-or-one globs under `spec/features/**` (`*.entity.md`, `*.property.md`). They are the first registry consumers of the comma-separated `Consumer Path` form — see [REQ: consumer-path-per-kind](#req-consumer-path-per-kind). Cross-checks of their adherence-footer URLs follow the same mechanism as every other Document Kind. |
 
 ## Acceptance Criteria
 
@@ -136,10 +139,15 @@ Every Document-Kind and Index-Kind feature lives directly under `spec/features/`
 
 Every feature directory has a registry row; every registry row points to a real feature directory; every Document/Index-Kind feature's local adherence-footer URL matches its registry URL; Structure/Meta-Kind features do not declare a `REQ: adherence-footer`.
 
+### AC: multi-glob-consumer-path-resolution
+
+**Requirements:** document-types-registry#req:consumer-path-per-kind
+
+Given a Document-Kind row whose `Consumer Path` cell is the comma-separated value `spec/features/**/*.entity.md, spec/features/**/*.property.md`, and a consumer repo containing both an `*.entity.md` file and an `*.property.md` file under `spec/features/**`, every registry consumer (lint walker, `specscore` CLI glob expansion, doc renderer) treats the cell as the union of the two globs and resolves both files against the same row. Whitespace around the comma is tolerated. A registry row that uses the comma-separated form for an `Index` or `Meta` Kind, or that lists only one glob in the comma-separated form (i.e., a trailing-comma artifact), is a validation error.
+
 ## Outstanding Questions
 
 - Should the registry gain a `Spec Status` column distinct from the feature's own Status, or is the feature's Status column sufficient for both purposes?
-- Should `Consumer Path` accept multiple globs (for document types whose instances live in more than one location), or is single-glob-per-type sufficient forever?
 - Should consumer repos be allowed to extend the registry with custom document types (via a `spec/document-types.md` overlay or a `specscore.yaml` field), and how would lint combine the base and overlay?
 - When a Document-Kind feature is renamed (e.g., `plan` → `development-plan`), does the URL change (breaking every existing consumer document) or stay stable (breaking the terminal-slug-equals-URL convention)? Current lean: favor URL stability; rename-without-URL-change requires an explicit registry entry decoupling the two.
 

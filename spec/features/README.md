@@ -11,6 +11,8 @@ Core features of the SpecScore specification framework. This table is the canoni
 | [acceptance-criteria](acceptance-criteria/README.md) | Stable | Structure | `https://specscore.md/acceptance-criteria-specification` | — | — | Acceptance criteria format and conventions |
 | [requirement](requirement/README.md) | Stable | Structure | `https://specscore.md/requirement-specification` | — | — | Discrete testable rules within feature Behavior sections |
 | [scenario](scenario/README.md) | Stable | Document | `https://specscore.md/scenario-specification` | `spec/features/**/_tests/*.md` | [scenarios-index](scenarios-index/README.md) | Concrete Given/When/Then behavior examples in `_tests/` directories |
+| [entity](entity/README.md) | Approved | Document | `https://specscore.md/entity-specification` | `spec/features/**/*.entity.md` | — | Typed business-object definition with YAML-frontmatter source of truth |
+| [property](property/README.md) | Approved | Document | `https://specscore.md/property-specification` | `spec/features/**/*.property.md` | — | Reusable single-field definition (data type + checks) referenced from entities |
 | [source-references](source-references/README.md) | Stable | Structure | `https://specscore.md/source-references-specification` | — | — | Code-to-spec traceability via inline annotations |
 | [plan](plan/README.md) | Stable | Document | `https://specscore.md/plan-specification` | `spec/plans/**/README.md` | [plans-index](plans-index/README.md) | Planning documents that bridge specs to execution |
 | [plans-index](plans-index/README.md) | Draft | Index | `https://specscore.md/plans-index-specification` | `spec/plans/README.md` | — | Canonical index of all Plan documents in a repo |
@@ -32,6 +34,8 @@ spec/features/
 ├── requirement/               # How to define addressable rules in Behavior sections
 ├── acceptance-criteria/       # How to define abstract verification conditions
 ├── scenario/                  # How to write concrete behavior examples
+├── entity/                    # How to define typed business objects with YAML-frontmatter source of truth
+├── property/                  # How to define reusable single-field property definitions
 ├── source-references/         # How to link code to specifications
 ├── plan/                      # How to structure planning documents
 ├── plans-index/               # How to structure the plans index

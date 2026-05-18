@@ -1,9 +1,9 @@
 # Idea: Entity and Property Definitions
 
-**Status:** Approved
+**Status:** Implementing
 **Date:** 2026-05-18
 **Owner:** alexander.trakhimenok
-**Promotes To:** —
+**Promotes To:** document-types-registry, entity, property
 **Supersedes:** —
 **Related Ideas:** —
 
