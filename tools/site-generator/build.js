@@ -83,19 +83,20 @@ async function build() {
     // 1. Rewrite links for HTML output
     const htmlMarkdown = rewriteLinks(rawMarkdown, page.source, config.sourceToSlug, 'html');
 
-    // 2. Pre-render mermaid diagrams (on the HTML-targeted markdown)
-    const mermaidRendered = await renderMermaidBlocks(htmlMarkdown);
+    // 2. Convert ```mermaid``` fences to <pre class="mermaid"> (client-side rendered)
+    const { markdown: mermaidRendered, hasMermaid } = renderMermaidBlocks(htmlMarkdown);
 
     // 3. Render markdown to HTML
     const htmlContent = renderMarkdownToHtml(mermaidRendered);
 
-    // 4. Inject into template
+    // 4. Inject into template (Mermaid script loaded only on pages with diagrams)
     const htmlPage = injectIntoTemplate(template, {
       title: page.title,
       content: htmlContent,
       slug: page.slug,
       sidebarGroups: config.sidebarGroups,
       eyebrow: page.navGroup || '',
+      hasMermaid,
     });
 
     // 5. Write HTML file
@@ -180,19 +181,10 @@ async function build() {
   await writeLlmsFiles(config, OUTPUT, ROOT);
   console.log('  llms.txt + llms-full.txt');
 
-  // --- Cloudflare Pages config (_headers, _redirects) ---
-  // Source-of-truth lives at the repo root; copy into the publish dir so
-  // Cloudflare Pages finds them. Firebase ignores these via firebase.json
-  // "ignore". Missing files are skipped silently — _redirects is optional.
-  for (const file of ['_headers', '_redirects']) {
-    const src = join(ROOT, file);
-    try {
-      await cp(src, join(OUTPUT, file));
-      console.log(`  ${file} (Cloudflare Pages config)`);
-    } catch (err) {
-      if (err.code !== 'ENOENT') throw err;
-    }
-  }
+  // Cloudflare Pages config (_headers, _redirects) is intentionally NOT
+  // copied into public/. CF Pages builds from sources and is responsible
+  // for placing those files at its own publish-dir root. Firebase serves
+  // the committed public/ unchanged.
 
   console.log(`\nDone. Output: ${OUTPUT}`);
 }

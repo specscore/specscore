@@ -12,7 +12,7 @@ If you are tempted to "modernize" the build by swapping in a popular static-site
 |---|---|---|
 | Generator | Custom Node.js script | [`tools/site-generator/build.js`](tools/site-generator/build.js) |
 | Markdown | `markdown-it` | [`tools/site-generator/package.json`](tools/site-generator/package.json) |
-| Diagrams | `@mermaid-js/mermaid-cli` + `puppeteer` | [`tools/site-generator/package.json`](tools/site-generator/package.json) |
+| Diagrams | Mermaid (client-side, loaded from CDN only on pages with diagrams) | [`tools/site-generator/lib/render-page.js`](tools/site-generator/lib/render-page.js) |
 | Templates | Hand-rolled HTML | `tools/site-generator/{template,landing,blog-*}.html` |
 | Output | Side-by-side `.html` + `.md` | `public/` |
 | Hosting | **Firebase Hosting** *or* **Cloudflare Pages** | see [Supported Hostings](#supported-hostings) |
@@ -25,22 +25,31 @@ src markdown (docs/, blog/, ideas/)
         ▼
 tools/site-generator/build.js
    ├── markdown-it → HTML body
-   ├── mermaid-cli (puppeteer) → inline SVG
+   ├── ```mermaid``` fences → <pre class="mermaid"> (rendered client-side)
    ├── template.html / landing.html / blog-*.html → wrap body
-   ├── emit BOTH:  public/foo.html   ← human-friendly
-   │               public/foo.md     ← LLM- / curl-friendly (verbatim source)
-   └── copy hosting config into publish dir:
-       public/_headers, public/_redirects   ← for Cloudflare Pages
+   └── emit BOTH:  public/foo.html   ← human-friendly
+                   public/foo.md     ← LLM- / curl-friendly (verbatim source)
         │
-        ▼
-Hosting (Firebase OR Cloudflare Pages — both supported)
+        ├──────────────────────────────────┐
+        ▼                                  ▼
+Firebase Hosting                  Cloudflare Pages
+(deploys committed public/)       (re-runs `pnpm build` from sources, then
+                                   places _headers/_redirects at publish-dir
+                                   root from repo-root sources)
 ```
 
 ---
 
 ## Supported Hostings
 
-The site can be deployed to **either** Firebase Hosting **or** Cloudflare Pages from the same `public/` build output. Both targets are kept in sync intentionally so we can:
+The site supports **two hosting targets with two different build models**:
+
+- **Firebase Hosting** deploys the pre-built, committed `public/` directory from CI.
+- **Cloudflare Pages** builds from sources — CF runs `pnpm build` itself in its own runner and serves the result.
+
+This means **`_headers` / `_redirects` are CF-only source files at the repo root and are NOT copied into `public/`**. Firebase never sees them; CF Pages reads them from sources during its own build. Keeping them out of `public/` ensures Firebase's deployment artifact stays clean and provider-agnostic.
+
+Both targets are maintained intentionally so we can:
 
 - A/B test latency and DX between providers
 - Fail over from one to the other without rebuilding
@@ -58,23 +67,20 @@ Active production target as of this writing. Site name: `specscore-org`.
 | [`.firebaserc`](.firebaserc) | Maps the default project alias to `synchestra-io` so `firebase deploy` targets the right Firebase project without `--project` flags. |
 
 **Notable Firebase-only behavior:**
-- `"ignore": ["firebase.json", "**/.*", "**/_headers", "**/_redirects"]` — the `_headers` / `_redirects` patterns prevent Firebase from serving Cloudflare's config files as plain-text URLs (`https://specscore.md/_headers`).
 - `cleanUrls: true` + `trailingSlash: false` — `/foo` resolves to `foo.html`; `/foo/` 301s to `/foo`.
 - `headers[].source` uses Firebase's path-matching syntax (`**/*.md` for all Markdown).
+- Deploy artifact is the committed `public/` directory — `build.js` deliberately does **not** copy `_headers` / `_redirects` into it. A CI guard in [`.github/workflows/site-ci.yml`](.github/workflows/site-ci.yml) fails the build if either file appears in `public/`.
 
-**Deploy:**
-```sh
-firebase deploy --only hosting
-```
+**Deploy:** automatic via [`.github/workflows/site-ci.yml`](.github/workflows/site-ci.yml) on push to `main` (or `workflow_dispatch`). Manual fallback: `firebase deploy --only hosting`.
 
 ### Cloudflare Pages
 
-Companion target. Project setup is via the Cloudflare dashboard (Pages → connect repo or push via Wrangler); there is no `.cloudflare/` config file equivalent to `.firebaserc`.
+Companion target. **Cloudflare Pages builds from sources** — when configured via the Cloudflare dashboard, CF runs its own build runner against the connected git repo, regenerates `public/`, and serves the result. There is no `.cloudflare/` config file equivalent to `.firebaserc`.
 
 | File | Purpose |
 |---|---|
-| [`_headers`](_headers) | Source-of-truth for Cloudflare's per-path response headers. Mirrors `firebase.json`'s `headers[]` block: serves `*.md` as `text/markdown`, attaches `Link: rel="alternate"` to canonical HTML pages, and sets `Content-Type` + `Cache-Control` on `/install/get-cli{,.ps1}`. Copied into `public/_headers` by `build.js` so Cloudflare finds it at the publish-dir root. |
-| [`_redirects`](_redirects) | Source-of-truth for Cloudflare's HTTP redirects. Currently 301s legacy `/get-cli{,.ps1}` paths to the canonical `/install/get-cli{,.ps1}`. Copied into `public/_redirects` by `build.js`. Optional — if absent, the copy step is silently skipped. |
+| [`_headers`](_headers) | Source-of-truth for Cloudflare's per-path response headers. Mirrors `firebase.json`'s `headers[]` block: serves `*.md` as `text/markdown`, attaches `Link: rel="alternate"` to canonical HTML pages, and sets `Content-Type` + `Cache-Control` on `/install/get-cli{,.ps1}`. Lives at the **repo root only** — CF Pages' build command is responsible for placing it at the publish-dir root. |
+| [`_redirects`](_redirects) | Source-of-truth for Cloudflare's HTTP redirects. Currently 301s legacy `/get-cli{,.ps1}` paths to the canonical `/install/get-cli{,.ps1}`. Same placement contract as `_headers`. |
 
 **Notable Cloudflare-only behavior:**
 - `_headers` syntax: path on its own line, headers indented two spaces below. See the [Cloudflare Pages headers docs](https://developers.cloudflare.com/pages/configuration/headers/).
@@ -82,12 +88,21 @@ Companion target. Project setup is via the Cloudflare dashboard (Pages → conne
 - Clean URLs (no trailing slash, `/foo` → `foo.html`) are CF Pages defaults — no config needed.
 - Per-PR preview deploys via the git integration are available out of the box.
 
-**Deploy:**
-```sh
-# via Wrangler
-npx wrangler pages deploy public --project-name=specscore
+**Required CF Pages project config (when setting up):**
 
-# or push to main with the CF Pages GitHub integration enabled
+| Setting | Value |
+|---|---|
+| Build command | `pnpm install --frozen-lockfile && pnpm --filter specscore-site-generator build && cp _headers _redirects public/` |
+| Build output directory | `public` |
+| Root directory | repo root |
+
+The trailing `cp _headers _redirects public/` is what gets the CF config into the publish dir without polluting the Firebase artifact. Alternative: write a thin `tools/site-generator/build-cf.sh` wrapper that does the build + copy; the dashboard build command then becomes a one-liner.
+
+**Manual deploy fallback:**
+```sh
+pnpm --filter specscore-site-generator build
+cp _headers _redirects public/
+npx wrangler pages deploy public --project-name=specscore
 ```
 
 ### Why duplicate config?
@@ -139,7 +154,6 @@ Real evaluations against the requirement "raw `.md` URLs are first-class, byte-s
 **Pros**
 - Built-in nav, sidebar, search, MDX, syntax highlighting
 - Active ecosystem; minimal bespoke code
-- Mermaid via `astro-rehype-mermaid` would let us drop Puppeteer/Chromium
 - Great for traditional docs sites
 
 **Cons (blocking)**
@@ -186,13 +200,7 @@ Same pattern: HTML-first, raw-Markdown-at-canonical-URL is bolt-on. None of them
 
 The current stack is not perfect. The honest list:
 
-1. **Puppeteer / Chromium for Mermaid is heavy.** It dominates `node_modules` size and CI install time. Replacing `@mermaid-js/mermaid-cli` with either:
-   - a `markdown-it` plugin that emits `<pre class="mermaid">` and lets Mermaid render client-side, or
-   - server-side Mermaid via `@mermaid-js/mermaid` + `jsdom`
-
-   would remove the largest dependency without touching the dual-output design.
-
-2. **No built-in search.** If/when we need site search, the right move is a small client-side index (e.g. Pagefind, which runs over the built `public/` directory and is generator-agnostic) — **not** a framework migration.
+1. **No built-in search.** If/when we need site search, the right move is a small client-side index (e.g. Pagefind, which runs over the built `public/` directory and is generator-agnostic) — **not** a framework migration.
 
 3. **No sidebar / nav generation.** Today nav is hand-maintained in templates. If this becomes painful, the fix is a small Node helper that reads frontmatter — not a framework.
 
@@ -211,4 +219,4 @@ Reopen the "should we switch generators?" question if **and only if** one of the
 - The custom generator grows past ~1000 LOC and starts duplicating framework features (templating engine, asset pipeline, content collections)
 - We need rich interactive components (search-as-you-type, live playgrounds) on the spec pages themselves
 
-Until then, the answer is: **keep `build.js`, kill Puppeteer when convenient, add Pagefind if search is needed.**
+Until then, the answer is: **keep `build.js`, add Pagefind if search is needed.**

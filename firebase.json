@@ -2,7 +2,7 @@
   "hosting": {
     "site": "specscore-org",
     "public": "public",
-    "ignore": ["firebase.json", "**/.*", "**/_headers", "**/_redirects"],
+    "ignore": ["firebase.json", "**/.*"],
     "cleanUrls": true,
     "trailingSlash": false,
     "headers": [

@@ -49,15 +49,7 @@ jobs:
         working-directory: tools/site-generator
         run: pnpm install --frozen-lockfile
 
-      - name: Install Chrome
-        working-directory: tools/site-generator
-        run: |
-          sudo apt-get install -y --no-install-recommends \
-            libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 libcups2 \
-            libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 \
-            libxrandr2 libgbm1
-          pnpm exec puppeteer browsers install chrome
-          pnpm exec puppeteer browsers install chrome-headless-shell
+      # No headless browser install needed — Mermaid renders client-side from a CDN.
 
       - name: Run tests
         working-directory: tools/site-generator
@@ -67,21 +59,32 @@ jobs:
         working-directory: tools/site-generator
         run: pnpm build
 
-      - name: Verify no mermaid code blocks in HTML
+      - name: Verify no unrendered mermaid fences in HTML
         run: |
           if grep -r '```mermaid' public/*.html; then
-            echo "ERROR: Found unrendered mermaid blocks in HTML output"
+            echo "ERROR: Found unrendered mermaid fences in HTML output"
             exit 1
           fi
 
-      - name: Verify mermaid SVGs rendered
+      - name: Verify mermaid blocks present and loader script wired
         run: |
           for f in public/feature-specification.html public/plan-specification.html; do
-            if ! grep -q '<svg' "$f"; then
-              echo "ERROR: No SVG found in $f"
+            if ! grep -q '<pre class="mermaid">' "$f"; then
+              echo "ERROR: No <pre class=\"mermaid\"> block in $f"
+              exit 1
+            fi
+            if ! grep -q 'mermaid.esm.min.mjs' "$f"; then
+              echo "ERROR: Mermaid loader script not present in $f"
               exit 1
             fi
           done
+
+      - name: Verify Cloudflare config not in Firebase artifact
+        run: |
+          if [ -f public/_headers ] || [ -f public/_redirects ]; then
+            echo "ERROR: _headers/_redirects must not be inside public/ (Cloudflare-only files)"
+            exit 1
+          fi
 
       - name: Authenticate to GCP
         if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
