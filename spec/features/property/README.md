@@ -1,6 +1,6 @@
 # Feature: Property
 
-> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Fproperty) — graph, discussions, approvals
+> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@specscore@github.com&path=spec%2Ffeatures%2Fproperty) — graph, discussions, approvals
 
 **Status:** Approved
 **Source Ideas:** entity-and-property-definitions

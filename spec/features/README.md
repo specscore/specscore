@@ -1,6 +1,6 @@
 # SpecScore Features
 
-> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures) — graph, discussions, approvals
+> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@specscore@github.com&path=spec%2Ffeatures) — graph, discussions, approvals
 
 Core features of the SpecScore specification framework. This table is the canonical [Document Types Registry](document-types-registry/README.md) — every SpecScore document type is listed here with its Kind, specification URL, and Consumer Path.
 
@@ -24,6 +24,7 @@ Core features of the SpecScore specification framework. This table is the canoni
 | [adherence-footer](adherence-footer/README.md) | Draft | Meta | — | — | — | The shared footer mechanism every Document-Kind feature delegates to |
 | [document-types-registry](document-types-registry/README.md) | Draft | Meta | — | — | — | This registry — canonical list of SpecScore document types |
 | [index](index/README.md) | Draft | Meta | — | — | — | Shared shape of every Index-Kind feature — required sections, completeness, footer delegation |
+| [studio-toolbar](studio-toolbar/README.md) | Replaces the single 'View in SpecStudio' link in feature READMEs with a fixed four-item toolbar (Explore, Edit, Ask question, Request change) that links into the SpecScore.Studio web app at specscore.studio/app/p/. Defines the canonical byte form, URL grammar, brand attribution rendering, lint rule, and autofix migration. |
 
 ## Feature Hierarchy
 

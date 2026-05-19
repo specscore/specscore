@@ -1,6 +1,6 @@
 # Feature: Adherence Footer
 
-> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Fadherence-footer) — graph, discussions, approvals
+> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@specscore@github.com&path=spec%2Ffeatures%2Fadherence-footer) — graph, discussions, approvals
 
 **Status:** Draft
 **Source Ideas:** adherence-footer-and-doc-type-registry
