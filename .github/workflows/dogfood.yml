@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  SPECSCORE_VERSION: v0.12.1  # bump intentionally via PR
+  SPECSCORE_VERSION: v0.0.3  # bump intentionally via PR
 
 jobs:
   lint:
