@@ -1,9 +1,9 @@
 # Idea: Studio Toolbar
 
-**Status:** Approved
+**Status:** Implementing
 **Date:** 2026-05-19
 **Owner:** alex
-**Promotes To:** —
+**Promotes To:** studio-toolbar
 **Supersedes:** —
 **Related Ideas:** —
 
