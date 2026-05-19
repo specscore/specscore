@@ -23,10 +23,10 @@ Scenarios that verify the requirements defined in [Repo Config](../README.md).
 | [module-root-coexists-with-explicit-paths](module-root-coexists-with-explicit-paths.md) | [REQ: module-paths-non-nested](../README.md#req-module-paths-non-nested) |
 | [code-paths-are-scan-roots](code-paths-are-scan-roots.md) | [REQ: module-code-list](../README.md#req-module-code-list) |
 | [unknown-fields-preserved](unknown-fields-preserved.md) | [REQ: unknown-fields-preserved](../README.md#req-unknown-fields-preserved) |
-| [viewer-defaults-when-omitted](viewer-defaults-when-omitted.md) | [REQ: viewer-default-when-omitted](../README.md#req-viewer-default-when-omitted), [REQ: viewer-link-mandatory-unless-opted-out](../README.md#req-viewer-link-mandatory-unless-opted-out) |
-| [viewer-explicit-overrides](viewer-explicit-overrides.md) | [REQ: viewer-explicit-values](../README.md#req-viewer-explicit-values) |
-| [viewer-partial-block-fails](viewer-partial-block-fails.md) | [REQ: viewer-explicit-values](../README.md#req-viewer-explicit-values) |
-| [viewer-null-suppresses-link](viewer-null-suppresses-link.md) | [REQ: viewer-null-opts-out](../README.md#req-viewer-null-opts-out) |
+| [studio-defaults-when-omitted](studio-defaults-when-omitted.md) | [REQ: studio-default-when-omitted](../README.md#req-studio-default-when-omitted), [REQ: studio-toolbar-mandatory-unless-opted-out](../README.md#req-studio-toolbar-mandatory-unless-opted-out) |
+| [studio-explicit-overrides](studio-explicit-overrides.md) | [REQ: studio-explicit-values](../README.md#req-studio-explicit-values) |
+| [studio-partial-block-fails](studio-partial-block-fails.md) | [REQ: studio-explicit-values](../README.md#req-studio-explicit-values) |
+| [studio-null-suppresses-toolbar](studio-null-suppresses-toolbar.md) | [REQ: studio-null-opts-out](../README.md#req-studio-null-opts-out) |
 
 ## Outstanding Questions
 

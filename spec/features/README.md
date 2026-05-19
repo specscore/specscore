@@ -1,6 +1,6 @@
 # SpecScore Features
 
-> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@specscore@github.com&path=spec%2Ffeatures) — graph, discussions, approvals
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features?op=request-change) |
 
 Core features of the SpecScore specification framework. This table is the canonical [Document Types Registry](document-types-registry/README.md) — every SpecScore document type is listed here with its Kind, specification URL, and Consumer Path.
 

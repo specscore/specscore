@@ -11,7 +11,7 @@ AND its full contents are exactly:
 ```
 WHEN SpecScore validates the project
 THEN validation MUST succeed
-AND every default defined by `repo-config` MUST apply (project title from working directory, `specs_dir_name: specs`, `docs_dir_name: docs`, single implicit-root module, default viewer)
+AND every default defined by `repo-config` MUST apply (project title from working directory, `specs_dir_name: specs`, `docs_dir_name: docs`, single implicit-root module, default studio)
 
 ---
 
