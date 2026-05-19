@@ -1,12 +1,12 @@
 # Feature: Repo Config
 
-> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@synchestra-io@github.com&path=spec%2Ffeatures%2Frepo-config) — graph, discussions, approvals
+> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@specscore@github.com&path=spec%2Ffeatures%2Frepo-config) — graph, discussions, approvals
 
 **Status:** Draft
 
 ## Summary
 
-Defines `specscore.yaml`, the single mandatory repository-level config file for SpecScore projects. Specifies the file name, the mandatory schema-pointer header comment, the optional `project` identity block, related-project navigation hints, top-level dir-name overrides, modules with code roots, viewer configuration, and inference defaults so a minimal repo can ship with an effectively empty config.
+Defines `specscore.yaml`, the single mandatory repository-level config file for SpecScore projects. Specifies the file name, the mandatory schema-pointer header comment, the optional `project` identity block, related-project navigation hints, top-level dir-name overrides, modules with code roots, studio configuration, and inference defaults so a minimal repo can ship with an effectively empty config.
 
 ## Contents
 
@@ -16,7 +16,7 @@ Defines `specscore.yaml`, the single mandatory repository-level config file for 
 
 ## Problem
 
-SpecScore needs a single, predictable, repo-level config file. The legacy `specscore-spec-repo.yaml` carried Synchestra-flavored naming (the spec-repo / state-repo / code-repo split) that does not apply to SpecScore proper, and its schema did not support modular layouts (e.g., a frontend and a backend module sharing one repo). Tools that render artifact links (`View in …`) had no name-agnostic place to read viewer settings, so `Spec Studio` was effectively hard-coded.
+SpecScore needs a single, predictable, repo-level config file. The legacy `specscore-spec-repo.yaml` carried Synchestra-flavored naming (the spec-repo / state-repo / code-repo split) that does not apply to SpecScore proper, and its schema did not support modular layouts (e.g., a frontend and a backend module sharing one repo). Tools that render the studio toolbar in artifact documents (the four canonical verbs: Explore, Edit, Ask question, Request change) need a name-agnostic place to read studio settings; the legacy `viewer:` block (with its single-link "View in …" model) is out of date and is superseded by `studio:`.
 
 This feature replaces `project-definition` with a simpler, more flexible schema.
 
@@ -185,36 +185,40 @@ Two modules MUST NOT have the same effective `path` (where omitted `path` is tre
 
 Two modules with explicit `path:` values MUST NOT have an ancestor-descendant relationship (i.e., one path is a prefix of the other interpreted as filesystem paths). A module with no `path:` (the implicit-root module) MAY coexist with any number of explicit-path modules. Nested explicit-path modules are a hard error.
 
-### Viewer
+### Studio
 
-The optional `viewer:` block names the upstream viewer that renders SpecScore artifacts in a browser. Tools that emit "View in …" links in artifact documents (e.g., feature READMEs) read this block.
+The optional `studio:` block names the upstream studio (Spec Studio web app) that renders SpecScore artifacts in a browser and serves the toolbar. Tools that emit the toolbar line in artifact documents (e.g., feature READMEs) read this block.
 
 ```yaml
-viewer:
-  name: SpecStudio
-  url: https://specstudio.synchestra.io/
+studio:
+  name: SpecScore.Studio
+  url: https://specscore.studio/
 ```
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `name` | yes (when `viewer:` is present as a mapping) | Display name shown in rendered links (e.g., "View in {name}") |
-| `url` | yes (when `viewer:` is present as a mapping) | Base URL of the viewer; rendered links point under this URL |
+| `name` | yes (when `studio:` is present as a mapping) | Display name shown in the toolbar brand attribution |
+| `url` | yes (when `studio:` is present as a mapping) | Base URL of the studio; toolbar links point under this URL |
 
-#### REQ: viewer-default-when-omitted
+#### REQ: studio-default-when-omitted
 
-When `viewer:` is omitted entirely, tools MUST use the defaults `name: SpecStudio` and `url: https://specstudio.synchestra.io/`. Artifact view links MUST be rendered with these defaults.
+When `studio:` is omitted entirely, tools MUST use the defaults `name: SpecScore.Studio` and `url: https://specscore.studio/`. The studio toolbar MUST be rendered in artifact documents with these defaults.
 
-#### REQ: viewer-explicit-values
+#### REQ: studio-explicit-values
 
-When `viewer:` is present as a mapping, both `name` (string) and `url` (valid URL) MUST be present. Partial mappings (e.g., `viewer: { name: X }` without a URL) are a hard error. Defaults do not apply to a partially-specified `viewer:` block — defaults apply only when the whole block is absent.
+When `studio:` is present as a mapping, both `name` (string) and `url` (valid URL) MUST be present. Partial mappings (e.g., `studio: { name: X }` without a URL) are a hard error. Defaults do not apply to a partially-specified `studio:` block — defaults apply only when the whole block is absent.
 
-#### REQ: viewer-null-opts-out
+#### REQ: studio-null-opts-out
 
-When `viewer:` is explicitly set to `null` (YAML `null`, `~`, or an empty value), tools MUST NOT render any view link in artifact documents. This is the only way to suppress view links; omitting the block falls back to defaults.
+When `studio:` is explicitly set to `null` (YAML `null`, `~`, or an empty value), tools MUST NOT render any studio toolbar in artifact documents. This is the only way to suppress the toolbar; omitting the block falls back to defaults.
 
-#### REQ: viewer-link-mandatory-unless-opted-out
+#### REQ: studio-toolbar-mandatory-unless-opted-out
 
-Tools rendering artifact documents that support a "View in …" link (e.g., the lint `view-link` rule operating on feature READMEs) MUST emit such a link unless `viewer: null` is explicitly set. Implementations MUST NOT silently omit links for any other reason.
+Tools rendering artifact documents that support a studio toolbar (e.g., the lint `studio-toolbar` rule operating on feature READMEs) MUST emit such a toolbar unless `studio: null` is explicitly set. Implementations MUST NOT silently omit the toolbar for any other reason. The toolbar's rendering convention — its line position, byte form, verb set, separator, and URL grammar — is owned by the [studio-toolbar](../studio-toolbar/README.md) Feature, not by this Feature; `repo-config` owns only the `studio:` schema (defaults, opt-out, explicit-values rules, trailing-slash validation).
+
+#### REQ: studio-url-trailing-slash
+
+`studio.url` MUST end with exactly one trailing `/` character. A `studio.url` value with no trailing slash (e.g., `https://specscore.studio`) or with multiple trailing slashes (e.g., `https://specscore.studio//`) is a hard error. This schema-level validation is owned by `repo-config`; the [studio-toolbar](../studio-toolbar/README.md) Feature consumes the validated value and strips the single trailing `/` before joining it with the toolbar URL path grammar.
 
 ### Unknown fields
 
@@ -265,9 +269,9 @@ projects:
 specs_dir_name: specs
 docs_dir_name: docs
 
-viewer:
-  name: SpecStudio
-  url: https://specstudio.synchestra.io/
+studio:
+  name: SpecScore.Studio
+  url: https://specscore.studio/
 
 modules:
   - name: Highlevel
@@ -290,7 +294,8 @@ modules:
 | Feature | Interaction |
 |---|---|
 | [Source References](../source-references/README.md) | `project.host`, `project.org`, `project.repo` provide overrides for git-remote inference when expanding same-repo references. |
-| [Feature](../feature/README.md) | Feature READMEs carry "View in …" links rendered from the `viewer:` block (or its defaults). |
+| [Feature](../feature/README.md) | Feature READMEs carry the studio toolbar (see [studio-toolbar](../studio-toolbar/README.md)) rendered using `studio.name` and `studio.url` from this block. |
+| [Studio Toolbar](../studio-toolbar/README.md) | The `studio:` block defined here provides `studio.name` and `studio.url` consumed by the studio-toolbar Feature's renderer and lint rule. |
 | [Document Types Registry](../document-types-registry/README.md) | This feature is registered in the canonical document-types table; its consumer path is `specscore.yaml`. |
 
 ## Acceptance Criteria
@@ -335,11 +340,13 @@ Each `projects:` entry is recognized as a URL or a local directory path. Local p
 
 Modules resolve their specs, docs, and code paths relative to `module.path`. Module names are deduced from `path` when omitted. Duplicate or nested explicit module paths produce hard errors. The implicit-root module (no `path:`) coexists with explicit-path modules.
 
-### AC: viewer-rules
+### AC: studio-rules
 
-**Requirements:** repo-config#req:viewer-default-when-omitted, repo-config#req:viewer-explicit-values, repo-config#req:viewer-null-opts-out, repo-config#req:viewer-link-mandatory-unless-opted-out
+**Requirements:** repo-config#req:studio-default-when-omitted, repo-config#req:studio-explicit-values, repo-config#req:studio-null-opts-out, repo-config#req:studio-toolbar-mandatory-unless-opted-out, repo-config#req:studio-url-trailing-slash
 
-When `viewer:` is omitted, defaults apply and view links are rendered. When `viewer:` is a mapping, both fields are required. `viewer: null` suppresses view links. View links are mandatory in artifact documents unless explicitly opted out.
+**Given** a `specscore.yaml` with any of the following `studio:` configurations — the block omitted entirely, the block present as a mapping with both `name` and `url`, the block present as a partial mapping (only `name` or only `url`), the block set to `null` / `~` / empty, or the block present with a `studio.url` lacking or doubling its trailing slash
+**When** tools load the config and render artifact documents
+**Then** an omitted `studio:` block applies defaults (`name: SpecScore.Studio`, `url: https://specscore.studio/`) and the studio toolbar is rendered; a full mapping uses its explicit values and the toolbar is rendered; a partial mapping is a hard error and no defaults are applied; `studio: null` suppresses the studio toolbar entirely; and a `studio.url` without a single trailing `/` is a hard error. The studio toolbar is mandatory in artifact documents unless explicitly opted out via `studio: null`.
 
 ### AC: extensions-preserved
 
@@ -351,7 +358,7 @@ Unknown fields at any level survive read/write without warnings. Orchestrators c
 
 - The schema-pointer URL `https://specscore.md/repo-config` does not follow the registry convention `https://specscore.md/{type}-specification` used by other Document-Kind features. Should it be renamed to `https://specscore.md/repo-config-specification` for consistency, or is the shorter form preferred for human typing in YAML headers?
 - Should `code:` entries support glob patterns (e.g., `pkg/**/*.go`), or must they be literal file/directory paths? Defer until lint actually consumes them.
-- Should an explicit `viewer.name` be allowed to differ from the host implied by `viewer.url` (e.g., `name: MyCompanyDocs` with a SpecStudio-hosted URL)? Spec currently allows it freely.
+- Should an explicit `studio.name` be allowed to differ from the host implied by `studio.url` (e.g., `name: MyCompanyDocs` with a SpecScore.Studio-hosted URL)? Spec currently allows it freely.
 - How should tooling handle a repository that has no `specscore.yaml` at all — refuse to operate, or assume defaults?
 
 ---
