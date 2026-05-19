@@ -2,7 +2,3 @@
 
 project:
   title: SpecScore
-
-viewer:
-  name: SpecStudio
-  url: https://specstudio.synchestra.io/

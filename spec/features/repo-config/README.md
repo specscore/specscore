@@ -1,6 +1,6 @@
 # Feature: Repo Config
 
-> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@specscore@github.com&path=spec%2Ffeatures%2Frepo-config) — graph, discussions, approvals
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=request-change) |
 
 **Status:** Draft
 

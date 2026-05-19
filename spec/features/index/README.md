@@ -1,6 +1,6 @@
 # Feature: Index
 
-> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@specscore@github.com&path=spec%2Ffeatures%2Findex) — graph, discussions, approvals
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/index?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/index?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/index?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/index?op=request-change) |
 
 **Status:** Draft
 **Source Ideas:** shared-index-feature

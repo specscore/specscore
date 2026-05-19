@@ -1,6 +1,6 @@
 # Feature: Plan
 
-> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@specscore@github.com&path=spec%2Ffeatures%2Fplan) — graph, discussions, approvals
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/plan?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/plan?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/plan?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/plan?op=request-change) |
 
 **Status:** Stable
 

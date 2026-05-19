@@ -1,6 +1,6 @@
 # Feature: Task
 
-> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@specscore@github.com&path=spec%2Ffeatures%2Ftask) — graph, discussions, approvals
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/task?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/task?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/task?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/task?op=request-change) |
 
 **Status:** Stable
 

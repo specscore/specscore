@@ -1,6 +1,6 @@
 # Feature: Studio Toolbar
 
-> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@specscore@github.com&path=spec%2Ffeatures%2Fstudio-toolbar) — graph, discussions, approvals
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/studio-toolbar?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/studio-toolbar?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/studio-toolbar?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/studio-toolbar?op=request-change) |
 
 **Status:** Approved
 **Source Ideas:** studio-toolbar

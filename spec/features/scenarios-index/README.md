@@ -1,6 +1,6 @@
 # Feature: Scenarios Index
 
-> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@specscore@github.com&path=spec%2Ffeatures%2Fscenarios-index) — graph, discussions, approvals
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/scenarios-index?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/scenarios-index?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/scenarios-index?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/scenarios-index?op=request-change) |
 
 **Status:** Draft
 

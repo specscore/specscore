@@ -24,7 +24,9 @@ Core features of the SpecScore specification framework. This table is the canoni
 | [adherence-footer](adherence-footer/README.md) | Draft | Meta | — | — | — | The shared footer mechanism every Document-Kind feature delegates to |
 | [document-types-registry](document-types-registry/README.md) | Draft | Meta | — | — | — | This registry — canonical list of SpecScore document types |
 | [index](index/README.md) | Draft | Meta | — | — | — | Shared shape of every Index-Kind feature — required sections, completeness, footer delegation |
-| [studio-toolbar](studio-toolbar/README.md) | Replaces the single 'View in SpecStudio' link in feature READMEs with a fixed four-item toolbar (Explore, Edit, Ask question, Request change) that links into the SpecScore.Studio web app at specscore.studio/app/p/. Defines the canonical byte form, URL grammar, brand attribution rendering, lint rule, and autofix migration. |
+| [studio-toolbar](studio-toolbar/README.md) | Approved | Meta | — | — | — | Fixed four-item toolbar (Explore / Edit / Ask question / Request change) at line 3 of every feature README, replacing the legacy "View in SpecStudio" link |
+| [decision](decision/README.md) | Draft | Document | `https://specscore.md/decision-specification` | `spec/decisions/<NNNN>-<slug>.md` | — | Durable, lintable record of a choice made between two or more options |
+| [decisions-index](decisions-index/README.md) | Draft | Index | `https://specscore.md/decisions-index-specification` | `spec/decisions/README.md` | — | Canonical index of active Decision documents in a repo |
 
 ## Feature Hierarchy
 

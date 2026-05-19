@@ -1,6 +1,6 @@
 # Feature: Ideas Index
 
-> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@specscore@github.com&path=spec%2Ffeatures%2Fideas-index) — graph, discussions, approvals
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/ideas-index?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/ideas-index?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/ideas-index?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/ideas-index?op=request-change) |
 
 **Status:** Draft
 

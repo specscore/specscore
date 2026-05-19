@@ -1,6 +1,6 @@
 # Feature: Requirement
 
-> [View in SpecStudio](https://specstudio.synchestra.io/project/features?id=specscore@specscore@github.com&path=spec%2Ffeatures%2Frequirement) — graph, discussions, approvals
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/requirement?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/requirement?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/requirement?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/requirement?op=request-change) |
 
 **Status:** Stable
 
