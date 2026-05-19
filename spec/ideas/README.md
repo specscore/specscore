@@ -12,6 +12,7 @@ Archived Ideas are indexed separately at [archived/README.md](archived/README.md
 | [decision-and-decisions-index](decision-and-decisions-index.md) | Implementing | 2026-04-20 | alexander.trakhimenok@gmail.com | decision, decisions-index |
 | [entity-and-property-definitions](entity-and-property-definitions.md) | Implementing | 2026-05-18 | alexander.trakhimenok | document-types-registry, entity, property |
 | [shared-index-feature](shared-index-feature.md) | Implementing | 2026-04-20 | alexander.trakhimenok | index |
+| [studio-toolbar](studio-toolbar.md) | Approved | 2026-05-19 | alex | — |
 
 ## Outstanding Questions
 
