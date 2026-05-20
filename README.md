@@ -1,7 +1,5 @@
 # SpecScore
 
-[![Spec'd with SpecScore](https://specscore.md/badge.svg)](https://specscore.md)
-
 **The open specification standard for AI-driven development**
 
 SpecScore is an open specification format that makes requirements machine-readable without making them human-unreadable. It's Markdown and YAML — version-controlled, portable, no vendor lock-in. Use it standalone or with any orchestration tool.
@@ -94,6 +92,12 @@ Adding your project? Open a PR.
 ## Contributing
 
 Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
+
+---
+
+## Specified with [SpecScore.md](https://specscore.md)
+
+This project uses [SpecScore](https://specscore.md) — an open, machine-readable specification format designed to be read by AI agents as well as humans. The requirements, acceptance criteria, and lifecycle status of every feature live in [`spec/`](spec/README.md), validated by `specscore spec lint` ([install the CLI](https://specscore.md/install)). Status fields are maintained with `specscore change-status`, never edited by hand.
 
 ---
 
