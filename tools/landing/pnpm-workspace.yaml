@@ -1,0 +1,8 @@
+# pnpm v11+ requires explicit approval for post-install build scripts.
+# These two are Astro's standard transitive deps — both safe:
+#   - esbuild: JavaScript bundler (Astro's build engine)
+#   - sharp:   image-processing library (Astro's image optimization)
+# See: https://pnpm.io/settings#allowbuilds
+allowBuilds:
+  esbuild: true
+  sharp: true

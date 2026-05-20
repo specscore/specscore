@@ -1,0 +1,58 @@
+---
+// Site header — clef wordmark + GitHub link. No theme toggle.
+// The theme toggle lives in the rest of the docs site (template.html) but
+// is intentionally absent here: the landing forces light per brand spec.
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="/" class="wordmark" aria-label="SpecScore home">
+      <span class="wordmark__clef" aria-hidden="true">𝄞</span>
+      <span class="wordmark__name">SpecScore.md</span>
+    </a>
+    <nav class="site-header__nav" aria-label="Primary">
+      <a
+        href="https://github.com/specscore/specscore"
+        rel="noopener"
+        class="site-header__link"
+      >
+        GitHub
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--cream);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .site-header__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    padding: 0.875rem var(--space-3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+  .site-header__link {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: var(--ink);
+    padding: 0.3rem 0.6rem;
+    border-radius: 2px;
+    transition: background 120ms ease;
+  }
+  .site-header__link:hover {
+    background: var(--cream-2);
+  }
+  .site-header__link:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+  }
+</style>

@@ -1,0 +1,17 @@
+{
+  "name": "specscore-landing",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "specscore.md landing page (Astro). Built as a standalone sub-project alongside the existing markdown-driven docs site.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.0.0"
+  }
+}

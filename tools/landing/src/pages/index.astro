@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Hero from '../components/Hero.astro';
+import Problem from '../components/Problem.astro';
+import WhatSpecScoreIs from '../components/WhatSpecScoreIs.astro';
+import LinterDemo from '../components/LinterDemo.astro';
+import WhatShips from '../components/WhatShips.astro';
+import ToolAgnostic from '../components/ToolAgnostic.astro';
+import Quickstart from '../components/Quickstart.astro';
+import Ecosystem from '../components/Ecosystem.astro';
+import FinalCta from '../components/FinalCta.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<BaseLayout>
+  <SiteHeader />
+  <main>
+    <Hero />
+    <Problem />
+    <WhatSpecScoreIs />
+    <LinterDemo />
+    <WhatShips />
+    <ToolAgnostic />
+    <Quickstart />
+    <Ecosystem />
+  </main>
+  <FinalCta />
+  <SiteFooter />
+</BaseLayout>

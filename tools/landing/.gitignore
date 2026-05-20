@@ -1,0 +1,27 @@
+# Astro build artifacts
+dist/
+.astro/
+
+# Node
+node_modules/
+
+# OS / editor
+.DS_Store
+*.log
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# --- public/ re-inclusion ---
+# The root .gitignore excludes all `public/` folders (the docs site uses
+# `public/` as its build artifact). This sub-project ships static assets
+# from `public/` — optimized hero images + favicon — so re-include the
+# directory and the asset types we actually want to track. Raw source
+# PNGs are deliberately NOT tracked: the canonical source is the
+# marketing repo at specscore/marketing/images/hero2.png.
+!public/
+public/*
+!public/*.webp
+!public/*.svg

@@ -1,0 +1,222 @@
+/* ==========================================================================
+   SpecScore Landing — global styles
+   Brand register: paper and ink.
+   Source of truth for brand decisions: marketing repo
+     specscore/marketing/branding/palette.md
+     specscore/marketing/branding/website/hero-scene.md
+   Five colors only. No dark mode.
+   ========================================================================== */
+
+:root {
+  /* --- Palette (five colors + graphite for wireframes) --- */
+  --cream: #faf6ec;          /* paper background */
+  --cream-2: #f5efe0;         /* subtly differentiated cream — Final CTA band */
+  --surface: #ffffff;          /* true white — code blocks, terminal interior */
+
+  --ink: #1a1a1a;             /* primary text */
+  --mid-ink: #4a4a4a;          /* secondary text */
+  --pale-ink: #767676;         /* muted */
+  --hairline: rgba(26, 26, 26, 0.12);
+
+  --validator-green: #0f8a4e;  /* primary CTA, lint-pass marks */
+  --mark-red: #c41e3a;          /* lint-fail, errors */
+  --ink-blue: #1e54c4;          /* cross-reference links only */
+  --graphite: #404040;          /* wireframe strokes */
+
+  /* --- Type --- */
+  --font-display: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-code: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* The clef glyph is rendered by a font that has it (U+1D11E). Most
+     monospace fonts don't, so fall back through symbol-capable fonts. */
+  --font-symbol: 'Segoe UI Symbol', 'Apple Symbols', 'Noto Sans Symbols2',
+                 'DejaVu Sans', system-ui, sans-serif;
+
+  /* --- Type scale (quiet, document-grade) --- */
+  --fs-hero: clamp(2.4rem, 4.8vw, 3.5rem);
+  --fs-h2: clamp(1.6rem, 2.4vw, 2rem);
+  --fs-h3: 1.125rem;
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-tiny: 0.75rem;
+
+  /* --- Spacing (8px rhythm) --- */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4rem;
+  --space-7: 6rem;
+  --space-8: 8rem;
+
+  --max-prose: 640px;
+  --max-content: 1100px;
+
+  color-scheme: light;
+}
+
+/* Force light, regardless of any inherited [data-theme] attribute or
+   OS preference. The brand register is paper-and-ink; there is no dark
+   variant. */
+:root,
+:root[data-theme='dark'],
+:root[data-theme='light'] {
+  color-scheme: light;
+  background: var(--cream);
+}
+
+/* --- Reset (minimal, opinionated) --- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img, svg { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+p { margin: 0; }
+code, pre, kbd { font-family: var(--font-code); }
+
+/* --- Section rhythm --- */
+.section {
+  padding: var(--space-6) var(--space-3);
+}
+.section-inner {
+  max-width: var(--max-content);
+  margin: 0 auto;
+}
+.section-inner--prose {
+  max-width: var(--max-prose);
+}
+main > .section + .section {
+  border-top: 1px solid var(--hairline);
+}
+
+/* --- Buttons / CTAs --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  border-radius: 2px;
+  border: 1.5px solid currentColor;
+  transition: transform 120ms ease, background 120ms ease, color 120ms ease;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:focus-visible {
+  outline: 2px solid var(--ink-blue);
+  outline-offset: 2px;
+}
+.btn--primary {
+  background: var(--validator-green);
+  color: var(--cream);
+  border-color: var(--validator-green);
+}
+.btn--primary:hover {
+  background: #0d7a45;
+  border-color: #0d7a45;
+}
+.btn--secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.btn--secondary:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+/* --- Terminal blocks --- */
+pre.terminal,
+.terminal {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  padding: var(--space-3);
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--ink);
+  overflow-x: auto;
+  margin: 0;
+  white-space: pre;
+}
+.terminal .mark-pass { color: var(--validator-green); font-weight: 700; }
+.terminal .mark-fail { color: var(--mark-red); font-weight: 700; }
+.terminal .prompt { color: var(--pale-ink); user-select: none; }
+.terminal .dim { color: var(--mid-ink); }
+
+/* --- Cross-reference links --- */
+.xref {
+  color: var(--ink-blue);
+  border-bottom: 1px solid currentColor;
+  transition: color 120ms ease;
+}
+.xref:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+/* --- Wireframe surface shared classes --- */
+.wire-card {
+  border: 1px solid var(--graphite);
+  background: transparent;
+  padding: var(--space-3);
+}
+
+/* --- Selection --- */
+::selection {
+  background: var(--validator-green);
+  color: var(--cream);
+}
+
+/* --- Wordmark --- */
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+.wordmark__clef {
+  font-family: var(--font-symbol);
+  font-size: 1.45em;
+  line-height: 0;
+  position: relative;
+  top: 0.12em;
+  color: var(--ink);
+}
+.wordmark__name {
+  font-family: var(--font-display);
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

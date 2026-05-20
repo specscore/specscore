@@ -1,0 +1,238 @@
+---
+// Section 3 — What SpecScore is.
+// Heading + intro + hierarchy diagram (SVG wireframe) + example spec.
+---
+
+<section class="what-is section" aria-labelledby="what-is-title">
+  <div class="section-inner">
+    <h2 id="what-is-title" class="what-is__title">
+      A format for the specs you already write.
+    </h2>
+    <p class="what-is__intro">
+      SpecScore is a Markdown + YAML format for features, requirements,
+      and acceptance criteria. It defines a structure your team and
+      your AI agents both understand — and it's just files in your repo.
+    </p>
+
+    <figure
+      class="what-is__diagram"
+      aria-label="SpecScore hierarchy. A Feature contains Requirements (R1, R2, R3). Each Requirement contains Acceptance Criteria (AC). Scenarios sit beneath."
+    >
+      <svg
+        viewBox="0 0 760 320"
+        xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-hidden="true"
+        class="what-is__diagram-svg"
+      >
+        {/* Margin annotation */}
+        <text x="20" y="36" class="wf-annot">FIG. 1</text>
+
+        {/* FEATURE node */}
+        <rect x="310" y="20" width="140" height="44" rx="2" class="wf-node" />
+        <text x="380" y="48" text-anchor="middle" class="wf-label">FEATURE</text>
+
+        {/* Stems from FEATURE down to R-row */}
+        <path d="M 380 64 V 88 H 140 V 110" class="wf-line" />
+        <path d="M 380 64 V 88 H 380 V 110" class="wf-line" />
+        <path d="M 380 64 V 88 H 620 V 110" class="wf-line" />
+
+        {/* R1 / R2 / R3 nodes */}
+        <rect x="80"  y="110" width="120" height="40" rx="2" class="wf-node" />
+        <text x="140" y="135" text-anchor="middle" class="wf-label">R1</text>
+
+        <rect x="320" y="110" width="120" height="40" rx="2" class="wf-node" />
+        <text x="380" y="135" text-anchor="middle" class="wf-label">R2</text>
+
+        <rect x="560" y="110" width="120" height="40" rx="2" class="wf-node" />
+        <text x="620" y="135" text-anchor="middle" class="wf-label">R3</text>
+
+        {/* Stems from each R down to AC labels */}
+        <path d="M 140 150 V 178" class="wf-line" />
+        <path d="M 380 150 V 178" class="wf-line" />
+        <path d="M 620 150 V 178" class="wf-line" />
+
+        {/* AC labels — text only (no boxes, keeps the diagram quiet) */}
+        <text x="140" y="198" text-anchor="middle" class="wf-label-small">AC-1, AC-2</text>
+        <text x="380" y="198" text-anchor="middle" class="wf-label-small">AC-1, AC-2</text>
+        <text x="620" y="198" text-anchor="middle" class="wf-label-small">AC-1 … AC-3</text>
+
+        {/* Confluence into SCENARIOS */}
+        <path d="M 140 214 V 240 H 380 V 240" class="wf-line" />
+        <path d="M 380 214 V 240" class="wf-line" />
+        <path d="M 620 214 V 240 H 380" class="wf-line" />
+        <path d="M 380 240 V 256" class="wf-line" />
+
+        {/* SCENARIOS node */}
+        <rect x="290" y="256" width="180" height="44" rx="2" class="wf-node" />
+        <text x="380" y="284" text-anchor="middle" class="wf-label">GIVEN / WHEN / THEN</text>
+      </svg>
+      <figcaption class="what-is__diagram-cap">
+        Feature → Requirements → Acceptance Criteria → Scenarios.
+      </figcaption>
+    </figure>
+
+    <div class="what-is__example">
+      <div class="what-is__example-head">
+        <span class="what-is__example-label">EXAMPLE</span>
+        <span class="what-is__example-path">features/checkout/apply-discount.md</span>
+      </div>
+<pre class="what-is__example-code"><code><span class="sx-fm">---
+type: feature
+slug: apply-discount
+status: approved
+owner: cart-team
+score: 0.83
+---</span>
+
+<span class="sx-h1"># Feature: Apply Discount</span>
+
+A registered user can apply one valid discount code to their cart at checkout.
+
+<span class="sx-h2">## Requirements</span>
+
+<span class="sx-h3">### R1 — Single-code limit</span>
+
+- <span class="sx-bold">**AC-1**</span> The cart accepts at most one discount code at a time.
+- <span class="sx-bold">**AC-2**</span> Applying a second code replaces the first, with a visible confirmation.
+- <span class="sx-bold">**AC-3**</span> Removing the code restores the original cart total.
+
+<span class="sx-h3">### R2 — Code validity</span>
+
+- <span class="sx-bold">**AC-1**</span> A code is valid only if <span class="sx-tick">`valid_from`</span> ≤ now ≤ <span class="sx-tick">`valid_until`</span>.
+- <span class="sx-bold">**AC-2**</span> Invalid codes show a specific error message.
+
+<span class="sx-h3">### R3 — Discount application</span>
+
+- <span class="sx-bold">**AC-1**</span> Percentage discounts apply to subtotal, not shipping.
+- <span class="sx-bold">**AC-2**</span> Discount totals round down to the nearest cent.
+- <span class="sx-bold">**AC-3**</span> Stacking with site-wide promotions follows the higher-of rule.
+
+<span class="sx-h2">## Scenario: Apply a valid percent-off code</span>
+
+<span class="sx-bold">**GIVEN**</span> a cart with subtotal $50.00 and shipping $10.00
+<span class="sx-bold">**WHEN**</span> the user applies code <span class="sx-tick">`SAVE20`</span> (20% off)
+<span class="sx-bold">**THEN**</span> the cart shows subtotal $40.00, shipping $10.00, total $50.00</code></pre>
+    </div>
+  </div>
+</section>
+
+<style>
+  .what-is { background: var(--cream); }
+  .what-is__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    max-width: 28ch;
+  }
+  .what-is__intro {
+    font-size: 1.05rem;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-5);
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+
+  /* --- Diagram --- */
+  .what-is__diagram {
+    margin: 0 0 var(--space-5);
+    border: 1px solid var(--hairline);
+    background: var(--cream);
+    padding: var(--space-4) var(--space-3);
+  }
+  .what-is__diagram-svg {
+    width: 100%;
+    height: auto;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  /* SVG sub-classes — applied via attribute selectors so the values
+     can reference CSS custom properties */
+  .what-is__diagram-svg .wf-node {
+    fill: var(--cream);
+    stroke: var(--graphite);
+    stroke-width: 1.6;
+  }
+  .what-is__diagram-svg .wf-line {
+    fill: none;
+    stroke: var(--graphite);
+    stroke-width: 1.4;
+  }
+  .what-is__diagram-svg .wf-label {
+    font-family: var(--font-code);
+    font-size: 13px;
+    fill: var(--graphite);
+    letter-spacing: 0.04em;
+    font-weight: 600;
+  }
+  .what-is__diagram-svg .wf-label-small {
+    font-family: var(--font-code);
+    font-size: 11px;
+    fill: var(--graphite);
+    letter-spacing: 0.04em;
+  }
+  .what-is__diagram-svg .wf-annot {
+    font-family: var(--font-code);
+    font-size: 10px;
+    fill: var(--mid-ink);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .what-is__diagram-cap {
+    font-family: var(--font-code);
+    font-size: 0.8rem;
+    color: var(--mid-ink);
+    margin-top: var(--space-2);
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  /* --- Example spec --- */
+  .what-is__example {
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .what-is__example-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.5rem 0.875rem;
+    border-bottom: 1px solid var(--hairline);
+    background: var(--cream-2);
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+  .what-is__example-label {
+    color: var(--graphite);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .what-is__example-path {
+    color: var(--mid-ink);
+  }
+  .what-is__example-code {
+    margin: 0;
+    padding: var(--space-3);
+    background: var(--surface);
+    border: none;
+    font-size: 0.825rem;
+    line-height: 1.65;
+    overflow-x: auto;
+    color: var(--ink);
+  }
+
+  /* Faux syntax highlight — paper-friendly: ink + greys, no rainbow */
+  .sx-fm   { color: var(--mid-ink); }
+  .sx-h1   { color: var(--ink); font-weight: 700; }
+  .sx-h2   { color: var(--ink); font-weight: 600; }
+  .sx-h3   { color: var(--graphite); font-weight: 600; }
+  .sx-bold { color: var(--ink); font-weight: 700; }
+  .sx-tick { color: var(--ink-blue); }
+
+  @media (max-width: 720px) {
+    .what-is__diagram { padding: var(--space-3) var(--space-2); }
+    .what-is__example-code { font-size: 0.78rem; }
+  }
+</style>
