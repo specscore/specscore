@@ -1,5 +1,7 @@
 # SpecScore
 
+[![Spec'd with SpecScore](https://specscore.md/badge.svg)](https://specscore.md)
+
 **The open specification standard for AI-driven development**
 
 SpecScore is an open specification format that makes requirements machine-readable without making them human-unreadable. It's Markdown and YAML — version-controlled, portable, no vendor lock-in. Use it standalone or with any orchestration tool.

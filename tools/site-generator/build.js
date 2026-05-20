@@ -26,6 +26,13 @@ async function build() {
     join(OUTPUT, 'assets', 'style.css')
   );
 
+  // Adopter-facing badge served at https://specscore.md/badge.svg.
+  // Referenced from README badges in projects that adopt SpecScore.
+  await cp(
+    join(__dirname, 'assets', 'badge.svg'),
+    join(OUTPUT, 'badge.svg')
+  );
+
   // CLI installer scripts — served at /install/get-cli (sh) and
   // /install/get-cli.ps1 (PowerShell). Old paths /get-cli and /get-cli.ps1
   // are 301-redirected to the canonical URLs via firebase.json.
