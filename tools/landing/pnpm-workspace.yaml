@@ -1,5 +1,16 @@
-# pnpm v11+ requires explicit approval for post-install build scripts.
-# These two are Astro's standard transitive deps — both safe:
+# pnpm v11+ workspace declaration for this single-package sub-project.
+#
+# The `packages:` field is required by pnpm 11's schema validation —
+# without it, pnpm errors with "packages field missing or empty" when
+# parsing this file. We declare a single member ('.') so pnpm treats
+# this directory itself as the only workspace member. This is the
+# minimum-overhead way to keep the `allowBuilds:` setting working
+# under both pnpm 10 (lenient) and pnpm 11 (strict).
+packages:
+  - '.'
+
+# Explicit approval for post-install build scripts. Both packages are
+# Astro's standard transitive deps and safe:
 #   - esbuild: JavaScript bundler (Astro's build engine)
 #   - sharp:   image-processing library (Astro's image optimization)
 # See: https://pnpm.io/settings#allowbuilds
