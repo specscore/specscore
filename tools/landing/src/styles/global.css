@@ -9,9 +9,20 @@
 
 :root {
   /* --- Palette (five colors + graphite for wireframes) --- */
-  --cream: #faf6ec;          /* paper background */
-  --cream-2: #f5efe0;         /* subtly differentiated cream — Final CTA band */
-  --surface: #ffffff;          /* true white — code blocks, terminal interior */
+  /*
+   * NOTE on cream values: the brand spec (specscore/marketing/branding/palette.md)
+   * documents the canonical cream as #faf6ec. The values below are calibrated
+   * to MATCH the actual production hero image (marketing/images/hero3.png),
+   * which Gemini rendered at #f6efdc — slightly warmer/darker than the
+   * spec hex. We sample from the hero and match the CSS so the image
+   * blends seamlessly with the page (no visible rectangle). When the hero
+   * is regenerated, re-sample the outer cream and update these values
+   * accordingly (use `magick hero3.png -crop 60x60+10+10 -resize 1x1
+   * -format "%[pixel:p{0,0}]" info:` or equivalent).
+   */
+  --cream: #f6efdc;            /* page background — matches hero3.png outer cream */
+  --cream-2: #f1e8d0;           /* subtly differentiated cream — Final CTA band (proportional shift) */
+  --surface: #ffffff;            /* true white — code blocks, terminal interior */
 
   --ink: #1a1a1a;             /* primary text */
   --mid-ink: #4a4a4a;          /* secondary text */
