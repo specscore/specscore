@@ -1,0 +1,33 @@
+---
+// Spanish variant of ToolAgnostic.astro.
+---
+
+<section class="agnostic section" aria-labelledby="agnostic-title">
+  <div class="section-inner section-inner--prose">
+    <h2 id="agnostic-title" class="agnostic__title">
+      Trae tus propias herramientas.
+    </h2>
+    <p class="agnostic__body">
+      SpecScore son solo archivos en tu repositorio. Sin SaaS al que
+      registrarse. Sin orquestador obligatorio. Úsalo con Linear, Jira,
+      GitHub Projects, Markdown sin más en una carpeta, o sin gestor
+      de proyectos en absoluto. Al formato y al linter les da igual
+      dónde vivan tus tickets.
+    </p>
+  </div>
+</section>
+
+<style>
+  .agnostic { background: var(--cream); }
+  .agnostic__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .agnostic__body {
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.65;
+  }
+</style>

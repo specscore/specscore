@@ -1,0 +1,205 @@
+---
+// Spanish variant of Quickstart.astro.
+// Install commands and CLI output stay English (literal command strings + stdout).
+---
+
+<section class="quickstart section" id="quickstart" aria-labelledby="quickstart-title">
+  <div class="section-inner">
+    <h2 id="quickstart-title" class="quickstart__title">
+      ¿Prefieres la CLI?
+    </h2>
+    <p class="quickstart__lede">
+      ¿No usas agentes de IA, o necesitas validación de specs en tu
+      pipeline de CI? Hay una CLI para eso. Se instala en 60 segundos
+      — sin cuenta, sin telemetría, funciona en cualquier carpeta de
+      specs en Markdown.
+    </p>
+
+    <div class="qs-tabs" role="tablist" aria-label="Comando de instalación para tu sistema operativo">
+      <button
+        type="button"
+        role="tab"
+        id="qs-tab-unix"
+        aria-controls="qs-panel-unix"
+        aria-selected="true"
+        tabindex="0"
+        class="qs-tab is-active"
+        data-tab="unix"
+      >
+        Linux / macOS
+      </button>
+      <button
+        type="button"
+        role="tab"
+        id="qs-tab-windows"
+        aria-controls="qs-panel-windows"
+        aria-selected="false"
+        tabindex="-1"
+        class="qs-tab"
+        data-tab="windows"
+      >
+        Windows
+      </button>
+    </div>
+
+    <div
+      id="qs-panel-unix"
+      role="tabpanel"
+      aria-labelledby="qs-tab-unix"
+      class="qs-panel is-active"
+      data-panel="unix"
+    >
+<pre class="terminal"><span class="prompt">$</span> curl -fsSL https://specscore.md/install/get-cli | sh</pre>
+    </div>
+
+    <div
+      id="qs-panel-windows"
+      role="tabpanel"
+      aria-labelledby="qs-tab-windows"
+      class="qs-panel"
+      data-panel="windows"
+      hidden
+    >
+<pre class="terminal"><span class="prompt">&gt;</span> irm https://specscore.md/install/get-cli.ps1 | iex</pre>
+    </div>
+
+    <p class="quickstart__step">
+      Pasa el linter a la spec de ejemplo que viene con el binario:
+    </p>
+<pre class="terminal"><span class="prompt">$</span> specscore lint examples/checkout/apply-discount.md</pre>
+
+    <p class="quickstart__step">Mira la salida:</p>
+<pre class="terminal">  examples/checkout/apply-discount.md
+    <span class="mark-pass">✓</span> R1  Single-code limit
+    <span class="mark-pass">✓</span> R2  Code validity
+    <span class="mark-fail">✗</span> R3  Discount application
+         <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
+                  <span class="dim">fix:</span> specify "higher discount wins; if tied, site-wide promotion wins"
+
+  <span class="dim">1 of 3 requirements failing</span>
+  <span class="dim">exit 1</span></pre>
+
+    <p class="quickstart__next">
+      Lee la <a class="xref" href="https://specscore.md/docs">documentación completa</a>
+      <span aria-hidden="true">·</span>
+      <a class="xref" href="https://github.com/specscore/specscore">Contribuye en GitHub</a>
+    </p>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var tabs = document.querySelectorAll('.qs-tab');
+    var panels = document.querySelectorAll('.qs-panel');
+    if (!tabs.length) return;
+
+    function activate(name, focus) {
+      tabs.forEach(function (t) {
+        var on = t.getAttribute('data-tab') === name;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.setAttribute('tabindex', on ? '0' : '-1');
+        if (on && focus) t.focus();
+      });
+      panels.forEach(function (p) {
+        var on = p.getAttribute('data-panel') === name;
+        p.classList.toggle('is-active', on);
+        if (on) p.removeAttribute('hidden');
+        else p.setAttribute('hidden', '');
+      });
+    }
+
+    // Auto-detect: Windows users see Windows tab by default. Otherwise default
+    // remains Linux/macOS as rendered server-side. Keyboard users can still
+    // switch — auto-detect changes the visual default, not the focusable order.
+    try {
+      if (/Windows/i.test(navigator.userAgent)) {
+        activate('windows', false);
+      }
+    } catch (e) {
+      /* ignore */
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        activate(tab.getAttribute('data-tab'), false);
+      });
+      tab.addEventListener('keydown', function (ev) {
+        var key = ev.key;
+        if (key !== 'ArrowRight' && key !== 'ArrowLeft' &&
+            key !== 'Home' && key !== 'End') return;
+        ev.preventDefault();
+        var i = Array.prototype.indexOf.call(tabs, ev.currentTarget);
+        var next;
+        if (key === 'ArrowRight') next = (i + 1) % tabs.length;
+        else if (key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        else if (key === 'Home') next = 0;
+        else next = tabs.length - 1;
+        activate(tabs[next].getAttribute('data-tab'), true);
+      });
+    });
+  })();
+</script>
+
+<style>
+  .quickstart { background: var(--cream); }
+  .quickstart__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .quickstart__lede {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+  }
+  .qs-tabs {
+    display: inline-flex;
+    gap: 0;
+    border-bottom: 1px solid var(--hairline);
+    margin-bottom: 0;
+  }
+  .qs-tab {
+    background: transparent;
+    border: none;
+    padding: 0.55rem 0.95rem;
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--mid-ink);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 120ms ease, border-color 120ms ease;
+  }
+  .qs-tab:hover {
+    color: var(--ink);
+  }
+  .qs-tab.is-active {
+    color: var(--ink);
+    border-bottom-color: var(--validator-green);
+  }
+  .qs-tab:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .qs-panel {
+    margin-top: 0;
+  }
+  .qs-panel pre {
+    border-top-width: 0;
+  }
+
+  .quickstart__step {
+    margin: var(--space-3) 0 var(--space-2);
+    color: var(--mid-ink);
+    font-size: 0.95rem;
+  }
+  .quickstart__next {
+    margin-top: var(--space-4);
+    font-size: 0.95rem;
+    color: var(--mid-ink);
+  }
+</style>

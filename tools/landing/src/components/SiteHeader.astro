@@ -5,29 +5,40 @@
 // language (per the conversation: flag emoji was rejected — flags ≠ languages,
 // inconsistent OS rendering, accessibility issues).
 const path = Astro.url.pathname;
-const isRu = path.startsWith('/ru');
+const locale =
+  path.startsWith('/ru')    ? 'ru'    :
+  path.startsWith('/es')    ? 'es'    :
+  path.startsWith('/pt-br') ? 'pt-br' :
+                              'en';
+const wordmarkHref = locale === 'en' ? '/' : `/${locale}/`;
+
+// Order: English (default) first, then alphabetical by URL code.
+// `tag` is the HTML lang attribute value (uppercase BR per RFC 5646);
+// `code` matches the locale detector above.
+const langs = [
+  { code: 'en',    href: '/',       label: 'English',         tag: 'en'    },
+  { code: 'es',    href: '/es/',    label: 'Español',         tag: 'es'    },
+  { code: 'pt-br', href: '/pt-br/', label: 'Português (BR)',  tag: 'pt-BR' },
+  { code: 'ru',    href: '/ru/',    label: 'Русский',         tag: 'ru'    },
+];
 ---
 
 <header class="site-header">
   <div class="site-header__inner">
-    <a href={isRu ? '/ru/' : '/'} class="wordmark" aria-label="SpecScore home">
+    <a href={wordmarkHref} class="wordmark" aria-label="SpecScore home">
       <span class="wordmark__clef" aria-hidden="true">𝄞</span>
       <span class="wordmark__name">SpecScore.md</span>
     </a>
 
     <div class="site-header__lang" role="group" aria-label="Language">
-      <a
-        href="/"
-        class:list={['lang-tab', !isRu && 'is-active']}
-        aria-current={!isRu ? 'page' : undefined}
-        lang="en"
-      >English</a>
-      <a
-        href="/ru/"
-        class:list={['lang-tab', isRu && 'is-active']}
-        aria-current={isRu ? 'page' : undefined}
-        lang="ru"
-      >Русский</a>
+      {langs.map(({ code, href, label, tag }) => (
+        <a
+          href={href}
+          class:list={['lang-tab', code === locale && 'is-active']}
+          aria-current={code === locale ? 'page' : undefined}
+          lang={tag}
+        >{label}</a>
+      ))}
     </div>
 
     <nav class="site-header__nav" aria-label="Primary">
