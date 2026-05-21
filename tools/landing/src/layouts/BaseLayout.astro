@@ -5,17 +5,19 @@ interface Props {
   title?: string;
   description?: string;
   canonical?: string;
+  lang?: 'en' | 'ru';
 }
 
 const {
   title = 'SpecScore — Lint your specs like you lint your code.',
   description = 'An open Markdown + YAML format for features, requirements, and acceptance criteria — with a linter.',
   canonical = 'https://specscore.md/',
+  lang = 'en',
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang={lang} data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

@@ -1,15 +1,35 @@
 ---
-// Site header — clef wordmark + GitHub link. No theme toggle.
-// The theme toggle lives in the rest of the docs site (template.html) but
-// is intentionally absent here: the landing forces light per brand spec.
+// Site header — clef wordmark + centered language switcher + GitHub link.
+// Language switcher uses Astro.url.pathname to detect current locale, so
+// pages don't need to pass a prop. Language names appear in their own
+// language (per the conversation: flag emoji was rejected — flags ≠ languages,
+// inconsistent OS rendering, accessibility issues).
+const path = Astro.url.pathname;
+const isRu = path.startsWith('/ru');
 ---
 
 <header class="site-header">
   <div class="site-header__inner">
-    <a href="/" class="wordmark" aria-label="SpecScore home">
+    <a href={isRu ? '/ru/' : '/'} class="wordmark" aria-label="SpecScore home">
       <span class="wordmark__clef" aria-hidden="true">𝄞</span>
       <span class="wordmark__name">SpecScore.md</span>
     </a>
+
+    <div class="site-header__lang" role="group" aria-label="Language">
+      <a
+        href="/"
+        class:list={['lang-tab', !isRu && 'is-active']}
+        aria-current={!isRu ? 'page' : undefined}
+        lang="en"
+      >English</a>
+      <a
+        href="/ru/"
+        class:list={['lang-tab', isRu && 'is-active']}
+        aria-current={isRu ? 'page' : undefined}
+        lang="ru"
+      >Русский</a>
+    </div>
+
     <nav class="site-header__nav" aria-label="Primary">
       <a
         href="https://github.com/specscore/specscore"
@@ -34,11 +54,16 @@
     max-width: var(--max-content);
     margin: 0 auto;
     padding: 0.875rem var(--space-3);
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: space-between;
     gap: var(--space-3);
   }
+  /* Wordmark stays left, nav stays right; switcher anchored to grid centre. */
+  .site-header__inner > .wordmark { justify-self: start; }
+  .site-header__nav { justify-self: end; }
+  .site-header__lang { justify-self: center; }
+
   .site-header__link {
     font-family: var(--font-display);
     font-weight: 500;
@@ -54,5 +79,41 @@
   .site-header__link:focus-visible {
     outline: 2px solid var(--ink-blue);
     outline-offset: 2px;
+  }
+
+  /* --- Language switcher (tab pair) --- */
+  .site-header__lang {
+    display: inline-flex;
+    gap: 0.5rem;
+  }
+  .lang-tab {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    letter-spacing: 0.01em;
+    color: var(--mid-ink);
+    padding: 0.35rem 0.75rem;
+    border-bottom: 2px solid transparent;
+    transition: color 120ms ease, border-color 160ms ease;
+  }
+  .lang-tab:hover { color: var(--ink); }
+  .lang-tab:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: -2px;
+  }
+  .lang-tab.is-active {
+    color: var(--ink);
+    border-bottom-color: var(--validator-green);
+    font-weight: 600;
+  }
+
+  @media (max-width: 720px) {
+    .site-header__inner {
+      grid-template-columns: auto auto auto;
+      gap: var(--space-2);
+      padding: 0.625rem var(--space-2);
+    }
+    .lang-tab { padding: 0.3rem 0.5rem; font-size: 0.8rem; }
   }
 </style>

@@ -1,0 +1,32 @@
+---
+// Russian variant of ToolAgnostic.astro.
+---
+
+<section class="agnostic section" aria-labelledby="agnostic-title">
+  <div class="section-inner section-inner--prose">
+    <h2 id="agnostic-title" class="agnostic__title">
+      Никаких обязательных инструментов.
+    </h2>
+    <p class="agnostic__body">
+      SpecScore — это просто файлы в вашем репозитории. Не нужно регистрироваться
+      в SaaS. Не нужен оркестратор. Используйте с Linear, Jira, GitHub Projects,
+      сырыми Markdown-файлами в папке — или вообще без таск-трекера. Формату
+      и линтеру всё равно, где живут ваши тикеты.
+    </p>
+  </div>
+</section>
+
+<style>
+  .agnostic { background: var(--cream); }
+  .agnostic__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .agnostic__body {
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.65;
+  }
+</style>

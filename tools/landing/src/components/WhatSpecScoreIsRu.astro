@@ -1,0 +1,446 @@
+---
+// Russian variant of WhatSpecScoreIs.astro.
+// HTML structure + CSS classes match the English original exactly so the
+// shared global rules and the page-level layout behave identically.
+// Tab labels translate (идея / фича / план); the artifact example
+// content stays English because that IS the SpecScore format (Markdown
+// + English keywords like Status, Promotes To, AC-1, GIVEN/WHEN/THEN).
+//
+// JS for the tab strip queries `.wi-tab` and `.wi-track` — same class
+// names as the English component. The Russian page renders this
+// component instead of the English one, never both at once, so there's
+// no DOM collision.
+---
+
+<section class="what-is section" aria-labelledby="what-is-title">
+  <div class="section-inner">
+    <h2 id="what-is-title" class="what-is__title">
+      Формат для спецификаций, которые вы и так пишете.
+    </h2>
+    <div class="what-is__grid">
+      <div class="what-is__col what-is__col--text">
+        <p class="what-is__intro">
+          <strong>SpecScore — это формат на основе Markdown + YAML</strong> для
+          фич, требований и критериев приёмки. Он задаёт структуру, понятную
+          и вашей команде, и вашим AI-агентам — и это просто файлы в вашем
+          репозитории.
+        </p>
+        <p class="what-is__intro">
+          Проект SpecScore состоит из трёх типов артефактов в едином жизненном
+          цикле: <strong>Идея</strong> фиксирует полусформированное направление;
+          <strong>Фича</strong> замораживает согласованное поведение;
+          <strong>План</strong> раскладывает фичу на упорядоченные задачи,
+          каждая из которых ссылается на критерии приёмки, которые она
+          удовлетворяет.
+        </p>
+
+        <figure
+          class="what-is__diagram"
+          aria-label="Иерархия SpecScore. Фича содержит требования (R1, R2, R3). Каждое требование содержит критерии приёмки (AC). Сценарии — ниже."
+        >
+          <svg
+            viewBox="0 0 760 320"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-hidden="true"
+            class="what-is__diagram-svg"
+          >
+            <text x="20" y="36" class="wf-annot">РИС. 1</text>
+
+            <rect x="310" y="20" width="140" height="44" rx="2" class="wf-node" />
+            <text x="380" y="48" text-anchor="middle" class="wf-label">FEATURE</text>
+
+            <path d="M 380 64 V 88 H 140 V 110" class="wf-line" />
+            <path d="M 380 64 V 88 H 380 V 110" class="wf-line" />
+            <path d="M 380 64 V 88 H 620 V 110" class="wf-line" />
+
+            <rect x="80"  y="110" width="120" height="40" rx="2" class="wf-node" />
+            <text x="140" y="135" text-anchor="middle" class="wf-label">R1</text>
+
+            <rect x="320" y="110" width="120" height="40" rx="2" class="wf-node" />
+            <text x="380" y="135" text-anchor="middle" class="wf-label">R2</text>
+
+            <rect x="560" y="110" width="120" height="40" rx="2" class="wf-node" />
+            <text x="620" y="135" text-anchor="middle" class="wf-label">R3</text>
+
+            <path d="M 140 150 V 178" class="wf-line" />
+            <path d="M 380 150 V 178" class="wf-line" />
+            <path d="M 620 150 V 178" class="wf-line" />
+
+            <text x="140" y="198" text-anchor="middle" class="wf-label-small">AC-1, AC-2</text>
+            <text x="380" y="198" text-anchor="middle" class="wf-label-small">AC-1, AC-2</text>
+            <text x="620" y="198" text-anchor="middle" class="wf-label-small">AC-1 … AC-3</text>
+
+            <path d="M 140 214 V 240 H 380 V 240" class="wf-line" />
+            <path d="M 380 214 V 240" class="wf-line" />
+            <path d="M 620 214 V 240 H 380" class="wf-line" />
+            <path d="M 380 240 V 256" class="wf-line" />
+
+            <rect x="290" y="256" width="180" height="44" rx="2" class="wf-node" />
+            <text x="380" y="284" text-anchor="middle" class="wf-label">GIVEN / WHEN / THEN</text>
+          </svg>
+          <figcaption class="what-is__diagram-cap">
+            Feature → Requirements → Acceptance Criteria → Scenarios.
+          </figcaption>
+        </figure>
+
+        <h3 class="what-is__problem-head">
+          Спецификации устаревают. Критерии расплываются.<br />Агенты делают не то.
+        </h3>
+        <p class="what-is__problem">
+          Вы зафиксировали фичу на kick-off. К концу второго спринта она
+          уехала — критерий, говоривший <em>обрабатывает ошибки корректно</em>,
+          должен был означать <em>показать тост и откатить.</em> Или
+          <em>логировать и повторить?</em> Никто не может найти, какая
+          версия разговора каноническая. Спека в документе, тред в Slack
+          и код в PR молча расходятся неделями.
+        </p>
+        <p class="what-is__problem">
+          Это было терпимо, пока спеки читали люди — люди интерполируют,
+          уточняют, спрашивают. AI-агенты — нет. Они берут "обрабатывает
+          ошибки корректно" и реализуют тот паттерн, который чаще всего
+          встречался в их обучающих данных. Код проходит ревью, потому что
+          делает <strong>что-то</strong> разумное. Просто не то, что вы
+          имели в виду.
+        </p>
+      </div>
+
+      <div class="what-is__col what-is__col--example">
+        <div class="wi-tabs" role="tablist" aria-label="Жизненный цикл артефактов SpecScore">
+          <button type="button" role="tab" id="wi-tab-idea"    aria-controls="wi-panel-idea"    aria-selected="false" tabindex="-1" class="wi-tab"           data-step="0">идея</button>
+          <span class="wi-tab-arrow" aria-hidden="true">→</span>
+          <button type="button" role="tab" id="wi-tab-feature" aria-controls="wi-panel-feature" aria-selected="true"  tabindex="0"  class="wi-tab is-active" data-step="1">фича</button>
+          <span class="wi-tab-arrow" aria-hidden="true">→</span>
+          <button type="button" role="tab" id="wi-tab-plan"    aria-controls="wi-panel-plan"    aria-selected="false" tabindex="-1" class="wi-tab"           data-step="2">план</button>
+        </div>
+
+        <div class="wi-viewport" aria-live="polite">
+          <div class="wi-track" data-index="1" style="transform: translateX(-33.3333%);">
+
+            <div class="wi-panel" role="tabpanel" id="wi-panel-idea" aria-labelledby="wi-tab-idea">
+              <div class="what-is__example">
+                <div class="what-is__example-head">
+                  <span class="what-is__example-label">ПРИМЕР</span>
+                  <span class="what-is__example-path">ideas/apply-discount.md</span>
+                </div>
+<pre class="what-is__example-code"><code><span class="sx-h1"># Idea: Discount codes at checkout</span>
+
+<span class="sx-bold">**Status:**</span> Approved
+<span class="sx-bold">**Date:**</span> 2026-05-19
+<span class="sx-bold">**Owner:**</span> cart-team
+<span class="sx-bold">**Promotes To:**</span> features/apply-discount
+
+<span class="sx-h2">## Problem Statement</span>
+
+How might we let returning customers redeem a
+single promo code at checkout without breaking
+the existing cart math or the site-wide promotion
+engine?
+
+<span class="sx-h2">## Recommended Direction</span>
+
+A registered user can apply <span class="sx-bold">**one**</span> valid code per cart.
+Codes are time-bounded and replaceable. Stacking
+with site-wide promotions follows a deterministic
+tiebreak rule (higher discount wins; site-wide
+wins on tie).</code></pre>
+              </div>
+            </div>
+
+            <div class="wi-panel" role="tabpanel" id="wi-panel-feature" aria-labelledby="wi-tab-feature">
+              <div class="what-is__example">
+                <div class="what-is__example-head">
+                  <span class="what-is__example-label">ПРИМЕР</span>
+                  <span class="what-is__example-path">features/checkout/apply-discount.md</span>
+                </div>
+<pre class="what-is__example-code"><code><span class="sx-fm">---
+type: feature
+slug: apply-discount
+status: approved
+owner: cart-team
+score: 0.83
+---</span>
+
+<span class="sx-h1"># Feature: Apply Discount</span>
+
+A registered user can apply one valid discount code to their cart at checkout.
+
+<span class="sx-h2">## Requirements</span>
+
+<span class="sx-h3">### R1 — Single-code limit</span>
+
+- <span class="sx-bold">**AC-1**</span> The cart accepts at most one discount code at a time.
+- <span class="sx-bold">**AC-2**</span> Applying a second code replaces the first, with a visible confirmation.
+- <span class="sx-bold">**AC-3**</span> Removing the code restores the original cart total.
+
+<span class="sx-h3">### R2 — Code validity</span>
+
+- <span class="sx-bold">**AC-1**</span> A code is valid only if <span class="sx-tick">`valid_from`</span> ≤ now ≤ <span class="sx-tick">`valid_until`</span>.
+- <span class="sx-bold">**AC-2**</span> Invalid codes show a specific error message.
+
+<span class="sx-h3">### R3 — Discount application</span>
+
+- <span class="sx-bold">**AC-1**</span> Percentage discounts apply to subtotal, not shipping.
+- <span class="sx-bold">**AC-2**</span> Discount totals round down to the nearest cent.
+- <span class="sx-bold">**AC-3**</span> Stacking with site-wide promotions follows the higher-of rule.
+
+<span class="sx-h2">## Scenario: Apply a valid percent-off code</span>
+
+<span class="sx-bold">**GIVEN**</span> a cart with subtotal $50.00 and shipping $10.00
+<span class="sx-bold">**WHEN**</span> the user applies code <span class="sx-tick">`SAVE20`</span> (20% off)
+<span class="sx-bold">**THEN**</span> the cart shows subtotal $40.00, shipping $10.00, total $50.00</code></pre>
+              </div>
+            </div>
+
+            <div class="wi-panel" role="tabpanel" id="wi-panel-plan" aria-labelledby="wi-tab-plan">
+              <div class="what-is__example">
+                <div class="what-is__example-head">
+                  <span class="what-is__example-label">ПРИМЕР</span>
+                  <span class="what-is__example-path">plans/apply-discount/README.md</span>
+                </div>
+<pre class="what-is__example-code"><code><span class="sx-h1"># Plan: Apply Discount</span>
+
+<span class="sx-bold">**Status:**</span> approved
+<span class="sx-bold">**Features:**</span>
+  - <span class="sx-tick">[apply-discount](../../features/apply-discount.md)</span>
+<span class="sx-bold">**Author:**</span> cart-team
+<span class="sx-bold">**Effort:**</span> M
+<span class="sx-bold">**Impact:**</span> high
+
+<span class="sx-h2">## Context</span>
+
+The <span class="sx-tick">apply-discount</span> Feature is Approved. This plan
+breaks it into ordered tasks; each task cites the
+acceptance criteria it satisfies.
+
+<span class="sx-h2">## Tasks</span>
+
+<span class="sx-h3">### T1 — Accept a `code` field on the cart</span>
+Cites: R1.AC-1, R1.AC-2, R1.AC-3
+
+<span class="sx-h3">### T2 — Validate code time-window</span>
+Cites: R2.AC-1, R2.AC-2
+
+<span class="sx-h3">### T3 — Apply percentage to subtotal, round down</span>
+Cites: R3.AC-1, R3.AC-2
+
+<span class="sx-h3">### T4 — Higher-of tiebreak vs site-wide promo</span>
+Cites: R3.AC-3
+
+<span class="sx-h3">### T5 — Confirmation toast on apply / replace</span>
+Cites: R1.AC-2</code></pre>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .what-is { background: var(--cream); }
+
+  .what-is__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-4);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .what-is__intro {
+    font-size: 1.05rem;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-3);
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+
+  .what-is__problem-head {
+    margin: var(--space-6) 0 var(--space-3);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    line-height: 1.25;
+    color: var(--ink);
+    max-width: 32ch;
+  }
+  .what-is__problem {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--ink);
+    margin-bottom: var(--space-3);
+    max-width: 60ch;
+  }
+  .what-is__problem em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-family: var(--font-code);
+    font-size: 0.95em;
+    color: var(--ink);
+  }
+  .what-is__problem strong { font-weight: 700; color: var(--ink); }
+
+  .what-is__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .what-is__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+      gap: var(--space-5);
+    }
+  }
+  .what-is__col { min-width: 0; }
+
+  .what-is__diagram {
+    margin: var(--space-3) 0;
+    border: 1px solid var(--hairline);
+    background: var(--cream);
+    padding: var(--space-3) var(--space-2);
+  }
+  .what-is__diagram-svg {
+    width: 100%;
+    height: auto;
+    max-width: 560px;
+    margin: 0 auto;
+    display: block;
+  }
+  .what-is__diagram-svg .wf-node {
+    fill: var(--cream); stroke: var(--graphite); stroke-width: 1.6;
+  }
+  .what-is__diagram-svg .wf-line {
+    fill: none; stroke: var(--graphite); stroke-width: 1.4;
+  }
+  .what-is__diagram-svg .wf-label {
+    font-family: var(--font-code); font-size: 13px; fill: var(--graphite);
+    letter-spacing: 0.04em; font-weight: 600;
+  }
+  .what-is__diagram-svg .wf-label-small {
+    font-family: var(--font-code); font-size: 11px; fill: var(--graphite);
+    letter-spacing: 0.04em;
+  }
+  .what-is__diagram-svg .wf-annot {
+    font-family: var(--font-code); font-size: 10px; fill: var(--mid-ink);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .what-is__diagram-cap {
+    font-family: var(--font-code); font-size: 0.8rem; color: var(--mid-ink);
+    margin-top: var(--space-2); letter-spacing: 0.04em; text-align: center;
+  }
+
+  .wi-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--hairline); }
+  .wi-tab {
+    appearance: none; background: transparent; border: 0;
+    border-bottom: 2px solid transparent;
+    padding: 0.55rem 0.95rem;
+    font-family: var(--font-code); font-size: 0.85rem;
+    letter-spacing: 0.04em; text-transform: lowercase;
+    color: var(--mid-ink); cursor: pointer;
+    transition: color 120ms ease, border-color 160ms ease;
+  }
+  .wi-tab:hover { color: var(--ink); }
+  .wi-tab:focus-visible { outline: 2px solid var(--ink-blue); outline-offset: -2px; }
+  .wi-tab.is-active {
+    color: var(--ink); border-bottom-color: var(--validator-green); font-weight: 600;
+  }
+  .wi-tab-arrow {
+    display: inline-flex; align-items: center;
+    padding: 0 0.25rem 2px;
+    font-family: var(--font-code); font-size: 0.85rem;
+    color: var(--pale-ink); user-select: none;
+  }
+
+  .wi-viewport {
+    overflow: hidden;
+    border-left: 1px solid var(--hairline);
+    border-right: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .wi-track { display: flex; width: 300%; transition: transform 280ms ease-in-out; will-change: transform; }
+  .wi-panel { width: 33.3333%; flex: 0 0 33.3333%; box-sizing: border-box; }
+
+  @media (prefers-reduced-motion: reduce) { .wi-track { transition: none; } }
+
+  .what-is__example { border: none; background: var(--surface); }
+  .what-is__example-head {
+    display: flex; align-items: baseline; gap: 0.75rem;
+    padding: 0.5rem 0.875rem;
+    border-bottom: 1px solid var(--hairline);
+    background: var(--cream-2);
+    font-family: var(--font-code); font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+  .what-is__example-label { color: var(--graphite); font-weight: 700; text-transform: uppercase; }
+  .what-is__example-path { color: var(--mid-ink); }
+  .what-is__example-code {
+    margin: 0; padding: var(--space-3); background: var(--surface);
+    border: none; font-size: 0.825rem; line-height: 1.65;
+    white-space: pre-wrap; overflow-wrap: break-word; color: var(--ink);
+  }
+
+  .sx-fm   { color: var(--mid-ink); }
+  .sx-h1   { color: var(--ink); font-weight: 700; }
+  .sx-h2   { color: var(--ink); font-weight: 600; }
+  .sx-h3   { color: var(--graphite); font-weight: 600; }
+  .sx-bold { color: var(--ink); font-weight: 700; }
+  .sx-tick { color: var(--ink-blue); }
+
+  @media (max-width: 720px) {
+    .what-is__diagram { padding: var(--space-3) var(--space-2); }
+    .what-is__example-code { font-size: 0.78rem; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var tabs = document.querySelectorAll('.wi-tab');
+    var track = document.querySelector('.wi-track');
+    var panels = document.querySelectorAll('.wi-panel');
+    if (!tabs.length || !track) return;
+
+    var step = panels.length;
+    var stride = 100 / step;
+
+    function activate(stepStr, focus) {
+      var idx = parseInt(stepStr, 10);
+      if (isNaN(idx)) return;
+      tabs.forEach(function (t) {
+        var on = t.getAttribute('data-step') === stepStr;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.setAttribute('tabindex', on ? '0' : '-1');
+        if (on && focus) t.focus();
+      });
+      panels.forEach(function (p, i) {
+        p.setAttribute('aria-hidden', i === idx ? 'false' : 'true');
+      });
+      track.style.transform = 'translateX(-' + (idx * stride) + '%)';
+      track.setAttribute('data-index', String(idx));
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        activate(tab.getAttribute('data-step'), false);
+      });
+      tab.addEventListener('keydown', function (ev) {
+        var key = ev.key;
+        if (key !== 'ArrowRight' && key !== 'ArrowLeft' &&
+            key !== 'Home' && key !== 'End') return;
+        ev.preventDefault();
+        var i = Array.prototype.indexOf.call(tabs, ev.currentTarget);
+        var next;
+        if (key === 'ArrowRight') next = (i + 1) % tabs.length;
+        else if (key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        else if (key === 'Home') next = 0;
+        else next = tabs.length - 1;
+        activate(String(next), true);
+      });
+    });
+  })();
+</script>

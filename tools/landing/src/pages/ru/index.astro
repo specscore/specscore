@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import HeroRu from '../../components/HeroRu.astro';
+import WhatSpecScoreIsRu from '../../components/WhatSpecScoreIsRu.astro';
+import AiSkillsRu from '../../components/AiSkillsRu.astro';
+import LinterDemoRu from '../../components/LinterDemoRu.astro';
+import WhatShipsRu from '../../components/WhatShipsRu.astro';
+import ToolAgnosticRu from '../../components/ToolAgnosticRu.astro';
+import QuickstartRu from '../../components/QuickstartRu.astro';
+import EcosystemRu from '../../components/EcosystemRu.astro';
+import FinalCtaRu from '../../components/FinalCtaRu.astro';
+import SiteFooterRu from '../../components/SiteFooterRu.astro';
+---
+
+<BaseLayout
+  lang="ru"
+  title="SpecScore — линтуйте спецификации, как линтуете код."
+  description="Открытый формат на основе Markdown + YAML для фич, требований и критериев приёмки — с линтером."
+  canonical="https://specscore.md/ru/"
+>
+  <SiteHeader />
+  <main>
+    <HeroRu />
+    <WhatSpecScoreIsRu />
+    <AiSkillsRu />
+    <LinterDemoRu />
+    <WhatShipsRu />
+    <ToolAgnosticRu />
+    <QuickstartRu />
+    <EcosystemRu />
+  </main>
+  <FinalCtaRu />
+  <SiteFooterRu />
+</BaseLayout>
