@@ -18,7 +18,7 @@ The site uses **two coexisting build stacks**: the custom Node.js generator for 
 | Docs templates | Hand-rolled HTML | `tools/site-generator/{template,landing,blog-*}.html` | Docs only |
 | **Landing** | **Astro 5** | [`tools/landing/`](tools/landing/) | **`/` only** |
 | Output | Side-by-side `.html` + `.md` (docs); `index.html` + assets (landing) | `public/` | — |
-| Hosting | **Firebase Hosting** *and* **Cloudflare Pages** (dogfooded in parallel) | see [Supported Hostings](#supported-hostings) | — |
+| Hosting | **Cloudflare Pages** (active) · **Firebase Hosting** (manual fallback) | see [Supported Hostings](#supported-hostings) | — |
 
 ### The two-stack rule
 
@@ -60,8 +60,8 @@ Firebase Hosting                  Cloudflare Pages
 
 The site supports **two hosting targets with two different build models**:
 
-- **Firebase Hosting** deploys the pre-built, committed `public/` directory from CI.
-- **Cloudflare Pages** builds from sources — CF runs `pnpm build` itself in its own runner and serves the result.
+- **Cloudflare Pages** — *active production target* (as of 2026-05-21). Builds from sources — CF runs `tools/cf-build.sh` itself in its own runner on every push to `main` and serves the result.
+- **Firebase Hosting** — *manual fallback target*. Capability retained for failover but deploys only run when the `site-ci.yml` workflow is dispatched manually via the Actions UI (no auto-deploy on push).
 
 This means **`_headers` / `_redirects` are CF-only source files at the repo root and are NOT copied into `public/`**. Firebase never sees them; CF Pages reads them from sources during its own build. Keeping them out of `public/` ensures Firebase's deployment artifact stays clean and provider-agnostic.
 
@@ -75,7 +75,11 @@ Both targets are maintained intentionally so we can:
 
 ### Firebase Hosting
 
-Active production target as of this writing. Site name: `specscore-org`.
+**Manual fallback target as of 2026-05-21.** Site name: `specscore-org`.
+
+Cloudflare Pages is the active production target (see [Cloudflare Pages](#cloudflare-pages) below). Firebase Hosting is retained as a documented fallback — capability stays wired up, but pushes don't auto-deploy. To deploy to Firebase, manually dispatch the [`site-ci.yml`](.github/workflows/site-ci.yml) workflow from the Actions UI (the `Authenticate to GCP` and `Deploy to Firebase Hosting` steps are gated on `workflow_dispatch`).
+
+The current Firebase deploy path also requires the GCP Workload Identity Federation attribute condition to allow the `specscore` org's repository owner (post-rename). The push-triggered runs of the workflow still execute build + verification as a smoke test, but skip the deploy.
 
 | File | Purpose |
 |---|---|
@@ -87,7 +91,10 @@ Active production target as of this writing. Site name: `specscore-org`.
 - `headers[].source` uses Firebase's path-matching syntax (`**/*.md` for all Markdown).
 - Deploy artifact is the committed `public/` directory — `build.js` deliberately does **not** copy `_headers` / `_redirects` into it. A CI guard in [`.github/workflows/site-ci.yml`](.github/workflows/site-ci.yml) fails the build if either file appears in `public/`.
 
-**Deploy:** automatic via [`.github/workflows/site-ci.yml`](.github/workflows/site-ci.yml) on push to `main` (or `workflow_dispatch`). Manual fallback: `firebase deploy --only hosting`.
+**Manual deploy steps:**
+1. GitHub Actions → "Site Generator CI" → "Run workflow" → branch `main` → "Run workflow"
+2. The dispatch path runs build + verification + auth + deploy steps in order
+3. CLI fallback (from a workstation with Firebase auth): `firebase deploy --only hosting`
 
 ### Cloudflare Pages
 
