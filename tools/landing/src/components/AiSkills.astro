@@ -38,8 +38,11 @@
     {/* Step tabs — pick a command, see how you'd invoke it */}
     <div class="ais-tabs" role="tablist" aria-label="SpecStudio commands">
       <button type="button" role="tab" id="ais-tab-ideate"    aria-controls="ais-panel-ideate"    aria-selected="true"  tabindex="0"  class="ais-tab is-active" data-step="0">/ideate</button>
+      <span class="ais-tab-arrow" aria-hidden="true">→</span>
       <button type="button" role="tab" id="ais-tab-specify"   aria-controls="ais-panel-specify"   aria-selected="false" tabindex="-1" class="ais-tab"           data-step="1">/specify</button>
+      <span class="ais-tab-arrow" aria-hidden="true">→</span>
       <button type="button" role="tab" id="ais-tab-plan"      aria-controls="ais-panel-plan"      aria-selected="false" tabindex="-1" class="ais-tab"           data-step="2">/plan</button>
+      <span class="ais-tab-arrow" aria-hidden="true">→</span>
       <button type="button" role="tab" id="ais-tab-implement" aria-controls="ais-panel-implement" aria-selected="false" tabindex="-1" class="ais-tab"           data-step="3">/implement</button>
     </div>
 
@@ -182,6 +185,15 @@
     color: var(--ink);
     border-bottom-color: var(--validator-green);
     font-weight: 600;
+  }
+  .ais-tab-arrow {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0.25rem 2px;
+    font-family: var(--font-code);
+    font-size: 0.92rem;
+    color: var(--pale-ink);
+    user-select: none;
   }
 
   /* --- Sliding viewport --- */
