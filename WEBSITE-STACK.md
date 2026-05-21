@@ -8,33 +8,49 @@ If you are tempted to "modernize" the build by swapping in a popular static-site
 
 ## Current Stack
 
-| Layer | Tool | Where |
-|---|---|---|
-| Generator | Custom Node.js script | [`tools/site-generator/build.js`](tools/site-generator/build.js) |
-| Markdown | `markdown-it` | [`tools/site-generator/package.json`](tools/site-generator/package.json) |
-| Diagrams | Mermaid (client-side, loaded from CDN only on pages with diagrams) | [`tools/site-generator/lib/render-page.js`](tools/site-generator/lib/render-page.js) |
-| Templates | Hand-rolled HTML | `tools/site-generator/{template,landing,blog-*}.html` |
-| Output | Side-by-side `.html` + `.md` | `public/` |
-| Hosting | **Firebase Hosting** *or* **Cloudflare Pages** | see [Supported Hostings](#supported-hostings) |
+The site uses **two coexisting build stacks**: the custom Node.js generator for everything *except* the homepage, plus a thin Astro sub-project that owns only `/`. The split exists because the homepage is a marketing landing with distinct visual and structural requirements that don't fit the markdown-driven template; everything else (docs, blog, ideas, specifications) still benefits from the custom generator's strengths (side-by-side `.html` + `.md`, fast cold-start, no framework lock-in).
+
+| Layer | Tool | Where | Owns |
+|---|---|---|---|
+| Docs generator | Custom Node.js script | [`tools/site-generator/build.js`](tools/site-generator/build.js) | Every path *except* `/` |
+| Markdown | `markdown-it` | [`tools/site-generator/package.json`](tools/site-generator/package.json) | Docs only |
+| Diagrams | Mermaid (client-side, loaded from CDN only on pages with diagrams) | [`tools/site-generator/lib/render-page.js`](tools/site-generator/lib/render-page.js) | Docs only |
+| Docs templates | Hand-rolled HTML | `tools/site-generator/{template,landing,blog-*}.html` | Docs only |
+| **Landing** | **Astro 5** | [`tools/landing/`](tools/landing/) | **`/` only** |
+| Output | Side-by-side `.html` + `.md` (docs); `index.html` + assets (landing) | `public/` | — |
+| Hosting | **Firebase Hosting** *and* **Cloudflare Pages** (dogfooded in parallel) | see [Supported Hostings](#supported-hostings) | — |
+
+### The two-stack rule
+
+> **Docs stack owns every path except `/`. Astro owns `/` and nothing else.**
+
+When building, the docs generator runs first and emits `public/index.html` (a docs-style landing — defensive fallback if the Astro build is ever broken). Astro then builds and `cp -r tools/landing/dist/. public/` overwrites that `index.html`, plus drops Astro's bundled assets (`_astro/*`, `hero*.webp`, `favicon.svg`) into `public/`. The order matters: Astro must run **after** the docs generator so its homepage wins.
+
+If you're tempted to "modernize" the docs side onto Astro too, **read the [Why not a standard SSG?](#why-not-a-standard-ssg) section first**. The custom docs generator exists for a specific product reason. The landing carve-out doesn't change that reasoning — it only handles the one path where the docs philosophy fits least.
 
 ### Build pipeline
 
 ```
-src markdown (docs/, blog/, ideas/)
-        │
-        ▼
-tools/site-generator/build.js
-   ├── markdown-it → HTML body
-   ├── ```mermaid``` fences → <pre class="mermaid"> (rendered client-side)
-   ├── template.html / landing.html / blog-*.html → wrap body
-   └── emit BOTH:  public/foo.html   ← human-friendly
-                   public/foo.md     ← LLM- / curl-friendly (verbatim source)
+src markdown (docs/, blog/, ideas/)        tools/landing/src/ (Astro)
+        │                                          │
+        ▼                                          ▼
+tools/site-generator/build.js              tools/landing/  (pnpm build)
+   ├── markdown-it → HTML body                ├── Astro 5 (static)
+   ├── ```mermaid``` fences → <pre>           ├── inlines small CSS, hashes assets
+   ├── template/landing/blog templates        └── emits dist/index.html, dist/_astro/*,
+   └── emit BOTH:                                 dist/hero*.webp, dist/favicon.svg
+       public/foo.html   ← human-friendly
+       public/foo.md     ← LLM/curl-friendly
+        │                                          │
+        ▼                                          ▼
+                       cp -r tools/landing/dist/. public/
+                        (Astro's index.html overwrites the docs one)
         │
         ├──────────────────────────────────┐
         ▼                                  ▼
 Firebase Hosting                  Cloudflare Pages
-(deploys committed public/)       (re-runs `pnpm build` from sources, then
-                                   places _headers/_redirects at publish-dir
+(deploys committed public/)       (re-runs both builds + merge from sources,
+                                   then places _headers/_redirects at publish-dir
                                    root from repo-root sources)
 ```
 
@@ -92,15 +108,38 @@ Companion target. **Cloudflare Pages builds from sources** — when configured v
 
 | Setting | Value |
 |---|---|
-| Build command | `pnpm install --frozen-lockfile && pnpm --filter specscore-site-generator build && cp _headers _redirects public/` |
+| Build command | see [CF Pages build command](#cf-pages-build-command) below |
 | Build output directory | `public` |
 | Root directory | repo root |
 
-The trailing `cp _headers _redirects public/` is what gets the CF config into the publish dir without polluting the Firebase artifact. Alternative: write a thin `tools/site-generator/build-cf.sh` wrapper that does the build + copy; the dashboard build command then becomes a one-liner.
+#### CF Pages build command
+
+```sh
+pnpm --dir tools/site-generator install --frozen-lockfile \
+  && pnpm --dir tools/site-generator build \
+  && pnpm --dir tools/landing install --frozen-lockfile \
+  && pnpm --dir tools/landing build \
+  && cp -r tools/landing/dist/. public/ \
+  && cp _headers _redirects public/
+```
+
+Step by step:
+1. Install docs-generator deps.
+2. Build the docs site → `public/*.html` + `public/*.md` (including a fallback `public/index.html`).
+3. Install landing deps.
+4. Build the Astro landing → `tools/landing/dist/`.
+5. Merge `tools/landing/dist/*` into `public/`. Astro's `index.html` overwrites the docs-style one; Astro's `_astro/`, `hero*.webp`, and `favicon.svg` land alongside the docs assets.
+6. Copy CF-only config files (`_headers`, `_redirects`) into `public/` so Cloudflare can read them at the publish-dir root. (Firebase never sees these — see [Firebase Hosting](#firebase-hosting) above; the CI guard fails the docs build if they leak into `public/` before this step.)
+
+`pnpm --dir` is used (rather than `pnpm --filter`) because the repo has no top-level pnpm workspace. Both sub-projects (`tools/site-generator` and `tools/landing`) keep their own `package.json` + `pnpm-lock.yaml` independently.
 
 **Manual deploy fallback:**
 ```sh
-pnpm --filter specscore-site-generator build
+pnpm --dir tools/site-generator install --frozen-lockfile
+pnpm --dir tools/site-generator build
+pnpm --dir tools/landing install --frozen-lockfile
+pnpm --dir tools/landing build
+cp -r tools/landing/dist/. public/
 cp _headers _redirects public/
 npx wrangler pages deploy public --project-name=specscore
 ```

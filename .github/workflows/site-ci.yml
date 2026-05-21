@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/site-ci.yml'
       - 'tools/site-generator/**'
+      - 'tools/landing/**'
       - 'spec/**'
       - 'docs/**'
       - 'blog/**'
@@ -12,6 +13,7 @@ on:
     paths:
       - '.github/workflows/site-ci.yml'
       - 'tools/site-generator/**'
+      - 'tools/landing/**'
       - 'spec/**'
       - 'docs/**'
       - 'blog/**'
@@ -43,21 +45,41 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
-          cache-dependency-path: tools/site-generator/pnpm-lock.yaml
+          cache-dependency-path: |
+            tools/site-generator/pnpm-lock.yaml
+            tools/landing/pnpm-lock.yaml
 
-      - name: Install dependencies
+      - name: Install site-generator dependencies
         working-directory: tools/site-generator
         run: pnpm install --frozen-lockfile
 
       # No headless browser install needed — Mermaid renders client-side from a CDN.
 
-      - name: Run tests
+      - name: Run site-generator tests
         working-directory: tools/site-generator
         run: pnpm test
 
-      - name: Build site
+      - name: Build docs site (emits public/)
         working-directory: tools/site-generator
         run: pnpm build
+
+      # --- Landing page (Astro, owns the homepage at `/`) ---
+      # The landing is a separate Astro sub-project that ships only one route.
+      # We build it after the docs site so its `index.html` overwrites the
+      # docs-style landing the site-generator emits. Everything else in
+      # public/ (docs pages, blog, ideas, install scripts) keeps coming
+      # from the site-generator unchanged. See tools/landing/README.md.
+
+      - name: Install landing dependencies
+        working-directory: tools/landing
+        run: pnpm install --frozen-lockfile
+
+      - name: Build landing (Astro)
+        working-directory: tools/landing
+        run: pnpm build
+
+      - name: Merge landing into public/ (Astro index.html wins)
+        run: cp -r tools/landing/dist/. public/
 
       - name: Verify no unrendered mermaid fences in HTML
         run: |

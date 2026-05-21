@@ -25,3 +25,4 @@ node_modules/
 public/*
 !public/*.webp
 !public/*.svg
+!public/README.md
