@@ -1,6 +1,16 @@
 ---
-// Section 3 — What SpecScore is.
-// Heading + intro + hierarchy diagram (SVG wireframe) + example spec.
+// Section — What SpecScore is.
+// Two-column on desktop:
+//   Left  = confident definition + hierarchy diagram, then a
+//           hairline-ruled warm "why this matters" sub-section.
+//   Right = tabbed artifact view (idea | feature | plan) with slide
+//           animation. Feature tab default.
+//
+// Voice ordering follows `marketing/voice-and-tone.md` § Rule 1 — "Lead
+// with the opinion, not the disclaimer." The position (what SpecScore
+// is) comes first; the warm problem paragraphs serve as lived-experience
+// evidence underneath, behind a small visual anchor so skimmers can find
+// them.
 ---
 
 <section class="what-is section" aria-labelledby="what-is-title">
@@ -8,75 +18,138 @@
     <h2 id="what-is-title" class="what-is__title">
       A format for the specs you already write.
     </h2>
-    <p class="what-is__intro">
-      SpecScore is a Markdown + YAML format for features, requirements,
-      and acceptance criteria. It defines a structure your team and
-      your AI agents both understand — and it's just files in your repo.
-    </p>
+    <div class="what-is__grid">
+      <div class="what-is__col what-is__col--text">
+        <p class="what-is__intro">
+          <strong>SpecScore is a Markdown + YAML format</strong> for features,
+          requirements, and acceptance criteria. It defines a structure your
+          team and your AI agents both understand — and it's just files in
+          your repo.
+        </p>
+        <p class="what-is__intro">
+          A SpecScore project is three artifact kinds along a lifecycle:
+          an <strong>Idea</strong> captures a half-formed direction; a
+          <strong>Feature</strong> spec freezes the agreed behavior; a
+          <strong>Plan</strong> decomposes the feature into ordered tasks
+          that each cite the acceptance criteria they satisfy.
+        </p>
 
-    <figure
-      class="what-is__diagram"
-      aria-label="SpecScore hierarchy. A Feature contains Requirements (R1, R2, R3). Each Requirement contains Acceptance Criteria (AC). Scenarios sit beneath."
-    >
-      <svg
-        viewBox="0 0 760 320"
-        xmlns="http://www.w3.org/2000/svg"
-        role="img"
-        aria-hidden="true"
-        class="what-is__diagram-svg"
-      >
-        {/* Margin annotation */}
-        <text x="20" y="36" class="wf-annot">FIG. 1</text>
+        <figure
+          class="what-is__diagram"
+          aria-label="SpecScore hierarchy. A Feature contains Requirements (R1, R2, R3). Each Requirement contains Acceptance Criteria (AC). Scenarios sit beneath."
+        >
+          <svg
+            viewBox="0 0 760 320"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-hidden="true"
+            class="what-is__diagram-svg"
+          >
+            <text x="20" y="36" class="wf-annot">FIG. 1</text>
 
-        {/* FEATURE node */}
-        <rect x="310" y="20" width="140" height="44" rx="2" class="wf-node" />
-        <text x="380" y="48" text-anchor="middle" class="wf-label">FEATURE</text>
+            <rect x="310" y="20" width="140" height="44" rx="2" class="wf-node" />
+            <text x="380" y="48" text-anchor="middle" class="wf-label">FEATURE</text>
 
-        {/* Stems from FEATURE down to R-row */}
-        <path d="M 380 64 V 88 H 140 V 110" class="wf-line" />
-        <path d="M 380 64 V 88 H 380 V 110" class="wf-line" />
-        <path d="M 380 64 V 88 H 620 V 110" class="wf-line" />
+            <path d="M 380 64 V 88 H 140 V 110" class="wf-line" />
+            <path d="M 380 64 V 88 H 380 V 110" class="wf-line" />
+            <path d="M 380 64 V 88 H 620 V 110" class="wf-line" />
 
-        {/* R1 / R2 / R3 nodes */}
-        <rect x="80"  y="110" width="120" height="40" rx="2" class="wf-node" />
-        <text x="140" y="135" text-anchor="middle" class="wf-label">R1</text>
+            <rect x="80"  y="110" width="120" height="40" rx="2" class="wf-node" />
+            <text x="140" y="135" text-anchor="middle" class="wf-label">R1</text>
 
-        <rect x="320" y="110" width="120" height="40" rx="2" class="wf-node" />
-        <text x="380" y="135" text-anchor="middle" class="wf-label">R2</text>
+            <rect x="320" y="110" width="120" height="40" rx="2" class="wf-node" />
+            <text x="380" y="135" text-anchor="middle" class="wf-label">R2</text>
 
-        <rect x="560" y="110" width="120" height="40" rx="2" class="wf-node" />
-        <text x="620" y="135" text-anchor="middle" class="wf-label">R3</text>
+            <rect x="560" y="110" width="120" height="40" rx="2" class="wf-node" />
+            <text x="620" y="135" text-anchor="middle" class="wf-label">R3</text>
 
-        {/* Stems from each R down to AC labels */}
-        <path d="M 140 150 V 178" class="wf-line" />
-        <path d="M 380 150 V 178" class="wf-line" />
-        <path d="M 620 150 V 178" class="wf-line" />
+            <path d="M 140 150 V 178" class="wf-line" />
+            <path d="M 380 150 V 178" class="wf-line" />
+            <path d="M 620 150 V 178" class="wf-line" />
 
-        {/* AC labels — text only (no boxes, keeps the diagram quiet) */}
-        <text x="140" y="198" text-anchor="middle" class="wf-label-small">AC-1, AC-2</text>
-        <text x="380" y="198" text-anchor="middle" class="wf-label-small">AC-1, AC-2</text>
-        <text x="620" y="198" text-anchor="middle" class="wf-label-small">AC-1 … AC-3</text>
+            <text x="140" y="198" text-anchor="middle" class="wf-label-small">AC-1, AC-2</text>
+            <text x="380" y="198" text-anchor="middle" class="wf-label-small">AC-1, AC-2</text>
+            <text x="620" y="198" text-anchor="middle" class="wf-label-small">AC-1 … AC-3</text>
 
-        {/* Confluence into SCENARIOS */}
-        <path d="M 140 214 V 240 H 380 V 240" class="wf-line" />
-        <path d="M 380 214 V 240" class="wf-line" />
-        <path d="M 620 214 V 240 H 380" class="wf-line" />
-        <path d="M 380 240 V 256" class="wf-line" />
+            <path d="M 140 214 V 240 H 380 V 240" class="wf-line" />
+            <path d="M 380 214 V 240" class="wf-line" />
+            <path d="M 620 214 V 240 H 380" class="wf-line" />
+            <path d="M 380 240 V 256" class="wf-line" />
 
-        {/* SCENARIOS node */}
-        <rect x="290" y="256" width="180" height="44" rx="2" class="wf-node" />
-        <text x="380" y="284" text-anchor="middle" class="wf-label">GIVEN / WHEN / THEN</text>
-      </svg>
-      <figcaption class="what-is__diagram-cap">
-        Feature → Requirements → Acceptance Criteria → Scenarios.
-      </figcaption>
-    </figure>
+            <rect x="290" y="256" width="180" height="44" rx="2" class="wf-node" />
+            <text x="380" y="284" text-anchor="middle" class="wf-label">GIVEN / WHEN / THEN</text>
+          </svg>
+          <figcaption class="what-is__diagram-cap">
+            Feature → Requirements → Acceptance Criteria → Scenarios.
+          </figcaption>
+        </figure>
 
-    <div class="what-is__example">
-      <div class="what-is__example-head">
-        <span class="what-is__example-label">EXAMPLE</span>
-        <span class="what-is__example-path">features/checkout/apply-discount.md</span>
+        <h3 class="what-is__problem-head">
+          Specs drift. AC stay vague.<br />Agents ship the wrong thing.
+        </h3>
+        <p class="what-is__problem">
+          You write the feature in the kickoff. By sprint two it's drifted —
+          the AC that said <em>handles errors gracefully</em> was supposed
+          to mean <em>show a toast and roll back.</em> Or was it
+          <em>log and retry?</em> Nobody can find which version of the
+          conversation is canonical. The spec in the doc, the thread in
+          Slack, and the code in the PR have quietly disagreed for weeks.
+        </p>
+        <p class="what-is__problem">
+          This was tolerable when humans read the spec — humans interpolate,
+          ask, clarify. AI agents don't. They take "handles errors
+          gracefully" and implement whatever pattern was most common in
+          their training data. The code passes review because it does
+          <strong>something</strong> sensible. It's just not what you meant.
+        </p>
       </div>
+
+      <div class="what-is__col what-is__col--example">
+        <div class="wi-tabs" role="tablist" aria-label="SpecScore artifact lifecycle">
+          <button type="button" role="tab" id="wi-tab-idea"    aria-controls="wi-panel-idea"    aria-selected="false" tabindex="-1" class="wi-tab"           data-step="0">idea</button>
+          <button type="button" role="tab" id="wi-tab-feature" aria-controls="wi-panel-feature" aria-selected="true"  tabindex="0"  class="wi-tab is-active" data-step="1">feature</button>
+          <button type="button" role="tab" id="wi-tab-plan"    aria-controls="wi-panel-plan"    aria-selected="false" tabindex="-1" class="wi-tab"           data-step="2">plan</button>
+        </div>
+
+        <div class="wi-viewport" aria-live="polite">
+          <div class="wi-track" data-index="1" style="transform: translateX(-33.3333%);">
+
+            <div class="wi-panel" role="tabpanel" id="wi-panel-idea" aria-labelledby="wi-tab-idea">
+              <div class="what-is__example">
+                <div class="what-is__example-head">
+                  <span class="what-is__example-label">EXAMPLE</span>
+                  <span class="what-is__example-path">ideas/apply-discount.md</span>
+                </div>
+<pre class="what-is__example-code"><code><span class="sx-h1"># Idea: Discount codes at checkout</span>
+
+<span class="sx-bold">**Status:**</span> Approved
+<span class="sx-bold">**Date:**</span> 2026-05-19
+<span class="sx-bold">**Owner:**</span> cart-team
+<span class="sx-bold">**Promotes To:**</span> features/apply-discount
+
+<span class="sx-h2">## Problem Statement</span>
+
+How might we let returning customers redeem a
+single promo code at checkout without breaking
+the existing cart math or the site-wide promotion
+engine?
+
+<span class="sx-h2">## Recommended Direction</span>
+
+A registered user can apply <span class="sx-bold">**one**</span> valid code per cart.
+Codes are time-bounded and replaceable. Stacking
+with site-wide promotions follows a deterministic
+tiebreak rule (higher discount wins; site-wide
+wins on tie).</code></pre>
+              </div>
+            </div>
+
+            <div class="wi-panel" role="tabpanel" id="wi-panel-feature" aria-labelledby="wi-tab-feature">
+              <div class="what-is__example">
+                <div class="what-is__example-head">
+                  <span class="what-is__example-label">EXAMPLE</span>
+                  <span class="what-is__example-path">features/checkout/apply-discount.md</span>
+                </div>
 <pre class="what-is__example-code"><code><span class="sx-fm">---
 type: feature
 slug: apply-discount
@@ -113,42 +186,132 @@ A registered user can apply one valid discount code to their cart at checkout.
 <span class="sx-bold">**GIVEN**</span> a cart with subtotal $50.00 and shipping $10.00
 <span class="sx-bold">**WHEN**</span> the user applies code <span class="sx-tick">`SAVE20`</span> (20% off)
 <span class="sx-bold">**THEN**</span> the cart shows subtotal $40.00, shipping $10.00, total $50.00</code></pre>
+              </div>
+            </div>
+
+            <div class="wi-panel" role="tabpanel" id="wi-panel-plan" aria-labelledby="wi-tab-plan">
+              <div class="what-is__example">
+                <div class="what-is__example-head">
+                  <span class="what-is__example-label">EXAMPLE</span>
+                  <span class="what-is__example-path">plans/apply-discount/README.md</span>
+                </div>
+<pre class="what-is__example-code"><code><span class="sx-h1"># Plan: Apply Discount</span>
+
+<span class="sx-bold">**Status:**</span> approved
+<span class="sx-bold">**Features:**</span>
+  - <span class="sx-tick">[apply-discount](../../features/apply-discount.md)</span>
+<span class="sx-bold">**Author:**</span> cart-team
+<span class="sx-bold">**Effort:**</span> M
+<span class="sx-bold">**Impact:**</span> high
+
+<span class="sx-h2">## Context</span>
+
+The <span class="sx-tick">apply-discount</span> Feature is Approved. This plan
+breaks it into ordered tasks; each task cites the
+acceptance criteria it satisfies.
+
+<span class="sx-h2">## Tasks</span>
+
+<span class="sx-h3">### T1 — Accept a `code` field on the cart</span>
+Cites: R1.AC-1, R1.AC-2, R1.AC-3
+
+<span class="sx-h3">### T2 — Validate code time-window</span>
+Cites: R2.AC-1, R2.AC-2
+
+<span class="sx-h3">### T3 — Apply percentage to subtotal, round down</span>
+Cites: R3.AC-1, R3.AC-2
+
+<span class="sx-h3">### T4 — Higher-of tiebreak vs site-wide promo</span>
+Cites: R3.AC-3
+
+<span class="sx-h3">### T5 — Confirmation toast on apply / replace</span>
+Cites: R1.AC-2</code></pre>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
   .what-is { background: var(--cream); }
+
   .what-is__title {
     font-size: var(--fs-h2);
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-4);
     font-weight: 700;
     letter-spacing: -0.01em;
-    max-width: 28ch;
   }
   .what-is__intro {
     font-size: 1.05rem;
     color: var(--mid-ink);
-    margin-bottom: var(--space-5);
+    margin-bottom: var(--space-3);
     max-width: 60ch;
     line-height: 1.6;
   }
 
+  /* --- Visual anchor before the warm sub-section.
+     No top rule — the diagram's own border above already separates the
+     confident block from the warm block. */
+  .what-is__problem-head {
+    margin: var(--space-5) 0 var(--space-3);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    line-height: 1.25;
+    color: var(--ink);
+    max-width: 28ch;
+  }
+  .what-is__problem {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--ink);
+    margin-bottom: var(--space-3);
+    max-width: 60ch;
+  }
+  .what-is__problem em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-family: var(--font-code);
+    font-size: 0.95em;
+    color: var(--ink);
+  }
+  .what-is__problem strong { font-weight: 700; color: var(--ink); }
+
+  /* --- Grid --- */
+  .what-is__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .what-is__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+      gap: var(--space-5);
+    }
+  }
+  .what-is__col { min-width: 0; }
+
   /* --- Diagram --- */
   .what-is__diagram {
-    margin: 0 0 var(--space-5);
+    margin: var(--space-3) 0;
     border: 1px solid var(--hairline);
     background: var(--cream);
-    padding: var(--space-4) var(--space-3);
+    padding: var(--space-3) var(--space-2);
   }
   .what-is__diagram-svg {
     width: 100%;
     height: auto;
-    max-width: 720px;
+    max-width: 560px;
     margin: 0 auto;
+    display: block;
   }
-  /* SVG sub-classes — applied via attribute selectors so the values
-     can reference CSS custom properties */
   .what-is__diagram-svg .wf-node {
     fill: var(--cream);
     stroke: var(--graphite);
@@ -188,11 +351,63 @@ A registered user can apply one valid discount code to their cart at checkout.
     text-align: center;
   }
 
-  /* --- Example spec --- */
-  .what-is__example {
-    border: 1px solid var(--hairline);
+  /* --- Right-column tabs --- */
+  .wi-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .wi-tab {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    padding: 0.55rem 0.95rem;
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: lowercase;
+    color: var(--mid-ink);
+    cursor: pointer;
+    transition: color 120ms ease, border-color 160ms ease;
+  }
+  .wi-tab:hover { color: var(--ink); }
+  .wi-tab:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: -2px;
+  }
+  .wi-tab.is-active {
+    color: var(--ink);
+    border-bottom-color: var(--validator-green);
+    font-weight: 600;
+  }
+
+  /* --- Sliding viewport (right column) --- */
+  .wi-viewport {
+    overflow: hidden;
+    border-left: 1px solid var(--hairline);
+    border-right: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
     background: var(--surface);
   }
+  .wi-track {
+    display: flex;
+    width: 300%;
+    transition: transform 280ms ease-in-out;
+    will-change: transform;
+  }
+  .wi-panel {
+    width: 33.3333%;
+    flex: 0 0 33.3333%;
+    box-sizing: border-box;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wi-track { transition: none; }
+  }
+
+  /* --- Example spec --- */
+  .what-is__example { border: none; background: var(--surface); }
   .what-is__example-head {
     display: flex;
     align-items: baseline;
@@ -209,9 +424,7 @@ A registered user can apply one valid discount code to their cart at checkout.
     font-weight: 700;
     text-transform: uppercase;
   }
-  .what-is__example-path {
-    color: var(--mid-ink);
-  }
+  .what-is__example-path { color: var(--mid-ink); }
   .what-is__example-code {
     margin: 0;
     padding: var(--space-3);
@@ -219,11 +432,11 @@ A registered user can apply one valid discount code to their cart at checkout.
     border: none;
     font-size: 0.825rem;
     line-height: 1.65;
-    overflow-x: auto;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
     color: var(--ink);
   }
 
-  /* Faux syntax highlight — paper-friendly: ink + greys, no rainbow */
   .sx-fm   { color: var(--mid-ink); }
   .sx-h1   { color: var(--ink); font-weight: 700; }
   .sx-h2   { color: var(--ink); font-weight: 600; }
@@ -236,3 +449,51 @@ A registered user can apply one valid discount code to their cart at checkout.
     .what-is__example-code { font-size: 0.78rem; }
   }
 </style>
+
+<script is:inline>
+  (function () {
+    var tabs = document.querySelectorAll('.wi-tab');
+    var track = document.querySelector('.wi-track');
+    var panels = document.querySelectorAll('.wi-panel');
+    if (!tabs.length || !track) return;
+
+    var step = panels.length;
+    var stride = 100 / step;
+
+    function activate(stepStr, focus) {
+      var idx = parseInt(stepStr, 10);
+      if (isNaN(idx)) return;
+      tabs.forEach(function (t) {
+        var on = t.getAttribute('data-step') === stepStr;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.setAttribute('tabindex', on ? '0' : '-1');
+        if (on && focus) t.focus();
+      });
+      panels.forEach(function (p, i) {
+        p.setAttribute('aria-hidden', i === idx ? 'false' : 'true');
+      });
+      track.style.transform = 'translateX(-' + (idx * stride) + '%)';
+      track.setAttribute('data-index', String(idx));
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        activate(tab.getAttribute('data-step'), false);
+      });
+      tab.addEventListener('keydown', function (ev) {
+        var key = ev.key;
+        if (key !== 'ArrowRight' && key !== 'ArrowLeft' &&
+            key !== 'Home' && key !== 'End') return;
+        ev.preventDefault();
+        var i = Array.prototype.indexOf.call(tabs, ev.currentTarget);
+        var next;
+        if (key === 'ArrowRight') next = (i + 1) % tabs.length;
+        else if (key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        else if (key === 'Home') next = 0;
+        else next = tabs.length - 1;
+        activate(String(next), true);
+      });
+    });
+  })();
+</script>

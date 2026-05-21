@@ -7,8 +7,13 @@
 <section class="quickstart section" id="quickstart" aria-labelledby="quickstart-title">
   <div class="section-inner">
     <h2 id="quickstart-title" class="quickstart__title">
-      Try it in 60 seconds.
+      Prefer the CLI?
     </h2>
+    <p class="quickstart__lede">
+      Don't use AI agents, or need spec validation in your CI pipeline?
+      There's a CLI for that. Install it in 60 seconds — no account, no
+      telemetry, works on any directory of Markdown specs.
+    </p>
 
     <div class="qs-tabs" role="tablist" aria-label="Install command for your operating system">
       <button
@@ -140,9 +145,14 @@
   .quickstart { background: var(--cream); }
   .quickstart__title {
     font-size: var(--fs-h2);
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-2);
     font-weight: 700;
     letter-spacing: -0.01em;
+  }
+  .quickstart__lede {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
   }
   .qs-tabs {
     display: inline-flex;

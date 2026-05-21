@@ -157,6 +157,16 @@ main > .section + .section {
   background: var(--ink);
   color: var(--cream);
 }
+.btn--tertiary {
+  background: transparent;
+  color: var(--mid-ink);
+  border-color: transparent;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.btn--tertiary:hover {
+  color: var(--ink);
+}
 
 /* --- Terminal blocks --- */
 pre.terminal,
@@ -231,3 +241,4 @@ pre.terminal,
     transition-duration: 0.001ms !important;
   }
 }
+
