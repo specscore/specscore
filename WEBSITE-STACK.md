@@ -114,16 +114,15 @@ Companion target. **Cloudflare Pages builds from sources** — when configured v
 
 #### CF Pages build command
 
+Paste this exact string into the CF dashboard's **Build command** field:
+
 ```sh
-pnpm --dir tools/site-generator install --frozen-lockfile \
-  && pnpm --dir tools/site-generator build \
-  && pnpm --dir tools/landing install --frozen-lockfile \
-  && pnpm --dir tools/landing build \
-  && cp -r tools/landing/dist/. public/ \
-  && cp _headers _redirects public/
+sh tools/cf-build.sh
 ```
 
-Step by step:
+That's the entire build command. The script at [`tools/cf-build.sh`](tools/cf-build.sh) orchestrates both sub-project builds and assembles `public/` for deploy.
+
+What the script does, in order:
 1. Install docs-generator deps.
 2. Build the docs site → `public/*.html` + `public/*.md` (including a fallback `public/index.html`).
 3. Install landing deps.
@@ -131,16 +130,13 @@ Step by step:
 5. Merge `tools/landing/dist/*` into `public/`. Astro's `index.html` overwrites the docs-style one; Astro's `_astro/`, `hero*.webp`, and `favicon.svg` land alongside the docs assets.
 6. Copy CF-only config files (`_headers`, `_redirects`) into `public/` so Cloudflare can read them at the publish-dir root. (Firebase never sees these — see [Firebase Hosting](#firebase-hosting) above; the CI guard fails the docs build if they leak into `public/` before this step.)
 
-`pnpm --dir` is used (rather than `pnpm --filter`) because the repo has no top-level pnpm workspace. Both sub-projects (`tools/site-generator` and `tools/landing`) keep their own `package.json` + `pnpm-lock.yaml` independently.
+Why a script rather than inlining the full chain in the dashboard: the CF dashboard's command field is a single-string text input, and long multi-command pastes can pick up stray newlines that break the shell chain in confusing ways. A version-controlled script is reviewable in PRs and immune to that class of bug.
+
+`pnpm --dir` is used inside the script (rather than `pnpm --filter`) because the repo has no top-level pnpm workspace. Both sub-projects (`tools/site-generator` and `tools/landing`) keep their own `package.json` + `pnpm-lock.yaml` independently.
 
 **Manual deploy fallback:**
 ```sh
-pnpm --dir tools/site-generator install --frozen-lockfile
-pnpm --dir tools/site-generator build
-pnpm --dir tools/landing install --frozen-lockfile
-pnpm --dir tools/landing build
-cp -r tools/landing/dist/. public/
-cp _headers _redirects public/
+sh tools/cf-build.sh
 npx wrangler pages deploy public --project-name=specscore
 ```
 
