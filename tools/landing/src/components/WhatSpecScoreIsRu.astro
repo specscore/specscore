@@ -84,28 +84,6 @@
           </figcaption>
         </figure>
 
-        <h3 class="what-is__problem-head">
-          Спецификации устаревают. Критерии расплываются.<br />Агенты делают не то.
-        </h3>
-        <p class="what-is__problem">
-          Вы зафиксировали фичу на kick-off. К концу второго спринта она
-          уехала — критерий, говоривший <em>обрабатывает ошибки корректно</em>,
-          должен был означать <em>показать тост и откатить.</em> Или
-          <em>логировать и повторить?</em> Никто не может найти, какая
-          версия разговора каноническая. Спека в документе, тред в Slack
-          и код в PR молча расходятся неделями.
-        </p>
-        <p class="what-is__problem">
-          Это было терпимо, пока спеки читали люди — люди интерполируют,
-          уточняют, спрашивают. AI-агенты — нет. Они берут "обрабатывает
-          ошибки корректно" и реализуют тот паттерн, который чаще всего
-          встречался в их обучающих данных. Код проходит ревью, потому что
-          делает <strong>что-то</strong> разумное. Просто не то, что вы
-          имели в виду.
-        </p>
-        <p class="what-is__problem-cta">
-          <a class="xref" href="#the-fix">Посмотреть решение <span aria-hidden="true">→</span></a>
-        </p>
       </div>
 
       <div class="what-is__col what-is__col--example">
@@ -257,38 +235,6 @@ Cites: R1.AC-2</code></pre>
     margin-bottom: var(--space-3);
     max-width: 60ch;
     line-height: 1.6;
-  }
-
-  .what-is__problem-head {
-    margin: var(--space-6) 0 var(--space-3);
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: -0.005em;
-    line-height: 1.25;
-    color: var(--ink);
-    max-width: 32ch;
-  }
-  .what-is__problem {
-    font-size: 1rem;
-    line-height: 1.65;
-    color: var(--ink);
-    margin-bottom: var(--space-3);
-    max-width: 60ch;
-  }
-  .what-is__problem em {
-    font-style: normal;
-    background: var(--cream-2);
-    padding: 0.05em 0.35em;
-    border-radius: 2px;
-    font-family: var(--font-code);
-    font-size: 0.95em;
-    color: var(--ink);
-  }
-  .what-is__problem strong { font-weight: 700; color: var(--ink); }
-  .what-is__problem-cta {
-    margin-top: var(--space-3);
-    font-family: var(--font-code);
-    font-size: 0.92rem;
   }
 
   .what-is__grid {

@@ -1,0 +1,185 @@
+---
+// "Three problems." — problem-and-fix pairing per column.
+// Replaces the earlier TheFix.astro one-sided "answer" section.
+//
+// Structure per voice-and-tone.md § Rule 3 (bad-version / good-version
+// comparison): each card pairs a lived-experience pain paragraph with
+// a concrete-mechanism fix paragraph, divided by a hairline rule. The
+// warm narrative that used to live inside § 2 is now redistributed
+// across the three columns — each warm passage tied to its specific
+// problem rather than floating as a general pre-fix block.
+//
+// Why this beats the prior "problem here, fix in a separate section"
+// design: when problem and fix are spatially separated, a scanner sees
+// "The fix." with no visible problem context (problem was at H3 level,
+// invisible at scan). Pairing them at the column level fixes this AND
+// gets the Rule 3 yield as a bonus.
+---
+
+<section class="problems section" id="problems" aria-labelledby="problems-title">
+  <div class="section-inner">
+    <h2 id="problems-title" class="problems__title">Three problems.</h2>
+
+    <ul class="problems__grid">
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌀</span> Specs drift.</h3>
+        <p class="problem-card__pain">
+          The spec in the doc, the thread in Slack, and the code in
+          the PR quietly disagree for weeks. Nobody can find which
+          version of the conversation is canonical.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">The fix</p>
+        <p class="problem-card__fix">
+          One canonical spec, in the repo, versioned with the code.
+          <code>specscore lint</code> runs in CI on every push; git
+          history is the audit trail. The spec, the thread, and the
+          PR can't quietly disagree — they share the same file under
+          review.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌫️</span> AC stay vague.</h3>
+        <p class="problem-card__pain">
+          <em>"Handles errors gracefully"</em> was supposed to mean
+          <em>"show a toast and roll back."</em> Or was it
+          <em>"log and retry?"</em> The agent has to guess.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">The fix</p>
+        <p class="problem-card__fix">
+          The linter catches ambiguous criteria before any code is
+          written. The verb fails lint because it has no concrete
+          object or condition. Fixing the warning forces you to write
+          what <em>"handles"</em> actually means.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🤖</span> Agents ship the wrong thing.</h3>
+        <p class="problem-card__pain">
+          Humans interpolate, ask, clarify. AI agents don't — they
+          implement whatever pattern was most common in their training
+          data. The code passes review because it does
+          <strong>something</strong> sensible. It's just not what you
+          meant.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">The fix</p>
+        <p class="problem-card__fix">
+          Structured input. AI agents parse REQ IDs, AC IDs and
+          <code>GIVEN&nbsp;/&nbsp;WHEN&nbsp;/&nbsp;THEN</code>
+          scenarios deterministically — there's nothing to interpolate.
+          Plans must cite the AC IDs each task satisfies, so what was
+          built is always checkable against what was specified.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .problems { background: var(--cream); }
+
+  .problems__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-5);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .problems__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+
+  .problem-card {
+    border-top: 1px solid var(--graphite);
+    padding-top: var(--space-3);
+    display: flex;
+    flex-direction: column;
+  }
+  .problem-card__name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0 0 var(--space-2);
+  }
+  .problem-card__emoji {
+    margin-right: 0.35em;
+    font-size: 1.05em;
+    vertical-align: -0.05em;
+    /* System emoji font stack — keeps the page's mono+Inter pairing for
+       the rest of the text while letting the emoji render in the OS's
+       native colour set. */
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  }
+  .problem-card__pain {
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 var(--space-3);
+  }
+  .problem-card__pain em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    color: var(--ink);
+  }
+  .problem-card__pain strong { font-weight: 700; color: var(--ink); }
+
+  .problem-card__rule {
+    height: 1px;
+    background: var(--hairline);
+    margin: 0 0 var(--space-3);
+  }
+
+  .problem-card__fix-label {
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--validator-green);
+    margin: 0 0 var(--space-2);
+  }
+  .problem-card__fix {
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .problem-card__fix code {
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-size: 0.92em;
+    color: var(--ink);
+  }
+  .problem-card__fix em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    color: var(--ink);
+  }
+
+  @media (max-width: 800px) {
+    .problems__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+  }
+</style>
