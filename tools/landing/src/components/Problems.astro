@@ -1,5 +1,7 @@
 ---
-// "Three problems." — problem-and-fix pairing per column.
+// "What goes wrong without it." — problem-and-fix pairing per column.
+// Title was previously "Three problems."; changed 2026-05-21 so the H2
+// stays valid as the card count grows past three.
 // Replaces the earlier TheFix.astro one-sided "answer" section.
 //
 // Structure per voice-and-tone.md § Rule 3 (bad-version / good-version
@@ -18,7 +20,7 @@
 
 <section class="problems section" id="problems" aria-labelledby="problems-title">
   <div class="section-inner">
-    <h2 id="problems-title" class="problems__title">Three problems.</h2>
+    <h2 id="problems-title" class="problems__title">What goes wrong without it.</h2>
 
     <ul class="problems__grid">
       <li class="problem-card">
@@ -75,6 +77,88 @@
           built is always checkable against what was specified.
         </p>
       </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">💸</span> Agents pay to re-read your specs.</h3>
+        <p class="problem-card__pain">
+          An AI agent answering <em>"what depends on this feature?"</em>
+          reads the whole feature README. Then every parent index.
+          Then sibling features just in case. Every query is a
+          re-parse. Tokens evaporate; latency rises; the bill rises
+          with them.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">The fix</p>
+        <p class="problem-card__fix">
+          Structured queries instead of file reads.
+          <code>specscore feature tree</code> returns the hierarchy as
+          YAML; <code>feature deps</code> walks the transitive
+          dependency chain; <code>feature info</code> exposes status,
+          owner, and open questions — each in one call. The agent
+          navigates the graph, not the prose.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔗</span> Code forgets its spec.</h3>
+        <p class="problem-card__pain">
+          Six months later, you're debugging a function and nobody
+          remembers which feature it implements. The link between
+          code and spec lived in someone's head, and that person
+          left. The PR that introduced it is in the archive.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">The fix</p>
+        <p class="problem-card__fix">
+          Source annotations. Comments like
+          <code>// specscore: features/checkout/apply-discount/R1.AC-2</code>
+          make the link machine-readable and survive every refactor.
+          <code>specscore code deps</code> answers
+          <em>"what spec does this file implement?"</em> in one call;
+          the linter flags references that point at deleted specs.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🏷️</span> Status changes leak.</h3>
+        <p class="problem-card__pain">
+          You move a feature from <em>Draft</em> to <em>Approved</em>
+          in its README, but the parent features-index still lists it
+          as Draft. Three weeks later, an agent reading the index
+          thinks it's still in flux. The status lives in two places
+          now, and they disagree.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">The fix</p>
+        <p class="problem-card__fix">
+          <code>specscore feature change-status</code> rewrites the
+          feature's Status field and re-syncs the features-index row
+          in one atomic step — lint failure rolls the rewrite back.
+          The status exists in one canonical place; the index is a
+          generated view of it.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">📋</span> Specs forget what they don't know.</h3>
+        <p class="problem-card__pain">
+          A spec reads as if it's settled — until you remember the
+          <em>"and what about timezones?"</em> question got lost in a
+          Slack thread two months ago and never made it into the doc.
+          Now you're in implementation, and nobody can say what the
+          answer was.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">The fix</p>
+        <p class="problem-card__fix">
+          Every SpecScore feature has a mandatory
+          <strong>Outstanding Questions</strong> section. The linter
+          rejects features that omit it — empty is fine
+          (<code>"None at this time."</code>), but missing isn't.
+          Unresolved questions are visible in the doc, queryable from
+          the CLI, and impossible to forget.
+        </p>
+      </li>
     </ul>
   </div>
 </section>
@@ -89,21 +173,44 @@
     letter-spacing: -0.01em;
   }
 
+  /* Pinterest-style masonry via CSS multi-column. CSS Grid `masonry` is
+     still behind a flag in 2026 — multi-column is the portable answer.
+     `column-count` says "3 columns"; `column-width: 0` removes the
+     implicit minimum-width heuristic that some browsers use to silently
+     reduce the column count when content has wide intrinsic min-widths.
+     `column-fill: balance` keeps column heights as equal as possible. */
   .problems__grid {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-4);
+    column-count: 3;
+    column-width: 0;
+    column-gap: var(--space-4);
+    column-fill: balance;
   }
 
+  /* Paper card — matches the hero illustration's "paper lifts off the
+     cream desk" register. White surface on cream section, hairline
+     border, soft two-stop ink shadow.
+
+     `break-inside: avoid` keeps each card intact in one column.
+     `margin-bottom` (not gap) creates inter-card spacing within a
+     column — gap doesn't apply across multi-column layouts. */
   .problem-card {
-    border-top: 1px solid var(--graphite);
-    padding-top: var(--space-3);
-    display: flex;
-    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 2px;
+    padding: var(--space-3);
+    box-shadow:
+      0 1px 2px rgba(26, 26, 26, 0.04),
+      0 3px 8px rgba(26, 26, 26, 0.06);
+    break-inside: avoid;
+    margin-bottom: var(--space-4);
   }
+  /* The last card in each column shouldn't have trailing margin —
+     `:last-child` of the <ul> covers the truly-last card; multi-column
+     fill handles the per-column tails. */
+  .problem-card:last-child { margin-bottom: 0; }
   .problem-card__name {
     font-size: 1.15rem;
     font-weight: 700;
@@ -176,10 +283,10 @@
     color: var(--ink);
   }
 
-  @media (max-width: 800px) {
-    .problems__grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-4);
-    }
+  /* 3 columns at typical viewport widths; collapse straight to 1 on
+     narrow mobile (skipping a 2-column middle state — it never reads
+     well with cards of widely varying height). */
+  @media (max-width: 599px) {
+    .problems__grid { column-count: 1; }
   }
 </style>

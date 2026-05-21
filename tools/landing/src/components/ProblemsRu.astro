@@ -4,7 +4,7 @@
 
 <section class="problems section" id="problems" aria-labelledby="problems-title">
   <div class="section-inner">
-    <h2 id="problems-title" class="problems__title">Три проблемы.</h2>
+    <h2 id="problems-title" class="problems__title">Что идёт не так без него.</h2>
 
     <ul class="problems__grid">
       <li class="problem-card">
@@ -64,6 +64,89 @@
           сделанное всегда сверяемо со специфицированным.
         </p>
       </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">💸</span> Агенты платят за повторное чтение спецификаций.</h3>
+        <p class="problem-card__pain">
+          AI-агент, отвечающий на вопрос <em>"что зависит от этой
+          фичи?"</em>, читает весь README фичи. Потом каждый
+          родительский индекс. Потом соседние фичи на всякий случай.
+          Каждый запрос — новый парсинг. Токены сгорают; латентность
+          растёт; счёт растёт вместе с ними.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Решение</p>
+        <p class="problem-card__fix">
+          Структурированные запросы вместо чтения файлов.
+          <code>specscore feature tree</code> возвращает иерархию
+          как YAML; <code>feature deps</code> обходит транзитивные
+          зависимости; <code>feature info</code> показывает статус,
+          владельца и открытые вопросы — каждая команда за один
+          вызов. Агент навигирует по графу, а не по прозе.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔗</span> Код забывает свою спецификацию.</h3>
+        <p class="problem-card__pain">
+          Спустя полгода ты дебажишь функцию, и никто не помнит,
+          какую фичу она реализует. Связь между кодом и спекой жила
+          в чьей-то голове, и этот человек уволился. PR, который её
+          ввёл, ушёл в архив.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Решение</p>
+        <p class="problem-card__fix">
+          Аннотации в исходниках. Комментарии вида
+          <code>// specscore: features/checkout/apply-discount/R1.AC-2</code>
+          делают связь машиночитаемой и переживают любой рефакторинг.
+          <code>specscore code deps</code> отвечает на вопрос
+          <em>"какую спеку реализует этот файл?"</em> за один вызов;
+          линтер помечает ссылки на удалённые спецификации.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🏷️</span> Изменения статуса утекают.</h3>
+        <p class="problem-card__pain">
+          Ты переводишь фичу из <em>Draft</em> в <em>Approved</em>
+          в её README, но родительский features-index всё ещё
+          показывает её как Draft. Через три недели агент, читающий
+          индекс, думает, что фича всё ещё в работе. Статус живёт в
+          двух местах, и они расходятся.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Решение</p>
+        <p class="problem-card__fix">
+          <code>specscore feature change-status</code> переписывает
+          поле Status фичи и пересинхронизирует строку в
+          features-index одной атомарной операцией — при сбое линта
+          изменение откатывается. Статус существует в одном
+          каноническом месте; индекс — это его сгенерированное
+          представление.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">📋</span> Спецификации забывают то, чего не знают.</h3>
+        <p class="problem-card__pain">
+          Спека читается как готовая — пока ты не вспоминаешь, что
+          вопрос <em>"а что с часовыми поясами?"</em> потерялся в
+          треде Slack два месяца назад и так и не попал в документ.
+          Теперь вы в реализации, и никто не может сказать, каким
+          был ответ.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Решение</p>
+        <p class="problem-card__fix">
+          У каждой SpecScore-фичи обязательная секция
+          <strong>Outstanding Questions</strong>. Линтер отвергает
+          фичи, в которых её нет — пусто можно
+          (<code>"None at this time."</code>), но отсутствие — нельзя.
+          Нерешённые вопросы видны в документе, доступны из CLI и их
+          невозможно забыть.
+        </p>
+      </li>
     </ul>
   </div>
 </section>
@@ -78,16 +161,28 @@
     letter-spacing: -0.01em;
   }
 
+  /* Masonry via CSS multi-column — see Problems.astro for the rationale. */
   .problems__grid {
     list-style: none; margin: 0; padding: 0;
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4);
+    column-count: 3;
+    column-width: 0;
+    column-gap: var(--space-4);
+    column-fill: balance;
   }
 
+  /* Paper card — matches the hero "paper lifts off the desk" register. */
   .problem-card {
-    border-top: 1px solid var(--graphite);
-    padding-top: var(--space-3);
-    display: flex; flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 2px;
+    padding: var(--space-3);
+    box-shadow:
+      0 1px 2px rgba(26, 26, 26, 0.04),
+      0 3px 8px rgba(26, 26, 26, 0.06);
+    break-inside: avoid;
+    margin-bottom: var(--space-4);
   }
+  .problem-card:last-child { margin-bottom: 0; }
   .problem-card__name {
     font-size: 1.15rem; font-weight: 700;
     letter-spacing: -0.005em; line-height: 1.25;
@@ -138,7 +233,9 @@
     font-family: var(--font-code); font-size: 0.9em; color: var(--ink);
   }
 
-  @media (max-width: 800px) {
-    .problems__grid { grid-template-columns: 1fr; gap: var(--space-4); }
+  /* 3 columns at typical viewport widths; collapse straight to 1 on
+     narrow mobile. See Problems.astro for the rationale. */
+  @media (max-width: 599px) {
+    .problems__grid { column-count: 1; }
   }
 </style>
