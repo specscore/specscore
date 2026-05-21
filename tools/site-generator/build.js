@@ -33,6 +33,15 @@ async function build() {
     join(OUTPUT, 'badge.svg')
   );
 
+  // Auto-generated-directory notice for AI agents and humans who land
+  // in `public/` and might be tempted to edit it directly. Excluded
+  // from both hosting targets — see firebase.json `ignore` and the
+  // trailing `rm` in tools/cf-build.sh.
+  await cp(
+    join(__dirname, 'public-readme.md'),
+    join(OUTPUT, 'README.md')
+  );
+
   // CLI installer scripts — served at /install/get-cli (sh) and
   // /install/get-cli.ps1 (PowerShell). Old paths /get-cli and /get-cli.ps1
   // are 301-redirected to the canonical URLs via firebase.json.
