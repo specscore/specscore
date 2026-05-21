@@ -1,0 +1,118 @@
+---
+// "The fix." — the answer to § 2's warm problem sub-section.
+// Three full-width hairline-top columns, each pairing one of the named
+// problems (eyebrow) with a concrete mechanism (body). Per voice-and-tone.md
+// Rule 2: every fix names a verifiable mechanism, not an adjective.
+---
+
+<section class="the-fix section" id="the-fix" aria-labelledby="the-fix-title">
+  <div class="section-inner">
+    <h2 id="the-fix-title" class="the-fix__title">The fix.</h2>
+    <p class="the-fix__lede">Each one has a specific mechanism.</p>
+
+    <ul class="the-fix__grid">
+      <li class="fix-card">
+        <h3 class="fix-card__eyebrow">Specs drift</h3>
+        <p class="fix-card__body">
+          One canonical spec, in the repo, versioned with the code.
+          <code>specscore lint</code> runs in CI on every push; the git
+          history shows exactly what changed and when. The spec, the
+          Slack thread, and the PR can't quietly disagree — they share
+          the same file under review.
+        </p>
+      </li>
+      <li class="fix-card">
+        <h3 class="fix-card__eyebrow">AC stay vague</h3>
+        <p class="fix-card__body">
+          The linter catches ambiguous criteria before any code is
+          written. <em>"Handles errors gracefully"</em> fails lint
+          because the verb has no concrete object or condition. Fixing
+          the warning forces you to write what <em>"handles"</em>
+          actually means — toast-and-roll-back, or log-and-retry.
+        </p>
+      </li>
+      <li class="fix-card">
+        <h3 class="fix-card__eyebrow">Agents ship the wrong thing</h3>
+        <p class="fix-card__body">
+          The format is structured input. AI agents parse REQ IDs, AC IDs
+          and <code>GIVEN&nbsp;/&nbsp;WHEN&nbsp;/&nbsp;THEN</code>
+          scenarios deterministically — there's nothing to interpolate.
+          Plans must cite the AC IDs each task satisfies, so what was
+          built is always checkable against what was specified.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  /* --cream (not --cream-2) — the page reserves --cream-2 for the
+     attention-grabbing on-ramp (AiSkills) and FinalCta. TheFix is
+     paired with § 2 (problem → answer), so it shares § 2's --cream. */
+  .the-fix { background: var(--cream); }
+
+  .the-fix__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .the-fix__lede {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-5);
+    font-size: 1.05rem;
+  }
+
+  .the-fix__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+  .fix-card {
+    border-top: 1px solid var(--graphite);
+    padding-top: var(--space-2);
+    display: flex;
+    flex-direction: column;
+  }
+  .fix-card__eyebrow {
+    font-family: var(--font-code);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--graphite);
+    margin: 0 0 var(--space-2);
+  }
+  .fix-card__body {
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .fix-card__body code {
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-size: 0.92em;
+    color: var(--ink);
+  }
+  .fix-card__body em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    color: var(--ink);
+  }
+
+  @media (max-width: 800px) {
+    .the-fix__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+  }
+</style>
