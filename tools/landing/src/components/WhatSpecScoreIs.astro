@@ -107,7 +107,9 @@
       <div class="what-is__col what-is__col--example">
         <div class="wi-tabs" role="tablist" aria-label="SpecScore artifact lifecycle">
           <button type="button" role="tab" id="wi-tab-idea"    aria-controls="wi-panel-idea"    aria-selected="false" tabindex="-1" class="wi-tab"           data-step="0">idea</button>
+          <span class="wi-tab-arrow" aria-hidden="true">→</span>
           <button type="button" role="tab" id="wi-tab-feature" aria-controls="wi-panel-feature" aria-selected="true"  tabindex="0"  class="wi-tab is-active" data-step="1">feature</button>
+          <span class="wi-tab-arrow" aria-hidden="true">→</span>
           <button type="button" role="tab" id="wi-tab-plan"    aria-controls="wi-panel-plan"    aria-selected="false" tabindex="-1" class="wi-tab"           data-step="2">plan</button>
         </div>
 
@@ -380,6 +382,15 @@ Cites: R1.AC-2</code></pre>
     color: var(--ink);
     border-bottom-color: var(--validator-green);
     font-weight: 600;
+  }
+  .wi-tab-arrow {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0.25rem 2px;
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    color: var(--pale-ink);
+    user-select: none;
   }
 
   /* --- Sliding viewport (right column) --- */
