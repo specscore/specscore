@@ -52,22 +52,26 @@ This page implements brand specs that live in the **marketing repo**, not in thi
 - [`specscore/marketing/branding/website/homepage-copy.md`](https://github.com/specscore/marketing/blob/main/branding/website/homepage-copy.md) — literal page text
 - [`specscore/marketing/branding/prompts/hero-score.md`](https://github.com/specscore/marketing/blob/main/branding/prompts/hero-score.md) — hero image generation prompt + iteration log
 
-The hero images in `public/` are **optimized WebP derivatives** of the marketing repo's `images/hero3.png` (Round 3 Gemini output — two-cream design where the paper sheet visibly lifts off the surrounding cream desk). The raw PNG is 5.3 MB; the three shipped WebP variants together are ~167 KB. Gemini watermark + a faint residual drop shadow are known artifacts in the source — they propagate through the optimization step; needs post-processing (clone-stamp the watermark, soften the shadow) before public launch. See the marketing repo's iteration log for detail.
+The hero images are **optimized WebP derivatives** of the marketing repo's `images/hero3.png` (Round 3 Gemini output — two-cream design where the paper sheet visibly lifts off the surrounding cream desk). Two derivatives ship:
+
+- `src/assets/hero.webp` — 1400px master, ~72 KB. Imported by every `Hero*.astro` variant and processed by Astro's `<Image />` component at build time. Astro auto-generates a 700w/1050w/1400w srcset (content-hashed filenames under `dist/_astro/`).
+- `public/hero-og.webp` — 1200px Open Graph image, ~66 KB. Stays in `public/` because OG scrapers require a stable absolute URL; not processed by Astro.
+
+The raw PNG source is intentionally NOT tracked in this repo. Gemini watermark + a faint residual drop shadow are known artifacts in the source; they propagate through the optimization step and need post-processing (clone-stamp the watermark, soften the shadow) before public launch. See the marketing repo's iteration log for detail.
 
 ### Regenerating the hero from a new source
 
-When the marketing repo's `images/hero2.png` is updated (e.g., watermark cleaned up, shadow removed, Round 3+ generation), regenerate the WebP variants here:
+When the marketing repo's `images/hero*.png` source is updated (e.g., watermark cleaned up, shadow removed, Round 3+ generation), regenerate the WebP variants here:
 
 ```sh
 # from tools/landing/
-cp /path/to/marketing/images/hero2.png public/hero-source.png  # local only; not committed
-cwebp -q 82 -resize 1400 0 public/hero-source.png -o public/hero.webp
-cwebp -q 80 -resize 700  0 public/hero-source.png -o public/hero@1x.webp
-cwebp -q 85 -resize 1200 0 public/hero-source.png -o public/hero-og.webp
-rm public/hero-source.png
+cp /path/to/marketing/images/heroX.png /tmp/hero-source.png  # local only; not committed
+cwebp -q 82 -resize 1400 0 /tmp/hero-source.png -o src/assets/hero.webp
+cwebp -q 85 -resize 1200 0 /tmp/hero-source.png -o public/hero-og.webp
+rm /tmp/hero-source.png
 ```
 
-`cwebp` is from `libwebp` (install via `brew install webp` on macOS). The raw source PNG is intentionally NOT tracked in this repo — the canonical source lives in the marketing repo, and the WebP variants are the deploy artifacts.
+`cwebp` is from `libwebp` (install via `brew install webp` on macOS). The raw source PNG is intentionally NOT tracked here — the canonical source lives in the marketing repo. Astro's image pipeline handles the responsive srcset from the single 1400px master, so no hand-built mobile/`@1x` variant is needed.
 
 ## Project structure
 
@@ -78,11 +82,11 @@ tools/landing/
 ├── tsconfig.json
 ├── README.md  ← you are here
 ├── public/
-│   ├── hero.webp       (1400px, ~72 KB — derived from marketing/images/hero3.png)
-│   ├── hero@1x.webp    (700px, ~29 KB — mobile)
-│   ├── hero-og.webp    (1200px, ~66 KB — OG image meta)
+│   ├── hero-og.webp    (1200px, ~66 KB — OG meta only; stays in public for absolute URL)
 │   └── favicon.svg     (clef glyph on cream)
 └── src/
+    ├── assets/
+    │   └── hero.webp   (1400px master — imported by Hero*.astro; Astro generates the srcset)
     ├── layouts/
     │   └── BaseLayout.astro
     ├── pages/

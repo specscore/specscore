@@ -2,6 +2,8 @@
 // Section 1 — Hero.
 // Per hero-scene.md: two-column desktop layout, copy left (~45%), score right (~55%).
 // Animation: a quiet settle (~1.7s total), not a theatrical reveal.
+import { Image } from 'astro:assets';
+import heroImage from '../assets/hero.webp';
 ---
 
 <section class="hero" aria-labelledby="hero-title">
@@ -41,13 +43,11 @@
       class="hero__art"
       aria-label="A SpecScore specification on cream drafting paper: two requirements pass lint (green checks), one fails (red mark)."
     >
-      <img
-        src="/hero.webp"
-        srcset="/hero@1x.webp 700w, /hero.webp 1400w"
+      <Image
+        src={heroImage}
+        widths={[700, 1050, 1400]}
         sizes="(max-width: 860px) 88vw, 52vw"
         alt=""
-        width="1400"
-        height="1867"
         loading="eager"
         decoding="async"
       />

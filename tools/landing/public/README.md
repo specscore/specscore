@@ -4,12 +4,12 @@ Static files copied as-is into `dist/` at build time. Astro does no processing o
 
 | File | Purpose |
 |---|---|
-| `hero.webp` | Main hero illustration, 1400px wide, ~72 KB. Derived from `specscore/marketing/images/hero3.png` (Round 3 — two-cream design, paper lifts off the desk). |
-| `hero@1x.webp` | Mobile/1x variant, 700px wide, ~29 KB. |
-| `hero-og.webp` | Open Graph image, 1200px wide, ~66 KB. |
+| `hero-og.webp` | Open Graph image, 1200px wide, ~66 KB. Must stay in `public/` because OG scrapers require an absolute static URL. |
 | `favicon.svg` | Clef glyph on cream. |
 
-The raw PNG source is **not tracked here** — canonical source lives in the marketing repo. To regenerate the WebP variants from a refreshed source, see `tools/landing/README.md` § *Regenerating the hero from a new source*.
+**Hero illustration note.** The main hero image (`hero.webp`) lived here through 2026-05-21 alongside a hand-built `hero@1x.webp` variant. Both were moved/dropped when the Hero component switched to Astro's `<Image />` component — the 1400px master now lives at [`../src/assets/hero.webp`](../src/assets/) and Astro generates the responsive srcset at build time (700w / 1050w / 1400w, written to `dist/_astro/*` with content-hashed filenames). Only `hero-og.webp` still lives in `public/` because Open Graph needs a stable absolute URL.
+
+The raw PNG source is **not tracked in this repo** — canonical source lives in the marketing repo. To regenerate WebP variants from a refreshed source, see `tools/landing/README.md` § *Regenerating the hero from a new source*.
 
 ## Outstanding Questions
 
