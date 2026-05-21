@@ -52,7 +52,7 @@ This page implements brand specs that live in the **marketing repo**, not in thi
 - [`specscore/marketing/branding/website/homepage-copy.md`](https://github.com/specscore/marketing/blob/main/branding/website/homepage-copy.md) — literal page text
 - [`specscore/marketing/branding/prompts/hero-score.md`](https://github.com/specscore/marketing/blob/main/branding/prompts/hero-score.md) — hero image generation prompt + iteration log
 
-The hero images in `public/` are **optimized WebP derivatives** of the marketing repo's `images/hero2.png` (the Round 2 Gemini output). The raw PNG is 5.2 MB; the three shipped WebP variants together are ~182 KB. Drop shadow + Gemini watermark are known artifacts in the source — they propagate through the optimization step; needs post-processing before public launch. See the marketing repo's iteration log for detail.
+The hero images in `public/` are **optimized WebP derivatives** of the marketing repo's `images/hero3.png` (Round 3 Gemini output — two-cream design where the paper sheet visibly lifts off the surrounding cream desk). The raw PNG is 5.3 MB; the three shipped WebP variants together are ~167 KB. Gemini watermark + a faint residual drop shadow are known artifacts in the source — they propagate through the optimization step; needs post-processing (clone-stamp the watermark, soften the shadow) before public launch. See the marketing repo's iteration log for detail.
 
 ### Regenerating the hero from a new source
 
@@ -78,9 +78,9 @@ tools/landing/
 ├── tsconfig.json
 ├── README.md  ← you are here
 ├── public/
-│   ├── hero.webp       (1400px, ~79 KB — derived from marketing/images/hero2.png)
-│   ├── hero@1x.webp    (700px, ~31 KB — mobile)
-│   ├── hero-og.webp    (1200×630, ~72 KB — OG image meta)
+│   ├── hero.webp       (1400px, ~72 KB — derived from marketing/images/hero3.png)
+│   ├── hero@1x.webp    (700px, ~29 KB — mobile)
+│   ├── hero-og.webp    (1200px, ~66 KB — OG image meta)
 │   └── favicon.svg     (clef glyph on cream)
 └── src/
     ├── layouts/
