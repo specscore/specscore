@@ -24,5 +24,5 @@ The `specscore` CLI is installed via `curl -fsSL https://specscore.md/install/ge
 ## Directory structure
 
 - Every directory MUST have a `README.md` file.
-- Every `README.md` MUST have an "Outstanding Questions" section. If there are none, it explicitly states "None at this time."
+- Every `README.md` MUST have an "Open Questions" section. If there are none, it explicitly states "None at this time."
 - Every `README.md` that has child directories MUST include a brief summary for each immediate child.

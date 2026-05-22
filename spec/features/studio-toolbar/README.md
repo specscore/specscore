@@ -273,7 +273,7 @@ The `--fix` autofix MUST remove any pre-existing toolbar line at file position 3
 **When** `specscore spec lint --fix` runs
 **Then** the toolbar line is removed from the feature README, leaving file position 3 either blank (matching feature-README convention for absent toolbar) or filled with whatever line followed it; no other line is modified.
 
-## Outstanding Questions
+## Open Questions
 
 - Rehearse stub coverage for each AC is deferred to the implementation plan; the `_tests/` directory is not yet scaffolded in this Feature.
 

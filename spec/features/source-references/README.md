@@ -296,7 +296,7 @@ References to non-existent resources produce errors, not warnings. Missing host/
 
 Same-repo references resolve host/org/repo from git remote by default. Project config overrides git remote inference. Cross-repo references use the explicit `@{host}/{org}/{repo}` suffix.
 
-## Outstanding Questions
+## Open Questions
 
 - Should the set of recognized comment prefixes be extensible via project configuration, or is the built-in set sufficient?
 - How should the linter handle references in files with no recognized comment syntax (e.g., plain text files)?

@@ -64,7 +64,7 @@ SpecScore specs are format-agnostic. These features define the mental model and 
 
 See [synchestra.io](https://synchestra.io) for orchestration on top of SpecScore.
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 

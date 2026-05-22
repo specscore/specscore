@@ -74,7 +74,7 @@ One cycle. Two new top-level Document-Kind features in spec/features/ (entity an
   - `pkg/lint/` in the [`specscore-cli`](https://github.com/synchestra-io/specscore-cli) — new lint passes for entity / property file validation, inheritance integrity (additive-only), managed `## Properties` table rendering, and `## Referenced by` maintenance.
 - **Dependencies:** Builds on the [`adherence-footer-and-doc-type-registry`](adherence-footer-and-doc-type-registry.md) Idea (Implementing). MVP can begin once the Document Kind taxonomy and adherence-footer mechanism are stable.
 
-## Outstanding Questions
+## Open Questions
 
 - **Where do cross-cutting entities (`Money`, `Address`, `Currency`) live when no single feature owns them?** Three plausible conventions, none picked for MVP — convention will emerge from real usage:
   - At the root `spec/` or `spec/features/` level (closest to "global namespace").

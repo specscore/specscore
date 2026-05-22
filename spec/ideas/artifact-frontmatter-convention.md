@@ -169,7 +169,7 @@ already there).
     `specscore.md`.
   - One-shot migration commit per consuming repo.
 
-## Outstanding Questions
+## Open Questions
 
 - **What counts as "having a status"?** Features, Ideas, Plans, seeds,
   Tasks all have a Status concept today. READMEs / index pages do not.

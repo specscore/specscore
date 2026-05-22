@@ -67,7 +67,7 @@ One cycle after `adherence-footer-and-doc-type-registry` has shipped and at leas
 - **Existing Features affected:** `plans-index` (reshaped to overrides-only; may be deleted if nothing non-trivial remains), `document-types-registry` (lint extended to cross-check Index-Kind delegation to `index/`).
 - **Dependencies:** Depends on `adherence-footer-and-doc-type-registry`. Specifically, the `Kind` taxonomy and the top-level rule for Index-Kind features must exist before this Idea is meaningful.
 
-## Outstanding Questions
+## Open Questions
 
 - Does `index/` specify the columns of the Contents table as a tiny base set (first column = link to item, plus Status) that per-domain features extend, or is the column set entirely per-domain? Current lean: tiny base with everything else per-domain.
 - Does the shared `index/` feature hard-require a `Recently Closed` section, or leave it as per-domain opt-in? Plans have a lifecycle where closed items matter; Ideas have `Archived`; Features have `Deprecated`. Different domains, different recency semantics.

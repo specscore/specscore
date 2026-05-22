@@ -23,7 +23,7 @@ Implements the [entity-and-property-definitions Idea](../ideas/entity-and-proper
 
 None at this time.
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 

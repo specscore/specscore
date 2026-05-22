@@ -16,16 +16,16 @@ A SpecScore repo can have dozens of feature specifications, nested and flat, wit
 
 ## Behavior
 
-This feature inherits all shared rules from the [Index feature](../index/README.md): canonical location at `spec/features/README.md`, the minimum-required-sections rule (list section + Outstanding Questions), completeness, adherence-footer delegation form, and the three registry cross-references in the Interaction table. Those rules are NOT re-stated here per [Index#req:overrides-only](../index/README.md#req-overrides-only). What follows is the features-index's own overrides.
+This feature inherits all shared rules from the [Index feature](../index/README.md): canonical location at `spec/features/README.md`, the minimum-required-sections rule (list section + Open Questions), completeness, adherence-footer delegation form, and the three registry cross-references in the Interaction table. Those rules are NOT re-stated here per [Index#req:overrides-only](../index/README.md#req-overrides-only). What follows is the features-index's own overrides.
 
 ### Section structure
 
 The features index adds no per-domain sections beyond the shared minimum. It contains, at minimum:
 
 1. A list-holding section — the Contents table.
-2. `## Outstanding Questions` — the shared terminal section.
+2. `## Open Questions` — the shared terminal section.
 
-Repositories MAY prepend optional header prose introducing the feature surface, and MAY append optional sections beyond Outstanding Questions only with project-specific rationale. The canonical example in this repo adds a `## Feature Hierarchy` ASCII diagram and an `## Integration with Orchestration Tools` narrative section between Contents and Outstanding Questions.
+Repositories MAY prepend optional header prose introducing the feature surface, and MAY append optional sections beyond Open Questions only with project-specific rationale. The canonical example in this repo adds a `## Feature Hierarchy` ASCII diagram and an `## Integration with Orchestration Tools` narrative section between Contents and Open Questions.
 
 #### REQ: list-section-heading
 
@@ -96,7 +96,7 @@ Given a feature whose `**Status:**` was updated (for example, by `specscore feat
 
 Every features index ends with a footer containing the bare URL `https://specscore.md/features-index-specification`. Lint matches on the URL, not the prose.
 
-## Outstanding Questions
+## Open Questions
 
 - Should the features index sort feature rows by a stable rule (alphabetical, Status then name, creation order), or is sort order a project choice? Current position: project choice.
 - When a feature is `Deprecated`, should it continue to appear in the main Index table or move to a dedicated "Deprecated" sub-section? Current position: remain in the main table with `Deprecated` in the Status cell.

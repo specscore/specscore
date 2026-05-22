@@ -145,7 +145,7 @@ Every feature directory has a registry row; every registry row points to a real 
 
 Given a Document-Kind row whose `Consumer Path` cell is the comma-separated value `spec/features/**/*.entity.md, spec/features/**/*.property.md`, and a consumer repo containing both an `*.entity.md` file and an `*.property.md` file under `spec/features/**`, every registry consumer (lint walker, `specscore` CLI glob expansion, doc renderer) treats the cell as the union of the two globs and resolves both files against the same row. Whitespace around the comma is tolerated. A registry row that uses the comma-separated form for an `Index` or `Meta` Kind, or that lists only one glob in the comma-separated form (i.e., a trailing-comma artifact), is a validation error.
 
-## Outstanding Questions
+## Open Questions
 
 - Should the registry gain a `Spec Status` column distinct from the feature's own Status, or is the feature's Status column sufficient for both purposes?
 - Should consumer repos be allowed to extend the registry with custom document types (via a `spec/document-types.md` overlay or a `specscore.yaml` field), and how would lint combine the base and overlay?

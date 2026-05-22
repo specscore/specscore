@@ -199,7 +199,7 @@ A requirement appears under a topic heading within `## Behavior`, at exactly one
 
 A requirement has a well-formed slug, a unique slug within its feature, a canonical `{feature-path}#req:{slug}` identifier, and all cross-references use the correct identifier syntax. Invalid slugs, duplicate slugs, or malformed references are validation errors.
 
-## Outstanding Questions
+## Open Questions
 
 - Should tooling enforce that every requirement has at least one AC or scenario, or is it acceptable to have uncovered requirements during early specification?
 - Should requirements support a status independent of their parent feature (e.g., a requirement could be marked `deprecated` while the feature remains `stable`)?

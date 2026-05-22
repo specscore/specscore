@@ -16,14 +16,14 @@ Without a structured active index, Ideas accumulate silently — each as a stand
 
 ## Behavior
 
-This feature inherits all shared rules from the [Index feature](../index/README.md): canonical location at `spec/ideas/README.md`, the minimum-required-sections rule (list section + Outstanding Questions), completeness, adherence-footer delegation form, and the three registry cross-references in the Interaction table. Those rules are NOT re-stated here per [Index#req:overrides-only](../index/README.md#req-overrides-only). What follows is the ideas-index's own overrides.
+This feature inherits all shared rules from the [Index feature](../index/README.md): canonical location at `spec/ideas/README.md`, the minimum-required-sections rule (list section + Open Questions), completeness, adherence-footer delegation form, and the three registry cross-references in the Interaction table. Those rules are NOT re-stated here per [Index#req:overrides-only](../index/README.md#req-overrides-only). What follows is the ideas-index's own overrides.
 
 ### Section structure
 
 The ideas index adds no per-domain sections beyond the shared minimum. It contains exactly:
 
 1. `## Index` — the list-holding section (satisfies [Index#req:required-sections-minimum](../index/README.md#req-required-sections-minimum)).
-2. `## Outstanding Questions` — the shared terminal section.
+2. `## Open Questions` — the shared terminal section.
 
 #### REQ: list-section-heading
 
@@ -96,7 +96,7 @@ Given an Idea whose `**Status:**` was updated (for example, by the [Idea](../ide
 
 Every ideas index ends with a footer containing the bare URL `https://specscore.md/ideas-index-specification`. Lint matches on the URL, not the prose.
 
-## Outstanding Questions
+## Open Questions
 
 - Should the Index table support an optional Source column showing which downstream work (plan, feature, proposal) originated from the Idea, or is `Promotes To` sufficient for all current needs?
 - Should Ideas that have been promoted (Status: Specified) stay in the active index indefinitely, or should they move to a "historical" partition after their promoted Features ship? Current position: remain in active index until Archived.

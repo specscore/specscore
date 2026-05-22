@@ -325,12 +325,12 @@ There are two indexes: one for active Ideas and one for archived Ideas.
 **Active index** (`spec/ideas/README.md`):
 
 1. An **Index** table with columns: Idea, Status, Date, Owner, Promotes To.
-2. An **Outstanding Questions** section.
+2. An **Open Questions** section.
 
 **Archived index** (`spec/ideas/archived/README.md`):
 
 1. A chronological list of Archived Ideas, ordered by the **Date** field (oldest first, newest at bottom) — not a full metadata table. Each entry is a line of the form `- YYYY-MM-DD — [slug](<slug>.md) — <archive reason>`.
-2. An **Outstanding Questions** section.
+2. An **Open Questions** section.
 
 #### REQ: index-completeness
 
@@ -392,9 +392,9 @@ A Feature's `**Source Ideas:**` field MAY list zero or more Idea slugs. Each ref
 
 Ideas do not directly reference [Plans](../plan/README.md). The Feature bridges the Idea to the Plan, just as it bridges the Feature to execution.
 
-### Ideas and outstanding questions
+### Ideas and open questions
 
-Every Idea maintains an Outstanding Questions section with the standard empty-state text ("None at this time.") when no questions remain open.
+Every Idea maintains an Open Questions section with the standard empty-state text ("None at this time.") when no questions remain open.
 
 ### Adherence footer
 
@@ -469,7 +469,7 @@ A hand-authored Idea and a skill-authored Idea with identical content produce id
 
 None at this time.
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 

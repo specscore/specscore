@@ -156,7 +156,7 @@ Edit `.github/workflows/dogfood.yml` to bump `SPECSCORE_VERSION` to the release 
 
 Once green on `main`, this plan is complete.
 
-## Outstanding Questions
+## Open Questions
 
 - The `studio-toolbar` Feature's `Might-be-true` assumption — does the `|` separator survive all common markdown renderers? — is best validated during T6 spot-check. If a renderer (GitHub mobile, narrow editor preview) mangles the toolbar visibly, file a follow-up Idea about an alternative separator and defer this plan's completion until resolved. Treat the assumption as still-open until T6 closes it.
 - The studio web app's readiness for `?op=ask` and `?op=request-change` is tracked outside both plans. If those endpoints are not live by T7, the toolbar will render but two of its links return 404. The plan still completes; the studio side catches up post-merge.

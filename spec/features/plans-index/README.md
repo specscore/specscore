@@ -18,17 +18,17 @@ This feature inherits all shared rules from the [Index feature](../index/README.
 
 ### Section structure
 
-The plans index adds one per-domain section, **Recently Closed**, between the list section and Outstanding Questions:
+The plans index adds one per-domain section, **Recently Closed**, between the list section and Open Questions:
 
 1. `## Contents` — the list-holding section (satisfies [Index#req:required-sections-minimum](../index/README.md#req-required-sections-minimum)).
 2. `## Recently Closed` — plans whose status indicates completion, supersession, or abandonment.
-3. `## Outstanding Questions` — the shared terminal section.
+3. `## Open Questions` — the shared terminal section.
 
 Repositories MAY prepend optional header prose and an optional `## Conventions` section for project-specific naming or structural conventions beyond the SpecScore baseline.
 
 #### REQ: required-sections
 
-The plans index MUST contain, in order: `## Contents`, `## Recently Closed`, and `## Outstanding Questions`. Header prose and `## Conventions` are OPTIONAL. This REQ is a per-domain refinement of [Index#req:required-sections-minimum](../index/README.md#req-required-sections-minimum) — it adds `## Recently Closed` between the list section and the shared terminal section.
+The plans index MUST contain, in order: `## Contents`, `## Recently Closed`, and `## Open Questions`. Header prose and `## Conventions` are OPTIONAL. This REQ is a per-domain refinement of [Index#req:required-sections-minimum](../index/README.md#req-required-sections-minimum) — it adds `## Recently Closed` between the list section and the shared terminal section.
 
 ### Contents table
 
@@ -93,7 +93,7 @@ Every plans-index document MUST end with an adherence footer per the [Adherence 
 
 **Requirements:** plans-index#req:required-sections
 
-The plans index adds `## Recently Closed` between the shared list section and the shared Outstanding Questions section. Section order is enforced.
+The plans index adds `## Recently Closed` between the shared list section and the shared Open Questions section. Section order is enforced.
 
 ### AC: contents-table
 
@@ -113,7 +113,7 @@ A Recently Closed section exists (even if empty) and its entries include plan li
 
 Every plans index ends with a footer containing the bare URL `https://specscore.md/plans-index-specification`. Lint matches on the URL, not the prose.
 
-## Outstanding Questions
+## Open Questions
 
 - Should the default N for Recently Closed (currently 5) be defined here or be purely project-configurable with no baseline? Current position: project-configurable, default 5.
 - Should the index support deeper sub-plan indentation (`&ensp;&ensp;` and beyond) for three-or-more levels of nesting? Current position: one level of indentation sufficient for current SpecScore patterns.

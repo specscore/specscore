@@ -15,7 +15,7 @@ Test scenarios for the [Requirement](../README.md) specification.
 | [rfc2119-keywords-used](rfc2119-keywords-used.md) | [requirement#req:rfc2119-keywords](../README.md#req-rfc2119-keywords) |
 | [no-implicit-inheritance](no-implicit-inheritance.md) | [requirement#req:no-inheritance](../README.md#req-no-inheritance) |
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 

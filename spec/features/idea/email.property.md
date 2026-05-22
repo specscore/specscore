@@ -26,7 +26,7 @@ semantically a user's email address — the most defensible home for
 this fixture in the absence of a `shared/` convention. Real consumer
 repos are free to relocate the property file as they adopt their own
 placement convention; see the
-[entity Feature's Outstanding Questions](../entity/README.md#outstanding-questions)
+[entity Feature's Open Questions](../entity/README.md#open-questions)
 for the open repo-wide discussion.
 
 ## Referenced by

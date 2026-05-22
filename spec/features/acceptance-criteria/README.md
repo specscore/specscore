@@ -60,9 +60,9 @@ Every feature README MUST include an `## Acceptance Criteria` section. This sect
 
 When no ACs are defined, the Acceptance Criteria section MUST state "Not defined yet." as its only content.
 
-#### REQ: outstanding-question-linkage
+#### REQ: open-question-linkage
 
-When the Acceptance Criteria section reads "Not defined yet.", the feature's Outstanding Questions section MUST include "Acceptance criteria not yet defined for this feature." This keeps missing ACs visible until addressed.
+When the Acceptance Criteria section reads "Not defined yet.", the feature's Open Questions section MUST include "Acceptance criteria not yet defined for this feature." This keeps missing ACs visible until addressed.
 
 ### When to use ACs
 
@@ -108,7 +108,7 @@ Plan task ACs MAY reference feature ACs to indicate that a task's completion dep
 | [Requirement](../requirement/README.md) | ACs bundle requirements via the `**Requirements:**` metadata field, creating traceability from composite verification conditions back to individual behavioral rules. |
 | [Scenario](../scenario/README.md) | Scenarios validate ACs (or REQs directly) with concrete Given/When/Then flows. An AC is abstract; a scenario is its executable proof. |
 | [Plan](../plan/README.md) | Plan task ACs may reference feature ACs. Plan-level ACs follow the same format and are captured in plan snapshots. |
-| [Outstanding Questions](../outstanding-questions/README.md) | Missing ACs surface as outstanding questions, keeping them visible until addressed. |
+| [Open Questions](../open-questions/README.md) | Missing ACs surface as open questions, keeping them visible until addressed. |
 
 ## Acceptance Criteria
 
@@ -120,9 +120,9 @@ An AC uses the correct heading format, includes a Requirements metadata field li
 
 ### AC: empty-section-handling
 
-**Requirements:** acceptance-criteria#req:section-required, acceptance-criteria#req:placeholder-when-empty, acceptance-criteria#req:outstanding-question-linkage
+**Requirements:** acceptance-criteria#req:section-required, acceptance-criteria#req:placeholder-when-empty, acceptance-criteria#req:open-question-linkage
 
-The Acceptance Criteria section is always present. When it has no ACs, it reads "Not defined yet." and a corresponding outstanding question is raised. Once ACs are added, the placeholder and question are removed.
+The Acceptance Criteria section is always present. When it has no ACs, it reads "Not defined yet." and a corresponding open question is raised. Once ACs are added, the placeholder and question are removed.
 
 ### AC: ac-scenario-separation
 
@@ -130,7 +130,7 @@ The Acceptance Criteria section is always present. When it has no ACs, it reads 
 
 ACs remain abstract — they never contain Given/When/Then steps or test data. Scenarios reference ACs (or REQs directly) in their Validates field. ACs are only created when bundling adds value; standalone requirements are referenced directly.
 
-## Outstanding Questions
+## Open Questions
 
 - Should tooling enforce a minimum of two requirements per AC, or is the "optional grouping" convention sufficient without automated enforcement?
 - How should ACs handle cross-feature requirement bundles — e.g., an AC in feature A that references requirements from both feature A and feature B?

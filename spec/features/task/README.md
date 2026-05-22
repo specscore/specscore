@@ -206,7 +206,7 @@ A task document carries structured properties in its `README.md`.
 - Expired tokens return 401 with a clear error message
 - Refresh endpoint issues new tokens for valid refresh tokens
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 ```
@@ -269,7 +269,7 @@ Dependency references resolve correctly using bare slugs (sibling), relative pat
 
 The task status board has the required columns (Queued, In Progress, Blocked, Done), uses strikethrough for done tasks, includes a Recently Finished section, and reflects current task state.
 
-## Outstanding Questions
+## Open Questions
 
 - Should task documents support optional metadata fields beyond Status, Depends on, and Produces (e.g., Assignee, Effort, Priority)?
 - How should cross-project dependency resolution work when the remote project is not accessible (offline, private)?

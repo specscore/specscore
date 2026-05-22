@@ -10,6 +10,6 @@ Entries appear in chronological order by each Idea's `**Date:**` field (oldest f
 
 - 2026-04-20 — [dual-audience-spec-urls](dual-audience-spec-urls.md) — implemented
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.

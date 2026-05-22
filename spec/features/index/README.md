@@ -34,9 +34,9 @@ Every Index-Kind feature's consumer instance MUST live at `spec/{domain}/README.
 Every index MUST include, at minimum, these two sections in order:
 
 1. A **list-holding section** — a section whose heading is determined by the per-domain Index-Kind feature (e.g., `## Contents` for plans-index, `## Index` for ideas-index), containing the table of instances.
-2. An **Outstanding Questions** section — the standard question-lifecycle section shared by all SpecScore documents.
+2. An **Open Questions** section — the standard question-lifecycle section shared by all SpecScore documents.
 
-Per-domain Index-Kind features MAY add additional required sections between the list section and Outstanding Questions (e.g., plans-index adds `## Recently Closed`). Sections MUST appear in the order declared by the per-domain feature; Outstanding Questions MUST always be last.
+Per-domain Index-Kind features MAY add additional required sections between the list section and Open Questions (e.g., plans-index adds `## Recently Closed`). Sections MUST appear in the order declared by the per-domain feature; Open Questions MUST always be last.
 
 #### REQ: completeness
 
@@ -58,7 +58,7 @@ Every Index-Kind feature's Interaction table MUST include three rows cross-refer
 
 Index-Kind features declare, in their own README:
 
-- **Per-domain sections** beyond list + Outstanding Questions (e.g., `## Recently Closed`, `## Conventions`).
+- **Per-domain sections** beyond list + Open Questions (e.g., `## Recently Closed`, `## Conventions`).
 - **Table columns** — entirely per-domain; this feature does not prescribe a column set.
 - **Status vocabulary** — which status values the table's Status column accepts.
 - **Domain-specific REQs** — e.g., plans-index's sub-plan indentation, ideas-index's archived-exclusion, optional per-item summaries.
@@ -92,7 +92,7 @@ An Index-Kind feature whose Behavior section contains only inherited REQ referen
 
 **Requirements:** index#req:index-location, index#req:required-sections-minimum, index#req:completeness, index#req:adherence-footer-delegation, index#req:registry-cross-references
 
-Every Index-Kind feature inherits the five shared rules: canonical location, minimum required sections (list section + Outstanding Questions, with Outstanding Questions last), completeness, adherence-footer delegation form, and the three registry cross-references in the Interaction table. A feature missing any is rejected.
+Every Index-Kind feature inherits the five shared rules: canonical location, minimum required sections (list section + Open Questions, with Open Questions last), completeness, adherence-footer delegation form, and the three registry cross-references in the Interaction table. A feature missing any is rejected.
 
 ### AC: no-duplicate-rules
 
@@ -106,7 +106,7 @@ A per-domain Index-Kind feature's Behavior section declares overrides only — n
 
 When an Index-Kind feature's overrides become empty (no per-domain sections, no unique columns, no domain-specific REQs), the feature SHOULD be deleted. Lint may emit a warning; deletion remains a human decision.
 
-## Outstanding Questions
+## Open Questions
 
 - Should the shared feature prescribe a minimum or default column set (e.g., always at least `{Item link}` + `Status`) or leave column composition entirely per-domain? Current position: entirely per-domain — column semantics vary too much across domains to share any.
 - Should Outstanding-Questions-last be enforced by lint, or treated as convention? Current position: lint-enforced, because section order is a determinant of reviewer navigation.

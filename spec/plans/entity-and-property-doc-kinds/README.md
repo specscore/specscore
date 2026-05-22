@@ -153,7 +153,7 @@ Tasks 3, 4, and 5 are parallelisable once Task 2 lands.
 - **Documentation page taxonomy** (`docs/for/spec-authors/` vs another category) — confirm at execution. The plan does not pin a specific path because the existing `docs/for/` structure is the authority.
 - **Site generator path resolution.** The new docs page links into `spec/features/**` and `spec/features/shared/email.property.md`. If `tools/site-generator/` rewrites URLs in a way that breaks these links, Task 4 needs a small site-generator fix as a sub-task. Verify at Task 4 start.
 
-## Outstanding Questions
+## Open Questions
 
 - Should this plan also amend the [Idea](../../features/idea/README.md) Feature to add a `Consumes:` / `Produces:` header so the smoke-test entity can be referenced structurally rather than only in prose? Decision: NO for this plan — that mechanism is a separate Idea per the source Idea's Not Doing list, and adding it here would inflate scope past one cycle.
 - Should the smoke-test `email` Property also have an inline JSON Schema (`checks.json_schema`) demonstrating the embedded-schema feature, or is the pattern/length pair sufficient for MVP? Lean: pattern/length only; defer JSON Schema demo until a real consumer needs it.

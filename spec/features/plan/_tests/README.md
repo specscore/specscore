@@ -20,7 +20,7 @@ Test scenarios validating the plan feature requirements.
 | [mixed-children](mixed-children.md) | [plan#req:mixed-children](../README.md#req-mixed-children) |
 | [status-rollup](status-rollup.md) | [plan#req:status-rollup](../README.md#req-status-rollup) |
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 

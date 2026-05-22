@@ -13,7 +13,7 @@ Test scenarios for the [Entity](../README.md) specification.
 | [properties-table-rendered-from-frontmatter](properties-table-rendered-from-frontmatter.md) | [entity#ac:managed-sections-rendered](../README.md#ac-managed-sections-rendered), [entity#req:properties-table-managed](../README.md#req-properties-table-managed) |
 | [missing-adherence-footer-rejected](missing-adherence-footer-rejected.md) | [entity#ac:adherence-footer-present](../README.md#ac-adherence-footer-present), [entity#req:adherence-footer](../README.md#req-adherence-footer) |
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 

@@ -181,7 +181,7 @@ Task 1 --> Task 2 --> Task 3
 - Error reporting granularity: per-item or fail-fast? Defaulting to
   per-item with `--fail-fast` flag.
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 ```
@@ -623,7 +623,7 @@ The What's Next report is an AI-generated prioritization document that surfaces 
 Brief AI explanation of prioritization -- dependency unlocks, ROI ratio,
 momentum, competing priorities.
 
-## Outstanding Questions
+## Open Questions
 
 (ambiguities the AI surfaced during analysis)
 ```
@@ -665,7 +665,7 @@ Every plan document MUST end with an adherence footer per the [Adherence Footer 
 | [Acceptance Criteria](../acceptance-criteria/README.md) | Plan-level and task-level ACs follow the same format as feature ACs. Snapshots provide immutable references to AC state at specific points. |
 | [Scenario](../scenario/README.md) | Scenarios in `_tests/` validate plan REQs with concrete Given/When/Then flows. |
 | [Proposals](../proposals/README.md) | A proposal (change request) is a trigger for plan creation. Approved proposals link forward to their plan; plans link back to their source proposal. |
-| [Outstanding Questions](../outstanding-questions/README.md) | Plan tasks may surface outstanding questions. These follow the existing question lifecycle. |
+| [Open Questions](../open-questions/README.md) | Plan tasks may surface open questions. These follow the existing question lifecycle. |
 | [Plans Index](../plans-index/README.md) | The plans-index feature specifies the `spec/plans/README.md` aggregation file that lists every Plan in a repo. Plan documents conform to `plan-specification`; the plans-index file conforms to `plans-index-specification`. |
 
 ## Acceptance Criteria
@@ -706,7 +706,7 @@ Plans nest recursively with no artificial depth limit. Tasks and sub-plans coexi
 
 Affected features back-reference plans in a Plans table. Proposals triggered by change requests include forward references to their plans. Bidirectional traceability is maintained.
 
-## Outstanding Questions
+## Open Questions
 
 - How should plan tasks reference specific sections of a feature spec when the plan implements only part of a feature?
 - What is the exact format for the plan task reference -- should it be structured metadata (YAML frontmatter) or a markdown convention (as shown in examples)?

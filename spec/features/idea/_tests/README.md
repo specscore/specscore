@@ -32,7 +32,7 @@ Test scenarios for the [Idea](../README.md) specification.
 | [unlisted-idea-in-index](unlisted-idea-in-index.md) | [idea#req:index-completeness](../README.md#req-index-completeness) |
 | [archived-index-chronological-ordering](archived-index-chronological-ordering.md) | [idea#ac:archival](../README.md#ac-archival), [idea#req:archived-index-chronological](../README.md#req-archived-index-chronological) |
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 

@@ -16,7 +16,7 @@ Scenarios validating the [Scenario](../README.md) feature specification.
 | [flow-in-flows-subdir](flow-in-flows-subdir.md) | req:flow-location, req:flow-format |
 | [cross-feature-primary](cross-feature-primary.md) | req:cross-feature-placement, req:cross-feature-validates |
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 

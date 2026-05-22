@@ -228,7 +228,7 @@ properties:
       required: true
 ```
 
-The exact key name (`ref` vs `$ref` vs `import`) is locked in by the [entity feature](../entity/README.md) — see [Outstanding Questions](#outstanding-questions).
+The exact key name (`ref` vs `$ref` vs `import`) is locked in by the [entity feature](../entity/README.md) — see [Open Questions](#open-questions).
 
 #### REQ: ref-target-exists
 
@@ -287,7 +287,7 @@ Every property file ends with the adherence footer pointing to `https://specscor
 
 Every Property reference from an Entity's `properties` list resolves to an existing `*.property.md` file. Broken references are a hard lint error.
 
-## Outstanding Questions
+## Open Questions
 
 - **Property reference key inside an entity's frontmatter** — `ref:`, `$ref:`, or `import:`? Both this feature and the [entity feature](../entity/README.md) reference the same key; the choice belongs in the entity spec and is locked there. This feature deliberately defers.
 - **URL form vs relative-path form** — both are accepted today. Should one form be canonical (with `specscore lint --fix` normalising to it), or do both remain first-class forever? Decision deferred until cross-repo imports land.

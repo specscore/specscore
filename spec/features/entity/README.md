@@ -345,7 +345,7 @@ This AC defines an explicit MVP exit criterion for the back-reference scan: in M
 
 Every entity file ends with the adherence footer pointing to `https://specscore.md/entity-specification`. Missing or wrong-URL footers are rejected by `specscore lint`.
 
-## Outstanding Questions
+## Open Questions
 
 - **Property reference key** — `ref:`, `$ref:`, or `import:`? MVP uses `ref:` because it is the shortest and reads cleanly inside a property item. Lock in or revise during plan-writing.
 - **Where do cross-cutting entities live by convention?** The Idea names three plausible options (root `spec/features/`, a `shared/` feature directory, a domain-scoped feature). MVP picks none — convention will emerge from real usage and a follow-on Idea may formalise it.

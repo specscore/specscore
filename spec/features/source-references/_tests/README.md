@@ -19,7 +19,7 @@ Test scenarios for the [Source References](../README.md) specification.
 | [cross-repo-suffix-required](cross-repo-suffix-required.md) | [source-references#req:cross-repo-suffix](../README.md#req-cross-repo-suffix) |
 | [only-known-type-prefixes](only-known-type-prefixes.md) | [source-references#req:type-prefix-set](../README.md#req-type-prefix-set) |
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 

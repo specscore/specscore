@@ -120,7 +120,7 @@ Every Document-Kind and Index-Kind feature's local `REQ: adherence-footer` uses 
 
 Lint matches footers by URL string (not prose), errors on missing or mismatched footers, and only inserts missing footers on `--fix` — never rewriting wrong URLs.
 
-## Outstanding Questions
+## Open Questions
 
 - Should the two-line delegation form be template-enforced by lint (exact regex match on the REQ body), or left as a convention that reviewers police?
 - Should the `trailing-slash` allowance be narrowed over time in favor of a single canonical form, or is the tolerant match good forever?

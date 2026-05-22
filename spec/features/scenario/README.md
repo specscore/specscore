@@ -263,7 +263,7 @@ Step keywords are uppercase. Each scenario has exactly one WHEN step. Scenarios 
 
 When a rehearse block is present, it uses the `rehearse` fence tag, starts with a shebang line, and appears under a `## Rehearse` section heading.
 
-## Outstanding Questions
+## Open Questions
 
 - Should scenarios support parameterized/templated steps (e.g., run the same scenario with different inputs)? Or should each input combination be a separate scenario file?
 - Should the `flows/` convention support nesting (flows referencing other flows), or is one level sufficient?

@@ -73,7 +73,7 @@ One cycle. Scope is the two new Meta features (`adherence-footer` and `document-
 - **Existing Features affected:** `feature` (local REQ: adherence-footer shrinks and references the new feature; index-completeness REQ gains new columns), `plan`, `idea`, `task`, `scenario`, `requirement`, `acceptance-criteria`, `source-references`, `project-definition` (each gains or shrinks a two-line `REQ: adherence-footer` pointing at its consumer URL), root `spec/features/README.md` (new required columns populated), `pkg/lint/adherence_footer.go` in [`specscore-cli`](https://github.com/synchestra-io/specscore-cli) (refactored).
 - **Dependencies:** None. This Idea is the foundation for `shared-index-feature`.
 
-## Outstanding Questions
+## Open Questions
 
 - Is `Kind` + `URL` + `Consumer Path` + `Index` the right minimum column set, or do we also need `Spec Status` (mirrored from the feature's own Status) and `Instance File Pattern` (for lint globbing)?
 - `outstanding-questions` phantom feature — create it as a Structure Kind, or remove the references from `feature/README.md`? The registry work forces the decision.

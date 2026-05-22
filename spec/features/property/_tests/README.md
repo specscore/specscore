@@ -11,7 +11,7 @@ Test scenarios for the [Property](../README.md) specification.
 | [missing-adherence-footer-rejected](missing-adherence-footer-rejected.md) | [property#ac:adherence-footer-present](../README.md#ac-adherence-footer-present), [property#req:adherence-footer](../README.md#req-adherence-footer) |
 | [entity-ref-broken-rejected](entity-ref-broken-rejected.md) | [property#ac:entity-references-resolve](../README.md#ac-entity-references-resolve), [property#req:ref-target-exists](../README.md#req-ref-target-exists) |
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 

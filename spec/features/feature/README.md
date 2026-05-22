@@ -136,7 +136,7 @@ Not defined yet.
 
 (Or: a table of ACs when defined.)
 
-## Outstanding Questions
+## Open Questions
 
 - Question 1
 - Question 2
@@ -171,7 +171,7 @@ Every feature README MUST include these sections:
 | Proposals               | Conditional | Present when the feature has a `proposals/` directory             |
 | Plans                   | Conditional | Present when a [plan](../plan/README.md) touches this feature |
 | Acceptance Criteria     | Yes         | Always present. See [REQ: ac-section](#req-ac-section).           |
-| Outstanding Questions   | Yes         | Always present. See [REQ: outstanding-questions](#req-outstanding-questions). |
+| Open Questions          | Yes         | Always present. See [REQ: open-questions](#req-open-questions). |
 | Adherence footer        | Yes         | Always the last line. See [REQ: adherence-footer](#req-adherence-footer).     |
 
 #### Optional sections
@@ -189,13 +189,13 @@ Features MAY include additional sections as needed:
 
 These requirements define how specific required sections behave when they have no content.
 
-#### REQ: outstanding-questions
+#### REQ: open-questions
 
-The Outstanding Questions section MUST always be present in every feature README. If there are no open questions, it MUST explicitly state "None at this time." The section MUST NOT be omitted.
+The Open Questions section MUST always be present in every feature README. If there are no open questions, it MUST explicitly state "None at this time." The section MUST NOT be omitted.
 
 #### REQ: ac-section
 
-The Acceptance Criteria section MUST always be present in every feature README. When no ACs are defined, it MUST state "Not defined yet." and a corresponding Outstanding Question ("Acceptance criteria not yet defined for this feature.") MUST be raised.
+The Acceptance Criteria section MUST always be present in every feature README. When no ACs are defined, it MUST state "Not defined yet." and a corresponding Open Question ("Acceptance criteria not yet defined for this feature.") MUST be raised.
 
 #### REQ: adherence-footer
 
@@ -270,7 +270,7 @@ The feature index (`spec/features/README.md`) is the entry point for understandi
 1. An **Index** table with columns: Feature, Status, Description
 2. A **Feature Summaries** section with a paragraph per feature
 3. A **Feature dependency graph** showing relationships
-4. An **Outstanding Questions** section
+4. An **Open Questions** section
 
 #### REQ: index-completeness
 
@@ -339,9 +339,9 @@ graph LR
 
 Features do not directly reference execution units. The plan bridges specifications to execution.
 
-### Features and outstanding questions
+### Features and open questions
 
-Every feature maintains an [Outstanding Questions](../outstanding-questions/README.md) section. Questions follow the standard question lifecycle defined by the Outstanding Questions feature.
+Every feature maintains an [Open Questions](../open-questions/README.md) section. Questions follow the standard question lifecycle defined by the Open Questions feature.
 
 ## Tooling Support
 
@@ -368,7 +368,7 @@ Feature behavior is configured through the repo config file. See [Repo Config](.
 | [Requirement](../requirement/README.md) | Requirements are `#### REQ:` subsections under topic headings within a feature's Behavior section. They are the addressable rules that scenarios verify. |
 | [Acceptance Criteria](../acceptance-criteria/README.md) | ACs are optional `### AC:` sections in the Acceptance Criteria section that bundle related requirements into composite verification conditions. |
 | [Scenario](../scenario/README.md) | Scenarios are concrete behavior examples in the feature's `_tests/` directory. They validate REQs or ACs with Given/When/Then flows. |
-| [Outstanding Questions](../outstanding-questions/README.md) | Every feature maintains an Outstanding Questions section with the standard question lifecycle. |
+| [Open Questions](../open-questions/README.md) | Every feature maintains an Open Questions section with the standard question lifecycle. |
 
 For tool integrations (CLI, UI, API, LSP), see [Synchestra](https://synchestra.io).
 
@@ -388,9 +388,9 @@ Every feature README ends with an adherence footer whose link target is `https:/
 
 ### AC: empty-state-text
 
-**Requirements:** feature#req:outstanding-questions, feature#req:ac-section
+**Requirements:** feature#req:open-questions, feature#req:ac-section
 
-Sections with no content use their prescribed placeholder text. Outstanding Questions says "None at this time." when empty. Acceptance Criteria says "Not defined yet." when undefined, and a corresponding Outstanding Question is raised.
+Sections with no content use their prescribed placeholder text. Open Questions says "None at this time." when empty. Acceptance Criteria says "Not defined yet." when undefined, and a corresponding Open Question is raised.
 
 ### AC: source-ideas-linkage
 
@@ -398,7 +398,7 @@ Sections with no content use their prescribed placeholder text. Outstanding Ques
 
 A Feature MAY declare zero or more source Ideas via a `**Source Ideas:**` header field. Every listed slug resolves to an existing Idea with `Status ∈ {Approved, Implementing, Specified}`; any other target (missing file, `Draft`, `Under Review`, or `Archived`) is rejected by lint. Adding or removing a slug triggers tooling to reconcile the referenced Idea's `**Promotes To:**` and `**Status:**` — Features never mutate Idea state directly.
 
-## Outstanding Questions
+## Open Questions
 
 - Should features have a machine-readable metadata format (YAML frontmatter) in addition to the markdown convention (`**Status:** X`), or is the markdown convention sufficient for both humans and parsers?
 - Should sub-feature status roll up to the parent? (e.g., if all sub-features are `Stable`, is the parent automatically `Stable`?)

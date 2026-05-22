@@ -17,14 +17,14 @@ Without a structured active index, Decisions accumulate silently — one numbere
 
 ## Behavior
 
-This feature inherits all shared rules from the [Index feature](../index/README.md): canonical location at `spec/decisions/README.md`, the minimum-required-sections rule (list section + Outstanding Questions), completeness, adherence-footer delegation form, and the three registry cross-references in the Interaction table. Those rules are NOT re-stated here per [Index#req:overrides-only](../index/README.md#req-overrides-only). What follows is the decisions-index's own overrides.
+This feature inherits all shared rules from the [Index feature](../index/README.md): canonical location at `spec/decisions/README.md`, the minimum-required-sections rule (list section + Open Questions), completeness, adherence-footer delegation form, and the three registry cross-references in the Interaction table. Those rules are NOT re-stated here per [Index#req:overrides-only](../index/README.md#req-overrides-only). What follows is the decisions-index's own overrides.
 
 ### Section structure
 
 The decisions index adds no per-domain sections beyond the shared minimum. It contains exactly:
 
 1. `## Decisions` — the list-holding section (satisfies [Index#req:required-sections-minimum](../index/README.md#req-required-sections-minimum)).
-2. `## Outstanding Questions` — the shared terminal section.
+2. `## Open Questions` — the shared terminal section.
 
 #### REQ: list-section-heading
 
@@ -110,7 +110,7 @@ The archived index at `spec/decisions/archived/README.md` lists every Superseded
 
 Every decisions index ends with a footer containing the bare URL `https://specscore.md/decisions-index-specification`. Lint matches on the URL, not the prose.
 
-## Outstanding Questions
+## Open Questions
 
 - Should the Index table gain a `Source Idea` column linking Decisions back to originating Ideas, or is the relationship niche enough that cross-referencing from within the Decision file is sufficient? Current position: no column; the link is one-to-optional-one and visible inside the Decision itself.
 - Should the Affected column render as links to the Feature READMEs rather than plain slugs, at the cost of a longer, wrapped cell? Current position: plain slugs; brevity wins until a consumer requests linked rendering.

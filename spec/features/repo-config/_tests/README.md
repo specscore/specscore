@@ -28,7 +28,7 @@ Scenarios that verify the requirements defined in [Repo Config](../README.md).
 | [studio-partial-block-fails](studio-partial-block-fails.md) | [REQ: studio-explicit-values](../README.md#req-studio-explicit-values) |
 | [studio-null-suppresses-toolbar](studio-null-suppresses-toolbar.md) | [REQ: studio-null-opts-out](../README.md#req-studio-null-opts-out) |
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 

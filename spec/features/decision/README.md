@@ -301,9 +301,9 @@ Decisions and Ideas are **optionally linked, not coupled**. An Idea MAY produce 
 
 Decisions constrain Features but do not own them. A Feature README MAY cite one or more Decisions by ID in prose. The formal back-link lives only on the Decision side via `## Affected Features`. A formal REQ↔Decision link (where an individual Requirement cites the Decision that produced it) is a plausible future feature; this revision does not introduce it.
 
-### Decisions and outstanding questions
+### Decisions and open questions
 
-Decisions do not carry an Outstanding Questions section. An Accepted Decision has no open questions — that is the point. Open questions at authoring time belong in the `## Context` section as named unknowns.
+Decisions do not carry an Open Questions section. An Accepted Decision has no open questions — that is the point. Open questions at authoring time belong in the `## Context` section as named unknowns.
 
 ## Interaction with Other Features
 
@@ -377,7 +377,7 @@ Every Decision ends with a footer containing the bare URL `https://specscore.md/
 
 None at this time.
 
-## Outstanding Questions
+## Open Questions
 
 - Should lint provide an `editorial` severity carve-out for whitespace- and punctuation-only diffs on Accepted Decisions, or is the strict immutability rule preferred forever? Current position: strict; revisit if dogfooding produces a stream of necessary editorial fixes.
 - Should `**Source Idea:**` support a list (multiple Ideas) in a future revision, and if so, how does that interact with Idea `Promotes To` bookkeeping? Current position: single slug only; Decisions synthesizing multiple Ideas mention the others in `## Context`.

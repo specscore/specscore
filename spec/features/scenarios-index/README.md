@@ -16,7 +16,7 @@ A feature with ten scenarios is hard to navigate without an index: readers openi
 
 ## Behavior
 
-This feature inherits all shared rules from the [Index feature](../index/README.md): canonical location (adapted — see below), minimum required sections (list section + Outstanding Questions), completeness, adherence-footer delegation form, and the three registry cross-references in the Interaction table. Those rules are NOT re-stated here per [Index#req:overrides-only](../index/README.md#req-overrides-only). What follows is the scenarios-index's own overrides.
+This feature inherits all shared rules from the [Index feature](../index/README.md): canonical location (adapted — see below), minimum required sections (list section + Open Questions), completeness, adherence-footer delegation form, and the three registry cross-references in the Interaction table. Those rules are NOT re-stated here per [Index#req:overrides-only](../index/README.md#req-overrides-only). What follows is the scenarios-index's own overrides.
 
 ### Location — per-feature, not repo-wide
 
@@ -30,7 +30,7 @@ A feature with no scenarios MAY omit the `_tests/` directory entirely. When `_te
 
 ### Section structure
 
-A scenarios index is minimal — typically a title line, one table, and Outstanding Questions. No additional sections are required.
+A scenarios index is minimal — typically a title line, one table, and Open Questions. No additional sections are required.
 
 #### REQ: list-section-heading
 
@@ -91,7 +91,7 @@ The Index table includes columns Scenario and Validates in the required order. E
 
 Every scenarios index ends with a footer containing the bare URL `https://specscore.md/scenarios-index-specification`. Lint matches on the URL, not the prose.
 
-## Outstanding Questions
+## Open Questions
 
 - Should the scenarios index enforce a completeness-style rule (every `.md` file in `_tests/` MUST have a row), or is listing opt-in? Current position: completeness-enforced (mirrors [Index#req:completeness](../index/README.md#req-completeness)). Scenario files exist to be tracked; an unlisted scenario is a coverage blind spot.
 - Should the Validates column support grouping (e.g., one row per REQ/AC with multiple scenarios) instead of one row per scenario? Current position: one row per scenario; grouping is a reviewer concern, not a spec format.

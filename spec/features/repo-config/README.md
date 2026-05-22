@@ -354,7 +354,7 @@ Modules resolve their specs, docs, and code paths relative to `module.path`. Mod
 
 Unknown fields at any level survive read/write without warnings. Orchestrators can extend the config without breaking SpecScore validation.
 
-## Outstanding Questions
+## Open Questions
 
 - The schema-pointer URL `https://specscore.md/repo-config` does not follow the registry convention `https://specscore.md/{type}-specification` used by other Document-Kind features. Should it be renamed to `https://specscore.md/repo-config-specification` for consistency, or is the shorter form preferred for human typing in YAML headers?
 - Should `code:` entries support glob patterns (e.g., `pkg/**/*.go`), or must they be literal file/directory paths? Defer until lint actually consumes them.
