@@ -11,6 +11,8 @@
 
 `specscore spec lint` (v0.1.0) truncates hyphenated AC slugs at the first hyphen when parsing entries in a Plan's `## Deferred AC Coverage` section. The same hyphenated slugs parse correctly in `**Verifies:**` lines. The defect prevents authors from using the documented Deferred-AC mechanism for the most common AC-slug shape — hyphenated lowercase — which is the conventional form throughout SpecScore.
 
+**How might we** make `specscore spec lint` parse hyphenated AC slugs in `## Deferred AC Coverage` entries the same way it parses them in `**Verifies:**` lines, so the documented deferral mechanism works for the conventional slug shape?
+
 Concretely: a Plan that contains
 
 ```
