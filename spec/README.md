@@ -24,6 +24,6 @@ spec/
 
 See [features/](features/README.md) for detailed specifications.
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
