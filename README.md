@@ -92,7 +92,6 @@ A SpecScore feature looks like this:
 | Tool | Role | Status |
 |---|---|---|
 | **SpecScore** | The open specification format — this repository | Standard |
-| [`ai-plugin-specscore`](https://github.com/specscore/ai-plugin-specscore) | Thin Claude Code plugin wrapping the SpecScore CLI; neutral building block for community workflows | Live (MIT, free) |
 | [SpecStudio Skills](https://github.com/specscore/specstudio-skills) *(repo: `specstudio-skills`)* | Opinionated SDD workflow Claude Code plugin — the entry gate for cold users | Live (MIT, free) |
 | [SpecScore Studio](https://specscore.studio) | Hosted web UI for SpecScore — Stage 0 minimal viewer (view documents + spec graph, navigate) live 2026-05-20 | Stage 0 viewer |
 | [Rehearse](https://github.com/specscore/rehearse) | Markdown-native test framework for SpecScore specs | Sibling, MIT |
@@ -108,7 +107,6 @@ Projects and tools built on SpecScore:
 
 - [**specscore-cli**](https://github.com/specscore/specscore-cli) — reference CLI: lint, query, and scaffold SpecScore specifications
 - [**specstudio-skills**](https://github.com/specscore/specstudio-skills) — Claude Code plugin: opinionated SDD authoring workflow for SpecScore
-- [**ai-plugin-specscore**](https://github.com/specscore/ai-plugin-specscore) — thin Claude Code plugin wrapping the SpecScore CLI
 - [**rehearse**](https://github.com/specscore/rehearse) — Markdown-native test framework that turns SpecScore specs into executable scenarios
 - [**spec-driven-todo-app**](https://github.com/specscore/spec-driven-todo-app) — demo todo app specified end-to-end across all four SpecScore layers
 - [**inGitDB**](https://github.com/ingitdb) — open-source Git-backed versioned database, specified with SpecScore
