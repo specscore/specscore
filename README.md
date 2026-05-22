@@ -111,7 +111,6 @@ Projects and tools built on SpecScore:
 - [**ai-plugin-specscore**](https://github.com/specscore/ai-plugin-specscore) — thin Claude Code plugin wrapping the SpecScore CLI
 - [**rehearse**](https://github.com/specscore/rehearse) — Markdown-native test framework that turns SpecScore specs into executable scenarios
 - [**spec-driven-todo-app**](https://github.com/specscore/spec-driven-todo-app) — demo todo app specified end-to-end across all four SpecScore layers
-- [**synchestra-io/synchestra**](https://github.com/synchestra-io/synchestra) — multi-agent orchestrator, specified using SpecScore
 - [**inGitDB**](https://github.com/ingitdb) — open-source Git-backed versioned database, specified with SpecScore
 - [**dal-go/dalgo**](https://github.com/dal-go/dalgo) — *(planned)* Go data access layer, SpecScore specification in progress
 
