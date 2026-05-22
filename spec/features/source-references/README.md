@@ -1,6 +1,6 @@
 # Feature: Source References
 
-> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/source-references?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/source-references?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/source-references?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/source-references?op=request-change) |
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/source-references?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/source-references?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/source-references?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/source-references?op=request-change) |
 
 **Status:** Stable
 

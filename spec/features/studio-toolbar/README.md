@@ -1,13 +1,13 @@
 # Feature: Studio Toolbar
 
-> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/studio-toolbar?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/studio-toolbar?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/studio-toolbar?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/studio-toolbar?op=request-change) |
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/studio-toolbar?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/studio-toolbar?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/studio-toolbar?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/studio-toolbar?op=request-change) |
 
 **Status:** Approved
 **Source Ideas:** studio-toolbar
 
 ## Summary
 
-Replaces the single "View in SpecStudio" link at the top of every feature README with a fixed four-item toolbar — Explore, Edit, Ask question, Request change — linking into the SpecScore.Studio web app at `specscore.studio/app/p/`. Defines the canonical byte form of the toolbar line, the URL grammar (`/app/p/{host}/{org}/{repo}/{artifact_path}?op={verb}`), the brand attribution rendering rule, the new `studio-toolbar` lint rule (replacing `view-link`), and the `--fix` autofix that rewrites legacy lines into the canonical form.
+Replaces the single "View in SpecStudio" link at the top of every feature README with a fixed four-item toolbar — Explore, Edit, Ask question, Request change — linking into the SpecScore.Studio web app at `specscore.studio/app/`. Defines the canonical byte form of the toolbar line, the URL grammar (`/app/{host}/{org}/{repo}/{artifact_path}?op={verb}`, per the canonical scheme in [Studio URL Scheme decision (D-0001)](https://specscore.studio/app/github.com/specscore/specscore/spec/decisions/0001-studio-url-scheme.md)), the brand attribution rendering rule, the new `studio-toolbar` lint rule (replacing `view-link`), and the `--fix` autofix that rewrites legacy lines into the canonical form.
 
 ## Problem
 
@@ -92,13 +92,13 @@ For `studio.name = "Acme.Internal.Studio"`, the rendered prefix is:
 Each toolbar URL MUST conform to the grammar:
 
 ```
-{studio.url-stripped}/app/p/{host}/{org}/{repo}/{artifact_path}?op={verb}
+{studio.url-stripped}/app/{host}/{org}/{repo}/{artifact_path}?op={verb}
 ```
 
-Where:
+The grammar follows the canonical Studio URL scheme in [D-0001](https://specscore.studio/app/github.com/specscore/specscore/spec/decisions/0001-studio-url-scheme.md) — first segment after `/app/` is the forge host directly (no `/p/` or `/project/` prefix). Where:
 
 - `{studio.url-stripped}` is the value of `studio.url` with its single trailing `/` removed (per `url-grammar-trailing-slash`).
-- `{host}`, `{org}`, `{repo}` are resolved from `specscore.yaml` `project.host` / `project.org` / `project.repo` (explicit values override git-remote inference per the `repo-config` Feature's `source-reference-overrides` REQ).
+- `{host}`, `{org}`, `{repo}` are resolved from `specscore.yaml` `project.host` / `project.org` / `project.repo` (explicit values override git-remote inference per the `repo-config` Feature's `source-reference-overrides` REQ). `{host}` MUST contain `.` per D-0001's first-segment dispatch rule — every forge host on the allow-list satisfies this.
 - `{artifact_path}` is the filesystem path from the repository root to the feature's directory (e.g., `spec/features/repo-config`), NOT including the `/README.md` suffix. Path separators (`/`) are preserved literally. Only characters that RFC 3986 requires to be percent-encoded (e.g., spaces) MUST be percent-encoded; common alphanumerics, `-`, `_`, `.`, and `/` MUST NOT be percent-encoded.
 - `{verb}` is one of the four values from the closed set: `explore`, `edit`, `ask`, `request-change`.
 
@@ -136,7 +136,7 @@ The lint rule MUST treat the presence of a `viewer:` block in `specscore.yaml` (
 
 #### REQ: studio-toolbar-autofix-artifact-line
 
-`specscore spec lint --fix` MUST detect any non-conforming toolbar line at file position 3 of a feature README and rewrite it to the canonical byte form, given the project's resolved `studio` config. Non-conforming forms that the autofix MUST handle include: the legacy single-link `> [View in {name}](...) — graph, discussions, approvals` line; any toolbar with a missing, extra, reordered, or relabeled item; any URL with a wrong host, wrong path prefix (`/project/` instead of `/app/p/`, query-id form, etc.); and a missing toolbar line entirely (when `studio:` is not `null`). The autofix MUST NOT touch any other line of the README.
+`specscore spec lint --fix` MUST detect any non-conforming toolbar line at file position 3 of a feature README and rewrite it to the canonical byte form, given the project's resolved `studio` config. Non-conforming forms that the autofix MUST handle include: the legacy single-link `> [View in {name}](...) — graph, discussions, approvals` line; any toolbar with a missing, extra, reordered, or relabeled item; any URL with a wrong host, wrong path prefix (pre-canonical forms such as `/project/`, `/app/p/`, `/app/project/`, or query-id form), and a missing toolbar line entirely (when `studio:` is not `null`). The autofix MUST NOT touch any other line of the README.
 
 #### REQ: studio-toolbar-autofix-blocked-by-viewer
 
@@ -166,7 +166,7 @@ The `--fix` autofix MUST remove any pre-existing toolbar line at file position 3
 **Then** file position 3 of `spec/features/repo-config/README.md` is exactly:
 
 ```
-> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=request-change) |
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/repo-config?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/repo-config?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/repo-config?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/repo-config?op=request-change) |
 ```
 
 ### AC: brand-attribution-bolds-last-segment
@@ -191,7 +191,7 @@ The `--fix` autofix MUST remove any pre-existing toolbar line at file position 3
 
 **Given** a project with `studio: { name: "X.Y", url: "https://x.example/" }` and a feature at `spec/features/foo/` in repo `baz` under org `bar` on host `github.com`
 **When** the `Edit` toolbar URL is rendered
-**Then** the URL is exactly `https://x.example/app/p/github.com/bar/baz/spec/features/foo?op=edit` — exactly one `/` between `https://x.example` and `app`, the path prefix is `/app/p/`, the artifact path is the feature directory without `/README.md`, and the verb is `?op=edit`.
+**Then** the URL is exactly `https://x.example/app/github.com/bar/baz/spec/features/foo?op=edit` — exactly one `/` between `https://x.example` and `app`, the path prefix is `/app/`, the host segment (`github.com`) follows `/app/` directly, the artifact path is the feature directory without `/README.md`, and the verb is `?op=edit`.
 
 ### AC: opt-out-suppresses-toolbar
 

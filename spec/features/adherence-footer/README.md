@@ -1,6 +1,6 @@
 # Feature: Adherence Footer
 
-> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/adherence-footer?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/adherence-footer?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/adherence-footer?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/adherence-footer?op=request-change) |
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/adherence-footer?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/adherence-footer?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/adherence-footer?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/adherence-footer?op=request-change) |
 
 **Status:** Draft
 **Source Ideas:** adherence-footer-and-doc-type-registry

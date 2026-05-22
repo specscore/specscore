@@ -1,6 +1,6 @@
 # Feature: Feature
 
-> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/feature?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/feature?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/feature?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/feature?op=request-change) |
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/feature?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/feature?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/feature?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/feature?op=request-change) |
 
 **Status:** Stable
 

@@ -1,6 +1,6 @@
 # Feature: Decisions Index
 
-> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/decisions-index?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/decisions-index?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/decisions-index?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/decisions-index?op=request-change) |
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decisions-index?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decisions-index?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decisions-index?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decisions-index?op=request-change) |
 
 **Status:** Draft
 **Source Ideas:** decision-and-decisions-index

@@ -1,6 +1,6 @@
 # Feature: Acceptance Criteria
 
-> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/acceptance-criteria?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/acceptance-criteria?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/acceptance-criteria?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/acceptance-criteria?op=request-change) |
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/acceptance-criteria?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/acceptance-criteria?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/acceptance-criteria?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/acceptance-criteria?op=request-change) |
 
 **Status:** Stable
 

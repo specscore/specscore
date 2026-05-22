@@ -1,6 +1,6 @@
 # Feature: Document Types Registry
 
-> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/document-types-registry?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/document-types-registry?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/document-types-registry?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/document-types-registry?op=request-change) |
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/document-types-registry?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/document-types-registry?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/document-types-registry?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/document-types-registry?op=request-change) |
 
 **Status:** Draft
 **Source Ideas:** adherence-footer-and-doc-type-registry, entity-and-property-definitions

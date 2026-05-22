@@ -1,6 +1,6 @@
 # Feature: Scenarios Index
 
-> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/scenarios-index?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/scenarios-index?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/scenarios-index?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/scenarios-index?op=request-change) |
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/scenarios-index?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/scenarios-index?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/scenarios-index?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/scenarios-index?op=request-change) |
 
 **Status:** Draft
 

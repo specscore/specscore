@@ -71,7 +71,7 @@ Rules:
 
 6. **`?op=` is reserved for Studio operations** (`explore`, `edit`, `ask`, `request-change`, future verbs). It is orthogonal to ref.
 
-7. **`#page=` is reserved for in-page view state on directory URLs** (`features`, `plans`, `architecture`, `tests`, future views). Hash routes are client-only and never participate in CDN cache keys or server logs — which is correct for view state (cf. GitHub's `#L42` line-highlight pattern). `#page=` MUST NOT appear on file URLs; `#tab=…` is reserved for future file-view state.
+7. **`#page=` is reserved for in-page view state on directory URLs** (`features`, `plans`, `architecture`, `tests`, future views). Hash routes are client-only and never participate in CDN cache keys or server logs — which is correct for view state (cf. GitHub's `#L42` line-highlight pattern). `#page=` MUST NOT appear on file URLs; `#tab=…` is reserved for future file-view state. **The `?op=` and `#page=` value sets are disjoint**: the verb set (`explore`, `edit`, `ask`, `request-change`, …) and the view set (`features`, `plans`, `architecture`, `tests`, …) MUST NOT share any value. `?op=features` and `#page=edit` are both invalid by construction. Lint MUST enforce this — `?op=` accepts only the verb set, `#page=` accepts only the view set.
 
 8. **`/app/` is retained.** It is required for PWA service-worker scoping and signals "dynamic application" rather than "static rendering."
 
