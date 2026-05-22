@@ -102,20 +102,20 @@ See [docs/ecosystem.md](docs/ecosystem.md) for the full architecture.
 
 ---
 
-## Open-source SpecScore projects
+## Used by
 
-Repositories that use SpecScore as their specification format:
+Projects and tools built on SpecScore:
 
-| Project | Description |
-|---|---|
-| [`specscore/specscore`](https://github.com/specscore/specscore) | This repository — the SpecScore format specified using SpecScore (see [`spec/`](spec/README.md)) |
-| [`specscore/specstudio-skills`](https://github.com/specscore/specstudio-skills) | SpecStudio Skills — the Claude Code SDD plugin |
-| [`specscore/ai-plugin-specscore`](https://github.com/specscore/ai-plugin-specscore) | The thin Claude Code CLI plugin |
-| [`synchestra-io/synchestra`](https://github.com/synchestra-io/synchestra) | The Synchestra orchestrator, specified using SpecScore |
-| [`specscore/spec-driven-todo-app`](https://github.com/specscore/spec-driven-todo-app) | A todo CLI specified end-to-end across all four SpecScore layers |
-| [`dal-go/dalgo`](https://github.com/dal-go/dalgo) | _(planned)_ Go data access layer — SpecScore specification in progress |
+- [**specscore-cli**](https://github.com/specscore/specscore-cli) — reference CLI: lint, query, and scaffold SpecScore specifications
+- [**specstudio-skills**](https://github.com/specscore/specstudio-skills) — Claude Code plugin: opinionated SDD authoring workflow for SpecScore
+- [**ai-plugin-specscore**](https://github.com/specscore/ai-plugin-specscore) — thin Claude Code plugin wrapping the SpecScore CLI
+- [**rehearse**](https://github.com/specscore/rehearse) — Markdown-native test framework that turns SpecScore specs into executable scenarios
+- [**spec-driven-todo-app**](https://github.com/specscore/spec-driven-todo-app) — demo todo app specified end-to-end across all four SpecScore layers
+- [**synchestra-io/synchestra**](https://github.com/synchestra-io/synchestra) — multi-agent orchestrator, specified using SpecScore
+- [**inGitDB**](https://github.com/ingitdb) — open-source Git-backed versioned database, specified with SpecScore
+- [**dal-go/dalgo**](https://github.com/dal-go/dalgo) — *(planned)* Go data access layer, SpecScore specification in progress
 
-Adding your project? Open a PR.
+Using SpecScore in your project? Open a PR.
 
 ---
 
@@ -152,12 +152,6 @@ SpecScore specifications are Markdown files. SpecScore lives at [`specscore.md`]
 ## Contributing
 
 Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
-
----
-
-## Specified with [SpecScore.md](https://specscore.md)
-
-This project uses [SpecScore](https://specscore.md) — an open, machine-readable specification format designed to be read by AI agents as well as humans. The requirements, acceptance criteria, and lifecycle status of every feature live in [`spec/`](spec/README.md), validated by `specscore spec lint` ([install the CLI](https://specscore.md/install)). Status fields are maintained with `specscore change-status`, never edited by hand.
 
 ---
 
