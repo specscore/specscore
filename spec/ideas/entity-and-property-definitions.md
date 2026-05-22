@@ -71,7 +71,7 @@ One cycle. Two new top-level Document-Kind features in spec/features/ (entity an
   - `document-types-registry` — `Consumer Path` column relaxed from a single glob to a list of globs; two new rows added (`entity`, `property`); `Kind` and `URL` cross-checks extended to cover the new Kinds.
   - `feature` — `specscore feature refs` learns to surface entity references; no schema change to the Feature README itself in MVP (feature-level `consumes` / `produces` declarations are a follow-on Idea, not part of this one).
   - `adherence-footer` — two new canonical URLs registered (`entity-specification`, `property-specification`); no mechanism change.
-  - `pkg/lint/` in the [`specscore-cli`](https://github.com/synchestra-io/specscore-cli) — new lint passes for entity / property file validation, inheritance integrity (additive-only), managed `## Properties` table rendering, and `## Referenced by` maintenance.
+  - `pkg/lint/` in the [`specscore-cli`](https://github.com/specscore/specscore-cli) — new lint passes for entity / property file validation, inheritance integrity (additive-only), managed `## Properties` table rendering, and `## Referenced by` maintenance.
 - **Dependencies:** Builds on the [`adherence-footer-and-doc-type-registry`](adherence-footer-and-doc-type-registry.md) Idea (Implementing). MVP can begin once the Document Kind taxonomy and adherence-footer mechanism are stable.
 
 ## Open Questions

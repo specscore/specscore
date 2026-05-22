@@ -7,7 +7,7 @@ curl -fsSL https://specscore.md/install/get-cli | sh
 ```
 
 The script detects your OS and architecture, downloads the matching archive
-from the latest [GitHub release](https://github.com/synchestra-io/specscore-cli/releases),
+from the latest [GitHub release](https://github.com/specscore/specscore-cli/releases),
 verifies its SHA‑256 checksum, and installs the `specscore` binary to
 `/usr/local/bin` (or `~/.local/bin` if `/usr/local/bin` isn't writable).
 
@@ -40,16 +40,16 @@ sh get-cli.sh
 ## Homebrew (macOS & Linux)
 
 ```bash
-brew install synchestra-io/tap/specscore
+brew install specscore/tap/specscore
 ```
 
-This taps `synchestra-io/homebrew-tap` on first install and tracks new releases
+This taps `specscore/homebrew-tap` on first install and tracks new releases
 from there.
 
 ## Quick install (Windows)
 
 Pick whichever channel fits your environment — all three install the same
-binary from the same [GitHub release](https://github.com/synchestra-io/specscore-cli/releases).
+binary from the same [GitHub release](https://github.com/specscore/specscore-cli/releases).
 
 ### PowerShell (mirrors the `curl | sh` flow)
 
@@ -79,14 +79,14 @@ winget install Synchestra.SpecScore
 ### Scoop
 
 ```powershell
-scoop bucket add synchestra https://github.com/synchestra-io/scoop-bucket
+scoop bucket add specscore https://github.com/specscore/scoop-bucket
 scoop install specscore
 ```
 
 ## Manual install
 
 1. Download the archive for your platform from the
-   [GitHub Releases page](https://github.com/synchestra-io/specscore-cli/releases).
+   [GitHub Releases page](https://github.com/specscore/specscore-cli/releases).
    Archives follow the pattern
    `specscore_<version>_<os>_<arch>.<ext>`:
    - `specscore_<version>_darwin_amd64.tar.gz`
@@ -104,7 +104,7 @@ scoop install specscore
 Requires [Go](https://go.dev/) 1.26 or newer. This installs the latest development build from `main` — may include changes not yet in a tagged release.
 
 ```bash
-go install github.com/synchestra-io/specscore-cli/cmd/specscore@main
+go install github.com/specscore/specscore-cli/cmd/specscore@main
 ```
 
 If you want a published release instead, use the install script at the top of this page. To pin a specific version when building from source, swap `@main` for a tag like `@v0.4.2`, or use `@latest` to get the most recent tagged release.

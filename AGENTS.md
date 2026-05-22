@@ -2,7 +2,7 @@
 
 ## Repository scope
 
-This repository holds the SpecScore **specification format** and the public website. The reference `specscore` CLI was extracted to [`synchestra-io/specscore-cli`](https://github.com/synchestra-io/specscore-cli); changes to CLI code, linter rules, or Go packages belong there, not here.
+This repository holds the SpecScore **specification format** and the public website. The reference `specscore` CLI was extracted to [`specscore/specscore-cli`](https://github.com/specscore/specscore-cli); changes to CLI code, linter rules, or Go packages belong there, not here.
 
 ## High-level layout
 

@@ -6,7 +6,7 @@
 
 ## Summary
 
-A scenario is a concrete example of system behavior written in Given/When/Then format. Scenarios live in a feature's `_tests/` directory as standalone markdown files, each describing a specific interaction flow with exact inputs and expected outputs. They are the executable proof layer — validating that requirements and acceptance criteria hold under real conditions. Scenarios are linked to the REQs or ACs they validate and are executable by the [Rehearse test runner](https://github.com/synchestra-io/rehearse).
+A scenario is a concrete example of system behavior written in Given/When/Then format. Scenarios live in a feature's `_tests/` directory as standalone markdown files, each describing a specific interaction flow with exact inputs and expected outputs. They are the executable proof layer — validating that requirements and acceptance criteria hold under real conditions. Scenarios are linked to the REQs or ACs they validate and are executable by the [Rehearse test runner](https://github.com/specscore/rehearse).
 
 ## Problem
 

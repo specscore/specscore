@@ -112,7 +112,7 @@ Repositories that use SpecScore as their specification format:
 | [`specscore/specstudio-skills`](https://github.com/specscore/specstudio-skills) | SpecStudio Skills — the Claude Code SDD plugin |
 | [`specscore/ai-plugin-specscore`](https://github.com/specscore/ai-plugin-specscore) | The thin Claude Code CLI plugin |
 | [`synchestra-io/synchestra`](https://github.com/synchestra-io/synchestra) | The Synchestra orchestrator, specified using SpecScore |
-| [`synchestra-io/spec-driven-todo-app`](https://github.com/synchestra-io/spec-driven-todo-app) | A todo CLI specified end-to-end across all four SpecScore layers |
+| [`specscore/spec-driven-todo-app`](https://github.com/specscore/spec-driven-todo-app) | A todo CLI specified end-to-end across all four SpecScore layers |
 | [`dal-go/dalgo`](https://github.com/dal-go/dalgo) | _(planned)_ Go data access layer — SpecScore specification in progress |
 
 Adding your project? Open a PR.

@@ -276,7 +276,7 @@ Every entity document MUST end with an adherence footer per the [Adherence Foote
 
 ### Tooling Support
 
-SpecScore entities are queryable programmatically by the `specscore` CLI and any spec-aware tool. The Feature spec defines the surface; implementation lives in [`synchestra-io/specscore-cli`](https://github.com/synchestra-io/specscore-cli).
+SpecScore entities are queryable programmatically by the `specscore` CLI and any spec-aware tool. The Feature spec defines the surface; implementation lives in [`specscore/specscore-cli`](https://github.com/specscore/specscore-cli).
 
 The MVP surface is:
 

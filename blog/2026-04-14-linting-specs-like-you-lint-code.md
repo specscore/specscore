@@ -62,7 +62,7 @@ Specs that don't pass the linter don't get merged. The same gate you have for te
 Builds the latest dev version from `main` (may be ahead of the most recent release):
 
 ```bash
-go install github.com/synchestra-io/specscore-cli/cmd/specscore@main
+go install github.com/specscore/specscore-cli/cmd/specscore@main
 specscore lint ./spec
 ```
 

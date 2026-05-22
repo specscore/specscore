@@ -14,7 +14,7 @@ site, find the source file and edit that. The mapping is:
 | Any docs page (`*.html` + `*.md` pair) | The matching markdown under [`../docs/`](../docs/), [`../blog/`](../blog/), or [`../spec/`](../spec/), referenced from [`../tools/site-generator/site-config.json`](../tools/site-generator/site-config.json) |
 | Site stylesheet (`assets/style.css`) | [`../tools/site-generator/assets/style.css`](../tools/site-generator/assets/) |
 | HTML chrome (header / footer / sidebar) | [`../tools/site-generator/template.html`](../tools/site-generator/template.html) and the sibling `landing.html`, `blog-*.html` templates |
-| CLI installer endpoints (`install/get-cli{,.ps1}`) | Upstream at [`synchestra-io/specscore-cli`](https://github.com/synchestra-io/specscore-cli) — fetched at build time, not stored here |
+| CLI installer endpoints (`install/get-cli{,.ps1}`) | Upstream at [`specscore/specscore-cli`](https://github.com/specscore/specscore-cli) — fetched at build time, not stored here |
 | This README | [`../tools/site-generator/public-readme.md`](../tools/site-generator/public-readme.md) |
 
 ## Rebuild

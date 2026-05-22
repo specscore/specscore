@@ -38,7 +38,7 @@ Authors specifications through guided AI workflows in your editor.
 - Gates implementation on lint-clean SpecScore artifacts that the user has explicitly approved
 - Turns vague ideas into testable specifications without leaving your IDE
 
-[specstudio-skills](https://github.com/synchestra-io/specstudio-skills)
+[specstudio-skills](https://github.com/specscore/specstudio-skills)
 
 ## How They Fit Together
 

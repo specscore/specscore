@@ -8,7 +8,7 @@
 
 An idea is a **pre-spec, lintable one-pager** that captures a problem, a recommended direction, an MVP scope, and the assumptions that must hold for the direction to be worth pursuing. Ideas are the optional front-door to SpecScore: they refine a vague concept into something concrete enough to promote into one or more [Features](../feature/README.md).
 
-An idea artifact is a single file at `spec/ideas/<slug>.md` with typed YAML front-matter and a fixed section schema. Ideas can be authored manually, by AI agents, or — recommended — via the [`spec-studio:ideate`](https://github.com/synchestra-io/spec-studio) skill. The spec defines the artifact; it does not mandate the authoring workflow. The typed shape of a single Idea is captured in the co-located [idea entity](idea.entity.md).
+An idea artifact is a single file at `spec/ideas/<slug>.md` with typed YAML front-matter and a fixed section schema. Ideas can be authored manually, by AI agents, or — recommended — via the [`specstudio:ideate`](https://github.com/specscore/specstudio-skills) skill. The spec defines the artifact; it does not mandate the authoring workflow. The typed shape of a single Idea is captured in the co-located [idea entity](idea.entity.md).
 
 ## Problem
 
@@ -299,7 +299,7 @@ An author (human or skill) MUST NOT directly write `**Status:** Implementing` or
 
 ### Recommended authoring workflow
 
-The [`spec-studio:ideate`](https://github.com/synchestra-io/spec-studio/tree/main/skills/ideate) skill is the **recommended** way to produce an Idea artifact. It runs a three-phase divergent/convergent process (Understand & Expand → Evaluate & Converge → Crystallize), enforces the schema above, and emits `idea.drafted` / `idea.approved` events for Synchestra consumers.
+The [`specstudio:ideate`](https://github.com/specscore/specstudio-skills/tree/main/skills/ideate) skill is the **recommended** way to produce an Idea artifact. It runs a three-phase divergent/convergent process (Understand & Expand → Evaluate & Converge → Crystallize), enforces the schema above, and emits `idea.drafted` / `idea.approved` events for Synchestra consumers.
 
 Using the skill is **not mandatory**. An Idea is valid if and only if it passes `specscore lint` — how it was authored is out of scope for this spec. Manual authoring, other skills, bespoke AI agents, and imports from external systems are all acceptable.
 
@@ -380,7 +380,7 @@ When a Feature is created or updated with a `**Source Ideas:**` entry, tooling:
 1. Resolves the link.
 2. Appends the Feature slug to each referenced Idea's `**Promotes To:**` list.
 3. Transitions any referenced Idea from `Status: Approved` to `Status: Implementing` (or to `Status: Specified` if the new Feature is itself created at `Status: Stable`).
-4. Optionally emits an `idea.specified` event (see [Synchestra events](https://github.com/synchestra-io/spec-studio/blob/main/skills/shared/synchestra-events.md)).
+4. Optionally emits an `idea.specified` event (see [Synchestra events](https://github.com/specscore/specstudio-skills/blob/main/skills/shared/synchestra-events.md)).
 
 When every Feature referencing an Idea is deleted or loses its reference, the Idea's `**Promotes To:**` is recomputed accordingly; if it becomes empty, tooling reverts `Status: Specified → Approved`.
 

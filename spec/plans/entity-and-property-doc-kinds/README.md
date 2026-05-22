@@ -16,8 +16,8 @@
 
 The [entity-and-property-definitions](../../ideas/entity-and-property-definitions.md) Idea introduces two new Document-Kind Features (`entity`, `property`) and amends `document-types-registry` to allow comma-separated `Consumer Path` globs. The Feature READMEs are written and `Approved`. This plan delivers the rest of the MVP across two repositories:
 
-- **`synchestra-io/specscore`** (this repo) — the worked-example smoke-test (one real `*.entity.md` plus one shared `*.property.md`), the SpecScore documentation surface that explains the new Doc-Kinds, and any blog/site copy. These artifacts dogfood the format and give the CLI implementer concrete fixtures.
-- **`synchestra-io/specscore-cli`** — the lint passes, the new `specscore entity`/`specscore property` subcommands, the managed-section renderers, and the `feature refs` extension. The CLI changes are gated by this plan but live in that repo; per [AGENTS.md](../../../AGENTS.md), no CLI code lives here.
+- **`specscore/specscore`** (this repo) — the worked-example smoke-test (one real `*.entity.md` plus one shared `*.property.md`), the SpecScore documentation surface that explains the new Doc-Kinds, and any blog/site copy. These artifacts dogfood the format and give the CLI implementer concrete fixtures.
+- **`specscore/specscore-cli`** — the lint passes, the new `specscore entity`/`specscore property` subcommands, the managed-section renderers, and the `feature refs` extension. The CLI changes are gated by this plan but live in that repo; per [AGENTS.md](../../../AGENTS.md), no CLI code lives here.
 
 The smoke-test fixtures intentionally land before the CLI catches up: they will not auto-render their managed `## Properties` / `## Referenced by` sections until the CLI ships, but their hand-authored forms must equal what `specscore lint --fix` will eventually emit. The fixtures are the contract.
 
@@ -28,7 +28,7 @@ The smoke-test fixtures intentionally land before the CLI catches up: they will 
 - The smoke-test entity is referenced by at least one existing SpecScore Feature's narrative prose (not a structured `Consumes:`/`Produces:` field — that mechanism is a separate Idea) so a reader can see the entity in context.
 - A new `docs/for/spec-authors/entities-and-properties.md` (or similar role-guide entry) explains how to write entity and property files end-to-end. Site build (`pnpm build` in `tools/site-generator/`) succeeds and the new page renders.
 - A scenario file under `spec/features/entity/_tests/` and one under `spec/features/property/_tests/` exists for each non-trivial AC, scaffolded with `status: pending` per the [Rehearse heuristic](../../features/scenario/README.md), so the CLI implementer can drive their work from concrete examples.
-- The `specscore-cli` Issue (or set of Issues) tracking the CLI implementation is filed against `synchestra-io/specscore-cli` with links back to the three Features and to this plan.
+- The `specscore-cli` Issue (or set of Issues) tracking the CLI implementation is filed against `specscore/specscore-cli` with links back to the three Features and to this plan.
 
 ## Tasks
 
@@ -99,7 +99,7 @@ Write `docs/for/spec-authors/entities-and-properties.md` (or the closest path ma
 
 ### 5. File the `specscore-cli` implementation Issues
 
-Open an Issue (or a small set of Issues, depending on the CLI repo's convention) against `synchestra-io/specscore-cli` capturing the CLI work scoped by this plan. Each Issue links back to the relevant Feature and to this plan, and carries enough detail for the CLI maintainer to start without re-reading three Feature READMEs from scratch.
+Open an Issue (or a small set of Issues, depending on the CLI repo's convention) against `specscore/specscore-cli` capturing the CLI work scoped by this plan. Each Issue links back to the relevant Feature and to this plan, and carries enough detail for the CLI maintainer to start without re-reading three Feature READMEs from scratch.
 
 The CLI surface to scope (per the [entity Feature](../../features/entity/README.md#tooling-support)):
 
@@ -111,10 +111,10 @@ The CLI surface to scope (per the [entity Feature](../../features/entity/README.
 **Depends on:** Tasks 1, 2 (so the CLI maintainer has fixtures to test against).
 
 **Produces:**
-- One or more open Issues on `synchestra-io/specscore-cli`, linked from this plan's Snapshots/Outstanding Questions section.
+- One or more open Issues on `specscore/specscore-cli`, linked from this plan's Snapshots/Outstanding Questions section.
 
 **Acceptance criteria:**
-- At least one Issue is filed against `synchestra-io/specscore-cli` and linked from this plan.
+- At least one Issue is filed against `specscore/specscore-cli` and linked from this plan.
 - Each Issue references the three Features and this plan by URL.
 
 ### 6. Snapshot and submit for approval
@@ -164,7 +164,7 @@ Tasks 3, 4, and 5 are parallelisable once Task 2 lands.
 | Date | Git Hash | Action | Comment |
 |---|---|---|---|
 | 2026-05-18 | `9e65e75` | drafted | Initial plan write following Feature approval |
-| 2026-05-18 | `9e65e75` | checkpoint | Tasks 1–4 implemented in same session as draft. Property fixture (`spec/features/idea/email.property.md`), entity fixture (`spec/features/idea/user.entity.md`), Rehearse scenario stubs for all 12 ACs (6 each in `spec/features/{entity,property}/_tests/`), author guide (`docs/entities-and-properties.md`) with site-config entry and successful `pnpm build`. Task 5 (file CLI Issues on `synchestra-io/specscore-cli`) deferred to user direction. `specscore spec lint`: 0 violations. |
+| 2026-05-18 | `9e65e75` | checkpoint | Tasks 1–4 implemented in same session as draft. Property fixture (`spec/features/idea/email.property.md`), entity fixture (`spec/features/idea/user.entity.md`), Rehearse scenario stubs for all 12 ACs (6 each in `spec/features/{entity,property}/_tests/`), author guide (`docs/entities-and-properties.md`) with site-config entry and successful `pnpm build`. Task 5 (file CLI Issues on `specscore/specscore-cli`) deferred to user direction. `specscore spec lint`: 0 violations. |
 | 2026-05-18 | `9e65e75` | approved | Plan approved by alexander.trakhimenok in same session as draft + checkpoint. CLI implementation work (Task 5) still deferred and tracked as outstanding. |
 
 ---

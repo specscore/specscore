@@ -2,7 +2,7 @@
 
 SpecScore is an open-source specification framework. Contributions are welcome — whether that's improving the spec format, fixing bugs, improving documentation, or writing guides.
 
-This repository holds the **specification format** and the public website. The `specscore` CLI (and its linter rules) lives at [`synchestra-io/specscore-cli`](https://github.com/synchestra-io/specscore-cli) — see [Linter Rules](#linter-rules) below.
+This repository holds the **specification format** and the public website. The `specscore` CLI (and its linter rules) lives at [`specscore/specscore-cli`](https://github.com/specscore/specscore-cli) — see [Linter Rules](#linter-rules) below.
 
 ## Getting Started
 
@@ -19,10 +19,10 @@ If you also intend to work on the website, install [pnpm](https://pnpm.io) and r
 The spec format lives in `spec/`. Changes to the format should include:
 - Updated `README.md` for the affected feature
 - Updated acceptance criteria
-- A matching update or proposal for the linter rules in [`specscore-cli`](https://github.com/synchestra-io/specscore-cli) when the change introduces a new structural rule
+- A matching update or proposal for the linter rules in [`specscore-cli`](https://github.com/specscore/specscore-cli) when the change introduces a new structural rule
 
 ### Linter Rules
-Linter rules live in [`synchestra-io/specscore-cli`](https://github.com/synchestra-io/specscore-cli) under `pkg/lint/`. Open changes to rules — including new rules and tests in `pkg/lint/*_test.go` — against that repository, not this one.
+Linter rules live in [`specscore/specscore-cli`](https://github.com/specscore/specscore-cli) under `pkg/lint/`. Open changes to rules — including new rules and tests in `pkg/lint/*_test.go` — against that repository, not this one.
 
 ### Documentation
 Guides live in `docs/`. Role-based guides are in `docs/for/`. Blog posts are in `blog/`.
@@ -40,4 +40,4 @@ Guides live in `docs/`. Role-based guides are in `docs/for/`. Blog posts are in 
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under [CC BY 4.0](LICENSE) (the same license that covers this repository's specification text and documentation). Linter-rule contributions to [`synchestra-io/specscore-cli`](https://github.com/synchestra-io/specscore-cli) are licensed separately under Apache-2.0.
+By contributing, you agree that your contributions will be licensed under [CC BY 4.0](LICENSE) (the same license that covers this repository's specification text and documentation). Linter-rule contributions to [`specscore/specscore-cli`](https://github.com/specscore/specscore-cli) are licensed separately under Apache-2.0.

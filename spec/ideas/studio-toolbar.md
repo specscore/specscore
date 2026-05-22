@@ -22,7 +22,7 @@ Rename the `viewer:` yaml block to `studio:` (preserving the `name` and `url` fi
 The rendered line on a feature README becomes:
 
 ```markdown
-> [SpecScore.**Studio**](https://specscore.studio/): | [Explore](https://specscore.studio/app/p/github.com/synchestra-io/specscore/spec/features/repo-config?op=explore) | [Edit](https://specscore.studio/app/p/github.com/synchestra-io/specscore/spec/features/repo-config?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/synchestra-io/specscore/spec/features/repo-config?op=ask) | [Request change](https://specscore.studio/app/p/github.com/synchestra-io/specscore/spec/features/repo-config?op=request-change) |
+> [SpecScore.**Studio**](https://specscore.studio/): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=request-change) |
 ```
 
 The brand attribution prefix is itself a link to `{studio.url}` (clickable brand → studio home). The renderer bolds the segment of `studio.name` that follows the last `.` — for the default brand `"SpecScore.Studio"`, this yields `SpecScore.**Studio**` inside the hyperlink, visually anchoring the product portion within the family/product hierarchy. The whole brand stays clickable; only the styling is split. (If `studio.name` contains no `.`, the entire name renders plain inside the link with no bold emphasis.)

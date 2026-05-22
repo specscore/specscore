@@ -36,4 +36,4 @@ Your agent tooling can honor whichever mechanism fits its architecture.
 
 ## Feedback
 
-SpecScore is open source. If a convention on this site breaks for your agent, open an issue at [github.com/synchestra-io/specscore](https://github.com/synchestra-io/specscore).
+SpecScore is open source. If a convention on this site breaks for your agent, open an issue at [github.com/specscore/specscore](https://github.com/specscore/specscore).

@@ -161,12 +161,12 @@ The `--fix` autofix MUST remove any pre-existing toolbar line at file position 3
 
 **Requirements:** studio-toolbar#req:toolbar-position, studio-toolbar#req:toolbar-line-shape, studio-toolbar#req:toolbar-verb-order, studio-toolbar#req:brand-attribution-rendering, studio-toolbar#req:url-grammar-path, studio-toolbar#req:url-grammar-trailing-slash, studio-toolbar#req:url-grammar-naked-default
 
-**Given** a SpecScore project at git remote `https://github.com/synchestra-io/specscore` with no `studio:` block in `specscore.yaml` (so defaults apply: `name = "SpecScore.Studio"`, `url = "https://specscore.studio/"`), and a feature README at `spec/features/repo-config/README.md`
+**Given** a SpecScore project at git remote `https://github.com/specscore/specscore` with no `studio:` block in `specscore.yaml` (so defaults apply: `name = "SpecScore.Studio"`, `url = "https://specscore.studio/"`), and a feature README at `spec/features/repo-config/README.md`
 **When** the feature README's toolbar line is rendered (by `specscore` codegen or by `--fix`)
 **Then** file position 3 of `spec/features/repo-config/README.md` is exactly:
 
 ```
-> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/synchestra-io/specscore/spec/features/repo-config?op=explore) | [Edit](https://specscore.studio/app/p/github.com/synchestra-io/specscore/spec/features/repo-config?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/synchestra-io/specscore/spec/features/repo-config?op=ask) | [Request change](https://specscore.studio/app/p/github.com/synchestra-io/specscore/spec/features/repo-config?op=request-change) |
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/specscore/spec/features/repo-config?op=request-change) |
 ```
 
 ### AC: brand-attribution-bolds-last-segment

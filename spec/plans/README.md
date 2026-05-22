@@ -16,7 +16,7 @@ directory under `spec/plans/` and is governed by the
 Delivers the MVP for the `entity` and `property` Document Kinds: hand-authored
 smoke-test fixtures in this repo, Rehearse scenario stubs, a spec-author
 documentation page, and CLI implementation Issues filed against
-[`synchestra-io/specscore-cli`](https://github.com/synchestra-io/specscore-cli).
+[`specscore/specscore-cli`](https://github.com/specscore/specscore-cli).
 Implements the [entity-and-property-definitions Idea](../ideas/entity-and-property-definitions.md).
 
 ## Recently Closed

@@ -2,7 +2,7 @@
 
 How to add typed business-data definitions to a SpecScore repository.
 
-> **Status:** authoritative specs are at [`entity`](../spec/features/entity/README.md) and [`property`](../spec/features/property/README.md). This page is a friendlier walkthrough for authors. CLI support (`specscore entity …`, `specscore property …`, the lint passes that render managed sections) lives in [`synchestra-io/specscore-cli`](https://github.com/synchestra-io/specscore-cli) and is on its way; the format is ready to use now, with hand-authored managed sections, and will become fully automated as the CLI catches up.
+> **Status:** authoritative specs are at [`entity`](../spec/features/entity/README.md) and [`property`](../spec/features/property/README.md). This page is a friendlier walkthrough for authors. CLI support (`specscore entity …`, `specscore property …`, the lint passes that render managed sections) lives in [`specscore/specscore-cli`](https://github.com/specscore/specscore-cli) and is on its way; the format is ready to use now, with hand-authored managed sections, and will become fully automated as the CLI catches up.
 
 ## Two Doc-Kinds, One Pair
 
