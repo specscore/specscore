@@ -2,13 +2,15 @@
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/idea?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/idea?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/idea?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/idea?op=request-change) |
 
-**Status:** Conceptual
+**Status:** Approved
 
 ## Summary
 
 An idea is a **pre-spec, lintable one-pager** that captures a problem, a recommended direction, an MVP scope, and the assumptions that must hold for the direction to be worth pursuing. Ideas are the optional front-door to SpecScore: they refine a vague concept into something concrete enough to promote into one or more [Features](../feature/README.md).
 
-An idea artifact is a single file at `spec/ideas/<slug>.md` with typed YAML front-matter and a fixed section schema. Ideas can be authored manually, by AI agents, or — recommended — via the [`specstudio:ideate`](https://github.com/specscore/specstudio-skills) skill. The spec defines the artifact; it does not mandate the authoring workflow. The typed shape of a single Idea is captured in the co-located [idea entity](idea.entity.md).
+Ideas come in two types: **feature-request ideas** (the default — greenfield new capabilities) and **change-request ideas** (proposals that target an existing Feature for mutation). Change-request ideas are also called **proposals** and live co-located with their target Feature at `{feature}/proposals/<slug>.md`. Both types share the same schema and lifecycle.
+
+An idea artifact is a single file at `spec/ideas/<slug>.md` (feature-request) or `spec/features/<feature>/proposals/<slug>.md` (change-request) with typed YAML front-matter and a fixed section schema. Ideas can be authored manually, by AI agents, or — recommended — via the [`specstudio:ideate`](https://github.com/specscore/specstudio-skills) skill. The spec defines the artifact; it does not mandate the authoring workflow. The typed shape of a single Idea is captured in the co-located [idea entity](idea.entity.md).
 
 ## Problem
 
@@ -18,7 +20,9 @@ Projects accumulate raw concepts — half-formed features, user complaints, "wha
 - **No traceable lineage.** When a shipped Feature turns out to rest on a bad assumption, there is no earlier artifact to point at. The assumption is implicit, and the retrospective has nothing to audit.
 - **No machine-addressable pre-spec layer.** Tools that want to reason about the product pipeline (Synchestra, Rehearse, dashboards) can see Features and Plans but have no typed representation of the upstream thinking.
 
-The Idea feature fills that gap: a typed, lintable artifact for the "is this worth building?" conversation, with a promotion path into Features.
+Additionally, there is no formal mechanism for proposing changes to existing Features. Change requests are described informally in issue trackers and chat but have no structured artifact, no lifecycle, and no discoverable index on the Feature they target.
+
+The Idea feature fills both gaps: a typed, lintable artifact for the "is this worth building?" conversation (feature-request ideas) and the "should we change this?" conversation (change-request ideas / proposals), with a unified promotion path.
 
 ## Design Philosophy
 
@@ -32,6 +36,7 @@ graph LR
     E["Execution<br/>(who/when)"]
 
     I -->|promotes to| F
+    I -->|proposes change to| F
     F -->|triggers| P
     P -->|generates| E
 ```
@@ -41,31 +46,37 @@ Key tenets inherited from the SDD skill family:
 - **Unsaved ideation is waste.** If a direction is worth discussing, it is worth a lint-clean artifact.
 - **Say no to 1,000 things.** The `Not Doing` section is load-bearing — an Idea without explicit exclusions is not an Idea.
 - **Types beat vibes.** An Idea that cannot pass `specscore lint` is not ready to be promoted.
-- **Stable IDs, mutable content.** The slug is a contract; the body is revised in place until the Idea reaches Specified or is Archived.
+- **Stable IDs, mutable content.** The slug is a contract; the body is revised in place until the Idea reaches Implemented or is Archived.
+- **One entity, two roles.** A proposal (also called a change request) is an Idea with a target, not a separate artifact type. One schema, one lifecycle, one CLI, one index.
 
-Ideas are **living until specified**. Once `status: Specified` (i.e., all referencing Features are Stable), the artifact is effectively frozen — further changes belong in the downstream Features, not in the Idea. While an Idea is `Implementing`, it MAY still be revised in place, since the work it describes is still in motion.
+Ideas are **living until implemented**. Once `Status: Implemented`, the artifact is effectively frozen — further changes belong in the downstream Features, not in the Idea. While an Idea is `Implementing`, it MAY still be revised in place, since the work it describes is still in motion.
 
 ## Behavior
 
 ### Idea location
 
-Ideas live as single files under `spec/ideas/` in the spec repository. Archived Ideas are moved to a reserved `archived/` subdirectory:
+Ideas live as single files. Feature-request ideas reside under `spec/ideas/`; change-request ideas reside under their target Feature's `proposals/` directory:
 
 ```text
 spec/ideas/
-  README.md              <- idea index (active + archived)
-  <slug>.md              <- an active idea
+  README.md              <- idea index (active + archived, all types)
+  <slug>.md              <- a feature-request idea
   <another-slug>.md
   archived/
     README.md            <- archived idea index
     <old-slug>.md        <- an archived idea (Status: Archived)
+
+spec/features/<feature-slug>/
+  README.md              <- the Feature spec
+  proposals/
+    <slug>.md            <- a change-request idea (proposal) targeting this Feature
 ```
 
-Unlike Features and Plans, Ideas are **files, not directories**. An Idea has no sub-artifacts, no `_tests/`, and no `proposals/`. Supporting material (mockups, research notes) belongs either on the downstream Feature (once promoted) or in `docs/`.
+Unlike Features and Plans, Ideas are **files, not directories**. An Idea has no sub-artifacts and no `_tests/`. Supporting material (mockups, research notes) belongs either on the downstream Feature (once promoted) or in `docs/`.
 
 #### REQ: idea-location
 
-Every Idea artifact MUST reside at `spec/ideas/<slug>.md` (active) or `spec/ideas/archived/<slug>.md` (archived). Ideas in `docs/ideas/`, `spec/features/*/ideas/`, or any other location are rejected by validation.
+Every feature-request Idea artifact MUST reside at `spec/ideas/<slug>.md` (active) or `spec/ideas/archived/<slug>.md` (archived). Every change-request Idea MUST reside at `spec/features/<feature-slug>/proposals/<slug>.md` where `<feature-slug>` matches the value of the Idea's `**Targets:**` field. Ideas at any other location are rejected by validation.
 
 #### REQ: slug-format
 
@@ -75,7 +86,49 @@ Examples of valid slugs: `payment-fraud-signals`, `offline-mode`, `team-billing`
 
 #### REQ: single-file
 
-An Idea MUST be a single markdown file. Creating a directory at `spec/ideas/<slug>/` is a validation error.
+An Idea MUST be a single markdown file. Creating a directory at `spec/ideas/<slug>/` or `spec/features/<feature>/proposals/<slug>/` is a validation error.
+
+### Idea types
+
+Ideas have an optional `**Type:**` field that determines whether they are greenfield (feature-request) or targeted (change-request / proposal).
+
+#### REQ: type-field
+
+The `**Type:**` field, when present, MUST be one of: `feature-request`, `change-request`. Any other value is a validation error.
+
+#### REQ: type-default
+
+When the `**Type:**` field is absent or set to `—`, the Idea is treated as `feature-request`. Tooling MUST NOT require the field to be present on feature-request Ideas.
+
+#### REQ: targets-required
+
+An Idea with `**Type:** change-request` MUST include a `**Targets:**` field with a non-empty value (a Feature slug). An Idea with Type `feature-request` (or absent Type) MUST NOT have a `**Targets:**` field with a value other than `—`.
+
+#### REQ: targets-valid-feature
+
+The `**Targets:**` value MUST reference an existing Feature directory under `spec/features/`. A broken reference is a validation error.
+
+#### REQ: change-request-location
+
+An Idea with `**Type:** change-request` and `**Targets:** <feature-slug>` MUST reside at `spec/features/<feature-slug>/proposals/<slug>.md`. A change-request Idea at any other location is a validation error. The `proposals/` directory is created on demand when the first change-request Idea targeting a Feature is scaffolded.
+
+#### REQ: proposal-title-prefix
+
+An Idea with `**Type:** change-request` MUST use the title prefix `# Proposal: <Title>`. An Idea with Type `feature-request` (or absent Type) MUST use the title prefix `# Idea: <Title>`. The title prefix is the dispatch key for lint: `# Proposal:` triggers idea validation with the additional requirement that `Type: change-request` and `Targets:` are present and valid.
+
+#### REQ: proposal-merge-on-implementation
+
+A change-request Idea's content MUST NOT be merged into the target Feature's README until the implementation lands. The Feature README reflects **current behavior** — it is the source of truth for "what exists." The change-request Idea is the source of truth for "what we want to change" until the change is implemented. When the implementation is complete:
+
+1. The Feature README is updated in the same PR (or commit) that lands the implementation, incorporating the behavioral changes described by the proposal.
+2. The change-request Idea transitions to `Status: Implemented`.
+3. The proposal file remains at `{feature}/proposals/<slug>.md` as historical record.
+
+A Feature at `Status: Stable` MUST NOT have its README updated with unimplemented proposal content. The `## Proposals` index section on the Feature README surfaces pending change-request Ideas so readers can see what changes are planned without the Feature README containing speculative content.
+
+#### REQ: phase-field
+
+An Idea MAY include an optional `**Phase:**` field with a free-form string value (e.g. `2`, `post-launch`, `foundation`). The field is intended for change-request Ideas that constitute ordered phases of a multi-phase Feature delivery, but is not restricted by Type — any Idea MAY carry it. When present, the value MUST be a non-empty string. Lint does not validate ordering across Phase values; UI and index tooling sort phases in the order they appear in the auto-generated `## Proposals` section on the Feature README (definition order).
 
 ### Idea header fields
 
@@ -93,13 +146,30 @@ Ideas use the **same markdown-body metadata convention as Features** — no YAML
 **Archive Reason:** — *(required only when Status is Archived)*
 ```
 
+Change-request Ideas carry additional fields:
+
+```markdown
+# Proposal: <Proposal Name>
+
+**Status:** Draft
+**Type:** change-request
+**Targets:** <feature-slug>
+**Phase:** — *(optional; free-form string for phased delivery)*
+**Date:** YYYY-MM-DD
+**Owner:** <author identifier>
+**Promotes To:** —
+**Supersedes:** —
+**Related Ideas:** —
+**Archive Reason:** —
+```
+
 #### REQ: title-format
 
-Every Idea README title MUST use the `# Idea: <Title>` format. The `Idea:` prefix is required — it is the dispatch key used by `specscore lint` to select the Idea rule set.
+Every Idea title MUST use either `# Idea: <Title>` or `# Proposal: <Title>`. The prefix is the dispatch key used by `specscore lint` to select the Idea rule set. `# Proposal:` additionally requires `**Type:** change-request` and a valid `**Targets:**` field (see [REQ: proposal-title-prefix](#req-proposal-title-prefix)).
 
 #### REQ: header-fields
 
-Every Idea MUST include `**Status:**`, `**Date:**`, and `**Owner:**` fields immediately after the title, in that order. `**Promotes To:**`, `**Supersedes:**`, and `**Related Ideas:**` MUST be present (value `—` when empty). `**Archive Reason:**` is required only when `Status: Archived` (see [REQ: archive-reason](#req-archive-reason)).
+Every Idea MUST include `**Status:**`, `**Date:**`, and `**Owner:**` fields immediately after the title. `**Promotes To:**`, `**Supersedes:**`, and `**Related Ideas:**` MUST be present (value `—` when empty). `**Archive Reason:**` is required only when `Status: Archived` (see [REQ: archive-reason](#req-archive-reason)). `**Type:**`, `**Targets:**`, and `**Phase:**` are optional — see [REQ: type-field](#req-type-field), [REQ: targets-required](#req-targets-required), and [REQ: phase-field](#req-phase-field) for when each is required or prohibited. When present, `**Type:**` and `**Targets:**` MUST appear after `**Status:**` and before `**Date:**`; `**Phase:**` MUST appear after `**Targets:**`.
 
 #### REQ: id-is-slug
 
@@ -107,7 +177,7 @@ An Idea's canonical id is its filename without `.md` — the slug itself. There 
 
 #### REQ: promotes-to-managed
 
-The `**Promotes To:**` field is **managed state**. Tooling populates it when a Feature is created that references this Idea (see [REQ: feature-cross-reference](#req-feature-cross-reference)). Authors and authoring skills MUST NOT edit it manually. An Idea with `Status: Implementing` or `Status: Specified` MUST have a non-empty `**Promotes To:**`.
+The `**Promotes To:**` field is **managed state** for feature-request Ideas. Tooling populates it when a Feature is created that references this Idea (see [REQ: feature-cross-reference](#req-feature-cross-reference)). Authors and authoring skills MUST NOT edit it manually. A feature-request Idea with `Status: Specifying`, `Status: Implementing`, or `Status: Implemented` MUST have a non-empty `**Promotes To:**`. For change-request Ideas, `**Promotes To:**` is always `—` — change-request Ideas target existing Features rather than promoting to new ones.
 
 ### Idea document structure
 
@@ -158,13 +228,15 @@ Every Idea follows this section schema:
 - <Question that needs answering before promotion to Feature(s)>
 ```
 
+Change-request Ideas (proposals) use the same section schema. The same sections are required regardless of Idea type.
+
 #### REQ: required-sections
 
 An Idea MUST include these sections, in this order:
 
 | Section | Required | Notes |
 |---|---|---|
-| Title (`# Idea: <Name>`) | Yes | `Idea:` prefix required. See [REQ: title-format](#req-title-format). |
+| Title (`# Idea: <Name>` or `# Proposal: <Name>`) | Yes | Prefix required. See [REQ: title-format](#req-title-format). |
 | Header fields | Yes | `Status`, `Date`, `Owner`, `Promotes To`, `Supersedes`. See [REQ: header-fields](#req-header-fields). |
 | Problem Statement | Yes | Contains exactly one "How Might We…" framing. |
 | Context | Yes | May be brief but MUST be present. |
@@ -194,51 +266,84 @@ The `Problem Statement` section SHOULD contain exactly one "How Might We…" sen
 |---|---|
 | `Draft` | First lint-clean write. Author is iterating. |
 | `Under Review` | Author has requested feedback from stakeholders. |
-| `Approved` | Recommended Direction has been approved; ready for promotion to Feature(s). |
-| `Implementing` | At least one Feature in `spec/features/` lists this Idea in its `**Source Ideas:**` field, and at least one such Feature has not yet reached `Stable`. The work of turning this Idea into shipped product is in progress. Tooling manages this transition — see [The promotion transitions](#the-promotion-transitions). |
-| `Specified` | Every Feature in `spec/features/` that lists this Idea in `**Source Ideas:**` has reached `Status: Stable`. The Idea has been fully realized through its downstream Features and is effectively frozen. Tooling manages this transition. |
-| `Archived` | Idea was abandoned or superseded. File is moved to `spec/ideas/archived/<slug>.md`. |
+| `Approved` | Recommended Direction has been approved; ready for detailed specification. |
+| `Specifying` | A detailed specification is being written. For feature-request Ideas, this is derived when a Feature referencing this Idea exists at `Draft` or `Under Review`. For change-request Ideas, this is author-managed (set when detailed AC or a plan is being drafted). |
+| `Specified` | Detailed spec/AC/plan exists; work hasn't started. For feature-request Ideas, derived when the referenced Feature reaches `Approved`. For change-request Ideas, author-managed. |
+| `Implementing` | Work is in progress. For feature-request Ideas, derived when the referenced Feature reaches `Implementing`. For change-request Ideas, author-managed. |
+| `Implemented` | Done. The promoted Feature shipped (feature-request) or the proposed change landed (change-request). The Idea stays visible in default listings and in its current file location — it is not moved or hidden. |
+| `Archived` | Idea was abandoned or superseded. Feature-request Ideas are moved to `spec/ideas/archived/<slug>.md`. Archived Ideas are hidden from `specscore idea list` by default (requires `--include-archived`). |
 
 ```mermaid
 graph LR
     A["Draft"]
     B["Under Review"]
     C["Approved"]
+    G["Specifying"]
+    H["Specified"]
     D["Implementing"]
-    E["Specified"]
+    I["Implemented"]
     F["Archived"]
 
     A -->|request feedback| B
     B -->|approved| C
     A -->|approved (fast path)| C
-    C -->|first Feature linked| D
-    D -->|all Features Stable| E
+    C -->|spec started| G
+    G -->|spec complete| H
+    H -->|work started| D
+    D -->|work done| I
     A -->|abandon| F
     B -->|abandon| F
     C -->|abandon| F
+    G -->|abandon| F
+    H -->|abandon| F
+    D -->|abandon| F
 ```
 
-The `Draft → Under Review → Approved → Implementing` quartet aligns with the parallel quartet on [Feature](../feature/README.md) so that early-and-mid lifecycle vocabulary is consistent across artifact types. The shared `Implementing` state means "the work of making this real is in progress" in both contexts.
+The `Draft → Under Review → Approved` progression aligns with the parallel progression on [Feature](../feature/README.md) so that early lifecycle vocabulary is consistent across artifact types.
 
 #### REQ: status-values
 
-The `**Status:**` value MUST be one of: `Draft`, `Under Review`, `Approved`, `Implementing`, `Specified`, `Archived`. Any other value is a validation error.
+The `**Status:**` value MUST be one of: `Draft`, `Under Review`, `Approved`, `Specifying`, `Specified`, `Implementing`, `Implemented`, `Archived`. Any other value is a validation error.
+
+#### REQ: specifying-derivation
+
+For feature-request Ideas: `Status: Specifying` MUST be set if and only if at least one Feature in `spec/features/` lists the Idea's slug in its `**Source Ideas:**` field, AND every such referenced Feature has `Status` in {`Draft`, `Under Review`}. The transition is driven by Feature creation, not by the author.
+
+#### REQ: specified-derivation
+
+For feature-request Ideas: `Status: Specified` MUST be set if and only if at least one Feature in `spec/features/` lists the Idea's slug in its `**Source Ideas:**` field, AND every such referenced Feature has `Status: Approved`. A Feature at `Approved` is fully specified but not yet being implemented. The transition is driven by Feature status change, not by the author.
+
+#### REQ: implementing-derivation
+
+For feature-request Ideas: `Status: Implementing` MUST be set if and only if (a) at least one Feature in `spec/features/` lists the Idea's slug in its `**Source Ideas:**` field, AND (b) at least one such referenced Feature has `Status: Implementing`. The transition is driven by Feature status change, not by the author.
+
+#### REQ: implemented-derivation
+
+For feature-request Ideas: `Status: Implemented` MUST be set if and only if (a) at least one Feature in `spec/features/` lists the Idea's slug in its `**Source Ideas:**` field, AND (b) every such referenced Feature has `Status: Stable`. The transition is driven by Feature stabilization, not by the author.
+
+#### REQ: change-request-status-author-managed
+
+For change-request Ideas: statuses `Specifying`, `Specified`, `Implementing`, and `Implemented` are **author-managed** (or set by tooling that detects signals like plan creation or `Verifies:` commit trailers). The derivation rules ([REQ: specifying-derivation](#req-specifying-derivation), [REQ: specified-derivation](#req-specified-derivation), [REQ: implementing-derivation](#req-implementing-derivation), [REQ: implemented-derivation](#req-implemented-derivation)) do NOT apply to change-request Ideas. Lint MUST NOT reject a change-request Idea at these statuses based on Feature reference checks.
+
+#### REQ: derived-status-not-author-set
+
+For feature-request Ideas: an author (human or skill) MUST NOT directly write `**Status:** Specifying`, `**Status:** Specified`, `**Status:** Implementing`, or `**Status:** Implemented`. Attempting to do so produces a lint error unless the corresponding Feature references and Feature statuses match the derivation rules above. This rule does NOT apply to change-request Ideas (see [REQ: change-request-status-author-managed](#req-change-request-status-author-managed)).
 
 #### REQ: implementing-requires-promotion
 
-An Idea with `Status: Implementing` MUST have a non-empty `**Promotes To:**` list. The transition to `Implementing` is driven by Feature creation, not by the author.
-
-#### REQ: specified-requires-all-stable
-
-An Idea with `Status: Specified` MUST have a non-empty `**Promotes To:**` list AND every referenced Feature in that list MUST have `Status: Stable`. If any referenced Feature is at `Draft`, `Under Review`, `Approved`, `Implementing`, or `Deprecated`, the Idea's status MUST be `Implementing` instead. The transition to `Specified` is driven by Feature stabilization, not by the author.
+A feature-request Idea with `Status: Specifying`, `Status: Specified`, `Status: Implementing`, or `Status: Implemented` MUST have a non-empty `**Promotes To:**` list. The transition to these statuses is driven by Feature creation and status changes, not by the author. This rule does NOT apply to change-request Ideas, which always have `**Promotes To:** —`.
 
 #### REQ: archived-location
 
-An Idea with `Status: Archived` MUST reside at `spec/ideas/archived/<slug>.md`. An Idea file at the top level of `spec/ideas/` with `Status: Archived` is a validation error, as is an Archived file outside that directory. Moving the file is part of the archival transition.
+A feature-request Idea with `Status: Archived` MUST reside at `spec/ideas/archived/<slug>.md`. An Idea file at the top level of `spec/ideas/` with `Status: Archived` is a validation error, as is an Archived file outside that directory. Moving the file is part of the archival transition. For change-request Ideas, archival leaves the file at `spec/features/<feature>/proposals/<slug>.md` — it is NOT moved to `spec/ideas/archived/`.
 
 #### REQ: archive-reason
 
 An Idea with `Status: Archived` MUST include a `**Archive Reason:**` header field with a non-empty value. Expected values are free-form but SHOULD categorize the reason (e.g. `abandoned`, `pivoted`, `superseded`, `no longer relevant`). Non-Archived Ideas MAY omit the field or set it to `—`.
+
+#### REQ: archived-default-hidden
+
+`specscore idea list` MUST exclude Archived Ideas by default. Archived Ideas MUST be included only when the `--include-archived` flag is passed. All other statuses (including `Implemented`) MUST be visible in default listings.
 
 ### Related Ideas
 
@@ -252,14 +357,14 @@ Each entry is `<relationship>:<idea-slug>`. Multiple entries are comma-separated
 
 | Relationship | Meaning |
 |---|---|
-| `depends_on` | This Idea can only be meaningfully pursued if the referenced Idea is also pursued (typically needs it to reach `Specified` first). |
+| `depends_on` | This Idea can only be meaningfully pursued if the referenced Idea is also pursued (typically needs it to reach `Implemented` first). |
 | `alternative_to` | This Idea and the referenced Idea address the same problem in different ways. At most one should normally be promoted. |
 | `extends` | This Idea builds on the scope of the referenced Idea (not a successor — both can coexist). |
 | `conflicts_with` | The two Ideas have incompatible directions. Promoting both would create contradictory Features. |
 
 #### REQ: related-ideas-format
 
-Each entry in `**Related Ideas:**` MUST match `<relationship>:<idea-slug>` where `<relationship>` is one of the four values above and `<idea-slug>` is an existing Idea (active or archived). Unknown relationships are a validation error. The vocabulary is deliberately fixed at this initial set; additional types require a revision of this spec.
+Each entry in `**Related Ideas:**` MUST match `<relationship>:<idea-slug>` where `<relationship>` is one of the four values above and `<idea-slug>` is an existing Idea (active, archived, or feature-scoped). Unknown relationships are a validation error. The vocabulary is deliberately fixed at this initial set; additional types require a revision of this spec.
 
 #### REQ: cycles-allowed
 
@@ -267,35 +372,25 @@ Cycles in `depends_on` (including mutual `depends_on` between two Ideas and long
 
 #### REQ: related-ideas-target-exists
 
-Every slug referenced in `**Related Ideas:**` MUST resolve to an Idea file under `spec/ideas/` or `spec/ideas/archived/`. Broken references are rejected by lint.
+Every slug referenced in `**Related Ideas:**` MUST resolve to an Idea file under `spec/ideas/`, `spec/ideas/archived/`, or `spec/features/*/proposals/`. Broken references are rejected by lint.
 
 ### The promotion transitions
 
-Both `Implementing` and `Specified` are **derived statuses**: they reflect the existence and maturity of Features that reference the Idea. Neither is a state the author chooses. Three mechanisms can drive the transitions:
+For feature-request Ideas, `Specifying`, `Specified`, `Implementing`, and `Implemented` are **derived statuses**: they reflect the existence and maturity of Features that reference the Idea. None is a state the author chooses. Three mechanisms can drive the transitions:
 
-1. **`specscore` CLI (authoritative).** `specscore idea sync` (equivalently `specscore lint --fix`) scans `spec/features/**/README.md` for `**Source Ideas:**` fields and the referenced Features' own `**Status:**` values, recomputes every Idea's `**Promotes To:**`, and updates `**Status:**` to either `Implementing` (any referenced Feature is non-Stable) or `Specified` (every referenced Feature is Stable). Running this command is the definitive way to reconcile Idea status.
-2. **Feature-creation and Feature-status-change tooling.** When `specscore feature new` (or an equivalent scaffolder) creates a Feature with `**Source Ideas:**`, or when a Feature transitions to or from `Stable`, it performs the same update on each referenced Idea in the same commit.
-3. **Synchestra (optional).** When Synchestra is present, it watches for Feature changes and performs the update automatically, emitting `idea.implementing` (on first link) and `idea.specified` (when all Features reach Stable). Standalone SpecScore users do not need Synchestra — the CLI is sufficient.
+1. **`specscore` CLI (authoritative).** `specscore idea sync` (equivalently `specscore lint --fix`) scans `spec/features/**/README.md` for `**Source Ideas:**` fields and the referenced Features' own `**Status:**` values, recomputes every feature-request Idea's `**Promotes To:**`, and updates `**Status:**` based on the derivation rules: `Specifying` (any referenced Feature at Draft or Under Review), `Specified` (all referenced Features at Approved), `Implementing` (any referenced Feature at Implementing), or `Implemented` (every referenced Feature at Stable). Running this command is the definitive way to reconcile feature-request Idea status.
+2. **Feature-creation and Feature-status-change tooling.** When `specscore feature new` (or an equivalent scaffolder) creates a Feature with `**Source Ideas:**`, or when a Feature transitions status, it performs the same update on each referenced Idea in the same commit.
+3. **Synchestra (optional).** When Synchestra is present, it watches for Feature changes and performs the update automatically, emitting `idea.specifying`, `idea.specified`, `idea.implementing`, and `idea.implemented` events. Standalone SpecScore users do not need Synchestra — the CLI is sufficient.
 
-**CI enforcement is strict.** `specscore lint` (without `--fix`) fails on any drift between a Feature's `**Source Ideas:**` entries (or the referenced Features' `**Status:**` values) and the corresponding Idea's `**Promotes To:**` / `**Status:**`. Contributors are expected to run `specscore lint --fix` locally before committing. If strictness proves too disruptive in practice, the severity can be relaxed in a future revision; the initial posture is strict because `lint --fix` makes compliance cheap.
+For change-request Ideas, these statuses are author-managed (see [REQ: change-request-status-author-managed](#req-change-request-status-author-managed)). The promotion transitions do not apply.
+
+**CI enforcement is strict.** `specscore lint` (without `--fix`) fails on any drift between a Feature's `**Source Ideas:**` entries (or the referenced Features' `**Status:**` values) and the corresponding feature-request Idea's `**Promotes To:**` / `**Status:**`. Contributors are expected to run `specscore lint --fix` locally before committing. If strictness proves too disruptive in practice, the severity can be relaxed in a future revision; the initial posture is strict because `lint --fix` makes compliance cheap.
 
 #### REQ: sync-lint-strict
 
-`specscore lint` MUST fail (error severity) when an Idea's `**Promotes To:**` or derived `**Status:**` is inconsistent with the set of Features referencing it (and those Features' own `Status` values). `specscore lint --fix` MUST repair the drift by rewriting the Idea's header fields in place.
+`specscore lint` MUST fail (error severity) when a feature-request Idea's `**Promotes To:**` or derived `**Status:**` is inconsistent with the set of Features referencing it (and those Features' own `Status` values). `specscore lint --fix` MUST repair the drift by rewriting the Idea's header fields in place. This rule does NOT apply to change-request Ideas.
 
-Recomputation is symmetric: if every Feature referencing an Idea is removed or unlinks it, the Idea's `**Promotes To:**` becomes empty and `Status` drops back to `Approved`. An Idea is never "stuck" in `Implementing` or `Specified` without a live referencing Feature.
-
-#### REQ: implementing-derivation
-
-`Status: Implementing` MUST be set if and only if (a) at least one Feature in `spec/features/` lists the Idea's slug in its `**Source Ideas:**` field, AND (b) at least one such referenced Feature has `Status` other than `Stable`. A tree where this invariant is violated is a lint error.
-
-#### REQ: specified-derivation
-
-`Status: Specified` MUST be set if and only if (a) at least one Feature in `spec/features/` lists the Idea's slug in its `**Source Ideas:**` field, AND (b) every such referenced Feature has `Status: Stable`. A tree where this invariant is violated is a lint error.
-
-#### REQ: derived-status-not-author-set
-
-An author (human or skill) MUST NOT directly write `**Status:** Implementing` or `**Status:** Specified`. Attempting to do so produces a lint error unless the corresponding Feature references and Feature statuses match the derivation rules above.
+Recomputation is symmetric: if every Feature referencing a feature-request Idea is removed or unlinks it, the Idea's `**Promotes To:**` becomes empty and `Status` drops back to `Approved`. An Idea is never "stuck" in a derived status without a live referencing Feature.
 
 ### Recommended authoring workflow
 
@@ -312,11 +407,15 @@ Validation MUST NOT depend on authoring provenance. An Idea hand-written by a hu
 The `specscore` CLI MUST provide `specscore idea new <slug>` that scaffolds a skeleton at `spec/ideas/<slug>.md`. Behavior:
 
 - **Pre-population.** Each required section is emitted with an inline HTML-comment prompt describing what belongs there (e.g. `<!-- One "How Might We…" sentence. -->`). These prompts replace placeholder text and do not trip lint rule U-005 (placeholders).
-- **Argument injection.** Values supplied via flags (`--title`, `--owner`, `--hmw`, `--not-doing`, etc.) replace the corresponding prompt with real content.
+- **Argument injection.** Values supplied via flags (`--title`, `--owner`, `--hmw`, `--not-doing`, `--type`, `--targets`, etc.) replace the corresponding prompt with real content. When `--type change-request --targets <feature-slug>` is supplied, the scaffold is created at `spec/features/<feature-slug>/proposals/<slug>.md` with the `# Proposal:` title prefix and the `Type:` and `Targets:` fields pre-populated.
 - **Interactive TUI.** When invoked with `--interactive` (or `-i`), the CLI prompts the user for each field and writes actual values in place of the HTML-comment prompts.
 - **Always lint-clean on exit.** Regardless of how much content was supplied, the generated file MUST pass `specscore lint` — the inline prompts and `—` placeholders are designed so an untouched scaffold already validates.
 
 The `spec-studio:ideate` skill SHOULD delegate file creation to this command when available, and fall back to writing the file directly when the CLI is not installed.
+
+#### REQ: proposal-scaffold-alias
+
+The `specscore` CLI MUST provide `specscore proposal new <feature-slug> <slug>` as a convenience alias for `specscore idea new <slug> --type change-request --targets <feature-slug>`. The alias scaffolds a change-request Idea at `spec/features/<feature-slug>/proposals/<slug>.md`.
 
 ### Idea index
 
@@ -324,17 +423,19 @@ There are two indexes: one for active Ideas and one for archived Ideas.
 
 **Active index** (`spec/ideas/README.md`):
 
-1. An **Index** table with columns: Idea, Status, Date, Owner, Promotes To.
+1. An **Index** table with columns: Idea, Type, Status, Date, Owner, Promotes To. The table includes ALL active Ideas regardless of filesystem location — both feature-request Ideas from `spec/ideas/` and change-request Ideas from `spec/features/*/proposals/`. Rows are grouped by Type (feature-request first, then change-request) within the table.
 2. An **Open Questions** section.
 
 **Archived index** (`spec/ideas/archived/README.md`):
 
-1. A chronological list of Archived Ideas, ordered by the **Date** field (oldest first, newest at bottom) — not a full metadata table. Each entry is a line of the form `- YYYY-MM-DD — [slug](<slug>.md) — <archive reason>`.
+1. A chronological list of Archived feature-request Ideas, ordered by the **Date** field (oldest first, newest at bottom) — not a full metadata table. Each entry is a line of the form `- YYYY-MM-DD — [slug](<slug>.md) — <archive reason>`.
 2. An **Open Questions** section.
+
+Archived change-request Ideas are NOT listed in the archived index (they remain at their feature-scoped path and are excluded from default listings via [REQ: archived-default-hidden](#req-archived-default-hidden)).
 
 #### REQ: index-completeness
 
-`spec/ideas/README.md` MUST list every active (non-Archived) Idea in `spec/ideas/`. `spec/ideas/archived/README.md` MUST list every Archived Idea in `spec/ideas/archived/`. An unlisted Idea on either side is a validation error.
+`spec/ideas/README.md` MUST list every active (non-Archived) Idea across all valid locations: `spec/ideas/` and `spec/features/*/proposals/`. `spec/ideas/archived/README.md` MUST list every Archived feature-request Idea in `spec/ideas/archived/`. An unlisted Idea on either side is a validation error.
 
 #### REQ: archived-index-chronological
 
@@ -344,19 +445,21 @@ Entries in `spec/ideas/archived/README.md` MUST appear in chronological order by
 
 An Idea whose scope has shifted enough to invalidate its assumptions MUST NOT be renamed. Instead, create a successor:
 
-1. Archive the predecessor: set `**Status:** Archived` and move the file to `spec/ideas/archived/<slug>.md`.
+1. Archive the predecessor: set `**Status:** Archived` and move the file to `spec/ideas/archived/<slug>.md` (feature-request) or leave in place (change-request).
 2. Create a new Idea with a new slug and list the predecessor slug in `**Supersedes:**`.
 3. The successor's `Context` section SHOULD explain what changed.
 
 #### REQ: supersedes-target-archived
 
-If an Idea's `**Supersedes:**` list is non-empty, every referenced Idea MUST exist (under `spec/ideas/archived/`) and have `Status: Archived`.
+If an Idea's `**Supersedes:**` list is non-empty, every referenced Idea MUST exist and have `Status: Archived`. For feature-request Ideas, the target MUST be under `spec/ideas/archived/`. For change-request Ideas, the target MAY be at `spec/features/*/proposals/` with `Status: Archived`.
 
 ## Relationship to Other Artifacts
 
 ### Ideas and features
 
-Ideas and Features cross-reference each other in a **many-to-many** relationship:
+Ideas and Features cross-reference each other in two ways:
+
+**Feature-request Ideas** promote to Features in a **many-to-many** relationship:
 
 - An Idea MAY promote to **multiple Features** when its scope decomposes.
 - A Feature MAY reference **multiple source Ideas** when it synthesizes several lines of thought.
@@ -365,32 +468,36 @@ The Feature carries the authoritative link via a `**Source Ideas:**` header fiel
 
 ```mermaid
 graph LR
-    I1["Idea A<br/>(Approved)"]
-    I2["Idea B<br/>(Approved)"]
+    I1["Idea A<br/>(feature-request)"]
+    I2["Idea B<br/>(feature-request)"]
+    P1["Proposal C<br/>(change-request)"]
     F1["Feature X"]
     F2["Feature Y"]
 
-    I1 -->|Source Ideas| F1
-    I1 -->|Source Ideas| F2
-    I2 -->|Source Ideas| F2
+    I1 -->|promotes to| F1
+    I1 -->|promotes to| F2
+    I2 -->|promotes to| F2
+    P1 -->|proposes change to| F1
 ```
+
+**Change-request Ideas** target Features in a **many-to-one** relationship: each change-request Idea targets exactly one Feature (via `**Targets:**`). A Feature MAY have zero or more change-request Ideas targeting it, surfaced in the Feature's `## Proposals` index section.
 
 When a Feature is created or updated with a `**Source Ideas:**` entry, tooling:
 
 1. Resolves the link.
 2. Appends the Feature slug to each referenced Idea's `**Promotes To:**` list.
-3. Transitions any referenced Idea from `Status: Approved` to `Status: Implementing` (or to `Status: Specified` if the new Feature is itself created at `Status: Stable`).
-4. Optionally emits an `idea.specified` event (see [Synchestra events](https://github.com/specscore/specstudio-skills/blob/main/skills/shared/synchestra-events.md)).
+3. Transitions any referenced feature-request Idea based on the Feature's status (see derivation rules).
+4. Optionally emits lifecycle events (see [Synchestra events](https://github.com/specscore/specstudio-skills/blob/main/skills/shared/synchestra-events.md)).
 
-When every Feature referencing an Idea is deleted or loses its reference, the Idea's `**Promotes To:**` is recomputed accordingly; if it becomes empty, tooling reverts `Status: Specified → Approved`.
+When every Feature referencing a feature-request Idea is deleted or loses its reference, the Idea's `**Promotes To:**` is recomputed accordingly; if it becomes empty, tooling reverts status to `Approved`.
 
 #### REQ: feature-cross-reference
 
-A Feature's `**Source Ideas:**` field MAY list zero or more Idea slugs. Each referenced Idea MUST exist and have `Status ∈ {Approved, Implementing, Specified}`. Referencing an Idea that is `Draft`, `Under Review`, or `Archived` is a validation error.
+A Feature's `**Source Ideas:**` field MAY list zero or more Idea slugs. Each referenced Idea MUST exist and have `Status ∈ {Approved, Specifying, Specified, Implementing, Implemented}`. Referencing an Idea that is `Draft`, `Under Review`, or `Archived` is a validation error.
 
 ### Ideas and plans
 
-Ideas do not directly reference [Plans](../plan/README.md). The Feature bridges the Idea to the Plan, just as it bridges the Feature to execution.
+Ideas do not directly reference [Plans](../plan/README.md). For feature-request Ideas, the Feature bridges the Idea to the Plan. For change-request Ideas, a plan MAY be triggered with `Source type: change-request` and the change-request Idea as the Source object.
 
 ### Ideas and open questions
 
@@ -406,8 +513,9 @@ Every Idea document MUST end with an adherence footer per the [Adherence Footer 
 
 | Feature | Interaction |
 |---|---|
-| [Feature](../feature/README.md) | Features carry an optional `**Source Ideas:**` header field listing one or more Idea slugs. The relationship is many-to-many. Tooling uses this link to manage each Idea's `Status` and `Promotes To`. Requires a companion update to the Feature spec. |
-| [Plan](../plan/README.md) | No direct link. Plans reference Features; Features reference Ideas. |
+| [Feature](../feature/README.md) | Features carry an optional `**Source Ideas:**` header field listing one or more Idea slugs (feature-request). Features also gain a `## Proposals` auto-generated index section listing change-request Ideas from `{feature}/proposals/`. Tooling uses Source Ideas links to manage each feature-request Idea's `Status` and `Promotes To`. |
+| [Plan](../plan/README.md) | Feature-request Ideas: no direct link (Plans reference Features; Features reference Ideas). Change-request Ideas: a plan MAY have `Source type: change-request` with the change-request Idea as Source. The `Source type: change-request` enum value on plans now points at a change-request Idea as the source object. |
+| [Ideas Index](../ideas-index/README.md) | The active index extends to include change-request Ideas from `spec/features/*/proposals/` with type-grouped sections. The `Type` column is added to the index table. |
 | [Repo Config](../repo-config/README.md) | `specscore.yaml` MAY declare whether Ideas are required before Features (policy knob, default off). |
 
 ## Dependencies
@@ -421,49 +529,81 @@ Every Idea document MUST end with an adherence footer per the [Adherence Footer 
 
 **Requirements:** idea#req:required-sections, idea#req:not-doing-non-empty, idea#req:must-be-true-present
 
-An Idea file contains all required sections in order, a non-empty "Not Doing" list, and at least one Must-be-true assumption. Any violation is rejected by `specscore lint`.
+Given an Idea file (feature-request or change-request)
+When it is missing a required section, has an empty "Not Doing" list, or lacks a Must-be-true assumption
+Then `specscore lint` rejects it with an error naming the violation
 
 ### AC: idea-header
 
-**Requirements:** idea#req:title-format, idea#req:header-fields, idea#req:id-is-slug, idea#req:status-values
+**Requirements:** idea#req:title-format, idea#req:header-fields, idea#req:id-is-slug, idea#req:status-values, idea#req:proposal-title-prefix
 
-An Idea carries a valid `# Idea: <Title>` header, the required body-metadata fields (`Status`, `Date`, `Owner`, `Promotes To`, `Supersedes`) in order, and a valid `Status` value. The filename slug is the canonical id; no separate `id` field is needed.
+Given a feature-request Idea with `# Idea: <Title>` and a change-request Idea with `# Proposal: <Title>`
+When both carry the required body-metadata fields in order and valid Status values
+Then `specscore lint` passes; a `# Proposal:` title without `Type: change-request` or a `# Idea:` title with `Type: change-request` is rejected
+
+### AC: idea-types
+
+**Requirements:** idea#req:type-field, idea#req:type-default, idea#req:targets-required, idea#req:targets-valid-feature, idea#req:change-request-location, idea#req:phase-field, idea#req:proposal-merge-on-implementation
+
+Given an Idea with `Type: change-request` and `Targets: my-feature`
+When the Idea resides at `spec/features/my-feature/proposals/<slug>.md` and the Feature exists
+Then `specscore lint` passes; a change-request Idea at `spec/ideas/` or targeting a non-existent Feature is rejected; the Feature README is updated with proposal content only when implementation lands, not on proposal approval
 
 ### AC: promotion-lifecycle
 
-**Requirements:** idea#req:promotes-to-managed, idea#req:specified-requires-promotion, idea#req:specified-derivation, idea#req:specified-not-author-set, idea#req:feature-cross-reference
+**Requirements:** idea#req:promotes-to-managed, idea#req:specifying-derivation, idea#req:specified-derivation, idea#req:implementing-derivation, idea#req:implemented-derivation, idea#req:derived-status-not-author-set, idea#req:implementing-requires-promotion, idea#req:feature-cross-reference
 
-Creating a Feature with `**Source Ideas:**` entries transitions each referenced Idea to `Status: Implementing` (or directly to `Status: Specified` if the new Feature is itself `Stable`) and appends the Feature slug to the Idea's `**Promotes To:**`. Removing every reference reverts the Idea to `Approved`. An author who writes `Status: Implementing` or `Status: Specified` without matching Feature references (or matching Feature statuses for Specified) is rejected by lint.
+Given a feature-request Idea referenced by a Feature via `Source Ideas:`
+When the Feature is at `Draft` the Idea is `Specifying`; at `Approved` the Idea is `Specified`; at `Implementing` the Idea is `Implementing`; at `Stable` the Idea is `Implemented`
+Then `specscore lint` enforces these derivations; drift is an error; `lint --fix` repairs it; an author who directly writes a derived status without matching Feature state is rejected
+
+### AC: change-request-lifecycle
+
+**Requirements:** idea#req:change-request-status-author-managed
+
+Given a change-request Idea at `Specifying`, `Specified`, `Implementing`, or `Implemented`
+When the status was set by the author (no Feature reference derivation)
+Then `specscore lint` accepts the status without checking Feature references
 
 ### AC: archival
 
-**Requirements:** idea#req:archived-location, idea#req:archive-reason, idea#req:supersedes-target-archived, idea#req:archived-index-chronological
+**Requirements:** idea#req:archived-location, idea#req:archive-reason, idea#req:supersedes-target-archived, idea#req:archived-index-chronological, idea#req:archived-default-hidden
 
-An Idea with `Status: Archived` resides at `spec/ideas/archived/<slug>.md`, carries a non-empty `**Archive Reason:**`, and appears in the chronologically ordered archived index. Any `**Supersedes:**` reference resolves to an Archived Idea in that directory.
+Given an Archived feature-request Idea at `spec/ideas/archived/<slug>.md` with a non-empty Archive Reason
+When `specscore idea list` is run without `--include-archived`
+Then the Archived Idea is NOT shown; with `--include-archived` it IS shown; an Archived change-request Idea remains at its feature-scoped path
 
 ### AC: related-ideas
 
 **Requirements:** idea#req:related-ideas-format, idea#req:related-ideas-target-exists, idea#req:cycles-allowed
 
-Typed relationships (`depends_on`, `alternative_to`, `extends`, `conflicts_with`) in `**Related Ideas:**` parse cleanly and resolve to existing Idea files. Unknown relationships and broken slugs are rejected. Cycles in `depends_on` are accepted by lint; consumers that traverse the graph handle cycles without infinite loops.
+Given typed relationships in `**Related Ideas:**` referencing Ideas at `spec/ideas/`, `spec/ideas/archived/`, or `spec/features/*/proposals/`
+When all slugs resolve to existing Idea files
+Then `specscore lint` passes; broken slugs and unknown relationships are rejected; cycles in `depends_on` are accepted
 
 ### AC: sync-strictness
 
 **Requirements:** idea#req:sync-lint-strict
 
-`specscore lint` fails when a Feature's `**Source Ideas:**` entries disagree with an Idea's `**Promotes To:**` or `**Status:**`. `specscore lint --fix` reconciles the drift by updating the Idea's header fields in place.
+Given a feature-request Idea whose `Promotes To` or derived Status drifts from the set of Features referencing it
+When `specscore lint` runs
+Then it fails with an error; `specscore lint --fix` reconciles the drift
 
 ### AC: scaffold-behavior
 
-**Requirements:** idea#req:scaffold-command
+**Requirements:** idea#req:scaffold-command, idea#req:proposal-scaffold-alias
 
-`specscore idea new <slug>` produces a lint-clean file whether invoked bare, with flag arguments, or interactively. Inline HTML-comment prompts stand in for missing content without triggering placeholder-detection rules.
+Given `specscore idea new my-idea` and `specscore proposal new my-feature my-proposal`
+When each command runs
+Then the first creates `spec/ideas/my-idea.md` with `# Idea:` prefix; the second creates `spec/features/my-feature/proposals/my-proposal.md` with `# Proposal:` prefix, `Type: change-request`, and `Targets: my-feature`; both pass `specscore lint`
 
 ### AC: authoring-independence
 
 **Requirements:** idea#req:authoring-agnostic
 
-A hand-authored Idea and a skill-authored Idea with identical content produce identical lint results. No rule references authoring provenance.
+Given a hand-authored Idea and a skill-authored Idea with identical content
+When both are validated
+Then they produce identical lint results; no rule references authoring provenance
 
 ## TODO
 

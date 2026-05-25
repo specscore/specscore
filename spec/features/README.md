@@ -6,7 +6,7 @@ Core features of the SpecScore specification framework. This table is the canoni
 
 | Feature | Status | Kind | URL | Consumer Path | Index | Description |
 |---------|--------|------|-----|---------------|-------|-------------|
-| [idea](idea/README.md) | Conceptual | Document | `https://specscore.md/idea-specification` | `spec/ideas/*.md` | [ideas-index](ideas-index/README.md) | Pre-spec one-pager that refines a concept into a promotable artifact |
+| [idea](idea/README.md) | Approved | Document | `https://specscore.md/idea-specification` | `spec/ideas/*.md` | [ideas-index](ideas-index/README.md) | Pre-spec one-pager that refines a concept into a promotable artifact |
 | [feature](feature/README.md) | Stable | Document | `https://specscore.md/feature-specification` | `spec/features/**/README.md` | [features-index](features-index/README.md) | Feature specification structure, metadata, lifecycle, and conventions |
 | [acceptance-criteria](acceptance-criteria/README.md) | Stable | Structure | `https://specscore.md/acceptance-criteria-specification` | — | — | Acceptance criteria format and conventions |
 | [requirement](requirement/README.md) | Stable | Structure | `https://specscore.md/requirement-specification` | — | — | Discrete testable rules within feature Behavior sections |
