@@ -74,6 +74,16 @@ Extend the scaffold command and add the proposal alias in specscore-cli:
 
 Verify that existing validation for required-sections, not-doing-non-empty, must-be-true-present, and authoring-agnostic rules still passes after the type/lifecycle changes. Run the existing test suite for these rules against both feature-request and change-request idea fixtures to confirm no regressions. No new logic expected — this task validates that the new code paths do not break existing behavior.
 
+### Task 6: Update CLI specifications in specscore-cli
+
+**Verifies:** idea#ac:idea-header, idea#ac:idea-types, idea#ac:promotion-lifecycle, idea#ac:change-request-lifecycle, idea#ac:archival, idea#ac:scaffold-behavior
+
+Update the CLI feature specs in `specscore-cli/spec/features/cli/` to reflect all new lint rules, lifecycle changes, and CLI commands added in Tasks 1–4. Per AGENTS.md convention ("When changing rule behavior, update the spec in the same commit"), this task ensures the CLI spec stays in sync with the implementation:
+
+- Update `spec/features/cli/idea/README.md` — document `idea new --type/--targets` flags, `proposal new` alias, and the extended lifecycle.
+- Update `spec/features/cli/spec/lint/README.md` (or create an `idea-rules/` child) — document the 6 new lint rules added in Task 1 (type-values, type-title-consistency, targets-required, targets-exists, change-request-location, phase-non-empty) and the modified rules from Task 2 (status-values, sync-lint-strict, specified-requires-promotion, feature-cross-reference).
+- Update `spec/features/cli/lifecycle-transitions/README.md` — document the new Specifying and Implemented statuses and the extended transition matrix.
+
 ## Open Questions
 
 None at this time.
