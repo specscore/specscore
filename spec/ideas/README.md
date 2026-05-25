@@ -14,7 +14,7 @@ Archived Ideas are indexed separately at [archived/README.md](archived/README.md
 | [entity-and-property-definitions](entity-and-property-definitions.md) | Implementing | 2026-05-18 | alexander.trakhimenok | document-types-registry, entity, property |
 | [journal-and-summary](journal-and-summary.md) | Draft | 2026-05-19 | alex | — |
 | [plan-deferred-ac-hyphenated-slug](plan-deferred-ac-hyphenated-slug.md) | Draft | 2026-05-22 | alexander.trakhimenok@gmail.com | — |
-| [proposals-and-feature-phases](proposals-and-feature-phases.md) | Draft | 2026-05-19 | alex | — |
+| [idea-types-and-lifecycle](idea-types-and-lifecycle.md) | Draft | 2026-05-19 | alex | — |
 | [rename-outstanding-questions-to-open-questions](rename-outstanding-questions-to-open-questions.md) | Approved | 2026-05-22 | alexandertrakhimenok | — |
 | [shared-index-feature](shared-index-feature.md) | Implementing | 2026-04-20 | alexander.trakhimenok | index |
 | [studio-toolbar](studio-toolbar.md) | Implementing | 2026-05-19 | alex | studio-toolbar |
