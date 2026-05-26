@@ -1,15 +1,15 @@
 # Plan: Decision and Decisions-Index CLI Implementation
 
-**Status:** draft
+**Status:** approved
 **Features:**
   - [decision](../../features/decision/README.md)
   - [decisions-index](../../features/decisions-index/README.md)
 **Source type:** feature
 **Source:** [decision](../../features/decision/README.md), [decisions-index](../../features/decisions-index/README.md)
 **Author:** alexander.trakhimenok
-**Approver:** —
+**Approver:** alexander.trakhimenok
 **Created:** 2026-05-26
-**Approved:** —
+**Approved:** 2026-05-26
 
 ## Context
 
@@ -174,6 +174,7 @@ None at this time.
 |---|---|---|---|
 | 2026-05-26 | — | drafted | Initial plan draft |
 | 2026-05-26 | `38448d3` | checkpoint | Tasks 1–4 and 6 implemented: audit passed (D-0001 compliant), decisions-index columns fixed, 19 decision scenario stubs + 6 decisions-index scenario stubs scaffolded, site-config updated for both specification pages. 4 CLI Issues filed against specscore/specscore-cli (#12–#15). `specscore spec lint`: 0 violations. |
+| 2026-05-26 | `123bf97` | approved | Plan approved by alexander.trakhimenok. All spec-repo tasks (1–6) complete. CLI implementation tracked via Issues #12–#15 on specscore/specscore-cli. |
 
 ---
 *This document follows the https://specscore.md/plan-specification*

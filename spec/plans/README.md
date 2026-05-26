@@ -10,7 +10,7 @@ directory under `spec/plans/` and is governed by the
 | Plan | Status | Features | Effort | Impact | Author | Approved |
 |---|---|---|---|---|---|---|
 | [entity-and-property-doc-kinds](entity-and-property-doc-kinds/README.md) | approved | entity, property, document-types-registry | M | high | alexander.trakhimenok | 2026-05-18 |
-| [decision](decision/README.md) | draft | decision, decisions-index | M | high | alexander.trakhimenok | — |
+| [decision](decision/README.md) | approved | decision, decisions-index | M | high | alexander.trakhimenok | 2026-05-26 |
 
 ### entity-and-property-doc-kinds
 
