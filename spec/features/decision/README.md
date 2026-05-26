@@ -2,7 +2,7 @@
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decision?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decision?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decision?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decision?op=request-change) |
 
-**Status:** Draft
+**Status:** Approved
 **Source Ideas:** decision-and-decisions-index
 
 ## Summary
@@ -379,9 +379,9 @@ None at this time.
 
 ## Open Questions
 
-- Should lint provide an `editorial` severity carve-out for whitespace- and punctuation-only diffs on Accepted Decisions, or is the strict immutability rule preferred forever? Current position: strict; revisit if dogfooding produces a stream of necessary editorial fixes.
-- Should `**Source Idea:**` support a list (multiple Ideas) in a future revision, and if so, how does that interact with Idea `Promotes To` bookkeeping? Current position: single slug only; Decisions synthesizing multiple Ideas mention the others in `## Context`.
-- Should a REQ within a Feature be able to cite a Decision as its rationale (e.g. `> Rationale: see D-0007`) via a managed header field, rather than in freeform prose? Current position: prose only in this revision; the managed link is a plausible follow-on feature once usage patterns are visible.
+- **Editorial carve-out: resolved — yes.** Lint should provide an `editorial` severity carve-out for whitespace- and punctuation-only diffs on Accepted Decisions. The strict rule proved too rigid in dogfooding; editorial fixes should not require a successor Decision. Implementation: a future revision adds a narrow `editorial` diff classification to the immutability check.
+- **Multi-source-idea: resolved — yes.** `**Source Idea:**` should support a comma-separated list of Idea slugs in a future revision. Each referenced slug must resolve. Interaction with `Promotes To` bookkeeping: each listed Idea gets the Decision added to its promotion chain. Implementation deferred to the revision that introduces it.
+- **REQ↔Decision managed link: resolved — prose for now.** A REQ may cite a Decision in freeform prose (e.g. "see D-0007"). A managed header field is deferred until usage patterns justify the complexity.
 
 ---
 *This document follows the https://specscore.md/feature-specification*

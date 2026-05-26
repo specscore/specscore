@@ -2,7 +2,7 @@
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decisions-index?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decisions-index?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decisions-index?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decisions-index?op=request-change) |
 
-**Status:** Draft
+**Status:** Approved
 **Source Ideas:** decision-and-decisions-index
 
 ## Summary
@@ -112,9 +112,11 @@ Every decisions index ends with a footer containing the bare URL `https://specsc
 
 ## Open Questions
 
-- Should the Index table gain a `Source Idea` column linking Decisions back to originating Ideas, or is the relationship niche enough that cross-referencing from within the Decision file is sufficient? Current position: no column; the link is one-to-optional-one and visible inside the Decision itself.
-- Should the Affected column render as links to the Feature READMEs rather than plain slugs, at the cost of a longer, wrapped cell? Current position: plain slugs; brevity wins until a consumer requests linked rendering.
-- Should `lint --fix` auto-reorder rows to numeric ascending order, or only flag violations? Current position: auto-fix; numeric reordering is mechanical and safe.
+None at this time. All original open questions resolved:
+
+- **Source Idea column** → No. The relationship is one-to-optional-one and visible inside the Decision file header. A column that's `—` in most rows is noise.
+- **Linked vs plain slugs in Affected** → Plain slugs. Brevity wins; raw markdown stays readable. Linked rendering can be added later without a schema break.
+- **`lint --fix` auto-reorder** → Yes, auto-fix. Numeric reordering is deterministic, lossless, and mechanical.
 
 ---
 *This document follows the https://specscore.md/feature-specification*

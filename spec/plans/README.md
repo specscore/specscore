@@ -10,6 +10,7 @@ directory under `spec/plans/` and is governed by the
 | Plan | Status | Features | Effort | Impact | Author | Approved |
 |---|---|---|---|---|---|---|
 | [entity-and-property-doc-kinds](entity-and-property-doc-kinds/README.md) | approved | entity, property, document-types-registry | M | high | alexander.trakhimenok | 2026-05-18 |
+| [decision](decision/README.md) | draft | decision, decisions-index | M | high | alexander.trakhimenok | — |
 
 ### entity-and-property-doc-kinds
 
@@ -18,6 +19,14 @@ smoke-test fixtures in this repo, Rehearse scenario stubs, a spec-author
 documentation page, and CLI implementation Issues filed against
 [`specscore/specscore-cli`](https://github.com/specscore/specscore-cli).
 Implements the [entity-and-property-definitions Idea](../ideas/entity-and-property-definitions.md).
+
+### decision
+
+Delivers CLI support for the `decision` and `decisions-index` Features:
+lint rules for all Decision REQs, `specscore decision new` scaffold command,
+immutability enforcement, decisions-index completeness and ordering checks,
+Rehearse scenario stubs, and specification pages for the public site.
+Implements the [decision-and-decisions-index Idea](../ideas/decision-and-decisions-index.md).
 
 ## Recently Closed
 

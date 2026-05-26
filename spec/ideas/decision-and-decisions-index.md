@@ -83,11 +83,13 @@ No REQ↔Decision linking in MVP. No automatic migration from existing `Alternat
 
 ## Open Questions
 
-- **Filename form: numbered-and-slugged (`0007-postgres-over-mongo.md`) or slug-only with a `**Number:**` header field?** Numbered-filename is the ADR convention and gives short citations. Slug-only preserves the existing SpecScore invariant. Recommend numbered-filename; flag as the biggest convention break on this Idea.
-- **Status lifecycle: `Proposed → Accepted → Superseded`, or also include `Deprecated` (no successor, just "don't follow this anymore")?** ADR community uses both. Recommend Deprecated be included — sometimes a decision expires without a replacement.
-- **Should `Declined Alternatives` require a minimum count of entries (e.g. ≥1)?** Matches `idea`'s `not-doing-non-empty` discipline. Recommend yes; the whole point of the artifact is the trade-off.
-- **Where does the `Observed Consequences` append-only rule get enforced?** Lint by body-hash-minus-that-section, or simply by convention? Recommend lint enforces immutability of all other sections once `Accepted`; `Observed Consequences` is the only mutable section.
-- **Does `decisions-index` need `Affected Features` as a first-class index column, or is that over-scoping MVP?** Recommend ship without it; add if the volume justifies a faceted index.
+None at this time. All original open questions were resolved during Feature specification:
+
+- **Filename form** → Numbered-and-slugged (`NNNN-<slug>.md`). See `decision` REQ: filename-format.
+- **Status lifecycle** → Includes `Deprecated`. See `decision` REQ: status-values.
+- **Declined Alternatives minimum** → ≥1 entry required. See `decision` REQ: declined-alternatives-non-empty.
+- **Observed Consequences enforcement** → Lint enforces immutability of all sections except `Observed Consequences` (append-only). See `decision` REQ: immutability-once-accepted, REQ: observed-consequences-append-only.
+- **Affected Features index column** → Included. See `decisions-index` REQ: index-columns.
 
 ---
 *This document follows the https://specscore.md/idea-specification*
