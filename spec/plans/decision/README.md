@@ -104,6 +104,12 @@ Open Issues on `specscore/specscore-cli` covering the full CLI surface, organize
 **Produces:**
 - 4 Issues on `specscore/specscore-cli`, linked from this plan.
 
+**Filed Issues:**
+- [#12 — Lint: validate Decision artifacts against all decision Feature REQs](https://github.com/specscore/specscore-cli/issues/12)
+- [#13 — Lint: immutability enforcement for Accepted Decisions](https://github.com/specscore/specscore-cli/issues/13)
+- [#14 — CLI: `specscore decision new <slug>` scaffold command](https://github.com/specscore/specscore-cli/issues/14)
+- [#15 — Lint: validate decisions-index against all decisions-index Feature REQs](https://github.com/specscore/specscore-cli/issues/15)
+
 **Acceptance criteria:**
 - Each Issue references the relevant Feature, REQs, and this plan by URL.
 - Each Issue links to the scenario stubs as the executable contract.
@@ -167,6 +173,7 @@ None at this time.
 | Date | Git Hash | Action | Comment |
 |---|---|---|---|
 | 2026-05-26 | — | drafted | Initial plan draft |
+| 2026-05-26 | `38448d3` | checkpoint | Tasks 1–4 and 6 implemented: audit passed (D-0001 compliant), decisions-index columns fixed, 19 decision scenario stubs + 6 decisions-index scenario stubs scaffolded, site-config updated for both specification pages. 4 CLI Issues filed against specscore/specscore-cli (#12–#15). `specscore spec lint`: 0 violations. |
 
 ---
 *This document follows the https://specscore.md/plan-specification*
