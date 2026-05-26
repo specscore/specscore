@@ -93,6 +93,30 @@
       "llmsFull": true
     },
     {
+      "source": "spec/features/decision/README.md",
+      "slug": "decision-specification",
+      "title": "Decision Specification",
+      "nav": true,
+      "navLabel": "Decision",
+      "navGroup": "Specification",
+      "navOrder": 8,
+      "llmsGroup": "Specifications",
+      "llmsDescription": "Architecture Decision Records (ADRs) adapted to SpecScore conventions. Durable, lintable records of choices made between options — immutable once accepted, superseded never rewritten.",
+      "llmsFull": true
+    },
+    {
+      "source": "spec/features/decisions-index/README.md",
+      "slug": "decisions-index-specification",
+      "title": "Decisions Index Specification",
+      "nav": true,
+      "navLabel": "Decisions Index",
+      "navGroup": "Specification",
+      "navOrder": 9,
+      "llmsGroup": "Specifications",
+      "llmsDescription": "Canonical index of active Decision documents in a repo. Inherits the shared Index shape with decisions-specific column set and numeric ordering.",
+      "llmsFull": true
+    },
+    {
       "source": "docs/installation.md",
       "slug": "install",
       "title": "Installation",
