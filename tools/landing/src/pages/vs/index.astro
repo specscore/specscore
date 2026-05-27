@@ -4,6 +4,7 @@
 // Currently only OpenSpec; more entries can be added here.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
+import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
 ---
 
 <BaseLayout
@@ -44,27 +45,7 @@ import SiteHeader from '../../components/SiteHeader.astro';
       </div>
     </section>
 
-    {/* ── Feedback ── */}
-    <section class="section feedback-section" aria-labelledby="feedback-title">
-      <div class="section-inner section-inner--prose">
-        <h2 id="feedback-title" class="sr-only">Feedback</h2>
-        <p class="feedback-p">
-          These comparisons are based on publicly available documentation and source code.
-          If something is wrong or outdated,
-          <a
-            href="https://github.com/specscore/specscore/issues/new?labels=comparison%2Ccorrection&title=%5Bvs%5D+Factual+correction&body=%2A%2APage%3A%2A%2A+%2Fvs%2F...%0A%2A%2AWhat%27s+incorrect%3A%2A%2A+%0A%2A%2AWhat+it+should+say%3A%2A%2A+%0A%2A%2ASource%3A%2A%2A+"
-            rel="noopener"
-            class="xref"
-          >open a correction issue</a>.
-          If you want us to add a comparison with another spec format or tool,
-          <a
-            href="https://github.com/specscore/specscore/issues/new?labels=comparison%2Crequest&title=%5Bvs%5D+Add+comparison+with+...&body=%2A%2ATool%2Fformat+name%3A%2A%2A+%0A%2A%2AWebsite%3A%2A%2A+%0A%2A%2AWhy+compare%3A%2A%2A+"
-            rel="noopener"
-            class="xref"
-          >request one</a>.
-        </p>
-      </div>
-    </section>
+    <ComparisonFeedback />
   </main>
 
   <footer class="page-footer">
@@ -189,14 +170,6 @@ import SiteHeader from '../../components/SiteHeader.astro';
 
   @media (max-width: 720px) {
     .compare-grid { grid-template-columns: 1fr; }
-  }
-
-  /* ── Feedback ── */
-  .feedback-section { border-top: none; }
-  .feedback-p {
-    font-size: var(--fs-small);
-    color: var(--pale-ink);
-    line-height: 1.6;
   }
 
   /* ── Footer ── */

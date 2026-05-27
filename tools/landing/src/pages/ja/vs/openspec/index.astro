@@ -2,6 +2,7 @@
 // /ja/vs/openspec/ — SpecScore vs OpenSpec comparison (ja).
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
+import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro';
 ---
 
 <BaseLayout
@@ -257,27 +258,7 @@ import SiteHeader from '../../../../components/SiteHeader.astro';
       </div>
     </section>
 
-    {/* ── Feedback ── */}
-    <section class="section feedback-section" aria-labelledby="feedback-title">
-      <div class="section-inner section-inner--prose">
-        <h2 id="feedback-title" class="sr-only">フィードバック</h2>
-        <p class="feedback-p">
-          この比較は公開されているドキュメントとソースコードに基づいています。
-          誤りや古い情報がありますか？
-          <a
-            href="https://github.com/specscore/specscore/issues/new?labels=comparison%2Ccorrection&title=%5Bvs%2Fopenspec%5D+Factual+correction&body=%2A%2APage%3A%2A%2A+%2Fvs%2Fopenspec%2F%0A%2A%2ASection%3A%2A%2A+%0A%2A%2AWhat%27s+incorrect%3A%2A%2A+%0A%2A%2AWhat+it+should+say%3A%2A%2A+%0A%2A%2ASource%3A%2A%2A+"
-            rel="noopener"
-            class="xref"
-          >修正issueを作成</a>してください。
-          他のツールとの比較をご希望ですか？
-          <a
-            href="https://github.com/specscore/specscore/issues/new?labels=comparison%2Crequest&title=%5Bvs%5D+Add+comparison+with+...&body=%2A%2ATool%2Fformat+name%3A%2A%2A+%0A%2A%2AWebsite%3A%2A%2A+%0A%2A%2AWhy+compare%3A%2A%2A+"
-            rel="noopener"
-            class="xref"
-          >リクエスト</a>してください。
-        </p>
-      </div>
-    </section>
+    <ComparisonFeedback page="openspec" />
   </main>
 
   {/* ── Final CTA ── */}
@@ -371,13 +352,6 @@ import SiteHeader from '../../../../components/SiteHeader.astro';
   .prose-p { color: var(--mid-ink); line-height: 1.65; margin-bottom: var(--space-2); }
   .prose-p:last-child { margin-bottom: 0; font-weight: 500; color: var(--ink); }
   .prose-p code { font-size: 0.9em; background: var(--cream-2); padding: 0.05em 0.3em; border-radius: 2px; }
-  /* ── Feedback ── */
-  .feedback-section { border-top: none; }
-  .feedback-p {
-    font-size: var(--fs-small);
-    color: var(--pale-ink);
-    line-height: 1.6;
-  }
   .final-cta { background: var(--cream-2); padding: var(--space-7) var(--space-3); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
   .final-cta__inner { max-width: var(--max-content); margin: 0 auto; text-align: center; }
   .final-cta__title { font-size: clamp(2.2rem, 4.2vw, 3.2rem); margin-bottom: var(--space-4); letter-spacing: -0.02em; line-height: 1.05; }

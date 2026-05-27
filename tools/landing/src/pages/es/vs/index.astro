@@ -2,6 +2,7 @@
 // /es/vs/ — Comparison index page (Spanish).
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../components/SiteHeader.astro';
+import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
 ---
 
 <BaseLayout
@@ -40,27 +41,7 @@ import SiteHeader from '../../../components/SiteHeader.astro';
       </div>
     </section>
 
-    {/* ── Feedback ── */}
-    <section class="section feedback-section" aria-labelledby="feedback-title">
-      <div class="section-inner section-inner--prose">
-        <h2 id="feedback-title" class="sr-only">Comentarios</h2>
-        <p class="feedback-p">
-          Estas comparaciones se basan en documentación y código fuente públicamente disponibles.
-          Si algo es incorrecto o está desactualizado,
-          <a
-            href="https://github.com/specscore/specscore/issues/new?labels=comparison%2Ccorrection&title=%5Bvs%5D+Factual+correction&body=%2A%2APage%3A%2A%2A+%2Fvs%2F...%0A%2A%2AWhat%27s+incorrect%3A%2A%2A+%0A%2A%2AWhat+it+should+say%3A%2A%2A+%0A%2A%2ASource%3A%2A%2A+"
-            rel="noopener"
-            class="xref"
-          >abre un issue de corrección</a>.
-          Si quieres que agreguemos una comparación con otro formato o herramienta de specs,
-          <a
-            href="https://github.com/specscore/specscore/issues/new?labels=comparison%2Crequest&title=%5Bvs%5D+Add+comparison+with+...&body=%2A%2ATool%2Fformat+name%3A%2A%2A+%0A%2A%2AWebsite%3A%2A%2A+%0A%2A%2AWhy+compare%3A%2A%2A+"
-            rel="noopener"
-            class="xref"
-          >solicita una</a>.
-        </p>
-      </div>
-    </section>
+    <ComparisonFeedback />
   </main>
 
   <footer class="page-footer">
@@ -114,13 +95,6 @@ import SiteHeader from '../../../components/SiteHeader.astro';
   .compare-card__desc { color: var(--mid-ink); font-size: var(--fs-body); line-height: 1.6; margin-bottom: var(--space-3); }
   .compare-card__cta { font-family: var(--font-display); font-size: var(--fs-small); font-weight: 600; color: var(--validator-green); }
   @media (max-width: 720px) { .compare-grid { grid-template-columns: 1fr; } }
-  /* ── Feedback ── */
-  .feedback-section { border-top: none; }
-  .feedback-p {
-    font-size: var(--fs-small);
-    color: var(--pale-ink);
-    line-height: 1.6;
-  }
   .page-footer { background: var(--cream); padding: var(--space-6) var(--space-3) var(--space-5); border-top: 1px solid var(--hairline); }
   .page-footer__inner { max-width: var(--max-content); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-4); }
   .page-footer__brand .wordmark { margin-bottom: var(--space-2); }

@@ -1,0 +1,135 @@
+---
+// Feedback note for /vs/ comparison pages.
+// Detects locale from URL. Pass `page` for specific comparison pages
+// (e.g. "openspec") — omit for the /vs/ index.
+
+interface Props {
+  /** Comparison page slug, e.g. "openspec". Omit on the /vs/ index. */
+  page?: string;
+}
+
+const { page } = Astro.props;
+const path = Astro.url.pathname;
+const locale =
+  path.startsWith('/ru')    ? 'ru'    :
+  path.startsWith('/uk')    ? 'uk'    :
+  path.startsWith('/es')    ? 'es'    :
+  path.startsWith('/pt-br') ? 'pt-br' :
+  path.startsWith('/ja')    ? 'ja'    :
+  path.startsWith('/zh-cn') ? 'zh-cn' :
+  path.startsWith('/ko')    ? 'ko'    :
+                              'en';
+
+// Build GitHub issue URLs.
+const pageTag = page ? `vs/${page}` : 'vs';
+const correctionUrl =
+  `https://github.com/specscore/specscore/issues/new?labels=comparison%2Ccorrection` +
+  `&title=%5B${encodeURIComponent(pageTag)}%5D+Factual+correction` +
+  `&body=%2A%2APage%3A%2A%2A+%2F${encodeURIComponent(pageTag)}%2F` +
+  (page ? '%0A%2A%2ASection%3A%2A%2A+' : '%0A') +
+  '%0A%2A%2AWhat%27s+incorrect%3A%2A%2A+%0A%2A%2AWhat+it+should+say%3A%2A%2A+%0A%2A%2ASource%3A%2A%2A+';
+const requestUrl =
+  `https://github.com/specscore/specscore/issues/new?labels=comparison%2Crequest` +
+  `&title=%5Bvs%5D+Add+comparison+with+...` +
+  `&body=%2A%2ATool%2Fformat+name%3A%2A%2A+%0A%2A%2AWebsite%3A%2A%2A+%0A%2A%2AWhy+compare%3A%2A%2A+`;
+
+// Translations — index (plural) and specific page (singular) variants.
+type Copy = { index: string; specific: string; correction: string; request: string };
+const i18n: Record<string, Copy> = {
+  en: {
+    index: 'These comparisons are based on publicly available documentation and source code. If something is wrong or outdated,',
+    specific: 'This comparison is based on publicly available documentation and source code. Something wrong or outdated?',
+    correction: 'open a correction issue',
+    request: 'request one',
+  },
+  es: {
+    index: 'Estas comparaciones se basan en documentación y código fuente públicamente disponibles. Si algo es incorrecto o está desactualizado,',
+    specific: 'Esta comparación se basa en documentación y código fuente públicamente disponibles. ¿Algo incorrecto o desactualizado?',
+    correction: 'abre un issue de corrección',
+    request: 'solicita una',
+  },
+  'pt-br': {
+    index: 'Estas comparações são baseadas em documentação e código-fonte publicamente disponíveis. Se algo está incorreto ou desatualizado,',
+    specific: 'Esta comparação é baseada em documentação e código-fonte publicamente disponíveis. Algo incorreto ou desatualizado?',
+    correction: 'abra uma issue de correção',
+    request: 'solicite uma',
+  },
+  ru: {
+    index: 'Эти сравнения основаны на публично доступной документации и исходном коде. Если что-то неверно или устарело,',
+    specific: 'Это сравнение основано на публично доступной документации и исходном коде. Что-то неверно или устарело?',
+    correction: 'откройте issue с исправлением',
+    request: 'запросите его',
+  },
+  uk: {
+    index: 'Ці порівняння базуються на публічно доступній документації та вихідному коді. Якщо щось невірно або застаріло,',
+    specific: 'Це порівняння базується на публічно доступній документації та вихідному коді. Щось невірно або застаріло?',
+    correction: 'відкрийте issue з виправленням',
+    request: 'запросіть його',
+  },
+  ja: {
+    index: 'これらの比較は公開されているドキュメントとソースコードに基づいています。誤りや古い情報がある場合は、',
+    specific: 'この比較は公開されているドキュメントとソースコードに基づいています。誤りや古い情報がありますか？',
+    correction: '修正issueを作成',
+    request: 'リクエスト',
+  },
+  'zh-cn': {
+    index: '这些对比基于公开可用的文档和源代码。如果有不准确或过时的信息，请',
+    specific: '本对比基于公开可用的文档和源代码。发现不准确或过时的信息？请',
+    correction: '提交勘误 issue',
+    request: '提交请求',
+  },
+  ko: {
+    index: '이 비교는 공개적으로 이용 가능한 문서와 소스 코드를 기반으로 합니다. 잘못되었거나 오래된 정보가 있다면',
+    specific: '이 비교는 공개적으로 이용 가능한 문서와 소스 코드를 기반으로 합니다. 잘못되었거나 오래된 정보가 있나요?',
+    correction: '수정 issue를 열어주세요',
+    request: '요청해 주세요',
+  },
+};
+
+const t = i18n[locale] ?? i18n.en;
+const intro = page ? t.specific : t.index;
+
+// Second sentence varies by page type.
+const i18nRequest: Record<string, { index: string; specific: string }> = {
+  en:      { index: 'If you want us to add a comparison with another spec format or tool,',  specific: 'Want us to compare SpecScore with another tool?' },
+  es:      { index: 'Si quieres que agreguemos una comparación con otro formato o herramienta de specs,', specific: '¿Quieres que comparemos SpecScore con otra herramienta?' },
+  'pt-br': { index: 'Se você quer que adicionemos uma comparação com outro formato ou ferramenta de specs,', specific: 'Quer que comparemos o SpecScore com outra ferramenta?' },
+  ru:      { index: 'Хотите, чтобы мы добавили сравнение с другим форматом или инструментом?', specific: 'Хотите, чтобы мы сравнили SpecScore с другим инструментом?' },
+  uk:      { index: 'Хочете, щоб ми додали порівняння з іншим форматом або інструментом?', specific: 'Хочете, щоб ми порівняли SpecScore з іншим інструментом?' },
+  ja:      { index: '他のツールとの比較を追加してほしい場合は、', specific: '他のツールとの比較をご希望ですか？' },
+  'zh-cn': { index: '如果您希望我们添加与其他规范格式或工具的对比，请', specific: '希望我们将 SpecScore 与其他工具进行对比？请' },
+  ko:      { index: '다른 도구와의 비교를 추가해 주길 원하시면', specific: 'SpecScore를 다른 도구와 비교해 주길 원하시나요?' },
+};
+
+const reqSentence = page
+  ? (i18nRequest[locale]?.specific ?? i18nRequest.en.specific)
+  : (i18nRequest[locale]?.index ?? i18nRequest.en.index);
+
+// Screen-reader heading.
+const srHeading: Record<string, string> = {
+  en: 'Feedback', es: 'Comentarios', 'pt-br': 'Feedback',
+  ru: 'Обратная связь', uk: "Зворотний зв'язок", ja: 'フィードバック',
+  'zh-cn': '反馈', ko: '피드백',
+};
+---
+
+<section class="section feedback-section" aria-labelledby="feedback-title">
+  <div class="section-inner section-inner--prose">
+    <h2 id="feedback-title" class="sr-only">{srHeading[locale] ?? 'Feedback'}</h2>
+    <p class="feedback-p">
+      {intro}
+      {' '}<a href={correctionUrl} rel="noopener" class="xref">{t.correction}</a>.
+      {' '}{reqSentence}
+      {' '}<a href={requestUrl} rel="noopener" class="xref">{t.request}</a>.
+    </p>
+  </div>
+</section>
+
+<style>
+  .feedback-section { border-top: none; }
+  .feedback-p {
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    line-height: 1.6;
+  }
+</style>
