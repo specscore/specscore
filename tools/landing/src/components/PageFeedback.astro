@@ -1,0 +1,91 @@
+---
+// Universal page feedback bar — appears at the bottom of every landing page.
+// On non-English pages: mentions translation errors AND general improvements.
+// On English pages: mentions general improvements only.
+// Replaces the per-locale translation-note blocks that were in BaseLayout.
+
+const path = Astro.url.pathname;
+const locale =
+  path.startsWith('/ru')    ? 'ru'    :
+  path.startsWith('/uk')    ? 'uk'    :
+  path.startsWith('/es')    ? 'es'    :
+  path.startsWith('/pt-br') ? 'pt-br' :
+  path.startsWith('/ja')    ? 'ja'    :
+  path.startsWith('/zh-cn') ? 'zh-cn' :
+  path.startsWith('/ko')    ? 'ko'    :
+                              'en';
+
+// Encode current path for the issue body.
+const encodedPath = encodeURIComponent(path);
+const issueUrl =
+  `https://github.com/specscore/specscore/issues/new` +
+  `?labels=page-feedback` +
+  `&title=Page+feedback%3A+${encodedPath}` +
+  `&body=%2A%2APage%3A%2A%2A+${encodedPath}%0A%2A%2AWhat+to+improve%3A%2A%2A+`;
+
+type Copy = { text: string; link: string };
+const i18n: Record<string, Copy> = {
+  en: {
+    text: 'Have an idea how to improve this page?',
+    link: 'Let us know',
+  },
+  es: {
+    text: '¿Encontraste un error en la traducción o tienes una idea para mejorar esta página?',
+    link: 'Avísanos',
+  },
+  'pt-br': {
+    text: 'Encontrou um erro na tradução ou tem uma ideia para melhorar esta página?',
+    link: 'Nos avise',
+  },
+  ru: {
+    text: 'Нашли ошибку в переводе или знаете, как улучшить эту страницу?',
+    link: 'Сообщите нам',
+  },
+  uk: {
+    text: 'Знайшли помилку в перекладі або маєте ідею, як покращити цю сторінку?',
+    link: 'Повідомте нам',
+  },
+  ja: {
+    text: '翻訳の誤りやこのページの改善案がありますか？',
+    link: 'お知らせください',
+  },
+  'zh-cn': {
+    text: '发现翻译问题或有改进此页面的想法？',
+    link: '告诉我们',
+  },
+  ko: {
+    text: '번역 오류를 발견했거나 이 페이지를 개선할 아이디어가 있나요?',
+    link: '알려주세요',
+  },
+};
+
+const t = i18n[locale] ?? i18n.en;
+---
+
+<div class="page-feedback">
+  <p>
+    {t.text}
+    {' '}<a href={issueUrl} rel="noopener">{t.link}</a>.
+  </p>
+</div>
+
+<style>
+  .page-feedback {
+    background: var(--cream-2);
+    border-top: 1px solid var(--hairline);
+    padding: 0.75rem var(--space-3);
+    text-align: center;
+    font-family: var(--font-code);
+    font-size: 0.78rem;
+    color: var(--pale-ink);
+    letter-spacing: 0.01em;
+  }
+  .page-feedback a {
+    color: var(--ink-blue);
+    border-bottom: 1px solid currentColor;
+    transition: color 120ms ease;
+  }
+  .page-feedback a:hover {
+    color: var(--ink);
+  }
+</style>
