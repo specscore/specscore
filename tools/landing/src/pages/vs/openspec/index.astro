@@ -292,6 +292,28 @@ import SiteHeader from '../../../components/SiteHeader.astro';
         </p>
       </div>
     </section>
+
+    {/* ── Feedback ── */}
+    <section class="section feedback-section" aria-labelledby="feedback-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="feedback-title" class="sr-only">Feedback</h2>
+        <p class="feedback-p">
+          This comparison is based on publicly available documentation and source code.
+          Something wrong or outdated?
+          <a
+            href="https://github.com/specscore/specscore/issues/new?labels=comparison%2Ccorrection&title=%5Bvs%2Fopenspec%5D+Factual+correction&body=%2A%2APage%3A%2A%2A+%2Fvs%2Fopenspec%2F%0A%2A%2ASection%3A%2A%2A+%0A%2A%2AWhat%27s+incorrect%3A%2A%2A+%0A%2A%2AWhat+it+should+say%3A%2A%2A+%0A%2A%2ASource%3A%2A%2A+"
+            rel="noopener"
+            class="xref"
+          >Open a correction issue</a>.
+          Want us to compare SpecScore with another tool?
+          <a
+            href="https://github.com/specscore/specscore/issues/new?labels=comparison%2Crequest&title=%5Bvs%5D+Add+comparison+with+...&body=%2A%2ATool%2Fformat+name%3A%2A%2A+%0A%2A%2AWebsite%3A%2A%2A+%0A%2A%2AWhy+compare%3A%2A%2A+"
+            rel="noopener"
+            class="xref"
+          >Request one</a>.
+        </p>
+      </div>
+    </section>
   </main>
 
   {/* ── Final CTA ── */}
@@ -611,6 +633,14 @@ import SiteHeader from '../../../components/SiteHeader.astro';
     background: var(--cream-2);
     padding: 0.05em 0.3em;
     border-radius: 2px;
+  }
+
+  /* ── Feedback ── */
+  .feedback-section { border-top: none; }
+  .feedback-p {
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    line-height: 1.6;
   }
 
   /* ── Final CTA ── */
