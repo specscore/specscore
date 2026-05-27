@@ -187,12 +187,25 @@ pre.terminal,
 .terminal .prompt { color: var(--pale-ink); user-select: none; }
 .terminal .dim { color: var(--mid-ink); }
 
-/* --- Hero stars badge --- */
-.hero__stars {
-  display: inline-block;
-  margin-top: var(--space-2);
+/* --- Hero GitHub line --- */
+.hero__github {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: var(--space-3);
 }
-.hero__stars img { display: inline-block; vertical-align: middle; }
+.hero__github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--mid-ink);
+}
+.hero__github-link:hover { color: var(--ink); }
+.hero__github-link svg { flex-shrink: 0; }
+.hero__github img { display: inline-block; vertical-align: middle; }
 
 /* --- Final CTA section --- */
 .final-cta {
