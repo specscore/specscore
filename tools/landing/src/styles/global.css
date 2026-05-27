@@ -187,6 +187,13 @@ pre.terminal,
 .terminal .prompt { color: var(--pale-ink); user-select: none; }
 .terminal .dim { color: var(--mid-ink); }
 
+/* --- Hero stars badge --- */
+.hero__stars {
+  display: inline-block;
+  margin-top: var(--space-2);
+}
+.hero__stars img { display: inline-block; vertical-align: middle; }
+
 /* --- Final CTA section --- */
 .final-cta {
   background: var(--cream-2);
@@ -206,6 +213,8 @@ pre.terminal,
 .final-cta__star { margin-top: var(--space-2); color: var(--mid-ink); font-size: var(--fs-small); }
 .final-cta__star a { color: inherit; text-decoration: underline; }
 .final-cta__star a:hover { color: var(--ink); }
+.final-cta__badge { display: inline-block; margin-left: 0.5rem; vertical-align: middle; }
+.final-cta__badge img { display: inline-block; vertical-align: middle; }
 
 /* --- Cross-reference links --- */
 .xref {
