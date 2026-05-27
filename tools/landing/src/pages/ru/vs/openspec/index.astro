@@ -1,0 +1,366 @@
+---
+// /ru/vs/openspec/ — SpecScore vs OpenSpec comparison (ru).
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+---
+
+<BaseLayout
+  lang="ru"
+  title="SpecScore vs OpenSpec — Честное сравнение."
+  description="Фактологическое сравнение SpecScore и OpenSpec: формат спецификаций, линтинг, жизненный цикл, трассируемость, CLI и поддержка агентов. Честно о каждом."
+  canonical="https://specscore.md/ru/vs/openspec/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href="/ru/vs/" class="xref">Сравнения</a></p>
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore vs OpenSpec
+        </h1>
+        <p class="hero__sub">
+          Оба инструмента хранят спецификации в Markdown рядом с вашим кодом — читаемые для AI-агентов. Они решают разные задачи: OpenSpec организует спецификации и генерирует команды для агентов. SpecScore проверяет содержание спецификаций, контролирует жизненный цикл и обеспечивает трассируемость кода к требованиям.
+        </p>
+      </div>
+    </section>
+
+    {/* ── What they share ── */}
+    <section class="section" aria-labelledby="shared-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="shared-title" class="section-title">Что у них общего.</h2>
+        <ul class="shared-list">
+          <li>Спецификации хранятся в репозитории как Markdown-файлы — с контролем версий и ревью через PR.</li>
+          <li>Оба проекта с открытым исходным кодом под лицензией MIT.</li>
+          <li>Оба используют критерии приёмки в формате Given/When/Then.</li>
+          <li>Оба поддерживают AI-агентов для разработки как полноценных потребителей спецификаций.</li>
+        </ul>
+      </div>
+    </section>
+
+    {/* ── What OpenSpec does well ── */}
+    <section class="section" aria-labelledby="openspec-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="openspec-title" class="section-title">Сильные стороны OpenSpec.</h2>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Самая широкая поддержка агентов</h3>
+          <p class="credit-card__desc">
+            OpenSpec поддерживает 29 AI-агентов для разработки через генерируемые файлы навыков — Claude, Cursor, Copilot, Gemini, Windsurf, Cline и другие. Если ваш агент есть в списке, OpenSpec интегрируется без настройки.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Низкий порог входа</h3>
+          <p class="credit-card__desc">
+            <code>npm install -g @fission-ai/openspec &amp;&amp; openspec init</code> — и вы уже пишете спецификации. Не нужно изучать схему, не требуется frontmatter. Инструмент спроектирован так, чтобы начать было максимально просто — особенно для существующих проектов.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Продуманная модель дельта-изменений</h3>
+          <p class="credit-card__desc">
+            Формат <code>ADDED / MODIFIED / REMOVED</code> в OpenSpec для развития спецификаций хорошо продуман. Каждое изменение — это папка с предложением, дельта-спецификациями и задачами — структурированный способ предлагать модификации.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Feature comparison table ── */}
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">Сравнение возможностей.</h2>
+
+        <div class="table-wrap">
+          <table class="compare-table" aria-label="Сравнение возможностей SpecScore и OpenSpec">
+            <thead>
+              <tr>
+                <th scope="col">Возможность</th>
+                <th scope="col">OpenSpec</th>
+                <th scope="col">SpecScore</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Формат спецификаций</td>
+                <td>Markdown (без frontmatter)</td>
+                <td>Markdown + YAML frontmatter</td>
+              </tr>
+              <tr>
+                <td>Линтинг спецификаций</td>
+                <td>Только структура файлов</td>
+                <td><strong>Качество содержания</strong> — расплывчатые формулировки, отсутствующие критерии приёмки, висячие ссылки</td>
+              </tr>
+              <tr>
+                <td>Идентификаторы требований</td>
+                <td>Нет (ссылки по заголовку)</td>
+                <td><strong>На основе slug</strong> (<code>REQ: slug-format</code>)</td>
+              </tr>
+              <tr>
+                <td>Идентификаторы критериев приёмки</td>
+                <td>Нет</td>
+                <td><strong>Машинно-адресуемые ID</strong></td>
+              </tr>
+              <tr>
+                <td>Статус жизненного цикла</td>
+                <td>Неявный (по расположению файла)</td>
+                <td><strong>Контролируемый</strong> — Draft → Under Review → Approved → Implementing → Stable → Deprecated</td>
+              </tr>
+              <tr>
+                <td>Трассируемость кода к спецификациям</td>
+                <td>Нет</td>
+                <td><strong><code>specscore:</code> аннотации</strong> + <code>Verifies:</code> трейлеры коммитов</td>
+              </tr>
+              <tr>
+                <td>Подфункции</td>
+                <td>Нет</td>
+                <td><strong>Да</strong> (вложенные директории)</td>
+              </tr>
+              <tr>
+                <td>Перекрёстные ссылки</td>
+                <td>Нет формального механизма</td>
+                <td><strong>Зависимости, исходные идеи, ссылки на планы</strong></td>
+              </tr>
+              <tr>
+                <td>Интеграция с CI</td>
+                <td>Базовая (<code>openspec validate</code>)</td>
+                <td><strong><code>specscore lint</code></strong> с настраиваемой строгостью, pre-commit хуки</td>
+              </tr>
+              <tr>
+                <td>Поддержка агентов</td>
+                <td><strong>29 агентов</strong></td>
+                <td>Основной — Claude Code + CLI для любого агента</td>
+              </tr>
+              <tr>
+                <td>Настройка схемы</td>
+                <td><strong>Да</strong> (<code>schema.yaml</code>, fork/init)</td>
+                <td>Фиксированная схема (консистентность по дизайну)</td>
+              </tr>
+              <tr>
+                <td>Предложения изменений</td>
+                <td><strong>Дельта-модель</strong> (ADDED/MODIFIED/REMOVED)</td>
+                <td>Идеи и предложения на изменения</td>
+              </tr>
+              <tr>
+                <td>Зависимость от среды выполнения</td>
+                <td>Node.js 20.19+</td>
+                <td><strong>Нет</strong> — единый бинарный файл на Go</td>
+              </tr>
+              <tr>
+                <td>Лицензия</td>
+                <td>MIT</td>
+                <td>MIT</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Where SpecScore goes further ── */}
+    <section class="section" aria-labelledby="further-title">
+      <div class="section-inner">
+        <h2 id="further-title" class="section-title">В чём SpecScore идёт дальше.</h2>
+
+        <div class="diff-grid">
+          <div class="diff-card">
+            <h3 class="diff-card__title">Линтинг спецификаций ловит неоднозначности раньше агентов</h3>
+            <p class="diff-card__desc">
+              Команда <code>validate</code> в OpenSpec проверяет структуру файлов — существует ли файл, есть ли нужные секции. Команда <code>lint</code> в SpecScore проверяет содержание: расплывчатые глаголы без объекта/условия, отсутствующие критерии приёмки, висячие перекрёстные ссылки, некорректные переходы статусов.
+            </p>
+            <div class="diff-card__example">
+<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+  <span class="mark-fail">✗</span> R3  Discount application
+       <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
+                <span class="dim">fix:</span> specify "higher discount wins; if tied, site-wide wins"</pre>
+            </div>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">У каждого требования есть машиночитаемый ID</h3>
+            <p class="diff-card__desc">
+              OpenSpec ссылается на требования по заголовку — это хрупко при переименованиях. SpecScore присваивает ID на основе slug (<code>REQ: slug-format</code>) и ID критериев приёмки, которые сохраняются при переименованиях, рефакторингах и передаче между агентами.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Жизненный цикл контролируется, а не подразумевается</h3>
+            <p class="diff-card__desc">
+              В OpenSpec жизненный цикл спецификации определяется расположением файла: <code>specs/</code> (текущие), <code>changes/</code> (предложенные), <code>archive/</code> (завершённые). В SpecScore жизненный цикл — это контролируемое поле статуса: Draft → Under Review → Approved → Implementing → Stable → Deprecated — валидируется линтером, переключается командой <code>specscore change-status</code> из git-хуков или CI.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Код прослеживается до спецификаций</h3>
+            <p class="diff-card__desc">
+              OpenSpec не имеет механизма трассируемости. В SpecScore есть аннотации <code>specscore:</code> в комментариях кода и трейлеры <code>Verifies:</code> в коммитах. Запустите <code>specscore code refs</code> и получите детерминированный ответ на вопрос «какой код реализует это требование?»
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Без зависимости от среды выполнения</h3>
+            <p class="diff-card__desc">
+              OpenSpec требует Node.js 20.19+. SpecScore — это единый бинарный файл на Go: без среды выполнения, без <code>node_modules</code>. Работает в проектах на Go, Rust, Python, Java без добавления Node в инструментарий.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Компонуемая иерархия артефактов</h3>
+            <p class="diff-card__desc">
+              Спецификации OpenSpec плоские, организованные по доменам. SpecScore имеет типизированную иерархию: идеи продвигаются в функции, функции содержат требования и критерии приёмки, планы ссылаются на критерии приёмки, задачи ссылаются на планы. Все связи доступны для машинной навигации через CLI.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── When to use which ── */}
+    <section class="section" aria-labelledby="when-title">
+      <div class="section-inner">
+        <h2 id="when-title" class="section-title">Когда что использовать.</h2>
+
+        <div class="when-grid">
+          <div class="when-card">
+            <h3 class="when-card__title">Начните с OpenSpec, если...</h3>
+            <ul class="when-card__list">
+              <li>Вы используете Cursor, Copilot или других не-Claude агентов и хотите интеграцию «из коробки».</li>
+              <li>Вы впервые добавляете спецификации в существующую кодовую базу и хотите минимум трений.</li>
+              <li>Ваша команда ценит гибкость схемы больше, чем контроль.</li>
+            </ul>
+          </div>
+
+          <div class="when-card when-card--primary">
+            <h3 class="when-card__title">Используйте SpecScore, если...</h3>
+            <ul class="when-card__list">
+              <li>Вам нужен контроль качества спецификаций — линтер ловит неоднозначности до того, как агенты потратят токены впустую.</li>
+              <li>Вам нужна трассируемость кода к спецификациям — «какой код реализует это требование?» даёт детерминированный ответ.</li>
+              <li>Вы строите крупную систему с множеством функций, подфункций и переходов жизненного цикла.</li>
+              <li>Вы хотите ноль зависимостей от среды выполнения — один бинарный файл, Node.js не требуется.</li>
+              <li>Вам нужны гейты качества спецификаций в CI — <code>specscore lint</code> завершается с ненулевым кодом при ошибках, как ESLint или <code>go vet</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── The integration opportunity ── */}
+    <section class="section" aria-labelledby="bridge-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="bridge-title" class="section-title">Они не взаимоисключающие.</h2>
+        <p class="prose-p">
+          SpecScore может проверять файлы <code>spec.md</code> OpenSpec. Команды, начавшие с OpenSpec, могут добавить слой контроля качества SpecScore без миграции — проверяйте уже имеющиеся спецификации, добавляйте трассируемость, когда она понадобится, контролируйте жизненный цикл, когда команда вырастет.
+        </p>
+        <p class="prose-p">
+          OpenSpec — отличная стартовая площадка. SpecScore — ограждающие рельсы.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">Спецификации, которые проходят проверку.</h2>
+      <div class="final-cta__buttons">
+        <a href="/cli/install/" class="btn btn--primary">Установить CLI</a>
+        <a href="/ai/specstudio-skills/" class="btn btn--secondary">AI-навыки для вашего агента</a>
+        <a href="https://github.com/specscore/specscore" rel="noopener" class="btn btn--tertiary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" /></svg>
+          Открытый код на GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <div class="page-footer__col page-footer__brand">
+        <a href="/ru/" class="wordmark" aria-label="SpecScore home">
+          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+          <span class="wordmark__name">SpecScore.md</span>
+        </a>
+        <p class="page-footer__tagline">Открытый стандарт для спецификаций, требований и критериев приёмки.</p>
+        <p class="page-footer__copyright">&copy; 2026 SpecScore contributors. MIT license.</p>
+      </div>
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">Продукт</h4>
+        <ul class="page-footer__list">
+          <li><a href="/cli/">SpecScore CLI</a></li>
+          <li><a href="/cli/install/">Установка</a></li>
+          <li><a href="https://github.com/specscore/specscore-cli">GitHub</a></li>
+        </ul>
+      </div>
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">Экосистема</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://specscore.md">SpecScore</a> — открытый стандарт</li>
+          <li><a href="/ai/specstudio-skills/">SpecStudio Skills</a></li>
+          <li><a href="https://specscore.studio">SpecScore Studio</a> — веб-просмотрщик</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  .hero { padding: var(--space-6) var(--space-3) var(--space-5); background: var(--cream); }
+  .hero__inner { max-width: var(--max-prose); margin: 0 auto; animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms; }
+  .hero__breadcrumb { font-family: var(--font-code); font-size: var(--fs-small); color: var(--pale-ink); margin-bottom: var(--space-2); }
+  .hero__headline { font-size: var(--fs-hero); font-weight: 700; line-height: 1.04; letter-spacing: -0.02em; margin-bottom: var(--space-3); }
+  .hero__sub { font-size: 1.125rem; color: var(--mid-ink); line-height: 1.55; max-width: 52ch; }
+  @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .section-title { font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-3); }
+  .shared-list { list-style: none; margin: 0; padding: 0; }
+  .shared-list li { position: relative; padding-left: 1.4rem; color: var(--mid-ink); line-height: 1.6; margin-bottom: var(--space-1); }
+  .shared-list li::before { content: '='; position: absolute; left: 0; font-family: var(--font-code); font-weight: 700; color: var(--pale-ink); }
+  .credit-card { background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-3); margin-bottom: var(--space-2); }
+  .credit-card__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; margin-bottom: var(--space-1); }
+  .credit-card__desc { color: var(--mid-ink); line-height: 1.6; font-size: var(--fs-body); }
+  .credit-card__desc code { font-size: 0.9em; background: var(--cream); padding: 0.05em 0.3em; border-radius: 2px; }
+  .table-section { background: var(--cream-2); }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .compare-table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); line-height: 1.5; }
+  .compare-table th, .compare-table td { text-align: left; padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  .compare-table thead th { font-family: var(--font-display); font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-ink); border-bottom: 2px solid var(--graphite); white-space: nowrap; }
+  .compare-table td:first-child { font-weight: 500; white-space: nowrap; min-width: 160px; }
+  .compare-table td:nth-child(2), .compare-table td:nth-child(3) { min-width: 200px; }
+  .compare-table td code { font-size: 0.88em; background: var(--surface); padding: 0.05em 0.3em; border-radius: 2px; }
+  .compare-table strong { font-weight: 600; color: var(--ink); }
+  .diff-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+  .diff-card { background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-3); }
+  .diff-card__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; margin-bottom: var(--space-1); }
+  .diff-card__desc { color: var(--mid-ink); font-size: var(--fs-small); line-height: 1.6; }
+  .diff-card__desc code { font-size: 0.9em; background: var(--cream-2); padding: 0.05em 0.3em; border-radius: 2px; }
+  .diff-card__example { margin-top: var(--space-2); }
+  .diff-card__example .terminal { font-size: 0.78rem; line-height: 1.6; }
+  @media (max-width: 860px) { .diff-grid { grid-template-columns: 1fr; } }
+  .when-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+  .when-card { background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-4); }
+  .when-card--primary { border-color: var(--validator-green); border-width: 2px; }
+  .when-card__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; margin-bottom: var(--space-2); }
+  .when-card__list { list-style: none; margin: 0; padding: 0; }
+  .when-card__list li { position: relative; padding-left: 1.2rem; color: var(--mid-ink); line-height: 1.6; margin-bottom: var(--space-1); font-size: var(--fs-small); }
+  .when-card__list li::before { content: '→'; position: absolute; left: 0; color: var(--pale-ink); font-family: var(--font-code); }
+  .when-card--primary .when-card__list li::before { color: var(--validator-green); }
+  .when-card__list code { font-size: 0.9em; background: var(--cream-2); padding: 0.05em 0.3em; border-radius: 2px; }
+  @media (max-width: 860px) { .when-grid { grid-template-columns: 1fr; } }
+  .prose-p { color: var(--mid-ink); line-height: 1.65; margin-bottom: var(--space-2); }
+  .prose-p:last-child { margin-bottom: 0; font-weight: 500; color: var(--ink); }
+  .prose-p code { font-size: 0.9em; background: var(--cream-2); padding: 0.05em 0.3em; border-radius: 2px; }
+  .final-cta { background: var(--cream-2); padding: var(--space-7) var(--space-3); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+  .final-cta__inner { max-width: var(--max-content); margin: 0 auto; text-align: center; }
+  .final-cta__title { font-size: clamp(2.2rem, 4.2vw, 3.2rem); margin-bottom: var(--space-4); letter-spacing: -0.02em; line-height: 1.05; }
+  .final-cta__buttons { display: inline-flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+  .page-footer { background: var(--cream); padding: var(--space-6) var(--space-3) var(--space-5); }
+  .page-footer__inner { max-width: var(--max-content); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-4); }
+  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
+  .page-footer__tagline { color: var(--mid-ink); margin-bottom: var(--space-2); max-width: 36ch; line-height: 1.5; font-size: 0.95rem; }
+  .page-footer__copyright { color: var(--pale-ink); font-size: 0.825rem; font-family: var(--font-code); }
+  .page-footer__heading { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-ink); margin-bottom: var(--space-2); }
+  .page-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+  .page-footer__list a { color: var(--ink); font-size: 0.9rem; border-bottom: 1px solid transparent; transition: border-color 120ms ease; }
+  .page-footer__list a:hover { border-bottom-color: var(--ink); }
+  @media (max-width: 800px) { .page-footer__inner { grid-template-columns: 1fr 1fr; } .page-footer__brand { grid-column: 1 / -1; } }
+</style>

@@ -1,0 +1,366 @@
+---
+// /ja/vs/openspec/ — SpecScore vs OpenSpec comparison (ja).
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+---
+
+<BaseLayout
+  lang="ja"
+  title="SpecScore vs OpenSpec — 誠実な比較"
+  description="SpecScore と OpenSpec の事実に基づいた比較：スペックフォーマット、linting、ライフサイクル、トレーサビリティ、CLI、エージェント対応。両ツールの長所を正直に紹介します。"
+  canonical="https://specscore.md/ja/vs/openspec/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href="/ja/vs/" class="xref">比較一覧</a></p>
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore vs OpenSpec
+        </h1>
+        <p class="hero__sub">
+          どちらも仕様を Markdown でコードの隣に配置し、AI エージェントが読み取れるようにします。解決する課題は異なります。OpenSpec はスペックを整理してエージェントコマンドを生成します。SpecScore はスペックの内容を lint し、ライフサイクルを強制し、コードから要件へのトレーサビリティを提供します。
+        </p>
+      </div>
+    </section>
+
+    {/* ── What they share ── */}
+    <section class="section" aria-labelledby="shared-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="shared-title" class="section-title">共通点</h2>
+        <ul class="shared-list">
+          <li>スペックは Markdown ファイルとしてリポジトリに配置され、バージョン管理と PR レビューが可能です。</li>
+          <li>どちらも MIT ライセンスのオープンソースです。</li>
+          <li>どちらも Given/When/Then 形式の受け入れ基準を使用します。</li>
+          <li>どちらも AI コーディングエージェントをスペックの主要な利用者としてサポートしています。</li>
+        </ul>
+      </div>
+    </section>
+
+    {/* ── What OpenSpec does well ── */}
+    <section class="section" aria-labelledby="openspec-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="openspec-title" class="section-title">OpenSpec の優れた点</h2>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">最も幅広いエージェント対応</h3>
+          <p class="credit-card__desc">
+            OpenSpec は生成されたスキルファイルを通じて 29 の AI コーディングエージェントをサポートしています — Claude、Cursor、Copilot、Gemini、Windsurf、Cline など。お使いのエージェントがリストにあれば、設定不要で統合できます。
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">導入障壁の低さ</h3>
+          <p class="credit-card__desc">
+            <code>npm install -g @fission-ai/openspec &amp;&amp; openspec init</code> ですぐにスペックを書き始められます。覚えるスキーマも、必須のフロントマターもありません。特に既存のコードベースでの導入が簡単になるよう設計されています。
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">優れた変更デルタモデル</h3>
+          <p class="credit-card__desc">
+            スペックの進化に対応する OpenSpec の <code>ADDED / MODIFIED / REMOVED</code> フォーマットは優れた設計です。各変更はプロポーザル、デルタスペック、タスクを含むフォルダで構成され、変更提案を構造化する方法を提供します。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Feature comparison table ── */}
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">機能比較</h2>
+
+        <div class="table-wrap">
+          <table class="compare-table" aria-label="SpecScore vs OpenSpec 機能比較">
+            <thead>
+              <tr>
+                <th scope="col">機能</th>
+                <th scope="col">OpenSpec</th>
+                <th scope="col">SpecScore</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>スペックフォーマット</td>
+                <td>Markdown（フロントマターなし）</td>
+                <td>Markdown + YAML frontmatter</td>
+              </tr>
+              <tr>
+                <td>スペック linting</td>
+                <td>ファイル構造のみ</td>
+                <td><strong>コンテンツ品質</strong> — 曖昧な動詞、欠落した AC、未解決の参照</td>
+              </tr>
+              <tr>
+                <td>要件 ID</td>
+                <td>なし（タイトルで参照）</td>
+                <td><strong>スラッグベース</strong>（<code>REQ: slug-format</code>）</td>
+              </tr>
+              <tr>
+                <td>受け入れ基準 ID</td>
+                <td>なし</td>
+                <td><strong>機械可読な ID</strong></td>
+              </tr>
+              <tr>
+                <td>ライフサイクルステータス</td>
+                <td>暗黙的（ファイルの配置場所）</td>
+                <td><strong>強制</strong> — Draft → Under Review → Approved → Implementing → Stable → Deprecated</td>
+              </tr>
+              <tr>
+                <td>コードからスペックへのトレーサビリティ</td>
+                <td>なし</td>
+                <td><strong><code>specscore:</code> アノテーション</strong> + <code>Verifies:</code> コミットトレーラー</td>
+              </tr>
+              <tr>
+                <td>サブフィーチャー</td>
+                <td>なし</td>
+                <td><strong>あり</strong>（ネストされたディレクトリ）</td>
+              </tr>
+              <tr>
+                <td>相互参照</td>
+                <td>公式なメカニズムなし</td>
+                <td><strong>依存関係、ソースアイデア、プラン参照</strong></td>
+              </tr>
+              <tr>
+                <td>CI 統合</td>
+                <td>基本的（<code>openspec validate</code>）</td>
+                <td><strong><code>specscore lint</code></strong> 設定可能な重要度、pre-commit フック対応</td>
+              </tr>
+              <tr>
+                <td>エージェント対応</td>
+                <td><strong>29 エージェント</strong></td>
+                <td>Claude Code を主軸に、CLI であらゆるエージェントに対応</td>
+              </tr>
+              <tr>
+                <td>スキーマのカスタマイズ</td>
+                <td><strong>あり</strong>（<code>schema.yaml</code>、fork/init）</td>
+                <td>固定スキーマ（設計による一貫性）</td>
+              </tr>
+              <tr>
+                <td>変更提案</td>
+                <td><strong>デルタモデル</strong>（ADDED/MODIFIED/REMOVED）</td>
+                <td>変更リクエストアイデア + プロポーザル</td>
+              </tr>
+              <tr>
+                <td>ランタイム依存</td>
+                <td>Node.js 20.19+</td>
+                <td><strong>なし</strong> — 単一の Go バイナリ</td>
+              </tr>
+              <tr>
+                <td>ライセンス</td>
+                <td>MIT</td>
+                <td>MIT</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Where SpecScore goes further ── */}
+    <section class="section" aria-labelledby="further-title">
+      <div class="section-inner">
+        <h2 id="further-title" class="section-title">SpecScore がさらに進んでいる点</h2>
+
+        <div class="diff-grid">
+          <div class="diff-card">
+            <h3 class="diff-card__title">スペック linting がエージェントより先に曖昧さを検出</h3>
+            <p class="diff-card__desc">
+              OpenSpec の <code>validate</code> はファイル構造を検査します — ファイルが存在するか、正しいセクションがあるか。SpecScore の <code>lint</code> はコンテンツを検査します：対象や条件のない曖昧な動詞、欠落した受け入れ基準、未解決の相互参照、不整合なステータス遷移。
+            </p>
+            <div class="diff-card__example">
+<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+  <span class="mark-fail">✗</span> R3  Discount application
+       <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
+                <span class="dim">fix:</span> specify "higher discount wins; if tied, site-wide wins"</pre>
+            </div>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">すべての要件に機械可読な ID</h3>
+            <p class="diff-card__desc">
+              OpenSpec はタイトルで要件を参照するため、名前変更に弱い構造です。SpecScore はスラッグベースの ID（<code>REQ: slug-format</code>）と AC ID を割り当て、名前変更、リファクタリング、エージェント間の引き継ぎにも耐えます。
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">ライフサイクルは暗黙的ではなく強制的</h3>
+            <p class="diff-card__desc">
+              OpenSpec ではスペックのライフサイクルはファイルの配置場所で決まります：<code>specs/</code>（現行）、<code>changes/</code>（提案中）、<code>archive/</code>（完了）。SpecScore ではライフサイクルは強制されるステータスフィールドです — Draft → Under Review → Approved → Implementing → Stable → Deprecated — lint で検証され、git フックや CI から <code>specscore change-status</code> で遷移します。
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">コードからスペックへの追跡</h3>
+            <p class="diff-card__desc">
+              OpenSpec にはトレーサビリティの仕組みがありません。SpecScore にはコードコメント内の <code>specscore:</code> ソースアノテーションと <code>Verifies:</code> コミットトレーラーがあります。<code>specscore code refs</code> を実行すれば、「この要件を実装しているコードはどれか？」に対する確定的な答えが得られます。
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">ランタイム依存なし</h3>
+            <p class="diff-card__desc">
+              OpenSpec は Node.js 20.19+ が必要です。SpecScore は単一の Go バイナリで、ランタイムも <code>node_modules</code> も不要です。Go、Rust、Python、Java のプロジェクトに Node を追加することなく動作します。
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">構成可能なアーティファクト階層</h3>
+            <p class="diff-card__desc">
+              OpenSpec のスペックはドメインごとにフラットです。SpecScore は型付けされた階層を持ちます：アイデアはフィーチャーに昇格し、フィーチャーは要件と AC を含み、プランは AC を参照し、タスクはプランを参照します。すべての関係は CLI で機械的にナビゲートできます。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── When to use which ── */}
+    <section class="section" aria-labelledby="when-title">
+      <div class="section-inner">
+        <h2 id="when-title" class="section-title">使い分けの指針</h2>
+
+        <div class="when-grid">
+          <div class="when-card">
+            <h3 class="when-card__title">OpenSpec から始めるべき場合</h3>
+            <ul class="when-card__list">
+              <li>Cursor、Copilot、または Claude 以外のエージェントを使用していて、すぐに使える統合が必要な場合。</li>
+              <li>既存のコードベースに初めてスペックを追加する際に、摩擦をゼロにしたい場合。</li>
+              <li>チームがスキーマの強制よりも柔軟性を重視する場合。</li>
+            </ul>
+          </div>
+
+          <div class="when-card when-card--primary">
+            <h3 class="when-card__title">SpecScore を使うべき場合</h3>
+            <ul class="when-card__list">
+              <li>スペック品質の強制が必要な場合 — lint がエージェントがトークンを無駄にする前に曖昧さを検出します。</li>
+              <li>コードからスペックへのトレーサビリティが必要な場合 — 「この要件を実装しているコードはどれか？」に確定的な答えが返ります。</li>
+              <li>多くのフィーチャー、サブフィーチャー、ライフサイクル遷移を持つ大規模システムを構築する場合。</li>
+              <li>ランタイム依存をゼロにしたい場合 — 単一バイナリ、Node.js 不要です。</li>
+              <li>CI にスペック品質ゲートが必要な場合 — <code>specscore lint</code> は ESLint や <code>go vet</code> と同様に、失敗時にゼロ以外の終了コードを返します。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── The integration opportunity ── */}
+    <section class="section" aria-labelledby="bridge-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="bridge-title" class="section-title">相互に排他的ではありません。</h2>
+        <p class="prose-p">
+          SpecScore は OpenSpec の <code>spec.md</code> ファイルを lint できます。OpenSpec から始めたチームは、移行することなく SpecScore の品質レイヤーを追加できます — 既存のスペックを lint し、必要に応じてトレーサビリティを追加し、チームが成長したらライフサイクルを強制できます。
+        </p>
+        <p class="prose-p">
+          OpenSpec は優れた出発点です。SpecScore はガードレールです。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">合格するスペックを。</h2>
+      <div class="final-cta__buttons">
+        <a href="/cli/install/" class="btn btn--primary">CLI をインストール</a>
+        <a href="/ai/specstudio-skills/" class="btn btn--secondary">エージェント用 AI スキルを入手</a>
+        <a href="https://github.com/specscore/specscore" rel="noopener" class="btn btn--tertiary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" /></svg>
+          GitHub でオープンソース公開中
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <div class="page-footer__col page-footer__brand">
+        <a href="/ja/" class="wordmark" aria-label="SpecScore home">
+          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+          <span class="wordmark__name">SpecScore.md</span>
+        </a>
+        <p class="page-footer__tagline">仕様、要件、受け入れ基準のためのオープンスタンダードです。</p>
+        <p class="page-footer__copyright">&copy; 2026 SpecScore contributors. MIT license.</p>
+      </div>
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">プロダクト</h4>
+        <ul class="page-footer__list">
+          <li><a href="/cli/">SpecScore CLI</a></li>
+          <li><a href="/cli/install/">インストール</a></li>
+          <li><a href="https://github.com/specscore/specscore-cli">GitHub</a></li>
+        </ul>
+      </div>
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">エコシステム</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://specscore.md">SpecScore</a> — オープンスタンダード</li>
+          <li><a href="/ai/specstudio-skills/">SpecStudio Skills</a></li>
+          <li><a href="https://specscore.studio">SpecScore Studio</a> — Web ビューア</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  .hero { padding: var(--space-6) var(--space-3) var(--space-5); background: var(--cream); }
+  .hero__inner { max-width: var(--max-prose); margin: 0 auto; animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms; }
+  .hero__breadcrumb { font-family: var(--font-code); font-size: var(--fs-small); color: var(--pale-ink); margin-bottom: var(--space-2); }
+  .hero__headline { font-size: var(--fs-hero); font-weight: 700; line-height: 1.04; letter-spacing: -0.02em; margin-bottom: var(--space-3); }
+  .hero__sub { font-size: 1.125rem; color: var(--mid-ink); line-height: 1.55; max-width: 52ch; }
+  @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .section-title { font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-3); }
+  .shared-list { list-style: none; margin: 0; padding: 0; }
+  .shared-list li { position: relative; padding-left: 1.4rem; color: var(--mid-ink); line-height: 1.6; margin-bottom: var(--space-1); }
+  .shared-list li::before { content: '='; position: absolute; left: 0; font-family: var(--font-code); font-weight: 700; color: var(--pale-ink); }
+  .credit-card { background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-3); margin-bottom: var(--space-2); }
+  .credit-card__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; margin-bottom: var(--space-1); }
+  .credit-card__desc { color: var(--mid-ink); line-height: 1.6; font-size: var(--fs-body); }
+  .credit-card__desc code { font-size: 0.9em; background: var(--cream); padding: 0.05em 0.3em; border-radius: 2px; }
+  .table-section { background: var(--cream-2); }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .compare-table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); line-height: 1.5; }
+  .compare-table th, .compare-table td { text-align: left; padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  .compare-table thead th { font-family: var(--font-display); font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-ink); border-bottom: 2px solid var(--graphite); white-space: nowrap; }
+  .compare-table td:first-child { font-weight: 500; white-space: nowrap; min-width: 160px; }
+  .compare-table td:nth-child(2), .compare-table td:nth-child(3) { min-width: 200px; }
+  .compare-table td code { font-size: 0.88em; background: var(--surface); padding: 0.05em 0.3em; border-radius: 2px; }
+  .compare-table strong { font-weight: 600; color: var(--ink); }
+  .diff-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+  .diff-card { background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-3); }
+  .diff-card__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; margin-bottom: var(--space-1); }
+  .diff-card__desc { color: var(--mid-ink); font-size: var(--fs-small); line-height: 1.6; }
+  .diff-card__desc code { font-size: 0.9em; background: var(--cream-2); padding: 0.05em 0.3em; border-radius: 2px; }
+  .diff-card__example { margin-top: var(--space-2); }
+  .diff-card__example .terminal { font-size: 0.78rem; line-height: 1.6; }
+  @media (max-width: 860px) { .diff-grid { grid-template-columns: 1fr; } }
+  .when-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+  .when-card { background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-4); }
+  .when-card--primary { border-color: var(--validator-green); border-width: 2px; }
+  .when-card__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; margin-bottom: var(--space-2); }
+  .when-card__list { list-style: none; margin: 0; padding: 0; }
+  .when-card__list li { position: relative; padding-left: 1.2rem; color: var(--mid-ink); line-height: 1.6; margin-bottom: var(--space-1); font-size: var(--fs-small); }
+  .when-card__list li::before { content: '→'; position: absolute; left: 0; color: var(--pale-ink); font-family: var(--font-code); }
+  .when-card--primary .when-card__list li::before { color: var(--validator-green); }
+  .when-card__list code { font-size: 0.9em; background: var(--cream-2); padding: 0.05em 0.3em; border-radius: 2px; }
+  @media (max-width: 860px) { .when-grid { grid-template-columns: 1fr; } }
+  .prose-p { color: var(--mid-ink); line-height: 1.65; margin-bottom: var(--space-2); }
+  .prose-p:last-child { margin-bottom: 0; font-weight: 500; color: var(--ink); }
+  .prose-p code { font-size: 0.9em; background: var(--cream-2); padding: 0.05em 0.3em; border-radius: 2px; }
+  .final-cta { background: var(--cream-2); padding: var(--space-7) var(--space-3); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+  .final-cta__inner { max-width: var(--max-content); margin: 0 auto; text-align: center; }
+  .final-cta__title { font-size: clamp(2.2rem, 4.2vw, 3.2rem); margin-bottom: var(--space-4); letter-spacing: -0.02em; line-height: 1.05; }
+  .final-cta__buttons { display: inline-flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+  .page-footer { background: var(--cream); padding: var(--space-6) var(--space-3) var(--space-5); }
+  .page-footer__inner { max-width: var(--max-content); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-4); }
+  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
+  .page-footer__tagline { color: var(--mid-ink); margin-bottom: var(--space-2); max-width: 36ch; line-height: 1.5; font-size: 0.95rem; }
+  .page-footer__copyright { color: var(--pale-ink); font-size: 0.825rem; font-family: var(--font-code); }
+  .page-footer__heading { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-ink); margin-bottom: var(--space-2); }
+  .page-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+  .page-footer__list a { color: var(--ink); font-size: 0.9rem; border-bottom: 1px solid transparent; transition: border-color 120ms ease; }
+  .page-footer__list a:hover { border-bottom-color: var(--ink); }
+  @media (max-width: 800px) { .page-footer__inner { grid-template-columns: 1fr 1fr; } .page-footer__brand { grid-column: 1 / -1; } }
+</style>

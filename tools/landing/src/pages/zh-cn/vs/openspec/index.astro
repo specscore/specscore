@@ -1,0 +1,366 @@
+---
+// /zh-cn/vs/openspec/ — SpecScore vs OpenSpec comparison (zh-cn).
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+---
+
+<BaseLayout
+  lang="zh-CN"
+  title="SpecScore vs OpenSpec — 客观对比"
+  description="SpecScore 与 OpenSpec 基于事实的逐项对比：规范格式、linting、生命周期、可追溯性、CLI 和 AI 代理支持。对两者都保持客观公正。"
+  canonical="https://specscore.md/zh-cn/vs/openspec/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href="/zh-cn/vs/" class="xref">对比列表</a></p>
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore vs OpenSpec
+        </h1>
+        <p class="hero__sub">
+          两者都将规范以 Markdown 形式放在代码旁边，可供 AI 代理读取。它们解决的问题不同：OpenSpec 组织规范并生成代理指令；SpecScore 对规范内容进行 linting、强制执行生命周期，并将代码追溯到需求。
+        </p>
+      </div>
+    </section>
+
+    {/* ── What they share ── */}
+    <section class="section" aria-labelledby="shared-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="shared-title" class="section-title">两者的共同点</h2>
+        <ul class="shared-list">
+          <li>规范以 Markdown 文件形式存放在仓库中 — 版本控制、可在 PR 中审查。</li>
+          <li>两者均基于 MIT 许可证开源。</li>
+          <li>两者都使用 Given/When/Then 验收标准。</li>
+          <li>两者都将 AI 编码代理作为规范的一等消费者。</li>
+        </ul>
+      </div>
+    </section>
+
+    {/* ── What OpenSpec does well ── */}
+    <section class="section" aria-labelledby="openspec-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="openspec-title" class="section-title">OpenSpec 的优势</h2>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">最广泛的代理支持</h3>
+          <p class="credit-card__desc">
+            OpenSpec 通过生成技能文件支持 29 个 AI 编码代理 — Claude、Cursor、Copilot、Gemini、Windsurf、Cline 等。如果你的代理在支持列表中，OpenSpec 无需任何配置即可集成。
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">极低的上手门槛</h3>
+          <p class="credit-card__desc">
+            <code>npm install -g @fission-ai/openspec &amp;&amp; openspec init</code> 即可开始编写规范。无需学习 schema，无需必填的 frontmatter。设计上追求零摩擦 — 尤其适合现有项目。
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">清晰的变更增量模型</h3>
+          <p class="credit-card__desc">
+            OpenSpec 的 <code>ADDED / MODIFIED / REMOVED</code> 规范演进格式设计精良。每个变更是一个包含提案、增量规范和任务的文件夹 — 一种结构化的修改提案方式。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Feature comparison table ── */}
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">功能对比</h2>
+
+        <div class="table-wrap">
+          <table class="compare-table" aria-label="SpecScore 与 OpenSpec 功能对比">
+            <thead>
+              <tr>
+                <th scope="col">能力</th>
+                <th scope="col">OpenSpec</th>
+                <th scope="col">SpecScore</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>规范格式</td>
+                <td>Markdown（无 frontmatter）</td>
+                <td>Markdown + YAML frontmatter</td>
+              </tr>
+              <tr>
+                <td>规范 linting</td>
+                <td>仅文件结构</td>
+                <td><strong>内容质量</strong> — 模糊动词、缺失验收标准、悬空引用</td>
+              </tr>
+              <tr>
+                <td>需求 ID</td>
+                <td>无（通过标题引用）</td>
+                <td><strong>基于 slug</strong>（<code>REQ: slug-format</code>）</td>
+              </tr>
+              <tr>
+                <td>验收标准 ID</td>
+                <td>无</td>
+                <td><strong>机器可寻址的 ID</strong></td>
+              </tr>
+              <tr>
+                <td>生命周期状态</td>
+                <td>隐式（基于文件位置）</td>
+                <td><strong>强制执行</strong> — Draft → Under Review → Approved → Implementing → Stable → Deprecated</td>
+              </tr>
+              <tr>
+                <td>代码到规范的可追溯性</td>
+                <td>无</td>
+                <td><strong><code>specscore:</code> 注解</strong> + <code>Verifies:</code> 提交尾注</td>
+              </tr>
+              <tr>
+                <td>子功能</td>
+                <td>否</td>
+                <td><strong>支持</strong>（嵌套目录）</td>
+              </tr>
+              <tr>
+                <td>交叉引用</td>
+                <td>无正式机制</td>
+                <td><strong>依赖关系、源 Idea、计划引用</strong></td>
+              </tr>
+              <tr>
+                <td>CI 集成</td>
+                <td>基础（<code>openspec validate</code>）</td>
+                <td><strong><code>specscore lint</code></strong> 可配置严重级别，支持 pre-commit 钩子</td>
+              </tr>
+              <tr>
+                <td>代理支持</td>
+                <td><strong>29 个代理</strong></td>
+                <td>以 Claude Code 为主 + CLI 支持任何代理</td>
+              </tr>
+              <tr>
+                <td>Schema 自定义</td>
+                <td><strong>支持</strong>（<code>schema.yaml</code>、fork/init）</td>
+                <td>固定 schema（设计上保持一致性）</td>
+              </tr>
+              <tr>
+                <td>变更提案</td>
+                <td><strong>增量模型</strong>（ADDED/MODIFIED/REMOVED）</td>
+                <td>变更请求 Idea + 提案</td>
+              </tr>
+              <tr>
+                <td>运行时依赖</td>
+                <td>Node.js 20.19+</td>
+                <td><strong>无</strong> — 单个 Go 二进制文件</td>
+              </tr>
+              <tr>
+                <td>许可证</td>
+                <td>MIT</td>
+                <td>MIT</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Where SpecScore goes further ── */}
+    <section class="section" aria-labelledby="further-title">
+      <div class="section-inner">
+        <h2 id="further-title" class="section-title">SpecScore 更进一步之处</h2>
+
+        <div class="diff-grid">
+          <div class="diff-card">
+            <h3 class="diff-card__title">规范 linting 在代理之前捕获歧义</h3>
+            <p class="diff-card__desc">
+              OpenSpec 的 <code>validate</code> 检查文件结构 — 文件是否存在、是否包含正确的章节。SpecScore 的 <code>lint</code> 检查内容：缺少宾语/条件的模糊动词、缺失的验收标准、悬空的交叉引用、不匹配的状态转换。
+            </p>
+            <div class="diff-card__example">
+<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+  <span class="mark-fail">✗</span> R3  Discount application
+       <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
+                <span class="dim">fix:</span> specify "higher discount wins; if tied, site-wide wins"</pre>
+            </div>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">每个需求都有机器可读的 ID</h3>
+            <p class="diff-card__desc">
+              OpenSpec 通过标题引用需求 — 重命名时容易出错。SpecScore 分配基于 slug 的 ID（<code>REQ: slug-format</code>）和验收标准 ID，在重命名、重构和代理交接时保持稳定。
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">生命周期是强制的，而非隐含的</h3>
+            <p class="diff-card__desc">
+              在 OpenSpec 中，规范的生命周期由文件位置决定：<code>specs/</code>（当前）、<code>changes/</code>（提议中）、<code>archive/</code>（已完成）。在 SpecScore 中，生命周期是一个强制执行的状态字段 — Draft → Under Review → Approved → Implementing → Stable → Deprecated — 由 lint 验证，通过 git 钩子或 CI 中的 <code>specscore change-status</code> 进行状态转换。
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">代码可追溯到规范</h3>
+            <p class="diff-card__desc">
+              OpenSpec 没有可追溯性机制。SpecScore 在代码注释中使用 <code>specscore:</code> 源注解和 <code>Verifies:</code> 提交尾注。运行 <code>specscore code refs</code> 即可确定性地回答"哪些代码实现了这个需求？"
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">无运行时依赖</h3>
+            <p class="diff-card__desc">
+              OpenSpec 需要 Node.js 20.19+。SpecScore 是单个 Go 二进制文件 — 无运行时依赖、无 <code>node_modules</code>。可直接用于 Go、Rust、Python、Java 项目，无需在工具链中引入 Node。
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">可组合的工件层级</h3>
+            <p class="diff-card__desc">
+              OpenSpec 的规范按领域平铺。SpecScore 具有类型化层级结构：Idea 晋升为 Feature，Feature 包含需求和验收标准，Plan 引用验收标准，Task 引用 Plan。所有关系均可通过 CLI 进行机器导航。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── When to use which ── */}
+    <section class="section" aria-labelledby="when-title">
+      <div class="section-inner">
+        <h2 id="when-title" class="section-title">何时使用哪个</h2>
+
+        <div class="when-grid">
+          <div class="when-card">
+            <h3 class="when-card__title">以下场景适合从 OpenSpec 开始……</h3>
+            <ul class="when-card__list">
+              <li>你使用 Cursor、Copilot 或非 Claude 代理，需要开箱即用的集成。</li>
+              <li>你首次为现有代码库添加规范，希望零摩擦上手。</li>
+              <li>你的团队更看重 schema 灵活性而非强制约束。</li>
+            </ul>
+          </div>
+
+          <div class="when-card when-card--primary">
+            <h3 class="when-card__title">以下场景适合使用 SpecScore……</h3>
+            <ul class="when-card__list">
+              <li>你需要规范质量保障 — lint 在代理浪费 token 之前就能捕获歧义。</li>
+              <li>你需要代码到规范的可追溯性 — "哪些代码实现了这个需求？"能得到确定性答案。</li>
+              <li>你正在构建具有大量功能、子功能和生命周期转换的大型系统。</li>
+              <li>你需要零运行时依赖 — 单个二进制文件，无需 Node.js。</li>
+              <li>你需要在 CI 中设置规范质量门禁 — <code>specscore lint</code> 在检查失败时返回非零退出码，与 ESLint 或 <code>go vet</code> 一致。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── The integration opportunity ── */}
+    <section class="section" aria-labelledby="bridge-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="bridge-title" class="section-title">两者并不互斥</h2>
+        <p class="prose-p">
+          SpecScore 可以对 OpenSpec 的 <code>spec.md</code> 文件进行 lint。从 OpenSpec 起步的团队可以在不迁移的情况下添加 SpecScore 的质量层 — 对现有规范进行 lint，在需要时添加可追溯性，在团队扩大时强制执行生命周期。
+        </p>
+        <p class="prose-p">
+          OpenSpec 是一个优秀的入门通道。SpecScore 是质量护栏。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">通过检查的规范</h2>
+      <div class="final-cta__buttons">
+        <a href="/cli/install/" class="btn btn--primary">安装 CLI</a>
+        <a href="/ai/specstudio-skills/" class="btn btn--secondary">获取 AI 代理技能</a>
+        <a href="https://github.com/specscore/specscore" rel="noopener" class="btn btn--tertiary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" /></svg>
+          在 GitHub 上开源
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <div class="page-footer__col page-footer__brand">
+        <a href="/zh-cn/" class="wordmark" aria-label="SpecScore home">
+          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+          <span class="wordmark__name">SpecScore.md</span>
+        </a>
+        <p class="page-footer__tagline">一个用于规范、需求和验收标准的开放标准。</p>
+        <p class="page-footer__copyright">&copy; 2026 SpecScore contributors. MIT license.</p>
+      </div>
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">产品</h4>
+        <ul class="page-footer__list">
+          <li><a href="/cli/">SpecScore CLI</a></li>
+          <li><a href="/cli/install/">安装</a></li>
+          <li><a href="https://github.com/specscore/specscore-cli">GitHub</a></li>
+        </ul>
+      </div>
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">生态系统</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://specscore.md">SpecScore</a> — 开放标准</li>
+          <li><a href="/ai/specstudio-skills/">SpecStudio Skills</a></li>
+          <li><a href="https://specscore.studio">SpecScore Studio</a> — 在线查看器</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  .hero { padding: var(--space-6) var(--space-3) var(--space-5); background: var(--cream); }
+  .hero__inner { max-width: var(--max-prose); margin: 0 auto; animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms; }
+  .hero__breadcrumb { font-family: var(--font-code); font-size: var(--fs-small); color: var(--pale-ink); margin-bottom: var(--space-2); }
+  .hero__headline { font-size: var(--fs-hero); font-weight: 700; line-height: 1.04; letter-spacing: -0.02em; margin-bottom: var(--space-3); }
+  .hero__sub { font-size: 1.125rem; color: var(--mid-ink); line-height: 1.55; max-width: 52ch; }
+  @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .section-title { font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-3); }
+  .shared-list { list-style: none; margin: 0; padding: 0; }
+  .shared-list li { position: relative; padding-left: 1.4rem; color: var(--mid-ink); line-height: 1.6; margin-bottom: var(--space-1); }
+  .shared-list li::before { content: '='; position: absolute; left: 0; font-family: var(--font-code); font-weight: 700; color: var(--pale-ink); }
+  .credit-card { background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-3); margin-bottom: var(--space-2); }
+  .credit-card__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; margin-bottom: var(--space-1); }
+  .credit-card__desc { color: var(--mid-ink); line-height: 1.6; font-size: var(--fs-body); }
+  .credit-card__desc code { font-size: 0.9em; background: var(--cream); padding: 0.05em 0.3em; border-radius: 2px; }
+  .table-section { background: var(--cream-2); }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .compare-table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); line-height: 1.5; }
+  .compare-table th, .compare-table td { text-align: left; padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  .compare-table thead th { font-family: var(--font-display); font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-ink); border-bottom: 2px solid var(--graphite); white-space: nowrap; }
+  .compare-table td:first-child { font-weight: 500; white-space: nowrap; min-width: 160px; }
+  .compare-table td:nth-child(2), .compare-table td:nth-child(3) { min-width: 200px; }
+  .compare-table td code { font-size: 0.88em; background: var(--surface); padding: 0.05em 0.3em; border-radius: 2px; }
+  .compare-table strong { font-weight: 600; color: var(--ink); }
+  .diff-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+  .diff-card { background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-3); }
+  .diff-card__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; margin-bottom: var(--space-1); }
+  .diff-card__desc { color: var(--mid-ink); font-size: var(--fs-small); line-height: 1.6; }
+  .diff-card__desc code { font-size: 0.9em; background: var(--cream-2); padding: 0.05em 0.3em; border-radius: 2px; }
+  .diff-card__example { margin-top: var(--space-2); }
+  .diff-card__example .terminal { font-size: 0.78rem; line-height: 1.6; }
+  @media (max-width: 860px) { .diff-grid { grid-template-columns: 1fr; } }
+  .when-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+  .when-card { background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-4); }
+  .when-card--primary { border-color: var(--validator-green); border-width: 2px; }
+  .when-card__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; margin-bottom: var(--space-2); }
+  .when-card__list { list-style: none; margin: 0; padding: 0; }
+  .when-card__list li { position: relative; padding-left: 1.2rem; color: var(--mid-ink); line-height: 1.6; margin-bottom: var(--space-1); font-size: var(--fs-small); }
+  .when-card__list li::before { content: '→'; position: absolute; left: 0; color: var(--pale-ink); font-family: var(--font-code); }
+  .when-card--primary .when-card__list li::before { color: var(--validator-green); }
+  .when-card__list code { font-size: 0.9em; background: var(--cream-2); padding: 0.05em 0.3em; border-radius: 2px; }
+  @media (max-width: 860px) { .when-grid { grid-template-columns: 1fr; } }
+  .prose-p { color: var(--mid-ink); line-height: 1.65; margin-bottom: var(--space-2); }
+  .prose-p:last-child { margin-bottom: 0; font-weight: 500; color: var(--ink); }
+  .prose-p code { font-size: 0.9em; background: var(--cream-2); padding: 0.05em 0.3em; border-radius: 2px; }
+  .final-cta { background: var(--cream-2); padding: var(--space-7) var(--space-3); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+  .final-cta__inner { max-width: var(--max-content); margin: 0 auto; text-align: center; }
+  .final-cta__title { font-size: clamp(2.2rem, 4.2vw, 3.2rem); margin-bottom: var(--space-4); letter-spacing: -0.02em; line-height: 1.05; }
+  .final-cta__buttons { display: inline-flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+  .page-footer { background: var(--cream); padding: var(--space-6) var(--space-3) var(--space-5); }
+  .page-footer__inner { max-width: var(--max-content); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-4); }
+  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
+  .page-footer__tagline { color: var(--mid-ink); margin-bottom: var(--space-2); max-width: 36ch; line-height: 1.5; font-size: 0.95rem; }
+  .page-footer__copyright { color: var(--pale-ink); font-size: 0.825rem; font-family: var(--font-code); }
+  .page-footer__heading { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-ink); margin-bottom: var(--space-2); }
+  .page-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+  .page-footer__list a { color: var(--ink); font-size: 0.9rem; border-bottom: 1px solid transparent; transition: border-color 120ms ease; }
+  .page-footer__list a:hover { border-bottom-color: var(--ink); }
+  @media (max-width: 800px) { .page-footer__inner { grid-template-columns: 1fr 1fr; } .page-footer__brand { grid-column: 1 / -1; } }
+</style>

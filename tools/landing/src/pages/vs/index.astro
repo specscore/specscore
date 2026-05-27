@@ -1,0 +1,198 @@
+---
+// /vs/ — Comparison index page.
+// Lists tools that compete or coexist with SpecScore.
+// Currently only OpenSpec; more entries can be added here.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+---
+
+<BaseLayout
+  title="SpecScore vs — How SpecScore compares."
+  description="Honest, detailed comparisons between SpecScore and other spec-driven development tools. Feature tables, architecture differences, and when to use which."
+  canonical="https://specscore.md/vs/"
+>
+  <SiteHeader />
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          How SpecScore compares.
+        </h1>
+        <p class="hero__sub">
+          Spec-driven development is a growing space. These comparisons are
+          factual, side-by-side, and honest about where each tool is stronger.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="comparisons-title">
+      <div class="section-inner">
+        <h2 id="comparisons-title" class="sr-only">Comparisons</h2>
+
+        <div class="compare-grid">
+          <a href="/vs/openspec/" class="compare-card">
+            <h3 class="compare-card__name">SpecScore vs OpenSpec</h3>
+            <p class="compare-card__desc">
+              Both write specs in Markdown. OpenSpec organizes them —
+              SpecScore lints, scores, and traces them.
+              The full comparison: format, CLI, lifecycle, traceability, agent support.
+            </p>
+            <span class="compare-card__cta">Read the comparison →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <div class="page-footer__col page-footer__brand">
+        <a href="/" class="wordmark" aria-label="SpecScore home">
+          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+          <span class="wordmark__name">SpecScore.md</span>
+        </a>
+        <p class="page-footer__tagline">
+          An open standard for specifications, requirements,
+          and acceptance criteria.
+        </p>
+        <p class="page-footer__copyright">
+          &copy; 2026 SpecScore contributors. MIT license.
+        </p>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">Product</h4>
+        <ul class="page-footer__list">
+          <li><a href="/cli/">SpecScore CLI</a></li>
+          <li><a href="/cli/install/">Install</a></li>
+          <li><a href="https://github.com/specscore/specscore-cli">GitHub</a></li>
+        </ul>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">Ecosystem</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://specscore.md">SpecScore</a> — the open standard</li>
+          <li><a href="/ai/specstudio-skills/">SpecStudio Skills</a></li>
+          <li><a href="https://specscore.studio">SpecScore Studio</a> — web viewer</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__headline {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Screen-reader only ── */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ── Comparison cards ── */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .compare-card {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-4);
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+    text-decoration: none;
+    color: inherit;
+  }
+  .compare-card:hover {
+    border-color: var(--graphite);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
+  }
+  .compare-card:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+  }
+  .compare-card__name {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+  }
+  .compare-card__desc {
+    color: var(--mid-ink);
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+  }
+  .compare-card__cta {
+    font-family: var(--font-display);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--validator-green);
+  }
+
+  @media (max-width: 720px) {
+    .compare-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Footer ── */
+  .page-footer {
+    background: var(--cream);
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    border-top: 1px solid var(--hairline);
+  }
+  .page-footer__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-4);
+  }
+  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
+  .page-footer__tagline { color: var(--mid-ink); margin-bottom: var(--space-2); max-width: 36ch; line-height: 1.5; font-size: 0.95rem; }
+  .page-footer__copyright { color: var(--pale-ink); font-size: 0.825rem; font-family: var(--font-code); }
+  .page-footer__heading { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-ink); margin-bottom: var(--space-2); }
+  .page-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+  .page-footer__list a { color: var(--ink); font-size: 0.9rem; border-bottom: 1px solid transparent; transition: border-color 120ms ease; }
+  .page-footer__list a:hover { border-bottom-color: var(--ink); }
+  .page-footer__list a:focus-visible { outline: 2px solid var(--ink-blue); outline-offset: 2px; border-radius: 2px; }
+
+  @media (max-width: 800px) {
+    .page-footer__inner { grid-template-columns: 1fr 1fr; }
+    .page-footer__brand { grid-column: 1 / -1; }
+  }
+</style>
