@@ -16,18 +16,28 @@ const locale =
                               'en';
 const wordmarkHref = locale === 'en' ? '/' : `/${locale}/`;
 
+// Strip the current locale prefix to get the route portion of the path.
+// e.g. "/es/vs/openspec/" → "/vs/openspec/", "/" → "/"
+const localePattern = /^\/(es|pt-br|ru|uk|ja|zh-cn|ko)(\/|$)/;
+const route = locale === 'en' ? path : path.replace(localePattern, '/');
+
+// Build per-language hrefs that preserve the current route.
+function langHref(code: string): string {
+  return code === 'en' ? route : `/${code}${route}`;
+}
+
 // Order: English (default) first, then alphabetical by URL code.
 // `tag` is the HTML lang attribute value (uppercase BR per RFC 5646);
 // `code` matches the locale detector above.
 const langs = [
-  { code: 'en',    href: '/',       label: 'English',         short: 'EN', tag: 'en'    },
-  { code: 'es',    href: '/es/',    label: 'Español',         short: 'ES', tag: 'es'    },
-  { code: 'pt-br', href: '/pt-br/', label: 'Português (BR)',  short: 'PT', tag: 'pt-BR' },
-  { code: 'ru',    href: '/ru/',    label: 'Русский',         short: 'RU', tag: 'ru'    },
-  { code: 'uk',    href: '/uk/',    label: 'Українська',      short: 'Укр', tag: 'uk'    },
-  { code: 'ja',    href: '/ja/',    label: '日本語',           short: '日本語',  tag: 'ja'    },
-  { code: 'zh-cn', href: '/zh-cn/', label: '中文',             short: '中文',    tag: 'zh-CN' },
-  { code: 'ko',    href: '/ko/',    label: '한국어',            short: '한국어',   tag: 'ko'    },
+  { code: 'en',    label: 'English',         short: 'EN', tag: 'en'    },
+  { code: 'es',    label: 'Español',         short: 'ES', tag: 'es'    },
+  { code: 'pt-br', label: 'Português (BR)',  short: 'PT', tag: 'pt-BR' },
+  { code: 'ru',    label: 'Русский',         short: 'RU', tag: 'ru'    },
+  { code: 'uk',    label: 'Українська',      short: 'Укр', tag: 'uk'    },
+  { code: 'ja',    label: '日本語',           short: '日本語',  tag: 'ja'    },
+  { code: 'zh-cn', label: '中文',             short: '中文',    tag: 'zh-CN' },
+  { code: 'ko',    label: '한국어',            short: '한국어',   tag: 'ko'    },
 ];
 ---
 
@@ -39,9 +49,9 @@ const langs = [
     </a>
 
     <div class="site-header__lang" role="group" aria-label="Language">
-      {langs.map(({ code, href, label, short, tag }) => (
+      {langs.map(({ code, label, short, tag }) => (
         <a
-          href={href}
+          href={langHref(code)}
           class:list={['lang-tab', code === locale && 'is-active']}
           aria-current={code === locale ? 'page' : undefined}
           aria-label={label}
