@@ -117,6 +117,18 @@
       "llmsFull": true
     },
     {
+      "source": "docs/docs-index.md",
+      "slug": "docs",
+      "title": "Documentation",
+      "nav": true,
+      "navLabel": "Docs",
+      "navGroup": "Getting Started",
+      "navOrder": 7,
+      "llmsGroup": "Getting Started",
+      "llmsDescription": "Documentation index — links to all specification pages, CLI install, AI plugins, and role-specific guides.",
+      "llmsFull": false
+    },
+    {
       "source": "docs/for/developers.md",
       "slug": "for/developers",
       "title": "SpecScore for Developers",
