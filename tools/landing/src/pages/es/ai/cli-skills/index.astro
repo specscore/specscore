@@ -1,0 +1,309 @@
+---
+// ai-plugin-specscore (CLI Skills) — Spanish translation.
+// Canonical URL: specscore.md/es/ai/cli-skills/
+// Product names (SpecScore, Claude Code, SpecStudio Skills, ai-plugin-specscore) stay English.
+// Slash-command names and terminal content stay English.
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+---
+
+<BaseLayout
+  lang="es"
+  title="CLI Skills — SpecScore CLI dentro de Claude Code"
+  description="Plugin liviano de Claude Code que envuelve el SpecScore CLI. Expone specscore lint, feature, task y change-status como comandos nativos del plugin."
+  canonical="https://specscore.md/es/ai/cli-skills/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          El SpecScore CLI, dentro de Claude Code.
+        </h1>
+        <p class="hero__sub">
+          <code>ai-plugin-specscore</code> es un plugin liviano de Claude Code
+          que envuelve el
+          <a class="xref" href="/es/cli/">SpecScore CLI</a> open-source. Expone
+          <code>specscore lint</code>, <code>specscore feature</code>,
+          <code>specscore task</code> y <code>specscore change-status</code>
+          como comandos nativos del plugin — sin escapar shell, sin cambiar de
+          contexto.
+        </p>
+        <div class="hero__install" id="install">
+<pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
+<span class="prompt">$</span> /plugin install cli-skills@specscore</pre>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Qué es / qué no es ── */}
+    <section class="section" aria-labelledby="what-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="what-title" class="section-title">Qué es y qué no es.</h2>
+        <p class="prose-p">
+          Esto es la <strong>superficie mecánica del CLI</strong>. Envuelve los
+          comandos del SpecScore CLI para usarlos dentro de Claude Code — nada más.
+          Sin opiniones sobre workflow, sin orquestación de ciclo de vida, sin
+          pipeline de slash commands.
+        </p>
+        <p class="prose-p">
+          Si quieres el workflow opinado de spec-driven development —
+          <code>/ideate</code>, <code>/specify</code>, <code>/plan</code>,
+          <code>/implement</code> — instala
+          <a class="xref" href="/es/ai/specstudio-skills/">SpecStudio Skills</a>.
+          Ambos se construyen sobre el mismo SpecScore CLI.
+        </p>
+
+        <div class="callout">
+          <strong>Cuándo usar cuál:</strong>
+          <ul class="callout-list">
+            <li><strong>CLI Skills</strong> — ya conoces SpecScore y quieres el CLI crudo en tu loop de agente.</li>
+            <li><strong>SpecStudio Skills</strong> — eres nuevo en SpecScore y quieres un workflow guiado.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Comandos ── */}
+    <section class="section" aria-labelledby="commands-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="commands-title" class="section-title">Comandos</h2>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-lint</h3>
+          <p class="cmd-desc">Lintea un árbol de specs o un archivo individual. Reporta pass/fail por regla.</p>
+<pre class="terminal"><span class="prompt">&gt;</span> /specscore-lint spec/features/password-reset/
+<span class="mark-pass">PASS</span>  Feature: password-reset
+  <span class="mark-pass">PASS</span>  has title, status, and description
+  <span class="mark-pass">PASS</span>  requirements have acceptance criteria
+  <span class="mark-pass">PASS</span>  all AC IDs are unique</pre>
+        </div>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-feature</h3>
+          <p class="cmd-desc">Lista, inspecciona o crea el esqueleto de features de SpecScore.</p>
+        </div>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-task</h3>
+          <p class="cmd-desc">Lee y alimenta el tablero de tareas del proyecto.</p>
+        </div>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-change-status</h3>
+          <p class="cmd-desc">Transiciona un Feature o Idea a través de su ciclo de vida.</p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Para constructores de herramientas ── */}
+    <section class="section" aria-labelledby="builders-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="builders-title" class="section-title">Para constructores de herramientas</h2>
+        <p class="prose-p">
+          <code>ai-plugin-specscore</code> existe para que cualquiera que construya
+          su propio plugin de workflow sobre SpecScore pueda depender de la
+          superficie del CLI sin reimplementarla. Si estás escribiendo una
+          alternativa comunitaria a SpecStudio Skills, este es tu sustrato.
+        </p>
+        <p class="prose-p">
+          El código fuente está en
+          <a class="xref" href="https://github.com/specscore/ai-plugin-specscore">specscore/ai-plugin-specscore</a>
+          — licencia MIT, gratis para siempre.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  {/* ── Footer ── */}
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <div class="page-footer__col page-footer__brand">
+        <a href="/es/" class="wordmark" aria-label="SpecScore — inicio">
+          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+          <span class="wordmark__name">SpecScore.md</span>
+        </a>
+        <p class="page-footer__tagline">
+          Un estándar abierto para especificaciones, requisitos
+          y criterios de aceptación.
+        </p>
+        <p class="page-footer__copyright">
+          &copy; 2026 SpecScore contributors. MIT license.
+        </p>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">CLI Skills</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://github.com/specscore/ai-plugin-specscore">GitHub</a></li>
+          <li><a href="https://github.com/specscore/ai-plugin-specscore/blob/main/LICENSE">Licencia: MIT</a></li>
+        </ul>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">Ecosistema</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://specscore.md">SpecScore</a> — el estándar abierto</li>
+          <li><a href="/es/ai/specstudio-skills/">SpecStudio Skills</a> — workflow opinado de SDD</li>
+          <li><a href="/es/cli/">SpecScore CLI</a> — el linter</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__headline {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1rem;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+  }
+  .hero__sub code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+  .hero__install { margin-bottom: var(--space-2); }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Sections ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+  .prose-p:last-child { margin-bottom: 0; }
+  .prose-p code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+
+  /* ── Callout ── */
+  .callout {
+    margin-top: var(--space-4);
+    padding: var(--space-2) var(--space-3);
+    border-left: 3px solid var(--hairline);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.6;
+  }
+  .callout-list {
+    margin: var(--space-1) 0 0;
+    padding-left: 1.25rem;
+  }
+  .callout-list li { margin-bottom: 0.35rem; }
+
+  /* ── Command blocks ── */
+  .cmd-block {
+    margin-bottom: var(--space-4);
+  }
+  .cmd-block:last-child { margin-bottom: 0; }
+  .cmd-name {
+    font-family: var(--font-code);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: var(--space-1);
+  }
+  .cmd-desc {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-2);
+    line-height: 1.55;
+  }
+
+  /* ── Footer ── */
+  .page-footer {
+    background: var(--cream);
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    border-top: 1px solid var(--hairline);
+  }
+  .page-footer__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-4);
+  }
+  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
+  .page-footer__tagline {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+    max-width: 36ch;
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+  .page-footer__copyright {
+    color: var(--pale-ink);
+    font-size: 0.825rem;
+    font-family: var(--font-code);
+  }
+  .page-footer__heading {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+  }
+  .page-footer__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .page-footer__list a {
+    color: var(--ink);
+    font-size: 0.9rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 120ms ease;
+  }
+  .page-footer__list a:hover { border-bottom-color: var(--ink); }
+  .page-footer__list a:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 800px) {
+    .page-footer__inner { grid-template-columns: 1fr 1fr; }
+    .page-footer__brand { grid-column: 1 / -1; }
+  }
+</style>

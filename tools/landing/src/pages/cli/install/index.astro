@@ -1,0 +1,385 @@
+---
+// CLI Installation — reference page for all install methods.
+// Lives at /cli/install — the deep-reference companion to /cli/ (product page).
+// Content migrated from docs/installation.md into the Astro design system.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+---
+
+<BaseLayout
+  title="Install the SpecScore CLI"
+  description="Install the specscore CLI on macOS, Linux, or Windows via curl, Homebrew, PowerShell, WinGet, Scoop, or from source."
+  canonical="https://specscore.md/cli/install/"
+>
+  <SiteHeader />
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__eyebrow">
+          <a href="/cli/" class="xref">SpecScore CLI</a>
+        </p>
+        <h1 id="hero-title" class="hero__headline">Installation</h1>
+        <p class="hero__sub">
+          Pick the method that fits your environment. All install the same
+          <code>specscore</code> binary from the same
+          <a class="xref" href="https://github.com/specscore/specscore-cli/releases">GitHub release</a>.
+        </p>
+      </div>
+    </section>
+
+    {/* ── Quick install (macOS & Linux) ── */}
+    <section class="section" id="quick-install" aria-labelledby="quick-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="quick-title" class="section-title">Quick install (macOS & Linux)</h2>
+<pre class="terminal"><span class="prompt">$</span> curl -fsSL https://specscore.md/install/get-cli | sh</pre>
+        <p class="method-desc">
+          The script detects your OS and architecture, downloads the matching
+          archive from the latest GitHub release, verifies its SHA-256 checksum,
+          and installs the <code>specscore</code> binary to <code>/usr/local/bin</code>
+          (or <code>~/.local/bin</code> if <code>/usr/local/bin</code> isn't writable).
+        </p>
+
+        <h3 class="subsection-title">Options</h3>
+        <table class="options-table">
+          <thead>
+            <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>SPECSCORE_VERSION</code></td>
+              <td><code>latest</code></td>
+              <td>Release tag to install, e.g. <code>v0.1.0</code>.</td>
+            </tr>
+            <tr>
+              <td><code>SPECSCORE_INSTALL_DIR</code></td>
+              <td><code>/usr/local/bin</code> or <code>~/.local/bin</code></td>
+              <td>Directory to install the binary into.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="method-desc">Install a specific version into <code>~/.local/bin</code>:</p>
+<pre class="terminal"><span class="prompt">$</span> curl -fsSL https://specscore.md/install/get-cli | \
+  SPECSCORE_VERSION=v0.1.0 SPECSCORE_INSTALL_DIR="$HOME/.local/bin" sh</pre>
+
+        <h3 class="subsection-title">Inspect before running</h3>
+        <p class="method-desc">If you prefer to review the script before piping it into a shell:</p>
+<pre class="terminal"><span class="prompt">$</span> curl -fsSL https://specscore.md/install/get-cli -o get-cli.sh
+<span class="prompt">$</span> less get-cli.sh
+<span class="prompt">$</span> sh get-cli.sh</pre>
+      </div>
+    </section>
+
+    {/* ── Homebrew ── */}
+    <section class="section" id="homebrew" aria-labelledby="brew-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="brew-title" class="section-title">Homebrew (macOS & Linux)</h2>
+<pre class="terminal"><span class="prompt">$</span> brew install specscore/tap/specscore</pre>
+        <p class="method-desc">
+          This taps <code>specscore/homebrew-tap</code> on first install and
+          tracks new releases from there.
+        </p>
+      </div>
+    </section>
+
+    {/* ── Windows ── */}
+    <section class="section" id="windows" aria-labelledby="win-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="win-title" class="section-title">Windows</h2>
+        <p class="method-desc">
+          Pick whichever channel fits your environment — all three install the same
+          binary from the same GitHub release.
+        </p>
+
+        <h3 class="subsection-title">PowerShell</h3>
+<pre class="terminal"><span class="prompt">PS&gt;</span> powershell -c "irm https://specscore.md/install/get-cli.ps1 | iex"</pre>
+        <p class="method-desc">
+          The script detects your architecture, downloads the matching <code>.zip</code>
+          from the latest release, verifies its SHA-256 checksum, installs
+          <code>specscore.exe</code> to
+          <code>%LOCALAPPDATA%\Programs\specscore\bin</code>, and appends that
+          directory to your user <code>PATH</code>. No admin rights required.
+          Open a new terminal afterwards so the updated <code>PATH</code> takes effect.
+        </p>
+
+        <h3 class="subsection-title">WinGet</h3>
+<pre class="terminal"><span class="prompt">PS&gt;</span> winget install Synchestra.SpecScore</pre>
+
+        <h3 class="subsection-title">Scoop</h3>
+<pre class="terminal"><span class="prompt">PS&gt;</span> scoop bucket add specscore https://github.com/specscore/scoop-bucket
+<span class="prompt">PS&gt;</span> scoop install specscore</pre>
+      </div>
+    </section>
+
+    {/* ── Manual ── */}
+    <section class="section" id="manual" aria-labelledby="manual-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="manual-title" class="section-title">Manual install</h2>
+        <ol class="manual-steps">
+          <li>
+            Download the archive for your platform from the
+            <a class="xref" href="https://github.com/specscore/specscore-cli/releases">GitHub Releases page</a>.
+            Archives follow the pattern <code>specscore_&lt;version&gt;_&lt;os&gt;_&lt;arch&gt;.&lt;ext&gt;</code>.
+          </li>
+          <li>
+            Verify its SHA-256 checksum against
+            <code>specscore_&lt;version&gt;_checksums.txt</code> from the same release.
+          </li>
+          <li>
+            Extract the archive and move <code>specscore</code>
+            (or <code>specscore.exe</code> on Windows) to a directory on your <code>PATH</code>.
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    {/* ── Build from source ── */}
+    <section class="section" id="source" aria-labelledby="source-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="source-title" class="section-title">Build from source</h2>
+        <p class="method-desc">
+          Requires <a class="xref" href="https://go.dev/">Go</a> 1.26 or newer.
+          This installs the latest development build from <code>main</code> —
+          may include changes not yet in a tagged release.
+        </p>
+<pre class="terminal"><span class="prompt">$</span> go install github.com/specscore/specscore-cli/cmd/specscore@main</pre>
+        <p class="method-desc">
+          To pin a specific version, swap <code>@main</code> for a tag like
+          <code>@v0.4.2</code>, or use <code>@latest</code> for the most recent
+          tagged release.
+        </p>
+      </div>
+    </section>
+
+    {/* ── Verify ── */}
+    <section class="section" id="verify" aria-labelledby="verify-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="verify-title" class="section-title">Verify the install</h2>
+<pre class="terminal"><span class="prompt">$</span> specscore version
+<span class="dim">specscore 0.1.0 (&lt;commit&gt;) &lt;date&gt;</span></pre>
+      </div>
+    </section>
+  </main>
+
+  {/* ── Footer ── */}
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <div class="page-footer__col page-footer__brand">
+        <a href="/" class="wordmark" aria-label="SpecScore home">
+          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+          <span class="wordmark__name">SpecScore.md</span>
+        </a>
+        <p class="page-footer__tagline">
+          An open standard for specifications, requirements,
+          and acceptance criteria.
+        </p>
+        <p class="page-footer__copyright">
+          &copy; 2026 SpecScore contributors. MIT license.
+        </p>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">SpecScore CLI</h4>
+        <ul class="page-footer__list">
+          <li><a href="/cli/">Overview</a></li>
+          <li><a href="https://github.com/specscore/specscore-cli">GitHub</a></li>
+          <li><a href="https://github.com/specscore/specscore-cli/releases">Releases</a></li>
+        </ul>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">Ecosystem</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://specscore.md">SpecScore</a> — the open standard</li>
+          <li><a href="/ai/specstudio-skills/">SpecStudio Skills</a> — Claude Code plugin</li>
+          <li><a href="https://specscore.studio">SpecScore Studio</a> — web viewer</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* ── Hero (compact for reference page) ── */
+  .hero {
+    padding: var(--space-5) var(--space-3) var(--space-4);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+  }
+  .hero__eyebrow {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+  }
+  .hero__headline {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+  }
+  .hero__sub {
+    font-size: 1rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+  .hero__sub code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .subsection-title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+  }
+
+  /* ── Method descriptions ── */
+  .method-desc {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .method-desc code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+
+  /* ── Options table ── */
+  .options-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-3) 0;
+    font-size: var(--fs-small);
+  }
+  .options-table th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--mid-ink);
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .options-table td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--hairline);
+    color: var(--mid-ink);
+    line-height: 1.5;
+  }
+  .options-table code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Manual steps ── */
+  .manual-steps {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    padding-left: 1.25rem;
+    margin: 0;
+  }
+  .manual-steps li {
+    margin-bottom: var(--space-2);
+  }
+  .manual-steps code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+
+  /* ── Terminal blocks — space after ── */
+  .section .terminal {
+    margin-bottom: var(--space-1);
+  }
+
+  /* ── Footer ── */
+  .page-footer {
+    background: var(--cream);
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    border-top: 1px solid var(--hairline);
+  }
+  .page-footer__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-4);
+  }
+  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
+  .page-footer__tagline {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+    max-width: 36ch;
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+  .page-footer__copyright {
+    color: var(--pale-ink);
+    font-size: 0.825rem;
+    font-family: var(--font-code);
+  }
+  .page-footer__heading {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+  }
+  .page-footer__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .page-footer__list a {
+    color: var(--ink);
+    font-size: 0.9rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 120ms ease;
+  }
+  .page-footer__list a:hover { border-bottom-color: var(--ink); }
+  .page-footer__list a:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 800px) {
+    .page-footer__inner { grid-template-columns: 1fr 1fr; }
+    .page-footer__brand { grid-column: 1 / -1; }
+  }
+</style>

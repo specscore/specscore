@@ -117,18 +117,6 @@
       "llmsFull": true
     },
     {
-      "source": "docs/installation.md",
-      "slug": "install",
-      "title": "Installation",
-      "nav": true,
-      "navLabel": "Installation",
-      "navGroup": "Getting Started",
-      "navOrder": 7,
-      "llmsGroup": "Getting Started",
-      "llmsDescription": "How to install the specscore CLI and initialize a SpecScore project.",
-      "llmsFull": true
-    },
-    {
       "source": "docs/for/developers.md",
       "slug": "for/developers",
       "title": "SpecScore for Developers",
