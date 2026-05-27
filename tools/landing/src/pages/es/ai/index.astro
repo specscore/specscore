@@ -1,0 +1,135 @@
+---
+// /ai/ index — Spanish translation.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+---
+
+<BaseLayout
+  lang="es"
+  title="Plugins de IA — SpecScore"
+  description="Plugins compatibles con SpecScore para agentes de IA. SpecStudio Skills para el workflow completo de SDD, o CLI Skills para acceso directo al linter."
+  canonical="https://specscore.md/es/ai/"
+>
+  <SiteHeader />
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          Plugins de IA para SpecScore.
+        </h1>
+        <p class="hero__sub">
+          Dale a tu agente de IA un workflow basado en specs. Estos plugins
+          traen la <a class="xref" href="/es/cli/">CLI de SpecScore</a> a
+          Claude Code — elige el que se adapte a tu forma de trabajar.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="plugins-title">
+      <div class="section-inner">
+        <h2 id="plugins-title" class="sr-only">Plugins disponibles</h2>
+
+        <div class="plugin-grid">
+          <a href="/es/ai/specstudio-skills/" class="plugin-card">
+            <h3 class="plugin-card__name">SpecStudio Skills</h3>
+            <p class="plugin-card__repo">specscore/specstudio-skills</p>
+            <p class="plugin-card__desc">
+              El workflow opinado para desarrollo basado en specs.
+              Cuatro slash commands — <code>/ideate</code>, <code>/specify</code>,
+              <code>/plan</code>, <code>/implement</code> — que te llevan desde
+              una idea cruda hasta codigo funcional con una spec puntuada en cada paso.
+            </p>
+            <p class="plugin-card__audience">
+              Para desarrolladores nuevos en SpecScore que quieren un workflow guiado.
+            </p>
+            <span class="plugin-card__cta">Saber mas →</span>
+          </a>
+
+          <a href="/es/ai/cli-skills/" class="plugin-card">
+            <h3 class="plugin-card__name">CLI Skills</h3>
+            <p class="plugin-card__repo">specscore/ai-plugin-specscore</p>
+            <p class="plugin-card__desc">
+              Wrapper delgado alrededor de la CLI de SpecScore. Expone
+              <code>specscore lint</code>, <code>specscore feature</code>,
+              <code>specscore task</code> y <code>specscore change-status</code>
+              como comandos nativos de Claude Code.
+            </p>
+            <p class="plugin-card__audience">
+              Para usuarios avanzados que ya conocen SpecScore, y para tool builders
+              creando sus propios workflows.
+            </p>
+            <span class="plugin-card__cta">Saber mas →</span>
+          </a>
+        </div>
+
+        <p class="community-note">
+          ¿Estas construyendo tu propio plugin para SpecScore? Cuando aparezcan
+          plugins de la comunidad, se listaran aqui.
+          <a class="xref" href="https://github.com/specscore/specscore/blob/main/CONTRIBUTING.md">Guia de contribucion →</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <div class="page-footer__col page-footer__brand">
+        <a href="/es/" class="wordmark" aria-label="Inicio de SpecScore">
+          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+          <span class="wordmark__name">SpecScore.md</span>
+        </a>
+        <p class="page-footer__tagline">Un estandar abierto para especificaciones, requisitos y criterios de aceptacion.</p>
+        <p class="page-footer__copyright">&copy; 2026 SpecScore contributors. MIT license.</p>
+      </div>
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">Producto</h4>
+        <ul class="page-footer__list">
+          <li><a href="/es/cli/">SpecScore CLI</a></li>
+          <li><a href="/es/cli/install/">Instalacion</a></li>
+          <li><a href="https://github.com/specscore/specscore-cli">GitHub</a></li>
+        </ul>
+      </div>
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">Ecosistema</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://specscore.md">SpecScore</a> — el estandar abierto</li>
+          <li><a href="/es/ai/specstudio-skills/">SpecStudio Skills</a></li>
+          <li><a href="https://specscore.studio">SpecScore Studio</a> — visor web</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  .hero { padding: var(--space-6) var(--space-3) var(--space-5); background: var(--cream); }
+  .hero__inner { max-width: var(--max-prose); margin: 0 auto; animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms; }
+  .hero__headline { font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-3); }
+  .hero__sub { font-size: 1.125rem; color: var(--mid-ink); line-height: 1.55; }
+  @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  .plugin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+  .plugin-card { display: block; background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-4); transition: border-color 160ms ease, box-shadow 160ms ease; text-decoration: none; color: inherit; }
+  .plugin-card:hover { border-color: var(--graphite); box-shadow: 0 2px 8px rgba(26,26,26,0.06); }
+  .plugin-card:focus-visible { outline: 2px solid var(--ink-blue); outline-offset: 2px; }
+  .plugin-card__name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-1); }
+  .plugin-card__repo { font-family: var(--font-code); font-size: var(--fs-small); color: var(--pale-ink); margin-bottom: var(--space-3); }
+  .plugin-card__desc { color: var(--mid-ink); font-size: var(--fs-body); line-height: 1.6; margin-bottom: var(--space-2); }
+  .plugin-card__desc code { font-size: 0.9em; background: var(--cream); padding: 0.1em 0.3em; border-radius: 2px; }
+  .plugin-card__audience { font-size: var(--fs-small); color: var(--pale-ink); font-style: italic; margin-bottom: var(--space-3); }
+  .plugin-card__cta { font-family: var(--font-display); font-size: var(--fs-small); font-weight: 600; color: var(--validator-green); }
+  .community-note { margin-top: var(--space-5); font-size: var(--fs-small); color: var(--mid-ink); }
+  @media (max-width: 720px) { .plugin-grid { grid-template-columns: 1fr; } }
+  .page-footer { background: var(--cream); padding: var(--space-6) var(--space-3) var(--space-5); border-top: 1px solid var(--hairline); }
+  .page-footer__inner { max-width: var(--max-content); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-4); }
+  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
+  .page-footer__tagline { color: var(--mid-ink); margin-bottom: var(--space-2); max-width: 36ch; line-height: 1.5; font-size: 0.95rem; }
+  .page-footer__copyright { color: var(--pale-ink); font-size: 0.825rem; font-family: var(--font-code); }
+  .page-footer__heading { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-ink); margin-bottom: var(--space-2); }
+  .page-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+  .page-footer__list a { color: var(--ink); font-size: 0.9rem; border-bottom: 1px solid transparent; transition: border-color 120ms ease; }
+  .page-footer__list a:hover { border-bottom-color: var(--ink); }
+  .page-footer__list a:focus-visible { outline: 2px solid var(--ink-blue); outline-offset: 2px; border-radius: 2px; }
+  @media (max-width: 800px) { .page-footer__inner { grid-template-columns: 1fr 1fr; } .page-footer__brand { grid-column: 1 / -1; } }
+</style>

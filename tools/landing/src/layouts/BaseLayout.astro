@@ -57,6 +57,15 @@ const {
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
 
+    {/* Google Analytics */}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9Y2D7ZQV9C" is:inline></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9Y2D7ZQV9C');
+    </script>
+
     <slot name="head" />
   </head>
   <body>
