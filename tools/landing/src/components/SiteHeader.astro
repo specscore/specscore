@@ -7,8 +7,12 @@
 const path = Astro.url.pathname;
 const locale =
   path.startsWith('/ru')    ? 'ru'    :
+  path.startsWith('/uk')    ? 'uk'    :
   path.startsWith('/es')    ? 'es'    :
   path.startsWith('/pt-br') ? 'pt-br' :
+  path.startsWith('/ja')    ? 'ja'    :
+  path.startsWith('/zh-cn') ? 'zh-cn' :
+  path.startsWith('/ko')    ? 'ko'    :
                               'en';
 const wordmarkHref = locale === 'en' ? '/' : `/${locale}/`;
 
@@ -16,10 +20,14 @@ const wordmarkHref = locale === 'en' ? '/' : `/${locale}/`;
 // `tag` is the HTML lang attribute value (uppercase BR per RFC 5646);
 // `code` matches the locale detector above.
 const langs = [
-  { code: 'en',    href: '/',       label: 'English',         tag: 'en'    },
-  { code: 'es',    href: '/es/',    label: 'Español',         tag: 'es'    },
-  { code: 'pt-br', href: '/pt-br/', label: 'Português (BR)',  tag: 'pt-BR' },
-  { code: 'ru',    href: '/ru/',    label: 'Русский',         tag: 'ru'    },
+  { code: 'en',    href: '/',       label: 'English',         short: 'EN', tag: 'en'    },
+  { code: 'es',    href: '/es/',    label: 'Español',         short: 'ES', tag: 'es'    },
+  { code: 'pt-br', href: '/pt-br/', label: 'Português (BR)',  short: 'PT', tag: 'pt-BR' },
+  { code: 'ru',    href: '/ru/',    label: 'Русский',         short: 'RU', tag: 'ru'    },
+  { code: 'uk',    href: '/uk/',    label: 'Українська',      short: 'Укр', tag: 'uk'    },
+  { code: 'ja',    href: '/ja/',    label: '日本語',           short: '日本語',  tag: 'ja'    },
+  { code: 'zh-cn', href: '/zh-cn/', label: '中文',             short: '中文',    tag: 'zh-CN' },
+  { code: 'ko',    href: '/ko/',    label: '한국어',            short: '한국어',   tag: 'ko'    },
 ];
 ---
 
@@ -31,13 +39,17 @@ const langs = [
     </a>
 
     <div class="site-header__lang" role="group" aria-label="Language">
-      {langs.map(({ code, href, label, tag }) => (
+      {langs.map(({ code, href, label, short, tag }) => (
         <a
           href={href}
           class:list={['lang-tab', code === locale && 'is-active']}
           aria-current={code === locale ? 'page' : undefined}
+          aria-label={label}
           lang={tag}
-        >{label}</a>
+        >
+          <span class="lang-full">{label}</span>
+          <span class="lang-short">{short}</span>
+        </a>
       ))}
     </div>
 
@@ -119,12 +131,22 @@ const langs = [
     font-weight: 600;
   }
 
+  /* Full labels visible by default, short codes hidden */
+  .lang-short { display: none; }
+
   @media (max-width: 720px) {
     .site-header__inner {
       grid-template-columns: auto auto auto;
       gap: var(--space-2);
       padding: 0.625rem var(--space-2);
     }
-    .lang-tab { padding: 0.3rem 0.5rem; font-size: 0.8rem; }
+    /* Swap to 2-char codes on small screens */
+    .lang-full { display: none; }
+    .lang-short {
+      display: inline;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .lang-tab { padding: 0.3rem 0.45rem; font-size: 0.8rem; }
   }
 </style>

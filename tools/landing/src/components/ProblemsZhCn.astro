@@ -1,0 +1,221 @@
+---
+// Simplified Chinese variant of Problems.astro.
+---
+
+<section class="problems section" id="problems" aria-labelledby="problems-title">
+  <div class="section-inner">
+    <h2 id="problems-title" class="problems__title">没有它会出什么问题。</h2>
+
+    <ul class="problems__grid">
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌀</span> 规格说明会漂移。</h3>
+        <p class="problem-card__pain">
+          文档中的规格、Slack 里的讨论和 PR 中的代码悄悄地
+          分歧了好几周。没人能找到哪个版本的对话才是权威的。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解决方案</p>
+        <p class="problem-card__fix">
+          仓库中的唯一权威规格，与代码一起进行版本管理。
+          <code>specscore lint</code> 在 CI 中每次推送时运行；
+          git 历史就是审计追踪。规格、讨论和 PR 不可能悄悄
+          分歧——它们审查的是同一个文件。
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌫️</span> 验收标准含混不清。</h3>
+        <p class="problem-card__pain">
+          <em>"优雅地处理错误"</em>本来应该是指
+          <em>"显示提示并回滚"</em>。还是
+          <em>"记录日志并重试？"</em>AI 代理只能猜测。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解决方案</p>
+        <p class="problem-card__fix">
+          代码检查器在写任何代码之前就能捕获含混的标准。
+          动词无法通过检查，因为它缺少具体的对象或条件。
+          修复这个警告会迫使你写清楚<em>"处理"</em>到底
+          意味着什么。
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🤖</span> AI 代理交付了错误的东西。</h3>
+        <p class="problem-card__pain">
+          人类会推断、提问、澄清。AI 代理不会——它们实现的
+          是训练数据中最常见的模式。代码通过了审查，因为它做了
+          <strong>某些</strong>合理的事情。只是不是你想要的。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解决方案</p>
+        <p class="problem-card__fix">
+          结构化输入。AI 代理确定性地解析 REQ ID、AC ID 和
+          <code>GIVEN&nbsp;/&nbsp;WHEN&nbsp;/&nbsp;THEN</code>
+          场景——无需推断。Plan 必须引用每个任务满足的 AC ID，
+          所以构建的内容始终可以对照规格进行验证。
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">💸</span> AI 代理反复付费读取规格。</h3>
+        <p class="problem-card__pain">
+          AI 代理回答<em>"什么依赖于这个功能？"</em>时，
+          要读取整个功能 README。然后读每个父级索引。
+          然后以防万一再读兄弟功能。每次查询都是一次重新解析。
+          Token 在消耗；延迟在增加；费用也随之攀升。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解决方案</p>
+        <p class="problem-card__fix">
+          用结构化查询代替文件读取。
+          <code>specscore feature tree</code> 以 YAML 格式返回层级结构；
+          <code>feature deps</code> 遍历传递性依赖链；
+          <code>feature info</code> 展示状态、负责人和待解决问题——每个只需
+          一次调用。代理导航的是图，而不是文本。
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔗</span> 代码忘记了它的规格。</h3>
+        <p class="problem-card__pain">
+          六个月后，你在调试一个函数，没人记得它实现了哪个
+          功能。代码和规格之间的关联存在于某人的脑袋里，
+          而那个人已经离职了。引入它的 PR 已经存档。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解决方案</p>
+        <p class="problem-card__fix">
+          源码注解。类似
+          <code>// specscore: features/checkout/apply-discount/R1.AC-2</code>
+          的注释使关联变得机器可读，并在每次重构中保留下来。
+          <code>specscore code deps</code> 一次调用即可回答
+          <em>"这个文件实现了哪个规格？"</em>；
+          代码检查器会标记指向已删除规格的引用。
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🏷️</span> 状态变更会泄漏。</h3>
+        <p class="problem-card__pain">
+          你把一个功能从 <em>Draft</em> 改为 <em>Approved</em>，
+          但父级的 features-index 仍然显示它是 Draft。三周后，
+          读取索引的 AI 代理认为它仍在变动中。状态现在存在于
+          两个地方，而且它们不一致。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解决方案</p>
+        <p class="problem-card__fix">
+          <code>specscore feature change-status</code> 在一个
+          原子操作中重写功能的 Status 字段并重新同步 features-index
+          中的行——检查失败会回滚修改。状态存在于唯一的权威位置；
+          索引只是它的生成视图。
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">📋</span> 规格忘记了它不知道的东西。</h3>
+        <p class="problem-card__pain">
+          规格读起来像是已经定稿了——直到你想起两个月前在 Slack
+          讨论中丢失的<em>"时区怎么办？"</em>这个问题，
+          它从来没有进入文档。现在你们在实现阶段，没人能说出
+          答案是什么。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解决方案</p>
+        <p class="problem-card__fix">
+          每个 SpecScore 功能都有一个必填的
+          <strong>Outstanding Questions</strong> 部分。代码检查器
+          会拒绝省略它的功能——留空可以
+          （<code>"None at this time."</code>），但不能没有。
+          未解决的问题在文档中可见，可从 CLI 查询，不可能被遗忘。
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .problems { background: var(--cream); }
+
+  .problems__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-5);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .problems__grid {
+    list-style: none; margin: 0; padding: 0;
+    column-count: 3;
+    column-width: 0;
+    column-gap: var(--space-4);
+    column-fill: balance;
+  }
+
+  .problem-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 2px;
+    padding: var(--space-3);
+    box-shadow:
+      0 1px 2px rgba(26, 26, 26, 0.04),
+      0 3px 8px rgba(26, 26, 26, 0.06);
+    break-inside: avoid;
+    margin-bottom: var(--space-4);
+  }
+  .problem-card:last-child { margin-bottom: 0; }
+  .problem-card__name {
+    font-size: 1.15rem; font-weight: 700;
+    letter-spacing: -0.005em; line-height: 1.25;
+    color: var(--ink); margin: 0 0 var(--space-2);
+  }
+  .problem-card__emoji {
+    margin-right: 0.35em;
+    font-size: 1.05em;
+    vertical-align: -0.05em;
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  }
+  .problem-card__pain {
+    color: var(--ink); font-size: 0.95rem; line-height: 1.6;
+    margin: 0 0 var(--space-3);
+  }
+  .problem-card__pain em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em; border-radius: 2px;
+    font-family: var(--font-code); font-size: 0.9em; color: var(--ink);
+  }
+  .problem-card__pain strong { font-weight: 700; color: var(--ink); }
+
+  .problem-card__rule {
+    height: 1px; background: var(--hairline);
+    margin: 0 0 var(--space-3);
+  }
+
+  .problem-card__fix-label {
+    font-family: var(--font-code);
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--validator-green);
+    margin: 0 0 var(--space-2);
+  }
+  .problem-card__fix {
+    color: var(--ink); font-size: 0.95rem; line-height: 1.6; margin: 0;
+  }
+  .problem-card__fix code {
+    background: var(--cream-2);
+    padding: 0.05em 0.35em; border-radius: 2px;
+    font-size: 0.92em; color: var(--ink);
+  }
+  .problem-card__fix em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em; border-radius: 2px;
+    font-family: var(--font-code); font-size: 0.9em; color: var(--ink);
+  }
+
+  @media (max-width: 599px) {
+    .problems__grid { column-count: 1; }
+  }
+</style>

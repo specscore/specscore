@@ -1,0 +1,67 @@
+---
+// Japanese variant of SiteFooter.astro. Wordmark + product names stay English.
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__col site-footer__brand">
+      <a href="/ja/" class="wordmark" aria-label="SpecScore ホーム">
+        <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+        <span class="wordmark__name">SpecScore.md</span>
+      </a>
+      <p class="site-footer__tagline">
+        仕様、要件、受け入れ基準のためのオープンスタンダード。
+      </p>
+      <p class="site-footer__copyright">
+        &copy; 2026 SpecScore contributors. MIT license.
+      </p>
+    </div>
+
+    <div class="site-footer__col">
+      <h4 class="site-footer__heading">プロダクト</h4>
+      <ul class="site-footer__list">
+        <li><a href="https://specscore.md/docs">ドキュメント</a></li>
+        <li><a href="https://specscore.md/docs/cli">リンター</a></li>
+        <li><a href="https://specscore.md/docs/examples">サンプル</a></li>
+      </ul>
+    </div>
+
+    <div class="site-footer__col">
+      <h4 class="site-footer__heading">コミュニティ</h4>
+      <ul class="site-footer__list">
+        <li><a href="https://github.com/specscore/specscore">GitHub</a></li>
+        <li><a href="https://github.com/specscore/specscore/blob/main/CONTRIBUTING.md">コントリビューション</a></li>
+        <li><a href="https://github.com/specscore/specscore/blob/main/LICENSE">ライセンス</a></li>
+      </ul>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--cream); padding: var(--space-6) var(--space-3) var(--space-5); }
+  .site-footer__inner {
+    max-width: var(--max-content); margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-4);
+  }
+  .site-footer__brand .wordmark { margin-bottom: var(--space-2); }
+  .site-footer__tagline {
+    color: var(--mid-ink); margin-bottom: var(--space-2);
+    max-width: 38ch; line-height: 1.5; font-size: 0.95rem;
+  }
+  .site-footer__copyright { color: var(--pale-ink); font-size: 0.825rem; font-family: var(--font-code); }
+  .site-footer__heading {
+    font-family: var(--font-display); font-size: 0.7rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--mid-ink); margin-bottom: var(--space-2);
+  }
+  .site-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+  .site-footer__list a { color: var(--ink); font-size: 0.9rem; border-bottom: 1px solid transparent; transition: border-color 120ms ease; }
+  .site-footer__list a:hover { border-bottom-color: var(--ink); }
+  .site-footer__list a:focus-visible { outline: 2px solid var(--ink-blue); outline-offset: 2px; border-radius: 2px; }
+
+  @media (max-width: 800px) {
+    .site-footer__inner { grid-template-columns: 1fr 1fr; }
+    .site-footer__brand { grid-column: 1 / -1; }
+  }
+</style>

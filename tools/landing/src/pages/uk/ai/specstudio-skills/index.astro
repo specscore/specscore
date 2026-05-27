@@ -1,0 +1,530 @@
+---
+// SpecStudio Skills — Ukrainian translation of the dedicated landing page.
+// Canonical campaign URL: specscore.md/uk/ai/specstudio-skills/
+// Product names (SpecStudio Skills, SpecScore, Claude Code, GitHub) stay English.
+// Slash-command names stay English (they're literal command strings).
+// Terminal / code-block content stays English.
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooter from '../../../../components/SiteFooter.astro';
+---
+
+<BaseLayout
+  lang="uk"
+  title="SpecStudio Skills — Специфікації, яким ваш AI-агент справді слідує."
+  description="Безкоштовний плагін для Claude Code, який перетворює вайб-промпти на структуровані специфікації з оцінкою — і агент читає їх до того, як напише хоч рядок коду. Побудований на відкритому протоколі SpecScore."
+  canonical="https://specscore.md/uk/ai/specstudio-skills/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Section 1: Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          Специфікації, яким ваш<br />AI-агент справді слідує.
+        </h1>
+        <p class="hero__sub">
+          SpecStudio Skills — безкоштовний плагін для Claude Code, який
+          перетворює вайб-промпти на структуровані специфікації з оцінкою.
+          Агент читає їх до того, як напише хоч рядок коду. Побудований на
+          відкритому протоколі
+          <a class="xref" href="https://specscore.md">SpecScore</a>.
+        </p>
+        <div class="hero__install" id="install">
+<pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
+<span class="prompt">$</span> /plugin install specstudio@specscore</pre>
+        </div>
+        <p class="hero__demo-link">
+          <a href="#demo" class="xref">Дивитися 60-секундне демо ↓</a>
+        </p>
+      </div>
+    </section>
+
+    {/* ── Section 2: Demo ── */}
+    <section class="section" id="demo" aria-labelledby="demo-title">
+      <div class="section-inner">
+        <h2 id="demo-title" class="section-title">
+          Від ідеї до оціненої специфікації за 60 секунд.
+        </h2>
+
+        <div class="demo-placeholder">
+          <div class="terminal-frame">
+            <div class="terminal-frame__head">
+              <span class="terminal-frame__title">Claude Code</span>
+              <span class="terminal-frame__hint">демо</span>
+            </div>
+<pre class="terminal terminal-frame__body"><span class="prompt">&gt;</span> /specstudio:ideate A password reset flow for our SaaS app.
+
+<span class="dim">Refining idea...</span>
+<span class="dim">Producing spec/ideas/password-reset.md</span>
+
+<span class="prompt">&gt;</span> /specstudio:specify spec/ideas/password-reset.md
+
+<span class="dim">Writing Feature spec...</span>
+<span class="dim">spec/features/password-reset/README.md</span>
+
+<span class="prompt">$</span> specscore lint spec/features/password-reset/
+<span class="mark-pass">PASS</span>  Feature: password-reset
+  <span class="mark-pass">PASS</span>  has title, status, and description
+  <span class="mark-pass">PASS</span>  requirements have acceptance criteria
+  <span class="mark-pass">PASS</span>  all AC IDs are unique
+  <span class="mark-pass">PASS</span>  no orphan cross-references
+
+<span class="mark-pass">Score: 92 / 100</span></pre>
+          </div>
+          <p class="demo-caption">
+            Без монтажу. Без склеювань. Чистий Claude Code → встановлення плагіна →
+            оцінка реальної специфікації → агент робить саме те, що потрібно.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Section 3: The wedge ── */}
+    <section class="section" aria-labelledby="wedge-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="wedge-title" class="section-title">
+          Чому ваш агент раз за разом робить не те.
+        </h2>
+        <p class="prose-p">
+          Вайб-промпти працюють — поки не перестають. Агент реалізував
+          половину фічі. Неправильно зрозумів вимогу. Вигадав
+          неіснуючий API. Обрав не ту бібліотеку. Ви переформульовуєте
+          промпт. Потім ще раз. До третього разу ви все одно
+          руками набиваєте специфікацію прямо в чат.
+        </p>
+        <p class="prose-p">
+          Проблема не в агенті. Проблема в тому, що «зроби мені фічу» — це
+          не специфікація, а побажання. Агенти стохастичні. Побажання —
+          стохастичні за природою. Специфікації — ні.
+        </p>
+        <p class="prose-p">
+          SpecStudio Skills дає робочий процес для написання специфікацій,
+          які агент справді може розібрати: структуровані фічі,
+          вимоги, критерії приймання — з оцінкою повноти до того, як агент
+          їх побачить. Та сама швидкість, що й вайб-кодинг, але радикально менший
+          розкид у результатах.
+        </p>
+      </div>
+    </section>
+
+    {/* ── Section 4: The pipeline ── */}
+    <section class="section pipeline-section" aria-labelledby="pipeline-title">
+      <div class="section-inner">
+        <h2 id="pipeline-title" class="section-title">
+          Чотири команди. Один пайплайн.
+        </h2>
+        <p class="pipeline-intro">
+          Встановіть один раз, потім запускайте по порядку — від сирої ідеї до виконуваного плану.
+        </p>
+
+        <div class="pipeline-grid">
+          <div class="pipeline-card">
+            <div class="pipeline-card__head">
+              <span class="pipeline-card__cmd">/ideate</span>
+            </div>
+            <p class="pipeline-card__desc">
+              Пропрацювати сиру ідею через структуроване дивергентне
+              та конвергентне мислення. Створює пре-спек на одну сторінку, який можна лінтувати.
+            </p>
+          </div>
+
+          <div class="pipeline-card">
+            <div class="pipeline-card__head">
+              <span class="pipeline-card__cmd">/specify</span>
+            </div>
+            <p class="pipeline-card__desc">
+              Перетворити схвалену ідею на SpecScore Feature з вимогами,
+              критеріями приймання та блоками Given/When/Then.
+            </p>
+          </div>
+
+          <div class="pipeline-card">
+            <div class="pipeline-card__head">
+              <span class="pipeline-card__cmd">/plan</span>
+            </div>
+            <p class="pipeline-card__desc">
+              Декомпозувати фічу в упорядкований список задач. Кожна задача
+              прив'язана до одного або кількох критеріїв приймання.
+            </p>
+          </div>
+
+          <div class="pipeline-card">
+            <div class="pipeline-card__head">
+              <span class="pipeline-card__cmd">/implement</span>
+            </div>
+            <p class="pipeline-card__desc">
+              Виконати наступну задачу з плану. Один субагент на задачу,
+              коміти з трасуванням критеріїв приймання, staged diff на ваше схвалення.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Section 5: What's in the box ── */}
+    <section class="section" aria-labelledby="box-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="box-title" class="section-title">
+          Що всередині.
+        </h2>
+
+        <h3 class="list-heading">Вміє:</h3>
+        <ul class="feature-list feature-list--does">
+          <li>Додає slash-команди для повного SDD-циклу: <code>/ideate</code>, <code>/specify</code>, <code>/plan</code>, <code>/implement</code>.</li>
+          <li>Оцінює повноту та неоднозначність специфікації до того, як агент її побачить.</li>
+          <li>Пише специфікації у відкритому форматі SpecScore — без пропрієтарних розширень.</li>
+        </ul>
+
+        <h3 class="list-heading">Не робить:</h3>
+        <ul class="feature-list feature-list--doesnt">
+          <li>Не запускає агента за вас. Плагін — це шар робочого процесу; агент як і раніше Claude.</li>
+          <li>Не надсилає дані на сервер. Специфікації та оцінки залишаються локально.</li>
+          <li>Не прив'язує до себе. Якщо ви видалите плагін, ваші специфікації залишаться валідним Markdown, який як і раніше можна перевірити через CLI <a class="xref" href="https://github.com/specscore/specscore">specscore</a>.</li>
+        </ul>
+
+        <p class="sibling-callout">
+          Шукаєте нейтральну CLI-обгортку?
+          <a class="xref" href="https://github.com/specscore/ai-plugin-specscore">ai-plugin-specscore</a> —
+          тонкий враппер. SpecStudio Skills — це опініонований робочий процес поверх нього.
+        </p>
+      </div>
+    </section>
+
+    {/* ── Section 6: Open underneath ── */}
+    <section class="section" aria-labelledby="open-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="open-title" class="section-title">
+          Побудований на відкритому протоколі SpecScore.
+        </h2>
+        <p class="prose-p">
+          SpecStudio Skills пише специфікації у форматі
+          <a class="xref" href="https://specscore.md">SpecScore</a> — відкритому
+          стандарті. Формат — людиночитабельний Markdown. Схема опублікована.
+          CLI з відкритим вихідним кодом. Жодної прив'язки до вендора. Якщо ви
+          коли-небудь підете від SpecStudio, ваші специфікації підуть з вами.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">Спробуйте.</h2>
+      <div class="final-cta__install">
+<pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
+<span class="prompt">$</span> /plugin install specstudio@specscore</pre>
+      </div>
+      <p class="final-cta__note">
+        Безкоштовно для публічних та open-source репозиторіїв. Ліцензія MIT.
+      </p>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <div class="page-footer__col page-footer__brand">
+        <a href="/uk/" class="wordmark" aria-label="SpecScore — головна">
+          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+          <span class="wordmark__name">SpecScore.md</span>
+        </a>
+        <p class="page-footer__tagline">
+          Відкритий стандарт для специфікацій, вимог
+          та критеріїв приймання.
+        </p>
+        <p class="page-footer__copyright">
+          &copy; 2026 SpecScore contributors. MIT license.
+        </p>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">SpecStudio Skills</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://github.com/specscore/specstudio-skills">GitHub</a></li>
+          <li><a href="https://github.com/specscore/specstudio-skills/blob/main/CHANGELOG.md">Changelog</a></li>
+          <li><a href="https://github.com/specscore/specstudio-skills/blob/main/LICENSE">Ліцензія: MIT</a></li>
+        </ul>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">Екосистема</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://specscore.md">SpecScore</a> — відкритий стандарт</li>
+          <li><a href="https://github.com/specscore/ai-plugin-specscore">ai-plugin-specscore</a> — тонка CLI-обгортка</li>
+          <li><a href="https://specscore.studio">SpecScore Studio</a> — веб-переглядач</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-7) var(--space-3) var(--space-6);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.55;
+  }
+  .hero__install {
+    margin-bottom: var(--space-3);
+  }
+  .hero__demo-link {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Demo ── */
+  .demo-placeholder {
+    margin-top: var(--space-3);
+  }
+  .demo-caption {
+    margin-top: var(--space-2);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+
+  /* Terminal frame (shared with homepage AiSkills pattern) */
+  .terminal-frame {
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .terminal-frame__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.5rem 0.875rem;
+    border-bottom: 1px solid var(--hairline);
+    background: var(--cream-2);
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .terminal-frame__title { color: var(--graphite); font-weight: 700; }
+  .terminal-frame__hint  { color: var(--mid-ink); }
+  .terminal-frame__body  { border: none !important; }
+
+  /* ── Wedge (prose sections) ── */
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+  .prose-p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ── Pipeline grid ── */
+  .pipeline-section {
+    background: var(--cream-2);
+  }
+  .pipeline-intro {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+  }
+  .pipeline-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+  }
+  .pipeline-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+  }
+  .pipeline-card__head {
+    margin-bottom: var(--space-2);
+  }
+  .pipeline-card__cmd {
+    font-family: var(--font-code);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .pipeline-card__desc {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 860px) {
+    .pipeline-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 520px) {
+    .pipeline-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── What's in the box ── */
+  .list-heading {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .list-heading:first-of-type {
+    margin-top: 0;
+  }
+  .feature-list {
+    margin: 0 0 var(--space-3) 0;
+    padding-left: 1.25rem;
+    color: var(--mid-ink);
+    line-height: 1.65;
+  }
+  .feature-list li {
+    margin-bottom: 0.5rem;
+  }
+  .feature-list li:last-child {
+    margin-bottom: 0;
+  }
+  .feature-list code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+  .sibling-callout {
+    margin-top: var(--space-4);
+    padding: var(--space-2) var(--space-3);
+    border-left: 3px solid var(--hairline);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__install {
+    display: inline-block;
+    text-align: left;
+    margin-bottom: var(--space-3);
+  }
+  .final-cta__note {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+  }
+
+  /* ── Page footer (per-page variant matching the specstudio-skills draft) ── */
+  .page-footer {
+    background: var(--cream);
+    padding: var(--space-6) var(--space-3) var(--space-5);
+  }
+  .page-footer__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-4);
+  }
+  .page-footer__brand .wordmark {
+    margin-bottom: var(--space-2);
+  }
+  .page-footer__tagline {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+    max-width: 36ch;
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+  .page-footer__copyright {
+    color: var(--pale-ink);
+    font-size: 0.825rem;
+    font-family: var(--font-code);
+  }
+  .page-footer__heading {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+  }
+  .page-footer__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .page-footer__list a {
+    color: var(--ink);
+    font-size: 0.9rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 120ms ease;
+  }
+  .page-footer__list a:hover {
+    border-bottom-color: var(--ink);
+  }
+  .page-footer__list a:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 800px) {
+    .page-footer__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+    .page-footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

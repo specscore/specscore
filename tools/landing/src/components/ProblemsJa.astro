@@ -1,0 +1,247 @@
+---
+// Japanese variant of Problems.astro. Structure / CSS copied verbatim.
+---
+
+<section class="problems section" id="problems" aria-labelledby="problems-title">
+  <div class="section-inner">
+    <h2 id="problems-title" class="problems__title">これがないと何が起きるか。</h2>
+
+    <ul class="problems__grid">
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌀</span> 仕様がドリフトする。</h3>
+        <p class="problem-card__pain">
+          ドキュメントの仕様、Slackのスレッド、PRのコードが
+          数週間にわたって静かに食い違い続けます。どのバージョンの
+          会話が正式なのか、誰にもわかりません。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解決策</p>
+        <p class="problem-card__fix">
+          リポジトリ内の1つの正式な仕様を、コードと一緒にバージョン管理。
+          <code>specscore lint</code>がCIでプッシュごとに実行され、git履歴が
+          監査証跡になります。仕様、スレッド、PRは同じレビュー対象のファイルを
+          共有するため、静かに食い違うことはできません。
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌫️</span> 受け入れ基準が曖昧なまま。</h3>
+        <p class="problem-card__pain">
+          <em>「エラーを適切に処理する」</em>は
+          <em>「トーストを表示してロールバックする」</em>という意味のはずでした。
+          それとも<em>「ログに記録してリトライする」</em>？
+          エージェントは推測するしかありません。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解決策</p>
+        <p class="problem-card__fix">
+          リンターがコードを書く前に曖昧な基準を検出します。
+          具体的なオブジェクトや条件がない動詞はリントに失敗します。
+          警告を修正することで、<em>「処理する」</em>が実際に何を
+          意味するのかを書かざるを得なくなります。
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🤖</span> エージェントが間違ったものを作る。</h3>
+        <p class="problem-card__pain">
+          人間は補完し、質問し、確認します。AIエージェントはそうしません —
+          学習データで最も一般的だったパターンを実装します。コードは
+          <strong>何か</strong>妥当なことをしているのでレビューを通ります。
+          ただ、あなたが意図したものとは違うのです。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解決策</p>
+        <p class="problem-card__fix">
+          構造化された入力。AIエージェントはREQ ID、AC ID、
+          <code>GIVEN&nbsp;/&nbsp;WHEN&nbsp;/&nbsp;THEN</code>
+          シナリオを決定論的に解析します — 補完の余地がありません。
+          プランは各タスクが満たすAC IDを引用する必要があるため、
+          何が作られたかを仕様と照合できます。
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">💸</span> エージェントが仕様の再読み込みにコストを払う。</h3>
+        <p class="problem-card__pain">
+          <em>「この機能に何が依存しているか？」</em>に答えるために、
+          AIエージェントは機能のREADME全体を読みます。次に親のインデックスを全部。
+          念のため兄弟の機能も。すべてのクエリが再パースです。
+          トークンが消え、レイテンシが上がり、請求額も上がります。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解決策</p>
+        <p class="problem-card__fix">
+          ファイル読み込みの代わりに構造化クエリ。
+          <code>specscore feature tree</code>は階層をYAMLで返し、
+          <code>feature deps</code>は推移的な依存関係チェーンをたどり、
+          <code>feature info</code>はステータス、オーナー、未解決の質問を
+          1回の呼び出しで公開します。エージェントは散文ではなく
+          グラフをナビゲートします。
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔗</span> コードが仕様を忘れる。</h3>
+        <p class="problem-card__pain">
+          6ヶ月後、ある関数をデバッグしていて、どの機能を実装しているのか
+          誰も覚えていません。コードと仕様のリンクは誰かの頭の中にあり、
+          その人は退職しました。導入したPRはアーカイブの中です。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解決策</p>
+        <p class="problem-card__fix">
+          ソースアノテーション。
+          <code>// specscore: features/checkout/apply-discount/R1.AC-2</code>
+          のようなコメントがリンクを機械可読にし、リファクタリングを
+          すべて生き延びます。<code>specscore code deps</code>は
+          <em>「このファイルはどの仕様を実装しているか？」</em>に
+          1回の呼び出しで答え、リンターは削除された仕様への参照を検出します。
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🏷️</span> ステータス変更が漏れる。</h3>
+        <p class="problem-card__pain">
+          機能をREADMEで<em>Draft</em>から<em>Approved</em>に変更しましたが、
+          親の機能インデックスにはまだDraftと記載されています。3週間後、
+          インデックスを読むエージェントはまだ検討中だと思います。
+          ステータスが2箇所に存在し、食い違っています。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解決策</p>
+        <p class="problem-card__fix">
+          <code>specscore feature change-status</code>が機能のStatusフィールドを
+          書き換え、機能インデックスの行を1つのアトミック操作で再同期します —
+          リント失敗で書き換えがロールバックされます。ステータスは1つの正式な
+          場所に存在し、インデックスはそのビューです。
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">📋</span> 仕様が未知の事項を忘れる。</h3>
+        <p class="problem-card__pain">
+          仕様は確定しているように読めます — 2ヶ月前に
+          Slackスレッドで失われた<em>「タイムゾーンはどうする？」</em>
+          という質問がドキュメントに反映されなかったことを思い出すまでは。
+          実装段階に入り、答えが何だったか誰にもわかりません。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解決策</p>
+        <p class="problem-card__fix">
+          すべてのSpecScore機能には必須の<strong>Outstanding Questions</strong>
+          セクションがあります。リンターはそれを省略した機能を拒否します —
+          空は問題ありません（<code>"None at this time."</code>）が、
+          欠落は許されません。未解決の質問はドキュメント内で可視化され、
+          CLIからクエリ可能で、忘れることが不可能になります。
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .problems { background: var(--cream); }
+
+  .problems__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-5);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .problems__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    column-count: 3;
+    column-width: 0;
+    column-gap: var(--space-4);
+    column-fill: balance;
+  }
+
+  .problem-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 2px;
+    padding: var(--space-3);
+    box-shadow:
+      0 1px 2px rgba(26, 26, 26, 0.04),
+      0 3px 8px rgba(26, 26, 26, 0.06);
+    break-inside: avoid;
+    margin-bottom: var(--space-4);
+  }
+  .problem-card:last-child { margin-bottom: 0; }
+  .problem-card__name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0 0 var(--space-2);
+  }
+  .problem-card__emoji {
+    margin-right: 0.35em;
+    font-size: 1.05em;
+    vertical-align: -0.05em;
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  }
+  .problem-card__pain {
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 var(--space-3);
+  }
+  .problem-card__pain em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    color: var(--ink);
+  }
+  .problem-card__pain strong { font-weight: 700; color: var(--ink); }
+
+  .problem-card__rule {
+    height: 1px;
+    background: var(--hairline);
+    margin: 0 0 var(--space-3);
+  }
+
+  .problem-card__fix-label {
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--validator-green);
+    margin: 0 0 var(--space-2);
+  }
+  .problem-card__fix {
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .problem-card__fix code {
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-size: 0.92em;
+    color: var(--ink);
+  }
+  .problem-card__fix em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    color: var(--ink);
+  }
+
+  @media (max-width: 599px) {
+    .problems__grid { column-count: 1; }
+  }
+</style>

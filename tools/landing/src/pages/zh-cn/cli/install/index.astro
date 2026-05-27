@@ -1,0 +1,222 @@
+---
+// CLI Installation — Simplified Chinese translation.
+// Commands and code blocks stay English. Headings and descriptions translated.
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+---
+
+<BaseLayout
+  lang="zh-CN"
+  title="安装 SpecScore CLI"
+  description="在 macOS、Linux 或 Windows 上通过 curl、Homebrew、PowerShell、WinGet、Scoop 或从源码安装 specscore CLI。"
+  canonical="https://specscore.md/zh-cn/cli/install/"
+>
+  <SiteHeader />
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__eyebrow">
+          <a href="/zh-cn/cli/" class="xref">SpecScore CLI</a>
+        </p>
+        <h1 id="hero-title" class="hero__headline">安装</h1>
+        <p class="hero__sub">
+          选择适合你的方式。所有选项安装的都是来自同一个
+          <a class="xref" href="https://github.com/specscore/specscore-cli/releases">GitHub 发布</a>的同一个
+          <code>specscore</code> 二进制文件。
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="quick-install" aria-labelledby="quick-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="quick-title" class="section-title">快速安装（macOS 和 Linux）</h2>
+<pre class="terminal"><span class="prompt">$</span> curl -fsSL https://specscore.md/install/get-cli | sh</pre>
+        <p class="method-desc">
+          脚本自动检测操作系统和架构，从 GitHub 最新发布中下载对应的压缩包，
+          验证 SHA-256 校验和，然后将 <code>specscore</code> 二进制文件安装到
+          <code>/usr/local/bin</code>（如果 <code>/usr/local/bin</code>
+          不可写则安装到 <code>~/.local/bin</code>）。
+        </p>
+
+        <h3 class="subsection-title">参数</h3>
+        <table class="options-table">
+          <thead>
+            <tr><th>环境变量</th><th>默认值</th><th>描述</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>SPECSCORE_VERSION</code></td>
+              <td><code>latest</code></td>
+              <td>发布标签，例如 <code>v0.1.0</code>。</td>
+            </tr>
+            <tr>
+              <td><code>SPECSCORE_INSTALL_DIR</code></td>
+              <td><code>/usr/local/bin</code> 或 <code>~/.local/bin</code></td>
+              <td>安装二进制文件的目录。</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="method-desc">安装指定版本到 <code>~/.local/bin</code>：</p>
+<pre class="terminal"><span class="prompt">$</span> curl -fsSL https://specscore.md/install/get-cli | \
+  SPECSCORE_VERSION=v0.1.0 SPECSCORE_INSTALL_DIR="$HOME/.local/bin" sh</pre>
+
+        <h3 class="subsection-title">运行前检查脚本</h3>
+        <p class="method-desc">如果你希望在执行前审查脚本：</p>
+<pre class="terminal"><span class="prompt">$</span> curl -fsSL https://specscore.md/install/get-cli -o get-cli.sh
+<span class="prompt">$</span> less get-cli.sh
+<span class="prompt">$</span> sh get-cli.sh</pre>
+      </div>
+    </section>
+
+    <section class="section" id="homebrew" aria-labelledby="brew-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="brew-title" class="section-title">Homebrew（macOS 和 Linux）</h2>
+<pre class="terminal"><span class="prompt">$</span> brew install specscore/tap/specscore</pre>
+        <p class="method-desc">
+          首次安装时添加 <code>specscore/homebrew-tap</code> tap，
+          后续通过该 tap 跟踪新版本。
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="windows" aria-labelledby="win-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="win-title" class="section-title">Windows</h2>
+        <p class="method-desc">
+          三种方式任选其一——都安装来自同一个 GitHub 发布的同一个二进制文件。
+        </p>
+
+        <h3 class="subsection-title">PowerShell</h3>
+<pre class="terminal"><span class="prompt">PS&gt;</span> powershell -c "irm https://specscore.md/install/get-cli.ps1 | iex"</pre>
+        <p class="method-desc">
+          脚本检测架构，从最新发布中下载对应的 <code>.zip</code>，
+          验证 SHA-256 校验和，将 <code>specscore.exe</code> 安装到
+          <code>%LOCALAPPDATA%\Programs\specscore\bin</code> 并将该目录
+          添加到用户 <code>PATH</code>。不需要管理员权限。安装后请打开新的终端，
+          以使更新的 <code>PATH</code> 生效。
+        </p>
+
+        <h3 class="subsection-title">WinGet</h3>
+<pre class="terminal"><span class="prompt">PS&gt;</span> winget install Synchestra.SpecScore</pre>
+
+        <h3 class="subsection-title">Scoop</h3>
+<pre class="terminal"><span class="prompt">PS&gt;</span> scoop bucket add specscore https://github.com/specscore/scoop-bucket
+<span class="prompt">PS&gt;</span> scoop install specscore</pre>
+      </div>
+    </section>
+
+    <section class="section" id="manual" aria-labelledby="manual-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="manual-title" class="section-title">手动安装</h2>
+        <ol class="manual-steps">
+          <li>
+            从
+            <a class="xref" href="https://github.com/specscore/specscore-cli/releases">GitHub 发布页面</a>下载适合你平台的压缩包。
+            压缩包命名格式为 <code>specscore_&lt;version&gt;_&lt;os&gt;_&lt;arch&gt;.&lt;ext&gt;</code>。
+          </li>
+          <li>
+            根据同一发布中的
+            <code>specscore_&lt;version&gt;_checksums.txt</code> 文件验证 SHA-256 校验和。
+          </li>
+          <li>
+            解压并将 <code>specscore</code>（Windows 上为 <code>specscore.exe</code>）
+            移动到 <code>PATH</code> 中的目录。
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="source" aria-labelledby="source-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="source-title" class="section-title">从源码构建</h2>
+        <p class="method-desc">
+          需要 <a class="xref" href="https://go.dev/">Go</a> 1.26 或更高版本。
+          安装 <code>main</code> 分支的最新开发构建——可能包含尚未纳入
+          正式发布标签的更改。
+        </p>
+<pre class="terminal"><span class="prompt">$</span> go install github.com/specscore/specscore-cli/cmd/specscore@main</pre>
+        <p class="method-desc">
+          要锁定特定版本，将 <code>@main</code> 替换为标签（如 <code>@v0.4.2</code>），
+          或使用 <code>@latest</code> 获取最新的正式发布。
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="verify" aria-labelledby="verify-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="verify-title" class="section-title">验证安装</h2>
+<pre class="terminal"><span class="prompt">$</span> specscore version
+<span class="dim">specscore 0.1.0 (&lt;commit&gt;) &lt;date&gt;</span></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <div class="page-footer__col page-footer__brand">
+        <a href="/zh-cn/" class="wordmark" aria-label="SpecScore 首页">
+          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+          <span class="wordmark__name">SpecScore.md</span>
+        </a>
+        <p class="page-footer__tagline">
+          用于规范、需求和验收标准的开放标准。
+        </p>
+        <p class="page-footer__copyright">
+          &copy; 2026 SpecScore contributors. MIT license.
+        </p>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">SpecScore CLI</h4>
+        <ul class="page-footer__list">
+          <li><a href="/zh-cn/cli/">概览</a></li>
+          <li><a href="https://github.com/specscore/specscore-cli">GitHub</a></li>
+          <li><a href="https://github.com/specscore/specscore-cli/releases">发布</a></li>
+        </ul>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">生态系统</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://specscore.md">SpecScore</a> — 开放标准</li>
+          <li><a href="/zh-cn/ai/specstudio-skills/">SpecStudio Skills</a> — Claude Code 插件</li>
+          <li><a href="https://specscore.studio">SpecScore Studio</a> — Web 查看器</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  .hero { padding: var(--space-5) var(--space-3) var(--space-4); background: var(--cream); }
+  .hero__inner { max-width: var(--max-prose); margin: 0 auto; }
+  .hero__eyebrow { font-family: var(--font-code); font-size: var(--fs-small); text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-ink); margin-bottom: var(--space-2); }
+  .hero__headline { font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-2); }
+  .hero__sub { font-size: 1rem; color: var(--mid-ink); line-height: 1.55; }
+  .hero__sub code { font-size: 0.9em; background: var(--surface); border: 1px solid var(--hairline); padding: 0.1em 0.35em; border-radius: 2px; }
+  .section-title { font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-3); }
+  .subsection-title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; margin-top: var(--space-4); margin-bottom: var(--space-2); }
+  .method-desc { color: var(--mid-ink); line-height: 1.6; margin-top: var(--space-2); margin-bottom: var(--space-2); }
+  .method-desc code { font-size: 0.9em; background: var(--surface); border: 1px solid var(--hairline); padding: 0.1em 0.35em; border-radius: 2px; }
+  .options-table { width: 100%; border-collapse: collapse; margin: var(--space-3) 0; font-size: var(--fs-small); }
+  .options-table th { font-family: var(--font-display); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-ink); text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--hairline); }
+  .options-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--hairline); color: var(--mid-ink); line-height: 1.5; }
+  .options-table code { font-size: 0.9em; background: var(--surface); border: 1px solid var(--hairline); padding: 0.1em 0.3em; border-radius: 2px; }
+  .manual-steps { color: var(--mid-ink); line-height: 1.65; padding-left: 1.25rem; margin: 0; }
+  .manual-steps li { margin-bottom: var(--space-2); }
+  .manual-steps code { font-size: 0.9em; background: var(--surface); border: 1px solid var(--hairline); padding: 0.1em 0.35em; border-radius: 2px; }
+  .section .terminal { margin-bottom: var(--space-1); }
+  .page-footer { background: var(--cream); padding: var(--space-6) var(--space-3) var(--space-5); border-top: 1px solid var(--hairline); }
+  .page-footer__inner { max-width: var(--max-content); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-4); }
+  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
+  .page-footer__tagline { color: var(--mid-ink); margin-bottom: var(--space-2); max-width: 36ch; line-height: 1.5; font-size: 0.95rem; }
+  .page-footer__copyright { color: var(--pale-ink); font-size: 0.825rem; font-family: var(--font-code); }
+  .page-footer__heading { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-ink); margin-bottom: var(--space-2); }
+  .page-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+  .page-footer__list a { color: var(--ink); font-size: 0.9rem; border-bottom: 1px solid transparent; transition: border-color 120ms ease; }
+  .page-footer__list a:hover { border-bottom-color: var(--ink); }
+  .page-footer__list a:focus-visible { outline: 2px solid var(--ink-blue); outline-offset: 2px; border-radius: 2px; }
+  @media (max-width: 800px) { .page-footer__inner { grid-template-columns: 1fr 1fr; } .page-footer__brand { grid-column: 1 / -1; } }
+</style>

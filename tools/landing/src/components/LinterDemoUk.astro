@@ -1,0 +1,57 @@
+---
+// Ukrainian variant of LinterDemo.astro.
+// Terminal output stays English — it's literal CLI stdout.
+---
+
+<section class="linter section" aria-labelledby="linter-title">
+  <div class="section-inner">
+    <h2 id="linter-title" class="linter__title">Запустіть лінтер.</h2>
+    <p class="linter__intro">
+      Запустіть <code>specscore lint</code> на специфікації, яку ви щойно
+      бачили. Ось що він скаже.
+    </p>
+
+    <div
+      class="linter__terminal"
+      role="img"
+      aria-label="Вивід specscore lint у терміналі: R1 і R2 проходять (зелені галочки), R3 не проходить (червона позначка) із вказівкою на виправну помилку."
+    >
+<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+
+  checkout/apply-discount.md
+    <span class="mark-pass">✓</span> R1  Single-code limit
+    <span class="mark-pass">✓</span> R2  Code validity
+    <span class="mark-fail">✗</span> R3  Discount application
+         <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
+                  <span class="dim">expected:</span> concrete tie-break behavior, or reference to a defined rule
+                  <span class="dim">fix:</span>      specify "higher discount wins; if tied, site-wide promotion wins"
+
+  <span class="dim">1 of 3 requirements failing</span>
+  <span class="dim">exit 1</span></pre>
+    </div>
+  </div>
+</section>
+
+<style>
+  .linter { background: var(--cream); }
+  .linter__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .linter__intro {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+  }
+  .linter__intro code {
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-size: 0.92em;
+    color: var(--ink);
+  }
+  .linter__terminal {
+    margin-bottom: var(--space-3);
+  }
+</style>

@@ -5,7 +5,7 @@ interface Props {
   title?: string;
   description?: string;
   canonical?: string;
-  lang?: 'en' | 'es' | 'pt-BR' | 'ru';
+  lang?: 'en' | 'es' | 'pt-BR' | 'ru' | 'uk' | 'ja' | 'zh-CN' | 'ko';
 }
 
 const {
@@ -69,5 +69,46 @@ const {
   </head>
   <body>
     <slot />
+    {lang === 'es' && (
+      <div class="translation-note"><p>¿Encontraste un error en la traducción? <a href="https://github.com/specscore/specscore/issues/new?labels=translation&title=Translation+issue" rel="noopener">Abre un issue</a> o envía un PR.</p></div>
+    )}
+    {lang === 'pt-BR' && (
+      <div class="translation-note"><p>Encontrou um erro na tradução? <a href="https://github.com/specscore/specscore/issues/new?labels=translation&title=Translation+issue" rel="noopener">Abra uma issue</a> ou envie um PR.</p></div>
+    )}
+    {lang === 'ru' && (
+      <div class="translation-note"><p>Нашли ошибку в переводе? <a href="https://github.com/specscore/specscore/issues/new?labels=translation&title=Translation+issue" rel="noopener">Откройте issue</a> или отправьте PR.</p></div>
+    )}
+    {lang === 'uk' && (
+      <div class="translation-note"><p>Знайшли помилку в перекладі? <a href="https://github.com/specscore/specscore/issues/new?labels=translation&title=Translation+issue" rel="noopener">Відкрийте issue</a> або надішліть PR.</p></div>
+    )}
+    {lang === 'ja' && (
+      <div class="translation-note"><p>翻訳の問題を見つけましたか？ <a href="https://github.com/specscore/specscore/issues/new?labels=translation&title=Translation+issue" rel="noopener">issueを作成</a>するかPRを送ってください。</p></div>
+    )}
+    {lang === 'zh-CN' && (
+      <div class="translation-note"><p>发现翻译问题？<a href="https://github.com/specscore/specscore/issues/new?labels=translation&title=Translation+issue" rel="noopener">提交 issue</a> 或发送 PR。</p></div>
+    )}
+    {lang === 'ko' && (
+      <div class="translation-note"><p>번역 오류를 발견하셨나요? <a href="https://github.com/specscore/specscore/issues/new?labels=translation&title=Translation+issue" rel="noopener">issue를 열거나</a> PR을 보내주세요.</p></div>
+    )}
+    <style>
+      .translation-note {
+        background: var(--cream-2);
+        border-top: 1px solid var(--hairline);
+        padding: 0.75rem var(--space-3);
+        text-align: center;
+        font-family: var(--font-code);
+        font-size: 0.78rem;
+        color: var(--pale-ink);
+        letter-spacing: 0.01em;
+      }
+      .translation-note a {
+        color: var(--ink-blue);
+        border-bottom: 1px solid currentColor;
+        transition: color 120ms ease;
+      }
+      .translation-note a:hover {
+        color: var(--ink);
+      }
+    </style>
   </body>
 </html>

@@ -1,0 +1,65 @@
+---
+// Simplified Chinese variant of Ecosystem.astro. Tool names stay English (product names).
+---
+
+<section class="ecosystem section" aria-labelledby="ecosystem-title">
+  <div class="section-inner">
+    <h2 id="ecosystem-title" class="ecosystem__title">基于 SpecScore 构建。</h2>
+
+    <ul class="ecosystem__grid">
+      <li class="eco-card">
+        <h3 class="eco-card__title">Rehearse</h3>
+        <p class="eco-card__body">
+          基于 Markdown 的测试框架。将 SpecScore 规格与实现它们的代码进行对照测试。
+        </p>
+        <a class="eco-card__link" href="https://rehearse.synchestra.io" rel="noopener">
+          rehearse.synchestra.io <span aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li class="eco-card">
+        <h3 class="eco-card__title">SpecScore Studio</h3>
+        <p class="eco-card__body">
+          SpecScore 的编辑环境——一个用于 IDE 的 Claude Code 插件，
+          加上一个用于深度工作的 Web 应用。
+        </p>
+        <a class="eco-card__link" href="https://specscore.studio" rel="noopener">
+          specscore.studio <span aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li class="eco-card">
+        <h3 class="eco-card__title">Synchestra</h3>
+        <p class="eco-card__body">
+          围绕 SpecScore 规格进行协调的 AI 代理编排。
+        </p>
+        <a class="eco-card__link" href="https://synchestra.io" rel="noopener">
+          synchestra.io <span aria-hidden="true">→</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .ecosystem { background: var(--cream); }
+  .ecosystem__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-4);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .ecosystem__grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4);
+  }
+  .eco-card {
+    border-top: 1px solid var(--graphite);
+    padding-top: var(--space-2);
+    display: flex; flex-direction: column;
+  }
+  .eco-card__title { font-size: 1.05rem; margin-bottom: var(--space-2); font-weight: 700; }
+  .eco-card__body { color: var(--mid-ink); font-size: 0.95rem; line-height: 1.55; margin-bottom: var(--space-2); flex-grow: 1; }
+  .eco-card__link { font-family: var(--font-code); font-size: 0.825rem; color: var(--ink-blue); border-bottom: 1px solid currentColor; align-self: flex-start; }
+  .eco-card__link:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+  @media (max-width: 800px) { .ecosystem__grid { grid-template-columns: 1fr; gap: var(--space-3); } }
+</style>

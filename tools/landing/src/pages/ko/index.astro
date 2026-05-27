@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import HeroKo from '../../components/HeroKo.astro';
+import WhatSpecScoreIsKo from '../../components/WhatSpecScoreIsKo.astro';
+import ProblemsKo from '../../components/ProblemsKo.astro';
+import AiSkillsKo from '../../components/AiSkillsKo.astro';
+import LinterDemoKo from '../../components/LinterDemoKo.astro';
+import WhatShipsKo from '../../components/WhatShipsKo.astro';
+import ToolAgnosticKo from '../../components/ToolAgnosticKo.astro';
+import QuickstartKo from '../../components/QuickstartKo.astro';
+import EcosystemKo from '../../components/EcosystemKo.astro';
+import FinalCtaKo from '../../components/FinalCtaKo.astro';
+import SiteFooterKo from '../../components/SiteFooterKo.astro';
+---
+
+<BaseLayout
+  lang="ko"
+  title="SpecScore — 코드를 린트하듯 명세를 린트하세요."
+  description="기능, 요구사항, 인수 기준을 위한 오픈 Markdown + YAML 포맷 — 린터가 포함되어 있습니다."
+  canonical="https://specscore.md/ko/"
+>
+  <SiteHeader />
+  <main>
+    <HeroKo />
+    <WhatSpecScoreIsKo />
+    <ProblemsKo />
+    <AiSkillsKo />
+    <LinterDemoKo />
+    <WhatShipsKo />
+    <ToolAgnosticKo />
+    <QuickstartKo />
+    <EcosystemKo />
+  </main>
+  <FinalCtaKo />
+  <SiteFooterKo />
+</BaseLayout>

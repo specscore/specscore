@@ -1,0 +1,33 @@
+---
+// Korean variant of ToolAgnostic.astro.
+---
+
+<section class="agnostic section" aria-labelledby="agnostic-title">
+  <div class="section-inner section-inner--prose">
+    <h2 id="agnostic-title" class="agnostic__title">
+      원하는 도구를 그대로 사용하세요.
+    </h2>
+    <p class="agnostic__body">
+      SpecScore는 저장소에 있는 파일 그 자체입니다. 가입할 SaaS도
+      없습니다. 오케스트레이터도 필요 없습니다. Linear, Jira, GitHub
+      Projects, 폴더 안의 순수 Markdown, 또는 프로젝트 관리 도구 없이도
+      사용할 수 있습니다. 포맷과 린터는 티켓이 어디에 있는지 신경 쓰지
+      않습니다.
+    </p>
+  </div>
+</section>
+
+<style>
+  .agnostic { background: var(--cream); }
+  .agnostic__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .agnostic__body {
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.65;
+  }
+</style>

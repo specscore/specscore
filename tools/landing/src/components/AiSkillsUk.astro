@@ -1,0 +1,230 @@
+---
+// Ukrainian variant of AiSkills.astro.
+// Slash-command names stay English (they're literal command strings).
+// Terminal mockups have Ukrainian prose in the user-input lines.
+---
+
+<section class="aiskills section" id="ai-skills" aria-labelledby="aiskills-title">
+  <div class="section-inner">
+    <h2 id="aiskills-title" class="aiskills__title">
+      Найпростіший спосіб почати: SpecStudio в Claude Code.
+    </h2>
+    <p class="aiskills__intro">
+      <a class="xref" href="https://github.com/specscore/specstudio-skills">SpecStudio Skills</a> —
+      плагін для Claude Code, який перетворює життєвий цикл SpecScore
+      на чотири slash-команди. Встановіть один раз, потім запускайте їх
+      по порядку — від сирої ідеї до виконуваного плану.
+    </p>
+
+    <div class="aiskills__install">
+<pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
+<span class="prompt">$</span> /plugin install specstudio@specscore</pre>
+    </div>
+
+    <div class="aiskills__overview" aria-label="Команди SpecStudio з одного погляду">
+      <div class="terminal-frame__head">
+        <span class="terminal-frame__title">Claude Code</span>
+        <span class="terminal-frame__hint">автодоповнення</span>
+      </div>
+<pre class="terminal terminal-frame__body"><span class="prompt">&gt;</span> /specstudio:
+   <span class="ac-cmd">/specstudio:ideate</span>     <span class="dim">Перетворити сиру ідею на SpecScore Idea</span>
+   <span class="ac-cmd">/specstudio:specify</span>    <span class="dim">Перетворити схвалену Idea на Feature-специфікацію</span>
+   <span class="ac-cmd">/specstudio:plan</span>       <span class="dim">Розкласти Feature на Plan із завдань</span>
+   <span class="ac-cmd">/specstudio:implement</span>  <span class="dim">Виконати наступне завдання з Plan</span></pre>
+    </div>
+
+    <div class="ais-tabs" role="tablist" aria-label="Команди SpecStudio">
+      <button type="button" role="tab" id="ais-tab-ideate"    aria-controls="ais-panel-ideate"    aria-selected="true"  tabindex="0"  class="ais-tab is-active" data-step="0">/ideate</button>
+      <span class="ais-tab-arrow" aria-hidden="true">→</span>
+      <button type="button" role="tab" id="ais-tab-specify"   aria-controls="ais-panel-specify"   aria-selected="false" tabindex="-1" class="ais-tab"           data-step="1">/specify</button>
+      <span class="ais-tab-arrow" aria-hidden="true">→</span>
+      <button type="button" role="tab" id="ais-tab-plan"      aria-controls="ais-panel-plan"      aria-selected="false" tabindex="-1" class="ais-tab"           data-step="2">/plan</button>
+      <span class="ais-tab-arrow" aria-hidden="true">→</span>
+      <button type="button" role="tab" id="ais-tab-implement" aria-controls="ais-panel-implement" aria-selected="false" tabindex="-1" class="ais-tab"           data-step="3">/implement</button>
+    </div>
+
+    <div class="ais-viewport" aria-live="polite">
+      <div class="ais-track" data-index="0" style="transform: translateX(0%);">
+        <div class="ais-panel" role="tabpanel" id="ais-panel-ideate" aria-labelledby="ais-tab-ideate">
+          <div class="terminal-frame">
+            <div class="terminal-frame__head">
+              <span class="terminal-frame__title">Claude Code</span>
+              <span class="terminal-frame__hint">/ideate</span>
+            </div>
+<pre class="terminal terminal-frame__body"><span class="prompt">&gt;</span> /ideate Давай подумаємо, як має виглядати екран кошика для процесу оформлення замовлення.</pre>
+          </div>
+        </div>
+
+        <div class="ais-panel" role="tabpanel" id="ais-panel-specify" aria-labelledby="ais-tab-specify">
+          <div class="terminal-frame">
+            <div class="terminal-frame__head">
+              <span class="terminal-frame__title">Claude Code</span>
+              <span class="terminal-frame__hint">/specify</span>
+            </div>
+<pre class="terminal terminal-frame__body"><span class="prompt">&gt;</span> /specify Зафіксуй spec/ideas/checkout-basket.md</pre>
+          </div>
+        </div>
+
+        <div class="ais-panel" role="tabpanel" id="ais-panel-plan" aria-labelledby="ais-tab-plan">
+          <div class="terminal-frame">
+            <div class="terminal-frame__head">
+              <span class="terminal-frame__title">Claude Code</span>
+              <span class="terminal-frame__hint">/plan</span>
+            </div>
+<pre class="terminal terminal-frame__body"><span class="prompt">&gt;</span> /plan Реалізувати spec/features/checkout/basket/README.md</pre>
+          </div>
+        </div>
+
+        <div class="ais-panel" role="tabpanel" id="ais-panel-implement" aria-labelledby="ais-tab-implement">
+          <div class="terminal-frame">
+            <div class="terminal-frame__head">
+              <span class="terminal-frame__title">Claude Code</span>
+              <span class="terminal-frame__hint">/implement</span>
+            </div>
+<pre class="terminal terminal-frame__body"><span class="prompt">&gt;</span> /implement Виконай spec/plans/checkout-basket/README.md</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="aiskills__foot">
+      Безкоштовно для публічних та open-source репозиторіїв. Вихідний код плагіна —
+      <a class="xref" href="https://github.com/specscore/specstudio-skills">specscore/specstudio-skills</a>, ліцензія MIT.
+    </p>
+  </div>
+</section>
+
+<style>
+  .aiskills { background: var(--cream-2); }
+
+  .aiskills__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .aiskills__intro {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+  }
+  .aiskills__install { margin-bottom: var(--space-5); }
+  .aiskills__foot {
+    margin-top: var(--space-3);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+
+  .terminal-frame { border: 1px solid var(--hairline); background: var(--surface); }
+  .terminal-frame__head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 0.75rem; padding: 0.5rem 0.875rem;
+    border-bottom: 1px solid var(--hairline);
+    background: var(--cream-2);
+    font-family: var(--font-code); font-size: 0.72rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .terminal-frame__title { color: var(--graphite); font-weight: 700; }
+  .terminal-frame__hint  { color: var(--mid-ink); }
+  .terminal-frame__body  { border: none !important; }
+
+  .aiskills__overview {
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+    margin-bottom: var(--space-5);
+  }
+  .aiskills__overview .ac-cmd { color: var(--ink); font-weight: 600; }
+
+  .ais-tabs { display: flex; flex-wrap: wrap; gap: 0; border-bottom: 1px solid var(--hairline); }
+  .ais-tab {
+    appearance: none; background: transparent; border: 0;
+    border-bottom: 2px solid transparent;
+    padding: 0.6rem 1rem; margin: 0;
+    font-family: var(--font-code); font-size: 0.92rem;
+    color: var(--mid-ink); cursor: pointer;
+    transition: color 120ms ease, border-color 160ms ease;
+    letter-spacing: 0.01em;
+  }
+  .ais-tab:hover { color: var(--ink); }
+  .ais-tab:focus-visible { outline: 2px solid var(--ink-blue); outline-offset: -2px; }
+  .ais-tab.is-active {
+    color: var(--ink); border-bottom-color: var(--validator-green); font-weight: 600;
+  }
+  .ais-tab-arrow {
+    display: inline-flex; align-items: center;
+    padding: 0 0.25rem 2px;
+    font-family: var(--font-code); font-size: 0.92rem;
+    color: var(--pale-ink); user-select: none;
+  }
+
+  .ais-viewport {
+    overflow: hidden;
+    border-left: 1px solid var(--hairline);
+    border-right: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .ais-track {
+    display: flex; width: 400%;
+    transition: transform 280ms ease-in-out; will-change: transform;
+  }
+  .ais-panel {
+    width: 25%; flex: 0 0 25%;
+    padding: var(--space-3); box-sizing: border-box;
+  }
+  .ais-panel .terminal-frame { background: var(--cream); }
+  .ais-panel .terminal-frame__body { background: var(--cream); }
+
+  @media (prefers-reduced-motion: reduce) { .ais-track { transition: none; } }
+
+  @media (max-width: 720px) {
+    .ais-tab { padding: 0.55rem 0.7rem; font-size: 0.85rem; }
+    .ais-panel { padding: var(--space-2); }
+    .terminal-frame__body { font-size: 0.78rem; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var tabs = document.querySelectorAll('.ais-tab');
+    var track = document.querySelector('.ais-track');
+    var panels = document.querySelectorAll('.ais-panel');
+    if (!tabs.length || !track) return;
+
+    function activate(stepStr, focus) {
+      var step = parseInt(stepStr, 10);
+      if (isNaN(step)) return;
+      tabs.forEach(function (t) {
+        var on = t.getAttribute('data-step') === stepStr;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.setAttribute('tabindex', on ? '0' : '-1');
+        if (on && focus) t.focus();
+      });
+      panels.forEach(function (p, i) {
+        p.setAttribute('aria-hidden', i === step ? 'false' : 'true');
+      });
+      track.style.transform = 'translateX(-' + (step * 25) + '%)';
+      track.setAttribute('data-index', String(step));
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        activate(tab.getAttribute('data-step'), false);
+      });
+      tab.addEventListener('keydown', function (ev) {
+        var key = ev.key;
+        if (key !== 'ArrowRight' && key !== 'ArrowLeft' &&
+            key !== 'Home' && key !== 'End') return;
+        ev.preventDefault();
+        var i = Array.prototype.indexOf.call(tabs, ev.currentTarget);
+        var next;
+        if (key === 'ArrowRight') next = (i + 1) % tabs.length;
+        else if (key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        else if (key === 'Home') next = 0;
+        else next = tabs.length - 1;
+        activate(String(next), true);
+      });
+    });
+  })();
+</script>

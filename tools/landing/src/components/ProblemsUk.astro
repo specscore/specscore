@@ -1,0 +1,237 @@
+---
+// Ukrainian variant of Problems.astro.
+---
+
+<section class="problems section" id="problems" aria-labelledby="problems-title">
+  <div class="section-inner">
+    <h2 id="problems-title" class="problems__title">Що йде не так без нього.</h2>
+
+    <ul class="problems__grid">
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌀</span> Специфікації застарівають.</h3>
+        <p class="problem-card__pain">
+          Спека в документі, тред у Slack і код у PR мовчки розходяться
+          тижнями. Ніхто не може знайти, яка версія розмови
+          канонічна.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Рішення</p>
+        <p class="problem-card__fix">
+          Одна канонічна спека в репозиторії, версіонується
+          разом із кодом. <code>specscore lint</code> запускається в
+          CI на кожен push; git-історія — це аудит-трейл. Спека,
+          тред і PR не можуть мовчки розійтися — це один і той самий
+          файл під рев'ю.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌫️</span> Критерії розпливаються.</h3>
+        <p class="problem-card__pain">
+          <em>"Обробляє помилки коректно"</em> мало означати
+          <em>"показати тост і відкотити."</em> Чи
+          <em>"залогувати і повторити?"</em> Агенту доводиться
+          вгадувати.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Рішення</p>
+        <p class="problem-card__fix">
+          Лінтер ловить розмиті критерії до того, як написано хоч
+          рядок коду. Дієслово не проходить лінт, бо в нього
+          немає конкретного об'єкта та умови. Щоб прибрати
+          попередження, доводиться сформулювати, що означає
+          <em>"обробляє"</em>.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🤖</span> Агенти роблять не те.</h3>
+        <p class="problem-card__pain">
+          Люди інтерполюють, уточнюють, запитують. AI-агенти — ні.
+          Вони реалізують той патерн, який найчастіше траплявся в
+          їхніх навчальних даних. Код проходить рев'ю, бо робить
+          <strong>щось</strong> розумне. Просто не те, що ви
+          мали на увазі.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Рішення</p>
+        <p class="problem-card__fix">
+          Структурований вхід. AI-агенти парсять REQ-ID, AC-ID і
+          сценарії
+          <code>GIVEN&nbsp;/&nbsp;WHEN&nbsp;/&nbsp;THEN</code>
+          детерміновано — інтерполювати нема чого. Кожне завдання
+          Plan зобов'язане послатися на AC-ID, які воно задовольняє:
+          зроблене завжди звіряється зі специфікованим.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">💸</span> Агенти платять за повторне читання специфікацій.</h3>
+        <p class="problem-card__pain">
+          AI-агент, що відповідає на запитання <em>"що залежить від цієї
+          фічі?"</em>, читає весь README фічі. Потім кожен
+          батьківський індекс. Потім сусідні фічі про всяк випадок.
+          Кожен запит — новий парсинг. Токени згоряють; латентність
+          зростає; рахунок зростає разом із ними.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Рішення</p>
+        <p class="problem-card__fix">
+          Структуровані запити замість читання файлів.
+          <code>specscore feature tree</code> повертає ієрархію
+          як YAML; <code>feature deps</code> обходить транзитивні
+          залежності; <code>feature info</code> показує статус,
+          власника і відкриті питання — кожна команда за один
+          виклик. Агент навігує графом, а не прозою.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔗</span> Код забуває свою специфікацію.</h3>
+        <p class="problem-card__pain">
+          Через півроку ти дебажиш функцію, і ніхто не пам'ятає,
+          яку фічу вона реалізує. Зв'язок між кодом і спекою жив
+          у чиїйсь голові, і ця людина звільнилася. PR, який її
+          ввів, пішов в архів.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Рішення</p>
+        <p class="problem-card__fix">
+          Анотації у вихідному коді. Коментарі виду
+          <code>// specscore: features/checkout/apply-discount/R1.AC-2</code>
+          роблять зв'язок машиночитабельним і переживають будь-який рефакторинг.
+          <code>specscore code deps</code> відповідає на запитання
+          <em>"яку спеку реалізує цей файл?"</em> за один виклик;
+          лінтер позначає посилання на видалені специфікації.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🏷️</span> Зміни статусу втрачаються.</h3>
+        <p class="problem-card__pain">
+          Ти переводиш фічу з <em>Draft</em> на <em>Approved</em>
+          у її README, але батьківський features-index досі
+          показує її як Draft. Через три тижні агент, що читає
+          індекс, думає, що фіча все ще в роботі. Статус живе в
+          двох місцях, і вони розходяться.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Рішення</p>
+        <p class="problem-card__fix">
+          <code>specscore feature change-status</code> переписує
+          поле Status фічі й пересинхронізує рядок у
+          features-index однією атомарною операцією — при збої лінта
+          зміна відкочується. Статус існує в одному
+          канонічному місці; індекс — це його згенероване
+          представлення.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">📋</span> Специфікації забувають те, чого не знають.</h3>
+        <p class="problem-card__pain">
+          Спека читається як готова — поки ти не згадуєш, що
+          питання <em>"а що з часовими поясами?"</em> загубилося в
+          треді Slack два місяці тому і так і не потрапило в документ.
+          Тепер ви в реалізації, і ніхто не може сказати, якою
+          була відповідь.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Рішення</p>
+        <p class="problem-card__fix">
+          У кожної SpecScore-фічі обов'язкова секція
+          <strong>Outstanding Questions</strong>. Лінтер відхиляє
+          фічі, в яких її немає — порожньо можна
+          (<code>"None at this time."</code>), але відсутність — ні.
+          Невирішені питання видні в документі, доступні з CLI і їх
+          неможливо забути.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .problems { background: var(--cream); }
+
+  .problems__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-5);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .problems__grid {
+    list-style: none; margin: 0; padding: 0;
+    column-count: 3;
+    column-width: 0;
+    column-gap: var(--space-4);
+    column-fill: balance;
+  }
+
+  .problem-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 2px;
+    padding: var(--space-3);
+    box-shadow:
+      0 1px 2px rgba(26, 26, 26, 0.04),
+      0 3px 8px rgba(26, 26, 26, 0.06);
+    break-inside: avoid;
+    margin-bottom: var(--space-4);
+  }
+  .problem-card:last-child { margin-bottom: 0; }
+  .problem-card__name {
+    font-size: 1.15rem; font-weight: 700;
+    letter-spacing: -0.005em; line-height: 1.25;
+    color: var(--ink); margin: 0 0 var(--space-2);
+  }
+  .problem-card__emoji {
+    margin-right: 0.35em;
+    font-size: 1.05em;
+    vertical-align: -0.05em;
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  }
+  .problem-card__pain {
+    color: var(--ink); font-size: 0.95rem; line-height: 1.6;
+    margin: 0 0 var(--space-3);
+  }
+  .problem-card__pain em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em; border-radius: 2px;
+    font-family: var(--font-code); font-size: 0.9em; color: var(--ink);
+  }
+  .problem-card__pain strong { font-weight: 700; color: var(--ink); }
+
+  .problem-card__rule {
+    height: 1px; background: var(--hairline);
+    margin: 0 0 var(--space-3);
+  }
+
+  .problem-card__fix-label {
+    font-family: var(--font-code);
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--validator-green);
+    margin: 0 0 var(--space-2);
+  }
+  .problem-card__fix {
+    color: var(--ink); font-size: 0.95rem; line-height: 1.6; margin: 0;
+  }
+  .problem-card__fix code {
+    background: var(--cream-2);
+    padding: 0.05em 0.35em; border-radius: 2px;
+    font-size: 0.92em; color: var(--ink);
+  }
+  .problem-card__fix em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em; border-radius: 2px;
+    font-family: var(--font-code); font-size: 0.9em; color: var(--ink);
+  }
+
+  @media (max-width: 599px) {
+    .problems__grid { column-count: 1; }
+  }
+</style>

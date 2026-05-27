@@ -1,0 +1,135 @@
+---
+// /ai/ index — Korean translation.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+---
+
+<BaseLayout
+  lang="ko"
+  title="AI 플러그인 — SpecScore"
+  description="SpecScore 호환 AI 에이전트 플러그인. 완전한 SDD 워크플로를 위한 SpecStudio Skills 또는 린터에 직접 접근하는 CLI Skills."
+  canonical="https://specscore.md/ko/ai/"
+>
+  <SiteHeader />
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore를 위한 AI 플러그인.
+        </h1>
+        <p class="hero__sub">
+          AI 에이전트에게 명세 기반 워크플로를 제공하세요. 이 플러그인들은
+          <a class="xref" href="/ko/cli/">SpecScore CLI</a>를
+          Claude Code에 통합합니다 — 적합한 것을 선택하세요.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="plugins-title">
+      <div class="section-inner">
+        <h2 id="plugins-title" class="sr-only">사용 가능한 플러그인</h2>
+
+        <div class="plugin-grid">
+          <a href="/ko/ai/specstudio-skills/" class="plugin-card">
+            <h3 class="plugin-card__name">SpecStudio Skills</h3>
+            <p class="plugin-card__repo">specscore/specstudio-skills</p>
+            <p class="plugin-card__desc">
+              명세 주도 개발을 위한 의견이 담긴 워크플로.
+              네 개의 슬래시 명령 — <code>/ideate</code>, <code>/specify</code>,
+              <code>/plan</code>, <code>/implement</code> — 이 원시 아이디어에서
+              각 단계에서 점수가 매겨진 명세와 함께 작동하는 코드까지 안내합니다.
+            </p>
+            <p class="plugin-card__audience">
+              SpecScore를 처음 접하고 가이드된 워크플로를 원하는 개발자에게 적합합니다.
+            </p>
+            <span class="plugin-card__cta">자세히 보기 →</span>
+          </a>
+
+          <a href="/ko/ai/cli-skills/" class="plugin-card">
+            <h3 class="plugin-card__name">CLI Skills</h3>
+            <p class="plugin-card__repo">specscore/ai-plugin-specscore</p>
+            <p class="plugin-card__desc">
+              SpecScore CLI의 얇은 래퍼.
+              <code>specscore lint</code>, <code>specscore feature</code>,
+              <code>specscore task</code>, <code>specscore change-status</code>를
+              Claude Code 네이티브 명령으로 사용할 수 있게 합니다.
+            </p>
+            <p class="plugin-card__audience">
+              SpecScore에 이미 익숙한 고급 사용자와 자체 워크플로를 구축하는
+              도구 개발자에게 적합합니다.
+            </p>
+            <span class="plugin-card__cta">자세히 보기 →</span>
+          </a>
+        </div>
+
+        <p class="community-note">
+          SpecScore용 자체 플러그인을 만들고 계신가요? 커뮤니티 플러그인이 등장하면
+          여기에 나열됩니다.
+          <a class="xref" href="https://github.com/specscore/specscore/blob/main/CONTRIBUTING.md">기여 가이드 →</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <div class="page-footer__col page-footer__brand">
+        <a href="/ko/" class="wordmark" aria-label="SpecScore 홈">
+          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+          <span class="wordmark__name">SpecScore.md</span>
+        </a>
+        <p class="page-footer__tagline">명세, 요구사항, 인수 기준을 위한 오픈 표준.</p>
+        <p class="page-footer__copyright">&copy; 2026 SpecScore contributors. MIT license.</p>
+      </div>
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">제품</h4>
+        <ul class="page-footer__list">
+          <li><a href="/ko/cli/">SpecScore CLI</a></li>
+          <li><a href="/ko/cli/install/">설치</a></li>
+          <li><a href="https://github.com/specscore/specscore-cli">GitHub</a></li>
+        </ul>
+      </div>
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">에코시스템</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://specscore.md">SpecScore</a> — 오픈 표준</li>
+          <li><a href="/ko/ai/specstudio-skills/">SpecStudio Skills</a></li>
+          <li><a href="https://specscore.studio">SpecScore Studio</a> — 웹 뷰어</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  .hero { padding: var(--space-6) var(--space-3) var(--space-5); background: var(--cream); }
+  .hero__inner { max-width: var(--max-prose); margin: 0 auto; animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms; }
+  .hero__headline { font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-3); }
+  .hero__sub { font-size: 1.125rem; color: var(--mid-ink); line-height: 1.55; }
+  @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  .plugin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+  .plugin-card { display: block; background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-4); transition: border-color 160ms ease, box-shadow 160ms ease; text-decoration: none; color: inherit; }
+  .plugin-card:hover { border-color: var(--graphite); box-shadow: 0 2px 8px rgba(26,26,26,0.06); }
+  .plugin-card:focus-visible { outline: 2px solid var(--ink-blue); outline-offset: 2px; }
+  .plugin-card__name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-1); }
+  .plugin-card__repo { font-family: var(--font-code); font-size: var(--fs-small); color: var(--pale-ink); margin-bottom: var(--space-3); }
+  .plugin-card__desc { color: var(--mid-ink); font-size: var(--fs-body); line-height: 1.6; margin-bottom: var(--space-2); }
+  .plugin-card__desc code { font-size: 0.9em; background: var(--cream); padding: 0.1em 0.3em; border-radius: 2px; }
+  .plugin-card__audience { font-size: var(--fs-small); color: var(--pale-ink); font-style: italic; margin-bottom: var(--space-3); }
+  .plugin-card__cta { font-family: var(--font-display); font-size: var(--fs-small); font-weight: 600; color: var(--validator-green); }
+  .community-note { margin-top: var(--space-5); font-size: var(--fs-small); color: var(--mid-ink); }
+  @media (max-width: 720px) { .plugin-grid { grid-template-columns: 1fr; } }
+  .page-footer { background: var(--cream); padding: var(--space-6) var(--space-3) var(--space-5); border-top: 1px solid var(--hairline); }
+  .page-footer__inner { max-width: var(--max-content); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-4); }
+  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
+  .page-footer__tagline { color: var(--mid-ink); margin-bottom: var(--space-2); max-width: 36ch; line-height: 1.5; font-size: 0.95rem; }
+  .page-footer__copyright { color: var(--pale-ink); font-size: 0.825rem; font-family: var(--font-code); }
+  .page-footer__heading { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-ink); margin-bottom: var(--space-2); }
+  .page-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+  .page-footer__list a { color: var(--ink); font-size: 0.9rem; border-bottom: 1px solid transparent; transition: border-color 120ms ease; }
+  .page-footer__list a:hover { border-bottom-color: var(--ink); }
+  .page-footer__list a:focus-visible { outline: 2px solid var(--ink-blue); outline-offset: 2px; border-radius: 2px; }
+  @media (max-width: 800px) { .page-footer__inner { grid-template-columns: 1fr 1fr; } .page-footer__brand { grid-column: 1 / -1; } }
+</style>

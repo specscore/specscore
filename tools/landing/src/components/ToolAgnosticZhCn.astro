@@ -1,0 +1,32 @@
+---
+// Simplified Chinese variant of ToolAgnostic.astro.
+---
+
+<section class="agnostic section" aria-labelledby="agnostic-title">
+  <div class="section-inner section-inner--prose">
+    <h2 id="agnostic-title" class="agnostic__title">
+      无需绑定任何工具。
+    </h2>
+    <p class="agnostic__body">
+      SpecScore 只是你仓库中的文件。无需注册任何 SaaS。无需编排器。
+      可以与 Linear、Jira、GitHub Projects、文件夹中的原始 Markdown
+      一起使用，或者完全不用任何项目管理工具。格式和代码检查器
+      不关心你的工单放在哪里。
+    </p>
+  </div>
+</section>
+
+<style>
+  .agnostic { background: var(--cream); }
+  .agnostic__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .agnostic__body {
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.65;
+  }
+</style>

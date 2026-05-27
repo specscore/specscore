@@ -1,0 +1,74 @@
+---
+// Simplified Chinese variant of WhatShips.astro.
+---
+
+<section class="ships section" aria-labelledby="ships-title">
+  <div class="section-inner">
+    <h2 id="ships-title" class="ships__title">包含什么。</h2>
+
+    <div class="ships__grid">
+      <article class="ship-card">
+        <div class="ship-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="4" width="48" height="72" rx="1.5" fill="none" stroke="var(--graphite)" stroke-width="1.6" />
+            <line x1="14" y1="20" x2="46" y2="20" stroke="var(--graphite)" stroke-width="1.2" />
+            <line x1="14" y1="28" x2="40" y2="28" stroke="var(--graphite)" stroke-width="1.2" />
+            <line x1="14" y1="36" x2="46" y2="36" stroke="var(--graphite)" stroke-width="1.2" />
+            <line x1="14" y1="44" x2="34" y2="44" stroke="var(--graphite)" stroke-width="1.2" />
+            <line x1="14" y1="52" x2="46" y2="52" stroke="var(--graphite)" stroke-width="1.2" />
+            <line x1="14" y1="60" x2="38" y2="60" stroke="var(--graphite)" stroke-width="1.2" />
+          </svg>
+        </div>
+        <h3 class="ship-card__title">格式</h3>
+        <p class="ship-card__body">
+          Markdown + YAML。在任何能打开文本的编辑器中使用。
+          无需新工具即可开始编写。
+        </p>
+      </article>
+
+      <article class="ship-card">
+        <div class="ship-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="6" width="72" height="48" rx="1.5" fill="none" stroke="var(--graphite)" stroke-width="1.6" />
+            <text x="14" y="34" font-family="JetBrains Mono, monospace" font-size="14" font-weight="600" fill="var(--graphite)">$</text>
+            <line x1="26" y1="30" x2="50" y2="30" stroke="var(--graphite)" stroke-width="1.4" />
+            <path d="M 58 30 l 4 4 l 8 -8" stroke="var(--validator-green)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <h3 class="ship-card__title">代码检查器</h3>
+        <p class="ship-card__body">
+          Go 语言编写的 CLI。验证结构、引用和完整性。
+          失败时返回非零退出码——适用于你的终端和 CI。
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ships { background: var(--cream); }
+  .ships__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-4);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .ships__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+  .ship-card {
+    border: 1px solid var(--graphite);
+    padding: var(--space-4) var(--space-3);
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+  }
+  .ship-card__icon { margin-bottom: var(--space-3); height: 72px; display: flex; align-items: center; }
+  .ship-card__icon svg { height: 100%; width: auto; max-width: 100px; }
+  .ship-card__title { font-size: 1.125rem; margin-bottom: var(--space-1); font-weight: 700; }
+  .ship-card__body { color: var(--mid-ink); line-height: 1.55; }
+
+  @media (max-width: 720px) { .ships__grid { grid-template-columns: 1fr; } }
+</style>

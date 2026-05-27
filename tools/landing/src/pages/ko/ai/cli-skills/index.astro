@@ -1,0 +1,308 @@
+---
+// ai-plugin-specscore (CLI Skills) — Korean translation.
+// Canonical URL: specscore.md/ko/ai/cli-skills/
+// Product names (SpecScore, Claude Code, SpecStudio Skills, ai-plugin-specscore) stay English.
+// Slash-command names and terminal content stay English.
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+---
+
+<BaseLayout
+  lang="ko"
+  title="CLI Skills — Claude Code 안에서 SpecScore CLI 사용"
+  description="SpecScore CLI를 감싸는 얇은 Claude Code 플러그인. specscore lint, feature, task, change-status를 네이티브 플러그인 명령으로 제공합니다."
+  canonical="https://specscore.md/ko/ai/cli-skills/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore CLI, Claude Code 안에서 바로.
+        </h1>
+        <p class="hero__sub">
+          <code>ai-plugin-specscore</code>는 오픈소스
+          <a class="xref" href="/ko/cli/">SpecScore CLI</a>를 감싸는
+          얇은 Claude Code 플러그인입니다.
+          <code>specscore lint</code>, <code>specscore feature</code>,
+          <code>specscore task</code>, <code>specscore change-status</code>를
+          네이티브 플러그인 명령으로 제공합니다 — 셸 이스케이프 없이, 컨텍스트
+          전환 없이.
+        </p>
+        <div class="hero__install" id="install">
+<pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
+<span class="prompt">$</span> /plugin install cli-skills@specscore</pre>
+        </div>
+      </div>
+    </section>
+
+    {/* ── 무엇인지 / 무엇이 아닌지 ── */}
+    <section class="section" aria-labelledby="what-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="what-title" class="section-title">무엇이고, 무엇이 아닌지.</h2>
+        <p class="prose-p">
+          이것은 <strong>기계적 CLI 표면</strong>입니다. SpecScore CLI 명령을
+          Claude Code 안에서 사용할 수 있도록 감쌉니다 — 그 이상은 아닙니다.
+          워크플로에 대한 의견 없음, 라이프사이클 오케스트레이션 없음,
+          슬래시 명령 파이프라인 없음.
+        </p>
+        <p class="prose-p">
+          명세 주도 개발의 의견이 담긴 워크플로가 필요하다면 —
+          <code>/ideate</code>, <code>/specify</code>, <code>/plan</code>,
+          <code>/implement</code> —
+          <a class="xref" href="/ko/ai/specstudio-skills/">SpecStudio Skills</a>를
+          설치하세요. 두 플러그인 모두 동일한 SpecScore CLI 위에서 작동합니다.
+        </p>
+
+        <div class="callout">
+          <strong>언제 무엇을 사용할지:</strong>
+          <ul class="callout-list">
+            <li><strong>CLI Skills</strong> — SpecScore를 이미 알고 있고 에이전트 루프에서 직접 CLI가 필요한 경우.</li>
+            <li><strong>SpecStudio Skills</strong> — SpecScore를 처음 접하고 단계별 워크플로를 원하는 경우.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    {/* ── 명령 ── */}
+    <section class="section" aria-labelledby="commands-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="commands-title" class="section-title">명령</h2>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-lint</h3>
+          <p class="cmd-desc">명세 트리 또는 개별 파일을 린트합니다. 각 규칙에 대한 pass/fail 리포트.</p>
+<pre class="terminal"><span class="prompt">&gt;</span> /specscore-lint spec/features/password-reset/
+<span class="mark-pass">PASS</span>  Feature: password-reset
+  <span class="mark-pass">PASS</span>  has title, status, and description
+  <span class="mark-pass">PASS</span>  requirements have acceptance criteria
+  <span class="mark-pass">PASS</span>  all AC IDs are unique</pre>
+        </div>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-feature</h3>
+          <p class="cmd-desc">SpecScore 기능을 조회, 검사 또는 스캐폴딩합니다.</p>
+        </div>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-task</h3>
+          <p class="cmd-desc">프로젝트의 작업 보드를 읽고 채웁니다.</p>
+        </div>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-change-status</h3>
+          <p class="cmd-desc">Feature 또는 Idea의 라이프사이클 단계를 전환합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── 도구 빌더를 위해 ── */}
+    <section class="section" aria-labelledby="builders-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="builders-title" class="section-title">도구 개발자를 위해</h2>
+        <p class="prose-p">
+          <code>ai-plugin-specscore</code>는 SpecScore 위에 자체 워크플로
+          플러그인을 구축하는 모든 사람이 CLI 표면을 다시 발명하지 않고도
+          의존할 수 있도록 존재합니다. SpecStudio Skills의 커뮤니티 대안을
+          작성하고 있다면 — 이것이 기반입니다.
+        </p>
+        <p class="prose-p">
+          소스 코드는
+          <a class="xref" href="https://github.com/specscore/ai-plugin-specscore">specscore/ai-plugin-specscore</a>에
+          있습니다 — MIT 라이선스, 영구 무료.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  {/* ── Footer ── */}
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <div class="page-footer__col page-footer__brand">
+        <a href="/ko/" class="wordmark" aria-label="SpecScore 홈">
+          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+          <span class="wordmark__name">SpecScore.md</span>
+        </a>
+        <p class="page-footer__tagline">
+          명세, 요구사항, 인수 기준을 위한 오픈 표준.
+        </p>
+        <p class="page-footer__copyright">
+          &copy; 2026 SpecScore contributors. MIT license.
+        </p>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">CLI Skills</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://github.com/specscore/ai-plugin-specscore">GitHub</a></li>
+          <li><a href="https://github.com/specscore/ai-plugin-specscore/blob/main/LICENSE">라이선스: MIT</a></li>
+        </ul>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">에코시스템</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://specscore.md">SpecScore</a> — 오픈 표준</li>
+          <li><a href="/ko/ai/specstudio-skills/">SpecStudio Skills</a> — 의견이 담긴 SDD 워크플로</li>
+          <li><a href="/ko/cli/">SpecScore CLI</a> — 린터</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__headline {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1rem;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+  }
+  .hero__sub code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+  .hero__install { margin-bottom: var(--space-2); }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Sections ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+  .prose-p:last-child { margin-bottom: 0; }
+  .prose-p code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+
+  /* ── Callout ── */
+  .callout {
+    margin-top: var(--space-4);
+    padding: var(--space-2) var(--space-3);
+    border-left: 3px solid var(--hairline);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.6;
+  }
+  .callout-list {
+    margin: var(--space-1) 0 0;
+    padding-left: 1.25rem;
+  }
+  .callout-list li { margin-bottom: 0.35rem; }
+
+  /* ── Command blocks ── */
+  .cmd-block {
+    margin-bottom: var(--space-4);
+  }
+  .cmd-block:last-child { margin-bottom: 0; }
+  .cmd-name {
+    font-family: var(--font-code);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: var(--space-1);
+  }
+  .cmd-desc {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-2);
+    line-height: 1.55;
+  }
+
+  /* ── Footer ── */
+  .page-footer {
+    background: var(--cream);
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    border-top: 1px solid var(--hairline);
+  }
+  .page-footer__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-4);
+  }
+  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
+  .page-footer__tagline {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+    max-width: 36ch;
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+  .page-footer__copyright {
+    color: var(--pale-ink);
+    font-size: 0.825rem;
+    font-family: var(--font-code);
+  }
+  .page-footer__heading {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+  }
+  .page-footer__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .page-footer__list a {
+    color: var(--ink);
+    font-size: 0.9rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 120ms ease;
+  }
+  .page-footer__list a:hover { border-bottom-color: var(--ink); }
+  .page-footer__list a:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 800px) {
+    .page-footer__inner { grid-template-columns: 1fr 1fr; }
+    .page-footer__brand { grid-column: 1 / -1; }
+  }
+</style>

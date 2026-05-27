@@ -1,0 +1,478 @@
+---
+// SpecScore CLI — сторінка продукту (UK).
+// Відкритий лінтер для специфікацій SpecScore.
+// Частина стандартного набору (безкоштовно назавжди, MIT).
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+---
+
+<BaseLayout
+  lang="uk"
+  title="SpecScore CLI — Лінтуйте специфікації, як лінтуєте код."
+  description="Відкритий лінтер для специфікацій SpecScore. Валідує фічі, вимоги та критерії приймання з командного рядка або CI-пайплайну. Без акаунта, без телеметрії."
+  canonical="https://specscore.md/uk/cli/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Герой ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          Лінтуйте специфікації,<br />як лінтуєте код.
+        </h1>
+        <p class="hero__sub">
+          SpecScore CLI валідує фічі, вимоги та критерії приймання
+          з командного рядка. Запускайте локально, вбудовуйте в CI
+          або дайте вашому AI-агенту викликати його. Відкритий код, без акаунта, без телеметрії.
+        </p>
+        <div class="hero__cta">
+          <a href="/uk/cli/install/" class="btn btn--primary">Встановити</a>
+          <a
+            href="https://github.com/specscore/specscore-cli"
+            rel="noopener"
+            class="btn btn--secondary"
+          >
+            GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Швидке встановлення ── */}
+    <section class="section" id="install" aria-labelledby="install-title">
+      <div class="section-inner">
+        <h2 id="install-title" class="section-title">Встановлення за 60 секунд.</h2>
+
+        <div class="qs-tabs" role="tablist" aria-label="Команда встановлення для вашої ОС">
+          <button type="button" role="tab" id="qs-tab-unix" aria-controls="qs-panel-unix" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="unix">Linux / macOS</button>
+          <button type="button" role="tab" id="qs-tab-win" aria-controls="qs-panel-win" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="win">Windows</button>
+          <button type="button" role="tab" id="qs-tab-brew" aria-controls="qs-panel-brew" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="brew">Homebrew</button>
+        </div>
+
+        <div id="qs-panel-unix" role="tabpanel" aria-labelledby="qs-tab-unix" class="qs-panel is-active" data-panel="unix">
+<pre class="terminal"><span class="prompt">$</span> curl -fsSL https://specscore.md/install/get-cli | sh</pre>
+        </div>
+        <div id="qs-panel-win" role="tabpanel" aria-labelledby="qs-tab-win" class="qs-panel" data-panel="win" hidden>
+<pre class="terminal"><span class="prompt">PS&gt;</span> powershell -c "irm https://specscore.md/install/get-cli.ps1 | iex"</pre>
+        </div>
+        <div id="qs-panel-brew" role="tabpanel" aria-labelledby="qs-tab-brew" class="qs-panel" data-panel="brew" hidden>
+<pre class="terminal"><span class="prompt">$</span> brew install specscore/tap/specscore</pre>
+        </div>
+
+        <p class="qs-more">
+          <a class="xref" href="/uk/cli/install/">Усі способи встановлення →</a>
+        </p>
+      </div>
+    </section>
+
+    {/* ── Демо лінтера ── */}
+    <section class="section" aria-labelledby="demo-title">
+      <div class="section-inner">
+        <h2 id="demo-title" class="section-title">Запустіть лінтер.</h2>
+        <p class="section-intro">
+          Запустіть <code>specscore lint</code> на будь-якій директорії зі специфікаціями.
+          Зелені галочки — все гаразд, червоні хрестики — помилки з конкретними пропозиціями щодо виправлення.
+        </p>
+
+        <div
+          class="demo-terminal"
+          role="img"
+          aria-label="Вивід терміналу specscore lint: R1 та R2 пройшли із зеленими галочками, R3 не пройшов із червоним хрестиком та повідомленням про помилку."
+        >
+<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+
+  checkout/apply-discount.md
+    <span class="mark-pass">✓</span> R1  Single-code limit
+    <span class="mark-pass">✓</span> R2  Code validity
+    <span class="mark-fail">✗</span> R3  Discount application
+         <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
+                  <span class="dim">expected:</span> concrete tie-break behavior, or reference to a defined rule
+                  <span class="dim">fix:</span>      specify "higher discount wins; if tied, site-wide promotion wins"
+
+  <span class="dim">1 of 3 requirements failing</span>
+  <span class="dim">exit 1</span></pre>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Що входить ── */}
+    <section class="section features-section" aria-labelledby="features-title">
+      <div class="section-inner">
+        <h2 id="features-title" class="section-title">Що ви отримуєте.</h2>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3 class="feature-card__title">Lint</h3>
+            <p class="feature-card__desc">
+              Валідація структури, метаданих, перехресних посилань та унікальності AC.
+              Звіт pass/fail по кожній вимозі з пропозиціями щодо виправлення.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-card__title">Score</h3>
+            <p class="feature-card__desc">
+              Оцінка повноти специфікації за шкалою 0–100. Знаходить пропущених акторів,
+              тригери, помилкові стани, моделі безпеки та ліміти.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-card__title">Готовий до CI</h3>
+            <p class="feature-card__desc">
+              Ненульовий exit-код при помилках. Вбудуйте <code>specscore lint</code>
+              у ваш CI-пайплайн поруч з ESLint, Prettier та тестами.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-card__title">Без телеметрії</h3>
+            <p class="feature-card__desc">
+              CLI не надсилає даних назовні. Специфікації та оцінки залишаються на вашій машині.
+              Без акаунта, без API-ключа, без залежності від хмари.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-card__title">Портативний</h3>
+            <p class="feature-card__desc">
+              Один бінарник. macOS, Linux, Windows. Без залежностей.
+              Працює з будь-якою директорією Markdown-специфікацій.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-card__title">Відкритий код</h3>
+            <p class="feature-card__desc">
+              MIT-ліцензія. Вихідний код на
+              <a class="xref" href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a>.
+              Безкоштовно назавжди.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Використання з AI-агентами ── */}
+    <section class="section" aria-labelledby="agents-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="agents-title" class="section-title">Використовуйте з AI-агентом.</h2>
+        <p class="prose-p">
+          CLI — рушій під капотом обох плагінів для Claude Code. Якщо ваш
+          агент пише специфікації, CLI скаже, чи хороші вони — до того, як
+          агент напише хоч рядок коду.
+        </p>
+        <div class="agent-links">
+          <a href="/uk/ai/specstudio-skills/" class="btn btn--secondary">SpecStudio Skills</a>
+          <a href="/uk/ai/cli-skills/" class="btn btn--tertiary">CLI Skills (тонка обгортка)</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {/* ── Фінальний CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">Специфікації, що проходять.</h2>
+      <div class="final-cta__buttons">
+        <a href="/uk/cli/install/" class="btn btn--primary">Встановити CLI</a>
+        <a href="/uk/ai/specstudio-skills/" class="btn btn--secondary">AI-навички для вашого агента</a>
+        <a
+          href="https://github.com/specscore/specscore-cli"
+          rel="noopener"
+          class="btn btn--tertiary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          Відкритий код на GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Підвал ── */}
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <div class="page-footer__col page-footer__brand">
+        <a href="/uk/" class="wordmark" aria-label="SpecScore — головна">
+          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+          <span class="wordmark__name">SpecScore.md</span>
+        </a>
+        <p class="page-footer__tagline">
+          Відкритий стандарт для специфікацій, вимог
+          та критеріїв приймання.
+        </p>
+        <p class="page-footer__copyright">
+          &copy; 2026 SpecScore contributors. MIT license.
+        </p>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">SpecScore CLI</h4>
+        <ul class="page-footer__list">
+          <li><a href="/uk/cli/install/">Встановлення</a></li>
+          <li><a href="https://github.com/specscore/specscore-cli">GitHub</a></li>
+          <li><a href="https://github.com/specscore/specscore-cli/releases">Релізи</a></li>
+        </ul>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">Екосистема</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://specscore.md">SpecScore</a> — відкритий стандарт</li>
+          <li><a href="/uk/ai/specstudio-skills/">SpecStudio Skills</a> — плагін для Claude Code</li>
+          <li><a href="https://specscore.studio">SpecScore Studio</a> — веб-переглядач</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-7) var(--space-3) var(--space-6);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.55;
+  }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .section-intro {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+  }
+  .section-intro code {
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-size: 0.92em;
+    color: var(--ink);
+  }
+
+  /* ── Tabbed install ── */
+  .qs-tabs {
+    display: inline-flex;
+    gap: 0;
+    border-bottom: 1px solid var(--hairline);
+    margin-bottom: 0;
+  }
+  .qs-tab {
+    background: transparent;
+    border: none;
+    padding: 0.55rem 0.95rem;
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--mid-ink);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    cursor: pointer;
+    transition: color 120ms ease, border-color 120ms ease;
+  }
+  .qs-tab:hover { color: var(--ink); }
+  .qs-tab.is-active {
+    color: var(--ink);
+    border-bottom-color: var(--validator-green);
+  }
+  .qs-tab:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  .qs-panel { margin-top: 0; }
+  .qs-panel pre { border-top-width: 0; }
+  .qs-more {
+    margin-top: var(--space-3);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+
+  /* ── Linter demo ── */
+  .demo-terminal {
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Features grid ── */
+  .features-section { background: var(--cream-2); }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+  }
+  .feature-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .feature-card__desc {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+  .feature-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 860px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .features-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── AI agents section ── */
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+  .agent-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--space-3);
+  }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  /* ── Footer ── */
+  .page-footer {
+    background: var(--cream);
+    padding: var(--space-6) var(--space-3) var(--space-5);
+  }
+  .page-footer__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-4);
+  }
+  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
+  .page-footer__tagline { color: var(--mid-ink); margin-bottom: var(--space-2); max-width: 36ch; line-height: 1.5; font-size: 0.95rem; }
+  .page-footer__copyright { color: var(--pale-ink); font-size: 0.825rem; font-family: var(--font-code); }
+  .page-footer__heading { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-ink); margin-bottom: var(--space-2); }
+  .page-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+  .page-footer__list a { color: var(--ink); font-size: 0.9rem; border-bottom: 1px solid transparent; transition: border-color 120ms ease; }
+  .page-footer__list a:hover { border-bottom-color: var(--ink); }
+  .page-footer__list a:focus-visible { outline: 2px solid var(--ink-blue); outline-offset: 2px; border-radius: 2px; }
+
+  @media (max-width: 800px) {
+    .page-footer__inner { grid-template-columns: 1fr 1fr; }
+    .page-footer__brand { grid-column: 1 / -1; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var tabs = document.querySelectorAll('.qs-tab');
+    var panels = document.querySelectorAll('.qs-panel');
+    if (!tabs.length) return;
+
+    function activate(name, focus) {
+      tabs.forEach(function (t) {
+        var on = t.getAttribute('data-tab') === name;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.setAttribute('tabindex', on ? '0' : '-1');
+        if (on && focus) t.focus();
+      });
+      panels.forEach(function (p) {
+        var on = p.getAttribute('data-panel') === name;
+        p.classList.toggle('is-active', on);
+        if (on) p.removeAttribute('hidden');
+        else p.setAttribute('hidden', '');
+      });
+    }
+
+    try {
+      if (/Windows/i.test(navigator.userAgent)) activate('win', false);
+    } catch (e) { /* ignore */ }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        activate(tab.getAttribute('data-tab'), false);
+      });
+      tab.addEventListener('keydown', function (ev) {
+        var key = ev.key;
+        if (key !== 'ArrowRight' && key !== 'ArrowLeft' &&
+            key !== 'Home' && key !== 'End') return;
+        ev.preventDefault();
+        var i = Array.prototype.indexOf.call(tabs, ev.currentTarget);
+        var next;
+        if (key === 'ArrowRight') next = (i + 1) % tabs.length;
+        else if (key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        else if (key === 'Home') next = 0;
+        else next = tabs.length - 1;
+        activate(tabs[next].getAttribute('data-tab'), true);
+      });
+    });
+  })();
+</script>

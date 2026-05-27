@@ -1,0 +1,306 @@
+---
+// ai-plugin-specscore (CLI Skills) — Simplified Chinese translation.
+// Canonical URL: specscore.md/zh-cn/ai/cli-skills/
+// Product names (SpecScore, Claude Code, SpecStudio Skills, ai-plugin-specscore) stay English.
+// Slash-command names and terminal content stay English.
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+---
+
+<BaseLayout
+  lang="zh-CN"
+  title="CLI Skills — 在 Claude Code 中使用 SpecScore CLI"
+  description="轻量级 Claude Code 插件，包装 SpecScore CLI。将 specscore lint、feature、task 和 change-status 作为原生插件命令提供。"
+  canonical="https://specscore.md/zh-cn/ai/cli-skills/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore CLI，直接在 Claude Code 中使用。
+        </h1>
+        <p class="hero__sub">
+          <code>ai-plugin-specscore</code> 是一个轻量级 Claude Code 插件，
+          包装了开源的
+          <a class="xref" href="/zh-cn/cli/">SpecScore CLI</a>。将
+          <code>specscore lint</code>、<code>specscore feature</code>、
+          <code>specscore task</code> 和 <code>specscore change-status</code>
+          作为原生插件命令提供——无需转义 shell，无需切换上下文。
+        </p>
+        <div class="hero__install" id="install">
+<pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
+<span class="prompt">$</span> /plugin install cli-skills@specscore</pre>
+        </div>
+      </div>
+    </section>
+
+    {/* ── 是什么 / 不是什么 ── */}
+    <section class="section" aria-labelledby="what-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="what-title" class="section-title">它是什么，不是什么。</h2>
+        <p class="prose-p">
+          这是一个<strong>机械的 CLI 接口层</strong>。将 SpecScore CLI 命令
+          包装到 Claude Code 中——仅此而已。
+          没有工作流主张，没有生命周期编排，没有斜杠命令流水线。
+        </p>
+        <p class="prose-p">
+          如果你需要主张明确的规格驱动开发工作流——
+          <code>/ideate</code>、<code>/specify</code>、<code>/plan</code>、
+          <code>/implement</code>——请安装
+          <a class="xref" href="/zh-cn/ai/specstudio-skills/">SpecStudio Skills</a>。
+          两个插件都运行在同一个 SpecScore CLI 之上。
+        </p>
+
+        <div class="callout">
+          <strong>何时使用哪个：</strong>
+          <ul class="callout-list">
+            <li><strong>CLI Skills</strong> — 你已经了解 SpecScore，想在代理循环中使用原始 CLI。</li>
+            <li><strong>SpecStudio Skills</strong> — 你是 SpecScore 新手，想要分步引导的工作流。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    {/* ── 命令 ── */}
+    <section class="section" aria-labelledby="commands-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="commands-title" class="section-title">命令</h2>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-lint</h3>
+          <p class="cmd-desc">对规格树或单个文件进行检查。按规则输出 pass/fail 报告。</p>
+<pre class="terminal"><span class="prompt">&gt;</span> /specscore-lint spec/features/password-reset/
+<span class="mark-pass">PASS</span>  Feature: password-reset
+  <span class="mark-pass">PASS</span>  has title, status, and description
+  <span class="mark-pass">PASS</span>  requirements have acceptance criteria
+  <span class="mark-pass">PASS</span>  all AC IDs are unique</pre>
+        </div>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-feature</h3>
+          <p class="cmd-desc">查看、检查或创建 SpecScore 功能的脚手架。</p>
+        </div>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-task</h3>
+          <p class="cmd-desc">读取和填充项目的任务板。</p>
+        </div>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-change-status</h3>
+          <p class="cmd-desc">将 Feature 或 Idea 在生命周期阶段间转换。</p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── 面向工具开发者 ── */}
+    <section class="section" aria-labelledby="builders-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="builders-title" class="section-title">面向工具开发者</h2>
+        <p class="prose-p">
+          <code>ai-plugin-specscore</code> 的存在是为了让任何在 SpecScore
+          之上构建自定义工作流插件的人都可以依赖 CLI 接口层，
+          而无需重新发明它。如果你正在编写 SpecStudio Skills 的
+          社区替代方案——这就是你的基础层。
+        </p>
+        <p class="prose-p">
+          源代码在
+          <a class="xref" href="https://github.com/specscore/ai-plugin-specscore">specscore/ai-plugin-specscore</a>——MIT
+          许可证，永久免费。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  {/* ── Footer ── */}
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <div class="page-footer__col page-footer__brand">
+        <a href="/zh-cn/" class="wordmark" aria-label="SpecScore 首页">
+          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+          <span class="wordmark__name">SpecScore.md</span>
+        </a>
+        <p class="page-footer__tagline">
+          用于规范、需求和验收标准的开放标准。
+        </p>
+        <p class="page-footer__copyright">
+          &copy; 2026 SpecScore contributors. MIT license.
+        </p>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">CLI Skills</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://github.com/specscore/ai-plugin-specscore">GitHub</a></li>
+          <li><a href="https://github.com/specscore/ai-plugin-specscore/blob/main/LICENSE">许可证：MIT</a></li>
+        </ul>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">生态系统</h4>
+        <ul class="page-footer__list">
+          <li><a href="https://specscore.md">SpecScore</a> — 开放标准</li>
+          <li><a href="/zh-cn/ai/specstudio-skills/">SpecStudio Skills</a> — 主张明确的 SDD 工作流</li>
+          <li><a href="/zh-cn/cli/">SpecScore CLI</a> — 代码检查器</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__headline {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1rem;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+  }
+  .hero__sub code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+  .hero__install { margin-bottom: var(--space-2); }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Sections ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+  .prose-p:last-child { margin-bottom: 0; }
+  .prose-p code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+
+  /* ── Callout ── */
+  .callout {
+    margin-top: var(--space-4);
+    padding: var(--space-2) var(--space-3);
+    border-left: 3px solid var(--hairline);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.6;
+  }
+  .callout-list {
+    margin: var(--space-1) 0 0;
+    padding-left: 1.25rem;
+  }
+  .callout-list li { margin-bottom: 0.35rem; }
+
+  /* ── Command blocks ── */
+  .cmd-block {
+    margin-bottom: var(--space-4);
+  }
+  .cmd-block:last-child { margin-bottom: 0; }
+  .cmd-name {
+    font-family: var(--font-code);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: var(--space-1);
+  }
+  .cmd-desc {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-2);
+    line-height: 1.55;
+  }
+
+  /* ── Footer ── */
+  .page-footer {
+    background: var(--cream);
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    border-top: 1px solid var(--hairline);
+  }
+  .page-footer__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-4);
+  }
+  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
+  .page-footer__tagline {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+    max-width: 36ch;
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+  .page-footer__copyright {
+    color: var(--pale-ink);
+    font-size: 0.825rem;
+    font-family: var(--font-code);
+  }
+  .page-footer__heading {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+  }
+  .page-footer__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .page-footer__list a {
+    color: var(--ink);
+    font-size: 0.9rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 120ms ease;
+  }
+  .page-footer__list a:hover { border-bottom-color: var(--ink); }
+  .page-footer__list a:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 800px) {
+    .page-footer__inner { grid-template-columns: 1fr 1fr; }
+    .page-footer__brand { grid-column: 1 / -1; }
+  }
+</style>
