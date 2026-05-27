@@ -145,6 +145,14 @@ SpecScore specifications are Markdown files. SpecScore lives at [`specscore.md`]
 
 ---
 
+## Support the project
+
+Star us on GitHub — it helps others find the project.
+
+[![Star on GitHub](https://img.shields.io/github/stars/specscore/specscore?style=social)](https://github.com/specscore/specscore)
+
+---
+
 ## Contributing
 
 Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
