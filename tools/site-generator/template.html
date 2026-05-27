@@ -15,30 +15,16 @@
   <title>{{title}} - SpecScore</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/style.css">
   <link rel="canonical" href="{{canonical}}">
   {{alternateLink}}
-  <script>
-    (function() {
-      var saved = localStorage.getItem('specscore-theme');
-      if (saved) {
-        document.documentElement.setAttribute('data-theme', saved);
-      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    })();
-  </script>
 </head>
 <body>
   <header class="site-header">
     <a href="/" class="wordmark"><span class="wordmark-clef">𝄞</span> SpecScore.md</a>
     <div class="header-right">
       <a href="https://github.com/synchestra-io/specscore">GitHub</a>
-      <button id="theme-toggle" type="button" aria-label="Toggle dark/light theme">
-        <span class="theme-icon-light">&#9789;</span>
-        <span class="theme-icon-dark">&#9788;</span>
-      </button>
     </div>
   </header>
   <div class="site-body">
@@ -58,14 +44,6 @@
       <a href="https://github.com/synchestra-io/specscore">GitHub</a>
     </div>
   </footer>
-  <script>
-    document.getElementById('theme-toggle').addEventListener('click', function() {
-      var current = document.documentElement.getAttribute('data-theme');
-      var next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('specscore-theme', next);
-    });
-  </script>
   <script>
     (function() {
       var ICON_COPY = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>';
