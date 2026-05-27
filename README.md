@@ -1,4 +1,4 @@
-# SpecScore
+# [SpecScore.md](https://specscore.md)
 
 **An open standard for AI-readable software specifications.**
 
