@@ -1,9 +1,8 @@
 ---
-// Site header — clef wordmark + centered language switcher + GitHub link.
-// Language switcher uses Astro.url.pathname to detect current locale, so
-// pages don't need to pass a prop. Language names appear in their own
-// language (per the conversation: flag emoji was rejected — flags ≠ languages,
-// inconsistent OS rendering, accessibility issues).
+// Site header — wordmark + language dropdown + Docs + GitHub.
+// Language switcher uses Astro.url.pathname to detect current locale.
+// Dropdown is pure-CSS via :focus-within and :hover; the <ul><li><a>
+// list stays in the DOM for crawler discovery of alternate-language URLs.
 const path = Astro.url.pathname;
 const locale =
   path.startsWith('/ru')    ? 'ru'    :
@@ -17,28 +16,34 @@ const locale =
 const wordmarkHref = locale === 'en' ? '/' : `/${locale}/`;
 
 // Strip the current locale prefix to get the route portion of the path.
-// e.g. "/es/vs/openspec/" → "/vs/openspec/", "/" → "/"
 const localePattern = /^\/(es|pt-br|ru|uk|ja|zh-cn|ko)(\/|$)/;
 const route = locale === 'en' ? path : path.replace(localePattern, '/');
 
-// Build per-language hrefs that preserve the current route.
 function langHref(code: string): string {
   return code === 'en' ? route : `/${code}${route}`;
 }
 
-// Order: English (default) first, then alphabetical by URL code.
-// `tag` is the HTML lang attribute value (uppercase BR per RFC 5646);
-// `code` matches the locale detector above.
+// Order: English first, then alphabetical by URL code.
 const langs = [
-  { code: 'en',    label: 'English',         short: 'EN', tag: 'en'    },
-  { code: 'es',    label: 'Español',         short: 'ES', tag: 'es'    },
-  { code: 'pt-br', label: 'Português (BR)',  short: 'PT', tag: 'pt-BR' },
-  { code: 'ru',    label: 'Русский',         short: 'RU', tag: 'ru'    },
-  { code: 'uk',    label: 'Українська',      short: 'Укр', tag: 'uk'    },
-  { code: 'ja',    label: '日本語',           short: '日本語',  tag: 'ja'    },
-  { code: 'zh-cn', label: '中文',             short: '中文',    tag: 'zh-CN' },
-  { code: 'ko',    label: '한국어',            short: '한국어',   tag: 'ko'    },
+  { code: 'en',    label: 'English',         tag: 'en'    },
+  { code: 'es',    label: 'Español',         tag: 'es'    },
+  { code: 'pt-br', label: 'Português (BR)',  tag: 'pt-BR' },
+  { code: 'ru',    label: 'Русский',         tag: 'ru'    },
+  { code: 'uk',    label: 'Українська',      tag: 'uk'    },
+  { code: 'ja',    label: '日本語',           tag: 'ja'    },
+  { code: 'zh-cn', label: '中文',             tag: 'zh-CN' },
+  { code: 'ko',    label: '한국어',            tag: 'ko'    },
 ];
+const currentLang = langs.find(l => l.code === locale)!;
+
+// Docs link — points to docs site. Currently English-only; locale-aware
+// path can be wired up later if docs get translated.
+const docsHref = 'https://specscore.md/docs';
+
+// Localized labels for "Docs" link (chrome label only).
+const docsLabel: Record<string, string> =
+  { en: 'Docs', es: 'Docs', 'pt-br': 'Docs', ru: 'Документация',
+    uk: 'Документація', ja: 'ドキュメント', 'zh-cn': '文档', ko: '문서' };
 ---
 
 <header class="site-header">
@@ -48,29 +53,40 @@ const langs = [
       <span class="wordmark__name">SpecScore.md</span>
     </a>
 
-    <div class="site-header__lang" role="group" aria-label="Language">
-      {langs.map(({ code, label, short, tag }) => (
-        <a
-          href={langHref(code)}
-          class:list={['lang-tab', code === locale && 'is-active']}
-          aria-current={code === locale ? 'page' : undefined}
-          aria-label={label}
-          lang={tag}
-        >
-          <span class="lang-full">{label}</span>
-          <span class="lang-short">{short}</span>
-        </a>
-      ))}
-    </div>
-
     <nav class="site-header__nav" aria-label="Primary">
-      <a
-        href="https://github.com/specscore/specscore"
-        rel="noopener"
-        class="site-header__link"
-      >
-        GitHub
-      </a>
+      <a href={docsHref} class="site-header__link">{docsLabel[locale]}</a>
+      <a href="https://github.com/specscore/specscore" class="site-header__link">GitHub</a>
+
+      <div class="lang-switcher">
+        <button
+          type="button"
+          class="lang-switcher__trigger"
+          aria-haspopup="true"
+          aria-expanded="false"
+          lang={currentLang.tag}
+        >
+          <span>{currentLang.label}</span>
+          <svg class="lang-switcher__caret" viewBox="0 0 10 6" width="10" height="6" aria-hidden="true">
+            <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <ul class="lang-switcher__menu" role="menu" aria-label="Language">
+          {langs.map(({ code, label, tag }) => (
+            <li role="none">
+              <a
+                href={langHref(code)}
+                hreflang={tag}
+                lang={tag}
+                role="menuitem"
+                class:list={['lang-switcher__item', code === locale && 'is-active']}
+                aria-current={code === locale ? 'page' : undefined}
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </nav>
   </div>
 </header>
@@ -87,15 +103,16 @@ const langs = [
     max-width: var(--max-content);
     margin: 0 auto;
     padding: 0.875rem var(--space-3);
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: var(--space-3);
   }
-  /* Wordmark stays left, nav stays right; switcher anchored to grid centre. */
-  .site-header__inner > .wordmark { justify-self: start; }
-  .site-header__nav { justify-self: end; }
-  .site-header__lang { justify-self: center; }
+  .site-header__nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
 
   .site-header__link {
     font-family: var(--font-display);
@@ -114,49 +131,128 @@ const langs = [
     outline-offset: 2px;
   }
 
-  /* --- Language switcher (tab pair) --- */
-  .site-header__lang {
-    display: inline-flex;
-    gap: 0.25rem;
+  /* --- Language dropdown --- */
+  .lang-switcher {
+    position: relative;
   }
-  .lang-tab {
+  .lang-switcher__trigger {
     display: inline-flex;
     align-items: center;
+    gap: 0.35rem;
+    background: transparent;
+    border: 1px solid var(--hairline);
+    border-radius: 2px;
+    padding: 0.3rem 0.6rem;
     font-family: var(--font-code);
-    font-size: 0.75rem;
-    letter-spacing: 0.01em;
-    color: var(--pale-ink);
-    padding: 0.3rem 0.5rem;
-    border-bottom: 2px solid transparent;
-    transition: color 120ms ease, border-color 160ms ease, opacity 120ms ease;
+    font-size: 0.8rem;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 120ms ease, border-color 120ms ease;
   }
-  .lang-tab:hover { color: var(--mid-ink); }
-  .lang-tab:focus-visible {
+  .lang-switcher__trigger:hover {
+    background: var(--cream-2);
+    border-color: var(--ink);
+  }
+  .lang-switcher__trigger:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+  }
+  .lang-switcher__caret {
+    color: var(--mid-ink);
+    transition: transform 160ms ease;
+  }
+  .lang-switcher:hover .lang-switcher__caret,
+  .lang-switcher:focus-within .lang-switcher__caret {
+    transform: rotate(180deg);
+  }
+
+  .lang-switcher__menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    min-width: 11rem;
+    list-style: none;
+    margin: 0;
+    padding: 0.35rem;
+    background: var(--cream);
+    border: 1px solid var(--hairline);
+    border-radius: 2px;
+    box-shadow: 0 8px 24px rgba(26, 26, 26, 0.08);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 140ms ease, transform 140ms ease, visibility 0s linear 140ms;
+    z-index: 60;
+  }
+  .lang-switcher:hover .lang-switcher__menu,
+  .lang-switcher:focus-within .lang-switcher__menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 140ms ease, transform 140ms ease, visibility 0s linear 0s;
+  }
+
+  .lang-switcher__item {
+    display: block;
+    padding: 0.4rem 0.6rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--ink);
+    border-radius: 2px;
+    transition: background 100ms ease;
+  }
+  .lang-switcher__item:hover {
+    background: var(--cream-2);
+  }
+  .lang-switcher__item:focus-visible {
     outline: 2px solid var(--ink-blue);
     outline-offset: -2px;
   }
-  .lang-tab.is-active {
+  .lang-switcher__item.is-active {
     color: var(--ink);
-    border-bottom-color: var(--validator-green);
     font-weight: 600;
+    background: var(--cream-2);
   }
-
-  /* Full labels visible by default, short codes hidden */
-  .lang-short { display: none; }
 
   @media (max-width: 720px) {
     .site-header__inner {
-      grid-template-columns: auto auto auto;
       gap: var(--space-2);
       padding: 0.625rem var(--space-2);
     }
-    /* Swap to 2-char codes on small screens */
-    .lang-full { display: none; }
-    .lang-short {
-      display: inline;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-    .lang-tab { padding: 0.25rem 0.35rem; font-size: 0.72rem; }
+    .site-header__nav { gap: 0.15rem; }
+    .site-header__link { padding: 0.3rem 0.45rem; font-size: 0.82rem; }
+    .lang-switcher__trigger { padding: 0.25rem 0.45rem; font-size: 0.75rem; }
+    .lang-switcher__menu { right: -4px; }
   }
 </style>
+
+<script>
+  // Toggle aria-expanded on the trigger when the menu opens/closes
+  // (driven by :focus-within / :hover in CSS). This keeps screen readers
+  // in sync with the visual state.
+  document.querySelectorAll<HTMLElement>('.lang-switcher').forEach((switcher) => {
+    const trigger = switcher.querySelector<HTMLButtonElement>('.lang-switcher__trigger');
+    if (!trigger) return;
+    const sync = (open: boolean) => trigger.setAttribute('aria-expanded', String(open));
+    // Mouse
+    switcher.addEventListener('mouseenter', () => sync(true));
+    switcher.addEventListener('mouseleave', () => {
+      if (!switcher.contains(document.activeElement)) sync(false);
+    });
+    // Keyboard / click
+    switcher.addEventListener('focusin', () => sync(true));
+    switcher.addEventListener('focusout', (e) => {
+      const next = e.relatedTarget as Node | null;
+      if (!next || !switcher.contains(next)) sync(false);
+    });
+    // Escape closes menu and returns focus to trigger
+    switcher.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        sync(false);
+        trigger.focus();
+        // Blur to dismiss :focus-within
+        setTimeout(() => trigger.blur(), 0);
+      }
+    });
+  });
+</script>

@@ -187,6 +187,12 @@ pre.terminal,
 .terminal .prompt { color: var(--pale-ink); user-select: none; }
 .terminal .dim { color: var(--mid-ink); }
 
+/* --- Footer language list active state --- */
+.site-footer__list a.is-active {
+  font-weight: 600;
+  border-bottom-color: var(--ink);
+}
+
 /* --- Hero GitHub line --- */
 .hero__github {
   display: flex;
