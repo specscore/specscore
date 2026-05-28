@@ -1,0 +1,225 @@
+---
+// /faq/ — Frequently asked questions.
+// Single source of truth for Q&A; the homepage Faq.astro component
+// surfaces 3–4 highest-objection items as collapsibles and links here
+// for full answers. Each Q has an H2 with an id matching the homepage
+// link fragments.
+//
+// Pre-Habr scope: English only. RU and other locale variants are a
+// follow-up pass — see marketing/feedback/2026-05-28-pre-habr-peer-chat.md §8.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+---
+
+<BaseLayout
+  title="FAQ — SpecScore"
+  description="Honest answers to the questions reviewers actually ask: how SpecScore differs from spec-kit, why a CLI exists alongside skills, what 'Score' means, and where the token-savings numbers come from."
+  canonical="https://specscore.md/faq/"
+>
+  <SiteHeader />
+
+  <main>
+    <section class="faq-hero" aria-labelledby="faq-hero-title">
+      <div class="faq-hero__inner">
+        <h1 id="faq-hero-title" class="faq-hero__headline">
+          Questions reviewers actually asked.
+        </h1>
+        <p class="faq-hero__sub">
+          Drawn from pre-launch peer feedback. Each answer is the honest
+          one, not the marketing one.
+        </p>
+      </div>
+    </section>
+
+    <section class="faq-body section" aria-labelledby="faq-list-title">
+      <div class="section-inner">
+        <h2 id="faq-list-title" class="sr-only">FAQ list</h2>
+
+        <article class="faq-item">
+          <h2 id="vs-spec-kit" class="faq-item__q">
+            How is SpecScore different from spec-kit?
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              <strong>spec-kit is a methodology — a process for writing specs.</strong>
+              SpecScore is a <strong>storage format</strong> for the specs you
+              write, plus a CLI for querying and editing them. The two compose:
+              spec-kit can produce SpecScore files, and a spec-kit extension that
+              writes the SpecScore format is in flight.
+            </p>
+            <p>
+              Pick spec-kit when you need a process. Pick SpecScore when you need
+              specs that AI agents can lint, query, and mutate without reading
+              every file in the repo. Run both when you want both.
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <h2 id="why-cli" class="faq-item__q">
+            Why a CLI — can I not just install skills?
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              Skills can read and write files. They cannot reliably:
+            </p>
+            <ul>
+              <li>enforce referential integrity across the spec tree (links resolve, IDs unique, indexes stay in sync);</li>
+              <li>return a filtered list of "open Features with unanswered questions" without reading every file;</li>
+              <li>mutate the right status field at the right time on every artifact.</li>
+            </ul>
+            <p>
+              The CLI gives agents stable, structured surfaces for those jobs —
+              the same way <code>jq</code> gives you stable, structured surfaces
+              for JSON. Skills alone cost more tokens, drift more often, and
+              forget to update the index.
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <h2 id="naming" class="faq-item__q">
+            Why is it called "SpecScore" — what does it score?
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              "Score" reads two ways, and both are intended.
+            </p>
+            <p>
+              <strong>Partitura.</strong> A structured score of requirements —
+              the way a musical score structures parts, voices, and timing. Open
+              a SpecScore tree and you should be able to read it the way a
+              conductor reads a score: hierarchy, parts, references, all visible
+              at once.
+            </p>
+            <p>
+              <strong>A literal quality grade.</strong> The CLI linter is the
+              deterministic score (does the spec structure hold up?). The
+              <a href="https://specscore.studio/app/github.com/specscore/specstudio-skills/spec/ideas/manual-review-and-score-commands"><code>/score</code> skill</a>
+              is the AI-judged score — an A–F readiness grade per artifact, with
+              per-axis feedback for the author. The "Score" half of the name
+              becomes a feature the tool produces, not just an aspiration.
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <h2 id="token-savings" class="faq-item__q">
+            Show me the token-savings numbers.
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              A measured side-by-side comparison is in flight and will publish
+              before the Habr post — same task ("what should I work on next?"),
+              run twice: once with a vanilla agent reading docs, once with the
+              same agent calling the SpecScore CLI. Token counts and time-to-
+              answer for both.
+            </p>
+            <p>
+              Until those numbers land, the claim is structural: an agent asking
+              the CLI for open Features and unresolved questions gets a small
+              structured response. The same agent without the CLI reads N
+              documents — N often in the dozens. The CLI surface is built
+              precisely to skip that read fan-out.
+            </p>
+          </div>
+        </article>
+
+        <p class="faq-extend">
+          More questions, or a sharper version of one of these? Open an issue
+          at <a href="https://github.com/specscore/specscore/issues">specscore/specscore</a>;
+          this page is the canonical FAQ and grows from real reviewer asks.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <FinalCta />
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap; border: 0;
+  }
+
+  .faq-hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .faq-hero__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+  }
+  .faq-hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+    max-width: 22ch;
+  }
+  .faq-hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    max-width: 50ch;
+    line-height: 1.5;
+  }
+
+  .faq-body { background: var(--surface); }
+
+  .faq-item {
+    border-top: 1px solid var(--hairline);
+    padding: var(--space-4) 0;
+    max-width: 70ch;
+  }
+  .faq-item:last-of-type { border-bottom: 1px solid var(--hairline); }
+  .faq-item__q {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+    scroll-margin-top: var(--space-4);
+  }
+  .faq-item__a p,
+  .faq-item__a ul {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-2);
+  }
+  .faq-item__a ul {
+    padding-left: 1.25rem;
+  }
+  .faq-item__a li {
+    margin-bottom: 0.4rem;
+  }
+  .faq-item__a a {
+    color: var(--ink-blue);
+    border-bottom: 1px solid currentColor;
+  }
+  .faq-item__a code {
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  .faq-extend {
+    margin-top: var(--space-5);
+    font-size: 0.95rem;
+    color: var(--mid-ink);
+    max-width: 60ch;
+  }
+  .faq-extend a {
+    color: var(--ink-blue);
+    border-bottom: 1px solid currentColor;
+  }
+</style>

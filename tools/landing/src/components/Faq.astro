@@ -1,0 +1,177 @@
+---
+// FAQ teaser section for the homepage. Surfaces 3–4 highest-objection
+// items from the canonical /faq/ page as native HTML <details>
+// collapsibles (no JS). Each item links to the matching #fragment on
+// /faq/ for the full answer; the canonical answer lives at /faq/.
+//
+// Order is deliberate: vs spec-kit → why CLI → naming → token savings.
+// The first two are positioning; the second two address brand and
+// evidence.
+---
+
+<section class="faq-teaser section" aria-labelledby="faq-teaser-title">
+  <div class="section-inner">
+    <h2 id="faq-teaser-title" class="faq-teaser__title">
+      Quick answers.
+    </h2>
+    <p class="faq-teaser__lead">
+      The questions reviewers actually ask. Each links to the full answer
+      on the <a href="/faq/" class="faq-teaser__indexlink">FAQ page</a>.
+    </p>
+
+    <div class="faq-teaser__list">
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          How is SpecScore different from spec-kit?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            spec-kit is a methodology; SpecScore is a storage format
+            for the specs you write, plus a CLI. They compose — a
+            spec-kit extension that writes SpecScore is in flight.
+          </p>
+          <a href="/faq/#vs-spec-kit" class="faq-teaser__more">
+            Full answer →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          Why a CLI — can I not just install skills?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            Skills cannot reliably enforce referential integrity,
+            return filtered queries without reading every file, or
+            mutate the right status field at the right time. The CLI
+            is the structured surface that makes that cheap.
+          </p>
+          <a href="/faq/#why-cli" class="faq-teaser__more">
+            Full answer →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          Why "SpecScore" — what does it score?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            Two readings, both intended. Partitura — a structured
+            score of requirements. And a literal quality grade — the
+            CLI linter is the deterministic score, and the
+            <code>/score</code> skill is the AI-judged A–F readiness
+            grade.
+          </p>
+          <a href="/faq/#naming" class="faq-teaser__more">
+            Full answer →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          Where are the token-savings numbers?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            A measured side-by-side comparison is in flight before the
+            Habr post. Structurally: the CLI returns a small structured
+            list; a vanilla agent reads N documents instead.
+          </p>
+          <a href="/faq/#token-savings" class="faq-teaser__more">
+            Full answer →
+          </a>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-teaser { background: var(--cream); }
+  .faq-teaser__title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+  }
+  .faq-teaser__lead {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    max-width: 50ch;
+    line-height: 1.6;
+  }
+  .faq-teaser__indexlink {
+    color: var(--ink-blue);
+    border-bottom: 1px solid currentColor;
+  }
+
+  .faq-teaser__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--hairline);
+    max-width: 70ch;
+  }
+
+  .faq-teaser__item {
+    border-bottom: 1px solid var(--hairline);
+  }
+  .faq-teaser__item[open] {
+    background: var(--cream-2);
+  }
+  .faq-teaser__q {
+    cursor: pointer;
+    list-style: none;
+    padding: var(--space-3) 0;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .faq-teaser__q::-webkit-details-marker { display: none; }
+  .faq-teaser__q::after {
+    content: "+";
+    font-family: var(--font-code);
+    color: var(--mid-ink);
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: transform 160ms ease;
+  }
+  .faq-teaser__item[open] .faq-teaser__q::after {
+    content: "−";
+  }
+  .faq-teaser__q:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: -2px;
+  }
+
+  .faq-teaser__a {
+    padding: 0 0 var(--space-3);
+  }
+  .faq-teaser__a p {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-2);
+    max-width: 60ch;
+  }
+  .faq-teaser__a code {
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .faq-teaser__more {
+    display: inline-block;
+    color: var(--ink-blue);
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    border-bottom: 1px solid currentColor;
+  }
+</style>
