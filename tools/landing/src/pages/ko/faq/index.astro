@@ -1,0 +1,252 @@
+---
+// /ko/faq/ — Frequently asked questions (Korean).
+// Korean variant of /faq/index.astro. Anchor IDs stay verbatim
+// (vs-spec-kit, vs-superpowers, why-cli, naming, token-savings) so the
+// homepage teaser link targets land correctly.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import FinalCta from '../../../components/FinalCtaKo.astro';
+import SiteFooter from '../../../components/SiteFooterKo.astro';
+---
+
+<BaseLayout
+  lang="ko"
+  title="FAQ — SpecScore"
+  description="리뷰어들이 실제로 물어본 질문에 대한 정직한 답변: SpecScore와 spec-kit의 차이, 왜 스킬과 함께 CLI가 있는지, ‘Score’는 무슨 뜻인지, 토큰 절감 수치는 어디에서 오는지."
+  canonical="https://specscore.md/ko/faq/"
+>
+  <SiteHeader />
+
+  <main>
+    <section class="faq-hero" aria-labelledby="faq-hero-title">
+      <div class="faq-hero__inner">
+        <h1 id="faq-hero-title" class="faq-hero__headline">
+          리뷰어들이 실제로 물어본 질문들.
+        </h1>
+        <p class="faq-hero__sub">
+          출시 전 동료 피드백에서 모은 것입니다. 각 답변은
+          마케팅용이 아니라 정직한 답변입니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="faq-body section" aria-labelledby="faq-list-title">
+      <div class="section-inner">
+        <h2 id="faq-list-title" class="sr-only">FAQ 목록</h2>
+
+        <article class="faq-item">
+          <h2 id="vs-spec-kit" class="faq-item__q">
+            SpecScore는 spec-kit과 어떻게 다른가요?
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              <strong>spec-kit은 방법론입니다 — 명세를 작성하기 위한 프로세스입니다.</strong>
+              SpecScore는 여러분이 작성하는 명세를 위한 <strong>저장 포맷</strong>이며,
+              그 명세를 질의하고 편집하기 위한 CLI도 함께 제공됩니다.
+              둘은 함께 쓸 수 있습니다: spec-kit은 SpecScore 파일을
+              생성할 수 있고, SpecScore 포맷을 출력하는 spec-kit 확장도
+              진행 중입니다.
+            </p>
+            <p>
+              프로세스가 필요하면 spec-kit을 선택하세요. 리포지토리의
+              모든 파일을 읽지 않고도 AI 에이전트가 린트·질의·변경할 수
+              있는 명세가 필요하면 SpecScore를 선택하세요. 둘 다 필요하면
+              둘 다 쓰세요.
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <h2 id="vs-superpowers" class="faq-item__q">
+            SpecStudio Skills는 Superpowers, agent-skills와 어떻게 다른가요?
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              정신적으로는 비슷합니다. 셋 모두 AI 에이전트를 ideate →
+              specify → plan → implement로 이끄는 스킬 라이브러리입니다.
+              차이는 철학이 아니라 메커니즘에 있습니다.
+            </p>
+            <p>
+              <strong>SpecStudio Skills는 산출물을 SpecScore 포맷
+              (정의된 Markdown + YAML 구조)으로 작성하고</strong>,
+              질의, 린트, 상태 변경에 <code>specscore</code> CLI를
+              호출합니다. Superpowers와 agent-skills는 대체로 스킬
+              프롬프트를 통해 파일을 직접 읽고 씁니다.
+            </p>
+            <p>
+              토큰 소비가 중요할 때 SpecStudio Skills를 선택하세요 —
+              CLI는 <em>"미해결 질문이 있는 모든 열린 기능"</em>에 대한
+              구조화된 답을 한 번의 호출로 돌려주지만, 파일 기반 스킬은
+              같은 질문에 답하기 위해 N개의 문서를 읽어야 합니다.
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <h2 id="why-cli" class="faq-item__q">
+            왜 CLI인가요 — 스킬만 설치하면 안 되나요?
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              스킬은 파일을 읽고 쓸 수 있습니다. 하지만 다음은 안정적으로
+              해낼 수 없습니다:
+            </p>
+            <ul>
+              <li>명세 트리 전반의 참조 무결성 보장 (링크가 해석되고, ID가 유일하며, 인덱스가 동기화 상태로 유지되는 것);</li>
+              <li>모든 파일을 읽지 않고 "미해결 질문이 있는 열린 기능"의 필터링된 목록을 반환하는 것;</li>
+              <li>모든 산출물에서 적절한 시점에 올바른 상태 필드를 변경하는 것.</li>
+            </ul>
+            <p>
+              CLI는 에이전트에게 작업당 한 번의 깔끔한 호출을 제공합니다 —
+              <code>jq</code>가 JSON에 대한 한 번의 깔끔한 호출을 여러분에게
+              제공하는 것과 같은 방식입니다. 스킬만 쓰면 토큰이 더 들고,
+              더 자주 어긋나며, 인덱스 갱신을 잊습니다.
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <h2 id="naming" class="faq-item__q">
+            왜 "SpecScore"인가요 — 무엇을 채점하나요?
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              "Score"는 두 가지로 읽히며, 둘 다 의도된 것입니다.
+            </p>
+            <p>
+              <strong>파르티투라(partitura).</strong> 요구사항의 구조화된
+              악보 — 음악 악보가 파트, 성부, 타이밍을 구조화하는 방식
+              그대로입니다. SpecScore 트리를 펼치면 지휘자가 악보를
+              읽듯이 읽을 수 있어야 합니다: 계층, 파트, 참조 — 한눈에 보입니다.
+            </p>
+            <p>
+              <strong>문자 그대로의 품질 등급.</strong> CLI 린터는
+              결정론적 점수입니다 (명세 구조가 유지되는가?).
+              <a href="https://specscore.studio/app/github.com/specscore/specstudio-skills/spec/ideas/manual-review-and-score-commands"><code>/score</code> 스킬</a>은
+              AI가 판정하는 점수입니다 — 산출물별 A–F 준비도 등급에,
+              작성자를 위한 축별 피드백이 함께 제공됩니다. 이름의
+              "Score" 절반이 단순한 포부가 아니라 도구가 만들어내는
+              기능이 됩니다.
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <h2 id="token-savings" class="faq-item__q">
+            토큰 절감 수치를 보여주세요.
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              측정 기반의 나란히 비교가 진행 중이며, Habr 게시물 전에
+              공개될 예정입니다 — 같은 작업 ("다음에 무엇을 해야 하지?")을
+              두 번 실행합니다: 한 번은 일반 에이전트가 문서를 읽고,
+              다른 한 번은 같은 에이전트가 SpecScore CLI를 호출합니다.
+              두 경우의 토큰 수와 응답 시간을 모두 측정합니다.
+            </p>
+            <p>
+              그 수치가 나오기 전까지 주장은 구조적인 것입니다: CLI에
+              열린 기능과 미해결 질문을 묻는 에이전트는 작은 구조화된
+              응답을 받습니다. CLI 없는 같은 에이전트는 N개의 문서를
+              읽고 — N은 수십 개에 이르는 경우가 많습니다. CLI의 인터페이스는
+              바로 그 부채꼴 읽기를 건너뛰도록 정확히 설계되었습니다.
+            </p>
+          </div>
+        </article>
+
+        <p class="faq-extend">
+          더 많은 질문, 또는 이 중 하나를 더 날카롭게 다듬은 버전이 있나요?
+          <a href="https://github.com/specscore/specscore/issues">specscore/specscore</a>에
+          이슈를 열어주세요 — 이 페이지가 정식 FAQ이며, 실제 리뷰어의
+          질문에서 자라납니다.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <FinalCta />
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap; border: 0;
+  }
+
+  .faq-hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .faq-hero__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+  }
+  .faq-hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+    max-width: 22ch;
+  }
+  .faq-hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    max-width: 50ch;
+    line-height: 1.5;
+  }
+
+  .faq-body { background: var(--surface); }
+
+  .faq-item {
+    border-top: 1px solid var(--hairline);
+    padding: var(--space-4) 0;
+    max-width: 70ch;
+  }
+  .faq-item:last-of-type { border-bottom: 1px solid var(--hairline); }
+  .faq-item__q {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+    scroll-margin-top: var(--space-4);
+  }
+  .faq-item__a p,
+  .faq-item__a ul {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-2);
+  }
+  .faq-item__a ul {
+    padding-left: 1.25rem;
+  }
+  .faq-item__a li {
+    margin-bottom: 0.4rem;
+  }
+  .faq-item__a a {
+    color: var(--ink-blue);
+    border-bottom: 1px solid currentColor;
+  }
+  .faq-item__a code {
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  .faq-extend {
+    margin-top: var(--space-5);
+    font-size: 0.95rem;
+    color: var(--mid-ink);
+    max-width: 60ch;
+  }
+  .faq-extend a {
+    color: var(--ink-blue);
+    border-bottom: 1px solid currentColor;
+  }
+</style>

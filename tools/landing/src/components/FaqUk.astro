@@ -1,0 +1,194 @@
+---
+// Ukrainian variant of Faq.astro.
+// HTML structure + CSS classes match the English original exactly; only
+// the prose changes. Anchor hrefs target /uk/faq/#... (the Ukrainian FAQ
+// page, which keeps the same anchor IDs as the English one).
+---
+
+<section class="faq-teaser section" aria-labelledby="faq-teaser-title">
+  <div class="section-inner">
+    <h2 id="faq-teaser-title" class="faq-teaser__title">
+      Є запитання?
+    </h2>
+    <p class="faq-teaser__lead">
+      Ось запитання, які ставлять найчастіше. Кожне веде до повної
+      відповіді на <a href="/uk/faq/" class="faq-teaser__indexlink">сторінці FAQ</a>.
+    </p>
+
+    <div class="faq-teaser__list">
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          Чим SpecScore відрізняється від spec-kit?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            spec-kit — це методологія; SpecScore — формат зберігання
+            для специфікацій, які ви пишете, плюс CLI. Вони поєднуються —
+            розширення spec-kit, що пише SpecScore, уже в роботі.
+          </p>
+          <a href="/uk/faq/#vs-spec-kit" class="faq-teaser__more">
+            Повна відповідь →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          Чим SpecStudio Skills відрізняються від Superpowers і agent-skills?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            За духом — схоже: всі три ведуть AI-агентів через ideate →
+            specify → plan → implement. SpecStudio Skills пишуть
+            артефакти у форматі SpecScore і викликають CLI
+            <code>specscore</code> для запитів та зміни статусів; інші
+            читають і пишуть файли напряму. Беріть SpecStudio, коли
+            важлива витрата токенів.
+          </p>
+          <a href="/uk/faq/#vs-superpowers" class="faq-teaser__more">
+            Повна відповідь →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          Навіщо CLI — чи не можна просто встановити навички?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            Навички не можуть надійно забезпечувати реферативну
+            цілісність, повертати відфільтровані запити без читання
+            кожного файлу або змінювати потрібне поле статусу в потрібний
+            момент. CLI робить кожне за один виклик. Навичкам, щоб
+            зробити те саме, доводиться читати кожен файл.
+          </p>
+          <a href="/uk/faq/#why-cli" class="faq-teaser__more">
+            Повна відповідь →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          Чому «SpecScore» — що він оцінює?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            Два прочитання, обидва навмисні. Партитура — структурований
+            запис вимог. І буквальна оцінка якості — CLI-лінтер дає
+            детерміновану оцінку, а навичка <code>/score</code> — це
+            AI-оцінка готовності від A до F.
+          </p>
+          <a href="/uk/faq/#naming" class="faq-teaser__more">
+            Повна відповідь →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          Де цифри щодо економії токенів?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            Виміряне порівняння пліч-о-пліч готується до публікації
+            перед постом на Habr. Структурно: CLI повертає невеликий
+            структурований список; звичайний агент натомість читає N
+            документів.
+          </p>
+          <a href="/uk/faq/#token-savings" class="faq-teaser__more">
+            Повна відповідь →
+          </a>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-teaser { background: var(--cream); }
+  .faq-teaser__title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+  }
+  .faq-teaser__lead {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    max-width: 60ch;
+    line-height: 1.6;
+    text-wrap: balance;
+  }
+  .faq-teaser__indexlink {
+    color: var(--ink-blue);
+    border-bottom: 1px solid currentColor;
+  }
+
+  .faq-teaser__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--hairline);
+    max-width: 70ch;
+  }
+
+  .faq-teaser__item {
+    border-bottom: 1px solid var(--hairline);
+  }
+  .faq-teaser__item[open] {
+    background: var(--cream-2);
+  }
+  .faq-teaser__q {
+    cursor: pointer;
+    list-style: none;
+    padding: var(--space-3);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .faq-teaser__q::-webkit-details-marker { display: none; }
+  .faq-teaser__q::after {
+    content: "+";
+    font-family: var(--font-code);
+    color: var(--mid-ink);
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: transform 160ms ease;
+  }
+  .faq-teaser__item[open] .faq-teaser__q::after {
+    content: "−";
+  }
+  .faq-teaser__q:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: -2px;
+  }
+
+  .faq-teaser__a {
+    padding: 0 var(--space-3) var(--space-3);
+  }
+  .faq-teaser__a p {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-2);
+    max-width: 60ch;
+  }
+  .faq-teaser__a code {
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .faq-teaser__more {
+    display: inline-block;
+    color: var(--ink-blue);
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    border-bottom: 1px solid currentColor;
+  }
+</style>

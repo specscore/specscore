@@ -1,0 +1,193 @@
+---
+// Korean variant of Faq.astro.
+// HTML structure + CSS classes match the English original exactly; only
+// the prose changes. Anchor hrefs target /ko/faq/#... (the Korean FAQ
+// page, which keeps the same anchor IDs as the English one).
+---
+
+<section class="faq-teaser section" aria-labelledby="faq-teaser-title">
+  <div class="section-inner">
+    <h2 id="faq-teaser-title" class="faq-teaser__title">
+      질문이 있으신가요?
+    </h2>
+    <p class="faq-teaser__lead">
+      자주 받는 질문들입니다. 각각
+      <a href="/ko/faq/" class="faq-teaser__indexlink">FAQ 페이지</a>의
+      전체 답변으로 연결됩니다.
+    </p>
+
+    <div class="faq-teaser__list">
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          SpecScore는 spec-kit과 어떻게 다른가요?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            spec-kit은 방법론이고, SpecScore는 여러분이 작성하는 명세를
+            위한 저장 포맷과 CLI입니다. 둘은 함께 쓸 수 있으며 —
+            SpecScore를 출력하는 spec-kit 확장도 진행 중입니다.
+          </p>
+          <a href="/ko/faq/#vs-spec-kit" class="faq-teaser__more">
+            전체 답변 →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          SpecStudio Skills는 Superpowers, agent-skills와 어떻게 다른가요?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            정신적으로는 비슷합니다 — 셋 다 AI 에이전트를 ideate →
+            specify → plan → implement로 이끕니다. SpecStudio Skills는
+            산출물을 SpecScore 포맷으로 작성하고, 질의와 상태 변경에
+            <code>specscore</code> CLI를 호출합니다. 나머지는 파일을
+            직접 읽고 씁니다. 토큰 소비가 중요할 때 SpecStudio를 선택하세요.
+          </p>
+          <a href="/ko/faq/#vs-superpowers" class="faq-teaser__more">
+            전체 답변 →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          왜 CLI인가요 — 스킬만 설치하면 안 되나요?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            스킬만으로는 참조 무결성 보장, 모든 파일을 읽지 않고
+            필터링된 결과 반환, 적절한 시점에 올바른 상태 필드 변경 —
+            이런 것들을 안정적으로 해낼 수 없습니다. CLI는 각각을
+            한 번의 호출로 처리합니다. 스킬은 같은 일을 하기 위해
+            모든 파일을 읽습니다.
+          </p>
+          <a href="/ko/faq/#why-cli" class="faq-teaser__more">
+            전체 답변 →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          왜 “SpecScore”인가요 — 무엇을 채점하나요?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            두 가지 의미가 있고, 둘 다 의도된 것입니다. 파르티투라
+            (partitura) — 요구사항의 구조화된 악보. 그리고 문자 그대로의
+            품질 등급 — CLI 린터가 결정론적 점수이고,
+            <code>/score</code> 스킬은 AI가 판정하는 A–F 준비도 등급입니다.
+          </p>
+          <a href="/ko/faq/#naming" class="faq-teaser__more">
+            전체 답변 →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          토큰 절감 수치는 어디에 있나요?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            측정 기반의 나란히 비교는 Habr 게시물 전에 공개될 예정입니다.
+            구조적으로: CLI는 작은 구조화 리스트를 반환하지만, 일반
+            에이전트는 N개의 문서를 읽습니다.
+          </p>
+          <a href="/ko/faq/#token-savings" class="faq-teaser__more">
+            전체 답변 →
+          </a>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-teaser { background: var(--cream); }
+  .faq-teaser__title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+  }
+  .faq-teaser__lead {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    max-width: 60ch;
+    line-height: 1.6;
+    text-wrap: balance;
+  }
+  .faq-teaser__indexlink {
+    color: var(--ink-blue);
+    border-bottom: 1px solid currentColor;
+  }
+
+  .faq-teaser__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--hairline);
+    max-width: 70ch;
+  }
+
+  .faq-teaser__item {
+    border-bottom: 1px solid var(--hairline);
+  }
+  .faq-teaser__item[open] {
+    background: var(--cream-2);
+  }
+  .faq-teaser__q {
+    cursor: pointer;
+    list-style: none;
+    padding: var(--space-3);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .faq-teaser__q::-webkit-details-marker { display: none; }
+  .faq-teaser__q::after {
+    content: "+";
+    font-family: var(--font-code);
+    color: var(--mid-ink);
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: transform 160ms ease;
+  }
+  .faq-teaser__item[open] .faq-teaser__q::after {
+    content: "−";
+  }
+  .faq-teaser__q:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: -2px;
+  }
+
+  .faq-teaser__a {
+    padding: 0 var(--space-3) var(--space-3);
+  }
+  .faq-teaser__a p {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-2);
+    max-width: 60ch;
+  }
+  .faq-teaser__a code {
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .faq-teaser__more {
+    display: inline-block;
+    color: var(--ink-blue);
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    border-bottom: 1px solid currentColor;
+  }
+</style>

@@ -1,0 +1,197 @@
+---
+// Spanish variant of Faq.astro.
+// HTML structure + CSS classes match the English original exactly; only
+// the prose changes. Anchor hrefs target /es/faq/#... (the Spanish FAQ
+// page, which keeps the same anchor IDs as the English one).
+---
+
+<section class="faq-teaser section" aria-labelledby="faq-teaser-title">
+  <div class="section-inner">
+    <h2 id="faq-teaser-title" class="faq-teaser__title">
+      ¿Tienes preguntas?
+    </h2>
+    <p class="faq-teaser__lead">
+      Estas son las preguntas que la gente sigue haciendo. Cada una lleva
+      a la respuesta completa en la <a href="/es/faq/" class="faq-teaser__indexlink">página de FAQ</a>.
+    </p>
+
+    <div class="faq-teaser__list">
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          ¿En qué se diferencia SpecScore de spec-kit?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            spec-kit es una metodología; SpecScore es un formato de
+            almacenamiento para las specs que escribes, más una CLI. Se
+            componen — una extensión de spec-kit que escribe SpecScore
+            está en camino.
+          </p>
+          <a href="/es/faq/#vs-spec-kit" class="faq-teaser__more">
+            Respuesta completa →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          ¿En qué se diferencian las SpecStudio Skills de Superpowers y agent-skills?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            Similares en espíritu — los tres guían a los agentes de IA a
+            través de ideate → specify → plan → implement. SpecStudio
+            Skills escribe artefactos en el formato SpecScore y usa la
+            CLI <code>specscore</code> para consultas y cambios de
+            estado; los otros leen y escriben archivos directamente.
+            Elige SpecStudio cuando importa el consumo de tokens.
+          </p>
+          <a href="/es/faq/#vs-superpowers" class="faq-teaser__more">
+            Respuesta completa →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          ¿Por qué una CLI — no basta con instalar skills?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            Las skills no pueden, de forma fiable, garantizar la
+            integridad referencial, devolver consultas filtradas sin
+            leer cada archivo, ni mutar el campo de estado correcto en
+            el momento correcto. La CLI hace cada una de estas cosas en
+            una sola llamada. Las skills leen cada archivo para hacer lo
+            mismo.
+          </p>
+          <a href="/es/faq/#why-cli" class="faq-teaser__more">
+            Respuesta completa →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          ¿Por qué «SpecScore» — qué puntúa?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            Dos lecturas, ambas intencionadas. Partitura — un score
+            estructurado de requisitos. Y una nota de calidad literal —
+            el linter de la CLI es la nota determinista, y la skill
+            <code>/score</code> es la nota de A a F juzgada por la IA
+            sobre la madurez del artefacto.
+          </p>
+          <a href="/es/faq/#naming" class="faq-teaser__more">
+            Respuesta completa →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          ¿Dónde están las cifras de ahorro de tokens?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            Una comparativa lado a lado medida está en marcha antes del
+            post en Habr. Estructuralmente: la CLI devuelve una pequeña
+            lista estructurada; un agente sin CLI lee N documentos en su
+            lugar.
+          </p>
+          <a href="/es/faq/#token-savings" class="faq-teaser__more">
+            Respuesta completa →
+          </a>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-teaser { background: var(--cream); }
+  .faq-teaser__title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+  }
+  .faq-teaser__lead {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    max-width: 60ch;
+    line-height: 1.6;
+    text-wrap: balance;
+  }
+  .faq-teaser__indexlink {
+    color: var(--ink-blue);
+    border-bottom: 1px solid currentColor;
+  }
+
+  .faq-teaser__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--hairline);
+    max-width: 70ch;
+  }
+
+  .faq-teaser__item {
+    border-bottom: 1px solid var(--hairline);
+  }
+  .faq-teaser__item[open] {
+    background: var(--cream-2);
+  }
+  .faq-teaser__q {
+    cursor: pointer;
+    list-style: none;
+    padding: var(--space-3);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .faq-teaser__q::-webkit-details-marker { display: none; }
+  .faq-teaser__q::after {
+    content: "+";
+    font-family: var(--font-code);
+    color: var(--mid-ink);
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: transform 160ms ease;
+  }
+  .faq-teaser__item[open] .faq-teaser__q::after {
+    content: "−";
+  }
+  .faq-teaser__q:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: -2px;
+  }
+
+  .faq-teaser__a {
+    padding: 0 var(--space-3) var(--space-3);
+  }
+  .faq-teaser__a p {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-2);
+    max-width: 60ch;
+  }
+  .faq-teaser__a code {
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .faq-teaser__more {
+    display: inline-block;
+    color: var(--ink-blue);
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    border-bottom: 1px solid currentColor;
+  }
+</style>

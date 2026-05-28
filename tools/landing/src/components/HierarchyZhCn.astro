@@ -1,0 +1,185 @@
+---
+// Simplified Chinese variant of Hierarchy.astro.
+// HTML structure + CSS classes match the English original exactly; only
+// the prose narration changes. The tree itself (directory names, ├──,
+// └──, │, slashes) stays verbatim — it's a literal render of a real
+// English-named feature tree.
+---
+
+<section class="hierarchy section" aria-labelledby="hierarchy-title">
+  <div class="section-inner">
+    <div class="hierarchy__grid">
+      <div class="hierarchy__col hierarchy__col--text">
+        <h2 id="hierarchy-title" class="hierarchy__title">
+          规格说明是层级结构。所以你的规格树也是。
+        </h2>
+        <p class="hierarchy__lead">
+          当 Feature 数量达到五十个时，扁平列表就会变成一堆乱麻。
+          SpecScore 让树保持可导航——父节点掌管范围，子节点掌管细节，
+          目录结构映射的正是你的团队早已在头脑中梳理的产品结构。
+        </p>
+        <p>
+          <strong>未决问题会向上汇总。</strong>任何深度上未解决的问题，
+          都会浮现在每个父节点的索引里。你可以从树顶看到是什么在阻塞发布，
+          而无需深入挖掘。
+        </p>
+        <p>
+          大多数规格工具假设扁平列表就够用了。确实够用——直到不够用为止。
+          SpecScore 正是为"这个 Feature 该放在哪里？"开始变得要紧的那一刻
+          而设计的。
+        </p>
+        <p class="hierarchy__cta">
+          <a
+            href="https://specscore.studio/app/github.com/specscore/specscore-cli/spec/features/cli?op=explore"
+            class="hierarchy__live"
+          >
+            在 <code>specscore-cli</code> 中实时查看 →
+          </a>
+        </p>
+      </div>
+
+      <figure
+        class="hierarchy__col hierarchy__col--tree"
+        aria-label="specscore CLI 功能树的简略视图：父级 Feature 及其子 Feature，以及 spec/lint/ 下的一个子-子 Feature。"
+      >
+        <figcaption class="hierarchy__caption">
+          <span class="hierarchy__caption-label">FROM</span>
+          <code>specscore-cli/spec/features/cli/</code>
+        </figcaption>
+<pre class="hierarchy__tree"><code><span class="hx-root">spec/features/cli/</span>
+├── <span class="hx-dir">agent/</span>
+│   └── <span class="hx-dir">setup/</span>
+├── <span class="hx-dir">feature/</span>
+│   ├── <span class="hx-dir">change-status/</span>
+│   ├── <span class="hx-dir">deps/</span>
+│   ├── <span class="hx-dir">info/</span>
+│   ├── <span class="hx-dir">list/</span>
+│   ├── <span class="hx-dir">new/</span>
+│   ├── <span class="hx-dir">refs/</span>
+│   └── <span class="hx-dir">tree/</span>
+├── <span class="hx-dir">idea/</span>
+│   ├── <span class="hx-dir">change-status/</span>
+│   ├── <span class="hx-dir">new/</span>
+│   └── <span class="hx-dir">relocate/</span>
+├── <span class="hx-dir">spec/</span>
+│   └── <span class="hx-dir">lint/</span>
+│       ├── <span class="hx-dir">issue-rules/</span>     <span class="hx-annot">← 子-子 Feature</span>
+│       └── <span class="hx-dir">plan-rules/</span>
+├── <span class="hx-dir">task/</span>
+│   ├── <span class="hx-dir">info/</span>
+│   ├── <span class="hx-dir">list/</span>
+│   └── <span class="hx-dir">new/</span>
+└── <span class="hx-more">… 还有 10 个顶层 Feature</span></code></pre>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hierarchy { background: var(--cream); }
+
+  .hierarchy__title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin-bottom: var(--space-3);
+    max-width: 22ch;
+  }
+
+  .hierarchy__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .hierarchy__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      gap: var(--space-5);
+    }
+  }
+  .hierarchy__col { min-width: 0; }
+
+  .hierarchy__lead {
+    font-size: 1.05rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+    max-width: 50ch;
+  }
+  .hierarchy__col--text p {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+    max-width: 50ch;
+  }
+  .hierarchy__col--text strong { color: var(--ink); }
+
+  .hierarchy__cta { margin-top: var(--space-3); }
+  .hierarchy__live {
+    color: var(--ink-blue);
+    font-family: var(--font-code);
+    font-size: 0.95rem;
+    border-bottom: 1px solid currentColor;
+  }
+  .hierarchy__live code {
+    font-family: inherit;
+    background: transparent;
+    padding: 0;
+  }
+
+  .hierarchy__col--tree {
+    margin: 0;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .hierarchy__caption {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.5rem 0.875rem;
+    border-bottom: 1px solid var(--hairline);
+    background: var(--cream-2);
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+  .hierarchy__caption-label {
+    color: var(--graphite);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .hierarchy__caption code {
+    color: var(--mid-ink);
+    font-family: inherit;
+    background: transparent;
+    padding: 0;
+  }
+
+  .hierarchy__tree {
+    margin: 0;
+    padding: var(--space-3);
+    background: var(--surface);
+    border: none;
+    font-size: 0.825rem;
+    line-height: 1.65;
+    color: var(--mid-ink);
+    overflow-x: auto;
+    font-family: var(--font-code);
+  }
+  .hx-root { color: var(--ink); font-weight: 700; }
+  .hx-dir  { color: var(--ink); }
+  .hx-annot {
+    color: var(--ink-blue);
+    font-style: italic;
+  }
+  .hx-more {
+    color: var(--pale-ink);
+    font-style: italic;
+  }
+
+  @media (max-width: 720px) {
+    .hierarchy__tree { font-size: 0.78rem; }
+  }
+</style>
