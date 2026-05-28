@@ -1,7 +1,7 @@
 ---
-// Site footer — three columns (brand + Product + Community) above a
-// full-width language tabs strip. FooterLanguages renders the tabs.
-import FooterLanguages from './FooterLanguages.astro';
+// Site footer — three columns (brand + Product + Community).
+// The language tabs are rendered by BaseLayout just above PageFeedback,
+// not here.
 ---
 
 <footer class="site-footer">
@@ -40,8 +40,6 @@ import FooterLanguages from './FooterLanguages.astro';
     </div>
 
   </div>
-
-  <FooterLanguages currentLocale="en" />
 </footer>
 
 <style>

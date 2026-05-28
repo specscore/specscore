@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import PageFeedback from '../components/PageFeedback.astro';
+import FooterLanguages from '../components/FooterLanguages.astro';
+import { localeFromPath } from '../lib/languages';
 
 interface Props {
   title?: string;
@@ -15,6 +17,8 @@ const {
   canonical = 'https://specscore.md/',
   lang = 'en',
 } = Astro.props;
+
+const currentLocale = localeFromPath(Astro.url.pathname);
 ---
 
 <!doctype html>
@@ -70,6 +74,7 @@ const {
   </head>
   <body>
     <slot />
+    <FooterLanguages currentLocale={currentLocale} />
     <PageFeedback />
   </body>
 </html>

@@ -1,12 +1,15 @@
 ---
-// Footer language switcher — horizontal tabs strip.
+// Page-bottom language switcher — full-width panel of horizontal tabs.
+// Rendered by BaseLayout just above PageFeedback so it sits between the
+// SiteFooter columns and the page-feedback strip as its own band.
+//
 // Mirrors the original header-tabs visual treatment (JetBrains Mono,
-// pale-ink default, green underline on active). Lives at the bottom
-// of the footer as the closing "international signal" strip.
+// pale-ink default, green underline on active) and is set apart from
+// the rest of the page by a full-width hairline rule on top.
 //
 // Semantics: <ul><li><a hreflang> so all 8 alternate-language URLs
 // are real DOM links (crawler-discoverable). The active locale is
-// passed in by the parent footer variant.
+// passed in by the layout.
 import { langs, localeHref, type LangCode } from '../lib/languages';
 
 interface Props {
@@ -16,19 +19,21 @@ const { currentLocale } = Astro.props;
 ---
 
 <nav class="footer-langs" aria-label="Language">
-  <ul class="footer-langs__list">
-    {langs.map((l) => (
-      <li>
-        <a
-          href={localeHref(l.code)}
-          hreflang={l.tag}
-          lang={l.tag}
-          class:list={['footer-langs__tab', l.code === currentLocale && 'is-active']}
-          aria-current={l.code === currentLocale ? 'page' : undefined}
-        >
-          {l.label}
-        </a>
-      </li>
-    ))}
-  </ul>
+  <div class="footer-langs__inner">
+    <ul class="footer-langs__list">
+      {langs.map((l) => (
+        <li>
+          <a
+            href={localeHref(l.code)}
+            hreflang={l.tag}
+            lang={l.tag}
+            class:list={['footer-langs__tab', l.code === currentLocale && 'is-active']}
+            aria-current={l.code === currentLocale ? 'page' : undefined}
+          >
+            {l.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
 </nav>

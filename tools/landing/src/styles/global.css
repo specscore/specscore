@@ -187,12 +187,18 @@ pre.terminal,
 .terminal .prompt { color: var(--pale-ink); user-select: none; }
 .terminal .dim { color: var(--mid-ink); }
 
-/* --- Footer language tabs --- */
+/* --- Footer language tabs ---
+   Full-width panel between SiteFooter and PageFeedback. The outer
+   element carries the edge-to-edge hairline + cream background; the
+   inner wrapper constrains tabs to the content max-width. */
 .footer-langs {
+  background: var(--cream);
+  border-top: 1px solid var(--hairline);
+}
+.footer-langs__inner {
   max-width: var(--max-content);
   margin: 0 auto;
-  padding: var(--space-3) var(--space-3) 0;
-  border-top: 1px solid var(--hairline);
+  padding: var(--space-3) var(--space-3);
 }
 .footer-langs__list {
   list-style: none;

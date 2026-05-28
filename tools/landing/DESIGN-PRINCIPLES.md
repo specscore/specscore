@@ -39,14 +39,14 @@ Use `Español`, `日本語`, `Українська`. Never country flags. Reason
 
 Full rationale at the top of [`src/lib/languages.ts`](src/lib/languages.ts).
 
-### 2. Header is a dropdown, footer is tabs
+### 2. Header is a dropdown, page-bottom is a tabs panel
 
 Two surfaces, two different jobs:
 
 - **Header** — compact dropdown. Header real estate is precious; switching languages is occasional. The trigger shows the current language; the 8 alternates are in a dropdown opened on hover/focus.
-- **Footer** — full-width horizontal tabs strip. The tabs visually broadcast that the site is internationalized — the signal the old header tabs used to provide. JetBrains Mono labels, hairline-rule above, green underline on the active locale.
+- **Page bottom** — full-width tabs panel, rendered by `BaseLayout` between `SiteFooter` and `PageFeedback`. Cream background, full-bleed hairline above, JetBrains Mono labels, green underline on active. The panel visually broadcasts that the site is internationalized — the signal the old header tabs used to provide — and sits as its own band, set apart from the columns above and the feedback strip below.
 
-Both surfaces render their 8 `<a hreflang>` links in real DOM (see § 8). Don't replace the footer tabs with a column / vertical list — the tabs are intentional. Don't expand the header into tabs — the dropdown is intentional.
+Both surfaces render their 8 `<a hreflang>` links in real DOM (see § 8). Don't fold the tabs back into `SiteFooter` columns — they were tried as a column and the panel reads better. Don't expand the header into tabs — the dropdown is intentional.
 
 ### 3. Hero GitHub line lives on its own row above the CTA buttons
 
