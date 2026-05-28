@@ -292,6 +292,10 @@ pre.terminal,
 }
 @media (max-width: 720px) {
   .plugin-grid { grid-template-columns: 1fr; }
+  /* Small screens: hide the "Recommended" badge and the "github.com/"
+     hostname prefix; the icon next to the repo path is enough indication. */
+  .plugin-card__badge { display: none; }
+  .plugin-card__repo-host { display: none; }
 }
 
 /* --- /ai/ plugin-card primary/recommended treatment ---
