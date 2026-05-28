@@ -187,6 +187,99 @@ pre.terminal,
 .terminal .prompt { color: var(--pale-ink); user-select: none; }
 .terminal .dim { color: var(--mid-ink); }
 
+/* --- /ai/ plugin-card grid + cards ---
+   Shared across all 8 locale variants of /ai/. Moved here from each
+   page's <style> block per DESIGN-PRINCIPLES.md §9; the per-page
+   scoped rules also beat the --primary border override on specificity,
+   so consolidation in global also fixes that. */
+.plugin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+.plugin-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  padding: var(--space-4);
+}
+.plugin-card__name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: var(--space-1);
+}
+.plugin-card__name a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 120ms ease;
+}
+.plugin-card__name a:hover {
+  border-bottom-color: var(--ink);
+}
+.plugin-card__name a:focus-visible {
+  outline: 2px solid var(--ink-blue);
+  outline-offset: 2px;
+}
+.plugin-card__repo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-code);
+  font-size: var(--fs-small);
+  color: var(--pale-ink);
+  margin-bottom: var(--space-3);
+}
+.plugin-card__repo svg {
+  flex-shrink: 0;
+  color: var(--pale-ink);
+}
+.plugin-card__desc {
+  color: var(--mid-ink);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  margin-bottom: var(--space-3);
+}
+.plugin-card__desc code {
+  font-size: 0.9em;
+  background: var(--cream);
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
+}
+.plugin-card__audience {
+  font-size: var(--fs-small);
+  color: var(--pale-ink);
+  font-style: italic;
+  margin-bottom: var(--space-3);
+}
+.plugin-card__pitch {
+  font-size: var(--fs-body);
+  font-weight: 700;
+  color: var(--validator-green);
+  margin-bottom: var(--space-3);
+}
+.plugin-card__cta {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--validator-green);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 120ms ease;
+}
+.plugin-card__cta:hover {
+  border-bottom-color: var(--validator-green);
+}
+.plugin-card__cta:focus-visible {
+  outline: 2px solid var(--ink-blue);
+  outline-offset: 2px;
+}
+@media (max-width: 720px) {
+  .plugin-grid { grid-template-columns: 1fr; }
+}
+
 /* --- /ai/ plugin-card primary/recommended treatment ---
    Used on the SpecStudio Skills card. Restrained: validator-green
    border replaces the hairline; small label pinned at the top of
@@ -194,24 +287,25 @@ pre.terminal,
    editorial brand. */
 .plugin-card--primary {
   border-color: var(--validator-green);
-  position: relative;
-}
-.plugin-card--primary:hover {
-  border-color: var(--validator-green);
 }
 .plugin-card__badge {
-  display: inline-block;
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
   font-family: var(--font-display);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--validator-green);
-  margin-bottom: var(--space-2);
 }
-.plugin-card__lead {
-  font-weight: 600;
-  color: var(--ink);
+
+/* --- /ai/ page community note ---
+   Below the plugin grid; mentions community plugins. Shared. */
+.community-note {
+  margin-top: var(--space-5);
+  font-size: var(--fs-small);
+  color: var(--mid-ink);
 }
 
 /* --- Footer language tabs ---
