@@ -235,6 +235,20 @@ pre.terminal,
   flex-shrink: 0;
   color: var(--pale-ink);
 }
+.plugin-card__repo a {
+  color: inherit;             /* stay dim grey (pale-ink) */
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+.plugin-card__repo a:hover {
+  color: var(--mid-ink);      /* darken slightly on hover so it reads as a link */
+  border-bottom-color: currentColor;
+}
+.plugin-card__repo a:focus-visible {
+  outline: 2px solid var(--ink-blue);
+  outline-offset: 2px;
+}
 .plugin-card__desc {
   color: var(--mid-ink);
   font-size: var(--fs-body);
