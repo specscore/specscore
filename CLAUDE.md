@@ -14,3 +14,5 @@ The specscore.md website has **two separate rendering systems**. Any change to u
 2. **Docs site** (`tools/site-generator/`) — Node.js static builder. Docs pages are Markdown rendered via `build.js`. `tools/site-generator/landing.html` is the legacy/fallback home page for the docs build only. Output goes to `public/`.
 
 **When editing landing page content**: update the Astro components in `tools/landing/src/components/` — all 8 variants (base + 7 translations). Also update `tools/site-generator/landing.html` if the docs site build uses it.
+
+**Before changing any landing component**: read [`tools/landing/DESIGN-PRINCIPLES.md`](tools/landing/DESIGN-PRINCIPLES.md). It documents locked-in decisions (no flag emoji, header-dropdown / footer-tabs, hero structure) and code conventions (per-locale variants + shared modules, crawler-discoverable links, shared styles in global.css). Don't re-litigate decisions captured there without new evidence.

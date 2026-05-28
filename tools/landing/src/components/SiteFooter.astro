@@ -1,7 +1,6 @@
 ---
-// Site footer — four columns (brand + Product + Community + Languages).
-// The Languages column is rendered by the shared FooterLanguages component
-// so the per-locale variants don't each hardcode the list of 8 links.
+// Site footer — three columns (brand + Product + Community) above a
+// full-width language tabs strip. FooterLanguages renders the tabs.
 import FooterLanguages from './FooterLanguages.astro';
 ---
 
@@ -40,9 +39,9 @@ import FooterLanguages from './FooterLanguages.astro';
       </ul>
     </div>
 
-    <FooterLanguages currentLocale="en" />
-
   </div>
+
+  <FooterLanguages currentLocale="en" />
 </footer>
 
 <style>
@@ -54,7 +53,7 @@ import FooterLanguages from './FooterLanguages.astro';
     max-width: var(--max-content);
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
     gap: var(--space-4);
   }
   .site-footer__brand .wordmark {

@@ -42,6 +42,10 @@ Notes for whoever wires this up:
 3. **`/hero.png` and `/favicon.svg`** live in `tools/landing/public/` and are copied to the root of `dist/` by Astro. They land at `public/hero.png` and `public/favicon.svg` after the merge step.
 4. **Firebase deploy artifact.** The Firebase pipeline deploys the pre-built committed `public/`, so the landing build needs to run as part of CI (or the built files need to be committed). Either approach works.
 
+## Design conventions
+
+Before editing any component here, read [`DESIGN-PRINCIPLES.md`](DESIGN-PRINCIPLES.md) (this directory). It captures locked-in decisions (no flag emoji, header-dropdown / footer-tabs, hero structure) and code conventions (per-locale variants + shared modules in `src/lib/`, crawler-discoverable hreflang links, shared styles in `global.css`).
+
 ## Brand source of truth
 
 This page implements brand specs that live in the **marketing repo**, not in this repo. When in doubt about visual or content choices, the marketing repo wins. Do not duplicate brand specs here.

@@ -1,6 +1,26 @@
 // Single source of truth for the locales the site supports.
 // Consumed by SiteHeader (dropdown switcher) and FooterLanguages
 // (footer inventory). Add a locale here once; both surfaces update.
+//
+// Why labels and not flag emoji
+// -----------------------------
+// Flag emoji were considered and rejected — do not reintroduce them
+// without rereading this rationale. See also: tools/landing/DESIGN-PRINCIPLES.md.
+//
+// 1. Flags ≠ languages. Spanish is spoken in 20+ countries (Spain or
+//    Mexico flag?). Portuguese: Portugal or Brazil? Chinese: PRC or
+//    Taiwan? Korean: which Korea? English: US/UK/Canada/Australia?
+//    Russian: putting a Russian flag erases the millions of Russian
+//    speakers outside Russia — and a Russian-flag-above-Ukrainian-flag
+//    pairing is politically loaded in this decade.
+// 2. OS rendering inconsistent. Windows does not render flag emoji at
+//    all — visitors there see the regional-indicator letters in a box.
+//    Cannot be fixed from CSS.
+// 3. Accessibility. Screen readers announce flag emoji unpredictably
+//    across NVDA/JAWS/VoiceOver; the language name reads cleanly.
+//
+// Native-language labels ("Español", "日本語", "Українська") do the
+// entire job without the failure modes above.
 
 export type LangCode =
   | 'en' | 'es' | 'pt-br' | 'ru' | 'uk' | 'ja' | 'zh-cn' | 'ko';

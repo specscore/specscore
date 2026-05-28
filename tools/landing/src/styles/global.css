@@ -187,10 +187,42 @@ pre.terminal,
 .terminal .prompt { color: var(--pale-ink); user-select: none; }
 .terminal .dim { color: var(--mid-ink); }
 
-/* --- Footer language list active state --- */
-.site-footer__list a.is-active {
+/* --- Footer language tabs --- */
+.footer-langs {
+  max-width: var(--max-content);
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-3) 0;
+  border-top: 1px solid var(--hairline);
+}
+.footer-langs__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  justify-content: center;
+}
+.footer-langs__tab {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  letter-spacing: 0.01em;
+  color: var(--pale-ink);
+  padding: 0.3rem 0.55rem;
+  border-bottom: 2px solid transparent;
+  transition: color 120ms ease, border-color 160ms ease;
+}
+.footer-langs__tab:hover { color: var(--mid-ink); }
+.footer-langs__tab:focus-visible {
+  outline: 2px solid var(--ink-blue);
+  outline-offset: -2px;
+}
+.footer-langs__tab.is-active {
+  color: var(--ink);
+  border-bottom-color: var(--validator-green);
   font-weight: 600;
-  border-bottom-color: var(--ink);
 }
 
 /* --- Hero GitHub line --- */
