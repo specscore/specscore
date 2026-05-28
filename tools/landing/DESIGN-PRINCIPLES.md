@@ -172,6 +172,47 @@ If a decision belongs in marketing (visual/brand/copy), it goes there. If it's a
 
 ---
 
+## Known debt
+
+### CSS duplication across product pages — pending consolidation per § 9
+
+Several CSS classes that govern shared visual primitives are currently duplicated across page files instead of living in `global.css` as § 9 requires. This is real tech debt: every visual tweak has to land in 8 or 16 places, and the duplication has already caused one specificity bug (the validator-green border override on `.plugin-card--primary` was silently beaten by per-page scoped rules until the rules were consolidated into `global.css`).
+
+**Inventory of shared-but-duplicated CSS:**
+
+| Class family | Where duplicated | Count |
+|---|---|---|
+| `.hero`, `.hero__inner`, `.hero__copy`, `.hero__headline`, `.hero__sub`, `.hero__cta`, `.hero__art` | 8 `/cli/` pages | ~8× |
+| `.section-title`, `.section-intro`, `.section-intro code`, `.prose-p` | All `/cli/` + `/ai/` pages | ~16× |
+| `.qs-tabs`, `.qs-tab`, `.qs-panel`, `.qs-more` (install tabs) | 8 `/cli/` pages | ~8× |
+| `.features-section`, `.features-grid`, `.feature-card*` | 8 `/cli/` pages | ~8× |
+| `.agent-links` | 8 `/cli/` pages | ~8× |
+| `.final-cta`, `.final-cta__inner`, `.final-cta__title`, `.final-cta__buttons` (product-page variant — separate from the `FinalCta` landing component) | 8 `/cli/` pages | ~8× |
+| `.page-footer`, `.page-footer__inner`, `.page-footer__col`, `.page-footer__brand`, `.page-footer__tagline`, `.page-footer__copyright`, `.page-footer__heading`, `.page-footer__list` | 8 `/cli/` + 8 `/ai/` pages | ~16× |
+| `@keyframes` (`fade-in`, `hero-copy-in`, `hero-art-in`) | 8 `/cli/` pages each | ~24× combined |
+
+Conservatively, **~80+ lines of CSS duplicated across ~16–24 files.**
+
+**Three-pass plan, smallest risk first:**
+
+1. **Pass 1 — `.page-footer*`** (highest duplication, lowest visual-risk).
+   - Move all `.page-footer*` to `global.css`. Strip from 16 files (`/cli/` + `/ai/`).
+   - Expected visual diff: zero.
+2. **Pass 2 — Section primitives + product-page Final CTA.**
+   - `.section-title`, `.section-intro`, `.prose-p`, product-page `.final-cta*` → `global.css`.
+   - Watch for collision with the landing `FinalCta` component; consolidate naming if both can share one rule set.
+   - Strip from ~16 files.
+3. **Pass 3 — Hero shared shape + features grid + install tabs.**
+   - `.hero` + variants → `global.css`. Per-page overrides stay scoped if a page legitimately differs.
+   - `.features-*`, `.qs-*`, `.agent-links`, animation keyframes → `global.css`.
+   - Strip from ~8 files.
+
+**Why we haven't done it yet.** Each pass is a cross-cutting refactor that needs visual verification per page per locale; mixing it into in-flight feature commits makes regressions hard to spot. Schedule it as its own dedicated session with before/after screenshots per page.
+
+**When you pick it up:** start with Pass 1. After it lands cleanly with no visual diff, the rest become incremental.
+
+---
+
 ## Open questions
 
 None at this time.
