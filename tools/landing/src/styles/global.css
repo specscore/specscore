@@ -187,6 +187,33 @@ pre.terminal,
 .terminal .prompt { color: var(--pale-ink); user-select: none; }
 .terminal .dim { color: var(--mid-ink); }
 
+/* --- /ai/ plugin-card primary/recommended treatment ---
+   Used on the SpecStudio Skills card. Restrained: validator-green
+   border replaces the hairline; small label pinned at the top of
+   the card. No shadow / no background tint — fits the paper-ink
+   editorial brand. */
+.plugin-card--primary {
+  border-color: var(--validator-green);
+  position: relative;
+}
+.plugin-card--primary:hover {
+  border-color: var(--validator-green);
+}
+.plugin-card__badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--validator-green);
+  margin-bottom: var(--space-2);
+}
+.plugin-card__lead {
+  font-weight: 600;
+  color: var(--ink);
+}
+
 /* --- Footer language tabs ---
    Full-width panel between SiteFooter and PageFeedback. The outer
    element carries the edge-to-edge hairline + cream background; the
