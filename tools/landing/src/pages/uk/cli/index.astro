@@ -4,6 +4,7 @@
 // Частина стандартного набору (безкоштовно назавжди, MIT).
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../components/SiteHeader.astro';
+import HeroGitHubLink from '../../../components/HeroGitHubLink.astro';
 ---
 
 <BaseLayout
@@ -27,15 +28,9 @@ import SiteHeader from '../../../components/SiteHeader.astro';
             з командного рядка. Запускайте локально, вбудовуйте в CI
             або дайте вашому AI-агенту викликати його. Відкритий код, без акаунта, без телеметрії.
           </p>
+          <HeroGitHubLink repo="specscore/specscore-cli" label="Відкритий код на GitHub" />
           <div class="hero__cta">
             <a href="/uk/cli/install/" class="btn btn--primary">Встановити</a>
-            <a
-              href="https://github.com/specscore/specscore-cli"
-              rel="noopener"
-              class="btn btn--secondary"
-            >
-              GitHub
-            </a>
           </div>        </div>
 
         <div

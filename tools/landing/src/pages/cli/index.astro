@@ -4,6 +4,7 @@
 // Part of the standard family (free forever, MIT).
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
+import HeroGitHubLink from '../../components/HeroGitHubLink.astro';
 ---
 
 <BaseLayout
@@ -29,15 +30,9 @@ import SiteHeader from '../../components/SiteHeader.astro';
             criteria from the command line. Run it locally, wire it into CI,
             or let your AI agent call it. Open source, no account, no telemetry.
           </p>
+          <HeroGitHubLink repo="specscore/specscore-cli" label="Open-source on GitHub" />
           <div class="hero__cta">
             <a href="/cli/install/" class="btn btn--primary">Install</a>
-            <a
-              href="https://github.com/specscore/specscore-cli"
-              rel="noopener"
-              class="btn btn--secondary"
-            >
-              GitHub
-            </a>
           </div>
         </div>
 

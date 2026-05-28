@@ -56,38 +56,38 @@ const aiSkillsLabel: Record<string, string> = {
       <a href={localeHref(locale, '/cli/')} class="site-header__link">CLI</a>
       <a href={localeHref(locale, '/ai/')} class="site-header__link">{aiSkillsLabel[locale]}</a>
       <a href="https://github.com/specscore/specscore" class="site-header__link">GitHub</a>
-
-      <div class="lang-switcher">
-        <button
-          type="button"
-          class="lang-switcher__trigger"
-          aria-haspopup="true"
-          aria-expanded="false"
-          lang={currentLang.tag}
-        >
-          <span>{currentLang.label}</span>
-          <svg class="lang-switcher__caret" viewBox="0 0 10 6" width="10" height="6" aria-hidden="true">
-            <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <ul class="lang-switcher__menu" role="menu" aria-label="Language">
-          {langs.map(({ code, label, tag }) => (
-            <li role="none">
-              <a
-                href={localeHref(code, route)}
-                hreflang={tag}
-                lang={tag}
-                role="menuitem"
-                class:list={['lang-switcher__item', code === locale && 'is-active']}
-                aria-current={code === locale ? 'page' : undefined}
-              >
-                {label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
     </nav>
+
+    <div class="lang-switcher">
+      <button
+        type="button"
+        class="lang-switcher__trigger"
+        aria-haspopup="true"
+        aria-expanded="false"
+        lang={currentLang.tag}
+      >
+        <span>{currentLang.label}</span>
+        <svg class="lang-switcher__caret" viewBox="0 0 10 6" width="10" height="6" aria-hidden="true">
+          <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <ul class="lang-switcher__menu" role="menu" aria-label="Language">
+        {langs.map(({ code, label, tag }) => (
+          <li role="none">
+            <a
+              href={localeHref(code, route)}
+              hreflang={tag}
+              lang={tag}
+              role="menuitem"
+              class:list={['lang-switcher__item', code === locale && 'is-active']}
+              aria-current={code === locale ? 'page' : undefined}
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
 </header>
 
@@ -218,13 +218,25 @@ const aiSkillsLabel: Record<string, string> = {
   }
 
   @media (max-width: 720px) {
+    /* Wordmark + language switcher stay on row 1; nav drops to row 2.
+       Achieved by wrapping the flex container and forcing the nav to
+       a 100% basis with explicit order. */
     .site-header__inner {
+      flex-wrap: wrap;
+      row-gap: 0.5rem;
       gap: var(--space-2);
       padding: 0.625rem var(--space-2);
     }
-    .site-header__nav { gap: 0.15rem; }
+    .site-header__nav {
+      order: 2;
+      flex-basis: 100%;
+      justify-content: flex-start;
+      gap: 0.15rem;
+    }
     .site-header__link { padding: 0.3rem 0.45rem; font-size: 0.82rem; }
-    .lang-switcher { margin-left: 0.5rem; }
+    .lang-switcher {
+      margin-left: auto;  /* push to right edge of row 1 */
+    }
     .lang-switcher__trigger { padding: 0.25rem 0.45rem; font-size: 0.75rem; }
     .lang-switcher__menu { right: -4px; }
   }

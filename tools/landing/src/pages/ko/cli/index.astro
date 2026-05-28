@@ -3,6 +3,7 @@
 // Open-source linter for SpecScore specifications.
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../components/SiteHeader.astro';
+import HeroGitHubLink from '../../../components/HeroGitHubLink.astro';
 ---
 
 <BaseLayout
@@ -26,15 +27,9 @@ import SiteHeader from '../../../components/SiteHeader.astro';
             검증합니다. 로컬에서 실행하고, CI에 통합하고, AI 에이전트가
             호출하도록 하세요. 오픈소스, 계정 불필요, 텔레메트리 없음.
           </p>
+          <HeroGitHubLink repo="specscore/specscore-cli" label="GitHub 오픈소스" />
           <div class="hero__cta">
             <a href="/ko/cli/install/" class="btn btn--primary">설치하기</a>
-            <a
-              href="https://github.com/specscore/specscore-cli"
-              rel="noopener"
-              class="btn btn--secondary"
-            >
-              GitHub
-            </a>
           </div>        </div>
 
         <div
