@@ -5,3 +5,4 @@ tools/site-generator/chrome/
 public/
 node_modules/
 .superpowers/
+.astro/
