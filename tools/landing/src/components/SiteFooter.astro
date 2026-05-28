@@ -1,6 +1,8 @@
 ---
-// Site footer — three columns (brand + Product + Community).
-// No persona links (out of new IA scope; existing /for/* pages stay where they are).
+// Site footer — four columns (brand + Product + Community + Languages).
+// The Languages column is rendered by the shared FooterLanguages component
+// so the per-locale variants don't each hardcode the list of 8 links.
+import FooterLanguages from './FooterLanguages.astro';
 ---
 
 <footer class="site-footer">
@@ -38,19 +40,7 @@
       </ul>
     </div>
 
-    <div class="site-footer__col">
-      <h4 class="site-footer__heading">Languages</h4>
-      <ul class="site-footer__list">
-        <li><a href="/" hreflang="en" lang="en" aria-current="page" class="is-active">English</a></li>
-        <li><a href="/es/" hreflang="es" lang="es">Español</a></li>
-        <li><a href="/pt-br/" hreflang="pt-BR" lang="pt-BR">Português (BR)</a></li>
-        <li><a href="/ru/" hreflang="ru" lang="ru">Русский</a></li>
-        <li><a href="/uk/" hreflang="uk" lang="uk">Українська</a></li>
-        <li><a href="/ja/" hreflang="ja" lang="ja">日本語</a></li>
-        <li><a href="/zh-cn/" hreflang="zh-CN" lang="zh-CN">中文</a></li>
-        <li><a href="/ko/" hreflang="ko" lang="ko">한국어</a></li>
-      </ul>
-    </div>
+    <FooterLanguages currentLocale="en" />
 
   </div>
 </footer>

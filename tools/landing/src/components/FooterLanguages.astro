@@ -1,0 +1,46 @@
+---
+// Footer column listing all supported languages.
+// Renders the canonical <ul><li><a hreflang> inventory consumed by both
+// users (visual signal that the site is internationalized) and crawlers
+// (alternate-language URL discovery).
+//
+// The active language is passed in by the parent footer variant.
+// Headings are localized per-locale and looked up via the same prop.
+import { langs, localeHref, type LangCode } from '../lib/languages';
+
+interface Props {
+  currentLocale: LangCode;
+}
+const { currentLocale } = Astro.props;
+
+// Localized heading for the "Languages" footer column.
+const headings: Record<LangCode, string> = {
+  'en':    'Languages',
+  'es':    'Idiomas',
+  'pt-br': 'Idiomas',
+  'ru':    'Языки',
+  'uk':    'Мови',
+  'ja':    '言語',
+  'zh-cn': '语言',
+  'ko':    '언어',
+};
+---
+
+<div class="site-footer__col">
+  <h4 class="site-footer__heading">{headings[currentLocale]}</h4>
+  <ul class="site-footer__list">
+    {langs.map((l) => (
+      <li>
+        <a
+          href={localeHref(l.code)}
+          hreflang={l.tag}
+          lang={l.tag}
+          class:list={[l.code === currentLocale && 'is-active']}
+          aria-current={l.code === currentLocale ? 'page' : undefined}
+        >
+          {l.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>

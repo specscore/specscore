@@ -1,39 +1,14 @@
 ---
-// Site header — wordmark + language dropdown + Docs + GitHub.
-// Language switcher uses Astro.url.pathname to detect current locale.
+// Site header — wordmark + Docs + GitHub + language dropdown.
+// Detects current locale from Astro.url.pathname.
 // Dropdown is pure-CSS via :focus-within and :hover; the <ul><li><a>
 // list stays in the DOM for crawler discovery of alternate-language URLs.
+import { langs, localeFromPath, routeFromPath, localeHref } from '../lib/languages';
+
 const path = Astro.url.pathname;
-const locale =
-  path.startsWith('/ru')    ? 'ru'    :
-  path.startsWith('/uk')    ? 'uk'    :
-  path.startsWith('/es')    ? 'es'    :
-  path.startsWith('/pt-br') ? 'pt-br' :
-  path.startsWith('/ja')    ? 'ja'    :
-  path.startsWith('/zh-cn') ? 'zh-cn' :
-  path.startsWith('/ko')    ? 'ko'    :
-                              'en';
-const wordmarkHref = locale === 'en' ? '/' : `/${locale}/`;
-
-// Strip the current locale prefix to get the route portion of the path.
-const localePattern = /^\/(es|pt-br|ru|uk|ja|zh-cn|ko)(\/|$)/;
-const route = locale === 'en' ? path : path.replace(localePattern, '/');
-
-function langHref(code: string): string {
-  return code === 'en' ? route : `/${code}${route}`;
-}
-
-// Order: English first, then alphabetical by URL code.
-const langs = [
-  { code: 'en',    label: 'English',         tag: 'en'    },
-  { code: 'es',    label: 'Español',         tag: 'es'    },
-  { code: 'pt-br', label: 'Português (BR)',  tag: 'pt-BR' },
-  { code: 'ru',    label: 'Русский',         tag: 'ru'    },
-  { code: 'uk',    label: 'Українська',      tag: 'uk'    },
-  { code: 'ja',    label: '日本語',           tag: 'ja'    },
-  { code: 'zh-cn', label: '中文',             tag: 'zh-CN' },
-  { code: 'ko',    label: '한국어',            tag: 'ko'    },
-];
+const locale = localeFromPath(path);
+const route = routeFromPath(path);
+const wordmarkHref = localeHref(locale, '/');
 const currentLang = langs.find(l => l.code === locale)!;
 
 // Docs link — points to docs site. Currently English-only; locale-aware
@@ -74,7 +49,7 @@ const docsLabel: Record<string, string> =
           {langs.map(({ code, label, tag }) => (
             <li role="none">
               <a
-                href={langHref(code)}
+                href={localeHref(code, route)}
                 hreflang={tag}
                 lang={tag}
                 role="menuitem"
