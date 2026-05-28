@@ -6,3 +6,4 @@ public/
 node_modules/
 .superpowers/
 .astro/
+.specscore/
