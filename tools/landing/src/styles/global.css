@@ -433,6 +433,9 @@ pre.terminal.terminal--window::after,
   font-size: var(--fs-small);
   font-weight: 500;
   color: var(--mid-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 .hero__github-link:hover { color: var(--ink); }
 .hero__github-link svg { flex-shrink: 0; }
