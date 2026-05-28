@@ -14,26 +14,45 @@ import SiteHeader from '../../../components/SiteHeader.astro';
   <SiteHeader />
 
   <main>
-    {/* ── Hero ── */}
+    {/* ── Hero: copy left, terminal demo right ── */}
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__inner">
-        <h1 id="hero-title" class="hero__headline">
-          像检查代码一样<br />检查你的规格说明。
-        </h1>
-        <p class="hero__sub">
-          SpecScore CLI 从命令行验证功能、需求和验收标准。
-          在本地运行，集成到 CI，或让你的 AI 代理调用它。
-          开源，无需账户，无遥测。
-        </p>
-        <div class="hero__cta">
-          <a href="/zh-cn/cli/install/" class="btn btn--primary">安装</a>
-          <a
-            href="https://github.com/specscore/specscore-cli"
-            rel="noopener"
-            class="btn btn--secondary"
-          >
-            GitHub
-          </a>
+        <div class="hero__copy">          <h1 id="hero-title" class="hero__headline">
+            像检查代码一样<br />检查你的规格说明。
+          </h1>
+          <p class="hero__sub">
+            SpecScore CLI 从命令行验证功能、需求和验收标准。
+            在本地运行，集成到 CI，或让你的 AI 代理调用它。
+            开源，无需账户，无遥测。
+          </p>
+          <div class="hero__cta">
+            <a href="/zh-cn/cli/install/" class="btn btn--primary">安装</a>
+            <a
+              href="https://github.com/specscore/specscore-cli"
+              rel="noopener"
+              class="btn btn--secondary"
+            >
+              GitHub
+            </a>
+          </div>        </div>
+
+        <div
+          class="hero__art"
+          role="img"
+          aria-label="specscore lint 的终端输出：R1 和 R2 通过（绿色对勾），R3 未通过（红色叉号）并附有错误信息。"
+        >
+<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+
+  checkout/apply-discount.md
+    <span class="mark-pass">✓</span> R1  Single-code limit
+    <span class="mark-pass">✓</span> R2  Code validity
+    <span class="mark-fail">✗</span> R3  Discount application
+         <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
+                  <span class="dim">expected:</span> concrete tie-break behavior, or reference to a defined rule
+                  <span class="dim">fix:</span>      specify "higher discount wins; if tied, site-wide promotion wins"
+
+  <span class="dim">1 of 3 requirements failing</span>
+  <span class="dim">exit 1</span></pre>
         </div>
       </div>
     </section>
@@ -62,36 +81,6 @@ import SiteHeader from '../../../components/SiteHeader.astro';
         <p class="qs-more">
           <a class="xref" href="/zh-cn/cli/install/">所有安装方式 →</a>
         </p>
-      </div>
-    </section>
-
-    {/* ── 检查器演示 ── */}
-    <section class="section" aria-labelledby="demo-title">
-      <div class="section-inner">
-        <h2 id="demo-title" class="section-title">运行代码检查器。</h2>
-        <p class="section-intro">
-          对任何规格目录运行 <code>specscore lint</code>。
-          绿色对勾表示通过，红色叉号表示错误——并附有具体的修复建议。
-        </p>
-
-        <div
-          class="demo-terminal"
-          role="img"
-          aria-label="specscore lint 的终端输出：R1 和 R2 通过（绿色对勾），R3 未通过（红色叉号）并附有错误信息。"
-        >
-<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-
-  checkout/apply-discount.md
-    <span class="mark-pass">✓</span> R1  Single-code limit
-    <span class="mark-pass">✓</span> R2  Code validity
-    <span class="mark-fail">✗</span> R3  Discount application
-         <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
-                  <span class="dim">expected:</span> concrete tie-break behavior, or reference to a defined rule
-                  <span class="dim">fix:</span>      specify "higher discount wins; if tied, site-wide promotion wins"
-
-  <span class="dim">1 of 3 requirements failing</span>
-  <span class="dim">exit 1</span></pre>
-        </div>
       </div>
     </section>
 
@@ -228,15 +217,23 @@ import SiteHeader from '../../../components/SiteHeader.astro';
 </BaseLayout>
 
 <style>
-  /* ── Hero ── */
+  /* ── Hero: two-column on desktop (copy left, terminal right),
+        stacked on mobile. Mirrors the landing hero's rhythm. ── */
   .hero {
-    padding: var(--space-7) var(--space-3) var(--space-6);
+    padding: var(--space-6) var(--space-3) var(--space-7);
     background: var(--cream);
+    overflow: hidden;
   }
   .hero__inner {
-    max-width: var(--max-prose);
+    max-width: var(--max-content);
     margin: 0 auto;
-    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+    display: grid;
+    grid-template-columns: 45fr 55fr;
+    gap: var(--space-6);
+    align-items: center;
+  }
+  .hero__copy {
+    animation: hero-copy-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 280ms;
   }
   .hero__headline {
     font-size: var(--fs-hero);
@@ -250,16 +247,40 @@ import SiteHeader from '../../../components/SiteHeader.astro';
     color: var(--mid-ink);
     margin-bottom: var(--space-4);
     line-height: 1.55;
+    max-width: 42ch;
   }
   .hero__cta {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
   }
+  .hero__art {
+    animation: hero-art-in 700ms cubic-bezier(0.22, 0.61, 0.36, 1) both 100ms;
+    min-width: 0;
+  }
+  .hero__art pre.terminal {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.65;
+  }
 
-  @keyframes fade-in {
-    from { opacity: 0; transform: translateY(10px); }
+  @keyframes hero-copy-in {
+    from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes hero-art-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 860px) {
+    .hero { padding: var(--space-5) var(--space-3) var(--space-6); }
+    .hero__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    .hero__copy { order: 1; }
+    .hero__art  { order: 2; }
   }
 
   /* ── Section titles ── */
@@ -318,11 +339,6 @@ import SiteHeader from '../../../components/SiteHeader.astro';
     margin-top: var(--space-3);
     font-size: var(--fs-small);
     color: var(--mid-ink);
-  }
-
-  /* ── Linter demo ── */
-  .demo-terminal {
-    margin-bottom: var(--space-3);
   }
 
   /* ── Features grid ── */

@@ -168,24 +168,28 @@ main > .section + .section {
   color: var(--ink);
 }
 
-/* --- Terminal blocks --- */
+/* --- Terminal blocks ---
+   Dark surface so terminals read as the tool layer, not the doc layer.
+   Background is ink; text is cream (warm light, on-brand). Prompt and
+   .dim use cream-with-opacity so they scale together if either base
+   color changes. Mark colors (green/red) stay saturated to pop on black. */
 pre.terminal,
 .terminal {
-  background: var(--surface);
-  border: 1px solid var(--hairline);
+  background: var(--ink);
+  border: 1px solid var(--ink);
   padding: var(--space-3);
   font-family: var(--font-code);
   font-size: 0.85rem;
   line-height: 1.7;
-  color: var(--ink);
+  color: var(--cream);
   overflow-x: auto;
   margin: 0;
   white-space: pre;
 }
 .terminal .mark-pass { color: var(--validator-green); font-weight: 700; }
 .terminal .mark-fail { color: var(--mark-red); font-weight: 700; }
-.terminal .prompt { color: var(--pale-ink); user-select: none; }
-.terminal .dim { color: var(--mid-ink); }
+.terminal .prompt { color: rgba(246, 239, 220, 0.45); user-select: none; }
+.terminal .dim { color: rgba(246, 239, 220, 0.55); }
 
 /* --- /ai/ plugin-card grid + cards ---
    Shared across all 8 locale variants of /ai/. Moved here from each
