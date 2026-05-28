@@ -58,6 +58,32 @@ import SiteFooter from '../../components/SiteFooter.astro';
         </article>
 
         <article class="faq-item">
+          <h2 id="vs-superpowers" class="faq-item__q">
+            How are SpecStudio Skills different from Superpowers and agent-skills?
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              Similar in spirit. All three are skill libraries that guide AI
+              agents through ideate → specify → plan → implement. The
+              difference is mechanical, not philosophical.
+            </p>
+            <p>
+              <strong>SpecStudio Skills writes its artifacts in the SpecScore
+              format</strong> (a defined Markdown + YAML structure) and
+              dispatches the <code>specscore</code> CLI for queries, linting,
+              and status changes. Superpowers and agent-skills mostly read and
+              write files directly via skill prose.
+            </p>
+            <p>
+              Pick SpecStudio Skills when token consumption matters — the CLI
+              returns a structured answer to <em>"all open Features with
+              unresolved questions"</em> in one call, where a file-based skill
+              reads N documents to answer the same thing.
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
           <h2 id="why-cli" class="faq-item__q">
             Why a CLI — can I not just install skills?
           </h2>
