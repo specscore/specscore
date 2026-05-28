@@ -256,7 +256,7 @@ pre.terminal,
 .plugin-card__pitch {
   font-size: var(--fs-body);
   font-weight: 700;
-  color: var(--validator-green);
+  color: var(--ink);
   margin-bottom: var(--space-3);
 }
 .plugin-card__cta {
