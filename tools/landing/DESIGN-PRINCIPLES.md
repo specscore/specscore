@@ -57,15 +57,24 @@ The Hero CTAs (`Get AI skills for your agent`, `Install the CLI`) are tool-insta
 
 The `<div class="hero__github">` element is intentional. Don't fold it back into `.hero__cta`.
 
-### 4. Header stays minimal: `Docs · GitHub · [Lang ▾]`
+### 4. Header describes the site's shape: `Specifications · CLI · AI Skills · GitHub · [Lang ▾]`
 
-Don't add `AI`, `CLI`, or any other product-area link to the header without evidence. Reasoning:
+The header should advertise *what the site offers*, not be a residual list of "places that aren't the homepage's pitch." Earlier this rule was the opposite ("header stays minimal — two items"); that was wrong and has been corrected. The Hero CTA is "do this now"; the header nav is "here's what exists." They do different jobs and are not redundant.
 
-- Those destinations already have prominent Hero buttons; duplicating them in the nav dilutes the buttons.
-- The current nav reads as "meta destinations" (Docs = read what it is; GitHub = read the source). Mixing product-area links breaks that mental model.
-- Minimalism is part of the brand register.
+The four nav items (left → right = general → specific → external):
 
-If a new item is justified by data, prefer one that complements (e.g., `Why?` / Manifesto / About) over one that competes with the Hero (e.g., `Pricing`, `Solutions`).
+1. **Specifications** — the canonical content (what SpecScore IS). Links to `/specifications` on the docs site, English-only for now.
+2. **CLI** — the primary tool. Links to `/cli/` (locale-routed).
+3. **AI Skills** — wrappers around the CLI for AI coding agents. Links to `/ai/` (locale-routed), the hub that lists all available Skills.
+4. **GitHub** — open-source verification signal.
+
+Then the **language dropdown** sits at the far right with the smallest visual weight.
+
+Don't:
+- Hard-code the Hero/FinalCta CTAs at a *leaf* like `/ai/specstudio-skills/`. Point them at the hub (`/ai/`) so the page auto-scales when more Skills ship.
+- Mix product-area labels with marketing/category labels (e.g., adding "Pricing" or "Solutions"). The current four describe **technical surfaces** — keep that consistent.
+- Rename "AI Skills" to "AI Plugins" without re-reading § 11 below — the products on `/ai/` are literally named "Skills" (SpecStudio Skills, CLI Skills), and "Skills" matches Anthropic's official term ("Agent Skills") plus broad cross-ecosystem usage (Alexa Skills, Watson Skills). "Plugin" appears in prose/title for SEO, but the product term is "Skills."
+- Tie the `/ai/` page framing (title, h1, meta description) to a specific agent like "Claude Code." The page is the AI hub for *any* coding agent; community Skills for other agents may ship here later. Mention specific agents only in product cards where it's factually accurate.
 
 ### 5. No timeline claims about sibling projects
 

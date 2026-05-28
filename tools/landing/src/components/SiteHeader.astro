@@ -1,6 +1,15 @@
 ---
-// Site header — wordmark + Docs + GitHub + language dropdown.
-// Detects current locale from Astro.url.pathname.
+// Site header — wordmark + Specifications + CLI + AI Skills + GitHub
+// + language dropdown.
+//
+// The four nav items describe the shape of the site (what exists):
+//   Specifications → the open standard (lives on the docs site,
+//                    English-only URL — locale routing can be added
+//                    when docs get translated)
+//   CLI            → the primary tool (Astro page, locale-routed)
+//   AI Skills      → AI agent integrations (Astro hub, locale-routed)
+//   GitHub         → source-of-truth / open-source verification
+//
 // Dropdown is pure-CSS via :focus-within and :hover; the <ul><li><a>
 // list stays in the DOM for crawler discovery of alternate-language URLs.
 import { langs, localeFromPath, routeFromPath, localeHref } from '../lib/languages';
@@ -11,14 +20,22 @@ const route = routeFromPath(path);
 const wordmarkHref = localeHref(locale, '/');
 const currentLang = langs.find(l => l.code === locale)!;
 
-// Docs link — points to docs site. Currently English-only; locale-aware
-// path can be wired up later if docs get translated.
-const docsHref = 'https://specscore.md/docs';
+// Specifications lives on the docs site (custom Node generator), which
+// is currently English-only, so this URL doesn't get a locale prefix.
+const specsHref = 'https://specscore.md/specifications';
 
-// Localized labels for "Docs" link (chrome label only).
-const docsLabel: Record<string, string> =
-  { en: 'Docs', es: 'Docs', 'pt-br': 'Docs', ru: 'Документация',
-    uk: 'Документація', ja: 'ドキュメント', 'zh-cn': '文档', ko: '문서' };
+// Localized nav labels. CLI is kept as the universal acronym across all
+// locales (matches industry convention; no translation needed).
+const specsLabel: Record<string, string> = {
+  'en': 'Specifications', 'es': 'Especificaciones', 'pt-br': 'Especificações',
+  'ru': 'Спецификации',   'uk': 'Специфікації',
+  'ja': '仕様',            'zh-cn': '规范',           'ko': '명세',
+};
+const aiSkillsLabel: Record<string, string> = {
+  'en': 'AI Skills',  'es': 'Skills de IA', 'pt-br': 'Skills de IA',
+  'ru': 'AI-скиллы',  'uk': 'AI-скіли',
+  'ja': 'AIスキル',    'zh-cn': 'AI 技能',    'ko': 'AI 스킬',
+};
 ---
 
 <header class="site-header">
@@ -29,7 +46,9 @@ const docsLabel: Record<string, string> =
     </a>
 
     <nav class="site-header__nav" aria-label="Primary">
-      <a href={docsHref} class="site-header__link">{docsLabel[locale]}</a>
+      <a href={specsHref} class="site-header__link">{specsLabel[locale]}</a>
+      <a href={localeHref(locale, '/cli/')} class="site-header__link">CLI</a>
+      <a href={localeHref(locale, '/ai/')} class="site-header__link">{aiSkillsLabel[locale]}</a>
       <a href="https://github.com/specscore/specscore" class="site-header__link">GitHub</a>
 
       <div class="lang-switcher">
@@ -86,6 +105,8 @@ const docsLabel: Record<string, string> =
   .site-header__nav {
     display: inline-flex;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     gap: 0.25rem;
   }
 
