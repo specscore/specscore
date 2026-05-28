@@ -169,27 +169,71 @@ main > .section + .section {
 }
 
 /* --- Terminal blocks ---
-   Dark surface so terminals read as the tool layer, not the doc layer.
-   Background is ink; text is cream (warm light, on-brand). Prompt and
-   .dim use cream-with-opacity so they scale together if either base
-   color changes. Mark colors (green/red) stay saturated to pop on black. */
+   Base .terminal is the paper/doc register — surface background, hairline
+   border, ink text. Install snippets and other in-flow code blocks blend
+   with the surrounding sections this way.
+
+   .terminal--window is an opt-in modifier on hero + example terminals
+   that flips the block to the dark tool layer (ink background, cream
+   text) and adds a macOS-style title bar with three traffic-light dots,
+   drawn via pseudo-elements so no HTML changes are needed across the
+   8 locale variants. */
 pre.terminal,
 .terminal {
-  background: var(--ink);
-  border: 1px solid var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
   padding: var(--space-3);
   font-family: var(--font-code);
   font-size: 0.85rem;
   line-height: 1.7;
-  color: var(--cream);
+  color: var(--ink);
   overflow-x: auto;
   margin: 0;
   white-space: pre;
 }
 .terminal .mark-pass { color: var(--validator-green); font-weight: 700; }
 .terminal .mark-fail { color: var(--mark-red); font-weight: 700; }
-.terminal .prompt { color: rgba(246, 239, 220, 0.45); user-select: none; }
-.terminal .dim { color: rgba(246, 239, 220, 0.55); }
+.terminal .prompt { color: var(--pale-ink); user-select: none; }
+.terminal .dim { color: var(--mid-ink); }
+
+/* .terminal--window — opt-in dark window chrome for hero + example blocks. */
+pre.terminal.terminal--window,
+.terminal.terminal--window {
+  position: relative;
+  background: var(--ink);
+  border-color: rgba(246, 239, 220, 0.15);
+  border-radius: 6px;
+  color: var(--cream);
+  padding-top: calc(var(--space-3) + 28px);
+}
+.terminal--window .prompt { color: rgba(246, 239, 220, 0.65); }
+.terminal--window .dim { color: rgba(246, 239, 220, 0.72); }
+pre.terminal.terminal--window::before,
+.terminal.terminal--window::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: rgba(246, 239, 220, 0.06);
+  border-bottom: 1px solid rgba(246, 239, 220, 0.12);
+  border-radius: 5px 5px 0 0;
+}
+pre.terminal.terminal--window::after,
+.terminal.terminal--window::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff5f57;
+  box-shadow:
+    14px 0 0 #febc2e,
+    28px 0 0 #28c840;
+}
 
 /* --- /ai/ plugin-card grid + cards ---
    Shared across all 8 locale variants of /ai/. Moved here from each

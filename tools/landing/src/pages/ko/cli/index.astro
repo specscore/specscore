@@ -17,9 +17,10 @@ import SiteHeader from '../../../components/SiteHeader.astro';
     {/* ── 히어로 ── */}
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__inner">
-        <div class="hero__copy">          <h1 id="hero-title" class="hero__headline">
-            명세를 린트하세요,<br />코드를 린트하듯이.
-          </h1>
+        <h1 id="hero-title" class="hero__headline">
+          명세를 린트하세요,<br />코드를 린트하듯이.
+        </h1>
+        <div class="hero__copy">
           <p class="hero__sub">
             SpecScore CLI는 커맨드라인에서 기능, 요구사항, 인수 기준을
             검증합니다. 로컬에서 실행하고, CI에 통합하고, AI 에이전트가
@@ -41,7 +42,7 @@ import SiteHeader from '../../../components/SiteHeader.astro';
           role="img"
           aria-label="specscore lint 터미널 출력: R1과 R2는 녹색 체크로 통과, R3은 빨간색 표시와 오류 메시지로 실패."
         >
-<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+<pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
 
   checkout/apply-discount.md
     <span class="mark-pass">✓</span> R1  Single-code limit
@@ -228,8 +229,8 @@ import SiteHeader from '../../../components/SiteHeader.astro';
     max-width: var(--max-content);
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 45fr 55fr;
-    gap: var(--space-6);
+    grid-template-columns: 30fr 70fr;
+    gap: var(--space-3) var(--space-6);
     align-items: center;
   }
   .hero__copy {
@@ -241,6 +242,10 @@ import SiteHeader from '../../../components/SiteHeader.astro';
     line-height: 1.04;
     letter-spacing: -0.02em;
     margin-bottom: var(--space-3);
+  }
+  .hero__inner > .hero__headline {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
   }
   .hero__sub {
     font-size: 1.125rem;

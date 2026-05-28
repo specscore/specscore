@@ -18,10 +18,10 @@ import SiteHeader from '../../../components/SiteHeader.astro';
     {/* ── Hero: copy left, terminal demo right ── */}
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          Lintea tus specs<br />como linteas tu codigo.
+        </h1>
         <div class="hero__copy">
-          <h1 id="hero-title" class="hero__headline">
-            Lintea tus specs<br />como linteas tu codigo.
-          </h1>
           <p class="hero__sub">
             El SpecScore CLI valida features, requisitos y criterios de aceptacion
             desde la linea de comandos. Ejecutalo en local, conectalo a tu CI
@@ -44,7 +44,7 @@ import SiteHeader from '../../../components/SiteHeader.astro';
           role="img"
           aria-label="Salida del terminal de specscore lint: R1 y R2 pasan con checks verdes, R3 falla con una marca roja y un mensaje de error corregible."
         >
-<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+<pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
 
   checkout/apply-discount.md
     <span class="mark-pass">✓</span> R1  Single-code limit
@@ -233,8 +233,8 @@ import SiteHeader from '../../../components/SiteHeader.astro';
     max-width: var(--max-content);
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 45fr 55fr;
-    gap: var(--space-6);
+    grid-template-columns: 30fr 70fr;
+    gap: var(--space-3) var(--space-6);
     align-items: center;
   }
   .hero__copy {
@@ -246,6 +246,10 @@ import SiteHeader from '../../../components/SiteHeader.astro';
     line-height: 1.04;
     letter-spacing: -0.02em;
     margin-bottom: var(--space-3);
+  }
+  .hero__inner > .hero__headline {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
   }
   .hero__sub {
     font-size: 1.125rem;

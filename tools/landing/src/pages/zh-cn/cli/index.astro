@@ -17,9 +17,10 @@ import SiteHeader from '../../../components/SiteHeader.astro';
     {/* ── Hero: copy left, terminal demo right ── */}
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__inner">
-        <div class="hero__copy">          <h1 id="hero-title" class="hero__headline">
-            像检查代码一样<br />检查你的规格说明。
-          </h1>
+        <h1 id="hero-title" class="hero__headline">
+          像检查代码一样<br />检查你的规格说明。
+        </h1>
+        <div class="hero__copy">
           <p class="hero__sub">
             SpecScore CLI 从命令行验证功能、需求和验收标准。
             在本地运行，集成到 CI，或让你的 AI 代理调用它。
@@ -41,7 +42,7 @@ import SiteHeader from '../../../components/SiteHeader.astro';
           role="img"
           aria-label="specscore lint 的终端输出：R1 和 R2 通过（绿色对勾），R3 未通过（红色叉号）并附有错误信息。"
         >
-<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+<pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
 
   checkout/apply-discount.md
     <span class="mark-pass">✓</span> R1  Single-code limit
@@ -228,8 +229,8 @@ import SiteHeader from '../../../components/SiteHeader.astro';
     max-width: var(--max-content);
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 45fr 55fr;
-    gap: var(--space-6);
+    grid-template-columns: 30fr 70fr;
+    gap: var(--space-3) var(--space-6);
     align-items: center;
   }
   .hero__copy {
@@ -241,6 +242,10 @@ import SiteHeader from '../../../components/SiteHeader.astro';
     line-height: 1.04;
     letter-spacing: -0.02em;
     margin-bottom: var(--space-3);
+  }
+  .hero__inner > .hero__headline {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
   }
   .hero__sub {
     font-size: 1.125rem;
