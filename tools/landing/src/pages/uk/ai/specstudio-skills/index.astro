@@ -7,6 +7,7 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
 import SiteFooter from '../../../../components/SiteFooter.astro';
+import QsTabsScript from '../../../../components/QsTabsScript.astro';
 ---
 
 <BaseLayout
@@ -32,8 +33,36 @@ import SiteFooter from '../../../../components/SiteFooter.astro';
           <a class="xref" href="https://specscore.md">SpecScore</a>.
         </p>
         <div class="hero__install" id="install">
+          <div class="qs-tabs" role="tablist" aria-label="Спосіб встановлення">
+            <button type="button" role="tab" id="qs-tab-claude" aria-controls="qs-panel-claude" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="claude">Claude Code</button>
+            <button type="button" role="tab" id="qs-tab-setup" aria-controls="qs-panel-setup" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="setup">Інші ШІ-агенти</button>
+            <button type="button" role="tab" id="qs-tab-manual" aria-controls="qs-panel-manual" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="manual">Вручну</button>
+          </div>
+
+          <div id="qs-panel-claude" role="tabpanel" aria-labelledby="qs-tab-claude" class="qs-panel is-active" data-panel="claude">
 <pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
 <span class="prompt">$</span> /plugin install specstudio@specscore</pre>
+          </div>
+          <div id="qs-panel-setup" role="tabpanel" aria-labelledby="qs-tab-setup" class="qs-panel" data-panel="setup" hidden>
+<pre class="terminal"><span class="prompt">$</span> specscore agent setup &lt;ім'я-агента&gt;</pre>
+            <p class="qs-note">
+              Створює правильний файл інструкцій для вашого агента —
+              <code>claude</code>, <code>copilot</code>, <code>cursor</code>, <code>codex</code>,
+              <code>antigravity.google</code>, <code>pi.dev</code> або <code>opencode</code>.
+              Запускайте всередині проєкту під керуванням SpecScore. Потребує
+              <a class="xref" href="/uk/cli/">SpecScore CLI</a>.
+            </p>
+          </div>
+          <div id="qs-panel-manual" role="tabpanel" aria-labelledby="qs-tab-manual" class="qs-panel" data-panel="manual" hidden>
+<pre class="terminal"><span class="prompt">$</span> git clone https://github.com/specscore/specstudio-skills
+<span class="prompt">$</span> cp -r specstudio-skills/commands /шлях/до/вашого/агента/commands/
+<span class="prompt">$</span> cp -r specstudio-skills/skills /шлях/до/вашого/агента/skills/</pre>
+            <p class="qs-note">
+              Клонуйте репозиторій плагіна та скопіюйте каталоги
+              <code>commands/</code> і <code>skills/</code> туди, звідки ваш агент
+              завантажує файли команд і навичок.
+            </p>
+          </div>
         </div>
         <p class="hero__demo-link">
           <a href="#demo" class="xref">Дивитися 60-секундне демо ↓</a>
@@ -214,8 +243,36 @@ import SiteFooter from '../../../../components/SiteFooter.astro';
     <div class="final-cta__inner">
       <h2 id="cta-title" class="final-cta__title">Спробуйте.</h2>
       <div class="final-cta__install">
+        <div class="qs-tabs" role="tablist" aria-label="Спосіб встановлення">
+          <button type="button" role="tab" id="qs-tab-claude-b" aria-controls="qs-panel-claude-b" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="claude">Claude Code</button>
+          <button type="button" role="tab" id="qs-tab-setup-b" aria-controls="qs-panel-setup-b" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="setup">Інші ШІ-агенти</button>
+          <button type="button" role="tab" id="qs-tab-manual-b" aria-controls="qs-panel-manual-b" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="manual">Вручну</button>
+        </div>
+
+        <div id="qs-panel-claude-b" role="tabpanel" aria-labelledby="qs-tab-claude-b" class="qs-panel is-active" data-panel="claude">
 <pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
 <span class="prompt">$</span> /plugin install specstudio@specscore</pre>
+        </div>
+        <div id="qs-panel-setup-b" role="tabpanel" aria-labelledby="qs-tab-setup-b" class="qs-panel" data-panel="setup" hidden>
+<pre class="terminal"><span class="prompt">$</span> specscore agent setup &lt;ім'я-агента&gt;</pre>
+          <p class="qs-note">
+            Створює правильний файл інструкцій для вашого агента —
+            <code>claude</code>, <code>copilot</code>, <code>cursor</code>, <code>codex</code>,
+            <code>antigravity.google</code>, <code>pi.dev</code> або <code>opencode</code>.
+            Запускайте всередині проєкту під керуванням SpecScore. Потребує
+            <a class="xref" href="/uk/cli/">SpecScore CLI</a>.
+          </p>
+        </div>
+        <div id="qs-panel-manual-b" role="tabpanel" aria-labelledby="qs-tab-manual-b" class="qs-panel" data-panel="manual" hidden>
+<pre class="terminal"><span class="prompt">$</span> git clone https://github.com/specscore/specstudio-skills
+<span class="prompt">$</span> cp -r specstudio-skills/commands /шлях/до/вашого/агента/commands/
+<span class="prompt">$</span> cp -r specstudio-skills/skills /шлях/до/вашого/агента/skills/</pre>
+          <p class="qs-note">
+            Клонуйте репозиторій плагіна та скопіюйте каталоги
+            <code>commands/</code> і <code>skills/</code> туди, звідки ваш агент
+            завантажує файли команд і навичок.
+          </p>
+        </div>
       </div>
       <p class="final-cta__note">
         Безкоштовно для публічних та open-source репозиторіїв. Ліцензія MIT.
@@ -528,3 +585,5 @@ import SiteFooter from '../../../../components/SiteFooter.astro';
     }
   }
 </style>
+
+<QsTabsScript />

@@ -5,6 +5,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import HeroGitHubLink from '../../../components/HeroGitHubLink.astro';
+import QsTabsScript from '../../../components/QsTabsScript.astro';
 ---
 
 <BaseLayout
@@ -306,44 +307,6 @@ import HeroGitHubLink from '../../../components/HeroGitHubLink.astro';
     color: var(--ink);
   }
 
-  /* ── Tabbed install ── */
-  .qs-tabs {
-    display: inline-flex;
-    gap: 0;
-    border-bottom: 1px solid var(--hairline);
-    margin-bottom: 0;
-  }
-  .qs-tab {
-    background: transparent;
-    border: none;
-    padding: 0.55rem 0.95rem;
-    font-family: var(--font-display);
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--mid-ink);
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    cursor: pointer;
-    transition: color 120ms ease, border-color 120ms ease;
-  }
-  .qs-tab:hover { color: var(--ink); }
-  .qs-tab.is-active {
-    color: var(--ink);
-    border-bottom-color: var(--validator-green);
-  }
-  .qs-tab:focus-visible {
-    outline: 2px solid var(--ink-blue);
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
-  .qs-panel { margin-top: 0; }
-  .qs-panel pre { border-top-width: 0; }
-  .qs-more {
-    margin-top: var(--space-3);
-    font-size: var(--fs-small);
-    color: var(--mid-ink);
-  }
-
   /* ── Features grid ── */
   .features-section { background: var(--cream-2); }
   .features-grid {
@@ -446,49 +409,4 @@ import HeroGitHubLink from '../../../components/HeroGitHubLink.astro';
   }
 </style>
 
-<script is:inline>
-  (function () {
-    var tabs = document.querySelectorAll('.qs-tab');
-    var panels = document.querySelectorAll('.qs-panel');
-    if (!tabs.length) return;
-
-    function activate(name, focus) {
-      tabs.forEach(function (t) {
-        var on = t.getAttribute('data-tab') === name;
-        t.classList.toggle('is-active', on);
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
-        t.setAttribute('tabindex', on ? '0' : '-1');
-        if (on && focus) t.focus();
-      });
-      panels.forEach(function (p) {
-        var on = p.getAttribute('data-panel') === name;
-        p.classList.toggle('is-active', on);
-        if (on) p.removeAttribute('hidden');
-        else p.setAttribute('hidden', '');
-      });
-    }
-
-    try {
-      if (/Windows/i.test(navigator.userAgent)) activate('win', false);
-    } catch (e) { /* ignore */ }
-
-    tabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        activate(tab.getAttribute('data-tab'), false);
-      });
-      tab.addEventListener('keydown', function (ev) {
-        var key = ev.key;
-        if (key !== 'ArrowRight' && key !== 'ArrowLeft' &&
-            key !== 'Home' && key !== 'End') return;
-        ev.preventDefault();
-        var i = Array.prototype.indexOf.call(tabs, ev.currentTarget);
-        var next;
-        if (key === 'ArrowRight') next = (i + 1) % tabs.length;
-        else if (key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
-        else if (key === 'Home') next = 0;
-        else next = tabs.length - 1;
-        activate(tabs[next].getAttribute('data-tab'), true);
-      });
-    });
-  })();
-</script>
+<QsTabsScript />

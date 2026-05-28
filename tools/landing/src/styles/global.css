@@ -235,6 +235,60 @@ pre.terminal.terminal--window::after,
     28px 0 0 #28c840;
 }
 
+/* --- Tabbed install (.qs-tabs) ---
+   Shared across /cli/, /ai/cli-skills/, and any future page that needs
+   a tab-switched code block. Pair with the activation <script> on each
+   page that uses it. */
+.qs-tabs {
+  display: inline-flex;
+  gap: 0;
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: 0;
+}
+.qs-tab {
+  background: transparent;
+  border: none;
+  padding: 0.55rem 0.95rem;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--mid-ink);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+.qs-tab:hover { color: var(--ink); }
+.qs-tab.is-active {
+  color: var(--ink);
+  border-bottom-color: var(--validator-green);
+}
+.qs-tab:focus-visible {
+  outline: 2px solid var(--ink-blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.qs-panel { margin-top: 0; }
+.qs-panel pre { border-top-width: 0; }
+.qs-more {
+  margin-top: var(--space-3);
+  font-size: var(--fs-small);
+  color: var(--mid-ink);
+}
+.qs-note {
+  margin-top: var(--space-2);
+  font-size: var(--fs-small);
+  color: var(--mid-ink);
+  line-height: 1.55;
+}
+.qs-note code {
+  font-size: 0.9em;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  padding: 0.05em 0.3em;
+  border-radius: 2px;
+}
+
 /* --- /ai/ plugin-card grid + cards ---
    Shared across all 8 locale variants of /ai/. Moved here from each
    page's <style> block per DESIGN-PRINCIPLES.md §9; the per-page

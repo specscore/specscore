@@ -7,6 +7,7 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
 import SiteFooter from '../../../../components/SiteFooter.astro';
+import QsTabsScript from '../../../../components/QsTabsScript.astro';
 ---
 
 <BaseLayout
@@ -31,8 +32,35 @@ import SiteFooter from '../../../../components/SiteFooter.astro';
           <a class="xref" href="https://specscore.md">SpecScore</a> 协议。
         </p>
         <div class="hero__install" id="install">
+          <div class="qs-tabs" role="tablist" aria-label="安装方式">
+            <button type="button" role="tab" id="qs-tab-claude" aria-controls="qs-panel-claude" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="claude">Claude Code</button>
+            <button type="button" role="tab" id="qs-tab-setup" aria-controls="qs-panel-setup" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="setup">其他 AI 代理</button>
+            <button type="button" role="tab" id="qs-tab-manual" aria-controls="qs-panel-manual" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="manual">手动</button>
+          </div>
+
+          <div id="qs-panel-claude" role="tabpanel" aria-labelledby="qs-tab-claude" class="qs-panel is-active" data-panel="claude">
 <pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
 <span class="prompt">$</span> /plugin install specstudio@specscore</pre>
+          </div>
+          <div id="qs-panel-setup" role="tabpanel" aria-labelledby="qs-tab-setup" class="qs-panel" data-panel="setup" hidden>
+<pre class="terminal"><span class="prompt">$</span> specscore agent setup &lt;代理名称&gt;</pre>
+            <p class="qs-note">
+              为你的代理写入正确的指令文件 —
+              <code>claude</code>、<code>copilot</code>、<code>cursor</code>、<code>codex</code>、
+              <code>antigravity.google</code>、<code>pi.dev</code> 或 <code>opencode</code>。
+              在 SpecScore 管理的项目内运行。需要
+              <a class="xref" href="/zh-cn/cli/">SpecScore CLI</a>。
+            </p>
+          </div>
+          <div id="qs-panel-manual" role="tabpanel" aria-labelledby="qs-tab-manual" class="qs-panel" data-panel="manual" hidden>
+<pre class="terminal"><span class="prompt">$</span> git clone https://github.com/specscore/specstudio-skills
+<span class="prompt">$</span> cp -r specstudio-skills/commands /你的代理/commands/路径
+<span class="prompt">$</span> cp -r specstudio-skills/skills /你的代理/skills/路径</pre>
+            <p class="qs-note">
+              克隆插件仓库，将 <code>commands/</code> 和 <code>skills/</code>
+              目录复制到你的代理读取命令和技能文件的位置。
+            </p>
+          </div>
         </div>
         <p class="hero__demo-link">
           <a href="#demo" class="xref">观看 60 秒演示 ↓</a>
@@ -209,8 +237,35 @@ import SiteFooter from '../../../../components/SiteFooter.astro';
     <div class="final-cta__inner">
       <h2 id="cta-title" class="final-cta__title">试一试。</h2>
       <div class="final-cta__install">
+        <div class="qs-tabs" role="tablist" aria-label="安装方式">
+          <button type="button" role="tab" id="qs-tab-claude-b" aria-controls="qs-panel-claude-b" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="claude">Claude Code</button>
+          <button type="button" role="tab" id="qs-tab-setup-b" aria-controls="qs-panel-setup-b" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="setup">其他 AI 代理</button>
+          <button type="button" role="tab" id="qs-tab-manual-b" aria-controls="qs-panel-manual-b" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="manual">手动</button>
+        </div>
+
+        <div id="qs-panel-claude-b" role="tabpanel" aria-labelledby="qs-tab-claude-b" class="qs-panel is-active" data-panel="claude">
 <pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
 <span class="prompt">$</span> /plugin install specstudio@specscore</pre>
+        </div>
+        <div id="qs-panel-setup-b" role="tabpanel" aria-labelledby="qs-tab-setup-b" class="qs-panel" data-panel="setup" hidden>
+<pre class="terminal"><span class="prompt">$</span> specscore agent setup &lt;代理名称&gt;</pre>
+          <p class="qs-note">
+            为你的代理写入正确的指令文件 —
+            <code>claude</code>、<code>copilot</code>、<code>cursor</code>、<code>codex</code>、
+            <code>antigravity.google</code>、<code>pi.dev</code> 或 <code>opencode</code>。
+            在 SpecScore 管理的项目内运行。需要
+            <a class="xref" href="/zh-cn/cli/">SpecScore CLI</a>。
+          </p>
+        </div>
+        <div id="qs-panel-manual-b" role="tabpanel" aria-labelledby="qs-tab-manual-b" class="qs-panel" data-panel="manual" hidden>
+<pre class="terminal"><span class="prompt">$</span> git clone https://github.com/specscore/specstudio-skills
+<span class="prompt">$</span> cp -r specstudio-skills/commands /你的代理/commands/路径
+<span class="prompt">$</span> cp -r specstudio-skills/skills /你的代理/skills/路径</pre>
+          <p class="qs-note">
+            克隆插件仓库，将 <code>commands/</code> 和 <code>skills/</code>
+            目录复制到你的代理读取命令和技能文件的位置。
+          </p>
+        </div>
       </div>
       <p class="final-cta__note">
         对公开和开源仓库免费。MIT 许可证。
@@ -521,3 +576,5 @@ import SiteFooter from '../../../../components/SiteFooter.astro';
     }
   }
 </style>
+
+<QsTabsScript />

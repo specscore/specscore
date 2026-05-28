@@ -5,6 +5,7 @@
 // Slash-command names and terminal content stay English.
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
+import QsTabsScript from '../../../../components/QsTabsScript.astro';
 ---
 
 <BaseLayout
@@ -32,19 +33,43 @@ import SiteHeader from '../../../../components/SiteHeader.astro';
           전환 없이.
         </p>
         <div class="hero__install" id="install">
+          <div class="qs-tabs" role="tablist" aria-label="설치 방법">
+            <button type="button" role="tab" id="qs-tab-claude" aria-controls="qs-panel-claude" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="claude">Claude Code</button>
+            <button type="button" role="tab" id="qs-tab-setup" aria-controls="qs-panel-setup" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="setup">기타 AI 에이전트</button>
+            <button type="button" role="tab" id="qs-tab-manual" aria-controls="qs-panel-manual" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="manual">수동</button>
+          </div>
+
+          <div id="qs-panel-claude" role="tabpanel" aria-labelledby="qs-tab-claude" class="qs-panel is-active" data-panel="claude">
 <pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
 <span class="prompt">$</span> /plugin install cli-skills@specscore</pre>
+          </div>
+          <div id="qs-panel-setup" role="tabpanel" aria-labelledby="qs-tab-setup" class="qs-panel" data-panel="setup" hidden>
+<pre class="terminal"><span class="prompt">$</span> specscore agent setup &lt;에이전트-이름&gt;</pre>
+            <p class="qs-note">
+              에이전트에 맞는 지시 파일을 작성합니다 —
+              <code>claude</code>, <code>copilot</code>, <code>cursor</code>, <code>codex</code>,
+              <code>antigravity.google</code>, <code>pi.dev</code>, 또는 <code>opencode</code>.
+              SpecScore로 관리되는 프로젝트 안에서 실행하세요.
+              <a class="xref" href="/ko/cli/">SpecScore CLI</a>가 필요합니다.
+            </p>
+          </div>
+          <div id="qs-panel-manual" role="tabpanel" aria-labelledby="qs-tab-manual" class="qs-panel" data-panel="manual" hidden>
+<pre class="terminal"><span class="prompt">$</span> git clone https://github.com/specscore/ai-plugin-specscore
+<span class="prompt">$</span> cp -r ai-plugin-specscore/skills /path/to/your/agent/skills/</pre>
+            <p class="qs-note">
+              플러그인 저장소를 클론하고 <code>skills/</code> 디렉터리를
+              에이전트가 스킬 파일을 로드하는 위치로 복사하세요.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    {/* ── 무엇인지 / 무엇이 아닌지 ── */}
-    <section class="section" aria-labelledby="what-title">
+    <section class="section">
       <div class="section-inner section-inner--prose">
-        <h2 id="what-title" class="section-title">무엇이고, 무엇이 아닌지.</h2>
         <p class="prose-p">
-          이것은 <strong>기계적 CLI 표면</strong>입니다. SpecScore CLI 명령을
-          Claude Code 안에서 사용할 수 있도록 감쌉니다 — 그 이상은 아닙니다.
+          이것은 SpecScore CLI를 AI 에이전트 안에서 사용하기 위한
+          <strong>얇은 래퍼</strong>입니다 — 그 이상은 아닙니다.
           워크플로에 대한 의견 없음, 라이프사이클 오케스트레이션 없음,
           슬래시 명령 파이프라인 없음.
         </p>
@@ -306,3 +331,5 @@ import SiteHeader from '../../../../components/SiteHeader.astro';
     .page-footer__brand { grid-column: 1 / -1; }
   }
 </style>
+
+<QsTabsScript />

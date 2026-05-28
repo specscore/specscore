@@ -5,6 +5,7 @@
 // Slash-command names and terminal content stay English.
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
+import QsTabsScript from '../../../../components/QsTabsScript.astro';
 ---
 
 <BaseLayout
@@ -32,19 +33,42 @@ import SiteHeader from '../../../../components/SiteHeader.astro';
           コンテキスト切り替え不要。
         </p>
         <div class="hero__install" id="install">
+          <div class="qs-tabs" role="tablist" aria-label="インストール方法">
+            <button type="button" role="tab" id="qs-tab-claude" aria-controls="qs-panel-claude" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="claude">Claude Code</button>
+            <button type="button" role="tab" id="qs-tab-setup" aria-controls="qs-panel-setup" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="setup">その他のAIエージェント</button>
+            <button type="button" role="tab" id="qs-tab-manual" aria-controls="qs-panel-manual" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="manual">手動</button>
+          </div>
+
+          <div id="qs-panel-claude" role="tabpanel" aria-labelledby="qs-tab-claude" class="qs-panel is-active" data-panel="claude">
 <pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
 <span class="prompt">$</span> /plugin install cli-skills@specscore</pre>
+          </div>
+          <div id="qs-panel-setup" role="tabpanel" aria-labelledby="qs-tab-setup" class="qs-panel" data-panel="setup" hidden>
+<pre class="terminal"><span class="prompt">$</span> specscore agent setup &lt;エージェント名&gt;</pre>
+            <p class="qs-note">
+              あなたのエージェント — <code>claude</code>、<code>copilot</code>、<code>cursor</code>、<code>codex</code>、
+              <code>antigravity.google</code>、<code>pi.dev</code>、または <code>opencode</code> — に適した指示ファイルを書き出します。
+              SpecScore で管理されているプロジェクト内で実行してください。
+              <a class="xref" href="/ja/cli/">SpecScore CLI</a> が必要です。
+            </p>
+          </div>
+          <div id="qs-panel-manual" role="tabpanel" aria-labelledby="qs-tab-manual" class="qs-panel" data-panel="manual" hidden>
+<pre class="terminal"><span class="prompt">$</span> git clone https://github.com/specscore/ai-plugin-specscore
+<span class="prompt">$</span> cp -r ai-plugin-specscore/skills /path/to/your/agent/skills/</pre>
+            <p class="qs-note">
+              プラグインのリポジトリをクローンし、<code>skills/</code> ディレクトリを
+              エージェントがスキルファイルを読み込む場所にコピーします。
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    {/* ── これは何か / 何でないか ── */}
-    <section class="section" aria-labelledby="what-title">
+    <section class="section">
       <div class="section-inner section-inner--prose">
-        <h2 id="what-title" class="section-title">これは何か、何でないか。</h2>
         <p class="prose-p">
-          これは<strong>機械的なCLIサーフェス</strong>です。SpecScore CLIの
-          コマンドをClaude Code内で使えるようにラップします — それだけです。
+          これは SpecScore CLI の<strong>薄いラッパー</strong>で、
+          AIエージェント内で使うためのものです — それだけです。
           ワークフローに関する意見なし、ライフサイクルのオーケストレーションなし、
           スラッシュコマンドのパイプラインなし。
         </p>
@@ -307,3 +331,5 @@ import SiteHeader from '../../../../components/SiteHeader.astro';
     .page-footer__brand { grid-column: 1 / -1; }
   }
 </style>
+
+<QsTabsScript />

@@ -5,6 +5,7 @@
 // Slash-command names and terminal content stay English.
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
+import QsTabsScript from '../../../../components/QsTabsScript.astro';
 ---
 
 <BaseLayout
@@ -32,21 +33,45 @@ import SiteHeader from '../../../../components/SiteHeader.astro';
           contexto.
         </p>
         <div class="hero__install" id="install">
+          <div class="qs-tabs" role="tablist" aria-label="Método de instalação">
+            <button type="button" role="tab" id="qs-tab-claude" aria-controls="qs-panel-claude" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="claude">Claude Code</button>
+            <button type="button" role="tab" id="qs-tab-setup" aria-controls="qs-panel-setup" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="setup">Outros agentes de IA</button>
+            <button type="button" role="tab" id="qs-tab-manual" aria-controls="qs-panel-manual" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="manual">Manual</button>
+          </div>
+
+          <div id="qs-panel-claude" role="tabpanel" aria-labelledby="qs-tab-claude" class="qs-panel is-active" data-panel="claude">
 <pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
 <span class="prompt">$</span> /plugin install cli-skills@specscore</pre>
+          </div>
+          <div id="qs-panel-setup" role="tabpanel" aria-labelledby="qs-tab-setup" class="qs-panel" data-panel="setup" hidden>
+<pre class="terminal"><span class="prompt">$</span> specscore agent setup &lt;nome-do-agente&gt;</pre>
+            <p class="qs-note">
+              Escreve o arquivo de instruções certo para o seu agente —
+              <code>claude</code>, <code>copilot</code>, <code>cursor</code>, <code>codex</code>,
+              <code>antigravity.google</code>, <code>pi.dev</code> ou <code>opencode</code>.
+              Execute dentro de um projeto gerenciado pelo SpecScore. Requer a
+              <a class="xref" href="/pt-br/cli/">SpecScore CLI</a>.
+            </p>
+          </div>
+          <div id="qs-panel-manual" role="tabpanel" aria-labelledby="qs-tab-manual" class="qs-panel" data-panel="manual" hidden>
+<pre class="terminal"><span class="prompt">$</span> git clone https://github.com/specscore/ai-plugin-specscore
+<span class="prompt">$</span> cp -r ai-plugin-specscore/skills /caminho/para/seu/agente/skills/</pre>
+            <p class="qs-note">
+              Clone o repositório do plugin e copie o diretório <code>skills/</code>
+              para onde seu agente carrega os arquivos de skills.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    {/* ── O que é / o que não é ── */}
-    <section class="section" aria-labelledby="what-title">
+    <section class="section">
       <div class="section-inner section-inner--prose">
-        <h2 id="what-title" class="section-title">O que é e o que não é.</h2>
         <p class="prose-p">
-          Isso é a <strong>superfície mecânica do CLI</strong>. Envolve os
-          comandos do SpecScore CLI para uso dentro do Claude Code — nada mais.
-          Sem opiniões sobre workflow, sem orquestração de ciclo de vida, sem
-          pipeline de slash commands.
+          Isto é um <strong>wrapper fino</strong> sobre o SpecScore CLI
+          para uso dentro do seu agente de IA — nada mais. Sem opiniões
+          sobre workflow, sem orquestração de ciclo de vida, sem pipeline
+          de slash commands.
         </p>
         <p class="prose-p">
           Se você quer o workflow opinado de spec-driven development —
@@ -308,3 +333,5 @@ import SiteHeader from '../../../../components/SiteHeader.astro';
     .page-footer__brand { grid-column: 1 / -1; }
   }
 </style>
+
+<QsTabsScript />

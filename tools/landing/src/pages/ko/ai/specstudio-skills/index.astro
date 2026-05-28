@@ -7,6 +7,7 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
 import SiteFooter from '../../../../components/SiteFooter.astro';
+import QsTabsScript from '../../../../components/QsTabsScript.astro';
 ---
 
 <BaseLayout
@@ -31,8 +32,35 @@ import SiteFooter from '../../../../components/SiteFooter.astro';
           <a class="xref" href="https://specscore.md">SpecScore</a> 기반입니다.
         </p>
         <div class="hero__install" id="install">
+          <div class="qs-tabs" role="tablist" aria-label="설치 방법">
+            <button type="button" role="tab" id="qs-tab-claude" aria-controls="qs-panel-claude" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="claude">Claude Code</button>
+            <button type="button" role="tab" id="qs-tab-setup" aria-controls="qs-panel-setup" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="setup">기타 AI 에이전트</button>
+            <button type="button" role="tab" id="qs-tab-manual" aria-controls="qs-panel-manual" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="manual">수동</button>
+          </div>
+
+          <div id="qs-panel-claude" role="tabpanel" aria-labelledby="qs-tab-claude" class="qs-panel is-active" data-panel="claude">
 <pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
 <span class="prompt">$</span> /plugin install specstudio@specscore</pre>
+          </div>
+          <div id="qs-panel-setup" role="tabpanel" aria-labelledby="qs-tab-setup" class="qs-panel" data-panel="setup" hidden>
+<pre class="terminal"><span class="prompt">$</span> specscore agent setup &lt;에이전트-이름&gt;</pre>
+            <p class="qs-note">
+              에이전트에 맞는 지시 파일을 작성합니다 —
+              <code>claude</code>, <code>copilot</code>, <code>cursor</code>, <code>codex</code>,
+              <code>antigravity.google</code>, <code>pi.dev</code>, 또는 <code>opencode</code>.
+              SpecScore로 관리되는 프로젝트 안에서 실행하세요.
+              <a class="xref" href="/ko/cli/">SpecScore CLI</a>가 필요합니다.
+            </p>
+          </div>
+          <div id="qs-panel-manual" role="tabpanel" aria-labelledby="qs-tab-manual" class="qs-panel" data-panel="manual" hidden>
+<pre class="terminal"><span class="prompt">$</span> git clone https://github.com/specscore/specstudio-skills
+<span class="prompt">$</span> cp -r specstudio-skills/commands /path/to/your/agent/commands/
+<span class="prompt">$</span> cp -r specstudio-skills/skills /path/to/your/agent/skills/</pre>
+            <p class="qs-note">
+              플러그인 저장소를 클론하고 <code>commands/</code>와 <code>skills/</code>
+              디렉터리를 에이전트가 명령과 스킬 파일을 로드하는 위치로 복사하세요.
+            </p>
+          </div>
         </div>
         <p class="hero__demo-link">
           <a href="#demo" class="xref">60초 데모 보기 ↓</a>
@@ -212,8 +240,35 @@ import SiteFooter from '../../../../components/SiteFooter.astro';
     <div class="final-cta__inner">
       <h2 id="cta-title" class="final-cta__title">사용해 보세요.</h2>
       <div class="final-cta__install">
+        <div class="qs-tabs" role="tablist" aria-label="설치 방법">
+          <button type="button" role="tab" id="qs-tab-claude-b" aria-controls="qs-panel-claude-b" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="claude">Claude Code</button>
+          <button type="button" role="tab" id="qs-tab-setup-b" aria-controls="qs-panel-setup-b" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="setup">기타 AI 에이전트</button>
+          <button type="button" role="tab" id="qs-tab-manual-b" aria-controls="qs-panel-manual-b" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="manual">수동</button>
+        </div>
+
+        <div id="qs-panel-claude-b" role="tabpanel" aria-labelledby="qs-tab-claude-b" class="qs-panel is-active" data-panel="claude">
 <pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
 <span class="prompt">$</span> /plugin install specstudio@specscore</pre>
+        </div>
+        <div id="qs-panel-setup-b" role="tabpanel" aria-labelledby="qs-tab-setup-b" class="qs-panel" data-panel="setup" hidden>
+<pre class="terminal"><span class="prompt">$</span> specscore agent setup &lt;에이전트-이름&gt;</pre>
+          <p class="qs-note">
+            에이전트에 맞는 지시 파일을 작성합니다 —
+            <code>claude</code>, <code>copilot</code>, <code>cursor</code>, <code>codex</code>,
+            <code>antigravity.google</code>, <code>pi.dev</code>, 또는 <code>opencode</code>.
+            SpecScore로 관리되는 프로젝트 안에서 실행하세요.
+            <a class="xref" href="/ko/cli/">SpecScore CLI</a>가 필요합니다.
+          </p>
+        </div>
+        <div id="qs-panel-manual-b" role="tabpanel" aria-labelledby="qs-tab-manual-b" class="qs-panel" data-panel="manual" hidden>
+<pre class="terminal"><span class="prompt">$</span> git clone https://github.com/specscore/specstudio-skills
+<span class="prompt">$</span> cp -r specstudio-skills/commands /path/to/your/agent/commands/
+<span class="prompt">$</span> cp -r specstudio-skills/skills /path/to/your/agent/skills/</pre>
+          <p class="qs-note">
+            플러그인 저장소를 클론하고 <code>commands/</code>와 <code>skills/</code>
+            디렉터리를 에이전트가 명령과 스킬 파일을 로드하는 위치로 복사하세요.
+          </p>
+        </div>
       </div>
       <p class="final-cta__note">
         공개 및 오픈소스 저장소에 무료입니다. MIT 라이선스.
@@ -524,3 +579,5 @@ import SiteFooter from '../../../../components/SiteFooter.astro';
     }
   }
 </style>
+
+<QsTabsScript />
