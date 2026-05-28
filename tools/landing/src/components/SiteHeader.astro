@@ -20,16 +20,22 @@ const route = routeFromPath(path);
 const wordmarkHref = localeHref(locale, '/');
 const currentLang = langs.find(l => l.code === locale)!;
 
-// Specifications lives on the docs site (custom Node generator), which
-// is currently English-only, so this URL doesn't get a locale prefix.
-const specsHref = 'https://specscore.md/specifications';
+// Specification points at the welcoming /docs hub (intro + role-based
+// guides + links to the spec tree), NOT the raw spec-tree index at
+// /specifications. The label promises a confident single thing ("the
+// specification of SpecScore"); /docs delivers the approachable entry
+// that suits cold visitors. /specifications stays available for power
+// users via internal links from /docs. The docs site is currently
+// English-only, so this URL doesn't get a locale prefix.
+const specsHref = 'https://specscore.md/docs';
 
 // Localized nav labels. CLI is kept as the universal acronym across all
-// locales (matches industry convention; no translation needed).
+// locales. Specification is singular per-locale (confident brand framing
+// — "the specification" as one thing to read, not a catalog of docs).
 const specsLabel: Record<string, string> = {
-  'en': 'Specifications', 'es': 'Especificaciones', 'pt-br': 'Especificações',
-  'ru': 'Спецификации',   'uk': 'Специфікації',
-  'ja': '仕様',            'zh-cn': '规范',           'ko': '명세',
+  'en': 'Specification', 'es': 'Especificación', 'pt-br': 'Especificação',
+  'ru': 'Спецификация',  'uk': 'Специфікація',
+  'ja': '仕様',           'zh-cn': '规范',          'ko': '명세',
 };
 const aiSkillsLabel: Record<string, string> = {
   'en': 'AI Skills',  'es': 'Skills de IA', 'pt-br': 'Skills de IA',
@@ -130,6 +136,7 @@ const aiSkillsLabel: Record<string, string> = {
   /* --- Language dropdown --- */
   .lang-switcher {
     position: relative;
+    margin-left: 1rem;   /* extra breathing room between nav links and dropdown */
   }
   .lang-switcher__trigger {
     display: inline-flex;
@@ -217,6 +224,7 @@ const aiSkillsLabel: Record<string, string> = {
     }
     .site-header__nav { gap: 0.15rem; }
     .site-header__link { padding: 0.3rem 0.45rem; font-size: 0.82rem; }
+    .lang-switcher { margin-left: 0.5rem; }
     .lang-switcher__trigger { padding: 0.25rem 0.45rem; font-size: 0.75rem; }
     .lang-switcher__menu { right: -4px; }
   }
