@@ -6,7 +6,7 @@
 // Terminal / code-block content stays English.
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
-import SiteFooter from '../../../../components/SiteFooter.astro';
+import SiteFooterUk from '../../../../components/SiteFooterUk.astro';
 import QsTabsScript from '../../../../components/QsTabsScript.astro';
 ---
 
@@ -281,41 +281,7 @@ import QsTabsScript from '../../../../components/QsTabsScript.astro';
   </section>
 
   {/* ── Footer ── */}
-  <footer class="page-footer">
-    <div class="page-footer__inner">
-      <div class="page-footer__col page-footer__brand">
-        <a href="/uk/" class="wordmark" aria-label="SpecScore — головна">
-          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
-          <span class="wordmark__name">SpecScore.md</span>
-        </a>
-        <p class="page-footer__tagline">
-          Відкритий стандарт для специфікацій, вимог
-          та критеріїв приймання.
-        </p>
-        <p class="page-footer__copyright">
-          &copy; 2026 SpecScore contributors. MIT license.
-        </p>
-      </div>
-
-      <div class="page-footer__col">
-        <h4 class="page-footer__heading">SpecStudio Skills</h4>
-        <ul class="page-footer__list">
-          <li><a href="https://github.com/specscore/specstudio-skills">GitHub</a></li>
-          <li><a href="https://github.com/specscore/specstudio-skills/blob/main/CHANGELOG.md">Changelog</a></li>
-          <li><a href="https://github.com/specscore/specstudio-skills/blob/main/LICENSE">Ліцензія: MIT</a></li>
-        </ul>
-      </div>
-
-      <div class="page-footer__col">
-        <h4 class="page-footer__heading">Екосистема</h4>
-        <ul class="page-footer__list">
-          <li><a href="/">SpecScore</a> — відкритий стандарт</li>
-          <li><a href="https://github.com/specscore/ai-plugin-specscore">ai-plugin-specscore</a> — тонка CLI-обгортка</li>
-          <li><a href="https://specscore.studio">SpecScore Studio</a> — веб-переглядач</li>
-        </ul>
-      </div>
-    </div>
-  </footer>
+  <SiteFooterUk />
 </BaseLayout>
 
 <style>
@@ -518,72 +484,6 @@ import QsTabsScript from '../../../../components/QsTabsScript.astro';
   }
 
   /* ── Page footer (per-page variant matching the specstudio-skills draft) ── */
-  .page-footer {
-    background: var(--cream);
-    padding: var(--space-6) var(--space-3) var(--space-5);
-  }
-  .page-footer__inner {
-    max-width: var(--max-content);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: var(--space-4);
-  }
-  .page-footer__brand .wordmark {
-    margin-bottom: var(--space-2);
-  }
-  .page-footer__tagline {
-    color: var(--mid-ink);
-    margin-bottom: var(--space-2);
-    max-width: 36ch;
-    line-height: 1.5;
-    font-size: 0.95rem;
-  }
-  .page-footer__copyright {
-    color: var(--pale-ink);
-    font-size: 0.825rem;
-    font-family: var(--font-code);
-  }
-  .page-footer__heading {
-    font-family: var(--font-display);
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--mid-ink);
-    margin-bottom: var(--space-2);
-  }
-  .page-footer__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-  .page-footer__list a {
-    color: var(--ink);
-    font-size: 0.9rem;
-    border-bottom: 1px solid transparent;
-    transition: border-color 120ms ease;
-  }
-  .page-footer__list a:hover {
-    border-bottom-color: var(--ink);
-  }
-  .page-footer__list a:focus-visible {
-    outline: 2px solid var(--ink-blue);
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
-
-  @media (max-width: 800px) {
-    .page-footer__inner {
-      grid-template-columns: 1fr 1fr;
-    }
-    .page-footer__brand {
-      grid-column: 1 / -1;
-    }
-  }
 </style>
 
 <QsTabsScript />
