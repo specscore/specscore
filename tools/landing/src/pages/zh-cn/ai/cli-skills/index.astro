@@ -5,6 +5,7 @@
 // Slash-command names and terminal content stay English.
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooterZhCn from '../../../../components/SiteFooterZhCn.astro';
 import QsTabsScript from '../../../../components/QsTabsScript.astro';
 ---
 
@@ -140,39 +141,7 @@ import QsTabsScript from '../../../../components/QsTabsScript.astro';
   </main>
 
   {/* ── Footer ── */}
-  <footer class="page-footer">
-    <div class="page-footer__inner">
-      <div class="page-footer__col page-footer__brand">
-        <a href="/zh-cn/" class="wordmark" aria-label="SpecScore 首页">
-          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
-          <span class="wordmark__name">SpecScore.md</span>
-        </a>
-        <p class="page-footer__tagline">
-          用于规范、需求和验收标准的开放标准。
-        </p>
-        <p class="page-footer__copyright">
-          &copy; 2026 SpecScore contributors. MIT license.
-        </p>
-      </div>
-
-      <div class="page-footer__col">
-        <h4 class="page-footer__heading">CLI Skills</h4>
-        <ul class="page-footer__list">
-          <li><a href="https://github.com/specscore/ai-plugin-specscore">GitHub</a></li>
-          <li><a href="https://github.com/specscore/ai-plugin-specscore/blob/main/LICENSE">许可证：MIT</a></li>
-        </ul>
-      </div>
-
-      <div class="page-footer__col">
-        <h4 class="page-footer__heading">生态系统</h4>
-        <ul class="page-footer__list">
-          <li><a href="/">SpecScore</a> — 开放标准</li>
-          <li><a href="/zh-cn/ai/specstudio-skills/">SpecStudio Skills</a> — 主张明确的 SDD 工作流</li>
-          <li><a href="/zh-cn/cli/">SpecScore CLI</a> — 代码检查器</li>
-        </ul>
-      </div>
-    </div>
-  </footer>
+  <SiteFooterZhCn />
 </BaseLayout>
 
 <style>
@@ -265,67 +234,6 @@ import QsTabsScript from '../../../../components/QsTabsScript.astro';
     font-size: var(--fs-small);
     margin-bottom: var(--space-2);
     line-height: 1.55;
-  }
-
-  /* ── Footer ── */
-  .page-footer {
-    background: var(--cream);
-    padding: var(--space-6) var(--space-3) var(--space-5);
-    border-top: 1px solid var(--hairline);
-  }
-  .page-footer__inner {
-    max-width: var(--max-content);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: var(--space-4);
-  }
-  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
-  .page-footer__tagline {
-    color: var(--mid-ink);
-    margin-bottom: var(--space-2);
-    max-width: 36ch;
-    line-height: 1.5;
-    font-size: 0.95rem;
-  }
-  .page-footer__copyright {
-    color: var(--pale-ink);
-    font-size: 0.825rem;
-    font-family: var(--font-code);
-  }
-  .page-footer__heading {
-    font-family: var(--font-display);
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--mid-ink);
-    margin-bottom: var(--space-2);
-  }
-  .page-footer__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-  .page-footer__list a {
-    color: var(--ink);
-    font-size: 0.9rem;
-    border-bottom: 1px solid transparent;
-    transition: border-color 120ms ease;
-  }
-  .page-footer__list a:hover { border-bottom-color: var(--ink); }
-  .page-footer__list a:focus-visible {
-    outline: 2px solid var(--ink-blue);
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
-
-  @media (max-width: 800px) {
-    .page-footer__inner { grid-template-columns: 1fr 1fr; }
-    .page-footer__brand { grid-column: 1 / -1; }
   }
 </style>
 
