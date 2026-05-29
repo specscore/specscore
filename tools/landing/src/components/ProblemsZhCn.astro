@@ -58,6 +58,23 @@
       </li>
 
       <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔁</span> 含糊的规格,你要付两次钱。</h3>
+        <p class="problem-card__pain">
+          代理根据含糊的指令做出了东西,你发现不对,于是换四种说法
+          重新提示。每个做了一半的功能、每一次重试,都按 token 计费。
+          规格越含糊,落地前来回的轮次就越多。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解决方案</p>
+        <p class="problem-card__fix">
+          在代理运行前先 lint 规格。<code>specscore lint</code>
+          在一开始就拒绝含糊的动词和缺失的验收标准,于是代理一次就
+          实现明确的指令,而不是在重试中反复猜测。最便宜的一次代理
+          运行,就是你不必重复的那一次。
+        </p>
+      </li>
+
+      <li class="problem-card">
         <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">💸</span> AI 代理反复付费读取规格。</h3>
         <p class="problem-card__pain">
           AI 代理回答<em>"什么依赖于这个功能？"</em>时，

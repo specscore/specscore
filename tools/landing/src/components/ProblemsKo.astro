@@ -61,6 +61,25 @@
       </li>
 
       <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔁</span> 모호한 명세에는 두 번 비용을 냅니다.</h3>
+        <p class="problem-card__pain">
+          에이전트가 모호한 지시를 바탕으로 무언가를 만들고, 당신은 그게
+          잘못됐다는 걸 알아채고, 네 가지 방식으로 다시 지시합니다.
+          절반만 만들어진 기능도, 매번의 재시도도 모두 토큰으로
+          청구됩니다. 명세가 모호할수록 완성까지의 왕복이 늘어납니다.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">해결책</p>
+        <p class="problem-card__fix">
+          에이전트가 실행되기 전에 명세를 린트하세요.
+          <code>specscore lint</code>가 모호한 동사와 누락된 인수 조건을
+          처음부터 걸러내므로, 에이전트는 재시도를 거치며 추측하는 대신
+          구체적인 지시를 한 번에 구현합니다. 가장 저렴한 실행은 다시
+          반복하지 않는 실행입니다.
+        </p>
+      </li>
+
+      <li class="problem-card">
         <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">💸</span> 에이전트가 명세를 다시 읽는 데 비용을 씁니다.</h3>
         <p class="problem-card__pain">
           <em>"이 기능에 의존하는 것이 무엇인가?"</em>에 답하는

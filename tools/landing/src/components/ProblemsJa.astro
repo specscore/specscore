@@ -62,6 +62,25 @@
       </li>
 
       <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔁</span> 曖昧な仕様には二重に払うことになる。</h3>
+        <p class="problem-card__pain">
+          エージェントは曖昧な指示から何かを作り、あなたはそれが
+          間違っていることに気づき、4通りの言い方で指示をやり直す。
+          作りかけの機能も、やり直しのたびに、すべてトークンで
+          請求される。仕様が曖昧なほど、形になるまでの往復が増える。
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">解決策</p>
+        <p class="problem-card__fix">
+          エージェントを動かす前に仕様をリントする。
+          <code>specscore lint</code> が曖昧な動詞や欠けた受け入れ基準を
+          最初に弾くので、エージェントは推測でやり直すのではなく、
+          具体的な指示を一度で実装する。最も安いエージェント実行は、
+          やり直さずに済む実行だ。
+        </p>
+      </li>
+
+      <li class="problem-card">
         <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">💸</span> エージェントが仕様の再読み込みにコストを払う。</h3>
         <p class="problem-card__pain">
           <em>「この機能に何が依存しているか？」</em>に答えるために、

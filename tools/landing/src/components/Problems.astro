@@ -78,6 +78,30 @@
         </p>
       </li>
 
+      <!-- The REWORK token sink (distinct from the next card's READ sink).
+           Mechanism-only per voice-and-tone.md § Rule 2: no number until the
+           "Tokens saved per ambiguous-spec retry avoided" / "Average retries
+           reduced" rows land in marketing/advantages.md § Quantified claims
+           roster — then fold the figure into the pain sentence. -->
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔁</span> You pay twice for a vague spec.</h3>
+        <p class="problem-card__pain">
+          The agent builds something from an ambiguous brief, you notice
+          it's wrong, and you re-prompt — four different ways. Every
+          half-built feature and every retry is billed in tokens. The
+          vaguer the spec, the more rounds before it lands.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">The fix</p>
+        <p class="problem-card__fix">
+          Lint the spec before the agent runs. <code>specscore lint</code>
+          rejects vague verbs and missing acceptance criteria up front, so
+          the agent implements a concrete brief once instead of guessing
+          across retries. The cheapest agent run is the one you don't
+          repeat.
+        </p>
+      </li>
+
       <li class="problem-card">
         <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">💸</span> Agents pay to re-read your specs.</h3>
         <p class="problem-card__pain">

@@ -67,6 +67,26 @@
       </li>
 
       <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔁</span> Pagas dos veces por una spec ambigua.</h3>
+        <p class="problem-card__pain">
+          El agente construye algo a partir de un brief ambiguo, ves que
+          está mal y vuelves a pedírselo — de cuatro formas distintas.
+          Cada función a medio hacer y cada reintento se facturan en
+          tokens. Cuanto más vaga la spec, más rondas antes de acertar.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">La solución</p>
+        <p class="problem-card__fix">
+          Lintea la spec antes de que el agente se ejecute.
+          <code>specscore lint</code> rechaza los verbos vagos y los
+          criterios de aceptación que faltan desde el principio, así el
+          agente implementa un brief concreto una sola vez en lugar de
+          adivinar entre reintentos. La ejecución más barata es la que no
+          tienes que repetir.
+        </p>
+      </li>
+
+      <li class="problem-card">
         <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">💸</span> Los agentes pagan por releer tus specs.</h3>
         <p class="problem-card__pain">
           Un agente de IA que responde <em>"¿qué depende de esta

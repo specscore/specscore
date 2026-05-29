@@ -66,6 +66,26 @@
       </li>
 
       <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔁</span> За розмиту специфікацію ви платите двічі.</h3>
+        <p class="problem-card__pain">
+          Агент щось будує за нечітким завданням, ви бачите, що це не те,
+          і переформульовуєте запит — чотирма різними способами. Кожна
+          недороблена функція й кожна повторна спроба оплачуються
+          токенами. Що розмитіша специфікація, то більше кіл до
+          результату.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Рішення</p>
+        <p class="problem-card__fix">
+          Лінтуйте специфікацію до запуску агента.
+          <code>specscore lint</code> одразу відхиляє розмиті дієслова та
+          відсутні критерії приймання, тож агент реалізує чітке завдання
+          з першого разу, а не вгадує між спробами. Найдешевший запуск
+          агента — той, який не доводиться повторювати.
+        </p>
+      </li>
+
+      <li class="problem-card">
         <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">💸</span> Агенти платять за повторне читання специфікацій.</h3>
         <p class="problem-card__pain">
           AI-агент, що відповідає на запитання <em>"що залежить від цієї
