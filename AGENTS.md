@@ -10,7 +10,7 @@ This repository holds the SpecScore **specification format** and the public webs
 - `docs/` — user-facing explanations and role-based guides under `docs/for/`.
 - `blog/` — long-form articles published to the site.
 - `tools/site-generator/` — Node.js (pnpm) static site builder for `https://specscore.md`.
-- `public/` — generated site output checked in for Firebase Hosting.
+- `public/` — generated site output (gitignored build artifact); Cloudflare Pages rebuilds it from sources on deploy.
 - `.github/workflows/` — `dogfood.yml` (installs the released `specscore` binary and lints `spec/`); `site-ci.yml` (builds and deploys the site).
 
 ## Build, test, and lint commands

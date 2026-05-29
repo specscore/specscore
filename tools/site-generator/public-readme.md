@@ -33,11 +33,8 @@ the two-stack rationale.
 
 ## Not deployed
 
-This file is excluded from both hosting targets:
-
-- **Firebase Hosting** — listed in `firebase.json`'s `hosting.ignore` array.
-- **Cloudflare Pages** — removed by [`../tools/cf-build.sh`](../tools/cf-build.sh)
-  as the final step before CF Pages takes its publish-dir snapshot.
+This file is excluded from the deployed site — [`../tools/cf-build.sh`](../tools/cf-build.sh)
+removes it as the final step before Cloudflare Pages takes its publish-dir snapshot.
 
 So it's only here for local-development clarity. Visiting
 `https://specscore.md/README.md` will return 404.

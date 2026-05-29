@@ -23,7 +23,7 @@ Produces static HTML + assets in `tools/landing/dist/`. Output is plain HTML —
 
 ## Wiring into the deploy pipeline (TBD)
 
-The Astro `dist/` needs to be merged into the parent repo's `public/` folder so both Firebase Hosting and Cloudflare Pages serve it from `/`.
+The Astro `dist/` needs to be merged into the parent repo's `public/` folder so Cloudflare Pages serves it from `/`.
 
 Suggested CF Pages build command (extend the one in [`../../WEBSITE-STACK.md`](../../WEBSITE-STACK.md)):
 
@@ -40,7 +40,7 @@ Notes for whoever wires this up:
 1. **Order matters.** The custom site-generator emits `public/index.html` (current homepage). Astro's `dist/index.html` must be copied **after** so it overwrites — otherwise the docs index wins and the landing is never served.
 2. **Asset collisions.** Astro outputs to `dist/_astro/*` by default. That namespace shouldn't collide with anything from the custom generator. Verify by inspecting `tools/landing/dist/` after a build.
 3. **`/hero.png` and `/favicon.svg`** live in `tools/landing/public/` and are copied to the root of `dist/` by Astro. They land at `public/hero.png` and `public/favicon.svg` after the merge step.
-4. **Firebase deploy artifact.** The Firebase pipeline deploys the pre-built committed `public/`, so the landing build needs to run as part of CI (or the built files need to be committed). Either approach works.
+4. **Build runs on deploy.** Cloudflare Pages rebuilds `public/` from sources via `tools/cf-build.sh` on every push to `main`, so the landing build runs as part of that script — `public/` itself is a gitignored artifact, not committed.
 
 ## Design conventions
 

@@ -9,8 +9,8 @@ export default defineConfig({
   // No `base` — this page is served from the site root.
   build: {
     // Inline tiny CSS — keeps the rendered HTML self-contained for the
-    // dual-deploy (Firebase / Cloudflare Pages) flow described in the
-    // parent repo's WEBSITE-STACK.md.
+    // Cloudflare Pages deploy flow described in the parent repo's
+    // WEBSITE-STACK.md.
     inlineStylesheets: 'auto',
   },
 });

@@ -18,7 +18,7 @@ The site uses **two coexisting build stacks**: the custom Node.js generator for 
 | Docs templates | Hand-rolled HTML | `tools/site-generator/{template,landing,blog-*}.html` | Docs only |
 | **Landing** | **Astro 5** | [`tools/landing/`](tools/landing/) | **`/` only** |
 | Output | Side-by-side `.html` + `.md` (docs); `index.html` + assets (landing) | `public/` | — |
-| Hosting | **Cloudflare Pages** (active) · **Firebase Hosting** (manual fallback) | see [Supported Hostings](#supported-hostings) | — |
+| Hosting | **Cloudflare Pages** | see [Hosting](#hosting) | — |
 
 ### The two-stack rule
 
@@ -46,63 +46,30 @@ tools/site-generator/build.js              tools/landing/  (pnpm build)
                        cp -r tools/landing/dist/. public/
                         (Astro's index.html overwrites the docs one)
         │
-        ├──────────────────────────────────┐
-        ▼                                  ▼
-Firebase Hosting                  Cloudflare Pages
-(deploys committed public/)       (re-runs both builds + merge from sources,
-                                   then places _headers/_redirects at publish-dir
-                                   root from repo-root sources)
+        ▼
+Cloudflare Pages
+(re-runs both builds + merge from sources via tools/cf-build.sh,
+ then places _headers/_redirects at the publish-dir root from
+ repo-root sources)
 ```
 
 ---
 
-## Supported Hostings
+## Hosting
 
-The site supports **two hosting targets with two different build models**:
+**Cloudflare Pages** is the sole hosting target (active since 2026-05-21). It builds from sources — CF runs [`tools/cf-build.sh`](tools/cf-build.sh) in its own runner on every push to `main`, regenerates `public/`, and serves the result. Per-PR preview deploys come via the git integration out of the box.
 
-- **Cloudflare Pages** — *active production target* (as of 2026-05-21). Builds from sources — CF runs `tools/cf-build.sh` itself in its own runner on every push to `main` and serves the result.
-- **Firebase Hosting** — *manual fallback target*. Capability retained for failover but deploys only run when the `site-ci.yml` workflow is dispatched manually via the Actions UI (no auto-deploy on push).
+Because CF Pages builds from sources, **`_headers` / `_redirects` are source files at the repo root and are NOT committed into `public/`** — `cf-build.sh` copies them to the publish-dir root during the build. A CI guard in [`site-ci.yml`](.github/workflows/site-ci.yml) fails the build if either file leaks into `public/` before that step.
 
-This means **`_headers` / `_redirects` are CF-only source files at the repo root and are NOT copied into `public/`**. Firebase never sees them; CF Pages reads them from sources during its own build. Keeping them out of `public/` ensures Firebase's deployment artifact stays clean and provider-agnostic.
-
-Both targets are maintained intentionally so we can:
-
-- A/B test latency and DX between providers
-- Fail over from one to the other without rebuilding
-- Migrate at our own pace without a flag day
-
-**Header rules and redirects must be maintained in both config formats** when added or changed. There is no single source-of-truth generator today (intentional — see [Why duplicate config?](#why-duplicate-config)).
-
-### Firebase Hosting
-
-**Manual fallback target as of 2026-05-21.** Site name: `specscore-org`.
-
-Cloudflare Pages is the active production target (see [Cloudflare Pages](#cloudflare-pages) below). Firebase Hosting is retained as a documented fallback — capability stays wired up, but pushes don't auto-deploy. To deploy to Firebase, manually dispatch the [`site-ci.yml`](.github/workflows/site-ci.yml) workflow from the Actions UI (the `Authenticate to GCP` and `Deploy to Firebase Hosting` steps are gated on `workflow_dispatch`).
-
-The current Firebase deploy path also requires the GCP Workload Identity Federation attribute condition to allow the `specscore` org's repository owner (post-rename). The push-triggered runs of the workflow still execute build + verification as a smoke test, but skip the deploy.
-
-| File | Purpose |
-|---|---|
-| [`firebase.json`](firebase.json) | All hosting config: publish dir (`public`), `cleanUrls`, `trailingSlash`, ignore patterns, and the full `headers[]` array (per-path `Content-Type`, `Link: rel="alternate"`, `Cache-Control`). Single file owns everything Firebase needs. |
-| [`.firebaserc`](.firebaserc) | Maps the default project alias to `synchestra-io` so `firebase deploy` targets the right Firebase project without `--project` flags. |
-
-**Notable Firebase-only behavior:**
-- `cleanUrls: true` + `trailingSlash: false` — `/foo` resolves to `foo.html`; `/foo/` 301s to `/foo`.
-- `headers[].source` uses Firebase's path-matching syntax (`**/*.md` for all Markdown).
-- Deploy artifact is the committed `public/` directory — `build.js` deliberately does **not** copy `_headers` / `_redirects` into it. A CI guard in [`.github/workflows/site-ci.yml`](.github/workflows/site-ci.yml) fails the build if either file appears in `public/`.
-
-**Manual deploy steps:**
-1. GitHub Actions → "Site Generator CI" → "Run workflow" → branch `main` → "Run workflow"
-2. The dispatch path runs build + verification + auth + deploy steps in order
-3. CLI fallback (from a workstation with Firebase auth): `firebase deploy --only hosting`
+> **Provider history.** The site was previously deployable to Firebase Hosting as a fallback; that path was retired on 2026-05-29 — the `firebase.json` / `.firebaserc` config and the `site-ci.yml` deploy step were removed after its GCP Workload Identity auth broke post org-rename. The stack stays provider-portable: moving to another static host (Netlify, Vercel, Firebase, …) is a config-translation exercise, not a re-architecture.
 
 ### Cloudflare Pages
 
-Companion target. **Cloudflare Pages builds from sources** — when configured via the Cloudflare dashboard, CF runs its own build runner against the connected git repo, regenerates `public/`, and serves the result. There is no `.cloudflare/` config file equivalent to `.firebaserc`.
+**Cloudflare Pages builds from sources** — configured via the Cloudflare dashboard, CF runs its own build runner against the connected git repo, regenerates `public/`, and serves the result. There is no committed CF project-config file; the build command and output directory are set in the dashboard (see below).
 
 | File | Purpose |
 |---|---|
-| [`_headers`](_headers) | Source-of-truth for Cloudflare's per-path response headers. Mirrors `firebase.json`'s `headers[]` block: serves `*.md` as `text/markdown`, attaches `Link: rel="alternate"` to canonical HTML pages, and sets `Content-Type` + `Cache-Control` on `/install/get-cli{,.ps1}`. Lives at the **repo root only** — CF Pages' build command is responsible for placing it at the publish-dir root. |
+| [`_headers`](_headers) | Source-of-truth for per-path response headers: serves `*.md` as `text/markdown`, attaches `Link: rel="alternate"` to canonical HTML pages, and sets `Content-Type` + `Cache-Control` on `/install/get-cli{,.ps1}`. Lives at the **repo root only** — CF Pages' build command places it at the publish-dir root. |
 | [`_redirects`](_redirects) | Source-of-truth for Cloudflare's HTTP redirects. Currently 301s legacy `/get-cli{,.ps1}` paths to the canonical `/install/get-cli{,.ps1}`. Same placement contract as `_headers`. |
 
 **Notable Cloudflare-only behavior:**
@@ -135,7 +102,7 @@ What the script does, in order:
 3. Install landing deps.
 4. Build the Astro landing → `tools/landing/dist/`.
 5. Merge `tools/landing/dist/*` into `public/`. Astro's `index.html` overwrites the docs-style one; Astro's `_astro/`, `hero*.webp`, and `favicon.svg` land alongside the docs assets.
-6. Copy CF-only config files (`_headers`, `_redirects`) into `public/` so Cloudflare can read them at the publish-dir root. (Firebase never sees these — see [Firebase Hosting](#firebase-hosting) above; the CI guard fails the docs build if they leak into `public/` before this step.)
+6. Copy the CF config files (`_headers`, `_redirects`) into `public/` so Cloudflare reads them at the publish-dir root. (The CI guard fails the docs build if they leak into `public/` before this step.)
 
 Why a script rather than inlining the full chain in the dashboard: the CF dashboard's command field is a single-string text input, and long multi-command pastes can pick up stray newlines that break the shell chain in confusing ways. A version-controlled script is reviewable in PRs and immune to that class of bug.
 
@@ -146,17 +113,6 @@ Why a script rather than inlining the full chain in the dashboard: the CF dashbo
 sh tools/cf-build.sh
 npx wrangler pages deploy public --project-name=specscore
 ```
-
-### Why duplicate config?
-
-Firebase wants JSON. Cloudflare wants two plain-text files with their own syntaxes. There is no shared schema; any "single source-of-truth generator" would be a custom script that translates between them.
-
-For our current rule count (~10 headers, 2 redirects) the duplication is:
-- A 30-second edit when something changes
-- A visible, greppable diff in PRs
-- Zero new dependencies
-
-If the rule count grows past ~30 entries or we start forgetting to update both files in lockstep, the right move is to add `tools/site-generator/hosting.config.js` as a single source-of-truth that emits both `firebase.json#hosting.headers` and `public/_headers`. **Don't pre-build this** — overkill until duplication actually causes a bug.
 
 ---
 
@@ -177,9 +133,9 @@ A generator that doesn't naturally emit `.md` at canonical URLs is the wrong too
 
 Because LLM tools and downstream agents fetch the `.md` files by URL, the **on-disk source must match the served bytes** (modulo small expansions like includes). A Markdown-in / HTML-out SSG that re-serializes Markdown through an AST and emits only HTML breaks this contract. Our generator copies `.md` through unchanged and renders HTML on the side.
 
-### 3. Both hostings are pure static + per-path headers
+### 3. Pure static + per-path headers
 
-Firebase Hosting and Cloudflare Pages both handle the negotiation we need with declarative config. Neither requires a server, edge function, or custom runtime — exactly the constraint we want for a docs/spec site. Swapping providers is a config-translation exercise, not a re-architecture.
+Cloudflare Pages handles the content negotiation we need with declarative config (`_headers` / `_redirects`) — no server, edge function, or custom runtime, exactly the constraint we want for a docs/spec site. The stack stays provider-portable: swapping to another static host is a config-translation exercise, not a re-architecture.
 
 ### 4. The custom generator is small
 
@@ -245,8 +201,6 @@ The current stack is not perfect. The honest list:
 1. **No built-in search.** If/when we need site search, the right move is a small client-side index (e.g. Pagefind, which runs over the built `public/` directory and is generator-agnostic) — **not** a framework migration.
 
 3. **No sidebar / nav generation.** Today nav is hand-maintained in templates. If this becomes painful, the fix is a small Node helper that reads frontmatter — not a framework.
-
-4. **Hosting config drift.** Header/redirect rules live in both `firebase.json` and `_headers`/`_redirects`. See [Why duplicate config?](#why-duplicate-config) for when to fix this and how.
 
 5. **Long-form docs subdomain.** If we eventually want a richer docs experience that doesn't share the raw-`.md` contract (e.g. tutorials, conceptual guides with heavy components), the right move is a **separate `docs.specscore.md` site** built with Astro + Starlight, leaving the spec pages on the custom generator so `/feature-specification.md` etc. stay byte-stable.
 

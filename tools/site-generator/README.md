@@ -1,6 +1,6 @@
 # site-generator
 
-Static site builder for [`https://specscore.md`](https://specscore.md). Reads the repo's Markdown (specs, docs, blog) plus [`site-config.json`](site-config.json) and writes the generated site into the repo root's `public/` directory, which is checked in and deployed by Firebase Hosting.
+Static site builder for [`https://specscore.md`](https://specscore.md). Reads the repo's Markdown (specs, docs, blog) plus [`site-config.json`](site-config.json) and writes the generated site into the repo root's `public/` directory, which Cloudflare Pages rebuilds from sources and serves.
 
 ## Quick start
 
