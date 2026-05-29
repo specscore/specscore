@@ -9,7 +9,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
 <BaseLayout
   lang="es"
   title="SpecScore vs OpenSpec — Comparación honesta."
-  description="Una comparación objetiva y lado a lado de SpecScore y OpenSpec: formato de specs, linting, ciclo de vida, trazabilidad, CLI y soporte de agentes. Honesta sobre ambos."
+  description="Una comparación objetiva y lado a lado de SpecScore y OpenSpec: formato de especificaciones, linting, ciclo de vida, trazabilidad, CLI y soporte de agentes. Honesta sobre ambos."
   canonical="https://specscore.md/es/vs/openspec/"
 >
   <SiteHeader />
@@ -23,7 +23,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
           SpecScore vs OpenSpec
         </h1>
         <p class="hero__sub">
-          Ambos colocan especificaciones en Markdown, junto a tu código, legibles por agentes de IA. Responden preguntas distintas: OpenSpec organiza specs y genera comandos para agentes. SpecScore valida el contenido de las specs, aplica el ciclo de vida y traza el código de vuelta a los requisitos.
+          Ambos colocan especificaciones en Markdown, junto a tu código, legibles por agentes de IA. Responden preguntas distintas: OpenSpec organiza especificaciones y genera comandos para agentes. SpecScore valida el contenido de las especificaciones, aplica el ciclo de vida y traza el código de vuelta a los requisitos.
         </p>
       </div>
     </section>
@@ -33,10 +33,10 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
       <div class="section-inner section-inner--prose">
         <h2 id="shared-title" class="section-title">Lo que tienen en común.</h2>
         <ul class="shared-list">
-          <li>Las specs viven en tu repositorio como archivos Markdown — con control de versiones, revisables en PRs.</li>
+          <li>Las especificaciones viven en tu repositorio como archivos Markdown — con control de versiones, revisables en PRs.</li>
           <li>Ambos son open source bajo la licencia MIT.</li>
           <li>Ambos usan criterios de aceptación Given/When/Then.</li>
-          <li>Ambos soportan agentes de IA como consumidores de primera clase de las specs.</li>
+          <li>Ambos soportan agentes de IA como consumidores de primera clase de las especificaciones.</li>
         </ul>
       </div>
     </section>
@@ -56,14 +56,14 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
         <div class="credit-card">
           <h3 class="credit-card__title">Baja barrera de entrada</h3>
           <p class="credit-card__desc">
-            <code>npm install -g @fission-ai/openspec &amp;&amp; openspec init</code> y ya estás escribiendo specs. Sin esquema que aprender, sin frontmatter obligatorio. Diseñado para ser sencillo — especialmente para proyectos existentes.
+            <code>npm install -g @fission-ai/openspec &amp;&amp; openspec init</code> y ya estás escribiendo especificaciones. Sin esquema que aprender, sin frontmatter obligatorio. Diseñado para ser sencillo — especialmente para proyectos existentes.
           </p>
         </div>
 
         <div class="credit-card">
           <h3 class="credit-card__title">Modelo limpio de deltas de cambio</h3>
           <p class="credit-card__desc">
-            El formato <code>ADDED / MODIFIED / REMOVED</code> de OpenSpec para evolucionar specs está bien diseñado. Cada cambio es una carpeta con una propuesta, specs delta y tareas — una forma estructurada de proponer modificaciones.
+            El formato <code>ADDED / MODIFIED / REMOVED</code> de OpenSpec para evolucionar especificaciones está bien diseñado. Cada cambio es una carpeta con una propuesta, especificaciones delta y tareas — una forma estructurada de proponer modificaciones.
           </p>
         </div>
       </div>
@@ -90,7 +90,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
                 <td>Markdown + YAML frontmatter</td>
               </tr>
               <tr>
-                <td>Linting de specs</td>
+                <td>Linting de especificaciones</td>
                 <td>Solo estructura de archivos</td>
                 <td><strong>Calidad de contenido</strong> — verbos vagos, ACs faltantes, referencias colgantes</td>
               </tr>
@@ -200,7 +200,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
           </div>
 
           <div class="diff-card">
-            <h3 class="diff-card__title">El código se traza de vuelta a las specs</h3>
+            <h3 class="diff-card__title">El código se traza de vuelta a las especificaciones</h3>
             <p class="diff-card__desc">
               OpenSpec no tiene mecanismo de trazabilidad. SpecScore tiene anotaciones <code>specscore:</code> en comentarios de código y trailers <code>Verifies:</code> en commits. Ejecuta <code>specscore code refs</code> y obtén una respuesta determinista a "¿qué código implementa este requisito?"
             </p>
@@ -216,7 +216,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
           <div class="diff-card">
             <h3 class="diff-card__title">Jerarquía de artefactos componible</h3>
             <p class="diff-card__desc">
-              Las specs de OpenSpec son planas por dominio. SpecScore tiene una jerarquía tipada: Ideas se promueven a Features, Features contienen requisitos y ACs, Plans referencian ACs, Tasks referencian Plans. Todas las relaciones son navegables por máquina a través del CLI.
+              Las especificaciones de OpenSpec son planas por dominio. SpecScore tiene una jerarquía tipada: Ideas se promueven a Features, Features contienen requisitos y ACs, Plans referencian ACs, Tasks referencian Plans. Todas las relaciones son navegables por máquina a través del CLI.
             </p>
           </div>
         </div>
@@ -233,7 +233,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
             <h3 class="when-card__title">Empieza con OpenSpec cuando…</h3>
             <ul class="when-card__list">
               <li>Usas Cursor, Copilot u otros agentes no-Claude y necesitas integración lista para usar.</li>
-              <li>Estás agregando specs a un codebase existente por primera vez y quieres cero fricción.</li>
+              <li>Estás agregando especificaciones a un codebase existente por primera vez y quieres cero fricción.</li>
               <li>Tu equipo valora la flexibilidad de esquema sobre la aplicación estricta.</li>
             </ul>
           </div>
@@ -241,11 +241,11 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
           <div class="when-card when-card--primary">
             <h3 class="when-card__title">Usa SpecScore cuando…</h3>
             <ul class="when-card__list">
-              <li>Necesitas control de calidad de specs — lint detecta ambigüedades antes de que los agentes desperdicien tokens en ellas.</li>
+              <li>Necesitas control de calidad de especificaciones — lint detecta ambigüedades antes de que los agentes desperdicien tokens en ellas.</li>
               <li>Necesitas trazabilidad código-a-spec — "¿qué código implementa este requisito?" retorna una respuesta determinista.</li>
               <li>Estás construyendo un sistema grande con muchas features, sub-features y transiciones de ciclo de vida.</li>
               <li>Quieres cero dependencias de runtime — un binario, sin Node.js requerido.</li>
-              <li>Necesitas puertas de calidad de specs en CI — <code>specscore lint</code> sale con código no-cero en fallos, igual que ESLint o <code>go vet</code>.</li>
+              <li>Necesitas puertas de calidad de especificaciones en CI — <code>specscore lint</code> sale con código no-cero en fallos, igual que ESLint o <code>go vet</code>.</li>
             </ul>
           </div>
         </div>
@@ -257,7 +257,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
       <div class="section-inner section-inner--prose">
         <h2 id="bridge-title" class="section-title">No son mutuamente excluyentes.</h2>
         <p class="prose-p">
-          SpecScore puede hacer lint de los archivos <code>spec.md</code> de OpenSpec. Los equipos que empiezan con OpenSpec pueden agregar la capa de calidad de SpecScore sin migrar — valida las specs que ya tienes, agrega trazabilidad cuando la necesites, aplica el ciclo de vida cuando tu equipo crezca.
+          SpecScore puede hacer lint de los archivos <code>spec.md</code> de OpenSpec. Los equipos que empiezan con OpenSpec pueden agregar la capa de calidad de SpecScore sin migrar — valida las especificaciones que ya tienes, agrega trazabilidad cuando la necesites, aplica el ciclo de vida cuando tu equipo crezca.
         </p>
         <p class="prose-p">
           OpenSpec es una buena rampa de entrada. SpecScore son las barandas de seguridad.

@@ -13,9 +13,9 @@ const ld = {
   '@graph': [
     {
       '@type': 'Article',
-      headline: 'Desarrollo basado en specs para agentes de IA',
+      headline: 'Desarrollo basado en especificaciones para agentes de IA',
       description:
-        'Qué es el desarrollo basado en specs, por qué importa para los agentes de IA, cómo funciona el workflow y cómo se compara con TDD y la programación solo con prompts.',
+        'Qué es el desarrollo basado en especificaciones, por qué importa para los agentes de IA, cómo funciona el workflow y cómo se compara con TDD y la programación solo con prompts.',
       inLanguage: 'es',
       datePublished: '2026-05-29',
       dateModified: '2026-05-29',
@@ -25,7 +25,7 @@ const ld = {
       publisher: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
       about: {
         '@type': 'DefinedTerm',
-        name: 'Desarrollo basado en specs',
+        name: 'Desarrollo basado en especificaciones',
         description:
           'Una práctica de desarrollo de software en la que una especificación escrita — requisitos y criterios de aceptación — es la fuente de verdad contra la que se construye y se verifica el código.',
       },
@@ -35,16 +35,16 @@ const ld = {
       mainEntity: [
         {
           '@type': 'Question',
-          name: '¿Es el desarrollo basado en specs lo mismo que el desarrollo basado en tests?',
+          name: '¿Es el desarrollo basado en especificaciones lo mismo que el desarrollo basado en tests?',
           acceptedAnswer: {
             '@type': 'Answer',
             text:
-              'No. El TDD guía la implementación a partir de tests que fallan, a nivel de código. El desarrollo basado en specs trabaja un nivel por encima: primero fija el comportamiento previsto y los criterios de aceptación en una spec escrita. Son complementarios — los criterios de aceptación de una spec a menudo se convierten en los tests que luego guían el TDD.',
+              'No. El TDD guía la implementación a partir de tests que fallan, a nivel de código. El desarrollo basado en especificaciones trabaja un nivel por encima: primero fija el comportamiento previsto y los criterios de aceptación en una spec escrita. Son complementarios — los criterios de aceptación de una spec a menudo se convierten en los tests que luego guían el TDD.',
           },
         },
         {
           '@type': 'Question',
-          name: '¿El desarrollo basado en specs te ralentiza?',
+          name: '¿El desarrollo basado en especificaciones te ralentiza?',
           acceptedAnswer: {
             '@type': 'Answer',
             text:
@@ -57,7 +57,7 @@ const ld = {
           acceptedAnswer: {
             '@type': 'Answer',
             text:
-              'Un PRD suele ser prosa dirigida a personas. Una spec en el desarrollo basado en specs es estructurada y testeable — requisitos discretos con criterios de aceptación explícitos — de modo que tanto los revisores como los agentes de IA puedan actuar sobre ella con precisión.',
+              'Un PRD suele ser prosa dirigida a personas. Una spec en el desarrollo basado en especificaciones es estructurada y testeable — requisitos discretos con criterios de aceptación explícitos — de modo que tanto los revisores como los agentes de IA puedan actuar sobre ella con precisión.',
           },
         },
         {
@@ -77,8 +77,8 @@ const ld = {
 
 <BaseLayout
   lang="es"
-  title="Desarrollo basado en specs para agentes de IA — Guía completa | SpecScore"
-  description="El desarrollo basado en specs significa escribir una especificación testeable antes que el código, para que los agentes de IA construyan lo correcto. Qué es, cómo funciona y cómo se compara con TDD y la programación solo con prompts."
+  title="Desarrollo basado en especificaciones para agentes de IA — Guía completa | SpecScore"
+  description="El desarrollo basado en especificaciones significa escribir una especificación testeable antes que el código, para que los agentes de IA construyan lo correcto. Qué es, cómo funciona y cómo se compara con TDD y la programación solo con prompts."
   canonical="https://specscore.md/es/spec-driven-development/"
 >
   <Fragment slot="head">
@@ -91,9 +91,9 @@ const ld = {
     <!-- 1. Definition block + TL;DR -->
     <section class="sdd-hero" aria-labelledby="sdd-title">
       <div class="sdd-hero__inner">
-        <h1 id="sdd-title" class="sdd-hero__headline">Desarrollo basado en specs para agentes de IA</h1>
+        <h1 id="sdd-title" class="sdd-hero__headline">Desarrollo basado en especificaciones para agentes de IA</h1>
         <p class="sdd-hero__lede">
-          <strong>El desarrollo basado en specs (SDD) es una práctica en la que una especificación
+          <strong>El desarrollo basado en especificaciones (SDD) es una práctica en la que una especificación
           escrita y testeable — requisitos y criterios de aceptación — es la fuente de verdad contra
           la que se construye y se verifica el código.</strong> En lugar de ir directamente de un
           prompt o un ticket al código, primero acuerdas qué debe hacer el software y luego
@@ -113,9 +113,9 @@ const ld = {
     <!-- 2. What is SDD -->
     <section class="sdd-section" aria-labelledby="what-title">
       <div class="sdd-section__inner">
-        <h2 id="what-title">¿Qué es el desarrollo basado en specs?</h2>
+        <h2 id="what-title">¿Qué es el desarrollo basado en especificaciones?</h2>
         <p>
-          El desarrollo basado en specs invierte el orden habitual del trabajo. En lugar de tratar
+          El desarrollo basado en especificaciones invierte el orden habitual del trabajo. En lugar de tratar
           la especificación como documentación escrita a posteriori — o de saltársela por completo —
           el SDD convierte la spec en el artefacto principal. El código, los tests y la revisión
           remiten todos a ella.
@@ -160,7 +160,7 @@ const ld = {
     <!-- 4. How it works -->
     <section class="sdd-section" aria-labelledby="how-title">
       <div class="sdd-section__inner">
-        <h2 id="how-title">Cómo funciona el desarrollo basado en specs</h2>
+        <h2 id="how-title">Cómo funciona el desarrollo basado en especificaciones</h2>
         <p>El workflow es un bucle, no un documento puntual:</p>
         <ol class="sdd-steps">
           <li><strong>Captura la intención.</strong> Registra la dirección a medio formar — el problema, el objetivo, las preguntas abiertas — antes de comprometerte con una solución.</li>
@@ -176,7 +176,7 @@ const ld = {
     <!-- 5. Benefits -->
     <section class="sdd-section" aria-labelledby="benefits-title">
       <div class="sdd-section__inner">
-        <h2 id="benefits-title">Beneficios del desarrollo basado en specs</h2>
+        <h2 id="benefits-title">Beneficios del desarrollo basado en especificaciones</h2>
         <ul class="sdd-benefits">
           <li>Los desacuerdos afloran durante la revisión de la spec — barato — en lugar de después de la implementación — caro.</li>
           <li>"Terminado" es objetivo, porque los criterios de aceptación son testeables.</li>
@@ -196,7 +196,7 @@ const ld = {
     <!-- 6. Comparison -->
     <section class="sdd-section" aria-labelledby="vs-title">
       <div class="sdd-section__inner">
-        <h2 id="vs-title">Desarrollo basado en specs frente a prácticas relacionadas</h2>
+        <h2 id="vs-title">Desarrollo basado en especificaciones frente a prácticas relacionadas</h2>
         <div class="sdd-table-wrap">
           <table class="sdd-table">
             <thead>
@@ -210,7 +210,7 @@ const ld = {
           </table>
         </div>
         <p>
-          Para una comparación detallada de SpecScore frente a otras herramientas de specs, consulta
+          Para una comparación detallada de SpecScore frente a otras herramientas de especificaciones, consulta
           <a href="/es/vs/">las páginas de comparación</a>.
         </p>
       </div>
@@ -221,7 +221,7 @@ const ld = {
       <div class="sdd-section__inner">
         <h2 id="limits-title">Compromisos y cuándo no usarlo</h2>
         <p>
-          El desarrollo basado en specs no es gratis. Adelanta el esfuerzo hacia pensar y escribir
+          El desarrollo basado en especificaciones no es gratis. Adelanta el esfuerzo hacia pensar y escribir
           antes de que se ejecute código alguno, lo cual es el trato equivocado para un script
           puntual o un experimento desechable. Y una spec solo ayuda si se mantiene al día — una
           spec abandonada se vuelve engañosa, peor que ninguna. El SDD compensa cuando el trabajo es
@@ -234,11 +234,11 @@ const ld = {
     <!-- 8. In practice (SpecScore) -->
     <section class="sdd-section" aria-labelledby="practice-title">
       <div class="sdd-section__inner">
-        <h2 id="practice-title">Hacer desarrollo basado en specs con agentes de IA en la práctica</h2>
+        <h2 id="practice-title">Hacer desarrollo basado en especificaciones con agentes de IA en la práctica</h2>
         <p>
           Para hacer SDD con agentes de IA necesitas dos cosas: un <strong>formato de spec legible
           por máquina</strong> que tanto tu equipo como tus agentes entiendan, y una <strong>forma
-          de que los agentes lean, escriban y validen</strong> esas specs.
+          de que los agentes lean, escriban y validen</strong> esas especificaciones.
         </p>
         <p>
           <strong>SpecScore</strong> es una implementación de exactamente eso. Es un formato abierto
@@ -261,16 +261,16 @@ const ld = {
       <div class="sdd-section__inner">
         <h2 id="faq-title">Preguntas frecuentes</h2>
         <div class="sdd-faq__item">
-          <p class="sdd-faq__q">¿Es el desarrollo basado en specs lo mismo que el desarrollo basado en tests?</p>
-          <p class="sdd-faq__a">No. El TDD guía la implementación a partir de tests que fallan, a nivel de código. El desarrollo basado en specs trabaja un nivel por encima: primero fija el comportamiento previsto y los criterios de aceptación en una spec escrita. Son complementarios — los criterios de aceptación de una spec a menudo se convierten en los tests que luego guían el TDD.</p>
+          <p class="sdd-faq__q">¿Es el desarrollo basado en especificaciones lo mismo que el desarrollo basado en tests?</p>
+          <p class="sdd-faq__a">No. El TDD guía la implementación a partir de tests que fallan, a nivel de código. El desarrollo basado en especificaciones trabaja un nivel por encima: primero fija el comportamiento previsto y los criterios de aceptación en una spec escrita. Son complementarios — los criterios de aceptación de una spec a menudo se convierten en los tests que luego guían el TDD.</p>
         </div>
         <div class="sdd-faq__item">
-          <p class="sdd-faq__q">¿El desarrollo basado en specs te ralentiza?</p>
+          <p class="sdd-faq__q">¿El desarrollo basado en especificaciones te ralentiza?</p>
           <p class="sdd-faq__a">Añade tiempo antes de escribir código y elimina el tiempo dedicado a reconstruir lo que no era. Para scripts desechables el coste no compensa. Para cualquier cosa que un agente de IA genere a gran escala, o que un equipo deba mantener, escribir la spec primero suele ser más rápido de principio a fin.</p>
         </div>
         <div class="sdd-faq__item">
           <p class="sdd-faq__q">¿Cuál es la diferencia entre una spec y un PRD?</p>
-          <p class="sdd-faq__a">Un PRD suele ser prosa dirigida a personas. Una spec en el desarrollo basado en specs es estructurada y testeable — requisitos discretos con criterios de aceptación explícitos — de modo que tanto los revisores como los agentes de IA puedan actuar sobre ella con precisión.</p>
+          <p class="sdd-faq__a">Un PRD suele ser prosa dirigida a personas. Una spec en el desarrollo basado en especificaciones es estructurada y testeable — requisitos discretos con criterios de aceptación explícitos — de modo que tanto los revisores como los agentes de IA puedan actuar sobre ella con precisión.</p>
         </div>
         <div class="sdd-faq__item">
           <p class="sdd-faq__q">¿Cómo usan una spec los agentes de IA de programación?</p>
@@ -283,7 +283,7 @@ const ld = {
   <!-- 10. CTA -->
   <section class="sdd-cta" aria-labelledby="cta-title">
     <div class="sdd-cta__inner">
-      <h2 id="cta-title">Empieza a construir basándote en specs con tu agente de IA</h2>
+      <h2 id="cta-title">Empieza a construir basándote en especificaciones con tu agente de IA</h2>
       <p>SpecScore le da a tu agente un formato de spec abierto y una CLI para consultarlo y hacerle lint.</p>
       <div class="sdd-cta__buttons">
         <a href="/es/ai/" class="btn btn--primary">Obtén skills de IA para tu agente</a>
