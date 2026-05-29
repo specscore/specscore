@@ -66,6 +66,8 @@ When present, `grade.values` is the effective value set for the repository, repl
 
 When `specscore.yaml` declares no `grade:` block (or a `grade:` block without `values:`), the effective value set is the built-in default `A, B, C, D, F`. A `**Grade:**` line is therefore always validated against some value set — the configured one when present, the default otherwise.
 
+The default deliberately **excludes `E`**, following the academic letter-grade convention the scale borrows from (A–F with no E, so `F` reads unambiguously as the failing grade). Five buckets — excellent / good / acceptable / weak / fail — suffice for a review-quality signal; a different or finer scale (an `E`, a numeric `1–5`, or `pass/fail`) is expressed by declaring `grade.values` (see [REQ: grade-values-config](#req-grade-values-config)) rather than by enlarging the default.
+
 #### REQ: grade-values-shape
 
 When `grade.values` is present, it MUST be a non-empty YAML list of non-empty scalar tokens. An empty list (`values: []`), a scalar value (`values: A`), or a list containing an empty or non-scalar entry is a hard error. Duplicate tokens within the list SHOULD emit a lint advisory and are de-duplicated; they are not a hard error.
@@ -171,8 +173,7 @@ Every acceptance criterion has a lint (CLI) surface, so a stub Scenario was scaf
 
 ## Open Questions
 
-- Should the default value set include `E` (i.e. `A, B, C, D, E, F`), or is the academic-style `A, B, C, D, F` (no `E`) the right canonical default? A repo can always override via `grade.values`.
-- Should `**Grade:**` placement be normalized by `specscore spec lint --fix` (reorder it to the canonical last-line position) or only diagnosed as an error?
+None at this time. (Resolved: the default value set is `A, B, C, D, F` — no `E` — per [REQ: grade-values-default](#req-grade-values-default); and `**Grade:**` placement is auto-normalized by `specscore spec lint --fix` per [REQ: grade-placement](#req-grade-placement).)
 
 ---
 *This document follows the https://specscore.md/feature-specification*

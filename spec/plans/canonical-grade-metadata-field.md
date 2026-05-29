@@ -42,7 +42,7 @@ Wire the Grade lint rule so it applies uniformly to every artifact kind that has
 
 ## Outstanding Questions
 
-- Should the built-in default value set include `E` (`A, B, C, D, E, F`) rather than the academic-style `A, B, C, D, F` (no `E`)? A repo can always override via `grade.values`, so this only affects the zero-config default.
+None at this time. (Resolved: the built-in default value set is `A, B, C, D, F` — no `E` — following the academic letter-grade convention; repos needing a different scale declare `grade.values`.)
 
 ---
 *This document follows the https://specscore.md/plan-specification*
