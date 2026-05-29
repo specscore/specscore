@@ -1,0 +1,38 @@
+---
+// Russian variant of HonestLimits.astro — honest-limits teaser.
+// NOTE: Russian copy is a draft pending native review.
+---
+
+<section class="limits-teaser section section--flush-top" aria-labelledby="limits-teaser-title">
+  <div class="section-inner section-inner--prose">
+    <h2 id="limits-teaser-title" class="limits-teaser__title">
+      Вот что он не поймает.
+    </h2>
+    <p class="limits-teaser__body">
+      Линтер, который утверждает, что ловит всё, — лжёт. SpecScore — это
+      многослойная система: детерминированный линтер, проверка ИИ и ваше
+      собственное суждение, и у каждого слоя есть реальные границы. Мы описали
+      их все: что ловит линтер, что ловит ИИ и что по-прежнему остаётся на
+      вас — по замыслу.
+    </p>
+    <p class="limits-teaser__cta">
+      <a class="xref" href="/ru/validators/#limits">Что линтер не поймает →</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .limits-teaser { background: var(--cream); }
+  .limits-teaser__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .limits-teaser__body {
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+</style>

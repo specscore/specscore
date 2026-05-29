@@ -166,15 +166,14 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
 
         <div class="diff-grid">
           <div class="diff-card">
-            <h3 class="diff-card__title">Линтинг спецификаций ловит неоднозначности раньше агентов</h3>
+            <h3 class="diff-card__title">Проверка идёт глубже структуры файлов</h3>
             <p class="diff-card__desc">
-              Команда <code>validate</code> в OpenSpec проверяет структуру файлов — существует ли файл, есть ли нужные секции. Команда <code>lint</code> в SpecScore проверяет содержание: расплывчатые глаголы без объекта/условия, отсутствующие критерии приёмки, висячие перекрёстные ссылки, некорректные переходы статусов.
+              Команда <code>validate</code> в OpenSpec проверяет структуру файлов — существует ли файл, есть ли нужные секции. SpecScore проверяет больше, в два слоя: <code>lint</code> детерминированно проверяет связи в содержании — у каждого требования есть критерии приёмки, перекрёстные ссылки разрешаются, переходы статусов корректны, — а проверка ИИ (<code>/review</code>, <code>/score</code>) ловит то, что не под силу линтеру: неоднозначные критерии и расплывчатые формулировки.
             </p>
             <div class="diff-card__example">
 <pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-  <span class="mark-fail">✗</span> R3  Discount application
-       <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
-                <span class="dim">fix:</span> specify "higher discount wins; if tied, site-wide wins"</pre>
+  <span class="mark-fail">✗</span> R3  no acceptance criteria
+  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
             </div>
           </div>
 

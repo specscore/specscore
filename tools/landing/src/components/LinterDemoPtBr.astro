@@ -1,6 +1,7 @@
 ---
 // Brazilian Portuguese variant of LinterDemo.astro.
 // Terminal output stays English — it's literal CLI stdout.
+import LintExample from './LintExample.astro';
 ---
 
 <section class="linter section" aria-labelledby="linter-title">
@@ -16,18 +17,7 @@
       role="img"
       aria-label="Saída de specscore lint no terminal: R1 e R2 passam com marcas verdes, R3 falha com marca vermelha e mensagem de erro corrigível."
     >
-<pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-
-  checkout/apply-discount.md
-    <span class="mark-pass">✓</span> R1  Single-code limit
-    <span class="mark-pass">✓</span> R2  Code validity
-    <span class="mark-fail">✗</span> R3  Discount application
-         <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
-                  <span class="dim">expected:</span> concrete tie-break behavior, or reference to a defined rule
-                  <span class="dim">fix:</span>      specify "higher discount wins; if tied, site-wide promotion wins"
-
-  <span class="dim">1 of 3 requirements failing</span>
-  <span class="dim">exit 1</span></pre>
+<LintExample />
     </div>
   </div>
 </section>
