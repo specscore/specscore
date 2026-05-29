@@ -446,7 +446,7 @@ pre.terminal.terminal--window::after,
 .footer-langs__inner {
   max-width: var(--max-content);
   margin: 0 auto;
-  padding: var(--space-3) var(--space-3);
+  padding: 0.75rem var(--space-3);
 }
 .footer-langs__list {
   list-style: none;
@@ -617,7 +617,7 @@ pre.terminal.terminal--window::after,
 .sdd-faq__q { font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: var(--space-1); }
 .sdd-faq__a { color: var(--mid-ink); line-height: 1.65; }
 
-.sdd-cta { background: var(--cream); padding: var(--space-6) var(--space-3); border-top: 1px solid var(--hairline); text-align: center; }
+.sdd-cta { background: var(--cream-2); padding: var(--space-7) var(--space-3); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); text-align: center; }
 .sdd-cta__inner { max-width: var(--max-prose); margin: 0 auto; }
 .sdd-cta__buttons { display: flex; gap: var(--space-2); justify-content: center; flex-wrap: wrap; margin-top: var(--space-3); }
 
