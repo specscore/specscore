@@ -181,18 +181,20 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
 
         <div class="diff-grid">
           <div class="diff-card">
-            <h3 class="diff-card__title">Spec linting catches ambiguity before agents do</h3>
+            <h3 class="diff-card__title">Validation goes beyond file structure</h3>
             <p class="diff-card__desc">
               OpenSpec's <code>validate</code> checks file structure — does the file
-              exist, does it have the right sections. SpecScore's <code>lint</code>
-              checks content: vague verbs without object/condition, missing acceptance
-              criteria, dangling cross-references, mismatched status transitions.
+              exist, does it have the right sections. SpecScore checks more, in two
+              layers: <code>lint</code> deterministically verifies content
+              relationships — every requirement has acceptance criteria,
+              cross-references resolve, status transitions are valid — and an AI
+              reviewer (<code>/review</code>, <code>/score</code>) catches what no
+              linter can: ambiguous criteria and vague verbs.
             </p>
             <div class="diff-card__example">
 <pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-  <span class="mark-fail">✗</span> R3  Discount application
-       <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
-                <span class="dim">fix:</span> specify "higher discount wins; if tied, site-wide wins"</pre>
+  <span class="mark-fail">✗</span> R3  no acceptance criteria
+  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
             </div>
           </div>
 
