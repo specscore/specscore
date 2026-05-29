@@ -579,3 +579,45 @@ pre.terminal.terminal--window::after,
   }
 }
 
+/* ── Spec-Driven Development pillar page (/spec-driven-development/) ──
+   Shared across all 8 locale variants per DESIGN-PRINCIPLES §9. */
+.sdd-hero { background: var(--cream); padding: var(--space-6) var(--space-3) var(--space-5); }
+.sdd-hero__inner { max-width: var(--max-prose); margin: 0 auto; }
+.sdd-hero__headline { font-size: var(--fs-h1); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-3); text-wrap: balance; }
+.sdd-hero__lede { font-size: 1.25rem; color: var(--ink); line-height: 1.5; text-wrap: pretty; }
+
+.sdd-section { padding: var(--space-6) var(--space-3); border-top: 1px solid var(--hairline); }
+.sdd-section__inner { max-width: var(--max-prose); margin: 0 auto; }
+.sdd-section h2 { font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-3); text-wrap: balance; }
+.sdd-section h3 { font-size: 1.15rem; font-weight: 600; margin: var(--space-3) 0 var(--space-2); }
+.sdd-section p { color: var(--mid-ink); line-height: 1.65; margin-bottom: var(--space-2); text-wrap: pretty; }
+.sdd-section p strong { color: var(--ink); }
+.sdd-section a { color: var(--ink-blue); border-bottom: 1px solid transparent; transition: border-color 120ms ease; }
+.sdd-section a:hover { border-bottom-color: var(--ink-blue); }
+
+.sdd-takeaways { list-style: none; margin: var(--space-3) 0 0; padding: var(--space-3) 0 0; border-top: 1px solid var(--hairline); display: flex; flex-direction: column; gap: 0.6rem; }
+.sdd-takeaways li { color: var(--ink); line-height: 1.5; padding-left: 1.4rem; position: relative; }
+.sdd-takeaways li::before { content: "✓"; position: absolute; left: 0; color: var(--ink-blue); font-family: var(--font-code); }
+
+.sdd-steps { margin: 0; padding-left: 1.3rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.sdd-steps li { color: var(--mid-ink); line-height: 1.6; }
+.sdd-steps li strong { color: var(--ink); }
+
+.sdd-benefits { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.sdd-benefits li { color: var(--mid-ink); line-height: 1.6; padding-left: 1.4rem; position: relative; }
+.sdd-benefits li::before { content: "→"; position: absolute; left: 0; color: var(--ink-blue); font-family: var(--font-code); }
+
+.sdd-table-wrap { overflow-x: auto; margin-top: var(--space-3); }
+.sdd-table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+.sdd-table th, .sdd-table td { text-align: left; padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--hairline); vertical-align: top; line-height: 1.5; }
+.sdd-table th { font-family: var(--font-display); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-ink); font-weight: 600; }
+.sdd-table td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+
+.sdd-faq__item { padding: var(--space-3) 0; border-top: 1px solid var(--hairline); }
+.sdd-faq__q { font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: var(--space-1); }
+.sdd-faq__a { color: var(--mid-ink); line-height: 1.65; }
+
+.sdd-cta { background: var(--cream); padding: var(--space-6) var(--space-3); border-top: 1px solid var(--hairline); text-align: center; }
+.sdd-cta__inner { max-width: var(--max-prose); margin: 0 auto; }
+.sdd-cta__buttons { display: flex; gap: var(--space-2); justify-content: center; flex-wrap: wrap; margin-top: var(--space-3); }
+
