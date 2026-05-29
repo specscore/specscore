@@ -40,19 +40,18 @@ import QsTabsScript from '../../components/QsTabsScript.astro';
         <div
           class="hero__art"
           role="img"
-          aria-label="Terminal output of specscore lint: R1 and R2 pass with green checks, R3 fails with a red mark and a fixable error message."
+          aria-label="Terminal output of specscore lint: R1 and R2 have acceptance criteria (green checks); R3 has none, a Related Feature link does not resolve, and the required Open Questions section is missing (red marks). 3 problems."
         >
 <pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
 
   checkout/apply-discount.md
-    <span class="mark-pass">✓</span> R1  Single-code limit
-    <span class="mark-pass">✓</span> R2  Code validity
-    <span class="mark-fail">✗</span> R3  Discount application
-         <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
-                  <span class="dim">expected:</span> concrete tie-break behavior, or reference to a defined rule
-                  <span class="dim">fix:</span>      specify "higher discount wins; if tied, site-wide promotion wins"
+    <span class="mark-pass">✓</span> R1  has acceptance criteria
+    <span class="mark-pass">✓</span> R2  has acceptance criteria
+    <span class="mark-fail">✗</span> R3  no acceptance criteria
+    <span class="mark-fail">✗</span> link     <span class="dim">"Related Feature: discount-tiers" not found</span>
+    <span class="mark-fail">✗</span> section  <span class="dim">"Open Questions" missing</span>
 
-  <span class="dim">1 of 3 requirements failing</span>
+  <span class="dim">3 problems</span>
   <span class="dim">exit 1</span></pre>
         </div>
       </div>
@@ -210,7 +209,7 @@ import QsTabsScript from '../../components/QsTabsScript.astro';
       <div class="page-footer__col">
         <h4 class="page-footer__heading">Ecosystem</h4>
         <ul class="page-footer__list">
-          <li><a href="https://specscore.md">SpecScore</a> — the open standard</li>
+          <li><a href="/">SpecScore</a> — the open standard</li>
           <li><a href="/ai/specstudio-skills/">SpecStudio Skills</a> — Claude Code plugin</li>
           <li><a href="https://specscore.studio">SpecScore Studio</a> — web viewer</li>
         </ul>

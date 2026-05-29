@@ -1,0 +1,39 @@
+---
+// Honest-limits teaser. Links to the dedicated /limits page.
+// Strategic intent: pre-empt the Habr "it says all-fixed while real
+// contradictions slip through" objection by naming the limit on our own
+// terms, before the comment thread does. Confidence comes from candor.
+---
+
+<section class="limits-teaser section section--flush-top" aria-labelledby="limits-teaser-title">
+  <div class="section-inner section-inner--prose">
+    <h2 id="limits-teaser-title" class="limits-teaser__title">
+      Here's what it won't catch.
+    </h2>
+    <p class="limits-teaser__body">
+      A linter that claims it catches everything is lying. SpecScore is a
+      layered system — a deterministic linter, an AI reviewer, and your own
+      judgment — and each layer has a real edge. We wrote them all down: what
+      lint catches, what the AI catches, and what's still on you by design.
+    </p>
+    <p class="limits-teaser__cta">
+      <a class="xref" href="/validators/#limits">What the linter won't catch →</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .limits-teaser { background: var(--cream); }
+  .limits-teaser__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .limits-teaser__body {
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+</style>

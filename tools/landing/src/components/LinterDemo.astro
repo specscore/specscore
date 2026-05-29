@@ -1,57 +1,146 @@
 ---
-// Section 4 — See the linter at work.
+// Section 4 — Check your spec in two passes.
+// Two-column: the deterministic linter and the non-deterministic AI review/score.
 // Visual callback to the hero: same green ✓ and red ✗ hex.
 ---
 
-<section class="linter section" aria-labelledby="linter-title">
+<section class="passes section" aria-labelledby="passes-title">
   <div class="section-inner">
-    <h2 id="linter-title" class="linter__title">Run the linter.</h2>
-    <p class="linter__intro">
-      Run <code>specscore lint</code> against the spec you just saw.
-      Here's what it tells you.
+    <h2 id="passes-title" class="passes__title">Check your spec in two passes.</h2>
+    <p class="passes__intro">
+      A fast deterministic linter, then a deeper AI review — run against the
+      spec you just saw. Two passes, two kinds of certainty.
     </p>
 
-    <div
-      class="linter__terminal"
-      role="img"
-      aria-label="Terminal output of specscore lint: R1 and R2 pass with green checks, R3 fails with a red mark and a fixable error message."
-    >
-<pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+    <div class="passes__grid">
+      {/* ── Pass 1 — the linter (shipped, real output) ── */}
+      <div class="pass">
+        <div class="pass__head">
+          <h3 class="pass__name">Run the linter.</h3>
+          <span class="pass__kind">deterministic</span>
+        </div>
+        <div
+          class="pass__terminal"
+          role="img"
+          aria-label="Terminal output of specscore lint: R1 and R2 have acceptance criteria (green checks); R3 has none, a Related Feature link doesn't resolve, and the required Open Questions section is missing (red marks). 3 problems, exit 1."
+        >
+<pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint apply-discount.md
 
-  checkout/apply-discount.md
-    <span class="mark-pass">✓</span> R1  Single-code limit
-    <span class="mark-pass">✓</span> R2  Code validity
-    <span class="mark-fail">✗</span> R3  Discount application
-         <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
-                  <span class="dim">expected:</span> concrete tie-break behavior, or reference to a defined rule
-                  <span class="dim">fix:</span>      specify "higher discount wins; if tied, site-wide promotion wins"
+  <span class="mark-pass">✓</span> R1  has acceptance criteria
+  <span class="mark-pass">✓</span> R2  has acceptance criteria
+  <span class="mark-fail">✗</span> R3  no acceptance criteria
+  <span class="mark-fail">✗</span> link     <span class="dim">"Related Feature: discount-tiers" not found</span>
+  <span class="mark-fail">✗</span> section  <span class="dim">"Open Questions" missing</span>
 
-  <span class="dim">1 of 3 requirements failing</span>
-  <span class="dim">exit 1</span></pre>
+  <span class="dim">3 problems   exit 1</span></pre>
+        </div>
+        <p class="pass__caption">
+          Same result every run. Free, fast, runs on every commit.
+        </p>
+      </div>
+
+      {/* ── Pass 2 — AI review/score (Approved Idea, labeled preview) ── */}
+      <div class="pass">
+        <div class="pass__head">
+          <h3 class="pass__name">Review &amp; score with AI.</h3>
+          <span class="pass__kind">non-deterministic</span>
+        </div>
+        <div
+          class="pass__terminal"
+          role="img"
+          aria-label="An AI review: the spec earns a B grade with two actionable notes — a vague trigger on AC-2 and a missing error path on AC-3."
+        >
+<pre class="terminal terminal--window"><span class="prompt">&gt;</span> /score apply-discount.md
+
+  Grade: <span class="mark-pass">B</span>  — ready with edits
+  <span class="dim">AC-2</span>  vague trigger — name the actor and event
+  <span class="dim">AC-3</span>  no error path for an expired code
+  <span class="dim">prose reads clean; criteria need tightening</span></pre>
+        </div>
+        <p class="pass__caption">
+          Reads for meaning, like a human reviewer.
+        </p>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .linter { background: var(--cream); }
-  .linter__title {
+  .passes { background: var(--cream); }
+  .passes__title {
     font-size: var(--fs-h2);
     margin-bottom: var(--space-2);
     font-weight: 700;
     letter-spacing: -0.01em;
   }
-  .linter__intro {
+  .passes__intro {
     color: var(--mid-ink);
     margin-bottom: var(--space-4);
+    line-height: 1.6;
+    text-wrap: pretty;
   }
-  .linter__intro code {
+
+  .passes__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .pass {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .pass__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .pass__name {
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .pass__kind {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+
+  .pass__terminal {
+    margin-bottom: var(--space-2);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .pass__terminal pre.terminal {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .pass__caption {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+  .pass__caption .xref code {
+    font-size: 0.9em;
     background: var(--cream-2);
-    padding: 0.05em 0.35em;
+    padding: 0.05em 0.3em;
     border-radius: 2px;
-    font-size: 0.92em;
-    color: var(--ink);
   }
-  .linter__terminal {
-    margin-bottom: var(--space-3);
+
+  /* Two-column only: reserve a consistent caption height so both
+     terminals stretch to the same height. */
+  @media (min-width: 721px) {
+    .pass__caption { min-height: 2lh; }
+  }
+
+  @media (max-width: 720px) {
+    .passes__grid { grid-template-columns: 1fr; gap: var(--space-5); }
   }
 </style>

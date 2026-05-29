@@ -42,14 +42,13 @@ import QsTabsScript from '../../../components/QsTabsScript.astro';
 <pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
 
   checkout/apply-discount.md
-    <span class="mark-pass">✓</span> R1  Single-code limit
-    <span class="mark-pass">✓</span> R2  Code validity
-    <span class="mark-fail">✗</span> R3  Discount application
-         <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
-                  <span class="dim">expected:</span> concrete tie-break behavior, or reference to a defined rule
-                  <span class="dim">fix:</span>      specify "higher discount wins; if tied, site-wide promotion wins"
+    <span class="mark-pass">✓</span> R1  has acceptance criteria
+    <span class="mark-pass">✓</span> R2  has acceptance criteria
+    <span class="mark-fail">✗</span> R3  no acceptance criteria
+    <span class="mark-fail">✗</span> link     <span class="dim">"Related Feature: discount-tiers" not found</span>
+    <span class="mark-fail">✗</span> section  <span class="dim">"Open Questions" missing</span>
 
-  <span class="dim">1 of 3 requirements failing</span>
+  <span class="dim">3 problems</span>
   <span class="dim">exit 1</span></pre>
         </div>
       </div>
@@ -207,7 +206,7 @@ import QsTabsScript from '../../../components/QsTabsScript.astro';
       <div class="page-footer__col">
         <h4 class="page-footer__heading">Экосистема</h4>
         <ul class="page-footer__list">
-          <li><a href="https://specscore.md">SpecScore</a> — открытый стандарт</li>
+          <li><a href="/">SpecScore</a> — открытый стандарт</li>
           <li><a href="/ru/ai/specstudio-skills/">SpecStudio Skills</a> — плагин для Claude Code</li>
           <li><a href="https://specscore.studio">SpecScore Studio</a> — веб-просмотрщик</li>
         </ul>

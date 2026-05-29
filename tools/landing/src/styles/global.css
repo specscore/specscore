@@ -118,6 +118,13 @@ code, pre, kbd { font-family: var(--font-code); }
 main > .section + .section {
   border-top: 1px solid var(--hairline);
 }
+/* Opt-out: let a section blend into the one above it — no hairline divider,
+   and no top padding so it flows from the previous section's bottom padding
+   instead of stacking a second full gap. */
+main > .section + .section.section--flush-top {
+  border-top: none;
+  padding-top: 0;
+}
 
 /* --- Buttons / CTAs --- */
 .btn {

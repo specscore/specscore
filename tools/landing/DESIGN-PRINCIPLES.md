@@ -128,6 +128,25 @@ Block / element / modifier. Examples:
 
 This keeps selectors flat (one class deep), avoids specificity wars, and reads predictably. Don't introduce arbitrary nesting or utility classes without a reason.
 
+### 13. Don't width-cap intro text that sits above a multi-column block in the same section
+
+Intro / lead text placed directly above a 2-column (or wider) layout **inside the same `.section`** must not carry a `max-width` line-length cap (e.g. `max-width: 60ch`). The narrow measure forces an early wrap and visually detaches the intro from the full-width columns beneath it. Let the intro span the section width; use `text-wrap: pretty` (or `text-wrap: balance` for headings) to avoid orphan lines **instead of** capping width.
+
+Wrong: `.passes__intro { max-width: 60ch; }` above a `1fr 1fr` grid → "…run against the spec you" / "just saw." orphan.
+Right: `.passes__intro { text-wrap: pretty; }` (no cap) → fills the section width, wraps only when it has to.
+
+This is *not* a blanket ban on line-length caps. Standalone prose with no full-width sibling to align to — `.section-inner--prose`, hero subheads — should still cap its measure for readability. The rule is specifically about intros that introduce a wide block in the same section.
+
+### 14. Same-site links are root-relative, not absolute
+
+Links to pages on `specscore.md` (the Astro landing *and* the docs site both live there) must use **root-relative** hrefs — `href="/"`, `href="/docs"`, `href="/cli/"` — never `href="https://specscore.md/…"`. Absolute self-links break local development (clicking one jumps you from `localhost` to the live site) and force a needless redirect in production.
+
+Absolute URLs are correct only for:
+- **Genuinely cross-domain** targets — `specscore.studio`, GitHub, external sites.
+- **`<link rel="canonical">` and Open Graph (`og:url`) tags** — these *must* be absolute. They are not navigable links, so they're exempt from this rule.
+
+If you're typing `https://specscore.md` into an `href`/`src`, stop — use the path.
+
 ---
 
 ## Voice and copy
