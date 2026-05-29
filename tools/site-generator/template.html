@@ -22,13 +22,23 @@
 </head>
 <body>
   <header class="site-header">
-    <a href="/" class="wordmark"><span class="wordmark-clef">𝄞</span> SpecScore.md</a>
-    <div class="header-right">
-      <a href="https://github.com/specscore/specscore">GitHub</a>
+    <div class="site-header__inner">
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="sidebar">
+        <span class="menu-toggle-bars" aria-hidden="true"></span>
+      </button>
+      <a href="/" class="wordmark"><span class="wordmark-clef">𝄞</span> SpecScore.md</a>
+      <nav class="header-right" aria-label="Primary">
+        <a href="/docs">Specification</a>
+        <a href="/cli/">CLI</a>
+        <a href="/ai/">AI Skills</a>
+        <a href="/faq/">FAQ</a>
+        <a href="https://github.com/specscore/specscore">GitHub</a>
+      </nav>
     </div>
   </header>
   <div class="site-body">
-    <aside class="sidebar">
+    <div class="sidebar-overlay"></div>
+    <aside class="sidebar" id="sidebar">
       {{sidebar}}
     </aside>
     <main>
@@ -63,6 +73,37 @@
       </footer>
     </main>
   </div>
+  <script>
+    (function() {
+      var toggle = document.querySelector('.menu-toggle');
+      var sidebar = document.getElementById('sidebar');
+      var overlay = document.querySelector('.sidebar-overlay');
+      var header = document.querySelector('.site-header');
+      if (!toggle || !sidebar || !overlay) return;
+
+      function syncHeaderHeight() {
+        if (header) document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+      }
+      syncHeaderHeight();
+      window.addEventListener('resize', syncHeaderHeight);
+
+      function setOpen(open) {
+        document.body.classList.toggle('menu-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+
+      toggle.addEventListener('click', function() {
+        setOpen(!document.body.classList.contains('menu-open'));
+      });
+      overlay.addEventListener('click', function() { setOpen(false); });
+      sidebar.addEventListener('click', function(e) {
+        if (e.target.closest('a')) setOpen(false);
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && document.body.classList.contains('menu-open')) setOpen(false);
+      });
+    })();
+  </script>
   <script>
     (function() {
       var ICON_COPY = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>';
