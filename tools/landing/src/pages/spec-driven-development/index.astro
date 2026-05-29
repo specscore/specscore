@@ -1,0 +1,314 @@
+---
+// /spec-driven-development/ — pillar page.
+// Neutral-reference-first explainer on spec-driven development, with AI as
+// the narrative spine. SpecScore appears as the named recommended
+// implementation in the "in practice" section + FAQ only.
+// Design: docs/superpowers/specs/2026-05-29-spec-driven-development-pillar-page-design.md
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: 'Spec-Driven Development for AI Coding Agents',
+      description:
+        'What spec-driven development is, why it matters for AI coding agents, how the workflow works, and how it compares to TDD and prompt-only coding.',
+      inLanguage: 'en',
+      datePublished: '2026-05-29',
+      dateModified: '2026-05-29',
+      mainEntityOfPage: 'https://specscore.md/spec-driven-development/',
+      image: 'https://specscore.md/hero-og.webp',
+      author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      publisher: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      about: {
+        '@type': 'DefinedTerm',
+        name: 'Spec-Driven Development',
+        description:
+          'A software development practice in which a written specification — requirements and acceptance criteria — is the source of truth that code is built against and verified against.',
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Is spec-driven development the same as test-driven development?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'No. Test-driven development drives implementation from failing tests at the code level. Spec-driven development works one level up: it fixes the intended behavior and acceptance criteria in a written spec first. The two are complementary — acceptance criteria in a spec often become the tests TDD then drives.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Does spec-driven development slow you down?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'It adds time before code is written and removes time spent rebuilding the wrong thing. For throwaway scripts the overhead is not worth it. For anything an AI agent will generate at scale, or that a team must maintain, writing the spec first is usually faster end to end.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'What is the difference between a spec and a PRD?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'A PRD (product requirements document) is usually prose aimed at humans. A spec in spec-driven development is structured and testable — discrete requirements with explicit acceptance criteria — so both reviewers and AI agents can act on it precisely.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'How do AI coding agents use a spec?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'When the spec is machine-readable, an agent can query it for the requirements and acceptance criteria relevant to its current task instead of loading the whole codebase into context, then check its output against those criteria. The spec acts as a guardrail against generating plausible but wrong code.',
+          },
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Spec-Driven Development for AI Agents — A Complete Guide | SpecScore"
+  description="Spec-driven development means writing a testable specification before code, so AI coding agents build the right thing. What it is, how it works, and how it compares to TDD and prompt-only coding."
+  canonical="https://specscore.md/spec-driven-development/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
+  </Fragment>
+
+  <SiteHeader />
+
+  <main>
+    <!-- 1. Definition block + TL;DR -->
+    <section class="sdd-hero" aria-labelledby="sdd-title">
+      <div class="sdd-hero__inner">
+        <h1 id="sdd-title" class="sdd-hero__headline">Spec-Driven Development for AI Coding Agents</h1>
+        <p class="sdd-hero__lede">
+          <strong>Spec-driven development (SDD) is a practice where a written, testable
+          specification — requirements and acceptance criteria — is the source of truth that
+          code is built against and verified against.</strong> Instead of going straight from a
+          prompt or a ticket to code, you first agree on what the software must do, then build to
+          that spec. With AI agents now writing much of the code, the spec is what keeps them
+          building the right thing.
+        </p>
+        <ul class="sdd-takeaways">
+          <li>The spec is the source of truth; code is derived from it and checked against it.</li>
+          <li>Requirements pair with explicit acceptance criteria, so "done" is testable, not subjective.</li>
+          <li>AI agents query the spec for intent instead of guessing from code — fewer wrong builds.</li>
+          <li>It is complementary to test-driven development, not a replacement for it.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 2. What is SDD -->
+    <section class="sdd-section" aria-labelledby="what-title">
+      <div class="sdd-section__inner">
+        <h2 id="what-title">What is spec-driven development?</h2>
+        <p>
+          Spec-driven development inverts the usual order of work. Rather than treating the
+          specification as documentation written after the fact — or skipping it entirely — SDD
+          makes the spec the primary artifact. Code, tests, and review all trace back to it.
+        </p>
+        <p>
+          A spec in this sense is not a wall of prose. It is structured: a set of
+          <strong>requirements</strong>, each with explicit <strong>acceptance criteria</strong>
+          that state, in testable terms, what must be true for the requirement to be satisfied. That
+          structure is what lets a reviewer, a test suite, and an AI agent all interpret the same
+          document the same way.
+        </p>
+        <p>
+          The spec is also a <strong>living artifact</strong>. When requirements change, the spec
+          changes first, and the code follows — so the spec never drifts into fiction.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. Why it matters now (AI spine) -->
+    <section class="sdd-section" aria-labelledby="why-title">
+      <div class="sdd-section__inner">
+        <h2 id="why-title">Why it matters now: AI raised the stakes</h2>
+        <p>
+          AI coding agents generate code far faster than a human can read it. That shifts the
+          bottleneck. The hard part is no longer typing the implementation — it is
+          <strong>specifying intent clearly enough that the generated code is the code you
+          wanted</strong>. An agent given a vague prompt will confidently produce something
+          plausible and wrong, and at machine speed.
+        </p>
+        <p>
+          A spec is the guardrail. When the intended behavior and acceptance criteria are written
+          down, the agent has an unambiguous target to build toward and a checklist to verify
+          against — and a human reviewer has a fixed thing to approve before any code exists. SDD
+          is how teams keep AI velocity from turning into AI rework.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. How it works -->
+    <section class="sdd-section" aria-labelledby="how-title">
+      <div class="sdd-section__inner">
+        <h2 id="how-title">How spec-driven development works</h2>
+        <p>The workflow is a loop, not a one-time document:</p>
+        <ol class="sdd-steps">
+          <li><strong>Capture intent.</strong> Record the half-formed direction — the problem, the goal, open questions — before committing to a solution.</li>
+          <li><strong>Specify behavior.</strong> Turn the agreed direction into requirements, each with explicit, testable acceptance criteria.</li>
+          <li><strong>Decompose into a plan.</strong> Break the spec into ordered tasks, each citing the acceptance criteria it satisfies.</li>
+          <li><strong>Implement.</strong> Build task by task — a human or an AI agent — against the spec.</li>
+          <li><strong>Verify against the criteria.</strong> Check the result against the acceptance criteria, not against a vibe.</li>
+          <li><strong>Keep the spec living.</strong> When requirements change, update the spec first; the code follows.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. Benefits -->
+    <section class="sdd-section" aria-labelledby="benefits-title">
+      <div class="sdd-section__inner">
+        <h2 id="benefits-title">Benefits of spec-driven development</h2>
+        <ul class="sdd-benefits">
+          <li>Disagreements surface during spec review — cheap — instead of after implementation — expensive.</li>
+          <li>"Done" is objective, because acceptance criteria are testable.</li>
+          <li>The spec is shared context for everyone: product, engineering, and AI agents.</li>
+          <li>Changes are traceable — every task points back to the criteria it satisfies.</li>
+        </ul>
+        <h3>Why it specifically helps AI agents</h3>
+        <ul class="sdd-benefits">
+          <li><strong>Machine-readable intent:</strong> the agent reads requirements directly instead of inferring them from code.</li>
+          <li><strong>Less context to load:</strong> the agent queries the relevant slice of the spec rather than the whole repository.</li>
+          <li><strong>Verifiable output:</strong> acceptance criteria give the agent a concrete pass/fail target.</li>
+          <li><strong>Traceability:</strong> generated code can be tied back to the requirement that motivated it.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. Comparison -->
+    <section class="sdd-section" aria-labelledby="vs-title">
+      <div class="sdd-section__inner">
+        <h2 id="vs-title">Spec-driven development vs related practices</h2>
+        <div class="sdd-table-wrap">
+          <table class="sdd-table">
+            <thead>
+              <tr><th>Practice</th><th>Source of truth</th><th>Relationship to SDD</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Test-driven development</td><td>Failing tests at the code level</td><td>Complementary — acceptance criteria become the tests.</td></tr>
+              <tr><td>Traditional PRD</td><td>Prose written for humans</td><td>Less structured; not directly testable or machine-readable.</td></tr>
+              <tr><td>Prompt-only ("vibe coding")</td><td>The prompt and the model's guess</td><td>No durable, reviewable target — what SDD exists to fix.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          For a detailed comparison of SpecScore against other spec tooling, see
+          <a href="/vs/">the comparison pages</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 7. Tradeoffs -->
+    <section class="sdd-section" aria-labelledby="limits-title">
+      <div class="sdd-section__inner">
+        <h2 id="limits-title">Tradeoffs and when not to use it</h2>
+        <p>
+          Spec-driven development is not free. It front-loads effort into thinking and writing
+          before any code runs, which is the wrong trade for a one-off script or a throwaway
+          experiment. And a spec only helps if it stays current — a spec left to rot becomes
+          misleading, worse than none. SDD pays off when the work is large enough to plan, will be
+          maintained, or will be handed to an AI agent to build at scale.
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. In practice (SpecScore) -->
+    <section class="sdd-section" aria-labelledby="practice-title">
+      <div class="sdd-section__inner">
+        <h2 id="practice-title">Doing spec-driven development with AI agents in practice</h2>
+        <p>
+          To run SDD with AI agents you need two things: a <strong>machine-readable spec
+          format</strong> both your team and your agents understand, and a <strong>way for agents
+          to read, write, and validate</strong> those specs.
+        </p>
+        <p>
+          <strong>SpecScore</strong> is one implementation of exactly that. It is an open
+          Markdown + YAML format for features, requirements, and acceptance criteria — plain files
+          in your repo — paired with a CLI your agents call to query, edit, and lint them. Because
+          the structure is machine-readable, an agent can ask "what should I build next?" and get
+          back the open requirements and their acceptance criteria, then check its work against
+          them. It is tool-agnostic and open source.
+        </p>
+        <p>
+          Get started with <a href="/ai/">AI Skills for your coding agent</a> or
+          <a href="/cli/">install the CLI</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. FAQ -->
+    <section class="sdd-section" aria-labelledby="faq-title">
+      <div class="sdd-section__inner">
+        <h2 id="faq-title">Frequently asked questions</h2>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Is spec-driven development the same as test-driven development?</p>
+          <p class="sdd-faq__a">No. TDD drives implementation from failing tests at the code level. SDD works one level up: it fixes the intended behavior and acceptance criteria in a written spec first. They are complementary — acceptance criteria in a spec often become the tests TDD then drives.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Does spec-driven development slow you down?</p>
+          <p class="sdd-faq__a">It adds time before code is written and removes time spent rebuilding the wrong thing. For throwaway scripts the overhead is not worth it. For anything an AI agent generates at scale, or that a team must maintain, writing the spec first is usually faster end to end.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">What is the difference between a spec and a PRD?</p>
+          <p class="sdd-faq__a">A PRD is usually prose aimed at humans. A spec in SDD is structured and testable — discrete requirements with explicit acceptance criteria — so both reviewers and AI agents can act on it precisely.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">How do AI coding agents use a spec?</p>
+          <p class="sdd-faq__a">When the spec is machine-readable, an agent queries it for the requirements and acceptance criteria relevant to its current task instead of loading the whole codebase, then checks its output against those criteria — a guardrail against plausible-but-wrong code.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. CTA -->
+  <section class="sdd-cta" aria-labelledby="cta-title">
+    <div class="sdd-cta__inner">
+      <h2 id="cta-title">Start building spec-driven with your AI agent</h2>
+      <p>SpecScore gives your agent an open spec format and a CLI to query and lint it.</p>
+      <div class="sdd-cta__buttons">
+        <a href="/ai/" class="btn btn--primary">Get AI skills for your agent</a>
+        <a href="/cli/" class="btn btn--secondary">Install the CLI</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <div class="page-footer__col page-footer__brand">
+        <a href="/" class="wordmark" aria-label="SpecScore home">
+          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+          <span class="wordmark__name">SpecScore.md</span>
+        </a>
+        <p class="page-footer__tagline">An open standard for specifications, requirements, and acceptance criteria.</p>
+        <p class="page-footer__copyright">&copy; 2026 SpecScore contributors. MIT license.</p>
+      </div>
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">Product</h4>
+        <ul class="page-footer__list">
+          <li><a href="/cli/">SpecScore CLI</a></li>
+          <li><a href="/ai/">AI Skills</a></li>
+          <li><a href="/vs/">Compare</a></li>
+        </ul>
+      </div>
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">Ecosystem</h4>
+        <ul class="page-footer__list">
+          <li><a href="/">SpecScore</a> — the open standard</li>
+          <li><a href="/ai/specstudio-skills/">SpecStudio Skills</a></li>
+          <li><a href="https://specscore.studio">SpecScore Studio</a> — web viewer</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
