@@ -32,7 +32,6 @@ jobs:
 
     permissions:
       contents: read
-      id-token: write
 
     steps:
       - uses: actions/checkout@v6
@@ -101,40 +100,17 @@ jobs:
             fi
           done
 
-      - name: Verify Cloudflare config not in Firebase artifact
+      - name: Verify Cloudflare-only config not bundled into build output
         run: |
           if [ -f public/_headers ] || [ -f public/_redirects ]; then
             echo "ERROR: _headers/_redirects must not be inside public/ (Cloudflare-only files)"
             exit 1
           fi
 
-      # --- Firebase Hosting deploy — manual-only since 2026-05-21 ---
-      #
-      # Cloudflare Pages is the active production target (configured at
-      # the CF dashboard; builds via tools/cf-build.sh on every push to
-      # main). Firebase Hosting is retained as a fallback target — in
-      # case CF has an outage or we want to A/B-compare providers — but
-      # the deploy is now MANUAL.
-      #
-      # To deploy to Firebase:
-      #   1. GitHub Actions → "Site Generator CI" → "Run workflow"
-      #   2. Select branch `main`, click "Run workflow"
-      #   3. Pre-req: GCP Workload Identity Federation attribute condition
-      #      must allow this org's repository_owner (currently misaligned
-      #      with the post-rename owner — see commit 4bc694b for context).
-      #
-      # The push-triggered runs of this workflow still execute build +
-      # verification steps as a smoke test, but skip the deploy below.
-
-      - name: Authenticate to GCP
-        if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
-        uses: google-github-actions/auth@v3
-        with:
-          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
-          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
-
-      - name: Deploy to Firebase Hosting
-        if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
-        env:
-          NODE_NO_WARNINGS: 1
-        run: pnpm --config.onlyBuiltDependencies='["protobufjs","re2"]' dlx firebase-tools@latest deploy --only hosting:specscore-org --non-interactive
+      # Deployment is handled by Cloudflare Pages' Git integration
+      # (configured in the CF dashboard; builds via tools/cf-build.sh on every
+      # push to main). This workflow only builds, tests, and verifies the site
+      # as CI — it does not deploy. The retired Firebase Hosting fallback
+      # (Authenticate to GCP + Deploy to Firebase Hosting) was removed on
+      # 2026-05-29; its GCP Workload Identity auth had broken after the org
+      # rename and Firebase is no longer a deploy target.
