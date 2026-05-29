@@ -34,9 +34,8 @@ async function build() {
   );
 
   // Auto-generated-directory notice for AI agents and humans who land
-  // in `public/` and might be tempted to edit it directly. Excluded
-  // from both hosting targets — see firebase.json `ignore` and the
-  // trailing `rm` in tools/cf-build.sh.
+  // in `public/` and might be tempted to edit it directly. Excluded from
+  // the deployed site by the trailing `rm` in tools/cf-build.sh.
   await cp(
     join(__dirname, 'public-readme.md'),
     join(OUTPUT, 'README.md')
@@ -44,7 +43,7 @@ async function build() {
 
   // CLI installer scripts — served at /install/get-cli (sh) and
   // /install/get-cli.ps1 (PowerShell). Old paths /get-cli and /get-cli.ps1
-  // are 301-redirected to the canonical URLs via firebase.json.
+  // are 301-redirected to the canonical URLs via _redirects.
   //
   // Source of truth: synchestra-io/specscore-cli/scripts/install.{sh,ps1}.
   // Override the ref via SPECSCORE_CLI_REF (defaults to `main`) if the upstream
@@ -199,8 +198,7 @@ async function build() {
 
   // Cloudflare Pages config (_headers, _redirects) is intentionally NOT
   // copied into public/. CF Pages builds from sources and is responsible
-  // for placing those files at its own publish-dir root. Firebase serves
-  // the committed public/ unchanged.
+  // for placing those files at its own publish-dir root.
 
   console.log(`\nDone. Output: ${OUTPUT}`);
 }
