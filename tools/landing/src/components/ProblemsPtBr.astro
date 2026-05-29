@@ -10,16 +10,16 @@
       <li class="problem-card">
         <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌀</span> As especificações divergem.</h3>
         <p class="problem-card__pain">
-          A spec no documento, a thread no Slack e o código no PR
+          A especificação no documento, a thread no Slack e o código no PR
           discordam silenciosamente por semanas. Ninguém consegue achar
           qual versão da conversa é a canônica.
         </p>
         <div class="problem-card__rule" aria-hidden="true"></div>
         <p class="problem-card__fix-label">A solução</p>
         <p class="problem-card__fix">
-          Uma spec canônica, no repositório, versionada com o código.
+          Uma especificação canônica, no repositório, versionada com o código.
           <code>specscore lint</code> roda no CI a cada push; o histórico
-          do git é a trilha de auditoria. A spec, a thread e o PR não
+          do git é a trilha de auditoria. A especificação, a thread e o PR não
           podem mais discordar em silêncio — eles compartilham o mesmo
           arquivo em revisão.
         </p>
@@ -65,18 +65,18 @@
       </li>
 
       <li class="problem-card">
-        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔁</span> Você paga em dobro por uma spec vaga.</h3>
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔁</span> Você paga em dobro por uma especificação vaga.</h3>
         <p class="problem-card__pain">
           O agente constrói algo a partir de um brief ambíguo, você
           percebe que está errado e pede de novo — de quatro formas
           diferentes. Cada funcionalidade pela metade e cada nova
-          tentativa são cobradas em tokens. Quanto mais vaga a spec, mais
+          tentativa são cobradas em tokens. Quanto mais vaga a especificação, mais
           rodadas até acertar.
         </p>
         <div class="problem-card__rule" aria-hidden="true"></div>
         <p class="problem-card__fix-label">A solução</p>
         <p class="problem-card__fix">
-          Faça lint da spec antes de o agente rodar.
+          Faça lint da especificação antes de o agente rodar.
           <code>specscore lint</code> rejeita verbos vagos e critérios de
           aceitação ausentes logo de início, então o agente implementa um
           brief concreto de uma vez em vez de adivinhar entre tentativas.
@@ -105,11 +105,11 @@
       </li>
 
       <li class="problem-card">
-        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔗</span> O código esquece sua spec.</h3>
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔗</span> O código esquece sua especificação.</h3>
         <p class="problem-card__pain">
           Seis meses depois, você está debugando uma função e ninguém
           lembra qual feature ela implementa. A ligação entre código e
-          spec vivia na cabeça de alguém, e essa pessoa saiu. O PR que
+          especificação vivia na cabeça de alguém, e essa pessoa saiu. O PR que
           a introduziu está no arquivo morto.
         </p>
         <div class="problem-card__rule" aria-hidden="true"></div>
@@ -120,7 +120,7 @@
           tornam a ligação legível por máquinas e sobrevivem a qualquer
           refatoração.
           <code>specscore code deps</code> responde
-          <em>"qual spec este arquivo implementa?"</em> em uma única
+          <em>"qual especificação este arquivo implementa?"</em> em uma única
           chamada; o linter sinaliza referências que apontam para especificações
           deletadas.
         </p>
@@ -149,7 +149,7 @@
       <li class="problem-card">
         <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">📋</span> As especificações esquecem o que não sabem.</h3>
         <p class="problem-card__pain">
-          Uma spec parece acabada — até você lembrar que a pergunta
+          Uma especificação parece acabada — até você lembrar que a pergunta
           <em>"e quanto aos fusos horários?"</em> se perdeu numa thread
           do Slack há dois meses e nunca chegou ao documento. Agora
           vocês estão na implementação, e ninguém sabe dizer qual era

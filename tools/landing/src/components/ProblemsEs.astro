@@ -10,17 +10,17 @@
       <li class="problem-card">
         <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌀</span> Las especificaciones se desincronizan.</h3>
         <p class="problem-card__pain">
-          La spec en el documento, el hilo en Slack y el código en el
+          La especificación en el documento, el hilo en Slack y el código en el
           PR discrepan en silencio durante semanas. Nadie sabe cuál
           versión de la conversación es la canónica.
         </p>
         <div class="problem-card__rule" aria-hidden="true"></div>
         <p class="problem-card__fix-label">La solución</p>
         <p class="problem-card__fix">
-          Una sola spec canónica, en el repo, versionada junto al
+          Una sola especificación canónica, en el repo, versionada junto al
           código. <code>specscore lint</code> corre en CI en cada
           push; el historial de git es el rastro de auditoría. La
-          spec, el hilo y el PR no pueden discrepar en silencio —
+          especificación, el hilo y el PR no pueden discrepar en silencio —
           comparten el mismo archivo bajo revisión.
         </p>
       </li>
@@ -67,17 +67,17 @@
       </li>
 
       <li class="problem-card">
-        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔁</span> Pagas dos veces por una spec ambigua.</h3>
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔁</span> Pagas dos veces por una especificación ambigua.</h3>
         <p class="problem-card__pain">
           El agente construye algo a partir de un brief ambiguo, ves que
           está mal y vuelves a pedírselo — de cuatro formas distintas.
           Cada función a medio hacer y cada reintento se facturan en
-          tokens. Cuanto más vaga la spec, más rondas antes de acertar.
+          tokens. Cuanto más vaga la especificación, más rondas antes de acertar.
         </p>
         <div class="problem-card__rule" aria-hidden="true"></div>
         <p class="problem-card__fix-label">La solución</p>
         <p class="problem-card__fix">
-          Lintea la spec antes de que el agente se ejecute.
+          Lintea la especificación antes de que el agente se ejecute.
           <code>specscore lint</code> rechaza los verbos vagos y los
           criterios de aceptación que faltan desde el principio, así el
           agente implementa un brief concreto una sola vez en lugar de
@@ -108,11 +108,11 @@
       </li>
 
       <li class="problem-card">
-        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔗</span> El código olvida su spec.</h3>
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔗</span> El código olvida su especificación.</h3>
         <p class="problem-card__pain">
           Seis meses después estás depurando una función y nadie
           recuerda qué feature implementa. El vínculo entre código y
-          spec vivía en la cabeza de alguien, y esa persona ya no
+          especificación vivía en la cabeza de alguien, y esa persona ya no
           está. El PR que lo introdujo quedó en el archivo.
         </p>
         <div class="problem-card__rule" aria-hidden="true"></div>
@@ -123,7 +123,7 @@
           hacen el vínculo legible por máquina y sobreviven a
           cualquier refactor.
           <code>specscore code deps</code> responde
-          <em>"¿qué spec implementa este archivo?"</em> en una sola
+          <em>"¿qué especificación implementa este archivo?"</em> en una sola
           llamada; el linter marca las referencias que apuntan a
           especificaciones eliminadas.
         </p>
@@ -153,7 +153,7 @@
       <li class="problem-card">
         <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">📋</span> Las especificaciones olvidan lo que no saben.</h3>
         <p class="problem-card__pain">
-          Una spec se lee como si estuviera cerrada — hasta que
+          Una especificación se lee como si estuviera cerrada — hasta que
           recuerdas que la pregunta
           <em>"¿y qué pasa con las zonas horarias?"</em> se perdió
           en un hilo de Slack hace dos meses y nunca llegó al

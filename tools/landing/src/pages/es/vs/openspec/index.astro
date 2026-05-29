@@ -85,7 +85,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
             </thead>
             <tbody>
               <tr>
-                <td>Formato de spec</td>
+                <td>Formato de especificación</td>
                 <td>Markdown (sin frontmatter)</td>
                 <td>Markdown + YAML frontmatter</td>
               </tr>
@@ -110,7 +110,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
                 <td><strong>Aplicado</strong> — Draft → Under Review → Approved → Implementing → Stable → Deprecated</td>
               </tr>
               <tr>
-                <td>Trazabilidad código-a-spec</td>
+                <td>Trazabilidad código-a-especificación</td>
                 <td>Ninguno</td>
                 <td><strong><code>specscore:</code> anotaciones</strong> + <code>Verifies:</code> trailers de commits</td>
               </tr>
@@ -195,7 +195,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
           <div class="diff-card">
             <h3 class="diff-card__title">El ciclo de vida se aplica, no se infiere</h3>
             <p class="diff-card__desc">
-              En OpenSpec, el ciclo de vida de una spec es su ubicación de archivo: <code>specs/</code> (actual), <code>changes/</code> (propuesto), <code>archive/</code> (terminado). En SpecScore, el ciclo de vida es un campo de estado aplicado — Draft → Under Review → Approved → Implementing → Stable → Deprecated — validado por lint, transicionado por <code>specscore change-status</code> desde git hooks o CI.
+              En OpenSpec, el ciclo de vida de una especificación es su ubicación de archivo: <code>specs/</code> (actual), <code>changes/</code> (propuesto), <code>archive/</code> (terminado). En SpecScore, el ciclo de vida es un campo de estado aplicado — Draft → Under Review → Approved → Implementing → Stable → Deprecated — validado por lint, transicionado por <code>specscore change-status</code> desde git hooks o CI.
             </p>
           </div>
 
@@ -242,7 +242,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
             <h3 class="when-card__title">Usa SpecScore cuando…</h3>
             <ul class="when-card__list">
               <li>Necesitas control de calidad de especificaciones — lint detecta ambigüedades antes de que los agentes desperdicien tokens en ellas.</li>
-              <li>Necesitas trazabilidad código-a-spec — "¿qué código implementa este requisito?" retorna una respuesta determinista.</li>
+              <li>Necesitas trazabilidad código-a-especificación — "¿qué código implementa este requisito?" retorna una respuesta determinista.</li>
               <li>Estás construyendo un sistema grande con muchas features, sub-features y transiciones de ciclo de vida.</li>
               <li>Quieres cero dependencias de runtime — un binario, sin Node.js requerido.</li>
               <li>Necesitas puertas de calidad de especificaciones en CI — <code>specscore lint</code> sale con código no-cero en fallos, igual que ESLint o <code>go vet</code>.</li>

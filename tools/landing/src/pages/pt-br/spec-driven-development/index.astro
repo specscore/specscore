@@ -39,7 +39,7 @@ const ld = {
           acceptedAnswer: {
             '@type': 'Answer',
             text:
-              'Não. O TDD guia a implementação a partir de testes que falham, no nível do código. O desenvolvimento baseado em especificações trabalha um nível acima: primeiro fixa o comportamento pretendido e os critérios de aceitação em uma spec escrita. Eles são complementares — os critérios de aceitação de uma spec muitas vezes se tornam os testes que o TDD depois guia.',
+              'Não. O TDD guia a implementação a partir de testes que falham, no nível do código. O desenvolvimento baseado em especificações trabalha um nível acima: primeiro fixa o comportamento pretendido e os critérios de aceitação em uma especificação escrita. Eles são complementares — os critérios de aceitação de uma especificação muitas vezes se tornam os testes que o TDD depois guia.',
           },
         },
         {
@@ -48,25 +48,25 @@ const ld = {
           acceptedAnswer: {
             '@type': 'Answer',
             text:
-              'Ele acrescenta tempo antes de o código ser escrito e remove o tempo gasto reconstruindo a coisa errada. Para scripts descartáveis o custo não compensa. Para qualquer coisa que um agente de IA gere em escala, ou que uma equipe precise manter, escrever a spec primeiro costuma ser mais rápido do início ao fim.',
+              'Ele acrescenta tempo antes de o código ser escrito e remove o tempo gasto reconstruindo a coisa errada. Para scripts descartáveis o custo não compensa. Para qualquer coisa que um agente de IA gere em escala, ou que uma equipe precise manter, escrever a especificação primeiro costuma ser mais rápido do início ao fim.',
           },
         },
         {
           '@type': 'Question',
-          name: 'Qual é a diferença entre uma spec e um PRD?',
+          name: 'Qual é a diferença entre uma especificação e um PRD?',
           acceptedAnswer: {
             '@type': 'Answer',
             text:
-              'Um PRD costuma ser prosa voltada para pessoas. Uma spec no desenvolvimento baseado em especificações é estruturada e testável — requisitos discretos com critérios de aceitação explícitos — de modo que tanto os revisores quanto os agentes de IA possam agir sobre ela com precisão.',
+              'Um PRD costuma ser prosa voltada para pessoas. Uma especificação no desenvolvimento baseado em especificações é estruturada e testável — requisitos discretos com critérios de aceitação explícitos — de modo que tanto os revisores quanto os agentes de IA possam agir sobre ela com precisão.',
           },
         },
         {
           '@type': 'Question',
-          name: 'Como os agentes de IA de programação usam uma spec?',
+          name: 'Como os agentes de IA de programação usam uma especificação?',
           acceptedAnswer: {
             '@type': 'Answer',
             text:
-              'Quando a spec é legível por máquina, o agente a consulta para obter os requisitos e critérios de aceitação relevantes para a tarefa atual, em vez de carregar todo o codebase, e então compara o seu resultado com esses critérios — uma proteção contra código plausível, mas errado.',
+              'Quando a especificação é legível por máquina, o agente a consulta para obter os requisitos e critérios de aceitação relevantes para a tarefa atual, em vez de carregar todo o codebase, e então compara o seu resultado com esses critérios — uma proteção contra código plausível, mas errado.',
           },
         },
       ],
@@ -97,13 +97,13 @@ const ld = {
           escrita e testável — requisitos e critérios de aceitação — é a fonte de verdade contra
           a qual o código é construído e verificado.</strong> Em vez de ir direto de um
           prompt ou de um ticket para o código, primeiro você acorda o que o software deve fazer e então
-          constrói segundo essa spec. Agora que os agentes de IA escrevem grande parte do código, a
-          spec é o que os mantém construindo a coisa certa.
+          constrói segundo essa especificação. Agora que os agentes de IA escrevem grande parte do código, a
+          especificação é o que os mantém construindo a coisa certa.
         </p>
         <ul class="sdd-takeaways">
-          <li>A spec é a fonte de verdade; o código é derivado dela e conferido contra ela.</li>
+          <li>A especificação é a fonte de verdade; o código é derivado dela e conferido contra ela.</li>
           <li>Os requisitos vêm acompanhados de critérios de aceitação explícitos, então "pronto" é testável, não subjetivo.</li>
-          <li>Os agentes de IA consultam a spec para conhecer a intenção em vez de adivinhá-la a partir do código — menos construções erradas.</li>
+          <li>Os agentes de IA consultam a especificação para conhecer a intenção em vez de adivinhá-la a partir do código — menos construções erradas.</li>
           <li>É complementar ao desenvolvimento baseado em testes, não um substituto dele.</li>
         </ul>
         <p class="sdd-updated">Última atualização: maio de 2026</p>
@@ -117,18 +117,18 @@ const ld = {
         <p>
           O desenvolvimento baseado em especificações inverte a ordem habitual do trabalho. Em vez de tratar
           a especificação como documentação escrita depois do fato — ou de pulá-la por completo —
-          o SDD torna a spec o artefato principal. Código, testes e revisão remetem todos a ela.
+          o SDD torna a especificação o artefato principal. Código, testes e revisão remetem todos a ela.
         </p>
         <p>
-          Uma spec nesse sentido não é um muro de prosa. Ela é estruturada: um conjunto de
+          Uma especificação nesse sentido não é um muro de prosa. Ela é estruturada: um conjunto de
           <strong>requisitos</strong>, cada um com <strong>critérios de aceitação</strong>
           explícitos que indicam, em termos testáveis, o que deve ser verdadeiro para que o requisito
           seja satisfeito. Essa estrutura é o que permite que um revisor, uma suíte de
           testes e um agente de IA interpretem todos o mesmo documento da mesma maneira.
         </p>
         <p>
-          A spec é, além disso, um <strong>artefato vivo</strong>. Quando os requisitos mudam, a
-          spec muda primeiro e o código a segue — de modo que a spec nunca deriva para a ficção.
+          A especificação é, além disso, um <strong>artefato vivo</strong>. Quando os requisitos mudam, a
+          especificação muda primeiro e o código a segue — de modo que a especificação nunca deriva para a ficção.
         </p>
       </div>
     </section>
@@ -146,7 +146,7 @@ const ld = {
           com confiança algo plausível e errado, e a velocidade de máquina.
         </p>
         <p>
-          A spec é a proteção. Quando o comportamento pretendido e os critérios de
+          A especificação é a proteção. Quando o comportamento pretendido e os critérios de
           aceitação estão escritos, o agente tem um alvo inequívoco para o qual construir e
           uma lista de verificação contra a qual conferir — e um revisor humano tem algo fixo
           para aprovar antes de existir qualquer código. O SDD é a forma como as equipes
@@ -163,10 +163,10 @@ const ld = {
         <ol class="sdd-steps">
           <li><strong>Capture a intenção.</strong> Registre a direção ainda meio formada — o problema, o objetivo, as perguntas em aberto — antes de se comprometer com uma solução.</li>
           <li><strong>Especifique o comportamento.</strong> Transforme a direção acordada em requisitos, cada um com critérios de aceitação explícitos e testáveis.</li>
-          <li><strong>Decomponha em um plano.</strong> Divida a spec em tarefas ordenadas, cada uma citando os critérios de aceitação que satisfaz.</li>
-          <li><strong>Implemente.</strong> Construa tarefa a tarefa — uma pessoa ou um agente de IA — segundo a spec.</li>
+          <li><strong>Decomponha em um plano.</strong> Divida a especificação em tarefas ordenadas, cada uma citando os critérios de aceitação que satisfaz.</li>
+          <li><strong>Implemente.</strong> Construa tarefa a tarefa — uma pessoa ou um agente de IA — segundo a especificação.</li>
           <li><strong>Verifique contra os critérios.</strong> Confira o resultado contra os critérios de aceitação, não contra uma intuição.</li>
-          <li><strong>Mantenha a spec viva.</strong> Quando os requisitos mudarem, atualize a spec primeiro; o código a segue.</li>
+          <li><strong>Mantenha a especificação viva.</strong> Quando os requisitos mudarem, atualize a especificação primeiro; o código a segue.</li>
         </ol>
       </div>
     </section>
@@ -176,15 +176,15 @@ const ld = {
       <div class="sdd-section__inner">
         <h2 id="benefits-title">Benefícios do desenvolvimento baseado em especificações</h2>
         <ul class="sdd-benefits">
-          <li>As divergências aparecem durante a revisão da spec — barato — em vez de depois da implementação — caro.</li>
+          <li>As divergências aparecem durante a revisão da especificação — barato — em vez de depois da implementação — caro.</li>
           <li>"Pronto" é objetivo, porque os critérios de aceitação são testáveis.</li>
-          <li>A spec é contexto compartilhado para todos: produto, engenharia e agentes de IA.</li>
+          <li>A especificação é contexto compartilhado para todos: produto, engenharia e agentes de IA.</li>
           <li>As mudanças são rastreáveis — cada tarefa remete aos critérios que satisfaz.</li>
         </ul>
         <h3>Por que ela ajuda especificamente os agentes de IA</h3>
         <ul class="sdd-benefits">
           <li><strong>Intenção legível por máquina:</strong> o agente lê os requisitos diretamente em vez de inferi-los do código.</li>
-          <li><strong>Menos contexto para carregar:</strong> o agente consulta a fatia relevante da spec em vez de todo o repositório.</li>
+          <li><strong>Menos contexto para carregar:</strong> o agente consulta a fatia relevante da especificação em vez de todo o repositório.</li>
           <li><strong>Saída verificável:</strong> os critérios de aceitação dão ao agente um alvo concreto de aprovado/reprovado.</li>
           <li><strong>Rastreabilidade:</strong> o código gerado pode ser vinculado de volta ao requisito que o motivou.</li>
         </ul>
@@ -221,8 +221,8 @@ const ld = {
         <p>
           O desenvolvimento baseado em especificações não é de graça. Ele adianta o esforço para pensar e escrever
           antes de qualquer código rodar, o que é a troca errada para um script
-          único ou um experimento descartável. E uma spec só ajuda se for mantida em dia — uma
-          spec deixada para apodrecer torna-se enganosa, pior do que nenhuma. O SDD compensa quando o trabalho é
+          único ou um experimento descartável. E uma especificação só ajuda se for mantida em dia — uma
+          especificação deixada para apodrecer torna-se enganosa, pior do que nenhuma. O SDD compensa quando o trabalho é
           grande o suficiente para planejar, vai ser mantido, ou vai ser entregue a um agente
           de IA para construir em escala.
         </p>
@@ -234,7 +234,7 @@ const ld = {
       <div class="sdd-section__inner">
         <h2 id="practice-title">Fazer desenvolvimento baseado em especificações com agentes de IA na prática</h2>
         <p>
-          Para fazer SDD com agentes de IA você precisa de duas coisas: um <strong>formato de spec
+          Para fazer SDD com agentes de IA você precisa de duas coisas: um <strong>formato de especificação
           legível por máquina</strong> que tanto a sua equipe quanto os seus agentes entendam, e uma <strong>forma
           de os agentes lerem, escreverem e validarem</strong> essas especificações.
         </p>
@@ -260,19 +260,19 @@ const ld = {
         <h2 id="faq-title">Perguntas frequentes</h2>
         <div class="sdd-faq__item">
           <p class="sdd-faq__q">O desenvolvimento baseado em especificações é o mesmo que o desenvolvimento baseado em testes?</p>
-          <p class="sdd-faq__a">Não. O TDD guia a implementação a partir de testes que falham, no nível do código. O desenvolvimento baseado em especificações trabalha um nível acima: primeiro fixa o comportamento pretendido e os critérios de aceitação em uma spec escrita. Eles são complementares — os critérios de aceitação de uma spec muitas vezes se tornam os testes que o TDD depois guia.</p>
+          <p class="sdd-faq__a">Não. O TDD guia a implementação a partir de testes que falham, no nível do código. O desenvolvimento baseado em especificações trabalha um nível acima: primeiro fixa o comportamento pretendido e os critérios de aceitação em uma especificação escrita. Eles são complementares — os critérios de aceitação de uma especificação muitas vezes se tornam os testes que o TDD depois guia.</p>
         </div>
         <div class="sdd-faq__item">
           <p class="sdd-faq__q">O desenvolvimento baseado em especificações deixa você mais lento?</p>
-          <p class="sdd-faq__a">Ele acrescenta tempo antes de o código ser escrito e remove o tempo gasto reconstruindo a coisa errada. Para scripts descartáveis o custo não compensa. Para qualquer coisa que um agente de IA gere em escala, ou que uma equipe precise manter, escrever a spec primeiro costuma ser mais rápido do início ao fim.</p>
+          <p class="sdd-faq__a">Ele acrescenta tempo antes de o código ser escrito e remove o tempo gasto reconstruindo a coisa errada. Para scripts descartáveis o custo não compensa. Para qualquer coisa que um agente de IA gere em escala, ou que uma equipe precise manter, escrever a especificação primeiro costuma ser mais rápido do início ao fim.</p>
         </div>
         <div class="sdd-faq__item">
-          <p class="sdd-faq__q">Qual é a diferença entre uma spec e um PRD?</p>
-          <p class="sdd-faq__a">Um PRD costuma ser prosa voltada para pessoas. Uma spec no desenvolvimento baseado em especificações é estruturada e testável — requisitos discretos com critérios de aceitação explícitos — de modo que tanto os revisores quanto os agentes de IA possam agir sobre ela com precisão.</p>
+          <p class="sdd-faq__q">Qual é a diferença entre uma especificação e um PRD?</p>
+          <p class="sdd-faq__a">Um PRD costuma ser prosa voltada para pessoas. Uma especificação no desenvolvimento baseado em especificações é estruturada e testável — requisitos discretos com critérios de aceitação explícitos — de modo que tanto os revisores quanto os agentes de IA possam agir sobre ela com precisão.</p>
         </div>
         <div class="sdd-faq__item">
-          <p class="sdd-faq__q">Como os agentes de IA de programação usam uma spec?</p>
-          <p class="sdd-faq__a">Quando a spec é legível por máquina, o agente a consulta para obter os requisitos e critérios de aceitação relevantes para a tarefa atual, em vez de carregar todo o codebase, e então compara o seu resultado com esses critérios — uma proteção contra código plausível, mas errado.</p>
+          <p class="sdd-faq__q">Como os agentes de IA de programação usam uma especificação?</p>
+          <p class="sdd-faq__a">Quando a especificação é legível por máquina, o agente a consulta para obter os requisitos e critérios de aceitação relevantes para a tarefa atual, em vez de carregar todo o codebase, e então compara o seu resultado com esses critérios — uma proteção contra código plausível, mas errado.</p>
         </div>
       </div>
     </section>
@@ -282,7 +282,7 @@ const ld = {
   <section class="sdd-cta" aria-labelledby="cta-title">
     <div class="sdd-cta__inner">
       <h2 id="cta-title">Comece a construir baseado em especificações com o seu agente de IA</h2>
-      <p>O SpecScore dá ao seu agente um formato de spec aberto e uma CLI para consultá-lo e fazer lint.</p>
+      <p>O SpecScore dá ao seu agente um formato de especificação aberto e uma CLI para consultá-lo e fazer lint.</p>
       <div class="sdd-cta__buttons">
         <a href="/pt-br/ai/" class="btn btn--primary">Obtenha skills de IA para o seu agente</a>
         <a href="/pt-br/cli/" class="btn btn--secondary">Instale a CLI</a>

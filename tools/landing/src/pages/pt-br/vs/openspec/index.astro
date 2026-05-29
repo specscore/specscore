@@ -9,7 +9,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
 <BaseLayout
   lang="pt-BR"
   title="SpecScore vs OpenSpec — Comparação honesta."
-  description="Uma comparação factual e lado a lado entre SpecScore e OpenSpec: formato de spec, linting, ciclo de vida, rastreabilidade, CLI e suporte a agentes. Honesta sobre ambos."
+  description="Uma comparação factual e lado a lado entre SpecScore e OpenSpec: formato de especificação, linting, ciclo de vida, rastreabilidade, CLI e suporte a agentes. Honesta sobre ambos."
   canonical="https://specscore.md/pt-br/vs/openspec/"
 >
   <SiteHeader />
@@ -85,12 +85,12 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
             </thead>
             <tbody>
               <tr>
-                <td>Formato da spec</td>
+                <td>Formato da especificação</td>
                 <td>Markdown (sem frontmatter)</td>
                 <td>Markdown + YAML frontmatter</td>
               </tr>
               <tr>
-                <td>Linting de spec</td>
+                <td>Linting de especificação</td>
                 <td>Apenas estrutura de arquivos</td>
                 <td><strong>Qualidade do conteúdo</strong> — verbos vagos, ACs ausentes, referências soltas</td>
               </tr>
@@ -110,7 +110,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
                 <td><strong>Imposto</strong> — Draft → Under Review → Approved → Implementing → Stable → Deprecated</td>
               </tr>
               <tr>
-                <td>Rastreabilidade código-para-spec</td>
+                <td>Rastreabilidade código-para-especificação</td>
                 <td>Nenhuma</td>
                 <td><strong><code>specscore:</code> anotações</strong> + <code>Verifies:</code> trailers de commit</td>
               </tr>
@@ -188,7 +188,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
           <div class="diff-card">
             <h3 class="diff-card__title">O ciclo de vida é imposto, não implícito</h3>
             <p class="diff-card__desc">
-              No OpenSpec, o ciclo de vida de uma spec é sua localização no sistema de arquivos: <code>specs/</code> (atual), <code>changes/</code> (proposta), <code>archive/</code> (concluída). No SpecScore, o ciclo de vida é um campo de status imposto — Draft → Under Review → Approved → Implementing → Stable → Deprecated — validado pelo lint, transicionado via <code>specscore change-status</code> a partir de git hooks ou CI.
+              No OpenSpec, o ciclo de vida de uma especificação é sua localização no sistema de arquivos: <code>specs/</code> (atual), <code>changes/</code> (proposta), <code>archive/</code> (concluída). No SpecScore, o ciclo de vida é um campo de status imposto — Draft → Under Review → Approved → Implementing → Stable → Deprecated — validado pelo lint, transicionado via <code>specscore change-status</code> a partir de git hooks ou CI.
             </p>
           </div>
 
@@ -235,7 +235,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
             <h3 class="when-card__title">Use o SpecScore quando…</h3>
             <ul class="when-card__list">
               <li>Você precisa de controle de qualidade de especificações — o lint detecta ambiguidade antes que agentes desperdicem tokens com ela.</li>
-              <li>Você precisa de rastreabilidade código-para-spec — "qual código implementa este requisito?" retorna uma resposta determinística.</li>
+              <li>Você precisa de rastreabilidade código-para-especificação — "qual código implementa este requisito?" retorna uma resposta determinística.</li>
               <li>Você está construindo um sistema grande com muitas features, sub-features e transições de ciclo de vida.</li>
               <li>Você quer zero dependências de runtime — um binário, sem necessidade de Node.js.</li>
               <li>Você precisa de quality gates para especificações no CI — <code>specscore lint</code> retorna código diferente de zero em falhas, igual ao ESLint ou <code>go vet</code>.</li>
