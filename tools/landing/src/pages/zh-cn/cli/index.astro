@@ -3,6 +3,7 @@
 // Open-source linter for SpecScore specifications.
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../components/SiteHeader.astro';
+import LintExample from '../../../components/LintExample.astro';
 import HeroGitHubLink from '../../../components/HeroGitHubLink.astro';
 import QsTabsScript from '../../../components/QsTabsScript.astro';
 ---
@@ -38,17 +39,7 @@ import QsTabsScript from '../../../components/QsTabsScript.astro';
           role="img"
           aria-label="specscore lint 的终端输出：R1 和 R2 通过（绿色对勾），R3 未通过（红色叉号）并附有错误信息。"
         >
-<pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-
-  checkout/apply-discount.md
-    <span class="mark-pass">✓</span> R1  has acceptance criteria
-    <span class="mark-pass">✓</span> R2  has acceptance criteria
-    <span class="mark-fail">✗</span> R3  no acceptance criteria
-    <span class="mark-fail">✗</span> link     <span class="dim">"Related Feature: discount-tiers" not found</span>
-    <span class="mark-fail">✗</span> section  <span class="dim">"Open Questions" missing</span>
-
-  <span class="dim">3 problems</span>
-  <span class="dim">exit 1</span></pre>
+<LintExample />
         </div>
       </div>
     </section>

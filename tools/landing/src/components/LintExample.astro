@@ -1,0 +1,18 @@
+---
+// Canonical `specscore lint` example — deterministic, structural checks only
+// (AC presence, referential integrity, required sections). No judgment calls;
+// ambiguity/semantics are the AI reviewer's job (see ScoreExample).
+//
+// Single source of truth. Reused by the home two-pass section, the /cli hero,
+// and the /validators "what each validator checks" section. The caller supplies
+// the wrapping element (role="img" + aria-label) and the font-size context.
+---
+<pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint apply-discount.md
+
+  <span class="mark-pass">✓</span> R1  has acceptance criteria
+  <span class="mark-pass">✓</span> R2  has acceptance criteria
+  <span class="mark-fail">✗</span> R3  no acceptance criteria
+  <span class="mark-fail">✗</span> link     <span class="dim">"Related Feature: discount-tiers" not found</span>
+  <span class="mark-fail">✗</span> section  <span class="dim">"Open Questions" missing</span>
+
+  <span class="dim">3 problems   exit 1</span></pre>

@@ -1,7 +1,9 @@
 ---
 // Section 4 — Check your spec in two passes.
 // Two-column: the deterministic linter and the non-deterministic AI review/score.
-// Visual callback to the hero: same green ✓ and red ✗ hex.
+// Terminal examples are shared components (single source of truth).
+import LintExample from './LintExample.astro';
+import ScoreExample from './ScoreExample.astro';
 ---
 
 <section class="passes section" aria-labelledby="passes-title">
@@ -24,15 +26,7 @@
           role="img"
           aria-label="Terminal output of specscore lint: R1 and R2 have acceptance criteria (green checks); R3 has none, a Related Feature link doesn't resolve, and the required Open Questions section is missing (red marks). 3 problems, exit 1."
         >
-<pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint apply-discount.md
-
-  <span class="mark-pass">✓</span> R1  has acceptance criteria
-  <span class="mark-pass">✓</span> R2  has acceptance criteria
-  <span class="mark-fail">✗</span> R3  no acceptance criteria
-  <span class="mark-fail">✗</span> link     <span class="dim">"Related Feature: discount-tiers" not found</span>
-  <span class="mark-fail">✗</span> section  <span class="dim">"Open Questions" missing</span>
-
-  <span class="dim">3 problems   exit 1</span></pre>
+          <LintExample />
         </div>
         <p class="pass__caption">
           Same result every run. Free, fast, runs on every commit.
@@ -50,12 +44,7 @@
           role="img"
           aria-label="An AI review: the spec earns a B grade with two actionable notes — a vague trigger on AC-2 and a missing error path on AC-3."
         >
-<pre class="terminal terminal--window"><span class="prompt">&gt;</span> /score apply-discount.md
-
-  Grade: <span class="mark-pass">B</span>  — ready with edits
-  <span class="dim">AC-2</span>  vague trigger — name the actor and event
-  <span class="dim">AC-3</span>  no error path for an expired code
-  <span class="dim">prose reads clean; criteria need tightening</span></pre>
+          <ScoreExample />
         </div>
         <p class="pass__caption">
           Reads for meaning, like a human reviewer.

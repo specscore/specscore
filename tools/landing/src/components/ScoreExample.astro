@@ -1,0 +1,15 @@
+---
+// Canonical `/score` AI-review example — non-deterministic. Reads for meaning
+// (vague triggers, missing error paths, readiness grade) the way a human
+// reviewer would.
+//
+// Single source of truth. Reused by the home two-pass section and the
+// /validators "what each validator checks" section. The caller supplies the
+// wrapping element (role="img" + aria-label) and the font-size context.
+---
+<pre class="terminal terminal--window"><span class="prompt">&gt;</span> /score apply-discount.md
+
+  Grade: <span class="mark-pass">B</span>  — ready with edits
+  <span class="dim">AC-2</span>  vague trigger — name the actor and event
+  <span class="dim">AC-3</span>  no error path for an expired code
+  <span class="dim">prose reads clean; criteria need tightening</span></pre>

@@ -7,6 +7,8 @@
 // deterministic lint, probabilistic AI review, human judgment.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
+import LintExample from '../../components/LintExample.astro';
+import ScoreExample from '../../components/ScoreExample.astro';
 ---
 
 <BaseLayout
@@ -83,6 +85,13 @@ import SiteHeader from '../../components/SiteHeader.astro';
               Same result every run, no LLM, no cost. If it passes here, it's a
               fact — not an opinion.
             </p>
+            <div
+              class="checks-terminal"
+              role="img"
+              aria-label="specscore lint output: R1 and R2 have acceptance criteria; R3 has none, a Related Feature link doesn't resolve, and the required Open Questions section is missing. 3 problems, exit 1."
+            >
+              <LintExample />
+            </div>
             <ul class="vlist">
               <li><span class="mark mark--pass" aria-hidden="true">✓</span> Referential integrity — links resolve, IDs are unique</li>
               <li><span class="mark mark--pass" aria-hidden="true">✓</span> Structural conventions — required sections, frontmatter shape</li>
@@ -101,6 +110,13 @@ import SiteHeader from '../../components/SiteHeader.astro';
               Reads for meaning, the way a human reviewer would — and like a
               human, it isn't perfectly repeatable.
             </p>
+            <div
+              class="checks-terminal"
+              role="img"
+              aria-label="/score output: the spec earns a B grade with two actionable notes — a vague trigger on AC-2 and a missing error path on AC-3."
+            >
+              <ScoreExample />
+            </div>
             <ul class="vlist">
               <li><span class="mark mark--pass" aria-hidden="true">✓</span> ACs phrased as verifiable Given/When/Then</li>
               <li><span class="mark mark--pass" aria-hidden="true">✓</span> Internal consistency within an artifact</li>
@@ -385,6 +401,15 @@ import SiteHeader from '../../components/SiteHeader.astro';
     color: var(--mid-ink);
     line-height: 1.6;
     margin-bottom: var(--space-3);
+  }
+
+  .checks-terminal {
+    margin-bottom: var(--space-3);
+  }
+  .checks-terminal pre.terminal {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.65;
   }
 
   .vcols {

@@ -4,6 +4,7 @@
 // Parte da familia padrao (gratis para sempre, MIT).
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../components/SiteHeader.astro';
+import LintExample from '../../../components/LintExample.astro';
 import HeroGitHubLink from '../../../components/HeroGitHubLink.astro';
 import QsTabsScript from '../../../components/QsTabsScript.astro';
 ---
@@ -39,17 +40,7 @@ import QsTabsScript from '../../../components/QsTabsScript.astro';
           role="img"
           aria-label="Saida do terminal de specscore lint: R1 e R2 passam com checks verdes, R3 falha com uma marca vermelha e uma mensagem de erro corrigivel."
         >
-<pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-
-  checkout/apply-discount.md
-    <span class="mark-pass">✓</span> R1  has acceptance criteria
-    <span class="mark-pass">✓</span> R2  has acceptance criteria
-    <span class="mark-fail">✗</span> R3  no acceptance criteria
-    <span class="mark-fail">✗</span> link     <span class="dim">"Related Feature: discount-tiers" not found</span>
-    <span class="mark-fail">✗</span> section  <span class="dim">"Open Questions" missing</span>
-
-  <span class="dim">3 problems</span>
-  <span class="dim">exit 1</span></pre>
+<LintExample />
         </div>
       </div>
     </section>
