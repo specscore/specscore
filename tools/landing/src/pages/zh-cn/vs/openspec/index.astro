@@ -166,15 +166,14 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
 
         <div class="diff-grid">
           <div class="diff-card">
-            <h3 class="diff-card__title">规范 linting 在代理之前捕获歧义</h3>
+            <h3 class="diff-card__title">校验不止于文件结构</h3>
             <p class="diff-card__desc">
-              OpenSpec 的 <code>validate</code> 检查文件结构 — 文件是否存在、是否包含正确的章节。SpecScore 的 <code>lint</code> 检查内容：缺少宾语/条件的模糊动词、缺失的验收标准、悬空的交叉引用、不匹配的状态转换。
+              OpenSpec 的 <code>validate</code> 检查文件结构 — 文件是否存在、是否包含正确的章节。SpecScore 检查得更多，分为两层：<code>lint</code> 确定性地校验内容关系 — 每个需求都有验收标准、交叉引用可解析、状态转换合法 — 而 AI 审查器（<code>/review</code>、<code>/score</code>）则捕获任何 linter 都无法发现的问题：含糊的验收标准和模糊的动词。
             </p>
             <div class="diff-card__example">
 <pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-  <span class="mark-fail">✗</span> R3  Discount application
-       <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
-                <span class="dim">fix:</span> specify "higher discount wins; if tied, site-wide wins"</pre>
+  <span class="mark-fail">✗</span> R3  no acceptance criteria
+  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
             </div>
           </div>
 

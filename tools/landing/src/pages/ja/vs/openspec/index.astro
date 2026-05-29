@@ -166,15 +166,14 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
 
         <div class="diff-grid">
           <div class="diff-card">
-            <h3 class="diff-card__title">スペック linting がエージェントより先に曖昧さを検出</h3>
+            <h3 class="diff-card__title">検証はファイル構造にとどまらない</h3>
             <p class="diff-card__desc">
-              OpenSpec の <code>validate</code> はファイル構造を検査します — ファイルが存在するか、正しいセクションがあるか。SpecScore の <code>lint</code> はコンテンツを検査します：対象や条件のない曖昧な動詞、欠落した受け入れ基準、未解決の相互参照、不整合なステータス遷移。
+              OpenSpec の <code>validate</code> はファイル構造を検査します — ファイルが存在するか、正しいセクションがあるか。SpecScore は2つの層でさらに踏み込みます：<code>lint</code> はコンテンツの関係性を決定論的に検証し — すべての要件に受け入れ基準があるか、相互参照が解決するか、ステータス遷移が妥当か — そして AI レビュー（<code>/review</code>、<code>/score</code>）が、どんなリンターにも捉えられないもの — 曖昧な基準や漠然とした動詞 — を捉えます。
             </p>
             <div class="diff-card__example">
 <pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-  <span class="mark-fail">✗</span> R3  Discount application
-       <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
-                <span class="dim">fix:</span> specify "higher discount wins; if tied, site-wide wins"</pre>
+  <span class="mark-fail">✗</span> R3  no acceptance criteria
+  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
             </div>
           </div>
 

@@ -166,15 +166,14 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
 
         <div class="diff-grid">
           <div class="diff-card">
-            <h3 class="diff-card__title">O linting de specs detecta ambiguidade antes dos agentes</h3>
+            <h3 class="diff-card__title">A validação vai além da estrutura de arquivos</h3>
             <p class="diff-card__desc">
-              O <code>validate</code> do OpenSpec verifica a estrutura de arquivos — se o arquivo existe, se tem as seções corretas. O <code>lint</code> do SpecScore verifica o conteúdo: verbos vagos sem objeto/condição, critérios de aceitação ausentes, referências cruzadas soltas, transições de status incompatíveis.
+              O <code>validate</code> do OpenSpec verifica a estrutura de arquivos. O SpecScore verifica mais, em duas camadas: o <code>lint</code> verifica de forma determinística os relacionamentos de conteúdo — todo requisito tem critérios de aceitação, referências cruzadas resolvem, transições de status são válidas — e um revisor de IA (<code>/review</code>, <code>/score</code>) pega critérios ambíguos e verbos vagos que nenhum linter consegue.
             </p>
             <div class="diff-card__example">
 <pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-  <span class="mark-fail">✗</span> R3  Discount application
-       <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
-                <span class="dim">fix:</span> specify "higher discount wins; if tied, site-wide wins"</pre>
+  <span class="mark-fail">✗</span> R3  no acceptance criteria
+  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
             </div>
           </div>
 

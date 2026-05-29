@@ -1,0 +1,562 @@
+---
+// Ukrainian variant of /validators. Prose is a draft pending native review; terminal output stays English.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import LintExample from '../../../components/LintExample.astro';
+import ScoreExample from '../../../components/ScoreExample.astro';
+---
+
+<BaseLayout
+  lang="uk"
+  title="Що перевіряє SpecScore — і чого не може."
+  description="SpecScore перевіряє ваші специфікації двома валідаторами: детермінованим лінтером і AI-рецензентом. Подивіться, що саме ловить кожен із них — і де автоматична перевірка зупиняється, а далі працює ваше судження."
+  canonical="https://specscore.md/uk/validators/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero: orient the cold reader, then show lint passing ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          Що перевіряє<br />SpecScore.
+        </h1>
+        <div class="hero__copy">
+          <p class="hero__sub">
+            SpecScore — це відкритий формат на основі Markdown для фіч, вимог
+            і критеріїв приймання, який перевіряють два валідатори: детермінований
+            <strong>лінтер</strong> і <strong>AI-рецензент</strong>. Ось що
+            ловить кожен із них і де автоматична перевірка зупиняється.
+          </p>
+          <p class="hero__context">
+            Уперше про SpecScore? <a class="xref" href="/uk/">Почніть тут</a> ·
+            <a class="xref" href="/uk/cli/">CLI</a> ·
+            <a class="xref" href="/uk/ai/">AI-навички</a>
+          </p>
+        </div>
+
+        <div
+          class="hero__art"
+          role="img"
+          aria-label="Вивід терміналу: specscore lint на специфікації checkout проходить усі 24 вимоги — структура, посилання та ID коректні, немає розходження індексів і немає битих посилань. 0 проблем, exit 0."
+        >
+<pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/
+
+  <span class="mark-pass">✓</span> 24 requirements — structure, references, IDs valid
+  <span class="mark-pass">✓</span> no index drift · no broken links · no slug collisions
+
+  <span class="dim">0 problems   exit 0</span></pre>
+        </div>
+      </div>
+    </section>
+
+    {/* ── The three layers ── */}
+    <section class="section" aria-labelledby="layers-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="layers-title" class="section-title">Три шари, а не один.</h2>
+        <p class="prose-p">
+          SpecScore перевіряє пошарово — спершу найдешевше й найнадійніше.
+          <strong>Лінтер</strong> детермінований — швидкий, безкоштовний, працює
+          на кожному коміті. <strong>AI-рецензія</strong> імовірнісна — глибша,
+          витрачає токени, ловить те, до чого лінтер не дотягнеться.
+          <strong>Людське судження</strong> — це третій шар: стики, які не
+          закривають перші два, усе одно потребують людини — жоден інструмент
+          сьогодні не закриває їх надійно. Два автоматичні шари доповнюють один
+          одного, а не дублюють: лінтер ловить те, що AI не може обґрунтувати;
+          AI ловить те, до чого лінтер не дотягується.
+        </p>
+      </div>
+    </section>
+
+    {/* ── What each validator checks (the positive half) ── */}
+    <section class="section validators-section" aria-labelledby="checks-title">
+      <div class="section-inner">
+        <h2 id="checks-title" class="section-title">Що перевіряє кожен валідатор.</h2>
+        <div class="vcols">
+          <div class="vcol">
+            <div class="validator__head">
+              <span class="validator__layer">Шар 1</span>
+              <h3 class="validator__title">Лінтер CLI</h3>
+              <span class="validator__kind">детермінований</span>
+            </div>
+            <p class="validator__lead">
+              Однаковий результат при кожному запуску, без LLM, без витрат. Якщо
+              тут пройдено — це факт, а не думка.
+            </p>
+            <div
+              class="checks-terminal"
+              role="img"
+              aria-label="Вивід specscore lint: у R1 і R2 є критерії приймання; у R3 їх немає, посилання Related Feature не розв'язується, відсутній обов'язковий розділ Open Questions. 3 проблеми, exit 1."
+            >
+              <LintExample />
+            </div>
+            <ul class="vlist">
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Цілісність посилань — посилання розв'язуються, ID унікальні</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Структурні угоди — обов'язкові розділи, форма frontmatter</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Гігієна статусів і розходження індексів</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Колізії slug</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Коректність префіксів у полях метаданих (наприклад, <code>Related Ideas:</code>)</li>
+            </ul>
+          </div>
+          <div class="vcol">
+            <div class="validator__head">
+              <span class="validator__layer">Шар 2</span>
+              <h3 class="validator__title">AI-рецензія та оцінка</h3>
+              <span class="validator__kind">недетермінований</span>
+            </div>
+            <p class="validator__lead">
+              Читає за змістом, як це робив би живий рецензент, — і, як людина,
+              не ідеально повторюваний.
+            </p>
+            <div
+              class="checks-terminal"
+              role="img"
+              aria-label="Вивід /score: специфікація отримує оцінку B із двома дієвими зауваженнями — нечіткий тригер у AC-2 і відсутній шлях помилки в AC-3."
+            >
+              <ScoreExample />
+            </div>
+            <ul class="vlist">
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Критерії приймання у перевірному вигляді Given/When/Then</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Внутрішня узгодженість усередині артефакту</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Нечіткий або заглушковий вміст</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Читабельність для живого рецензента</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Дієвий зворотний зв'язок із позначенням важливості</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Оцінка готовності від A до F</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── #limits — what they don't catch (the honest half) ── */}
+    <section class="section limits-section" id="limits" aria-labelledby="limits-title">
+      <div class="section-inner">
+        <h2 id="limits-title" class="section-title">Чого вони не ловлять.</h2>
+        <p class="section-lead">
+          Жоден валідатор не чарівний. Ось де зупиняється кожен — щоб ви точно
+          знали, де ваше власне судження ще має виконувати роботу.
+        </p>
+        <div class="vcols">
+          <div class="vcol">
+            <div class="validator__head">
+              <span class="validator__layer">Шар 1</span>
+              <h3 class="validator__title">Лінтер CLI</h3>
+            </div>
+            <ul class="vlist">
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Неявні суперечності в глибоких ієрархіях</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Розходження між специфікацією та кодом <span class="vnote">(покращиться з виходом <code>specstudio:recap</code>)</span></li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Смислову коректність критеріїв приймання</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Чи має назва насправді сенс</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Чи розв'язують вимоги заявлену проблему</li>
+            </ul>
+          </div>
+          <div class="vcol">
+            <div class="validator__head">
+              <span class="validator__layer">Шар 2</span>
+              <h3 class="validator__title">AI-рецензія та оцінка</h3>
+              <span class="validator__kind">ловить непостійно</span>
+            </div>
+            <ul class="vlist">
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Повну відтворюваність між запусками — вердикти можуть змінюватися в межах допуску</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Міжартефактні суперечності у великому дереві без явних перехресних перевірок</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Чи справді вимоги розв'язують проблему — помічає очевидні прогалини, пропускає специфічні для предметної області</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Упередження, успадковані від базової LLM</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Смислову коректність з абсолютною впевненістю</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Усе, чого не враховує рубрика</li>
+            </ul>
+          </div>
+        </div>
+
+        <ol class="bands" aria-label="Три шари перевірки, за глибиною охоплення">
+          <li class="band">
+            <span class="band__step">1</span>
+            <h3 class="band__title">Лінтер сягає сюди</h3>
+            <p class="band__desc">
+              Структура, посилання, гігієна. Дешево й надійно — але сліпо до
+              змісту.
+            </p>
+          </li>
+          <li class="band band--mid">
+            <span class="band__step">2</span>
+            <h3 class="band__title">AI сягає сюди</h3>
+            <p class="band__desc">
+              Зміст, ясність, узгодженість усередині артефакту. Глибше — але
+              імовірнісно, і слабко на великому дереві.
+            </p>
+          </li>
+          <li class="band band--human">
+            <span class="band__step">3</span>
+            <h3 class="band__title">Залишається на вас</h3>
+            <p class="band__desc">
+              Наскрізне судження про всю систему — робота, яку жоден інструмент
+              сьогодні не може виконати надійно, тож для неї досі потрібен живий
+              рецензент.
+            </p>
+          </li>
+        </ol>
+
+        <div class="worked">
+          <h3 class="worked__title">Випадок, від якого вас не врятує жоден інструмент</h3>
+          <p class="worked__body">
+            Уявіть реальне глибоке дерево специфікацій. Фіча&nbsp;A потребує
+            <em>X</em>. Фіча&nbsp;B потребує <em>Y</em>. Фіча&nbsp;C потребує
+            <em>Z</em>. Потім фіча&nbsp;D непомітно потребує дещо, що суперечить
+            B — але лише коли активна й A. Лінтер бачить чотири коректні, добре
+            пов'язані документи і проходить. AI-рецензент, читаючи артефакти по
+            одному, не має причин завантажити всі чотири й помітити цю
+            трибічну взаємодію.
+          </p>
+          <p class="worked__body">
+            <strong>Жоден шар надійно цього не ловить — і ми не вдаватимемо, що
+            це не так.</strong> Саме цей клас суперечностей — причина існування
+            третього шару. Завдання SpecScore — зробити дерево достатньо
+            навігованим, щоб людина, яка переглядає стики, могла <em>знайти</em>
+            конфлікт — відкриті питання піднімаються вгору по ієрархії, пов'язані
+            вимоги за один запит — а не заявляти, що інструмент уже його знайшов.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">Чесні інструменти — чесні специфікації.</h2>
+      <div class="final-cta__buttons">
+        <a href="/uk/cli/install/" class="btn btn--primary">Встановити CLI</a>
+        <a href="/uk/ai/specstudio-skills/" class="btn btn--secondary">AI-навички для вашого агента</a>
+        <a
+          href="https://github.com/specscore/specscore-cli"
+          rel="noopener"
+          class="btn btn--tertiary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          Відкритий код на GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <footer class="page-footer">
+    <div class="page-footer__inner">
+      <div class="page-footer__col page-footer__brand">
+        <a href="/uk/" class="wordmark" aria-label="SpecScore — головна">
+          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
+          <span class="wordmark__name">SpecScore.md</span>
+        </a>
+        <p class="page-footer__tagline">
+          Відкритий стандарт для специфікацій, вимог
+          та критеріїв приймання.
+        </p>
+        <p class="page-footer__copyright">
+          &copy; 2026 SpecScore contributors. MIT license.
+        </p>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">SpecScore CLI</h4>
+        <ul class="page-footer__list">
+          <li><a href="/uk/cli/">Огляд</a></li>
+          <li><a href="/uk/cli/install/">Встановлення</a></li>
+          <li><a href="https://github.com/specscore/specscore-cli">GitHub</a></li>
+        </ul>
+      </div>
+
+      <div class="page-footer__col">
+        <h4 class="page-footer__heading">Екосистема</h4>
+        <ul class="page-footer__list">
+          <li><a href="/uk/">SpecScore</a> — відкритий стандарт</li>
+          <li><a href="/uk/ai/specstudio-skills/">SpecStudio Skills</a> — плагін для Claude Code</li>
+          <li><a href="https://specscore.studio">SpecScore Studio</a> — веб-переглядач</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* ── Hero (mirrors /cli two-column rhythm) ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-7);
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .hero__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 38fr 62fr;
+    gap: var(--space-3) var(--space-6);
+    align-items: center;
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+  }
+  .hero__inner > .hero__headline {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+  .hero__copy {
+    animation: hero-copy-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 280ms;
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+  .hero__sub strong { color: var(--ink); }
+  .hero__context {
+    margin-top: var(--space-3);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+  }
+  .hero__art {
+    animation: hero-art-in 700ms cubic-bezier(0.22, 0.61, 0.36, 1) both 100ms;
+    min-width: 0;
+  }
+  .hero__art pre.terminal {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.65;
+  }
+
+  @keyframes hero-copy-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes hero-art-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 860px) {
+    .hero { padding: var(--space-5) var(--space-3) var(--space-6); }
+    .hero__inner { grid-template-columns: 1fr; gap: var(--space-4); }
+    .hero__copy { order: 1; }
+    .hero__art  { order: 2; }
+  }
+
+  /* ── Section scaffolding ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .section-lead {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    max-width: 60ch;
+    margin-bottom: var(--space-4);
+  }
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+  }
+  .prose-p strong { color: var(--ink); }
+
+  /* ── Validator columns (used by both "checks" and "#limits") ── */
+  .validators-section { background: var(--cream); }
+  .limits-section {
+    background: var(--cream-2);
+    scroll-margin-top: var(--space-5);
+  }
+
+  .validator__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .validator__layer {
+    font-family: var(--font-display);
+    font-size: var(--fs-tiny);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--pale-ink);
+  }
+  .validator__title {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .validator__kind {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+  .validator__lead {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+  }
+
+  .checks-terminal {
+    margin-bottom: var(--space-3);
+  }
+  .checks-terminal pre.terminal {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.65;
+  }
+
+  .vcols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+  }
+  .vlist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .vlist li {
+    position: relative;
+    padding-left: 1.6rem;
+    color: var(--ink);
+    line-height: 1.5;
+    font-size: var(--fs-small);
+  }
+  .vlist code {
+    font-size: 0.9em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .mark {
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    font-family: var(--font-code);
+  }
+  .mark--pass { color: var(--validator-green); }
+  .mark--fail { color: var(--mark-red); }
+  .vnote { color: var(--pale-ink); }
+
+  @media (max-width: 640px) {
+    .vcols { grid-template-columns: 1fr; gap: var(--space-4); }
+  }
+
+  /* ── Synthesis bands ── */
+  .bands {
+    list-style: none;
+    margin: var(--space-5) 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+  .band {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-top: 3px solid var(--validator-green);
+    padding: var(--space-3);
+  }
+  .band--mid { border-top-color: var(--ink-blue); }
+  .band--human { border-top-color: var(--mark-red); }
+  .band__step {
+    font-family: var(--font-display);
+    font-size: var(--fs-small);
+    font-weight: 700;
+    color: var(--pale-ink);
+  }
+  .band__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin: var(--space-1) 0;
+  }
+  .band__desc {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 720px) {
+    .bands { grid-template-columns: 1fr; }
+  }
+
+  /* ── Worked example ── */
+  .worked {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-left: 3px solid var(--ink);
+    padding: var(--space-4);
+  }
+  .worked__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .worked__body {
+    color: var(--mid-ink);
+    line-height: 1.65;
+  }
+  .worked__body + .worked__body { margin-top: var(--space-2); }
+  .worked__body strong { color: var(--ink); }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  /* ── Footer ── */
+  .page-footer {
+    background: var(--cream);
+    padding: var(--space-6) var(--space-3) var(--space-5);
+  }
+  .page-footer__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-4);
+  }
+  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
+  .page-footer__tagline { color: var(--mid-ink); margin-bottom: var(--space-2); max-width: 36ch; line-height: 1.5; font-size: 0.95rem; }
+  .page-footer__copyright { color: var(--pale-ink); font-size: 0.825rem; font-family: var(--font-code); }
+  .page-footer__heading { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-ink); margin-bottom: var(--space-2); }
+  .page-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+  .page-footer__list a { color: var(--ink); font-size: 0.9rem; border-bottom: 1px solid transparent; transition: border-color 120ms ease; }
+  .page-footer__list a:hover { border-bottom-color: var(--ink); }
+  .page-footer__list a:focus-visible { outline: 2px solid var(--ink-blue); outline-offset: 2px; border-radius: 2px; }
+
+  @media (max-width: 800px) {
+    .page-footer__inner { grid-template-columns: 1fr 1fr; }
+    .page-footer__brand { grid-column: 1 / -1; }
+  }
+</style>

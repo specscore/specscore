@@ -1,48 +1,44 @@
 ---
-// SpecScore /validators — what the two validators check, and where they stop.
-//
-// Value-first: a cold reader (e.g. from a Habr link or Google) is oriented in
-// the hero, sees what each validator CATCHES, then reaches the honest-limits
-// section at #limits. Framing: a layered system with honest seams —
-// deterministic lint, probabilistic AI review, human judgment.
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import SiteHeader from '../../components/SiteHeader.astro';
-import LintExample from '../../components/LintExample.astro';
-import ScoreExample from '../../components/ScoreExample.astro';
+// Korean variant of /validators. Prose is a draft pending native review; terminal output stays English.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import LintExample from '../../../components/LintExample.astro';
+import ScoreExample from '../../../components/ScoreExample.astro';
 ---
 
 <BaseLayout
-  title="What SpecScore validates — and what it can't."
-  description="SpecScore checks your specs with two validators: a deterministic linter and an AI reviewer. See exactly what each one catches — and where automated validation stops and your judgment takes over."
-  canonical="https://specscore.md/validators/"
+  lang="ko"
+  title="SpecScore가 검증하는 것 — 그리고 검증할 수 없는 것."
+  description="SpecScore는 두 가지 검증기로 명세를 점검합니다: 결정적 린터와 AI 리뷰어. 각각이 정확히 무엇을 잡아내는지, 그리고 자동 검증이 멈추고 여러분의 판단이 시작되는 지점이 어디인지 확인하세요."
+  canonical="https://specscore.md/ko/validators/"
 >
   <SiteHeader />
 
   <main>
-    {/* ── Hero: orient the cold reader, then show lint passing ── */}
+    {/* ── Hero ── */}
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__inner">
         <h1 id="hero-title" class="hero__headline">
-          What SpecScore<br />validates.
+          SpecScore가<br />검증하는 것.
         </h1>
         <div class="hero__copy">
           <p class="hero__sub">
-            SpecScore is an open Markdown format for features, requirements, and
-            acceptance criteria — checked by two validators: a deterministic
-            <strong>linter</strong> and an <strong>AI reviewer</strong>. Here's
-            what each one catches, and where automated checking stops.
+            SpecScore는 기능, 요구사항, 인수 기준을 위한 오픈 Markdown
+            포맷이며, 두 가지 검증기가 점검합니다: 결정적
+            <strong>린터</strong>와 <strong>AI 리뷰어</strong>. 각각이 무엇을
+            잡아내는지, 그리고 자동 점검이 어디서 멈추는지 살펴보세요.
           </p>
           <p class="hero__context">
-            New to SpecScore? <a class="xref" href="/">Start here</a> ·
-            <a class="xref" href="/cli/">The CLI</a> ·
-            <a class="xref" href="/ai/">AI Skills</a>
+            SpecScore가 처음이신가요? <a class="xref" href="/ko/">여기서 시작하세요</a> ·
+            <a class="xref" href="/ko/cli/">CLI</a> ·
+            <a class="xref" href="/ko/ai/">AI 스킬</a>
           </p>
         </div>
 
         <div
           class="hero__art"
           role="img"
-          aria-label="Terminal output: specscore lint on a checkout spec passes all 24 requirements — structure, references, IDs valid, no index drift, no broken links. 0 problems, exit 0."
+          aria-label="터미널 출력: checkout 명세에 대한 specscore lint가 24개 요구사항을 모두 통과합니다 — 구조, 참조, ID가 유효하고, 인덱스 드리프트나 끊어진 링크가 없습니다. 0개 문제, exit 0."
         >
 <pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/
 
@@ -54,168 +50,170 @@ import ScoreExample from '../../components/ScoreExample.astro';
       </div>
     </section>
 
-    {/* ── The three layers ── */}
+    {/* ── 세 개의 레이어 ── */}
     <section class="section" aria-labelledby="layers-title">
       <div class="section-inner section-inner--prose">
-        <h2 id="layers-title" class="section-title">Three layers, not one.</h2>
+        <h2 id="layers-title" class="section-title">하나가 아니라 세 개의 레이어.</h2>
         <p class="prose-p">
-          SpecScore validates in layers, cheapest and most certain first.
-          <strong>Lint</strong> is deterministic — fast, free, runs on every
-          commit. <strong>AI review</strong> is probabilistic — deeper, costs
-          tokens, catches things lint can't reach. <strong>Human judgment</strong>
-          is the third layer: the seams the first two can't close still need a
-          person — no tool can close them reliably today. The two automated layers
-          are complementary, not redundant: lint catches what AI can't defend; AI
-          catches what lint can't reach.
+          SpecScore는 가장 저렴하고 가장 확실한 것부터 차례대로, 레이어로
+          검증합니다. <strong>린터</strong>는 결정적입니다 — 빠르고, 무료이며,
+          모든 커밋에서 실행됩니다. <strong>AI 리뷰</strong>는 확률적입니다 —
+          더 깊이 들여다보고, 토큰을 소모하며, 린터가 닿지 못하는 것을
+          잡아냅니다. <strong>사람의 판단</strong>이 세 번째 레이어입니다: 앞의
+          두 레이어가 메우지 못하는 틈은 여전히 사람이 필요합니다 — 오늘날 어떤
+          도구도 그것을 안정적으로 메울 수 없기 때문입니다. 두 자동 레이어는
+          중복이 아니라 상호 보완적입니다: 린터는 AI가 근거를 댈 수 없는 것을
+          잡고, AI는 린터가 닿지 못하는 것을 잡습니다.
         </p>
       </div>
     </section>
 
-    {/* ── What each validator checks (the positive half) ── */}
+    {/* ── 각 검증기가 점검하는 것 ── */}
     <section class="section validators-section" aria-labelledby="checks-title">
       <div class="section-inner">
-        <h2 id="checks-title" class="section-title">What each validator checks.</h2>
+        <h2 id="checks-title" class="section-title">각 검증기가 점검하는 것.</h2>
         <div class="vcols">
           <div class="vcol">
             <div class="validator__head">
-              <span class="validator__layer">Layer 1</span>
-              <h3 class="validator__title">CLI linter</h3>
-              <span class="validator__kind">deterministic</span>
+              <span class="validator__layer">레이어 1</span>
+              <h3 class="validator__title">CLI 린터</h3>
+              <span class="validator__kind">결정적</span>
             </div>
             <p class="validator__lead">
-              Same result every run, no LLM, no cost. If it passes here, it's a
-              fact — not an opinion.
+              실행할 때마다 같은 결과, LLM 없이, 비용 없이. 여기서 통과하면
+              그것은 의견이 아니라 사실입니다.
             </p>
             <div
               class="checks-terminal"
               role="img"
-              aria-label="specscore lint output: R1 and R2 have acceptance criteria; R3 has none, a Related Feature link doesn't resolve, and the required Open Questions section is missing. 3 problems, exit 1."
+              aria-label="specscore lint 출력: R1과 R2에는 인수 기준이 있습니다. R3에는 없고, Related Feature 링크가 해석되지 않으며, 필수 Open Questions 섹션이 누락되었습니다. 3개 문제, exit 1."
             >
               <LintExample />
             </div>
             <ul class="vlist">
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Referential integrity — links resolve, IDs are unique</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Structural conventions — required sections, frontmatter shape</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Status hygiene and index drift</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Slug collisions</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Prefix validity on metadata fields (e.g. <code>Related Ideas:</code>)</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 참조 무결성 — 링크가 해석되고, ID가 고유함</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 구조적 규약 — 필수 섹션, frontmatter 형식</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 상태 위생과 인덱스 드리프트</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Slug 충돌</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 메타데이터 필드의 접두사 유효성 (예: <code>Related Ideas:</code>)</li>
             </ul>
           </div>
           <div class="vcol">
             <div class="validator__head">
-              <span class="validator__layer">Layer 2</span>
-              <h3 class="validator__title">AI review &amp; score</h3>
-              <span class="validator__kind">non-deterministic</span>
+              <span class="validator__layer">레이어 2</span>
+              <h3 class="validator__title">AI 리뷰 &amp; 스코어</h3>
+              <span class="validator__kind">비결정적</span>
             </div>
             <p class="validator__lead">
-              Reads for meaning, the way a human reviewer would — and like a
-              human, it isn't perfectly repeatable.
+              사람 리뷰어처럼 의미를 읽어냅니다 — 그리고 사람과 마찬가지로
+              완벽하게 재현되지는 않습니다.
             </p>
             <div
               class="checks-terminal"
               role="img"
-              aria-label="/score output: the spec earns a B grade with two actionable notes — a vague trigger on AC-2 and a missing error path on AC-3."
+              aria-label="/score 출력: 명세는 두 가지 실행 가능한 지적과 함께 B 등급을 받습니다 — AC-2의 모호한 트리거와 AC-3의 누락된 오류 경로."
             >
               <ScoreExample />
             </div>
             <ul class="vlist">
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> ACs phrased as verifiable Given/When/Then</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Internal consistency within an artifact</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Vague or placeholder content</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Readability for a human reviewer</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Author-actionable, severity-marked feedback</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> An A–F readiness grade</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 검증 가능한 Given/When/Then 형식의 인수 기준</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 아티팩트 내부의 일관성</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 모호하거나 자리표시자에 불과한 내용</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 사람 리뷰어를 위한 가독성</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 작성자가 바로 손볼 수 있는, 심각도가 표시된 피드백</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> A–F 준비도 등급</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    {/* ── #limits — what they don't catch (the honest half) ── */}
+    {/* ── #limits — 잡아내지 못하는 것 ── */}
     <section class="section limits-section" id="limits" aria-labelledby="limits-title">
       <div class="section-inner">
-        <h2 id="limits-title" class="section-title">What they don't catch.</h2>
+        <h2 id="limits-title" class="section-title">잡아내지 못하는 것.</h2>
         <p class="section-lead">
-          No validator is magic. Here's where each one stops — so you know
-          exactly where your own judgment still has to do the work.
+          어떤 검증기도 마법이 아닙니다. 각각이 어디서 멈추는지 — 여러분 자신의
+          판단이 여전히 일을 해야 하는 지점이 정확히 어디인지 — 여기 적어
+          두었습니다.
         </p>
         <div class="vcols">
           <div class="vcol">
             <div class="validator__head">
-              <span class="validator__layer">Layer 1</span>
-              <h3 class="validator__title">CLI linter</h3>
+              <span class="validator__layer">레이어 1</span>
+              <h3 class="validator__title">CLI 린터</h3>
             </div>
             <ul class="vlist">
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Implicit contradictions across deep hierarchies</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Drift between spec and code <span class="vnote">(improving as <code>specstudio:recap</code> lands)</span></li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Semantic correctness of acceptance criteria</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Whether a name actually makes sense</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Whether the requirements solve the stated problem</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 깊은 계층 구조에 걸친 암묵적 모순</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 명세와 코드 사이의 드리프트 <span class="vnote">(<code>specstudio:recap</code>이 나오면서 개선 중)</span></li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 인수 기준의 의미적 정확성</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 이름이 실제로 말이 되는지 여부</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 요구사항이 명시된 문제를 푸는지 여부</li>
             </ul>
           </div>
           <div class="vcol">
             <div class="validator__head">
-              <span class="validator__layer">Layer 2</span>
-              <h3 class="validator__title">AI review &amp; score</h3>
-              <span class="validator__kind">catches inconsistently</span>
+              <span class="validator__layer">레이어 2</span>
+              <h3 class="validator__title">AI 리뷰 &amp; 스코어</h3>
+              <span class="validator__kind">일관되지 않게 잡아냄</span>
             </div>
             <ul class="vlist">
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Full run-to-run reproducibility — verdicts may shift within tolerance</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Cross-artifact contradictions across a large tree without explicit cross-checks</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Whether requirements truly solve the problem — flags obvious gaps, misses domain-specific ones</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Biases inherited from the underlying LLM</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Semantic correctness with absolute certainty</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Anything the rubric doesn't weight</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 실행 간 완전한 재현성 — 판정은 허용 범위 안에서 흔들릴 수 있음</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 명시적인 교차 점검 없이 큰 트리 전체에 걸친 아티팩트 간 모순</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 요구사항이 문제를 정말로 푸는지 — 명백한 공백은 표시하지만 도메인 특화된 공백은 놓침</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 기반 LLM에서 물려받은 편향</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 절대적 확신을 동반한 의미적 정확성</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 루브릭이 가중치를 두지 않는 모든 것</li>
             </ul>
           </div>
         </div>
 
-        <ol class="bands" aria-label="The three layers of validation, in order of reach">
+        <ol class="bands" aria-label="검증의 세 레이어, 도달 범위 순서대로">
           <li class="band">
             <span class="band__step">1</span>
-            <h3 class="band__title">Lint reaches here</h3>
+            <h3 class="band__title">린터는 여기까지 닿습니다</h3>
             <p class="band__desc">
-              Structure, references, hygiene. Cheap and certain — but blind to
-              meaning.
+              구조, 참조, 위생. 저렴하고 확실하지만 — 의미에는 눈을 감고 있습니다.
             </p>
           </li>
           <li class="band band--mid">
             <span class="band__step">2</span>
-            <h3 class="band__title">AI reaches here</h3>
+            <h3 class="band__title">AI는 여기까지 닿습니다</h3>
             <p class="band__desc">
-              Meaning, clarity, consistency within an artifact. Deeper — but
-              probabilistic, and weak across a large tree.
+              아티팩트 내부의 의미, 명료성, 일관성. 더 깊지만 — 확률적이고, 큰
+              트리 전체에서는 약합니다.
             </p>
           </li>
           <li class="band band--human">
             <span class="band__step">3</span>
-            <h3 class="band__title">Still on you</h3>
+            <h3 class="band__title">여전히 여러분의 몫</h3>
             <p class="band__desc">
-              Cross-cutting judgment over the whole system — work no tool can do
-              reliably today, so it still takes a human reviewer.
+              시스템 전체를 가로지르는 판단. 오늘날 어떤 도구도 이를 안정적으로
+              해낼 수 없기에 — 여전히 사람 리뷰어가 필요합니다. 이것은 게으름이
+              아니라 오늘의 한계를 솔직히 그은 선입니다.
             </p>
           </li>
         </ol>
 
         <div class="worked">
-          <h3 class="worked__title">The case neither tool will save you from</h3>
+          <h3 class="worked__title">어느 도구도 여러분을 구해 주지 못하는 경우</h3>
           <p class="worked__body">
-            Picture a real, deep spec tree. Feature&nbsp;A requires <em>X</em>.
-            Feature&nbsp;B requires <em>Y</em>. Feature&nbsp;C requires
-            <em>Z</em>. Then feature&nbsp;D quietly requires something that
-            contradicts B — but only when A is also active. Lint sees four valid,
-            well-linked documents and passes. The AI reviewer, reading artifacts
-            one at a time, has no reason to load all four and notice the
-            three-way interaction.
+            실제로 깊은 명세 트리를 떠올려 보세요. 기능&nbsp;A는 <em>X</em>를
+            요구합니다. 기능&nbsp;B는 <em>Y</em>를 요구합니다. 기능&nbsp;C는
+            <em>Z</em>를 요구합니다. 그런데 기능&nbsp;D가 슬며시 B와 모순되는
+            무언가를 요구합니다 — 하지만 오직 A도 함께 활성화되어 있을 때만요.
+            린터는 잘 연결된 유효한 네 개의 문서를 보고 통과시킵니다. AI
+            리뷰어는 아티팩트를 하나씩 읽기 때문에, 네 개를 모두 불러와 이
+            세 갈래의 상호작용을 알아챌 이유가 없습니다.
           </p>
           <p class="worked__body">
-            <strong>Neither layer reliably catches this — and we're not going to
-            pretend otherwise.</strong> This exact class of contradiction is why
-            the third layer exists. SpecScore's job is to make the tree
-            navigable enough that a human reviewing the seams can <em>find</em>
-            the conflict — open questions propagate up the hierarchy, related
-            requirements are one query away — not to claim a tool already found
-            it.
+            <strong>어느 레이어도 이를 안정적으로 잡아내지 못합니다 — 그리고
+            우리는 그렇지 않은 척하지 않겠습니다.</strong> 바로 이런 종류의
+            모순이 세 번째 레이어가 존재하는 이유입니다. SpecScore의 역할은
+            도구가 이미 그것을 찾아냈다고 주장하는 것이 아니라, 틈을 살피는
+            사람이 충돌을 <em>찾아낼</em> 수 있을 만큼 트리를 탐색 가능하게
+            만드는 것입니다 — 미해결 질문은 계층을 따라 위로 전파되고, 관련
+            요구사항은 쿼리 한 번 거리에 있습니다.
           </p>
         </div>
       </div>
@@ -225,10 +223,10 @@ import ScoreExample from '../../components/ScoreExample.astro';
   {/* ── Final CTA ── */}
   <section class="final-cta" aria-labelledby="cta-title">
     <div class="final-cta__inner">
-      <h2 id="cta-title" class="final-cta__title">Honest tools, honest specs.</h2>
+      <h2 id="cta-title" class="final-cta__title">솔직한 도구, 솔직한 명세.</h2>
       <div class="final-cta__buttons">
-        <a href="/cli/install/" class="btn btn--primary">Install the CLI</a>
-        <a href="/ai/specstudio-skills/" class="btn btn--secondary">Get AI skills for your agent</a>
+        <a href="/ko/cli/install/" class="btn btn--primary">CLI 설치하기</a>
+        <a href="/ko/ai/specstudio-skills/" class="btn btn--secondary">에이전트용 AI 스킬 받기</a>
         <a
           href="https://github.com/specscore/specscore-cli"
           rel="noopener"
@@ -237,7 +235,7 @@ import ScoreExample from '../../components/ScoreExample.astro';
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
           </svg>
-          Open-source on GitHub
+          GitHub에서 오픈소스로 공개
         </a>
       </div>
     </div>
@@ -247,13 +245,12 @@ import ScoreExample from '../../components/ScoreExample.astro';
   <footer class="page-footer">
     <div class="page-footer__inner">
       <div class="page-footer__col page-footer__brand">
-        <a href="/" class="wordmark" aria-label="SpecScore home">
+        <a href="/ko/" class="wordmark" aria-label="SpecScore 홈">
           <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
           <span class="wordmark__name">SpecScore.md</span>
         </a>
         <p class="page-footer__tagline">
-          An open standard for specifications, requirements,
-          and acceptance criteria.
+          사양, 요구사항, 인수 기준을 위한 오픈 표준.
         </p>
         <p class="page-footer__copyright">
           &copy; 2026 SpecScore contributors. MIT license.
@@ -263,18 +260,18 @@ import ScoreExample from '../../components/ScoreExample.astro';
       <div class="page-footer__col">
         <h4 class="page-footer__heading">SpecScore CLI</h4>
         <ul class="page-footer__list">
-          <li><a href="/cli/">Overview</a></li>
-          <li><a href="/cli/install/">Install</a></li>
+          <li><a href="/ko/cli/">개요</a></li>
+          <li><a href="/ko/cli/install/">설치</a></li>
           <li><a href="https://github.com/specscore/specscore-cli">GitHub</a></li>
         </ul>
       </div>
 
       <div class="page-footer__col">
-        <h4 class="page-footer__heading">Ecosystem</h4>
+        <h4 class="page-footer__heading">생태계</h4>
         <ul class="page-footer__list">
-          <li><a href="/">SpecScore</a> — the open standard</li>
-          <li><a href="/ai/specstudio-skills/">SpecStudio Skills</a> — Claude Code plugin</li>
-          <li><a href="https://specscore.studio">SpecScore Studio</a> — web viewer</li>
+          <li><a href="/ko/">SpecScore</a> — 오픈 표준</li>
+          <li><a href="/ko/ai/specstudio-skills/">SpecStudio Skills</a> — Claude Code 플러그인</li>
+          <li><a href="https://specscore.studio">SpecScore Studio</a> — 웹 뷰어</li>
         </ul>
       </div>
     </div>

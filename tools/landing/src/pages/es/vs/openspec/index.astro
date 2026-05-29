@@ -166,15 +166,21 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
 
         <div class="diff-grid">
           <div class="diff-card">
-            <h3 class="diff-card__title">El linting de specs detecta ambigüedades antes que los agentes</h3>
+            <h3 class="diff-card__title">La validación va más allá de la estructura de archivos</h3>
             <p class="diff-card__desc">
-              El <code>validate</code> de OpenSpec verifica la estructura de archivos — si el archivo existe, si tiene las secciones correctas. El <code>lint</code> de SpecScore verifica el contenido: verbos vagos sin objeto/condición, criterios de aceptación faltantes, referencias cruzadas colgantes, transiciones de estado inconsistentes.
+              El <code>validate</code> de OpenSpec verifica la estructura de
+              archivos — si el archivo existe, si tiene las secciones correctas.
+              SpecScore verifica más, en dos capas: <code>lint</code> comprueba de
+              forma determinista las relaciones de contenido — cada requisito
+              tiene criterios de aceptación, las referencias cruzadas se
+              resuelven, las transiciones de estado son válidas — y un revisor de
+              IA (<code>/review</code>, <code>/score</code>) detecta lo que ningún
+              linter puede: criterios ambiguos y verbos vagos.
             </p>
             <div class="diff-card__example">
 <pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-  <span class="mark-fail">✗</span> R3  Discount application
-       <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
-                <span class="dim">fix:</span> specify "higher discount wins; if tied, site-wide wins"</pre>
+  <span class="mark-fail">✗</span> R3  no acceptance criteria
+  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
             </div>
           </div>
 

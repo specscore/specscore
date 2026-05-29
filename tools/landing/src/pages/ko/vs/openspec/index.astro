@@ -166,15 +166,14 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
 
         <div class="diff-grid">
           <div class="diff-card">
-            <h3 class="diff-card__title">스펙 linting이 에이전트보다 먼저 모호함을 잡아냅니다</h3>
+            <h3 class="diff-card__title">검증은 파일 구조를 넘어섭니다</h3>
             <p class="diff-card__desc">
-              OpenSpec의 <code>validate</code>는 파일 구조를 검사합니다 — 파일이 존재하는지, 올바른 섹션이 있는지. SpecScore의 <code>lint</code>는 콘텐츠를 검사합니다: 목적어/조건 없는 모호한 동사, 누락된 인수 기준, 끊어진 상호 참조, 불일치하는 상태 전환.
+              OpenSpec의 <code>validate</code>는 파일 구조를 검사합니다. SpecScore는 두 레이어로 더 많은 것을 검사합니다: <code>lint</code>는 콘텐츠 관계를 결정적으로 검증하고 — 모든 요구사항에 인수 기준이 있는지, 상호 참조가 해석되는지, 상태 전환이 유효한지 — AI 리뷰어(<code>/review</code>, <code>/score</code>)는 어떤 린터도 잡을 수 없는 것을 잡아냅니다: 모호한 기준과 막연한 동사.
             </p>
             <div class="diff-card__example">
 <pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-  <span class="mark-fail">✗</span> R3  Discount application
-       <span class="dim">AC-3:18</span>  ambiguous AC — "higher-of rule" doesn't specify the tiebreaker
-                <span class="dim">fix:</span> specify "higher discount wins; if tied, site-wide wins"</pre>
+  <span class="mark-fail">✗</span> R3  no acceptance criteria
+  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
             </div>
           </div>
 

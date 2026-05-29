@@ -1,46 +1,133 @@
 ---
 // Japanese variant of LinterDemo.astro. Terminal content stays English.
 import LintExample from './LintExample.astro';
+import ScoreExample from './ScoreExample.astro';
 ---
 
-<section class="linter section" aria-labelledby="linter-title">
+<section class="passes section" aria-labelledby="passes-title">
   <div class="section-inner">
-    <h2 id="linter-title" class="linter__title">リンターを実行。</h2>
-    <p class="linter__intro">
-      先ほどの仕様に対して<code>specscore lint</code>を実行します。
-      出力結果はこちらです。
+    <h2 id="passes-title" class="passes__title">仕様を2つのパスで検査。</h2>
+    <p class="passes__intro">
+      高速で決定論的なリンター、続いてより深い AI レビュー — どちらも、先ほど
+      ご覧いただいた仕様に対して実行します。2つのパス、2種類の確実性。
     </p>
 
-    <div
-      class="linter__terminal"
-      role="img"
-      aria-label="specscore lintのターミナル出力：R1とR2が緑のチェックで通過、R3が赤のマークで失敗し、修正可能なエラーメッセージが表示。"
-    >
-<LintExample />
+    <div class="passes__grid">
+      {/* ── Pass 1 — the linter (shipped, real output) ── */}
+      <div class="pass">
+        <div class="pass__head">
+          <h3 class="pass__name">リンターを実行。</h3>
+          <span class="pass__kind">決定論的</span>
+        </div>
+        <div
+          class="pass__terminal"
+          role="img"
+          aria-label="specscore lint のターミナル出力：R1 と R2 には受け入れ基準があり（緑のチェック）、R3 には存在せず、Related Feature リンクが解決されず、必須の Open Questions セクションが欠落（赤のマーク）。3 problems、exit 1。"
+        >
+          <LintExample />
+        </div>
+        <p class="pass__caption">
+          実行のたびに同じ結果。無料で高速、コミットごとに走ります。
+        </p>
+      </div>
+
+      {/* ── Pass 2 — AI review/score (Approved Idea, labeled preview) ── */}
+      <div class="pass">
+        <div class="pass__head">
+          <h3 class="pass__name">AI でレビュー＆スコア。</h3>
+          <span class="pass__kind">非決定論的</span>
+        </div>
+        <div
+          class="pass__terminal"
+          role="img"
+          aria-label="AI レビュー：仕様は B 評価を得て、2つの実行可能な指摘 — AC-2 の曖昧なトリガーと AC-3 の欠落したエラーパス。"
+        >
+          <ScoreExample />
+        </div>
+        <p class="pass__caption">
+          人間のレビュアーのように、意味を読み取ります。
+        </p>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .linter { background: var(--cream); }
-  .linter__title {
+  .passes { background: var(--cream); }
+  .passes__title {
     font-size: var(--fs-h2);
     margin-bottom: var(--space-2);
     font-weight: 700;
     letter-spacing: -0.01em;
   }
-  .linter__intro {
+  .passes__intro {
     color: var(--mid-ink);
     margin-bottom: var(--space-4);
+    line-height: 1.6;
+    text-wrap: pretty;
   }
-  .linter__intro code {
+
+  .passes__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .pass {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .pass__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .pass__name {
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .pass__kind {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+
+  .pass__terminal {
+    margin-bottom: var(--space-2);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .pass__terminal pre.terminal {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .pass__caption {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+  .pass__caption .xref code {
+    font-size: 0.9em;
     background: var(--cream-2);
-    padding: 0.05em 0.35em;
+    padding: 0.05em 0.3em;
     border-radius: 2px;
-    font-size: 0.92em;
-    color: var(--ink);
   }
-  .linter__terminal {
-    margin-bottom: var(--space-3);
+
+  /* Two-column only: reserve a consistent caption height so both
+     terminals stretch to the same height. */
+  @media (min-width: 721px) {
+    .pass__caption { min-height: 2lh; }
+  }
+
+  @media (max-width: 720px) {
+    .passes__grid { grid-template-columns: 1fr; gap: var(--space-5); }
   }
 </style>

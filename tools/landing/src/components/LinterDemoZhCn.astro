@@ -1,47 +1,134 @@
 ---
 // Simplified Chinese variant of LinterDemo.astro.
+// Two-pass: the deterministic linter and the non-deterministic AI review/score.
 // Terminal output stays English — it's literal CLI stdout.
 import LintExample from './LintExample.astro';
+import ScoreExample from './ScoreExample.astro';
 ---
 
-<section class="linter section" aria-labelledby="linter-title">
+<section class="passes section" aria-labelledby="passes-title">
   <div class="section-inner">
-    <h2 id="linter-title" class="linter__title">运行代码检查器。</h2>
-    <p class="linter__intro">
-      对你刚才看到的规格运行 <code>specscore lint</code>。
-      以下是它的输出结果。
+    <h2 id="passes-title" class="passes__title">分两遍检查你的规格。</h2>
+    <p class="passes__intro">
+      先是快速的确定性代码检查器，再是更深入的 AI 审查 — 都在你刚才看到的规格上运行。两遍检查，两种确定性。
     </p>
 
-    <div
-      class="linter__terminal"
-      role="img"
-      aria-label="specscore lint 的终端输出：R1 和 R2 通过（绿色对勾），R3 未通过（红色标记），并显示可修复的错误信息。"
-    >
-<LintExample />
+    <div class="passes__grid">
+      {/* ── Pass 1 — the linter (shipped, real output) ── */}
+      <div class="pass">
+        <div class="pass__head">
+          <h3 class="pass__name">运行代码检查器。</h3>
+          <span class="pass__kind">deterministic</span>
+        </div>
+        <div
+          class="pass__terminal"
+          role="img"
+          aria-label="specscore lint 的终端输出：R1 和 R2 具有验收标准（绿色对勾）；R3 没有验收标准、一个 Related Feature 链接无法解析、缺少必需的 Open Questions 章节（红色叉号）。3 个问题，exit 1。"
+        >
+          <LintExample />
+        </div>
+        <p class="pass__caption">
+          每次运行结果都相同。免费、快速，可在每次提交时运行。
+        </p>
+      </div>
+
+      {/* ── Pass 2 — AI review/score (Approved Idea, labeled preview) ── */}
+      <div class="pass">
+        <div class="pass__head">
+          <h3 class="pass__name">用 AI 审查并评分。</h3>
+          <span class="pass__kind">non-deterministic</span>
+        </div>
+        <div
+          class="pass__terminal"
+          role="img"
+          aria-label="一次 AI 审查：该规格获得 B 等级，并附有两条可操作的提示 — AC-2 上的触发条件含糊，AC-3 缺少错误处理路径。"
+        >
+          <ScoreExample />
+        </div>
+        <p class="pass__caption">
+          像人类审查者一样按含义阅读。
+        </p>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .linter { background: var(--cream); }
-  .linter__title {
+  .passes { background: var(--cream); }
+  .passes__title {
     font-size: var(--fs-h2);
     margin-bottom: var(--space-2);
     font-weight: 700;
     letter-spacing: -0.01em;
   }
-  .linter__intro {
+  .passes__intro {
     color: var(--mid-ink);
     margin-bottom: var(--space-4);
+    line-height: 1.6;
+    text-wrap: pretty;
   }
-  .linter__intro code {
+
+  .passes__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .pass {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .pass__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .pass__name {
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .pass__kind {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+
+  .pass__terminal {
+    margin-bottom: var(--space-2);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .pass__terminal pre.terminal {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .pass__caption {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+  .pass__caption .xref code {
+    font-size: 0.9em;
     background: var(--cream-2);
-    padding: 0.05em 0.35em;
+    padding: 0.05em 0.3em;
     border-radius: 2px;
-    font-size: 0.92em;
-    color: var(--ink);
   }
-  .linter__terminal {
-    margin-bottom: var(--space-3);
+
+  /* Two-column only: reserve a consistent caption height so both
+     terminals stretch to the same height. */
+  @media (min-width: 721px) {
+    .pass__caption { min-height: 2lh; }
+  }
+
+  @media (max-width: 720px) {
+    .passes__grid { grid-template-columns: 1fr; gap: var(--space-5); }
   }
 </style>

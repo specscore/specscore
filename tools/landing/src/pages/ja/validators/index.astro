@@ -1,48 +1,44 @@
 ---
-// SpecScore /validators — what the two validators check, and where they stop.
-//
-// Value-first: a cold reader (e.g. from a Habr link or Google) is oriented in
-// the hero, sees what each validator CATCHES, then reaches the honest-limits
-// section at #limits. Framing: a layered system with honest seams —
-// deterministic lint, probabilistic AI review, human judgment.
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import SiteHeader from '../../components/SiteHeader.astro';
-import LintExample from '../../components/LintExample.astro';
-import ScoreExample from '../../components/ScoreExample.astro';
+// Japanese variant of /validators. Prose is a draft pending native review; terminal output stays English.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import LintExample from '../../../components/LintExample.astro';
+import ScoreExample from '../../../components/ScoreExample.astro';
 ---
 
 <BaseLayout
-  title="What SpecScore validates — and what it can't."
-  description="SpecScore checks your specs with two validators: a deterministic linter and an AI reviewer. See exactly what each one catches — and where automated validation stops and your judgment takes over."
-  canonical="https://specscore.md/validators/"
+  lang="ja"
+  title="SpecScore が検証するもの — そして検証できないもの。"
+  description="SpecScore は2つのバリデーターで仕様を検査します：決定論的なリンターと AI レビュー。それぞれが何を捉えるのか — そしてどこで自動検証が止まり、あなたの判断に委ねられるのかを正確にお見せします。"
+  canonical="https://specscore.md/ja/validators/"
 >
   <SiteHeader />
 
   <main>
-    {/* ── Hero: orient the cold reader, then show lint passing ── */}
+    {/* ── Hero ── */}
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__inner">
         <h1 id="hero-title" class="hero__headline">
-          What SpecScore<br />validates.
+          SpecScore が<br />検証するもの。
         </h1>
         <div class="hero__copy">
           <p class="hero__sub">
-            SpecScore is an open Markdown format for features, requirements, and
-            acceptance criteria — checked by two validators: a deterministic
-            <strong>linter</strong> and an <strong>AI reviewer</strong>. Here's
-            what each one catches, and where automated checking stops.
+            SpecScore は機能、要件、受け入れ基準のためのオープンな Markdown
+            フォーマットで、2つのバリデーターが検査します：決定論的な
+            <strong>リンター</strong>と <strong>AI レビュー</strong>です。それぞれが
+            何を捉え、どこで自動チェックが止まるのかをご紹介します。
           </p>
           <p class="hero__context">
-            New to SpecScore? <a class="xref" href="/">Start here</a> ·
-            <a class="xref" href="/cli/">The CLI</a> ·
-            <a class="xref" href="/ai/">AI Skills</a>
+            SpecScore は初めてですか？ <a class="xref" href="/ja/">ここから始める</a> ·
+            <a class="xref" href="/ja/cli/">CLI</a> ·
+            <a class="xref" href="/ja/ai/">AI スキル</a>
           </p>
         </div>
 
         <div
           class="hero__art"
           role="img"
-          aria-label="Terminal output: specscore lint on a checkout spec passes all 24 requirements — structure, references, IDs valid, no index drift, no broken links. 0 problems, exit 0."
+          aria-label="ターミナル出力：checkout 仕様に対する specscore lint が24件すべての要件に合格 — 構造、参照、ID が有効で、インデックスのずれもリンク切れもなし。0 problems、exit 0。"
         >
 <pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/
 
@@ -54,181 +50,180 @@ import ScoreExample from '../../components/ScoreExample.astro';
       </div>
     </section>
 
-    {/* ── The three layers ── */}
+    {/* ── 3つの層 ── */}
     <section class="section" aria-labelledby="layers-title">
       <div class="section-inner section-inner--prose">
-        <h2 id="layers-title" class="section-title">Three layers, not one.</h2>
+        <h2 id="layers-title" class="section-title">1つではなく、3つの層。</h2>
         <p class="prose-p">
-          SpecScore validates in layers, cheapest and most certain first.
-          <strong>Lint</strong> is deterministic — fast, free, runs on every
-          commit. <strong>AI review</strong> is probabilistic — deeper, costs
-          tokens, catches things lint can't reach. <strong>Human judgment</strong>
-          is the third layer: the seams the first two can't close still need a
-          person — no tool can close them reliably today. The two automated layers
-          are complementary, not redundant: lint catches what AI can't defend; AI
-          catches what lint can't reach.
+          SpecScore は層ごとに検証します — 最も安く、最も確実なものから先に。
+          <strong>リンター</strong>は決定論的です — 高速、無料、コミットごとに走ります。
+          <strong>AI レビュー</strong>は確率的です — より深く、トークンを消費し、
+          リンターが届かないものを捉えます。<strong>人間の判断</strong>が3つめの層です：
+          最初の2つが閉じられない隙間には、やはり人が必要です — 今日、どのツールも
+          それを確実に閉じることはできないからです。2つの自動化された層は、重複では
+          なく補完し合います：リンターは AI が根拠を示せないものを捉え、AI は
+          リンターが届かないものを捉えます。
         </p>
       </div>
     </section>
 
-    {/* ── What each validator checks (the positive half) ── */}
+    {/* ── 各バリデーターが検査するもの ── */}
     <section class="section validators-section" aria-labelledby="checks-title">
       <div class="section-inner">
-        <h2 id="checks-title" class="section-title">What each validator checks.</h2>
+        <h2 id="checks-title" class="section-title">各バリデーターが検査するもの。</h2>
         <div class="vcols">
           <div class="vcol">
             <div class="validator__head">
-              <span class="validator__layer">Layer 1</span>
-              <h3 class="validator__title">CLI linter</h3>
-              <span class="validator__kind">deterministic</span>
+              <span class="validator__layer">層 1</span>
+              <h3 class="validator__title">CLI リンター</h3>
+              <span class="validator__kind">決定論的</span>
             </div>
             <p class="validator__lead">
-              Same result every run, no LLM, no cost. If it passes here, it's a
-              fact — not an opinion.
+              実行のたびに同じ結果、LLM なし、コストなし。ここで合格すれば、
+              それは意見ではなく事実です。
             </p>
             <div
               class="checks-terminal"
               role="img"
-              aria-label="specscore lint output: R1 and R2 have acceptance criteria; R3 has none, a Related Feature link doesn't resolve, and the required Open Questions section is missing. 3 problems, exit 1."
+              aria-label="specscore lint の出力：R1 と R2 には受け入れ基準がある一方、R3 には存在せず、Related Feature リンクが解決されず、必須の Open Questions セクションが欠落。3 problems、exit 1。"
             >
               <LintExample />
             </div>
             <ul class="vlist">
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Referential integrity — links resolve, IDs are unique</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Structural conventions — required sections, frontmatter shape</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Status hygiene and index drift</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Slug collisions</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Prefix validity on metadata fields (e.g. <code>Related Ideas:</code>)</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 参照整合性 — リンクが解決し、ID が一意である</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 構造の取り決め — 必須セクション、frontmatter の形</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> ステータスの整合性とインデックスのずれ</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> slug の衝突</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> メタデータ項目のプレフィックスの妥当性（例：<code>Related Ideas:</code>）</li>
             </ul>
           </div>
           <div class="vcol">
             <div class="validator__head">
-              <span class="validator__layer">Layer 2</span>
-              <h3 class="validator__title">AI review &amp; score</h3>
-              <span class="validator__kind">non-deterministic</span>
+              <span class="validator__layer">層 2</span>
+              <h3 class="validator__title">AI レビュー＆スコア</h3>
+              <span class="validator__kind">非決定論的</span>
             </div>
             <p class="validator__lead">
-              Reads for meaning, the way a human reviewer would — and like a
-              human, it isn't perfectly repeatable.
+              人間のレビュアーのように意味を読み取ります — そして人間と同じく、
+              完全には再現できません。
             </p>
             <div
               class="checks-terminal"
               role="img"
-              aria-label="/score output: the spec earns a B grade with two actionable notes — a vague trigger on AC-2 and a missing error path on AC-3."
+              aria-label="/score の出力：仕様は B 評価を得て、2つの実行可能な指摘 — AC-2 の曖昧なトリガーと AC-3 の欠落したエラーパス。"
             >
               <ScoreExample />
             </div>
             <ul class="vlist">
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> ACs phrased as verifiable Given/When/Then</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Internal consistency within an artifact</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Vague or placeholder content</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Readability for a human reviewer</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Author-actionable, severity-marked feedback</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> An A–F readiness grade</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 検証可能な Given/When/Then の形で書かれた AC</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> アーティファクト内部の一貫性</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 曖昧な、またはプレースホルダーの内容</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 人間のレビュアーにとっての読みやすさ</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 作成者が対応でき、重要度が示されたフィードバック</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> A〜F の準備度評価</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    {/* ── #limits — what they don't catch (the honest half) ── */}
+    {/* ── #limits — 捉えられないもの ── */}
     <section class="section limits-section" id="limits" aria-labelledby="limits-title">
       <div class="section-inner">
-        <h2 id="limits-title" class="section-title">What they don't catch.</h2>
+        <h2 id="limits-title" class="section-title">捉えられないもの。</h2>
         <p class="section-lead">
-          No validator is magic. Here's where each one stops — so you know
-          exactly where your own judgment still has to do the work.
+          魔法のバリデーターはありません。それぞれがどこで止まるのか — あなた自身の
+          判断がどこでまだ働かなければならないのかを、正確にお伝えします。
         </p>
         <div class="vcols">
           <div class="vcol">
             <div class="validator__head">
-              <span class="validator__layer">Layer 1</span>
-              <h3 class="validator__title">CLI linter</h3>
+              <span class="validator__layer">層 1</span>
+              <h3 class="validator__title">CLI リンター</h3>
             </div>
             <ul class="vlist">
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Implicit contradictions across deep hierarchies</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Drift between spec and code <span class="vnote">(improving as <code>specstudio:recap</code> lands)</span></li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Semantic correctness of acceptance criteria</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Whether a name actually makes sense</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Whether the requirements solve the stated problem</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 深い階層をまたぐ暗黙の矛盾</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 仕様とコードのずれ <span class="vnote">（<code>specstudio:recap</code> の登場とともに改善中）</span></li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 受け入れ基準の意味的な正しさ</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 名前が実際に意味をなしているか</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 要件が掲げた課題を解決しているか</li>
             </ul>
           </div>
           <div class="vcol">
             <div class="validator__head">
-              <span class="validator__layer">Layer 2</span>
-              <h3 class="validator__title">AI review &amp; score</h3>
-              <span class="validator__kind">catches inconsistently</span>
+              <span class="validator__layer">層 2</span>
+              <h3 class="validator__title">AI レビュー＆スコア</h3>
+              <span class="validator__kind">捉え方にばらつきがある</span>
             </div>
             <ul class="vlist">
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Full run-to-run reproducibility — verdicts may shift within tolerance</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Cross-artifact contradictions across a large tree without explicit cross-checks</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Whether requirements truly solve the problem — flags obvious gaps, misses domain-specific ones</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Biases inherited from the underlying LLM</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Semantic correctness with absolute certainty</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Anything the rubric doesn't weight</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 実行ごとの完全な再現性 — 判定は許容範囲内で揺れることがある</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 明示的な相互チェックなしに、大きなツリー全体にまたがる矛盾</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 要件が本当に課題を解決しているか — 明白な抜けは指摘するが、ドメイン固有のものは見落とす</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 基盤となる LLM から受け継いだバイアス</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 絶対的な確実性をもった意味的な正しさ</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> ルーブリックが重み付けしないもの全般</li>
             </ul>
           </div>
         </div>
 
-        <ol class="bands" aria-label="The three layers of validation, in order of reach">
+        <ol class="bands" aria-label="検証の3つの層を、到達できる範囲の順に">
           <li class="band">
             <span class="band__step">1</span>
-            <h3 class="band__title">Lint reaches here</h3>
+            <h3 class="band__title">リンターはここまで届く</h3>
             <p class="band__desc">
-              Structure, references, hygiene. Cheap and certain — but blind to
-              meaning.
+              構造、参照、整合性。安く確実 — しかし意味には盲目です。
             </p>
           </li>
           <li class="band band--mid">
             <span class="band__step">2</span>
-            <h3 class="band__title">AI reaches here</h3>
+            <h3 class="band__title">AI はここまで届く</h3>
             <p class="band__desc">
-              Meaning, clarity, consistency within an artifact. Deeper — but
-              probabilistic, and weak across a large tree.
+              アーティファクト内部の意味、明確さ、一貫性。より深く — しかし
+              確率的で、大きなツリーには弱いです。
             </p>
           </li>
           <li class="band band--human">
             <span class="band__step">3</span>
-            <h3 class="band__title">Still on you</h3>
+            <h3 class="band__title">ここはあなた次第</h3>
             <p class="band__desc">
-              Cross-cutting judgment over the whole system — work no tool can do
-              reliably today, so it still takes a human reviewer.
+              システム全体を横断する判断 — 今日どのツールも確実にはできない
+              仕事なので、やはり人間のレビュアーが必要です。これは見落とされた
+              穴ではなく、現在できることの正直な境界です。
             </p>
           </li>
         </ol>
 
         <div class="worked">
-          <h3 class="worked__title">The case neither tool will save you from</h3>
+          <h3 class="worked__title">どちらのツールも救ってくれないケース</h3>
           <p class="worked__body">
-            Picture a real, deep spec tree. Feature&nbsp;A requires <em>X</em>.
-            Feature&nbsp;B requires <em>Y</em>. Feature&nbsp;C requires
-            <em>Z</em>. Then feature&nbsp;D quietly requires something that
-            contradicts B — but only when A is also active. Lint sees four valid,
-            well-linked documents and passes. The AI reviewer, reading artifacts
-            one at a time, has no reason to load all four and notice the
-            three-way interaction.
+            実在する、深い仕様ツリーを思い浮かべてください。機能&nbsp;A は
+            <em>X</em> を要求します。機能&nbsp;B は <em>Y</em> を要求します。
+            機能&nbsp;C は <em>Z</em> を要求します。そして機能&nbsp;D が、ひそかに
+            B と矛盾する何かを要求します — ただし A も同時に有効なときに限って。
+            リンターは4つの妥当で、きれいにリンクされた文書を見て、合格させます。
+            AI レビューはアーティファクトを1つずつ読むので、4つすべてを読み込んで
+            三者間の相互作用に気づく理由がありません。
           </p>
           <p class="worked__body">
-            <strong>Neither layer reliably catches this — and we're not going to
-            pretend otherwise.</strong> This exact class of contradiction is why
-            the third layer exists. SpecScore's job is to make the tree
-            navigable enough that a human reviewing the seams can <em>find</em>
-            the conflict — open questions propagate up the hierarchy, related
-            requirements are one query away — not to claim a tool already found
-            it.
+            <strong>どちらの層もこれを確実には捉えられません — そして私たちは
+            そうでないふりをするつもりはありません。</strong> まさにこの種の矛盾こそ、
+            3つめの層が存在する理由です。SpecScore の役割は、隙間をレビューする人が
+            矛盾を<em>見つけ</em>られるよう、ツリーを十分にたどりやすくすること
+            です — オープンクエスチョンは階層を上へ伝播し、関連する要件は1つの
+            クエリの先にあります — ツールがすでに見つけたと主張することではありません。
           </p>
         </div>
       </div>
     </section>
   </main>
 
-  {/* ── Final CTA ── */}
+  {/* ── 最終CTA ── */}
   <section class="final-cta" aria-labelledby="cta-title">
     <div class="final-cta__inner">
-      <h2 id="cta-title" class="final-cta__title">Honest tools, honest specs.</h2>
+      <h2 id="cta-title" class="final-cta__title">誠実なツール、誠実な仕様。</h2>
       <div class="final-cta__buttons">
-        <a href="/cli/install/" class="btn btn--primary">Install the CLI</a>
-        <a href="/ai/specstudio-skills/" class="btn btn--secondary">Get AI skills for your agent</a>
+        <a href="/ja/cli/install/" class="btn btn--primary">CLI をインストール</a>
+        <a href="/ja/ai/specstudio-skills/" class="btn btn--secondary">エージェント用 AI スキルを入手</a>
         <a
           href="https://github.com/specscore/specscore-cli"
           rel="noopener"
@@ -237,23 +232,23 @@ import ScoreExample from '../../components/ScoreExample.astro';
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
           </svg>
-          Open-source on GitHub
+          GitHub でオープンソース公開中
         </a>
       </div>
     </div>
   </section>
 
-  {/* ── Footer ── */}
+  {/* ── フッター ── */}
   <footer class="page-footer">
     <div class="page-footer__inner">
       <div class="page-footer__col page-footer__brand">
-        <a href="/" class="wordmark" aria-label="SpecScore home">
+        <a href="/ja/" class="wordmark" aria-label="SpecScore ホーム">
           <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
           <span class="wordmark__name">SpecScore.md</span>
         </a>
         <p class="page-footer__tagline">
-          An open standard for specifications, requirements,
-          and acceptance criteria.
+          仕様、要件、受け入れ基準のための
+          オープンスタンダード。
         </p>
         <p class="page-footer__copyright">
           &copy; 2026 SpecScore contributors. MIT license.
@@ -263,18 +258,18 @@ import ScoreExample from '../../components/ScoreExample.astro';
       <div class="page-footer__col">
         <h4 class="page-footer__heading">SpecScore CLI</h4>
         <ul class="page-footer__list">
-          <li><a href="/cli/">Overview</a></li>
-          <li><a href="/cli/install/">Install</a></li>
+          <li><a href="/ja/cli/">概要</a></li>
+          <li><a href="/ja/cli/install/">インストール</a></li>
           <li><a href="https://github.com/specscore/specscore-cli">GitHub</a></li>
         </ul>
       </div>
 
       <div class="page-footer__col">
-        <h4 class="page-footer__heading">Ecosystem</h4>
+        <h4 class="page-footer__heading">エコシステム</h4>
         <ul class="page-footer__list">
-          <li><a href="/">SpecScore</a> — the open standard</li>
-          <li><a href="/ai/specstudio-skills/">SpecStudio Skills</a> — Claude Code plugin</li>
-          <li><a href="https://specscore.studio">SpecScore Studio</a> — web viewer</li>
+          <li><a href="/ja/">SpecScore</a> — オープンスタンダード</li>
+          <li><a href="/ja/ai/specstudio-skills/">SpecStudio Skills</a> — Claude Code プラグイン</li>
+          <li><a href="https://specscore.studio">SpecScore Studio</a> — Web ビューア</li>
         </ul>
       </div>
     </div>

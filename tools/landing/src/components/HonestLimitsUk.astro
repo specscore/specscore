@@ -1,0 +1,38 @@
+---
+// Ukrainian variant of HonestLimits.astro. Links to the dedicated /uk/validators/#limits section.
+// Prose is a draft pending native review.
+---
+
+<section class="limits-teaser section section--flush-top" aria-labelledby="limits-teaser-title">
+  <div class="section-inner section-inner--prose">
+    <h2 id="limits-teaser-title" class="limits-teaser__title">
+      Ось чого він не зловить.
+    </h2>
+    <p class="limits-teaser__body">
+      Лінтер, який запевняє, що ловить усе, бреше. SpecScore — це шарувата
+      система: детермінований лінтер, AI-рецензент і ваше власне судження — і в
+      кожного шару є реальна межа. Ми всі їх записали: що ловить лінтер, що
+      ловить AI і що досі залишається на вас, бо жоден інструмент поки що цього
+      не вміє.
+    </p>
+    <p class="limits-teaser__cta">
+      <a class="xref" href="/uk/validators/#limits">Чого лінтер не зловить →</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .limits-teaser { background: var(--cream); }
+  .limits-teaser__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .limits-teaser__body {
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+</style>

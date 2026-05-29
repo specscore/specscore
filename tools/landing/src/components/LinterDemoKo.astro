@@ -1,47 +1,134 @@
 ---
-// Korean variant of LinterDemo.astro.
+// Korean variant of LinterDemo.astro — Check your spec in two passes.
 // Terminal output stays English — it's literal CLI stdout.
 import LintExample from './LintExample.astro';
+import ScoreExample from './ScoreExample.astro';
 ---
 
-<section class="linter section" aria-labelledby="linter-title">
+<section class="passes section" aria-labelledby="passes-title">
   <div class="section-inner">
-    <h2 id="linter-title" class="linter__title">린터를 실행하세요.</h2>
-    <p class="linter__intro">
-      방금 본 명세에 <code>specscore lint</code>를 실행해 보세요.
-      결과는 다음과 같습니다.
+    <h2 id="passes-title" class="passes__title">명세를 두 번에 걸쳐 점검하세요.</h2>
+    <p class="passes__intro">
+      빠른 결정적 린터, 그다음 더 깊은 AI 리뷰 — 방금 본 명세에 그대로
+      실행합니다. 두 번의 점검, 두 종류의 확신.
     </p>
 
-    <div
-      class="linter__terminal"
-      role="img"
-      aria-label="specscore lint 터미널 출력: R1과 R2는 녹색 체크로 통과하고, R3은 빨간색 표시와 수정 가능한 오류 메시지로 실패합니다."
-    >
-<LintExample />
+    <div class="passes__grid">
+      {/* ── Pass 1 — the linter (shipped, real output) ── */}
+      <div class="pass">
+        <div class="pass__head">
+          <h3 class="pass__name">린터를 실행하세요.</h3>
+          <span class="pass__kind">deterministic</span>
+        </div>
+        <div
+          class="pass__terminal"
+          role="img"
+          aria-label="specscore lint 터미널 출력: R1과 R2는 인수 기준이 있어 통과하고(녹색 체크), R3은 인수 기준이 없으며 Related Feature 링크가 해석되지 않고 필수 Open Questions 섹션이 누락되어 실패합니다(빨간색 표시). 3개 문제, exit 1."
+        >
+          <LintExample />
+        </div>
+        <p class="pass__caption">
+          실행할 때마다 같은 결과. 무료이고, 빠르며, 모든 커밋에서 실행됩니다.
+        </p>
+      </div>
+
+      {/* ── Pass 2 — AI review/score (Approved Idea, labeled preview) ── */}
+      <div class="pass">
+        <div class="pass__head">
+          <h3 class="pass__name">AI로 리뷰하고 점수를 매기세요.</h3>
+          <span class="pass__kind">non-deterministic</span>
+        </div>
+        <div
+          class="pass__terminal"
+          role="img"
+          aria-label="AI 리뷰: 명세는 두 가지 실행 가능한 지적과 함께 B 등급을 받습니다 — AC-2의 모호한 트리거와 AC-3의 누락된 오류 경로."
+        >
+          <ScoreExample />
+        </div>
+        <p class="pass__caption">
+          사람 리뷰어처럼 의미를 읽어냅니다.
+        </p>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .linter { background: var(--cream); }
-  .linter__title {
+  .passes { background: var(--cream); }
+  .passes__title {
     font-size: var(--fs-h2);
     margin-bottom: var(--space-2);
     font-weight: 700;
     letter-spacing: -0.01em;
   }
-  .linter__intro {
+  .passes__intro {
     color: var(--mid-ink);
     margin-bottom: var(--space-4);
+    line-height: 1.6;
+    text-wrap: pretty;
   }
-  .linter__intro code {
+
+  .passes__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .pass {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .pass__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .pass__name {
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .pass__kind {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+
+  .pass__terminal {
+    margin-bottom: var(--space-2);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .pass__terminal pre.terminal {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .pass__caption {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+  .pass__caption .xref code {
+    font-size: 0.9em;
     background: var(--cream-2);
-    padding: 0.05em 0.35em;
+    padding: 0.05em 0.3em;
     border-radius: 2px;
-    font-size: 0.92em;
-    color: var(--ink);
   }
-  .linter__terminal {
-    margin-bottom: var(--space-3);
+
+  /* Two-column only: reserve a consistent caption height so both
+     terminals stretch to the same height. */
+  @media (min-width: 721px) {
+    .pass__caption { min-height: 2lh; }
+  }
+
+  @media (max-width: 720px) {
+    .passes__grid { grid-template-columns: 1fr; gap: var(--space-5); }
   }
 </style>

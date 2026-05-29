@@ -1,20 +1,16 @@
 ---
-// SpecScore /validators — what the two validators check, and where they stop.
-//
-// Value-first: a cold reader (e.g. from a Habr link or Google) is oriented in
-// the hero, sees what each validator CATCHES, then reaches the honest-limits
-// section at #limits. Framing: a layered system with honest seams —
-// deterministic lint, probabilistic AI review, human judgment.
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import SiteHeader from '../../components/SiteHeader.astro';
-import LintExample from '../../components/LintExample.astro';
-import ScoreExample from '../../components/ScoreExample.astro';
+// Simplified Chinese variant of /validators. Prose is a draft pending native review; terminal output stays English.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import LintExample from '../../../components/LintExample.astro';
+import ScoreExample from '../../../components/ScoreExample.astro';
 ---
 
 <BaseLayout
-  title="What SpecScore validates — and what it can't."
-  description="SpecScore checks your specs with two validators: a deterministic linter and an AI reviewer. See exactly what each one catches — and where automated validation stops and your judgment takes over."
-  canonical="https://specscore.md/validators/"
+  lang="zh-CN"
+  title="SpecScore 校验什么 — 又有什么是它做不到的。"
+  description="SpecScore 用两个校验器检查你的规格：确定性的代码检查器和 AI 审查器。看看每一个究竟能捕获什么 — 以及自动校验在哪里止步，从此交给你的判断。"
+  canonical="https://specscore.md/zh-cn/validators/"
 >
   <SiteHeader />
 
@@ -23,26 +19,25 @@ import ScoreExample from '../../components/ScoreExample.astro';
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__inner">
         <h1 id="hero-title" class="hero__headline">
-          What SpecScore<br />validates.
+          SpecScore<br />校验什么。
         </h1>
         <div class="hero__copy">
           <p class="hero__sub">
-            SpecScore is an open Markdown format for features, requirements, and
-            acceptance criteria — checked by two validators: a deterministic
-            <strong>linter</strong> and an <strong>AI reviewer</strong>. Here's
-            what each one catches, and where automated checking stops.
+            SpecScore 是一种用于功能、需求和验收标准的开放式 Markdown
+            格式 — 由两个校验器检查：确定性的<strong>代码检查器</strong>和
+            <strong>AI 审查器</strong>。下面就是每一个能捕获什么，以及自动检查在哪里止步。
           </p>
           <p class="hero__context">
-            New to SpecScore? <a class="xref" href="/">Start here</a> ·
-            <a class="xref" href="/cli/">The CLI</a> ·
-            <a class="xref" href="/ai/">AI Skills</a>
+            初次了解 SpecScore？<a class="xref" href="/zh-cn/">从这里开始</a> ·
+            <a class="xref" href="/zh-cn/cli/">CLI</a> ·
+            <a class="xref" href="/zh-cn/ai/">AI 技能</a>
           </p>
         </div>
 
         <div
           class="hero__art"
           role="img"
-          aria-label="Terminal output: specscore lint on a checkout spec passes all 24 requirements — structure, references, IDs valid, no index drift, no broken links. 0 problems, exit 0."
+          aria-label="终端输出：specscore lint 在 checkout 规格上通过全部 24 个需求 — 结构、引用、ID 均合法，无索引漂移、无失效链接、无 slug 冲突。0 个问题，exit 0。"
         >
 <pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/
 
@@ -57,16 +52,13 @@ import ScoreExample from '../../components/ScoreExample.astro';
     {/* ── The three layers ── */}
     <section class="section" aria-labelledby="layers-title">
       <div class="section-inner section-inner--prose">
-        <h2 id="layers-title" class="section-title">Three layers, not one.</h2>
+        <h2 id="layers-title" class="section-title">三层，而非一层。</h2>
         <p class="prose-p">
-          SpecScore validates in layers, cheapest and most certain first.
-          <strong>Lint</strong> is deterministic — fast, free, runs on every
-          commit. <strong>AI review</strong> is probabilistic — deeper, costs
-          tokens, catches things lint can't reach. <strong>Human judgment</strong>
-          is the third layer: the seams the first two can't close still need a
-          person — no tool can close them reliably today. The two automated layers
-          are complementary, not redundant: lint catches what AI can't defend; AI
-          catches what lint can't reach.
+          SpecScore 分层校验，最廉价、最确定的优先。<strong>代码检查器</strong>是确定性的 —
+          快速、免费，每次提交都运行。<strong>AI 审查</strong>是概率性的 —
+          更深入，消耗 token，能捕获代码检查器够不着的东西。<strong>人的判断</strong>是第三层：
+          前两层无法弥合的缝隙仍然需要人 — 因为目前还没有工具能可靠地弥合它们。
+          这两个自动层是互补的，而非冗余的：代码检查器捕获 AI 无法佐证的问题，AI 捕获代码检查器够不着的问题。
         </p>
       </div>
     </section>
@@ -74,57 +66,55 @@ import ScoreExample from '../../components/ScoreExample.astro';
     {/* ── What each validator checks (the positive half) ── */}
     <section class="section validators-section" aria-labelledby="checks-title">
       <div class="section-inner">
-        <h2 id="checks-title" class="section-title">What each validator checks.</h2>
+        <h2 id="checks-title" class="section-title">每个校验器检查什么。</h2>
         <div class="vcols">
           <div class="vcol">
             <div class="validator__head">
               <span class="validator__layer">Layer 1</span>
-              <h3 class="validator__title">CLI linter</h3>
+              <h3 class="validator__title">CLI 代码检查器</h3>
               <span class="validator__kind">deterministic</span>
             </div>
             <p class="validator__lead">
-              Same result every run, no LLM, no cost. If it passes here, it's a
-              fact — not an opinion.
+              每次运行结果相同，不用 LLM，零成本。如果在这里通过了，那就是事实 — 而非意见。
             </p>
             <div
               class="checks-terminal"
               role="img"
-              aria-label="specscore lint output: R1 and R2 have acceptance criteria; R3 has none, a Related Feature link doesn't resolve, and the required Open Questions section is missing. 3 problems, exit 1."
+              aria-label="specscore lint 的输出：R1 和 R2 具有验收标准；R3 没有，一个 Related Feature 链接无法解析，缺少必需的 Open Questions 章节。3 个问题，exit 1。"
             >
               <LintExample />
             </div>
             <ul class="vlist">
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Referential integrity — links resolve, IDs are unique</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Structural conventions — required sections, frontmatter shape</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Status hygiene and index drift</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Slug collisions</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Prefix validity on metadata fields (e.g. <code>Related Ideas:</code>)</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 引用完整性 — 链接可解析、ID 唯一</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 结构约定 — 必需的章节、frontmatter 的形态</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 状态卫生与索引漂移</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> slug 冲突</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 元数据字段上的前缀合法性（例如 <code>Related Ideas:</code>）</li>
             </ul>
           </div>
           <div class="vcol">
             <div class="validator__head">
               <span class="validator__layer">Layer 2</span>
-              <h3 class="validator__title">AI review &amp; score</h3>
+              <h3 class="validator__title">AI 审查与评分</h3>
               <span class="validator__kind">non-deterministic</span>
             </div>
             <p class="validator__lead">
-              Reads for meaning, the way a human reviewer would — and like a
-              human, it isn't perfectly repeatable.
+              像人类审查者那样按含义阅读 — 也和人一样，并非完全可重复。
             </p>
             <div
               class="checks-terminal"
               role="img"
-              aria-label="/score output: the spec earns a B grade with two actionable notes — a vague trigger on AC-2 and a missing error path on AC-3."
+              aria-label="/score 的输出：该规格获得 B 等级，并附有两条可操作的提示 — AC-2 上的触发条件含糊，AC-3 缺少错误处理路径。"
             >
               <ScoreExample />
             </div>
             <ul class="vlist">
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> ACs phrased as verifiable Given/When/Then</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Internal consistency within an artifact</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Vague or placeholder content</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Readability for a human reviewer</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Author-actionable, severity-marked feedback</li>
-              <li><span class="mark mark--pass" aria-hidden="true">✓</span> An A–F readiness grade</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 验收标准是否写成可验证的 Given/When/Then</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 单个工件内部的一致性</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 含糊或占位性的内容</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 对人类审查者而言的可读性</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> 作者可操作、标注了严重级别的反馈</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> A–F 的就绪度评级</li>
             </ul>
           </div>
         </div>
@@ -134,88 +124,78 @@ import ScoreExample from '../../components/ScoreExample.astro';
     {/* ── #limits — what they don't catch (the honest half) ── */}
     <section class="section limits-section" id="limits" aria-labelledby="limits-title">
       <div class="section-inner">
-        <h2 id="limits-title" class="section-title">What they don't catch.</h2>
+        <h2 id="limits-title" class="section-title">它们捕获不到什么。</h2>
         <p class="section-lead">
-          No validator is magic. Here's where each one stops — so you know
-          exactly where your own judgment still has to do the work.
+          没有哪个校验器是魔法。下面就是每一个止步之处 — 好让你清楚地知道，哪里仍然需要你自己的判断来完成工作。
         </p>
         <div class="vcols">
           <div class="vcol">
             <div class="validator__head">
               <span class="validator__layer">Layer 1</span>
-              <h3 class="validator__title">CLI linter</h3>
+              <h3 class="validator__title">CLI 代码检查器</h3>
             </div>
             <ul class="vlist">
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Implicit contradictions across deep hierarchies</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Drift between spec and code <span class="vnote">(improving as <code>specstudio:recap</code> lands)</span></li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Semantic correctness of acceptance criteria</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Whether a name actually makes sense</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Whether the requirements solve the stated problem</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 跨深层级的隐式矛盾</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 规格与代码之间的漂移 <span class="vnote">（随着 <code>specstudio:recap</code> 上线而改善）</span></li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 验收标准在语义上的正确性</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 一个名称是否真的讲得通</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 这些需求是否解决了所陈述的问题</li>
             </ul>
           </div>
           <div class="vcol">
             <div class="validator__head">
               <span class="validator__layer">Layer 2</span>
-              <h3 class="validator__title">AI review &amp; score</h3>
-              <span class="validator__kind">catches inconsistently</span>
+              <h3 class="validator__title">AI 审查与评分</h3>
+              <span class="validator__kind">捕获并不稳定</span>
             </div>
             <ul class="vlist">
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Full run-to-run reproducibility — verdicts may shift within tolerance</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Cross-artifact contradictions across a large tree without explicit cross-checks</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Whether requirements truly solve the problem — flags obvious gaps, misses domain-specific ones</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Biases inherited from the underlying LLM</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Semantic correctness with absolute certainty</li>
-              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Anything the rubric doesn't weight</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 完全的逐次可重现性 — 在容差范围内裁决可能会变化</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 没有显式交叉检查时，大型树中跨工件的矛盾</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 需求是否真正解决了问题 — 能标出明显的缺口，会漏掉特定领域的缺口</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 从底层 LLM 继承而来的偏见</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 以绝对的把握保证语义正确性</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> 任何评分细则没有纳入权重的东西</li>
             </ul>
           </div>
         </div>
 
-        <ol class="bands" aria-label="The three layers of validation, in order of reach">
+        <ol class="bands" aria-label="校验的三个层次，按覆盖深度排列">
           <li class="band">
             <span class="band__step">1</span>
-            <h3 class="band__title">Lint reaches here</h3>
+            <h3 class="band__title">代码检查器够到这里</h3>
             <p class="band__desc">
-              Structure, references, hygiene. Cheap and certain — but blind to
-              meaning.
+              结构、引用、卫生。廉价又确定 — 但对含义视而不见。
             </p>
           </li>
           <li class="band band--mid">
             <span class="band__step">2</span>
-            <h3 class="band__title">AI reaches here</h3>
+            <h3 class="band__title">AI 够到这里</h3>
             <p class="band__desc">
-              Meaning, clarity, consistency within an artifact. Deeper — but
-              probabilistic, and weak across a large tree.
+              含义、清晰度、单个工件内部的一致性。更深入 — 但是概率性的，在大型树上较弱。
             </p>
           </li>
           <li class="band band--human">
             <span class="band__step">3</span>
-            <h3 class="band__title">Still on you</h3>
+            <h3 class="band__title">仍然要靠你</h3>
             <p class="band__desc">
-              Cross-cutting judgment over the whole system — work no tool can do
-              reliably today, so it still takes a human reviewer.
+              对整个系统的贯穿式判断 — 这是目前没有工具能可靠完成的工作，所以仍然需要一位人类审查者。
             </p>
           </li>
         </ol>
 
         <div class="worked">
-          <h3 class="worked__title">The case neither tool will save you from</h3>
+          <h3 class="worked__title">两个工具都救不了你的那种情形</h3>
           <p class="worked__body">
-            Picture a real, deep spec tree. Feature&nbsp;A requires <em>X</em>.
-            Feature&nbsp;B requires <em>Y</em>. Feature&nbsp;C requires
-            <em>Z</em>. Then feature&nbsp;D quietly requires something that
-            contradicts B — but only when A is also active. Lint sees four valid,
-            well-linked documents and passes. The AI reviewer, reading artifacts
-            one at a time, has no reason to load all four and notice the
-            three-way interaction.
+            想象一棵真实而深的规格树。功能&nbsp;A 要求 <em>X</em>。功能&nbsp;B 要求
+            <em>Y</em>。功能&nbsp;C 要求 <em>Z</em>。然后功能&nbsp;D 悄悄要求了某个与 B
+            矛盾的东西 — 但只在 A 同时生效时才矛盾。代码检查器看到的是四份合法、彼此链接良好的文档，于是通过了。
+            AI 审查器逐个阅读工件，没有理由把这四份一起加载进来，从而注意到这种三方交互。
           </p>
           <p class="worked__body">
-            <strong>Neither layer reliably catches this — and we're not going to
-            pretend otherwise.</strong> This exact class of contradiction is why
-            the third layer exists. SpecScore's job is to make the tree
-            navigable enough that a human reviewing the seams can <em>find</em>
-            the conflict — open questions propagate up the hierarchy, related
-            requirements are one query away — not to claim a tool already found
-            it.
+            <strong>这两层都无法可靠地捕获它 — 我们也不会假装不是这样。</strong>
+            正是这一类矛盾，才是第三层存在的理由。SpecScore 的职责是把这棵树做得足够易于导航，
+            让一位审查缝隙的人能够<em>找到</em>冲突 — 开放问题沿层级向上传播、相关需求只需一次查询即达 —
+            而不是声称某个工具已经替你找到了它。
           </p>
         </div>
       </div>
@@ -225,10 +205,10 @@ import ScoreExample from '../../components/ScoreExample.astro';
   {/* ── Final CTA ── */}
   <section class="final-cta" aria-labelledby="cta-title">
     <div class="final-cta__inner">
-      <h2 id="cta-title" class="final-cta__title">Honest tools, honest specs.</h2>
+      <h2 id="cta-title" class="final-cta__title">诚实的工具，诚实的规格。</h2>
       <div class="final-cta__buttons">
-        <a href="/cli/install/" class="btn btn--primary">Install the CLI</a>
-        <a href="/ai/specstudio-skills/" class="btn btn--secondary">Get AI skills for your agent</a>
+        <a href="/zh-cn/cli/install/" class="btn btn--primary">安装 CLI</a>
+        <a href="/zh-cn/ai/specstudio-skills/" class="btn btn--secondary">为你的代理获取 AI 技能</a>
         <a
           href="https://github.com/specscore/specscore-cli"
           rel="noopener"
@@ -237,7 +217,7 @@ import ScoreExample from '../../components/ScoreExample.astro';
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
           </svg>
-          Open-source on GitHub
+          在 GitHub 上开源
         </a>
       </div>
     </div>
@@ -247,13 +227,12 @@ import ScoreExample from '../../components/ScoreExample.astro';
   <footer class="page-footer">
     <div class="page-footer__inner">
       <div class="page-footer__col page-footer__brand">
-        <a href="/" class="wordmark" aria-label="SpecScore home">
+        <a href="/zh-cn/" class="wordmark" aria-label="SpecScore 首页">
           <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
           <span class="wordmark__name">SpecScore.md</span>
         </a>
         <p class="page-footer__tagline">
-          An open standard for specifications, requirements,
-          and acceptance criteria.
+          一个用于规范、需求和验收标准的开放标准。
         </p>
         <p class="page-footer__copyright">
           &copy; 2026 SpecScore contributors. MIT license.
@@ -263,18 +242,18 @@ import ScoreExample from '../../components/ScoreExample.astro';
       <div class="page-footer__col">
         <h4 class="page-footer__heading">SpecScore CLI</h4>
         <ul class="page-footer__list">
-          <li><a href="/cli/">Overview</a></li>
-          <li><a href="/cli/install/">Install</a></li>
+          <li><a href="/zh-cn/cli/">概览</a></li>
+          <li><a href="/zh-cn/cli/install/">安装</a></li>
           <li><a href="https://github.com/specscore/specscore-cli">GitHub</a></li>
         </ul>
       </div>
 
       <div class="page-footer__col">
-        <h4 class="page-footer__heading">Ecosystem</h4>
+        <h4 class="page-footer__heading">生态系统</h4>
         <ul class="page-footer__list">
-          <li><a href="/">SpecScore</a> — the open standard</li>
-          <li><a href="/ai/specstudio-skills/">SpecStudio Skills</a> — Claude Code plugin</li>
-          <li><a href="https://specscore.studio">SpecScore Studio</a> — web viewer</li>
+          <li><a href="/zh-cn/">SpecScore</a> — 开放标准</li>
+          <li><a href="/zh-cn/ai/specstudio-skills/">SpecStudio Skills</a> — Claude Code 插件</li>
+          <li><a href="https://specscore.studio">SpecScore Studio</a> — 在线查看器</li>
         </ul>
       </div>
     </div>
