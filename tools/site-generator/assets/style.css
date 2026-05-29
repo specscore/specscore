@@ -746,6 +746,8 @@ svg { max-width: 100%; height: auto; margin: 1rem 0; }
     height: auto;
     min-height: 56px;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    column-gap: 0.5rem;
     row-gap: 0.4rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
