@@ -1,11 +1,10 @@
-# Cloudflare Pages headers — companion to firebase.json
-# Edit BOTH this file and firebase.json when adding/changing headers.
+# Cloudflare Pages headers — the canonical source of response headers.
 # This file is copied into public/_headers by tools/site-generator/build.js
 # so Cloudflare Pages can find it at the publish-dir root.
 #
 # Syntax: https://developers.cloudflare.com/pages/configuration/headers/
 
-# Serve every .md file as text/markdown (mirrors firebase.json "**/*.md")
+# Serve every .md file as text/markdown
 /*.md
   Content-Type: text/markdown; charset=utf-8
 

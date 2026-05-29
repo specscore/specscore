@@ -1,5 +1,4 @@
-# Cloudflare Pages redirects — companion to firebase.json "redirects".
-# Edit BOTH this file and firebase.json when adding/changing redirects.
+# Cloudflare Pages redirects — the canonical source of redirect rules.
 # This file is copied into public/_redirects by tools/site-generator/build.js
 # so Cloudflare Pages can find it at the publish-dir root.
 #
