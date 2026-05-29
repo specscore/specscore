@@ -604,7 +604,19 @@ Decisions made with the user after reviewing the English page:
 2. **"Learn" footer column added** to all 8 `SiteFooter*` variants (a new 4th column) holding the pillar link. The SDD link added to the Product column in Task 3 (commit `fffc9bb`) is **removed** and relocated to the Learn column. Each variant's scoped `<style>` grid updates `2fr 1fr 1fr` → `2fr 1fr 1fr 1fr`.
 3. **Visible "Last updated" date line added** to the page (class `.sdd-updated` in `global.css`), per user choice.
 4. **Locale pillar pages (Phase 2) now use the matching `SiteFooter<Locale>` variant** (not an inline footer). All other Phase 2 steps unchanged.
-5. **Path strategy: hybrid.** Pillar stays at top-level `/spec-driven-development/`; future supporting guides go under `/learn/*` (not built in this feature). "AI coding agents/context engineering" and "machine-readable specs" ideas merge into one future guide.
+5. **Path strategy: hybrid.** Pillar stays at top-level `/spec-driven-development/`; future supporting guides go under `/learn/*` (not built in this feature).
+
+## Future "Learn" content cluster (candidate pages — not built in this feature)
+
+Original candidate guides proposed for the `/learn/*` cluster (the pillar anchors them; all cross-linked for topical authority / GEO). **Kept as separate distinct ideas — last two NOT merged; pending user decision on naming/scope:**
+
+- **Spec-Driven Development** — `/spec-driven-development/` (the pillar, top-level — already built).
+- **What are acceptance criteria?** — how to write testable acceptance criteria (high-intent, evergreen).
+- **Specs vs PRDs** *(alt: "Spec-driven vs vibe coding")* — comparison intent.
+- **AI coding agents & context engineering** — why machine-readable specs help agents work with less context.
+- **Machine-readable specifications** — the open-format angle.
+
+(User likes the original names of the last two and wants to keep them distinct for now rather than collapsing them into one guide.)
 
 ## Self-review notes (author)
 
