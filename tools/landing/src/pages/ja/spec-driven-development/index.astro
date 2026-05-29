@@ -1,0 +1,289 @@
+---
+// /ja/spec-driven-development/ — pillar page (Japanese).
+// Neutral-reference-first explainer on spec-driven development, with AI as
+// the narrative spine. SpecScore appears as the named recommended
+// implementation in the "in practice" section + FAQ only.
+// Design: docs/superpowers/specs/2026-05-29-spec-driven-development-pillar-page-design.md
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooterJa from '../../../components/SiteFooterJa.astro';
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: 'AIコーディングエージェントのための仕様駆動開発',
+      description:
+        '仕様駆動開発とは何か、なぜAIコーディングエージェントにとって重要なのか、ワークフローはどう機能するのか、そしてTDDやプロンプトのみのコーディングとどう違うのかを解説します。',
+      inLanguage: 'ja',
+      datePublished: '2026-05-29',
+      dateModified: '2026-05-29',
+      mainEntityOfPage: 'https://specscore.md/ja/spec-driven-development/',
+      image: 'https://specscore.md/hero-og.webp',
+      author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      publisher: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      about: {
+        '@type': 'DefinedTerm',
+        name: '仕様駆動開発',
+        description:
+          '書かれた仕様 — 要件と受け入れ基準 — を、コードを構築し検証するための信頼できる唯一の情報源とするソフトウェア開発のプラクティス。',
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: '仕様駆動開発はテスト駆動開発と同じものですか？',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'いいえ。TDDはコードレベルの失敗するテストから実装を駆動します。仕様駆動開発はその一つ上のレベルで機能します。まず、意図する振る舞いと受け入れ基準を書かれた仕様に固定します。両者は補完的です — 仕様の受け入れ基準は、しばしばTDDがその後に駆動するテストになります。',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: '仕様駆動開発は作業を遅くしますか？',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'コードを書く前に時間を足しますが、間違ったものを作り直すために費やす時間を減らします。使い捨てのスクリプトではそのオーバーヘッドは見合いません。AIエージェントが大規模に生成するもの、あるいはチームが保守しなければならないものについては、先に仕様を書くほうが最初から最後まで通常は速いです。',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: '仕様とPRDの違いは何ですか？',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'PRDは通常、人間向けの文章です。仕様駆動開発における仕様は構造化されていてテスト可能です — 明示的な受け入れ基準を伴う個別の要件 — そのため、レビュアーもAIエージェントも正確にそれに基づいて行動できます。',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'AIコーディングエージェントは仕様をどう使いますか？',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              '仕様が機械可読であるとき、エージェントはコードベース全体を読み込む代わりに、現在のタスクに関連する要件と受け入れ基準を仕様に問い合わせ、その後で自分の出力をそれらの基準に照らして確認します — もっともらしいが誤ったコードに対するガードレールです。',
+          },
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  lang="ja"
+  title="AIエージェントのための仕様駆動開発 — 完全ガイド | SpecScore"
+  description="仕様駆動開発とは、コードの前にテスト可能な仕様を書くことで、AIコーディングエージェントが正しいものを構築できるようにすることです。それが何か、どう機能するか、TDDやプロンプトのみのコーディングとどう違うかを解説します。"
+  canonical="https://specscore.md/ja/spec-driven-development/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
+  </Fragment>
+
+  <SiteHeader />
+
+  <main>
+    <!-- 1. Definition block + TL;DR -->
+    <section class="sdd-hero" aria-labelledby="sdd-title">
+      <div class="sdd-hero__inner">
+        <h1 id="sdd-title" class="sdd-hero__headline">AIコーディングエージェントのための仕様駆動開発</h1>
+        <p class="sdd-hero__lede">
+          <strong>仕様駆動開発（SDD）は、書かれたテスト可能な仕様 — 要件と受け入れ基準 — を、
+          コードを構築し検証するための信頼できる唯一の情報源とするプラクティスです。</strong>
+          プロンプトやチケットから直接コードに進むのではなく、まずソフトウェアが何をすべきかに合意し、
+          その仕様に従って構築します。いまやAIエージェントがコードの多くを書くようになり、
+          仕様こそがエージェントを正しいものの構築にとどめるものです。
+        </p>
+        <ul class="sdd-takeaways">
+          <li>仕様が信頼できる唯一の情報源であり、コードはそこから導かれ、それに照らして確認されます。</li>
+          <li>要件は明示的な受け入れ基準とペアになるため、「完了」は主観的ではなくテスト可能です。</li>
+          <li>AIエージェントはコードから推測する代わりに仕様に意図を問い合わせます — 間違った構築が減ります。</li>
+          <li>テスト駆動開発を補完するものであり、置き換えるものではありません。</li>
+        </ul>
+        <p class="sdd-updated">最終更新：2026年5月</p>
+      </div>
+    </section>
+
+    <!-- 2. What is SDD -->
+    <section class="sdd-section" aria-labelledby="what-title">
+      <div class="sdd-section__inner">
+        <h2 id="what-title">仕様駆動開発とは何か？</h2>
+        <p>
+          仕様駆動開発は、通常の作業順序を逆転させます。仕様を事後に書かれるドキュメントとして扱う、
+          あるいは完全に省略するのではなく、SDDは仕様を主要な成果物にします。コード、テスト、
+          レビューはすべてそこにさかのぼります。
+        </p>
+        <p>
+          この意味での仕様は文章の壁ではありません。それは構造化されています。すなわち
+          <strong>要件</strong>の集合であり、それぞれが明示的な<strong>受け入れ基準</strong>を
+          伴い、要件が満たされたといえるために何が真でなければならないかをテスト可能な言葉で示します。
+          その構造こそが、レビュアー、テストスイート、AIエージェントが同じドキュメントを同じように
+          解釈できるようにするものです。
+        </p>
+        <p>
+          仕様はまた<strong>生きた成果物</strong>でもあります。要件が変わると、まず仕様が変わり、
+          コードがそれに従います — そのため仕様が作り話へと逸れていくことはありません。
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. Why it matters now (AI spine) -->
+    <section class="sdd-section" aria-labelledby="why-title">
+      <div class="sdd-section__inner">
+        <h2 id="why-title">なぜ今重要なのか：AIが賭け金を引き上げた</h2>
+        <p>
+          AIコーディングエージェントは、人間が読めるよりもはるかに速くコードを生成します。
+          それがボトルネックを移します。難しいのはもはや実装をタイプすることではなく、
+          <strong>生成されたコードがあなたの望んだコードになるよう、意図を十分に明確に指定すること</strong>です。
+          曖昧なプロンプトを与えられたエージェントは、もっともらしくて誤ったものを自信を持って、
+          しかも機械の速度で生み出します。
+        </p>
+        <p>
+          仕様はガードレールです。意図する振る舞いと受け入れ基準が書き留められていれば、
+          エージェントには構築に向かう明確なターゲットと、それに照らして検証するチェックリストがあり、
+          人間のレビュアーにはコードが存在する前に承認すべき固定されたものがあります。SDDは、
+          チームがAIの速度をAIによる手戻りに変えないための方法です。
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. How it works -->
+    <section class="sdd-section" aria-labelledby="how-title">
+      <div class="sdd-section__inner">
+        <h2 id="how-title">仕様駆動開発はどう機能するか</h2>
+        <p>ワークフローは一度きりのドキュメントではなく、ループです：</p>
+        <ol class="sdd-steps">
+          <li><strong>意図を捉える。</strong> 解決策にコミットする前に、まだ固まっていない方向性 — 問題、目標、未解決の問い — を記録します。</li>
+          <li><strong>振る舞いを指定する。</strong> 合意した方向性を、それぞれ明示的でテスト可能な受け入れ基準を伴う要件へと変えます。</li>
+          <li><strong>計画へと分解する。</strong> 仕様を順序付けられたタスクに分け、各タスクは自分が満たす受け入れ基準を引用します。</li>
+          <li><strong>実装する。</strong> 仕様に従い、タスクごとに — 人間またはAIエージェントが — 構築します。</li>
+          <li><strong>基準に照らして検証する。</strong> 結果を雰囲気ではなく受け入れ基準に照らして確認します。</li>
+          <li><strong>仕様を生かし続ける。</strong> 要件が変わったら、まず仕様を更新します。コードがそれに従います。</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. Benefits -->
+    <section class="sdd-section" aria-labelledby="benefits-title">
+      <div class="sdd-section__inner">
+        <h2 id="benefits-title">仕様駆動開発のメリット</h2>
+        <ul class="sdd-benefits">
+          <li>意見の相違は実装後 — 高くつく — ではなく、仕様レビューの間 — 安く済む — に表面化します。</li>
+          <li>受け入れ基準がテスト可能なので、「完了」は客観的です。</li>
+          <li>仕様はプロダクト、エンジニアリング、AIエージェントの全員にとって共有された文脈です。</li>
+          <li>変更は追跡可能です — 各タスクは自分が満たす基準にさかのぼります。</li>
+        </ul>
+        <h3>なぜ特にAIエージェントの役に立つのか</h3>
+        <ul class="sdd-benefits">
+          <li><strong>機械可読な意図：</strong> エージェントはコードから推測するのではなく、要件を直接読みます。</li>
+          <li><strong>読み込む文脈が少ない：</strong> エージェントはリポジトリ全体ではなく、仕様の関連する部分に問い合わせます。</li>
+          <li><strong>検証可能な出力：</strong> 受け入れ基準はエージェントに具体的な合否のターゲットを与えます。</li>
+          <li><strong>トレーサビリティ：</strong> 生成されたコードは、それを動機づけた要件にさかのぼって結びつけられます。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. Comparison -->
+    <section class="sdd-section" aria-labelledby="vs-title">
+      <div class="sdd-section__inner">
+        <h2 id="vs-title">仕様駆動開発と関連プラクティスの比較</h2>
+        <div class="sdd-table-wrap">
+          <table class="sdd-table">
+            <thead>
+              <tr><th>プラクティス</th><th>信頼できる唯一の情報源</th><th>SDDとの関係</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>テスト駆動開発</td><td>コードレベルの失敗するテスト</td><td>補完的 — 受け入れ基準がテストになります。</td></tr>
+              <tr><td>従来のPRD</td><td>人間向けに書かれた文章</td><td>構造化が弱い。直接テスト可能でも機械可読でもありません。</td></tr>
+              <tr><td>プロンプトのみ（「バイブコーディング」）</td><td>プロンプトとモデルの推測</td><td>持続的でレビュー可能なターゲットがない — SDDが解決するために存在する問題です。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          SpecScoreと他の仕様ツールの詳細な比較は、
+          <a href="/ja/vs/">比較ページ</a>をご覧ください。
+        </p>
+      </div>
+    </section>
+
+    <!-- 7. Tradeoffs -->
+    <section class="sdd-section" aria-labelledby="limits-title">
+      <div class="sdd-section__inner">
+        <h2 id="limits-title">トレードオフと使わないほうがよいとき</h2>
+        <p>
+          仕様駆動開発はただではありません。コードが動く前に考えて書くことへ労力を前倒しします。
+          これは一度きりのスクリプトや使い捨ての実験には適さない取引です。そして仕様は最新に
+          保たれて初めて役立ちます — 放置されて腐った仕様は誤解を招き、ないよりも悪くなります。
+          SDDが報われるのは、作業が計画するに足るほど大きいとき、保守されるとき、あるいは
+          大規模に構築するためAIエージェントに引き渡されるときです。
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. In practice (SpecScore) -->
+    <section class="sdd-section" aria-labelledby="practice-title">
+      <div class="sdd-section__inner">
+        <h2 id="practice-title">AIエージェントとともに仕様駆動開発を実践する</h2>
+        <p>
+          AIエージェントとSDDを進めるには、2つのものが必要です。あなたのチームとエージェントの
+          双方が理解する<strong>機械可読な仕様フォーマット</strong>と、エージェントがそれらの仕様を
+          <strong>読み・書き・検証する手段</strong>です。
+        </p>
+        <p>
+          <strong>SpecScore</strong>はまさにそれを実現する一つの実装です。フィーチャー、要件、
+          受け入れ基準のためのオープンなMarkdown + YAMLフォーマット — リポジトリ内のプレーンな
+          ファイル — であり、エージェントがそれらを問い合わせ・編集・lintするために呼び出すCLIと
+          組み合わさっています。構造が機械可読なので、エージェントは「次に何を構築すべきか？」と
+          尋ねて、未解決の要件とその受け入れ基準を受け取り、その後で自分の作業をそれらに照らして
+          確認できます。ツールに依存せず、オープンソースです。
+        </p>
+        <p>
+          <a href="/ja/ai/">コーディングエージェント向けのAIスキル</a>で始めるか、
+          <a href="/ja/cli/">CLIをインストール</a>してください。
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. FAQ -->
+    <section class="sdd-section" aria-labelledby="faq-title">
+      <div class="sdd-section__inner">
+        <h2 id="faq-title">よくある質問</h2>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">仕様駆動開発はテスト駆動開発と同じものですか？</p>
+          <p class="sdd-faq__a">いいえ。TDDはコードレベルの失敗するテストから実装を駆動します。仕様駆動開発はその一つ上のレベルで機能します。まず、意図する振る舞いと受け入れ基準を書かれた仕様に固定します。両者は補完的です — 仕様の受け入れ基準は、しばしばTDDがその後に駆動するテストになります。</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">仕様駆動開発は作業を遅くしますか？</p>
+          <p class="sdd-faq__a">コードを書く前に時間を足しますが、間違ったものを作り直すために費やす時間を減らします。使い捨てのスクリプトではそのオーバーヘッドは見合いません。AIエージェントが大規模に生成するもの、あるいはチームが保守しなければならないものについては、先に仕様を書くほうが最初から最後まで通常は速いです。</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">仕様とPRDの違いは何ですか？</p>
+          <p class="sdd-faq__a">PRDは通常、人間向けの文章です。仕様駆動開発における仕様は構造化されていてテスト可能です — 明示的な受け入れ基準を伴う個別の要件 — そのため、レビュアーもAIエージェントも正確にそれに基づいて行動できます。</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">AIコーディングエージェントは仕様をどう使いますか？</p>
+          <p class="sdd-faq__a">仕様が機械可読であるとき、エージェントはコードベース全体を読み込む代わりに、現在のタスクに関連する要件と受け入れ基準を仕様に問い合わせ、その後で自分の出力をそれらの基準に照らして確認します — もっともらしいが誤ったコードに対するガードレールです。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. CTA -->
+  <section class="sdd-cta" aria-labelledby="cta-title">
+    <div class="sdd-cta__inner">
+      <h2 id="cta-title">AIエージェントとともに仕様駆動で構築を始めよう</h2>
+      <p>SpecScoreは、エージェントにオープンな仕様フォーマットと、それを問い合わせ・lintするCLIを与えます。</p>
+      <div class="sdd-cta__buttons">
+        <a href="/ja/ai/" class="btn btn--primary">エージェント向けのAIスキルを入手</a>
+        <a href="/ja/cli/" class="btn btn--secondary">CLIをインストール</a>
+      </div>
+    </div>
+  </section>
+
+  <SiteFooterJa />
+</BaseLayout>
