@@ -1,0 +1,280 @@
+---
+// /zh-cn/spec-driven-development/ — pillar page (Simplified Chinese).
+// Neutral-reference-first explainer on spec-driven development, with AI as
+// the narrative spine. SpecScore appears as the named recommended
+// implementation in the "in practice" section + FAQ only.
+// Design: docs/superpowers/specs/2026-05-29-spec-driven-development-pillar-page-design.md
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooterZhCn from '../../../components/SiteFooterZhCn.astro';
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: '面向 AI 编码代理的规范驱动开发',
+      description:
+        '什么是规范驱动开发，为什么它对 AI 编码代理很重要，工作流如何运作，以及它与 TDD 和仅靠提示词的编码相比有何不同。',
+      inLanguage: 'zh-CN',
+      datePublished: '2026-05-29',
+      dateModified: '2026-05-29',
+      mainEntityOfPage: 'https://specscore.md/zh-cn/spec-driven-development/',
+      image: 'https://specscore.md/hero-og.webp',
+      author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      publisher: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      about: {
+        '@type': 'DefinedTerm',
+        name: '规范驱动开发',
+        description:
+          '一种软件开发实践，其中书面规范——需求与验收标准——是构建代码并据以验证代码的唯一可信来源。',
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: '规范驱动开发和测试驱动开发是一回事吗？',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              '不是。TDD 在代码层面从失败的测试驱动实现。规范驱动开发在更上一层运作：它先把预期行为和验收标准固定在一份书面规范中。两者是互补的——规范中的验收标准往往会成为 TDD 随后驱动的那些测试。',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: '规范驱动开发会拖慢你吗？',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              '它在写代码之前增加了时间，却减少了重做错误东西所花的时间。对于一次性脚本，这点开销并不值得。但对于 AI 代理大规模生成的东西，或团队必须维护的东西，先写规范通常从头到尾都更快。',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: '规范和 PRD 有什么区别？',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'PRD 通常是面向人的散文。规范驱动开发中的规范是结构化且可测试的——带有明确验收标准的离散需求——因此评审者和 AI 代理都能据以精确地行动。',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'AI 编码代理如何使用规范？',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              '当规范可被机器读取时，代理会向它查询与当前任务相关的需求和验收标准，而不是加载整个代码库，然后对照这些标准检查自己的输出——这是对看似合理却错误的代码的一道防护。',
+          },
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  lang="zh-CN"
+  title="面向 AI 代理的规范驱动开发 — 完整指南 | SpecScore"
+  description="规范驱动开发意味着在写代码之前先写一份可测试的规范，让 AI 编码代理构建正确的东西。它是什么、如何运作，以及它与 TDD 和仅靠提示词的编码相比有何不同。"
+  canonical="https://specscore.md/zh-cn/spec-driven-development/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
+  </Fragment>
+
+  <SiteHeader />
+
+  <main>
+    <!-- 1. Definition block + TL;DR -->
+    <section class="sdd-hero" aria-labelledby="sdd-title">
+      <div class="sdd-hero__inner">
+        <h1 id="sdd-title" class="sdd-hero__headline">面向 AI 编码代理的规范驱动开发</h1>
+        <p class="sdd-hero__lede">
+          <strong>规范驱动开发（SDD）是一种实践，其中一份书面、可测试的规范——需求与验收标准——
+          是构建代码并据以验证代码的唯一可信来源。</strong> 与其直接从提示词或工单走向代码，
+          你先就软件必须做什么达成一致，然后按照这份规范来构建。如今 AI 代理已经在编写大量代码，
+          规范正是让它们持续构建正确东西的东西。
+        </p>
+        <ul class="sdd-takeaways">
+          <li>规范是唯一可信来源；代码由它派生，并对照它来检查。</li>
+          <li>需求与明确的验收标准配对，因此“完成”是可测试的，而非主观的。</li>
+          <li>AI 代理向规范查询意图，而不是从代码中猜测——更少的错误构建。</li>
+          <li>它与测试驱动开发互补，而非取而代之。</li>
+        </ul>
+        <p class="sdd-updated">最后更新：2026年5月</p>
+      </div>
+    </section>
+
+    <!-- 2. What is SDD -->
+    <section class="sdd-section" aria-labelledby="what-title">
+      <div class="sdd-section__inner">
+        <h2 id="what-title">什么是规范驱动开发？</h2>
+        <p>
+          规范驱动开发颠倒了通常的工作顺序。它不把规范当作事后补写的文档——也不把它完全跳过——
+          而是让规范成为首要的产物。代码、测试和评审都追溯回它。
+        </p>
+        <p>
+          这个意义上的规范不是一堵文字墙。它是结构化的：一组
+          <strong>需求</strong>，每条都带有明确的<strong>验收标准</strong>，
+          以可测试的措辞说明要让该需求被满足，什么必须为真。正是这种结构，
+          让评审者、测试套件和 AI 代理都能以相同的方式解读同一份文档。
+        </p>
+        <p>
+          规范还是一个<strong>活的产物</strong>。当需求改变时，规范先改变，代码随之跟进——
+          因此规范永远不会漂移成虚构。
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. Why it matters now (AI spine) -->
+    <section class="sdd-section" aria-labelledby="why-title">
+      <div class="sdd-section__inner">
+        <h2 id="why-title">为什么现在重要：AI 抬高了赌注</h2>
+        <p>
+          AI 编码代理生成代码的速度远快于人能读它的速度。这转移了瓶颈。难的部分不再是敲出实现，
+          而是
+          <strong>把意图说明得足够清楚，使生成的代码就是你想要的代码</strong>。
+          一个被给到模糊提示词的代理，会自信地产出看似合理却错误的东西，而且是以机器的速度。
+        </p>
+        <p>
+          规范就是那道护栏。当预期行为和验收标准被写下来，代理就有了一个明确的构建目标，
+          以及一份据以验证的检查清单——而人类评审者在任何代码存在之前，就有了一个固定的东西可以批准。
+          SDD 是团队避免让 AI 的速度变成 AI 返工的方式。
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. How it works -->
+    <section class="sdd-section" aria-labelledby="how-title">
+      <div class="sdd-section__inner">
+        <h2 id="how-title">规范驱动开发如何运作</h2>
+        <p>工作流是一个循环，而不是一份一次性的文档：</p>
+        <ol class="sdd-steps">
+          <li><strong>捕捉意图。</strong> 在确定解决方案之前，先记录尚未成形的方向——问题、目标、未决问题。</li>
+          <li><strong>规定行为。</strong> 把达成一致的方向转化为需求，每条都带有明确、可测试的验收标准。</li>
+          <li><strong>分解为计划。</strong> 把规范拆成有序的任务，每个任务都引用它所满足的验收标准。</li>
+          <li><strong>实现。</strong> 按照规范，逐个任务地构建——由人或 AI 代理完成。</li>
+          <li><strong>对照标准验证。</strong> 用验收标准而非感觉来检查结果。</li>
+          <li><strong>让规范保持鲜活。</strong> 当需求改变时，先更新规范；代码随之跟进。</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. Benefits -->
+    <section class="sdd-section" aria-labelledby="benefits-title">
+      <div class="sdd-section__inner">
+        <h2 id="benefits-title">规范驱动开发的好处</h2>
+        <ul class="sdd-benefits">
+          <li>分歧在规范评审期间浮现——成本低——而不是在实现之后——成本高。</li>
+          <li>“完成”是客观的，因为验收标准是可测试的。</li>
+          <li>规范是所有人的共享上下文：产品、工程和 AI 代理。</li>
+          <li>变更可追溯——每个任务都指回它所满足的标准。</li>
+        </ul>
+        <h3>为什么它对 AI 代理尤其有帮助</h3>
+        <ul class="sdd-benefits">
+          <li><strong>机器可读的意图：</strong> 代理直接读取需求，而不是从代码中推断它们。</li>
+          <li><strong>需要加载的上下文更少：</strong> 代理查询规范中相关的一片，而不是整个代码仓库。</li>
+          <li><strong>可验证的输出：</strong> 验收标准给代理一个具体的通过/不通过目标。</li>
+          <li><strong>可追溯性：</strong> 生成的代码可以回溯到促成它的需求。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. Comparison -->
+    <section class="sdd-section" aria-labelledby="vs-title">
+      <div class="sdd-section__inner">
+        <h2 id="vs-title">规范驱动开发与相关实践的对比</h2>
+        <div class="sdd-table-wrap">
+          <table class="sdd-table">
+            <thead>
+              <tr><th>实践</th><th>唯一可信来源</th><th>与 SDD 的关系</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>测试驱动开发</td><td>代码层面失败的测试</td><td>互补——验收标准成为那些测试。</td></tr>
+              <tr><td>传统 PRD</td><td>为人撰写的散文</td><td>结构化程度较低；不能直接测试，也不可被机器读取。</td></tr>
+              <tr><td>仅靠提示词（“vibe coding”）</td><td>提示词和模型的猜测</td><td>没有持久、可评审的目标——这正是 SDD 存在要修复的问题。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          要查看 SpecScore 与其他规范工具的详细对比，请参见
+          <a href="/zh-cn/vs/">对比页面</a>。
+        </p>
+      </div>
+    </section>
+
+    <!-- 7. Tradeoffs -->
+    <section class="sdd-section" aria-labelledby="limits-title">
+      <div class="sdd-section__inner">
+        <h2 id="limits-title">权衡，以及何时不要使用它</h2>
+        <p>
+          规范驱动开发并非免费。它把精力前置到在任何代码运行之前去思考和书写，
+          对于一次性脚本或用完即弃的实验来说，这是一笔错误的交易。而且规范只有在保持最新时才有帮助——
+          一份任其腐烂的规范会变得具有误导性，比没有还糟。当工作大到值得规划、需要被维护，
+          或要交给 AI 代理大规模构建时，SDD 才会获得回报。
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. In practice (SpecScore) -->
+    <section class="sdd-section" aria-labelledby="practice-title">
+      <div class="sdd-section__inner">
+        <h2 id="practice-title">在实践中与 AI 代理一起做规范驱动开发</h2>
+        <p>
+          要与 AI 代理一起运行 SDD，你需要两样东西：一种你的团队和代理都能理解的<strong>机器可读的
+          规范格式</strong>，以及一种让代理<strong>读取、写入和验证</strong>这些规范的方式。
+        </p>
+        <p>
+          <strong>SpecScore</strong> 正是这样的一种实现。它是一种面向特性、需求和验收标准的开放
+          Markdown + YAML 格式——你仓库中的纯文件——并配有一个 CLI，供你的代理调用以查询、
+          编辑和 lint 它们。由于结构是机器可读的，代理可以问“我接下来该构建什么？”，
+          得到未完成的需求及其验收标准，然后对照它们检查自己的工作。它与工具无关，且开源。
+        </p>
+        <p>
+          从 <a href="/zh-cn/ai/">面向你的编码代理的 AI 技能</a>开始，或
+          <a href="/zh-cn/cli/">安装 CLI</a>。
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. FAQ -->
+    <section class="sdd-section" aria-labelledby="faq-title">
+      <div class="sdd-section__inner">
+        <h2 id="faq-title">常见问题</h2>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">规范驱动开发和测试驱动开发是一回事吗？</p>
+          <p class="sdd-faq__a">不是。TDD 在代码层面从失败的测试驱动实现。规范驱动开发在更上一层运作：它先把预期行为和验收标准固定在一份书面规范中。两者是互补的——规范中的验收标准往往会成为 TDD 随后驱动的那些测试。</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">规范驱动开发会拖慢你吗？</p>
+          <p class="sdd-faq__a">它在写代码之前增加了时间，却减少了重做错误东西所花的时间。对于一次性脚本，这点开销并不值得。但对于 AI 代理大规模生成的东西，或团队必须维护的东西，先写规范通常从头到尾都更快。</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">规范和 PRD 有什么区别？</p>
+          <p class="sdd-faq__a">PRD 通常是面向人的散文。规范驱动开发中的规范是结构化且可测试的——带有明确验收标准的离散需求——因此评审者和 AI 代理都能据以精确地行动。</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">AI 编码代理如何使用规范？</p>
+          <p class="sdd-faq__a">当规范可被机器读取时，代理会向它查询与当前任务相关的需求和验收标准，而不是加载整个代码库，然后对照这些标准检查自己的输出——这是对看似合理却错误的代码的一道防护。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. CTA -->
+  <section class="sdd-cta" aria-labelledby="cta-title">
+    <div class="sdd-cta__inner">
+      <h2 id="cta-title">与你的 AI 代理一起开始规范驱动的构建</h2>
+      <p>SpecScore 为你的代理提供一种开放的规范格式，以及一个用于查询和 lint 它的 CLI。</p>
+      <div class="sdd-cta__buttons">
+        <a href="/zh-cn/ai/" class="btn btn--primary">为你的代理获取 AI 技能</a>
+        <a href="/zh-cn/cli/" class="btn btn--secondary">安装 CLI</a>
+      </div>
+    </div>
+  </section>
+
+  <SiteFooterZhCn />
+</BaseLayout>
