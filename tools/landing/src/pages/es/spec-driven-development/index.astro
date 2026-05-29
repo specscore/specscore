@@ -1,0 +1,296 @@
+---
+// /es/spec-driven-development/ — pillar page (Spanish).
+// Neutral-reference-first explainer on spec-driven development, with AI as
+// the narrative spine. SpecScore appears as the named recommended
+// implementation in the "in practice" section + FAQ only.
+// Design: docs/superpowers/specs/2026-05-29-spec-driven-development-pillar-page-design.md
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooterEs from '../../../components/SiteFooterEs.astro';
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: 'Desarrollo basado en specs para agentes de IA',
+      description:
+        'Qué es el desarrollo basado en specs, por qué importa para los agentes de IA, cómo funciona el workflow y cómo se compara con TDD y la programación solo con prompts.',
+      inLanguage: 'es',
+      datePublished: '2026-05-29',
+      dateModified: '2026-05-29',
+      mainEntityOfPage: 'https://specscore.md/es/spec-driven-development/',
+      image: 'https://specscore.md/hero-og.webp',
+      author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      publisher: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      about: {
+        '@type': 'DefinedTerm',
+        name: 'Desarrollo basado en specs',
+        description:
+          'Una práctica de desarrollo de software en la que una especificación escrita — requisitos y criterios de aceptación — es la fuente de verdad contra la que se construye y se verifica el código.',
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: '¿Es el desarrollo basado en specs lo mismo que el desarrollo basado en tests?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'No. El TDD guía la implementación a partir de tests que fallan, a nivel de código. El desarrollo basado en specs trabaja un nivel por encima: primero fija el comportamiento previsto y los criterios de aceptación en una spec escrita. Son complementarios — los criterios de aceptación de una spec a menudo se convierten en los tests que luego guían el TDD.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: '¿El desarrollo basado en specs te ralentiza?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Añade tiempo antes de escribir código y elimina el tiempo dedicado a reconstruir lo que no era. Para scripts desechables el coste no compensa. Para cualquier cosa que un agente de IA genere a gran escala, o que un equipo deba mantener, escribir la spec primero suele ser más rápido de principio a fin.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: '¿Cuál es la diferencia entre una spec y un PRD?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Un PRD suele ser prosa dirigida a personas. Una spec en el desarrollo basado en specs es estructurada y testeable — requisitos discretos con criterios de aceptación explícitos — de modo que tanto los revisores como los agentes de IA puedan actuar sobre ella con precisión.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: '¿Cómo usan una spec los agentes de IA de programación?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Cuando la spec es legible por máquina, el agente la consulta para obtener los requisitos y criterios de aceptación relevantes para su tarea actual en lugar de cargar todo el codebase, y luego compara su resultado con esos criterios — una salvaguarda frente al código plausible pero incorrecto.',
+          },
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  lang="es"
+  title="Desarrollo basado en specs para agentes de IA — Guía completa | SpecScore"
+  description="El desarrollo basado en specs significa escribir una especificación testeable antes que el código, para que los agentes de IA construyan lo correcto. Qué es, cómo funciona y cómo se compara con TDD y la programación solo con prompts."
+  canonical="https://specscore.md/es/spec-driven-development/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
+  </Fragment>
+
+  <SiteHeader />
+
+  <main>
+    <!-- 1. Definition block + TL;DR -->
+    <section class="sdd-hero" aria-labelledby="sdd-title">
+      <div class="sdd-hero__inner">
+        <h1 id="sdd-title" class="sdd-hero__headline">Desarrollo basado en specs para agentes de IA</h1>
+        <p class="sdd-hero__lede">
+          <strong>El desarrollo basado en specs (SDD) es una práctica en la que una especificación
+          escrita y testeable — requisitos y criterios de aceptación — es la fuente de verdad contra
+          la que se construye y se verifica el código.</strong> En lugar de ir directamente de un
+          prompt o un ticket al código, primero acuerdas qué debe hacer el software y luego
+          construyes según esa spec. Ahora que los agentes de IA escriben gran parte del código, la
+          spec es lo que los mantiene construyendo lo correcto.
+        </p>
+        <ul class="sdd-takeaways">
+          <li>La spec es la fuente de verdad; el código se deriva de ella y se contrasta con ella.</li>
+          <li>Los requisitos van acompañados de criterios de aceptación explícitos, así "terminado" es testeable, no subjetivo.</li>
+          <li>Los agentes de IA consultan la spec para conocer la intención en vez de adivinarla a partir del código — menos construcciones erróneas.</li>
+          <li>Es complementario al desarrollo basado en tests, no un sustituto de él.</li>
+        </ul>
+        <p class="sdd-updated">Última actualización: mayo de 2026</p>
+      </div>
+    </section>
+
+    <!-- 2. What is SDD -->
+    <section class="sdd-section" aria-labelledby="what-title">
+      <div class="sdd-section__inner">
+        <h2 id="what-title">¿Qué es el desarrollo basado en specs?</h2>
+        <p>
+          El desarrollo basado en specs invierte el orden habitual del trabajo. En lugar de tratar
+          la especificación como documentación escrita a posteriori — o de saltársela por completo —
+          el SDD convierte la spec en el artefacto principal. El código, los tests y la revisión
+          remiten todos a ella.
+        </p>
+        <p>
+          Una spec en este sentido no es un muro de prosa. Es estructurada: un conjunto de
+          <strong>requisitos</strong>, cada uno con <strong>criterios de aceptación</strong>
+          explícitos que indican, en términos testeables, qué debe ser cierto para que el requisito
+          se considere satisfecho. Esa estructura es lo que permite que un revisor, una suite de
+          tests y un agente de IA interpreten todos el mismo documento de la misma manera.
+        </p>
+        <p>
+          La spec es además un <strong>artefacto vivo</strong>. Cuando los requisitos cambian, la
+          spec cambia primero y el código la sigue — de modo que la spec nunca deriva hacia la
+          ficción.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. Why it matters now (AI spine) -->
+    <section class="sdd-section" aria-labelledby="why-title">
+      <div class="sdd-section__inner">
+        <h2 id="why-title">Por qué importa ahora: la IA subió lo que está en juego</h2>
+        <p>
+          Los agentes de IA de programación generan código mucho más rápido de lo que una persona
+          puede leerlo. Eso desplaza el cuello de botella. La parte difícil ya no es escribir la
+          implementación — es
+          <strong>especificar la intención con suficiente claridad como para que el código generado
+          sea el código que querías</strong>. A un agente al que se le da un prompt vago producirá
+          con seguridad algo plausible y equivocado, y a velocidad de máquina.
+        </p>
+        <p>
+          La spec es la baranda de seguridad. Cuando el comportamiento previsto y los criterios de
+          aceptación están escritos, el agente tiene un objetivo inequívoco hacia el que construir y
+          una lista de comprobación contra la que verificar — y un revisor humano tiene algo fijo
+          que aprobar antes de que exista ningún código. El SDD es la forma en que los equipos
+          evitan que la velocidad de la IA se convierta en retrabajo de la IA.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. How it works -->
+    <section class="sdd-section" aria-labelledby="how-title">
+      <div class="sdd-section__inner">
+        <h2 id="how-title">Cómo funciona el desarrollo basado en specs</h2>
+        <p>El workflow es un bucle, no un documento puntual:</p>
+        <ol class="sdd-steps">
+          <li><strong>Captura la intención.</strong> Registra la dirección a medio formar — el problema, el objetivo, las preguntas abiertas — antes de comprometerte con una solución.</li>
+          <li><strong>Especifica el comportamiento.</strong> Convierte la dirección acordada en requisitos, cada uno con criterios de aceptación explícitos y testeables.</li>
+          <li><strong>Descompón en un plan.</strong> Divide la spec en tareas ordenadas, cada una citando los criterios de aceptación que satisface.</li>
+          <li><strong>Implementa.</strong> Construye tarea a tarea — una persona o un agente de IA — según la spec.</li>
+          <li><strong>Verifica contra los criterios.</strong> Comprueba el resultado contra los criterios de aceptación, no contra una intuición.</li>
+          <li><strong>Mantén la spec viva.</strong> Cuando los requisitos cambien, actualiza la spec primero; el código la sigue.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. Benefits -->
+    <section class="sdd-section" aria-labelledby="benefits-title">
+      <div class="sdd-section__inner">
+        <h2 id="benefits-title">Beneficios del desarrollo basado en specs</h2>
+        <ul class="sdd-benefits">
+          <li>Los desacuerdos afloran durante la revisión de la spec — barato — en lugar de después de la implementación — caro.</li>
+          <li>"Terminado" es objetivo, porque los criterios de aceptación son testeables.</li>
+          <li>La spec es contexto compartido para todos: producto, ingeniería y agentes de IA.</li>
+          <li>Los cambios son trazables — cada tarea remite a los criterios que satisface.</li>
+        </ul>
+        <h3>Por qué ayuda específicamente a los agentes de IA</h3>
+        <ul class="sdd-benefits">
+          <li><strong>Intención legible por máquina:</strong> el agente lee los requisitos directamente en lugar de inferirlos del código.</li>
+          <li><strong>Menos contexto que cargar:</strong> el agente consulta la porción relevante de la spec en vez de todo el repositorio.</li>
+          <li><strong>Salida verificable:</strong> los criterios de aceptación dan al agente un objetivo concreto de aprobado/fallido.</li>
+          <li><strong>Trazabilidad:</strong> el código generado puede vincularse de vuelta al requisito que lo motivó.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. Comparison -->
+    <section class="sdd-section" aria-labelledby="vs-title">
+      <div class="sdd-section__inner">
+        <h2 id="vs-title">Desarrollo basado en specs frente a prácticas relacionadas</h2>
+        <div class="sdd-table-wrap">
+          <table class="sdd-table">
+            <thead>
+              <tr><th>Práctica</th><th>Fuente de verdad</th><th>Relación con el SDD</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Desarrollo basado en tests</td><td>Tests que fallan a nivel de código</td><td>Complementario — los criterios de aceptación se convierten en los tests.</td></tr>
+              <tr><td>PRD tradicional</td><td>Prosa escrita para personas</td><td>Menos estructurado; no es directamente testeable ni legible por máquina.</td></tr>
+              <tr><td>Solo prompts ("vibe coding")</td><td>El prompt y la conjetura del modelo</td><td>Sin un objetivo duradero y revisable — lo que el SDD existe para arreglar.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Para una comparación detallada de SpecScore frente a otras herramientas de specs, consulta
+          <a href="/es/vs/">las páginas de comparación</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 7. Tradeoffs -->
+    <section class="sdd-section" aria-labelledby="limits-title">
+      <div class="sdd-section__inner">
+        <h2 id="limits-title">Compromisos y cuándo no usarlo</h2>
+        <p>
+          El desarrollo basado en specs no es gratis. Adelanta el esfuerzo hacia pensar y escribir
+          antes de que se ejecute código alguno, lo cual es el trato equivocado para un script
+          puntual o un experimento desechable. Y una spec solo ayuda si se mantiene al día — una
+          spec abandonada se vuelve engañosa, peor que ninguna. El SDD compensa cuando el trabajo es
+          lo bastante grande como para planificarse, va a mantenerse, o se va a entregar a un agente
+          de IA para construirlo a gran escala.
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. In practice (SpecScore) -->
+    <section class="sdd-section" aria-labelledby="practice-title">
+      <div class="sdd-section__inner">
+        <h2 id="practice-title">Hacer desarrollo basado en specs con agentes de IA en la práctica</h2>
+        <p>
+          Para hacer SDD con agentes de IA necesitas dos cosas: un <strong>formato de spec legible
+          por máquina</strong> que tanto tu equipo como tus agentes entiendan, y una <strong>forma
+          de que los agentes lean, escriban y validen</strong> esas specs.
+        </p>
+        <p>
+          <strong>SpecScore</strong> es una implementación de exactamente eso. Es un formato abierto
+          de Markdown + YAML para features, requisitos y criterios de aceptación — archivos planos
+          en tu repositorio — emparejado con una CLI que tus agentes invocan para consultarlos,
+          editarlos y hacerles lint. Como la estructura es legible por máquina, un agente puede
+          preguntar "¿qué debería construir a continuación?" y recibir los requisitos abiertos y sus
+          criterios de aceptación, y luego contrastar su trabajo con ellos. Es agnóstico de
+          herramientas y open source.
+        </p>
+        <p>
+          Empieza con los <a href="/es/ai/">Skills de IA para tu agente de programación</a> o
+          <a href="/es/cli/">instala la CLI</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. FAQ -->
+    <section class="sdd-section" aria-labelledby="faq-title">
+      <div class="sdd-section__inner">
+        <h2 id="faq-title">Preguntas frecuentes</h2>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">¿Es el desarrollo basado en specs lo mismo que el desarrollo basado en tests?</p>
+          <p class="sdd-faq__a">No. El TDD guía la implementación a partir de tests que fallan, a nivel de código. El desarrollo basado en specs trabaja un nivel por encima: primero fija el comportamiento previsto y los criterios de aceptación en una spec escrita. Son complementarios — los criterios de aceptación de una spec a menudo se convierten en los tests que luego guían el TDD.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">¿El desarrollo basado en specs te ralentiza?</p>
+          <p class="sdd-faq__a">Añade tiempo antes de escribir código y elimina el tiempo dedicado a reconstruir lo que no era. Para scripts desechables el coste no compensa. Para cualquier cosa que un agente de IA genere a gran escala, o que un equipo deba mantener, escribir la spec primero suele ser más rápido de principio a fin.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">¿Cuál es la diferencia entre una spec y un PRD?</p>
+          <p class="sdd-faq__a">Un PRD suele ser prosa dirigida a personas. Una spec en el desarrollo basado en specs es estructurada y testeable — requisitos discretos con criterios de aceptación explícitos — de modo que tanto los revisores como los agentes de IA puedan actuar sobre ella con precisión.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">¿Cómo usan una spec los agentes de IA de programación?</p>
+          <p class="sdd-faq__a">Cuando la spec es legible por máquina, el agente la consulta para obtener los requisitos y criterios de aceptación relevantes para su tarea actual en lugar de cargar todo el codebase, y luego compara su resultado con esos criterios — una salvaguarda frente al código plausible pero incorrecto.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. CTA -->
+  <section class="sdd-cta" aria-labelledby="cta-title">
+    <div class="sdd-cta__inner">
+      <h2 id="cta-title">Empieza a construir basándote en specs con tu agente de IA</h2>
+      <p>SpecScore le da a tu agente un formato de spec abierto y una CLI para consultarlo y hacerle lint.</p>
+      <div class="sdd-cta__buttons">
+        <a href="/es/ai/" class="btn btn--primary">Obtén skills de IA para tu agente</a>
+        <a href="/es/cli/" class="btn btn--secondary">Instala la CLI</a>
+      </div>
+    </div>
+  </section>
+
+  <SiteFooterEs />
+</BaseLayout>
