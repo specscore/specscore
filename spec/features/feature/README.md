@@ -164,6 +164,7 @@ Every feature README MUST include these sections:
 | Title (`# Feature: X`) | Yes         | Always prefixed with `Feature:`                                   |
 | Status                  | Yes         | Immediately after the title                                       |
 | Source Ideas            | Optional    | Body-metadata line after Status. See [Idea linkage](#idea-linkage). |
+| Grade                   | Optional    | Body-metadata line, last in the header block. See [Grade](#grade). |
 | Summary                 | Yes         | 1-3 sentences                                                     |
 | Contents                | Conditional | Required when the feature has child directories                   |
 | Problem                 | Yes         | Why the feature exists                                            |
@@ -302,6 +303,18 @@ When the field is present:
 #### REQ: source-ideas-drive-idea-status
 
 Creating or updating a Feature's `**Source Ideas:**` field triggers tooling to reconcile each referenced Idea's `**Promotes To:**` and `**Status:**` (see [Idea#req:specified-derivation](../idea/README.md#req-specified-derivation) and [Idea#req:sync-lint-strict](../idea/README.md#req-sync-lint-strict)). Features declare the reference; `specscore lint --fix` (or the equivalent Feature-creation tooling) reconciles Idea status. Feature authors MUST NOT edit an Idea's `**Promotes To:**` or `**Status:**` directly to reflect a Feature link — the Feature's `**Source Ideas:**` entry is the only authoritative input.
+
+### Grade
+
+A Feature README MAY carry an optional `**Grade:**` body-metadata line recording a single-value quality grade:
+
+```markdown
+**Grade:** B
+```
+
+The field is OPTIONAL and holds exactly one value, overwritten on each re-grade — there is no grade history. When present, `**Grade:**` is the **last** line of the header block, after `**Status:**` and any `**Source Ideas:**` / `**Supersedes:**` lines. The set of allowed values is repository-configurable via `grade.values` in `specscore.yaml` (default `A, B, C, D, F`), and `specscore spec lint` validates the value against that set. The field is generic — it is not coupled to any reviewer-gate workflow or to the Feature's `Status` — and applies to every artifact kind that has a header block, not only Features.
+
+The canonical definition, lint behavior, and configuration of this field are owned by the [Grade body-metadata field](../canonical-grade-metadata-field/README.md) Feature; this section documents its appearance on a Feature README.
 
 ## Relationship to Other Artifacts
 
