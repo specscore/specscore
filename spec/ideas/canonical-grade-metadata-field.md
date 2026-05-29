@@ -57,9 +57,11 @@ A one-week change to the canonical spec + lint: define '**Grade:**' as an option
 
 ## Open Questions
 
-- What is the exact `specscore.yaml` key shape for the value set (e.g. `grade.values: [A, B, C, D, F]`), and what happens when an artifact carries a `**Grade:**` but the repo declared no value set — default to `A–F`, or treat any grade as a lint error?
-- Which artifact types are "gradeable"? Features and Plans clearly; are Ideas, Decisions, and Tasks in or out?
-- Where exactly does `**Grade:**` sit relative to other optional body-metadata lines (e.g. after `**Status:**` but before/after `**Source Ideas:**`)?
+None at this time. All three pre-spec questions were resolved by the [Grade body-metadata field Feature](../features/canonical-grade-metadata-field/README.md):
+
+- **Config key shape / no-config behavior:** a nested `grade.values` list; when no `grade:` block is declared, the built-in default `A, B, C, D, F` applies (a Grade is always validated against some set).
+- **Gradeable artifact types:** any artifact kind with a body-metadata header block — no per-kind allow-list.
+- **Placement:** `**Grade:**` is the last header-block line, after `**Status:**` and any `**Source Ideas:**` / `**Supersedes:**`.
 
 ---
 *This document follows the https://specscore.md/idea-specification*
