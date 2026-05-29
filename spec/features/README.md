@@ -27,6 +27,7 @@ Core features of the SpecScore specification framework. This table is the canoni
 | [studio-toolbar](studio-toolbar/README.md) | Approved | Meta | — | — | — | Fixed four-item toolbar (Explore / Edit / Ask question / Request change) at line 3 of every feature README, replacing the legacy "View in SpecStudio" link |
 | [decision](decision/README.md) | Approved | Document | `https://specscore.md/decision-specification` | `spec/decisions/<NNNN>-<slug>.md` | — | Durable, lintable record of a choice made between two or more options |
 | [decisions-index](decisions-index/README.md) | Approved | Index | `https://specscore.md/decisions-index-specification` | `spec/decisions/README.md` | — | Canonical index of active Decision documents in a repo |
+| [canonical-grade-metadata-field](canonical-grade-metadata-field/README.md) | Approved | — | https://specscore.md/feature-specification | — | — | Defines an optional, single-letter quality Grade as a canonical body-metadata field on gradeable SpecScore artifacts, validated by lint against a configurable value set in specscore.yaml. |
 
 ## Feature Hierarchy
 

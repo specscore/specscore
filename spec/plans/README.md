@@ -11,6 +11,7 @@ directory under `spec/plans/` and is governed by the
 |---|---|---|---|---|---|---|
 | [entity-and-property-doc-kinds](entity-and-property-doc-kinds/README.md) | approved | entity, property, document-types-registry | M | high | alexander.trakhimenok | 2026-05-18 |
 | [decision](decision/README.md) | approved | decision, decisions-index | M | high | alexander.trakhimenok | 2026-05-26 |
+| [canonical-grade-metadata-field](canonical-grade-metadata-field.md) | approved | canonical-grade-metadata-field | S | medium | alexander.trakhimenok | 2026-05-29 |
 
 ### entity-and-property-doc-kinds
 
@@ -27,6 +28,16 @@ lint rules for all Decision REQs, `specscore decision new` scaffold command,
 immutability enforcement, decisions-index completeness and ordering checks,
 Rehearse scenario stubs, and specification pages for the public site.
 Implements the [decision-and-decisions-index Idea](../ideas/decision-and-decisions-index.md).
+
+### canonical-grade-metadata-field
+
+Implements the `canonical-grade-metadata-field` Feature: `grade.values` config
+parsing, the canonical `**Grade:**` schema definition, header-block parsing
+(optionality, single-value, placement with `--fix` normalization), value
+validation against the effective set, and kind-agnostic / Status-decoupled
+rule application — across [`specscore/specscore-cli`](https://github.com/specscore/specscore-cli)
+and the published specification docs in this repo.
+Implements the [canonical-grade-metadata-field Idea](../ideas/canonical-grade-metadata-field.md).
 
 ## Recently Closed
 
