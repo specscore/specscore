@@ -6,4 +6,5 @@ public/
 node_modules/
 .superpowers/
 .astro/
-.specscore/
+.specscore/*
+!.specscore/reviewers/
