@@ -6,6 +6,7 @@
 // Design: docs/superpowers/specs/2026-05-29-spec-driven-development-pillar-page-design.md
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
 
 const ld = {
   '@context': 'https://schema.org',
@@ -104,6 +105,7 @@ const ld = {
           <li>AI agents query the spec for intent instead of guessing from code — fewer wrong builds.</li>
           <li>It is complementary to test-driven development, not a replacement for it.</li>
         </ul>
+        <p class="sdd-updated">Last updated: May 2026</p>
       </div>
     </section>
 
@@ -283,32 +285,5 @@ const ld = {
     </div>
   </section>
 
-  <footer class="page-footer">
-    <div class="page-footer__inner">
-      <div class="page-footer__col page-footer__brand">
-        <a href="/" class="wordmark" aria-label="SpecScore home">
-          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
-          <span class="wordmark__name">SpecScore.md</span>
-        </a>
-        <p class="page-footer__tagline">An open standard for specifications, requirements, and acceptance criteria.</p>
-        <p class="page-footer__copyright">&copy; 2026 SpecScore contributors. MIT license.</p>
-      </div>
-      <div class="page-footer__col">
-        <h4 class="page-footer__heading">Product</h4>
-        <ul class="page-footer__list">
-          <li><a href="/cli/">SpecScore CLI</a></li>
-          <li><a href="/ai/">AI Skills</a></li>
-          <li><a href="/vs/">Compare</a></li>
-        </ul>
-      </div>
-      <div class="page-footer__col">
-        <h4 class="page-footer__heading">Ecosystem</h4>
-        <ul class="page-footer__list">
-          <li><a href="/">SpecScore</a> — the open standard</li>
-          <li><a href="/ai/specstudio-skills/">SpecStudio Skills</a></li>
-          <li><a href="https://specscore.studio">SpecScore Studio</a> — web viewer</li>
-        </ul>
-      </div>
-    </div>
-  </footer>
+  <SiteFooter />
 </BaseLayout>

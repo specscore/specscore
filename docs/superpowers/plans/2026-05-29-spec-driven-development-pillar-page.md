@@ -596,6 +596,16 @@ Expected: all `OK`.
 
 ---
 
+## Amendments (post Phase-1 review, 2026-05-29)
+
+Decisions made with the user after reviewing the English page:
+
+1. **Footer approach changed.** The inline `page-footer` markup had no CSS (its `.page-footer*` styles live per-page in `/ai/`+`/cli/`, not in `global.css`), so the SDD page footer rendered unstyled. Fix: **new pages render the shared `<SiteFooter />` component instead of an inline footer.** Do NOT add `.page-footer*` to `global.css`. The 65-file consolidation of existing inline footers is split into its **own follow-up brainstorm+plan** (not this feature).
+2. **"Learn" footer column added** to all 8 `SiteFooter*` variants (a new 4th column) holding the pillar link. The SDD link added to the Product column in Task 3 (commit `fffc9bb`) is **removed** and relocated to the Learn column. Each variant's scoped `<style>` grid updates `2fr 1fr 1fr` → `2fr 1fr 1fr 1fr`.
+3. **Visible "Last updated" date line added** to the page (class `.sdd-updated` in `global.css`), per user choice.
+4. **Locale pillar pages (Phase 2) now use the matching `SiteFooter<Locale>` variant** (not an inline footer). All other Phase 2 steps unchanged.
+5. **Path strategy: hybrid.** Pillar stays at top-level `/spec-driven-development/`; future supporting guides go under `/learn/*` (not built in this feature). "AI coding agents/context engineering" and "machine-readable specs" ideas merge into one future guide.
+
 ## Self-review notes (author)
 
 - **Spec coverage:** definition block (§outline 1) → Task 2 hero; sections 2–10 → Task 2 `<main>`/CTA; GEO layer (title/H1/answer-first/question H2s/JSON-LD/last-updated) → Task 2 frontmatter + markup *(note: "last updated" is carried by JSON-LD `dateModified`; no visible date line was added to keep the paper-and-ink register clean — flag for user if a visible date is wanted)*; locale fan-out (§build) → Phase 2; dedup guard → comparison links to `/vs/`, FAQ is concept-level; discovery via footer (header is locked §4) → Task 3 + Phase 2 Step 2.
