@@ -583,7 +583,7 @@ pre.terminal.terminal--window::after,
    Shared across all 8 locale variants per DESIGN-PRINCIPLES §9. */
 .sdd-hero { background: var(--cream); padding: var(--space-6) var(--space-3) var(--space-5); }
 .sdd-hero__inner { max-width: var(--max-prose); margin: 0 auto; }
-.sdd-hero__headline { font-size: var(--fs-h1); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-3); text-wrap: balance; }
+.sdd-hero__headline { font-size: var(--fs-hero); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-3); text-wrap: balance; }
 .sdd-hero__lede { font-size: 1.25rem; color: var(--ink); line-height: 1.5; text-wrap: pretty; }
 
 .sdd-section { padding: var(--space-6) var(--space-3); border-top: 1px solid var(--hairline); }

@@ -38,7 +38,7 @@ const ld = {
           acceptedAnswer: {
             '@type': 'Answer',
             text:
-              'No. Test-driven development drives implementation from failing tests at the code level. Spec-driven development works one level up: it fixes the intended behavior and acceptance criteria in a written spec first. The two are complementary — acceptance criteria in a spec often become the tests TDD then drives.',
+              'No. TDD drives implementation from failing tests at the code level. SDD works one level up: it fixes the intended behavior and acceptance criteria in a written spec first. They are complementary — acceptance criteria in a spec often become the tests TDD then drives.',
           },
         },
         {
@@ -47,7 +47,7 @@ const ld = {
           acceptedAnswer: {
             '@type': 'Answer',
             text:
-              'It adds time before code is written and removes time spent rebuilding the wrong thing. For throwaway scripts the overhead is not worth it. For anything an AI agent will generate at scale, or that a team must maintain, writing the spec first is usually faster end to end.',
+              'It adds time before code is written and removes time spent rebuilding the wrong thing. For throwaway scripts the overhead is not worth it. For anything an AI agent generates at scale, or that a team must maintain, writing the spec first is usually faster end to end.',
           },
         },
         {
@@ -56,7 +56,7 @@ const ld = {
           acceptedAnswer: {
             '@type': 'Answer',
             text:
-              'A PRD (product requirements document) is usually prose aimed at humans. A spec in spec-driven development is structured and testable — discrete requirements with explicit acceptance criteria — so both reviewers and AI agents can act on it precisely.',
+              'A PRD is usually prose aimed at humans. A spec in SDD is structured and testable — discrete requirements with explicit acceptance criteria — so both reviewers and AI agents can act on it precisely.',
           },
         },
         {
@@ -65,7 +65,7 @@ const ld = {
           acceptedAnswer: {
             '@type': 'Answer',
             text:
-              'When the spec is machine-readable, an agent can query it for the requirements and acceptance criteria relevant to its current task instead of loading the whole codebase into context, then check its output against those criteria. The spec acts as a guardrail against generating plausible but wrong code.',
+              'When the spec is machine-readable, an agent queries it for the requirements and acceptance criteria relevant to its current task instead of loading the whole codebase, then checks its output against those criteria — a guardrail against plausible-but-wrong code.',
           },
         },
       ],
