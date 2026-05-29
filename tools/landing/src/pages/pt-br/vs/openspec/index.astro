@@ -2,6 +2,7 @@
 // /pt-br/vs/openspec/ — SpecScore vs OpenSpec comparison (pt-br).
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooterPtBr from '../../../../components/SiteFooterPtBr.astro';
 import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro';
 ---
 
@@ -276,34 +277,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
   </section>
 
   {/* ── Footer ── */}
-  <footer class="page-footer">
-    <div class="page-footer__inner">
-      <div class="page-footer__col page-footer__brand">
-        <a href="/pt-br/" class="wordmark" aria-label="SpecScore home">
-          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
-          <span class="wordmark__name">SpecScore.md</span>
-        </a>
-        <p class="page-footer__tagline">Um padrão aberto para especificações, requisitos e critérios de aceitação.</p>
-        <p class="page-footer__copyright">&copy; 2026 SpecScore contributors. MIT license.</p>
-      </div>
-      <div class="page-footer__col">
-        <h4 class="page-footer__heading">Produto</h4>
-        <ul class="page-footer__list">
-          <li><a href="/cli/">SpecScore CLI</a></li>
-          <li><a href="/cli/install/">Instalar</a></li>
-          <li><a href="https://github.com/specscore/specscore-cli">GitHub</a></li>
-        </ul>
-      </div>
-      <div class="page-footer__col">
-        <h4 class="page-footer__heading">Ecossistema</h4>
-        <ul class="page-footer__list">
-          <li><a href="/">SpecScore</a> — o padrão aberto</li>
-          <li><a href="/ai/specstudio-skills/">SpecStudio Skills</a></li>
-          <li><a href="https://specscore.studio">SpecScore Studio</a> — visualizador web</li>
-        </ul>
-      </div>
-    </div>
-  </footer>
+  <SiteFooterPtBr />
 </BaseLayout>
 
 <style>
@@ -355,14 +329,4 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
   .final-cta__inner { max-width: var(--max-content); margin: 0 auto; text-align: center; }
   .final-cta__title { font-size: clamp(2.2rem, 4.2vw, 3.2rem); margin-bottom: var(--space-4); letter-spacing: -0.02em; line-height: 1.05; }
   .final-cta__buttons { display: inline-flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
-  .page-footer { background: var(--cream); padding: var(--space-6) var(--space-3) var(--space-5); }
-  .page-footer__inner { max-width: var(--max-content); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-4); }
-  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
-  .page-footer__tagline { color: var(--mid-ink); margin-bottom: var(--space-2); max-width: 36ch; line-height: 1.5; font-size: 0.95rem; }
-  .page-footer__copyright { color: var(--pale-ink); font-size: 0.825rem; font-family: var(--font-code); }
-  .page-footer__heading { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-ink); margin-bottom: var(--space-2); }
-  .page-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
-  .page-footer__list a { color: var(--ink); font-size: 0.9rem; border-bottom: 1px solid transparent; transition: border-color 120ms ease; }
-  .page-footer__list a:hover { border-bottom-color: var(--ink); }
-  @media (max-width: 800px) { .page-footer__inner { grid-template-columns: 1fr 1fr; } .page-footer__brand { grid-column: 1 / -1; } }
 </style>

@@ -3,6 +3,7 @@
 // Commands and code blocks stay English. Headings and descriptions translated.
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooterPtBr from '../../../../components/SiteFooterPtBr.astro';
 ---
 
 <BaseLayout
@@ -156,41 +157,7 @@ import SiteHeader from '../../../../components/SiteHeader.astro';
     </section>
   </main>
 
-  <footer class="page-footer">
-    <div class="page-footer__inner">
-      <div class="page-footer__col page-footer__brand">
-        <a href="/pt-br/" class="wordmark" aria-label="Pagina inicial do SpecScore">
-          <span class="wordmark__clef" aria-hidden="true">&#x1D11E;</span>
-          <span class="wordmark__name">SpecScore.md</span>
-        </a>
-        <p class="page-footer__tagline">
-          Um padrao aberto para especificacoes, requisitos
-          e criterios de aceitacao.
-        </p>
-        <p class="page-footer__copyright">
-          &copy; 2026 SpecScore contributors. MIT license.
-        </p>
-      </div>
-
-      <div class="page-footer__col">
-        <h4 class="page-footer__heading">SpecScore CLI</h4>
-        <ul class="page-footer__list">
-          <li><a href="/pt-br/cli/">Visao geral</a></li>
-          <li><a href="https://github.com/specscore/specscore-cli">GitHub</a></li>
-          <li><a href="https://github.com/specscore/specscore-cli/releases">Releases</a></li>
-        </ul>
-      </div>
-
-      <div class="page-footer__col">
-        <h4 class="page-footer__heading">Ecossistema</h4>
-        <ul class="page-footer__list">
-          <li><a href="/">SpecScore</a> — o padrao aberto</li>
-          <li><a href="/pt-br/ai/specstudio-skills/">SpecStudio Skills</a> — plugin para Claude Code</li>
-          <li><a href="https://specscore.studio">SpecScore Studio</a> — visualizador web</li>
-        </ul>
-      </div>
-    </div>
-  </footer>
+  <SiteFooterPtBr />
 </BaseLayout>
 
 <style>
@@ -212,15 +179,4 @@ import SiteHeader from '../../../../components/SiteHeader.astro';
   .manual-steps li { margin-bottom: var(--space-2); }
   .manual-steps code { font-size: 0.9em; background: var(--surface); border: 1px solid var(--hairline); padding: 0.1em 0.35em; border-radius: 2px; }
   .section .terminal { margin-bottom: var(--space-1); }
-  .page-footer { background: var(--cream); padding: var(--space-6) var(--space-3) var(--space-5); border-top: 1px solid var(--hairline); }
-  .page-footer__inner { max-width: var(--max-content); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-4); }
-  .page-footer__brand .wordmark { margin-bottom: var(--space-2); }
-  .page-footer__tagline { color: var(--mid-ink); margin-bottom: var(--space-2); max-width: 36ch; line-height: 1.5; font-size: 0.95rem; }
-  .page-footer__copyright { color: var(--pale-ink); font-size: 0.825rem; font-family: var(--font-code); }
-  .page-footer__heading { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-ink); margin-bottom: var(--space-2); }
-  .page-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
-  .page-footer__list a { color: var(--ink); font-size: 0.9rem; border-bottom: 1px solid transparent; transition: border-color 120ms ease; }
-  .page-footer__list a:hover { border-bottom-color: var(--ink); }
-  .page-footer__list a:focus-visible { outline: 2px solid var(--ink-blue); outline-offset: 2px; border-radius: 2px; }
-  @media (max-width: 800px) { .page-footer__inner { grid-template-columns: 1fr 1fr; } .page-footer__brand { grid-column: 1 / -1; } }
 </style>
