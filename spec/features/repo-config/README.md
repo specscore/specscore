@@ -220,6 +220,17 @@ Tools rendering artifact documents that support a studio toolbar (e.g., the lint
 
 `studio.url` MUST end with exactly one trailing `/` character. A `studio.url` value with no trailing slash (e.g., `https://specscore.studio`) or with multiple trailing slashes (e.g., `https://specscore.studio//`) is a hard error. This schema-level validation is owned by `repo-config`; the [studio-toolbar](../studio-toolbar/README.md) Feature consumes the validated value and strips the single trailing `/` before joining it with the toolbar URL path grammar.
 
+### Grade values
+
+The optional `grade:` block declares the repository's allowed `**Grade:**` body-metadata values:
+
+```yaml
+grade:
+  values: [A, B, C, D, F]
+```
+
+`grade.values` is an OPTIONAL list of allowed grade tokens. When the block (or its `values:` key) is omitted, the built-in default `A, B, C, D, F` applies. This Feature owns only the presence of the `grade:` key in the `specscore.yaml` schema; the value-set shape rules, the default, and how `**Grade:**` is parsed, placed, and validated are owned by the [Grade body-metadata field](../canonical-grade-metadata-field/README.md) Feature.
+
 ### Unknown fields
 
 Orchestration tools (e.g., Synchestra) MAY extend `specscore.yaml` with additional fields at any level. SpecScore tooling preserves them.
@@ -273,6 +284,9 @@ studio:
   name: SpecScore.Studio
   url: https://specscore.studio/
 
+grade:
+  values: [A, B, C, D, F]
+
 modules:
   - name: Highlevel
   - name: Backend
@@ -297,6 +311,7 @@ modules:
 | [Feature](../feature/README.md) | Feature READMEs carry the studio toolbar (see [studio-toolbar](../studio-toolbar/README.md)) rendered using `studio.name` and `studio.url` from this block. |
 | [Studio Toolbar](../studio-toolbar/README.md) | The `studio:` block defined here provides `studio.name` and `studio.url` consumed by the studio-toolbar Feature's renderer and lint rule. |
 | [Document Types Registry](../document-types-registry/README.md) | This feature is registered in the canonical document-types table; its consumer path is `specscore.yaml`. |
+| [Grade body-metadata field](../canonical-grade-metadata-field/README.md) | The optional `grade:` block defined here carries `grade.values`; that Feature owns the field's parsing, placement, default, and lint semantics. |
 
 ## Acceptance Criteria
 

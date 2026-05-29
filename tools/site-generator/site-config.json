@@ -29,7 +29,7 @@
       "navGroup": "Specification",
       "navOrder": 2,
       "llmsGroup": "Specifications",
-      "llmsDescription": "The atomic unit of product specification. Defines directory structure, metadata (status, source ideas), required sections, lifecycle, and adherence-footer conventions for Features.",
+      "llmsDescription": "The atomic unit of product specification. Defines directory structure, metadata (status, source ideas, grade), required sections, lifecycle, and adherence-footer conventions for Features.",
       "llmsFull": true
     },
     {
