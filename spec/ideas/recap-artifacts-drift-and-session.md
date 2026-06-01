@@ -1,0 +1,104 @@
+# Idea: Recap Artifacts — Drift Recap and Session Recap
+
+**Status:** Draft
+**Date:** 2026-06-01
+**Owner:** alex
+**Promotes To:** —
+**Supersedes:** —
+**Related Ideas:** —
+
+## Problem Statement
+
+How might we give SpecScore a canonical home, frontmatter, and lifecycle for recap artifacts — both the existing machine-generated drift recap and a new curated session recap — so they are self-describing, queryable, and consistent with the spec/ vs _specscore/ storage split?
+
+## Context
+
+SpecStudio's recap skill(s) already *produce* recaps, but SpecScore — the meta-spec that owns artifact taxonomy, storage conventions, frontmatter, and lint — never *defines* recaps as artifacts. Two distinct kinds are in play:
+
+- **Drift recap (exists).** The `specstudio:recap` skill writes a per-AC spec↔code conformance report at `spec/features/<feature-slug>/_recap/<sha>.md`, opened by a grep-friendly YAML summary block (`feature`, `revision`, `verify_revision`, a `drift` list) followed by one `## AC:` section per AC. It is machine-generated, immutable at a SHA, and co-located with the Feature it audits. SpecScore has no registry row, no `format:` frontmatter contract, and no lint for it — its shape lives only inside the skill.
+- **Session recap (new).** A curated narrative of a working session — goal, decisions, scope changes, what shipped, commits, verification, follow-ups. It has no artifact home today. A session may span many Features or none, and may touch repos that aren't SpecScore-managed.
+
+Two adjacent Ideas constrain the design. `journal-and-summary` establishes that tool-generated content lives outside `spec/` (in `_specscore/`), and introduces the `journal.repo` pattern: a dedicated, user-configured repo that aggregates activity across many source repos, gated on a foundational layered-config Feature. `artifact-frontmatter-convention` requires every artifact to carry `format:` (spec URL) and, where a Status concept exists, `status:` frontmatter — the cheap-to-query mirror third-party tooling needs.
+
+There is a live tension to reckon with: the drift recap is machine-generated yet lives *inside* `spec/`, which contradicts the "`spec/` is human-curated; generated content goes to `_specscore/`" principle the journal Idea asserts. Defining recaps as artifacts forces an explicit decision on that, rather than leaving it as accidental precedent. The skill-side counterpart (two distinctly-named recap skills) is seeded in specstudio-skills as `two-recap-kinds-drift-recap-and-session-recap-as-artifacts`; this Idea owns only the SpecScore artifact side.
+
+## Recommended Direction
+
+**Define two *sibling* recap document types, not one unified schema.** "Recap" is a naming family, not a shared schema. `drift-recap` and `session-recap` each get their own `https://specscore.md/<type>-specification` URL, their own storage rule, and their own lifecycle. What they share is exactly the universal `artifact-frontmatter-convention` contract (`format:`, and `status:` where a Status concept applies) and the conceptual label "retrospective summary." Forcing a single `type: recap` with a `kind:` discriminator and a merged schema was rejected (see Alternatives) — the two are structurally too different to share validation without inventing conditional rules that cost more than they save.
+
+**Drift recap — formalize what already exists, leave it where it is.** Keep storage at `spec/features/<feature-slug>/_recap/<sha>.md`. It is a deliberately co-located, immutable audit snapshot versioned with the Feature at a SHA — that co-location is the value, so the `_recap/` location becomes a *named exception* to the "generated content lives in `_specscore/`" principle rather than a violation of it. Formalization is narrow: (1) a registry row in `document-types-registry` (Consumer Path `spec/features/**/_recap/*.md`); (2) a `format:` frontmatter line that the `specstudio:recap` skill emits going forward; (3) a lint rule that validates the YAML summary block shape the skill already produces. A drift recap is **status-less** — it is a point-in-time record, not a lifecycle object — so it carries `format:` but no `status:`.
+
+**Session recap — a curated artifact, journal-seedable, in a dedicated user-configured repo.** A session recap is authored (by a human, or AI-drafted then human-curated), so the artifact is the source of truth; the journal can pre-fill a draft but never owns the narrative. Storage follows the user's decision — *similar in spirit to, but substantially different from*, the `journal.repo` model: a dedicated, user-configured recap repo with a **per-user subdirectory** so one shared repo can hold many people's recaps without collisions — `<recaps.repo>/<username>/<YYYY-MM-DD>-<slug>.md`. The directory segment is a **username/userid, never a raw email**: the author is identified for MVP by their git `user.email`, then resolved to a username through a configured email→username mapping so addresses never leak into path names. This is the *only* recap kind that leaves the project repo — the drift recap stays local (above); only the session recap is written to the shared, user-configured repo. A session has exactly **one home repo** (the cwd repo, or a configured default); repos it touched that aren't the home repo — including non-SpecScore-managed ones — are referenced by path/origin in the body, never written to. The lifecycle is intentionally minimal: `Draft → Final` (with `Archived` as the escape hatch), so the artifact carries both `format:` and `status:`. A `recaps:` config block (`enabled`, `repo`, an explicit `user` override, and a `users` email→username map) parallels `journal:`; because `recaps.repo` is a per-user/per-machine path that must not be committed into a shared project `specscore.yaml`, it depends on the same foundational layered-config Feature (`~/.specscore.yaml` resolution) that `journal-and-summary` Phase 2 depends on.
+
+The product boundary stays clean: **SpecScore defines both artifacts; SpecStudio skills produce them.** `specstudio:recap` keeps writing drift recaps (now emitting `format:` frontmatter); a new `specstudio:session-recap` skill (seeded separately in specstudio-skills) writes session recaps against this Idea's schema.
+
+## Alternatives Considered
+
+1. **One unified `type: recap` with a `kind:` discriminator and a shared schema.** Tempting for symmetry, but it loses: drift recap is machine-generated, immutable, status-less, per-AC, and SHA-keyed; session recap is human-curated, mutable through a lifecycle, narrative, and session-keyed. A merged schema would be mostly conditional rules ("this field required only when `kind: drift`"), which is more lint and CLI surface than two clean sibling types. The frontmatter convention already gives each a distinct `format:` URL, so the registry distinguishes them for free.
+2. **Session recap as a pure on-demand journal projection (no stored artifact).** `specscore journal summary --period=session` could synthesize a recap from event records with no file, no lifecycle. Lost because the user's requirement is a *curated narrative* — decisions, scope changes, and follow-ups are authored judgment, not derivable from the event stream. The journal is a fine *seed* for a draft, but it cannot be the source of truth. (Kept as the Phase-2 seeding enhancement, not the core.)
+3. **Store session recaps under the Feature/Plan they relate to** (like drift recap). Lost because a session routinely spans many Features or none — the seed flags this explicitly. Forcing a parent Feature would misfile the common case and duplicate recaps across features a session touched.
+4. **Store session recaps standalone in `spec/recaps/` of the working repo.** Lost on the user's storage decision: recaps belong in a dedicated, user-configured repo with per-user dirs, so one home can aggregate a person's (or team's) sessions across all their projects — the same motivation as `journal.repo`. Putting them in each working repo's `spec/` fragments them and pollutes human-curated spec trees with session ephemera.
+5. **Relocate drift recap to `_specscore/` for storage-philosophy purity.** Lost (for now): the existing `_recap/<sha>.md` co-location with the Feature is intentional and already shipped; moving it is a breaking change to the recap skill and to anyone reading reports next to the spec. Reconciled instead by naming `_recap/` an explicit exception. (Retained as a Might-be-true to revisit.)
+
+## MVP Scope
+
+**A 1–2 week spike that makes a curated session recap a real, lint-clean, queryable SpecScore artifact, and formalizes the existing drift recap as a first-class type — without building the producing skills.** Concretely:
+
+1. **Two registry rows + two spec URLs.** Add `drift-recap` and `session-recap` to `document-types-registry` with their `format:` URLs and Consumer Paths (`spec/features/**/_recap/*.md` for drift; the configured recap-repo glob for session).
+2. **Drift-recap formalization.** A `format:` frontmatter line and a lint rule validating the YAML summary block the `specstudio:recap` skill already emits. Drift recap is status-less. (Coordinated emit-side change in the recap skill is tracked, not built here.)
+3. **Session-recap schema.** Define the artifact: `format:` + `status:` frontmatter, body sections (Goal, Decisions, Scope Changes, Shipped, Commits, Verification, Follow-ups), the `Draft → Final` lifecycle, and the `<recaps.repo>/<username>/<YYYY-MM-DD>-<slug>.md` storage rule with per-user subdirectories (username resolved from git `user.email` via the configured map — no raw emails in paths) and a single home-repo-per-session.
+4. **`recaps:` config block** (`enabled`, `repo`, `user`, `users` email→username map) in `repo-config`, resolved through layered config; documented-but-rejected with a clear error until the foundational layered-config Feature lands (same posture as `journal.repo`).
+5. **One CLI scaffold:** `specscore recap new --session [--slug …]` writes a lint-clean blank session-recap template into the resolved per-user path.
+
+If, on day one, a developer can run `specscore recap new --session`, fill in a real session's narrative, and have `specscore spec lint` pass on it in their configured recap repo — while a drift recap at `_recap/<sha>.md` lints against the new contract — the timing was right. The MVP ships **no** journal seeding, **no** Studio UI, **no** producing skills, and **no** drift-recap relocation.
+
+## Not Doing (and Why)
+
+- Forcing a unified type: recap schema across both kinds — they are structurally too different; a shared schema buys nothing and costs lint/CLI surface
+- Moving drift recap out of spec/features/<slug>/_recap/ into _specscore/ — it is a deliberately co-located audit snapshot versioned with the feature at a SHA; relocating it is a breaking change with no clear payoff
+- Auto-generating finalized session recaps without human curation — a session recap is curated by definition; tooling seeds a draft, the human finalizes
+- Writing session-recap files into non-home repos — a session has exactly one home repo; other repos are referenced by path/origin in the body, never written to
+- Journal auto-seeding of session-recap drafts in the MVP — ship blank-template-first; add seeding once the journal-and-summary Feature lands and demand is shown
+- Building the specstudio:session-recap skill itself — SpecScore defines the artifact; SpecStudio skills produce it (counterpart seed lives in specstudio-skills)
+- Retention, GC, or compaction of recap files — recaps are append-only history in v1
+- Multi-user merge/locking semantics beyond per-user subdirectories — per-user dirs make cross-user writes collision-free by construction
+
+## Key Assumptions to Validate
+
+| Tier | Assumption | How to validate |
+|------|------------|-----------------|
+| Must-be-true | The drift recap's existing YAML summary block (`feature`, `revision`, `verify_revision`, `drift` list) is stable enough across the `specstudio:recap` skill's output to freeze into a lint contract without breaking existing reports. | Sample every `_recap/<sha>.md` shape the skill can emit (from the skill spec + any generated reports); diff against the proposed lint schema; confirm zero false-positives. Gate the lint rule on this audit. |
+| Must-be-true | The dedicated recap repo (`recaps.repo`) genuinely depends on the foundational layered-config Feature — a per-user/per-machine path must not be committed into a shared project `specscore.yaml`. | Confirm the layered-config Feature is scoped and sequenced (same dependency `journal-and-summary` Phase 2 carries). If it is pushed out indefinitely, decide whether session-recap MVP ships behind `~/.specscore.yaml`-only as a narrow precedent or waits. |
+| Must-be-true | A per-user subdirectory keyed on a stable, human-readable username (resolved from git `user.email` via a configured map — never the raw email) prevents collisions in a shared recap repo across machines and people. | Define the email→username resolution and its fallback when an email is unmapped; stress two users × two machines writing same-day recaps; confirm no path collision, clean git pure-add merges, and that no raw email appears in any path. |
+| Should-be-true | A curated session recap is valuable enough that users will actually author and finalize one, rather than just reading a journal summary. | Dogfood: after 5 real working sessions, write the recap by hand against the schema; judge whether it captures decisions/follow-ups the journal summary misses. If it adds nothing over `journal summary`, collapse to Alternative 2. |
+| Should-be-true | A `Draft → Final` lifecycle (plus `Archived`) is sufficient — session recaps don't need richer states. | Review the dogfood recaps for any state the binary misses (e.g. "superseded", "amended"). Extend only on evidence. |
+| Should-be-true | Single home-repo-per-session + body references to other repos is enough for multi-repo sessions; no need to write into each touched repo. | On a real cross-repo session, record it once in the home repo with origin/path references; confirm nothing important is lost by not having a copy in each repo. |
+| Might-be-true | Users will want journal-seeded session-recap drafts rather than a blank template. | Ship blank-first; instrument whether users ask for or hand-roll seeding. Add `--from-journal` only if demand shows. |
+| Might-be-true | Drift recap should eventually migrate to `_specscore/` for storage-philosophy consistency. | Revisit after the `_specscore/` convention is widely adopted; weigh the breaking-change cost against the consistency gain. Defer unless a concrete consumer is hurt by the `spec/` location. |
+
+
+## SpecScore Integration
+
+- **New Features this would create:**
+  - `session-recap` — the curated session-recap artifact type: frontmatter, body sections, `Draft → Final` lifecycle, the `<recaps.repo>/<user>/<date>-<slug>.md` storage rule, and `specscore recap new --session` scaffold.
+  - `drift-recap` — formalizes the existing skill output as a SpecScore type: registry row, `format:` frontmatter, and the YAML-summary-block lint contract. Status-less.
+- **Existing Features affected:**
+  - `document-types-registry` — two new rows (`drift-recap` Kind `Document`, Consumer Path `spec/features/**/_recap/*.md`; `session-recap` Kind `Document`, Consumer Path under the configured recap repo).
+  - `repo-config` — adds the `recaps:` block (`enabled`, `repo`, `user`), with `repo`/`user` rejected until layered config lands.
+  - `artifact-frontmatter-convention` / `adherence-footer` — recaps carry `format:` frontmatter; session recap also carries `status:`; drift recap omits `status:` (status-less type).
+- **Dependencies:**
+  - `journal-and-summary` — soft: source of the optional draft-seeding enhancement and the `_specscore/` storage philosophy this Idea reconciles against.
+  - Foundational layered-config Feature (`~/.specscore.yaml` resolution) — hard prerequisite for activating `recaps.repo` / `recaps.user`, exactly as for `journal-and-summary` Phase 2.
+  - `document-types-registry` and `artifact-frontmatter-convention` — both must be far enough along to add rows and frontmatter rules.
+  - Emit-side change in `specstudio:recap` (external `specstudio-skills` repo) to write `format:` frontmatter; producing skill for session recap (`specstudio:session-recap`) is seeded there, out of scope here.
+
+## Open Questions
+
+- Does a drift recap carry a `status:` at all? Recommendation is status-less (immutable SHA snapshot), but the frontmatter-convention lint rule must be told which types have a Status concept — confirm at Feature-spec time.
+- Per-user subdirectory identity is **resolved for MVP**: key on git `user.email`, mapped to a username via a configured `users` email→username map; raw emails never appear in paths, and an explicit `recaps.user` can override. Open detail: the map's config shape and the fallback when an email is unmapped (reject the write, or derive a safe slug from the local-part?). Decide at spec time.
+- Exact session-recap path shape: `<recaps.repo>/<user>/<date>-<slug>.md` vs nesting under a `recaps/` prefix vs encoding the home-repo org/name in the path for cross-project disambiguation.
+- Does a shared recap repo need a canonical index README (per-user and/or top-level) to satisfy the project `readme-exists` lint rule, and who generates it?
+
+
+---
+*This document follows the https://specscore.md/idea-specification*

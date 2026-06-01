@@ -25,3 +25,5 @@ Design questions for SpecScore:
 - Align with `artifact-frontmatter-convention` and `idea-types-and-lifecycle`.
 
 Decide alongside `journal-and-summary` (overlapping storage). The skill-side counterpart (two distinctly-named recap skills) is seeded in specstudio-skills as `two-recap-kinds-drift-recap-and-session-recap-as-artifacts`.
+
+> **Drained** into [`../specscore-hub.md`](../specscore-hub.md) (2026-06-01): the **session-recap** artifact is part of the SpecScore Hub Idea, which carries the storage/boundary/contract questions forward. The **drift recap** already exists and is unaffected.
