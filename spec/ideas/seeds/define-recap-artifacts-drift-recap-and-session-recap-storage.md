@@ -26,4 +26,4 @@ Design questions for SpecScore:
 
 Decide alongside `journal-and-summary` (overlapping storage). The skill-side counterpart (two distinctly-named recap skills) is seeded in specstudio-skills as `two-recap-kinds-drift-recap-and-session-recap-as-artifacts`.
 
-> **Drained** into [`../specscore-hub.md`](../specscore-hub.md) (2026-06-01): the **session-recap** artifact is part of the SpecScore Hub Idea, which carries the storage/boundary/contract questions forward. The **drift recap** already exists and is unaffected.
+> **Drained** (2026-06-01) into [`../recap-artifacts-drift-and-session.md`](../recap-artifacts-drift-and-session.md), which owns the **artifact definitions** this seed asks for — frontmatter, storage, lifecycle for both the existing **drift recap** and the new **session recap**. The cross-project aggregator that *renders/consumes* those artifacts is [`../specscore-hub.md`](../specscore-hub.md) (`depends_on` recap-artifacts). Defining the artifacts → recap-artifacts; aggregating them → SpecScore Hub.
