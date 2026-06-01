@@ -20,7 +20,7 @@ Core features of the SpecScore specification framework. This table is the canoni
 | [features-index](features-index/README.md) | Draft | Index | `https://specscore.md/features-index-specification` | `spec/features/README.md` | — | Canonical index of all top-level features in a repo |
 | [scenarios-index](scenarios-index/README.md) | Draft | Index | `https://specscore.md/scenarios-index-specification` | `spec/features/**/_tests/README.md` | — | Per-feature index of scenarios inside `_tests/` directories |
 | [task](task/README.md) | Stable | Document | `https://specscore.md/task-specification` | `spec/plans/**/tasks/*.md` | — | Discrete units of work within a plan |
-| [repo-config](repo-config/README.md) | Draft | Document | `https://specscore.md/repo-config` | `specscore.yaml` | — | SpecScore repo-level configuration: identity, modules, viewer, related projects |
+| [repo-config](repo-config/README.md) | Draft | Document | `https://specscore.md/repo-config` | `specscore.yaml` | — | SpecScore repo-level configuration: identity, modules, studio settings, publication policy, related projects |
 | [adherence-footer](adherence-footer/README.md) | Draft | Meta | — | — | — | The shared footer mechanism every Document-Kind feature delegates to |
 | [document-types-registry](document-types-registry/README.md) | Draft | Meta | — | — | — | This registry — canonical list of SpecScore document types |
 | [index](index/README.md) | Draft | Meta | — | — | — | Shared shape of every Index-Kind feature — required sections, completeness, footer delegation |
@@ -28,7 +28,7 @@ Core features of the SpecScore specification framework. This table is the canoni
 | [decision](decision/README.md) | Approved | Document | `https://specscore.md/decision-specification` | `spec/decisions/<NNNN>-<slug>.md` | — | Durable, lintable record of a choice made between two or more options |
 | [decisions-index](decisions-index/README.md) | Approved | Index | `https://specscore.md/decisions-index-specification` | `spec/decisions/README.md` | — | Canonical index of active Decision documents in a repo |
 | [canonical-grade-metadata-field](canonical-grade-metadata-field/README.md) | Approved | — | https://specscore.md/feature-specification | — | — | Defines an optional, single-letter quality Grade as a canonical body-metadata field on gradeable SpecScore artifacts, validated by lint against a configurable value set in specscore.yaml. |
-| [publication-policy-config](publication-policy-config/README.md) | Draft | — | https://specscore.md/feature-specification | — | — | Defines durable project and user configuration for SpecScore publication policy: action lists, event and command scopes, branch safety, and precedence. |
+| [publication-policy-config](publication-policy-config/README.md) | Approved | — | https://specscore.md/feature-specification | — | — | Defines durable project and user configuration for SpecScore publication policy: action lists, event and command scopes, branch safety, and precedence. |
 
 ## Feature Hierarchy
 
@@ -48,10 +48,11 @@ spec/features/
 ├── features-index/            # How to structure this features index
 ├── scenarios-index/           # How to structure per-feature scenarios indexes
 ├── task/                      # How to define discrete units of work within a plan
-├── repo-config/               # Repo-level config (specscore.yaml): identity, modules, viewer
+├── repo-config/               # Repo-level config (specscore.yaml): identity, modules, studio, publication policy
 ├── adherence-footer/          # Shared footer mechanism
 ├── document-types-registry/   # Canonical list of document types (this registry)
-└── index/                     # Shared shape of every Index-Kind feature
+├── index/                     # Shared shape of every Index-Kind feature
+└── publication-policy-config/ # Durable project and user publication policy config
 ```
 
 The `specscore` CLI is specified separately at [specscore/specscore-cli](https://github.com/specscore/specscore-cli).

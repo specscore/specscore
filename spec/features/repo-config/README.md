@@ -6,7 +6,7 @@
 
 ## Summary
 
-Defines `specscore.yaml`, the single mandatory repository-level config file for SpecScore projects. Specifies the file name, the mandatory schema-pointer header comment, the optional `project` identity block, related-project navigation hints, top-level dir-name overrides, modules with code roots, studio configuration, and inference defaults so a minimal repo can ship with an effectively empty config.
+Defines `specscore.yaml`, the single mandatory repository-level config file for SpecScore projects. Specifies the file name, the mandatory schema-pointer header comment, the optional `project` identity block, related-project navigation hints, top-level dir-name overrides, modules with code roots, studio configuration, publication policy, and inference defaults so a minimal repo can ship with an effectively empty config.
 
 ## Contents
 
@@ -231,6 +231,35 @@ grade:
 
 `grade.values` is an OPTIONAL list of allowed grade tokens. When the block (or its `values:` key) is omitted, the built-in default `A, B, C, D, F` applies. This Feature owns only the presence of the `grade:` key in the `specscore.yaml` schema; the value-set shape rules, the default, and how `**Grade:**` is parsed, placed, and validated are owned by the [Grade body-metadata field](../canonical-grade-metadata-field/README.md) Feature.
 
+### Publication policy
+
+The optional `publication:` block declares project-level publication policy for SpecScore producers. It is consumed by SpecStudio skills and by `specscore` CLI helpers that need durable defaults for whether artifact changes are left unstaged, staged, committed, or pushed.
+
+```yaml
+publication:
+  default:
+    actions: [stage]
+  events:
+    idea.approved:
+      actions: [stage, commit]
+  commands:
+    implement:
+      events:
+        feature.approved:
+          actions: [stage, commit]
+  push:
+    allow_branches: ["feature/*"]
+    deny_branches: ["main", "release/*"]
+```
+
+#### REQ: publication-block-optional
+
+The `publication:` block MAY be omitted entirely. Absence means no project-level publication policy is configured; consumers fall back to user, session, task, or built-in defaults owned by their respective features.
+
+#### REQ: publication-schema-delegated
+
+When `publication:` is present, its durable shape and validation rules are owned by the [Publication Policy Config](../publication-policy-config/README.md) Feature. Repo Config owns the top-level key and the requirement that unknown fields under `publication:` round-trip unchanged with the rest of `specscore.yaml`.
+
 ### Unknown fields
 
 Orchestration tools (e.g., Synchestra) MAY extend `specscore.yaml` with additional fields at any level. SpecScore tooling preserves them.
@@ -244,7 +273,7 @@ planning:
 
 #### REQ: unknown-fields-preserved
 
-SpecScore MUST ignore unknown fields at the root, inside `project:`, inside any `project.repositories` entry, and inside any module entry. Unknown fields MUST round-trip unchanged on read/write. They MUST NOT cause a validation warning or error.
+SpecScore MUST ignore unknown fields at the root, inside `project:`, inside any `project.repositories` entry, and inside any module entry. Unknown fields MUST round-trip unchanged on read/write. They MUST NOT cause a validation warning or error. Unknown fields under `publication:` MUST also round-trip unchanged per [Publication Policy Config](../publication-policy-config/README.md).
 
 ### Example
 
@@ -287,6 +316,16 @@ studio:
 grade:
   values: [A, B, C, D, F]
 
+publication:
+  default:
+    actions: [stage]
+  events:
+    idea.approved:
+      actions: [stage, commit]
+  push:
+    allow_branches: ["feature/*"]
+    deny_branches: ["main", "release/*"]
+
 modules:
   - name: Highlevel
   - name: Backend
@@ -312,6 +351,7 @@ modules:
 | [Studio Toolbar](../studio-toolbar/README.md) | The `studio:` block defined here provides `studio.name` and `studio.url` consumed by the studio-toolbar Feature's renderer and lint rule. |
 | [Document Types Registry](../document-types-registry/README.md) | This feature is registered in the canonical document-types table; its consumer path is `specscore.yaml`. |
 | [Grade body-metadata field](../canonical-grade-metadata-field/README.md) | The optional `grade:` block defined here carries `grade.values`; that Feature owns the field's parsing, placement, default, and lint semantics. |
+| [Publication Policy Config](../publication-policy-config/README.md) | The optional `publication:` block defined here carries project-level publication policy; that Feature owns policy shape, action validation, command/event scopes, branch rules, and user-config parity. |
 
 ## Acceptance Criteria
 
@@ -368,6 +408,14 @@ Modules resolve their specs, docs, and code paths relative to `module.path`. Mod
 **Requirements:** repo-config#req:unknown-fields-preserved
 
 Unknown fields at any level survive read/write without warnings. Orchestrators can extend the config without breaking SpecScore validation.
+
+### AC: publication-block-delegated
+
+**Requirements:** repo-config#req:publication-block-optional, repo-config#req:publication-schema-delegated
+
+**Given** a `specscore.yaml` with a top-level `publication:` block containing event policy, command policy, push branch rules, and an unknown future field
+**When** SpecScore tooling reads and writes an unrelated config key
+**Then** the `publication:` block remains a top-level project config block, its known fields are available to consumers under the Publication Policy Config schema, and the unknown future field round-trips unchanged.
 
 ## Open Questions
 

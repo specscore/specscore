@@ -27,6 +27,7 @@ Scenarios that verify the requirements defined in [Repo Config](../README.md).
 | [studio-explicit-overrides](studio-explicit-overrides.md) | [REQ: studio-explicit-values](../README.md#req-studio-explicit-values) |
 | [studio-partial-block-fails](studio-partial-block-fails.md) | [REQ: studio-explicit-values](../README.md#req-studio-explicit-values) |
 | [studio-null-suppresses-toolbar](studio-null-suppresses-toolbar.md) | [REQ: studio-null-opts-out](../README.md#req-studio-null-opts-out) |
+| [publication-block-delegated](publication-block-delegated.md) | [REQ: publication-block-optional](../README.md#req-publication-block-optional), [REQ: publication-schema-delegated](../README.md#req-publication-schema-delegated) |
 
 ## Open Questions
 

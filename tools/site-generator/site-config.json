@@ -77,7 +77,7 @@
       "navGroup": "Specification",
       "navOrder": 6,
       "llmsGroup": "Specifications",
-      "llmsDescription": "Repo-level SpecScore configuration in `specscore.yaml` — project identity, modules, viewer, related projects.",
+      "llmsDescription": "Repo-level SpecScore configuration in `specscore.yaml` — project identity, modules, studio settings, publication policy, related projects.",
       "llmsFull": true
     },
     {
