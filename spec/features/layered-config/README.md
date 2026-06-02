@@ -1,0 +1,154 @@
+# Feature: Layered Config
+
+> [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/layered-config?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/layered-config?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/layered-config?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/layered-config?op=request-change) |
+
+**Status:** Under Review
+**Source Ideas:** —
+
+## Summary
+
+**Layered config** resolves SpecScore configuration from three layers — `specscore.local.yaml` (repo, uncommitted) → `specscore.yaml` (repo, committed) → `~/.specscore.yaml` (user/machine) — with the most specific layer winning per key and maps deep-merged. It also introduces **user-scoped keys**: keys that carry per-user/per-machine paths (e.g. `recaps.repo`, `recaps.user`, `journal.repo`, `journal.stream`) and therefore MUST NOT be committed into the shared project `specscore.yaml`, but may be set in `specscore.local.yaml` or `~/.specscore.yaml`. This is the foundational Feature that the recap/portfolio stack depends on: it is what lets a developer point their hub repo and journal at personal locations without leaking those paths to teammates. Until it lands, those keys are documented-but-rejected by their owning Features.
+
+## Problem
+
+Today SpecScore reads exactly one config file: the committed `specscore.yaml`. That is correct for project-shared settings but wrong for anything per-user or per-machine. A developer who wants their drift/verify/session recaps and activity journal aggregated into a personal hub repo (`~/work-log`, `~/specscore-hub`) has nowhere to put that path: committing it into the shared `specscore.yaml` is hostile to teammates, and there is no per-user override layer. Multiple Features ([journal-and-summary](../journal-and-summary/README.md) Phase 2, [session-recap](../session-recap/README.md), [repo-config](../repo-config/README.md)) already declare keys they must reject until a layered resolver exists — `recaps.repo`, `recaps.user`, `journal.repo`, `journal.stream`. This Feature provides the one resolver they all consume, plus the rule that keeps user-scoped keys out of the shared file.
+
+## Behavior
+
+### Layer set and discovery
+
+#### REQ: layer-set
+
+Configuration MUST be resolved from exactly three layers, in decreasing specificity:
+
+1. **`specscore.local.yaml`** — at the repo root; per-developer-per-checkout; **uncommitted** (gitignored).
+2. **`specscore.yaml`** — at the repo root; project-shared; **committed**.
+3. **`~/.specscore.yaml`** — in the user's home directory; per-user/per-machine defaults across all repos.
+
+The repo root is the git top-level (`git rev-parse --show-toplevel`); when the working directory is not a git repo, the current directory is used for the repo-root layers. Any layer file that is absent is treated as an empty layer (not an error).
+
+#### REQ: precedence
+
+Resolution MUST apply **most-specific-wins** per key: `specscore.local.yaml` overrides `specscore.yaml`, which overrides `~/.specscore.yaml`. A key set in a more specific layer fully determines that key's value (subject to merge semantics below); the user-home layer provides defaults that repo layers may override.
+
+#### REQ: merge-semantics
+
+Merging across layers MUST be a **deep merge of mapping nodes**: nested maps combine key-by-key across layers. Scalars and sequences are **replaced wholesale** by the more specific layer (sequences are not concatenated). An explicit `null` in a more specific layer MUST override (clear) a value set by a less specific layer, distinct from the key being absent.
+
+#### REQ: degrade-single-file
+
+When only `specscore.yaml` is present (today's state), resolution MUST return exactly its contents — layered config is backward compatible and introduces no behavior change for repos that adopt neither the local nor the home layer.
+
+### User-scoped keys
+
+#### REQ: gated-key-registry
+
+The resolver MUST support keys declared **user-scoped**. A user-scoped key carries a per-user/per-machine value (typically a filesystem path or identity) and MUST NOT appear in the committed `specscore.yaml`. Owning Features register which keys are user-scoped; this Feature owns the mechanism, not the list. The initial registered set is `recaps.repo`, `recaps.user`, `journal.repo`, `journal.stream`.
+
+#### REQ: gate-committed-file
+
+If a user-scoped key is present in the committed `specscore.yaml`, the loader MUST reject it with a hard error that names the key, states it was found in the committed project file, and points the user to set it in `specscore.local.yaml` or `~/.specscore.yaml` instead. The same key set in `specscore.local.yaml` or `~/.specscore.yaml` MUST be accepted.
+
+#### REQ: unblocks-gated-features
+
+Once this Feature lands, the previously documented-but-rejected keys (`journal.repo`, `journal.stream`, `recaps.repo`, `recaps.user`) MUST resolve through the layered stack when set in an allowed layer — superseding the interim "rejected with a pointer to layered-config" posture those Features carry. The committed-file gate (above) remains in force.
+
+### Local layer hygiene
+
+#### REQ: local-gitignored
+
+`specscore.local.yaml` MUST be gitignored. SpecScore MUST ensure this: when it scaffolds or first resolves config, it MUST add `specscore.local.yaml` to the repo's `.gitignore` if absent, and if `specscore.local.yaml` is already tracked by git it MUST warn that the file is committed (defeating its per-user purpose) with instructions to untrack it.
+
+### Introspection
+
+#### REQ: config-resolve-command
+
+`specscore config show [--origin]` MUST print the fully resolved configuration. With `--origin`, it MUST annotate each key with the layer it was resolved from (`local` / `project` / `home`), so precedence and gating outcomes are debuggable. `specscore config get <dotted.key>` MUST print a single resolved value (and its origin with `--origin`).
+
+## Acceptance Criteria
+
+### AC: three-layers-discovered
+
+**Requirements:** layered-config#req:layer-set
+
+**Given** a git repo containing `specscore.local.yaml` and `specscore.yaml` at its root, and a `~/.specscore.yaml` in the user's home
+**When** SpecScore resolves config from anywhere inside the repo
+**Then** all three files are discovered (repo-root layers via git top-level, the home layer via `$HOME`), and a run in a directory missing any of the three treats the missing file as an empty layer rather than erroring.
+
+### AC: most-specific-wins
+
+**Requirements:** layered-config#req:precedence
+
+**Given** a key `studio.theme` set to `dark` in `~/.specscore.yaml`, `light` in `specscore.yaml`, and `solarized` in `specscore.local.yaml`
+**When** config is resolved
+**Then** the resolved value is `solarized`; removing the local layer yields `light`; removing the project layer yields `dark`.
+
+### AC: deep-merge-and-null-override
+
+**Requirements:** layered-config#req:merge-semantics
+
+**Given** `~/.specscore.yaml` setting `journal: {enabled: true, aggregation_periods: [day, week]}` and `specscore.yaml` setting `journal: {aggregation_periods: [day, week, month]}`, plus a separate case where `specscore.local.yaml` sets `journal.enabled: null`
+**When** config is resolved
+**Then** the maps deep-merge to `{enabled: true, aggregation_periods: [day, week, month]}` (the sequence is replaced wholesale, not concatenated), and in the separate case the explicit `null` clears `enabled` rather than being ignored.
+
+### AC: single-file-unchanged
+
+**Requirements:** layered-config#req:degrade-single-file
+
+**Given** a repo with only `specscore.yaml` (no local or home layer)
+**When** config is resolved
+**Then** the result equals the contents of `specscore.yaml` exactly — no behavior change for repos that adopt neither extra layer.
+
+### AC: user-scoped-key-rejected-in-committed-file
+
+**Requirements:** layered-config#req:gated-key-registry, layered-config#req:gate-committed-file
+
+**Given** `recaps.repo` (a user-scoped key) set in the committed `specscore.yaml`
+**When** the loader runs
+**Then** it rejects the key with an error naming it, stating it was found in the committed project file, and pointing to `specscore.local.yaml` / `~/.specscore.yaml`; the same key set in either of those layers is accepted.
+
+### AC: gated-features-unblocked
+
+**Requirements:** layered-config#req:unblocks-gated-features
+
+**Given** `journal.repo` set in `~/.specscore.yaml` and `recaps.repo` set in `specscore.local.yaml`, with layered-config present
+**When** the journal and recaps loaders resolve their config
+**Then** both keys resolve through the layered stack (no longer rejected as "pending layered-config"), while a `journal.repo` placed in the committed `specscore.yaml` is still rejected by the committed-file gate.
+
+### AC: local-file-gitignored
+
+**Requirements:** layered-config#req:local-gitignored
+
+**Given** a repo whose `.gitignore` does not list `specscore.local.yaml`
+**When** SpecScore scaffolds or first resolves config
+**Then** `specscore.local.yaml` is added to `.gitignore`; and given a repo where `specscore.local.yaml` is already git-tracked, SpecScore warns that the file is committed with instructions to untrack it.
+
+### AC: config-show-reports-origins
+
+**Requirements:** layered-config#req:config-resolve-command
+
+**Given** a resolved config drawn from all three layers
+**When** the user runs `specscore config show --origin` (and `specscore config get <dotted.key> --origin`)
+**Then** each resolved key is annotated with its source layer (`local` / `project` / `home`), and the single-key form prints that key's resolved value and origin.
+
+## Rehearse Integration
+
+Every AC above is testable through fixture config trees (combinations of `specscore.local.yaml` / `specscore.yaml` / `~/.specscore.yaml`) plus CLI invocation and resolved-value/origin inspection. Rehearse scenario stubs are deferred to the Plan phase to match the current repo convention.
+
+## Not Doing
+
+- **Per-block layering rules** (layering scoped to only the `journal:` or `recaps:` block) — rejected in the source Ideas; layering applies uniformly across all of `specscore.yaml` via one code path.
+- **More than three layers** (e.g. an org-wide or system layer) — three layers cover the project-shared / per-repo-personal / per-user cases; additional layers are an additive future Feature if a real need appears.
+- **Network-fetched or remote config layers** — all layers are local files.
+- **Encryption / secret management for config values** — user-scoped keys hold paths and identities, not secrets; secret handling is out of scope.
+- **Auto-creating `~/.specscore.yaml` or `specscore.local.yaml`** — SpecScore reads them when present and ensures `.gitignore` hygiene; it does not fabricate them (the `specscore config` surface / init flows may scaffold templates separately).
+- **Migrating existing `specscore.yaml` keys** — adopting layers is opt-in; nothing is moved automatically.
+
+## Open Questions
+
+- The exact registration mechanism by which an owning Feature declares a key user-scoped (a static list in the loader vs. a per-key annotation in each Feature's config schema) — decide at plan time; the initial set is fixed (`recaps.repo`, `recaps.user`, `journal.repo`, `journal.stream`).
+- Whether `~/.specscore.yaml` should itself be allowed to set user-scoped keys for *all* repos at once (current design: yes — it is the per-user defaults layer) vs. requiring per-repo `specscore.local.yaml` for path values.
+- Whether to also honor an `XDG_CONFIG_HOME`-based location (`~/.config/specscore/config.yaml`) as an alias for the home layer; defer unless requested.
+
+---
+*This document follows the https://specscore.md/feature-specification*

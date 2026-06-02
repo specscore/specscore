@@ -7,6 +7,8 @@
 **Supersedes:** —
 **Related Ideas:** depends_on:journal-and-summary, depends_on:recap-artifacts-drift-and-session
 
+> **Amended by [Decision D-0002](../decisions/0002-recap-storage-surfacing-and-producer-gate-boundary.md) (Accepted 2026-06-02).** Under D-0002 the drift recap and verify report no longer live co-located in each code repo's `spec/features/<slug>/_recap|_verify/`; they are written to the user's **hub repo** (namespaced by source repo), making the hub repo a single uniform operational store the Hub renders from. The **Hub backend writes the hub repo on `recap.completed` / `verify.completed` event ingest** (single-token auth) and **optionally posts the PR deeplink on the PR-open webhook**. References below to recaps living at `spec/features/<slug>/_recap/<sha>.md` are superseded accordingly; Hub still only renders/cross-links, never authors, these artifacts.
+
 ## Problem Statement
 
 How might we give a developer running AI agents across many projects an always-current, cross-project view of what they have worked on, what shipped, and where each project stands — assembled automatically from the activity SpecScore already records, with no manual upkeep and no server?
