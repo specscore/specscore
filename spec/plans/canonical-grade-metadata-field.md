@@ -40,7 +40,7 @@ Add the lint check that validates a parsed `**Grade:**` value against the effect
 
 Wire the Grade lint rule so it applies uniformly to every artifact kind that has a header block (Feature, Plan, Idea, Decision, Task) with no per-kind allow-list or exemption, reusing the shared header-block parser rather than re-deriving placement logic. Ensure the rule never gates on `Status` or on any reviewer-gate/workflow artifact: a valid grade on a `Draft` artifact in a repository that declares no reviewer gates passes validation.
 
-## Outstanding Questions
+## Open Questions
 
 None at this time. (Resolved: the built-in default value set is `A, B, C, D, F` — no `E` — following the academic letter-grade convention; repos needing a different scale declare `grade.values`.)
 
