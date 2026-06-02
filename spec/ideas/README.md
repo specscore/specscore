@@ -16,7 +16,7 @@ Archived Ideas are indexed separately at [archived/README.md](archived/README.md
 | [idea-types-and-lifecycle](idea-types-and-lifecycle.md) | Draft | 2026-05-19 | alex | — |
 | [journal-and-summary](journal-and-summary.md) | Draft | 2026-05-19 | alex | — |
 | [plan-deferred-ac-hyphenated-slug](plan-deferred-ac-hyphenated-slug.md) | Draft | 2026-05-22 | alexander.trakhimenok@gmail.com | — |
-| [recap-artifacts-drift-and-session](recap-artifacts-drift-and-session.md) | Draft | 2026-06-01 | alex | — |
+| [recap-artifacts-drift-and-session](recap-artifacts-drift-and-session.md) | Implementing | 2026-06-01 | alex | drift-recap, session-recap |
 | [rename-outstanding-questions-to-open-questions](rename-outstanding-questions-to-open-questions.md) | Approved | 2026-05-22 | alexandertrakhimenok | — |
 | [shared-index-feature](shared-index-feature.md) | Implementing | 2026-04-20 | alexander.trakhimenok | index |
 | [specscore-hub](specscore-hub.md) | Approved | 2026-06-01 | alex | — |

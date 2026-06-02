@@ -29,6 +29,8 @@ Core features of the SpecScore specification framework. This table is the canoni
 | [decisions-index](decisions-index/README.md) | Approved | Index | `https://specscore.md/decisions-index-specification` | `spec/decisions/README.md` | — | Canonical index of active Decision documents in a repo |
 | [canonical-grade-metadata-field](canonical-grade-metadata-field/README.md) | Approved | — | https://specscore.md/feature-specification | — | — | Defines an optional, single-letter quality Grade as a canonical body-metadata field on gradeable SpecScore artifacts, validated by lint against a configurable value set in specscore.yaml. |
 | [publication-policy-config](publication-policy-config/README.md) | Approved | — | https://specscore.md/feature-specification | — | — | Defines durable project and user configuration for SpecScore publication policy: action lists, event and command scopes, branch safety, and precedence. |
+| [drift-recap](drift-recap/README.md) | Under Review | — | https://specscore.md/feature-specification | — | — | Formalizes the existing machine-generated per-AC spec-vs-code drift recap as a first-class, status-less SpecScore document type: registry row, format frontmatter, and a lint contract for its YAML summary block. |
+| [session-recap](session-recap/README.md) | Under Review | — | https://specscore.md/feature-specification | — | — | Defines the new curated session-recap document type: format and status frontmatter, body sections, Draft to Final lifecycle, a per-user dedicated-repo storage rule, the recaps config block, and a specscore recap new --session scaffold. |
 
 ## Feature Hierarchy
 
