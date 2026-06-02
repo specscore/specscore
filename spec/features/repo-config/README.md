@@ -260,6 +260,31 @@ The `publication:` block MAY be omitted entirely. Absence means no project-level
 
 When `publication:` is present, its durable shape and validation rules are owned by the [Publication Policy Config](../publication-policy-config/README.md) Feature. Repo Config owns the top-level key and the requirement that unknown fields under `publication:` round-trip unchanged with the rest of `specscore.yaml`.
 
+### Recaps and journal storage targets
+
+The optional `recaps:` and `journal:` blocks declare where machine-generated recap/verify artifacts and the activity journal are stored. Per [Decision D-0002](../../decisions/0002-recap-storage-surfacing-and-producer-gate-boundary.md), storage **always targets the hub repo** — a configured location, default a dedicated repo, that **may be configured to equal the current code repo** (covering the case before the Hub backend exists and repos that are not SpecScore-managed). The drift recap, verify report, and session recap all resolve their storage target through these blocks.
+
+```yaml
+recaps:
+  enabled: true
+  repo: ~/work-hub     # hub-repo path (may point at the current repo); layered-config-gated
+  user: alice          # explicit username override; layered-config-gated
+  users:               # email→username map (never raw emails in paths)
+    alice@example.com: alice
+
+journal:
+  enabled: true
+  repo: ~/work-hub     # layered-config-gated (Phase 2)
+```
+
+#### REQ: recaps-journal-storage-target
+
+`specscore.yaml` MAY carry `recaps:` and `journal:` blocks. Storage always targets the hub repo — `recaps.repo` / `journal.repo` is the configured hub-repo location (default a dedicated repo) and may be configured to equal the current code repo, in which case artifacts are written into it directly. There is no separate `local` mode: writing into the current repo is the degenerate case where the hub repo points at it, so resolution stays uniform (one storage target, one read path). The durable shape of these blocks is owned by the [session-recap](../session-recap/README.md), [drift-recap](../drift-recap/README.md), and [journal-and-summary](../journal-and-summary/README.md) artifacts; Repo Config owns only the presence of the top-level keys and that unknown fields under them round-trip unchanged.
+
+#### REQ: recaps-journal-layered-config-gated
+
+Because `recaps.repo`, `recaps.user`, and `journal.repo` are per-user/per-machine values that MUST NOT be committed into a shared project `specscore.yaml`, the loader MUST reject them with a clear error pointing at the [**layered-config**](../layered-config/README.md) Feature (**Under Review; not yet implemented**) (`specscore.local.yaml` → `specscore.yaml` → `~/.specscore.yaml`) until that Feature ships. `recaps.enabled` / `journal.enabled` alone are accepted in the project file. This is the same posture the activity-journal cross-repo key carries.
+
 ### Unknown fields
 
 Orchestration tools (e.g., Synchestra) MAY extend `specscore.yaml` with additional fields at any level. SpecScore tooling preserves them.
@@ -416,6 +441,14 @@ Unknown fields at any level survive read/write without warnings. Orchestrators c
 **Given** a `specscore.yaml` with a top-level `publication:` block containing event policy, command policy, push branch rules, and an unknown future field
 **When** SpecScore tooling reads and writes an unrelated config key
 **Then** the `publication:` block remains a top-level project config block, its known fields are available to consumers under the Publication Policy Config schema, and the unknown future field round-trips unchanged.
+
+### AC: recaps-journal-storage-target-gated
+
+**Requirements:** repo-config#req:recaps-journal-storage-target, repo-config#req:recaps-journal-layered-config-gated
+
+**Given** a project `specscore.yaml` with a `recaps:` block setting `enabled: true`, and a second one additionally setting `recaps.repo` while the layered-config Feature has not shipped
+**When** the config loader runs
+**Then** `recaps.enabled` is accepted (storage always targets the hub repo, which may be configured to equal the current code repo), and `recaps.repo` (likewise `recaps.user` / `journal.repo`) is rejected with a clear error pointing at the layered-config dependency; unknown fields under the blocks round-trip unchanged.
 
 ## Open Questions
 

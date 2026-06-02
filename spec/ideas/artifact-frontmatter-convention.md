@@ -1,9 +1,9 @@
 # Idea: Artifact Frontmatter Convention — format + status fields
 
-**Status:** Draft
+**Status:** Implementing
 **Date:** 2026-05-19
 **Owner:** alexandertrakhimenok
-**Promotes To:** —
+**Promotes To:** artifact-frontmatter-convention
 **Supersedes:** —
 **Related Ideas:** —
 

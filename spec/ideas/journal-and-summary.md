@@ -1,11 +1,13 @@
 # Idea: Journal and Summary
 
-**Status:** Draft
+**Status:** Implementing
 **Date:** 2026-05-19
 **Owner:** alex
-**Promotes To:** —
+**Promotes To:** journal-and-summary
 **Supersedes:** —
 **Related Ideas:** —
+
+> **Referenced by [Decision D-0002](../decisions/0002-recap-storage-surfacing-and-producer-gate-boundary.md) (Accepted 2026-06-02).** D-0002 makes this journal the **rollup spine** of the recap model: the session recap and month report are projections of the journal over a time window, and the `recap.completed` / `verify.completed` events carry `report_path` + per-AC verdict counts so portfolio rollups link into the detail without scanning recap filenames for the time dimension. D-0002 also notes this Idea must be promoted to a Feature (it is the spine); that promotion is now done — see [`spec/features/journal-and-summary/`](../features/journal-and-summary/README.md) (Phase 1; Phase 2 cross-repo `journal.repo` remains a gated proposal).
 
 ## Problem Statement
 
