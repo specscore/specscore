@@ -1,7 +1,7 @@
 # Feature: Capability and Platform Implementations
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/capability-and-platform-implementations?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/capability-and-platform-implementations?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/capability-and-platform-implementations?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/capability-and-platform-implementations?op=request-change) |
-**Status:** Approved
+**Status:** Implementing
 **Date:** 2026-06-03
 **Owner:** alexander.trakhimenok
 **Source Ideas:** capability-and-platform-implementations
