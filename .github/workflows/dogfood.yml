@@ -18,18 +18,17 @@ concurrency:
   group: dogfood-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  SPECSCORE_VERSION: v0.5.0  # bump intentionally via PR
-
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Install specscore CLI
+      - name: Install specscore CLI (latest published)
+        # The CLI lints the very specs that define it, so dogfood against the
+        # latest published release rather than a pinned version. The installer
+        # resolves "latest" when SPECSCORE_VERSION is unset.
         run: |
           curl -fsSL https://specscore.md/install/get-cli | \
-            SPECSCORE_VERSION="${SPECSCORE_VERSION}" \
             SPECSCORE_INSTALL_DIR="$HOME/.local/bin" sh
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Lint spec tree

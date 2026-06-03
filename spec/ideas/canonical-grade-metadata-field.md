@@ -1,6 +1,6 @@
 # Idea: Canonical Grade body-metadata field
 
-**Status:** Implementing
+**Status:** Specified
 **Date:** 2026-05-29
 **Owner:** alex
 **Promotes To:** canonical-grade-metadata-field

@@ -1,6 +1,6 @@
 # Idea: Studio Toolbar
 
-**Status:** Implementing
+**Status:** Specified
 **Date:** 2026-05-19
 **Owner:** alex
 **Promotes To:** studio-toolbar

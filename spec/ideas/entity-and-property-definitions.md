@@ -1,6 +1,6 @@
 # Idea: Entity and Property Definitions
 
-**Status:** Implementing
+**Status:** Specifying
 **Date:** 2026-05-18
 **Owner:** alexander.trakhimenok
 **Promotes To:** document-types-registry, entity, property

@@ -1,6 +1,6 @@
 # Idea: Journal and Summary
 
-**Status:** Implementing
+**Status:** Specifying
 **Date:** 2026-05-19
 **Owner:** alex
 **Promotes To:** journal-and-summary
