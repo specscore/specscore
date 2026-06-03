@@ -1,6 +1,6 @@
 # Idea: Recap Artifacts — Drift Recap and Session Recap
 
-**Status:** Implementing
+**Status:** Specifying
 **Date:** 2026-06-01
 **Owner:** alex
 **Promotes To:** drift-recap, session-recap

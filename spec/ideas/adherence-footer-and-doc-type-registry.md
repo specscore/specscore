@@ -1,6 +1,6 @@
 # Idea: Adherence Footer and Document Types Registry
 
-**Status:** Implementing
+**Status:** Specifying
 **Date:** 2026-04-20
 **Owner:** alexander.trakhimenok
 **Promotes To:** adherence-footer, document-types-registry

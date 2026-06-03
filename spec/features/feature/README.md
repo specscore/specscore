@@ -3,6 +3,7 @@
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/feature?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/feature?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/feature?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/feature?op=request-change) |
 
 **Status:** Stable
+**Grade:** B
 
 ## Summary
 
@@ -309,7 +310,6 @@ Creating or updating a Feature's `**Source Ideas:**` field triggers tooling to r
 A Feature README MAY carry an optional `**Grade:**` body-metadata line recording a single-value quality grade:
 
 ```markdown
-**Grade:** B
 ```
 
 The field is OPTIONAL and holds exactly one value, overwritten on each re-grade — there is no grade history. When present, `**Grade:**` is the **last** line of the header block, after `**Status:**` and any `**Source Ideas:**` / `**Supersedes:**` lines. The set of allowed values is repository-configurable via `grade.values` in `specscore.yaml` (default `A, B, C, D, F`), and `specscore spec lint` validates the value against that set. The field is generic — it is not coupled to any reviewer-gate workflow or to the Feature's `Status` — and applies to every artifact kind that has a header block, not only Features.

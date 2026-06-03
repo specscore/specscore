@@ -1,6 +1,6 @@
 # Idea: Decision and Decisions Index
 
-**Status:** Implementing
+**Status:** Specified
 **Date:** 2026-04-20
 **Owner:** alexander.trakhimenok@gmail.com
 **Promotes To:** decision, decisions-index

@@ -32,6 +32,7 @@ for the open repo-wide discussion.
 ## Referenced by
 
 <!-- managed-by: specscore lint --fix -->
+- Entity: [idea](idea.entity.md)
 - Entity: [user](user.entity.md)
 <!-- end-managed -->
 
