@@ -1,6 +1,6 @@
 # Idea: Capability and Platform Implementations
 
-**Status:** Specified
+**Status:** Implementing
 **Date:** 2026-06-03
 **Owner:** alexander.trakhimenok
 **Promotes To:** capability-and-platform-implementations
