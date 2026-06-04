@@ -36,13 +36,28 @@ properties:
         - aborted
   - name: depends_on
     data_type: array
-    description: Other Tasks that must reach `complete` before this Task may transition from `queued` to `in_progress`.
+    description: Other Tasks that must reach `complete` before this Task may transition from `queued` to `in_progress`. Required on tasks within non-terminal plans (the value is `none` when there are no dependencies); lint enforces. Grandfathered (optional) for tasks in terminal-status plans once those statuses exist.
     checks:
       required: false
       items:
         data_type: ref
         checks:
           entity_ref: ./task.entity.md
+  - name: model
+    data_type: string
+    description: Capability tier the Task runs on when executed in isolation — one of small, medium, large, inherit. `inherit` runs on the ambient/session model. Required on tasks within non-terminal plans; lint enforces. Grandfathered for terminal-status plans once those statuses exist.
+    checks:
+      required: false
+      enum:
+        - small
+        - medium
+        - large
+        - inherit
+  - name: model_override
+    data_type: string
+    description: Optional exact, opaque model identifier; when present it takes precedence over `model` for this Task. Opaque to SpecScore — consumers interpret it.
+    checks:
+      required: false
 ---
 
 # Entity: Task
@@ -66,7 +81,9 @@ Plan's `features` list.
 | `id` | string | yes | The task's slug — the directory name within its enclosing Plan. |
 | `title` | string | yes | Human-readable title rendered after the `Task:` prefix. |
 | `status` | string | yes | Task lifecycle stage. |
-| `depends_on` | array | no | Other Tasks that must reach `complete` before this Task may transition from `queued` to `in_progress`. |
+| `depends_on` | array | no | Other Tasks that must reach `complete` before this Task may transition from `queued` to `in_progress`. Required on tasks within non-terminal plans (the value is `none` when there are no dependencies); lint enforces. Grandfathered (optional) for tasks in terminal-status plans once those statuses exist. |
+| `model` | string | no | Capability tier the Task runs on when executed in isolation — one of small, medium, large, inherit. `inherit` runs on the ambient/session model. Required on tasks within non-terminal plans; lint enforces. Grandfathered for terminal-status plans once those statuses exist. |
+| `model_override` | string | no | Optional exact, opaque model identifier; when present it takes precedence over `model` for this Task. Opaque to SpecScore — consumers interpret it. |
 <!-- end-managed -->
 
 ## Referenced by

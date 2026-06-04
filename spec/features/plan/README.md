@@ -352,9 +352,17 @@ Status rollup is advisory -- a plan author MAY set an explicit status that overr
 
 A composite task's status MAY be derived from the statuses of its children. Tooling SHOULD support automatic status rollup. An explicitly set status MUST take precedence over the derived value.
 
+### Task count
+
+A plan carries a derived count of its tasks, surfaced in frontmatter so external tools can size a plan without parsing its body.
+
+#### REQ: tasks-count
+
+A plan MUST carry a derived `tasks_count` recording the number of its direct child tasks. The value is maintained by `specscore spec lint --fix` and surfaced in the plan's frontmatter per the [artifact-frontmatter-convention](../artifact-frontmatter-convention/README.md) feature. Authors MUST NOT hand-maintain `tasks_count`; lint reconciles it from the actual task children.
+
 ### Tasks and dependencies
 
-Tasks that do not declare a `Depends on` field may execute in parallel. The dependency graph determines the critical path.
+Tasks whose `Depends on` is `none` may execute in parallel. The dependency graph determines the critical path.
 
 For complex plans, an optional **Dependency graph** section visualizes the parallelism:
 
@@ -375,7 +383,7 @@ This section is optional -- useful for complex plans, noise for simple sequentia
 
 #### REQ: parallel-eligibility
 
-Tasks that do not declare a `Depends on` field MUST be treated as parallel-eligible. The dependency graph determines the critical path; tasks without dependencies MAY execute concurrently.
+Tasks whose `Depends on` value is `none` MUST be treated as parallel-eligible. Because `Depends on` is now required on every task (see [task#req:task-required-fields](../task/README.md#req-task-required-fields)), parallel-eligibility keys off the explicit `none` value rather than an absent field. The dependency graph determines the critical path; tasks with no dependencies MAY execute concurrently.
 
 ### Plan-level and task-level acceptance criteria
 
@@ -698,7 +706,13 @@ Snapshots are recorded in a table with Date, Git Hash, Action, and Comment colum
 
 **Requirements:** plan#req:recursive-nesting, plan#req:mixed-children, plan#req:parallel-eligibility, plan#req:two-level-acceptance-criteria, plan#req:status-rollup
 
-Plans nest recursively with no artificial depth limit. Tasks and sub-plans coexist at the same level. Tasks without `Depends on` are parallel-eligible. Acceptance criteria exist at both plan-level and task-level. Composite task status derives from children unless explicitly overridden.
+Plans nest recursively with no artificial depth limit. Tasks and sub-plans coexist at the same level. Tasks whose `Depends on` is `none` are parallel-eligible. Acceptance criteria exist at both plan-level and task-level. Composite task status derives from children unless explicitly overridden.
+
+### AC: tasks-count
+
+**Requirements:** plan#req:tasks-count
+
+A plan carries a derived `tasks_count` equal to its number of direct child tasks, maintained by `specscore spec lint --fix` and surfaced in frontmatter. The value is never hand-authored; lint reconciles it from the actual children.
 
 ### AC: cross-artifact-links
 
@@ -711,6 +725,7 @@ Affected features back-reference plans in a Plans table. Proposals triggered by 
 - How should plan tasks reference specific sections of a feature spec when the plan implements only part of a feature?
 - What is the exact format for the plan task reference -- should it be structured metadata (YAML frontmatter) or a markdown convention (as shown in examples)?
 - Should the deviation report be generated automatically when all tasks complete, or only on demand?
+- `tasks_count` migration: existing plans gain `tasks_count` via `specscore spec lint --fix` on next touch (derived, never hand-authored), so no manual backfill is required. (Source Idea: `plan-granularity-improvement`.)
 
 ---
 *This document follows the https://specscore.md/feature-specification*
