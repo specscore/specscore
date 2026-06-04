@@ -41,6 +41,12 @@ properties:
         data_type: ref
         checks:
           entity_ref: ../task/task.entity.md
+  - name: tasks_count
+    data_type: integer
+    description: Derived count of the Plan's direct child tasks. Maintained by `specscore spec lint --fix` and surfaced in frontmatter (per artifact-frontmatter-convention); never hand-authored.
+    checks:
+      required: false
+      min: 0
 ---
 
 # Entity: Plan
@@ -55,7 +61,7 @@ The Plan entity is the typed shape of a SpecScore
 A Plan is a composite Task; structurally, the two share their core
 shape. The distinction is whether `tasks` is empty (leaf Task) or
 non-empty (Plan). See the Plan spec's
-[unified plan/task model](README.md#plan-and-task-model) for the full
+[unified plan/task model](README.md#recursive-task-and-plan-model) for the full
 recursive definition.
 
 ## Properties
@@ -67,6 +73,7 @@ recursive definition.
 | `status` | string | yes | Plan preparation stage. Plans do not carry execution statuses (`completed`, `failed`) — those live on tasks. |
 | `features` | array | yes | Features this Plan affects. |
 | `tasks` | array | no | Subtasks that make up this Plan. Empty list means the Plan is a leaf Task. |
+| `tasks_count` | integer | no | Derived count of the Plan's direct child tasks. Maintained by `specscore spec lint --fix` and surfaced in frontmatter (per artifact-frontmatter-convention); never hand-authored. |
 <!-- end-managed -->
 
 ## Referenced by

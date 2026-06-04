@@ -151,6 +151,23 @@ A URL in `depends_on` MUST resolve to a task in a different project. The URL MUS
 
 A task with unmet dependencies (any dependency whose status is not `complete`) MUST NOT transition from `queued` to `in_progress`. The task MUST remain in `queued` or transition to `blocked` if it was already `in_progress` when a dependency became unmet.
 
+### Execution model
+
+Every task declares the model tier it should run on when executed in isolation (as a subagent or a parallel workflow agent). This lets a plan express per-task compute intent — a mechanical edit on a small model, a design task on a large one — without pinning to vendor model names.
+
+```markdown
+**Model:** large
+**Model override:** some-exact-model-id
+```
+
+#### REQ: task-model-tier
+
+Every task document MUST include a `Model` field declaring a capability tier, one of: `small`, `medium`, `large`, or `inherit`. The tier is vendor-neutral; the execution runtime maps it to a concrete model. The value `inherit` means the task runs on the ambient/session model rather than a pinned tier — appropriate for tasks executed in the current session rather than dispatched to an isolated agent.
+
+#### REQ: task-model-override
+
+A task MAY additionally declare a `Model override` field carrying an exact, opaque model identifier. When present, the override MUST take precedence over the tier when the runtime selects the concrete model for that task. The override string is opaque to SpecScore — consumers interpret it.
+
 ### Task status board format
 
 A task status board provides a visual summary of all tasks within a plan. It is rendered as a markdown table grouped by status columns.
@@ -196,6 +213,7 @@ A task document carries structured properties in its `README.md`.
 
 **Status:** queued
 **Depends on:** set-up-infrastructure
+**Model:** medium
 **Produces:**
   - JWT middleware module
   - Token refresh endpoint
@@ -217,7 +235,7 @@ Every task document MUST use the `# Task: {Title}` format for its title. The `Ta
 
 #### REQ: task-required-fields
 
-Every task document MUST include the `Status` field. The `Depends on` and `Produces` fields are OPTIONAL and appear only when applicable.
+Every task document MUST include the `Status`, `Depends on`, and `Model` fields. The `Depends on` field MUST be present even when the task has no dependencies; in that case its value is the literal `none`. The `Produces` field is OPTIONAL and appears only when applicable. Existing documents are migrated via `specscore spec lint --fix` (which backfills `Depends on: none` and a default `Model`); exemption of tasks in terminal-status plans is deferred until those statuses exist (see Open Questions).
 
 #### REQ: task-acceptance-criteria
 
@@ -249,7 +267,7 @@ Every task document MUST end with an adherence footer per the [Adherence Footer 
 
 **Requirements:** task#req:task-directory, task#req:task-slug-format, task#req:task-is-leaf, task#req:task-title-format, task#req:task-required-fields
 
-A task resides in a dedicated directory with a slug-formatted name and a `README.md` file. The document uses the `# Task: {Title}` format. The task is a leaf node with no child task directories. The `Status` field is always present.
+A task resides in a dedicated directory with a slug-formatted name and a `README.md` file. The document uses the `# Task: {Title}` format. The task is a leaf node with no child task directories. The `Status`, `Depends on`, and `Model` fields are always present.
 
 ### AC: status-lifecycle
 
@@ -263,6 +281,18 @@ A task's status is always one of the seven defined values. Status transitions fo
 
 Dependency references resolve correctly using bare slugs (sibling), relative paths (cousin), or URLs (cross-project). Tasks with unmet dependencies cannot transition to `in_progress`.
 
+### AC: dependency-explicit
+
+**Requirements:** task#req:task-required-fields
+
+A task with no dependencies still declares `Depends on` with the literal value `none`; the field is never omitted. This makes dependency intent explicit on every task rather than inferred from an absent field.
+
+### AC: task-model
+
+**Requirements:** task#req:task-model-tier, task#req:task-model-override
+
+Every task declares a `Model` tier of `small`, `medium`, `large`, or `inherit`. When a `Model override` is also present, the override identifier takes precedence over the tier when the runtime selects a concrete model.
+
 ### AC: board-format
 
 **Requirements:** task#req:board-columns, task#req:board-done-strikethrough, task#req:board-recently-finished, task#req:board-reflects-current-state
@@ -271,9 +301,10 @@ The task status board has the required columns (Queued, In Progress, Blocked, Do
 
 ## Open Questions
 
-- Should task documents support optional metadata fields beyond Status, Depends on, and Produces (e.g., Assignee, Effort, Priority)?
+- Should task documents support optional metadata fields beyond Status, Depends on, Model, and Produces (e.g., Assignee, Effort, Priority)?
 - How should cross-project dependency resolution work when the remote project is not accessible (offline, private)?
 - Should the task status board be auto-generated by tooling or manually maintained, and what is the validation tolerance for staleness?
+- Grandfathering & migration: `specscore spec lint --fix` backfills `Depends on: none` and a default `Model` tier on existing tasks. Once the `plan-status-lifecycle` work lands terminal plan statuses (`implemented`/`withdrawn`/`superseded`), tasks within terminal-status plans should be exempt from the required `Depends on`/`Model` fields — deferred until those statuses exist. (Source Idea: `plan-granularity-improvement`.)
 
 ---
 *This document follows the https://specscore.md/feature-specification*
