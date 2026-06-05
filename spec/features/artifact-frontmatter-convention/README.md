@@ -19,7 +19,7 @@ Today an artifact's conformance and lifecycle are split across two unstructured 
 
 #### REQ: format-field
 
-Every SpecScore artifact MUST carry a `format:` key in YAML frontmatter whose value is the canonical spec URL for its type (e.g. `https://specscore.md/feature-specification`, `https://specscore.md/idea-specification`, `https://specscore.md/drift-recap-specification`). The value is a **bare URL** for v1 — no registry indirection — but the grammar is forward-compatible: a future non-URL token MAY be interpreted as a registry key without breaking existing bare-URL artifacts. The `format:` value is essentially static per type, set at create time and never edited thereafter.
+Every SpecScore artifact MUST carry a `format:` key in YAML frontmatter whose value is the canonical spec URL for its type (e.g. `https://specscore.md/feature-specification`, `https://specscore.md/idea-specification`, `https://specscore.md/plan-specification`, `https://specscore.md/drift-recap-specification`). The value is a **bare URL** for v1 — no registry indirection — but the grammar is forward-compatible: a future non-URL token MAY be interpreted as a registry key without breaking existing bare-URL artifacts. The `format:` value is essentially static per type, set at create time and never edited thereafter.
 
 #### REQ: status-field
 
