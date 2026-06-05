@@ -128,6 +128,51 @@ async function build() {
     console.log(`  ${page.slug}.html + ${page.slug}.md`);
   }
 
+  // --- New-artefact template gallery (/new/) ---
+  // Raw, ready-to-fill skeletons for each SpecScore artefact type. Sources
+  // live in `new/` at the repo root (outside `spec/`, so `specscore spec lint`
+  // does not dispatch them as real artefacts) and are published verbatim at
+  // /new/<type>.md, with a browsable index at /new/.
+  const newDir = join(ROOT, 'new');
+  let templateFiles = [];
+  try {
+    templateFiles = (await readdir(newDir)).filter(f => f.endsWith('.md')).sort();
+  } catch {
+    // new/ directory doesn't exist yet — skip
+  }
+
+  if (templateFiles.length > 0) {
+    await mkdir(join(OUTPUT, 'new'), { recursive: true });
+
+    const entries = [];
+    for (const file of templateFiles) {
+      const body = await readFile(join(newDir, file), 'utf-8');
+      // Published byte-for-byte: the file IS the template.
+      await writeFile(join(OUTPUT, 'new', file), body, 'utf-8');
+      entries.push({ type: file.replace(/\.md$/, ''), file });
+      console.log(`  new/${file}`);
+    }
+
+    const listItems = entries.map(e =>
+      `<li><a href="/new/${e.file}"><code>/new/${e.file}</code></a> — ${e.type} template</li>`
+    ).join('\n');
+    const indexContent = `<h1>New-Artefact Templates</h1>
+<p>Blank, ready-to-fill skeletons for each SpecScore artefact type. Each link returns the raw Markdown you start a new artefact from — copy it, fill the prompts, and save it to its canonical path in your spec tree.</p>
+<ul>
+${listItems}
+</ul>`;
+    const indexPage = injectIntoTemplate(template, {
+      title: 'New-Artefact Templates',
+      content: indexContent,
+      slug: 'new',
+      sidebarGroups: config.sidebarGroups,
+      eyebrow: '',
+      showViewMarkdown: false,
+    });
+    await writeFile(join(OUTPUT, 'new', 'index.html'), indexPage, 'utf-8');
+    console.log('  new/index.html (index)');
+  }
+
   // --- Blog ---
   const { parseBlogPost, buildBlogIndex } = await import('./lib/build-blog.js');
 

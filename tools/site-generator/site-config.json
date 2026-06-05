@@ -117,6 +117,15 @@
       "llmsFull": true
     },
     {
+      "source": null,
+      "slug": "new",
+      "title": "New-Artefact Templates",
+      "nav": true,
+      "navLabel": "New Templates",
+      "navGroup": "Specification",
+      "navOrder": 10
+    },
+    {
       "source": "docs/docs-index.md",
       "slug": "docs",
       "title": "Documentation",
