@@ -62,7 +62,7 @@ The `format:` frontmatter field and the footer line `*This document follows the 
 
 #### REQ: scaffold-and-change-status
 
-Create verbs (`specscore feature new`, `idea new`, `task new`, and the sidekick-capture path) MUST emit `format:` — and `status:` for status-bearing types — in the scaffold. `specscore feature change-status` and `specscore idea change-status` MUST rewrite the body `**Status:**` line and the frontmatter `status:` mirror **atomically**, rolling back both on any mid-flight failure. (These verbs live in `specscore-cli`; this Feature owns the contract they implement.)
+Create verbs (`specscore feature new`, `idea new`, `task new`, `plan new`, and the sidekick-capture path) MUST emit `format:` — and `status:` for status-bearing types — in the scaffold. (`plan new` is a status-bearing type and emits both fields; its full subcommand contract lives in the `cli/plan/new` Feature in `specscore-cli`.) `specscore feature change-status` and `specscore idea change-status` MUST rewrite the body `**Status:**` line and the frontmatter `status:` mirror **atomically**, rolling back both on any mid-flight failure. (These verbs live in `specscore-cli`; this Feature owns the contract they implement.)
 
 ### Migration
 
@@ -117,8 +117,8 @@ To avoid a flag day across SpecScore-managed repos, the enforcing lint rules MUS
 **Requirements:** artifact-frontmatter-convention#req:scaffold-and-change-status
 
 **Given** a SpecScore repo
-**When** the user runs `specscore feature new <slug>` (a status-bearing type)
-**Then** the scaffold contains both `format:` (the feature spec URL) and `status:` (the initial status); a status-less type's scaffold contains `format:` only.
+**When** the user runs `specscore feature new <slug>` or `specscore plan new <slug>` (both status-bearing types)
+**Then** each scaffold contains both `format:` (the type's spec URL) and `status:` (the initial status); a status-less type's scaffold contains `format:` only.
 
 ### AC: change-status-dual-write
 

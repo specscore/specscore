@@ -8,7 +8,7 @@
 
 ## Summary
 
-Implements the `artifact-frontmatter-convention` Feature: every SpecScore artifact carries a frontmatter `format:` field (the canonical spec URL for its type) and, for status-bearing types, a `status:` field mirroring the body `**Status:**` line. Lint enforces both, `--fix` reconciles the derivatives (frontmatter `status:` from the body; the footer URL from frontmatter `format:`), the create/change-status verbs emit and dual-write the fields, and a graced migration flips the rules to error once repos are converted. Work lands entirely in `specscore-cli`; the convention contract is already published by the source Feature.
+Implements the `artifact-frontmatter-convention` Feature: every SpecScore artifact carries a frontmatter `format:` field (the canonical spec URL for its type) and, for status-bearing types, a `status:` field mirroring the body `**Status:**` line. Lint enforces both, `--fix` reconciles the derivatives (frontmatter `status:` from the body; the footer URL from frontmatter `format:`), the create/change-status verbs emit and dual-write the fields (including a new `specscore plan new` verb so plans are scaffolded with frontmatter, not hand-authored without it), and a graced migration flips the rules to error once repos are converted. Work lands entirely in `specscore-cli`; the convention contract is already published by the source Feature.
 
 ## Approach
 
@@ -40,11 +40,11 @@ Extend the `lint-status-mirror` rule so a status-less type (e.g. drift-recap, se
 
 Add the rule that an artifact's adherence-footer URL and its frontmatter `format:` MUST carry the same URL (trailing slash optional). A mismatch is an error; a match passes. `specscore spec lint --fix` MUST derive the footer URL from `format:` (frontmatter is canonical), never the reverse. Coordinate with the existing adherence-footer `fix-inserts-only` behavior so the two rules do not conflict.
 
-### Task 5: Create verbs emit `format:` and `status:`
+### Task 5: Create verbs emit `format:` and `status:` (incl. new `plan new` verb)
 
 **Verifies:** artifact-frontmatter-convention#ac:scaffold-emits-fields
 
-Make `specscore feature new`, `idea new`, `task new`, and the sidekick-capture path emit `format:` (the type's spec URL from Task 1) — and `status:` for status-bearing types — in the scaffolded frontmatter. A status-less type's scaffold carries `format:` only.
+Make every create verb — `specscore feature new`, `idea new`, `task new`, and the sidekick-capture path — emit `format:` (the type's spec URL from Task 1) and, for status-bearing types, `status:` in the scaffolded frontmatter; a status-less type's scaffold carries `format:` only. As supporting work this task also introduces the new `specscore plan new` verb (whose full subcommand contract is the `cli/plan/new` Feature in `specscore-cli`) so that plans — previously hand-authored by `specstudio:plan` without frontmatter — are scaffolded by the CLI with `format:`/`status:` from creation. This is the create-path fix for the original gap; existing plans are reconciled by the Task 7 migration / `lint --fix` backfill.
 
 ### Task 6: `change-status` atomic body + frontmatter dual-write
 
@@ -61,7 +61,7 @@ Ship the enforcing rules (Tasks 1–4) behind a grace period (disabled or warnin
 ## Open Questions
 
 - **`tasks_count` / plan frontmatter coupling.** This Plan's own frontmatter (and the `tasks_count` field defined by `plan#req:tasks-count`) is itself surfaced "per the artifact-frontmatter-convention feature." Once Tasks 1–2 ship, `specscore spec lint --fix` will backfill frontmatter into existing plans (including this one) — until then plans intentionally remain body-metadata only and lint clean.
-- **Plan scaffolding.** The `scaffold-emits-fields` AC names `feature new`, `idea new`, `task new`, and sidekick-capture — not `plan new` (no such verb exists). Whether plans acquire frontmatter via a new `plan new` verb or solely via `lint --fix` backfill is a Feature-level question carried out of this Plan's scope.
+- **Plan scaffolding — resolved.** Plans acquire frontmatter via a new `specscore plan new` verb (Task 5), defined by the `cli/plan/new` Feature in `specscore-cli`; `lint --fix` backfill (Task 7) covers pre-existing plans. The cli/plan/new Feature's own structural ACs (slug, no-clobber, source binding) are delivered as supporting work in Task 5 and may be split into a dedicated `specscore-cli` plan if that work proves larger than one task.
 - **Status-concept source of truth.** Whether the per-type Status-concept flag lives in the document-types registry, each type's spec page, or a static loader list (carried from the Feature) is settled in Task 1's design.
 
 ---
