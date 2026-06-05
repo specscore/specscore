@@ -8,25 +8,27 @@ trigger: explicit
 status: queued
 synchestra_task: null
 ---
-# Implement the artifact-frontmatter-convention in specscore-cli — lint rules + scaffolder/change-status emission
+# Land the artifact-frontmatter-convention CLI impl — it already exists on a branch; push, review, merge, migrate
 
 ## Where this came up
 
-While revising `new-artefact-template-gallery`, the `/new/*` templates were brought into the Approved [`artifact-frontmatter-convention`](../../features/artifact-frontmatter-convention/README.md) shape (`format:` on all; `status:` mirror on status-bearing types). But the convention is **Approved-but-unimplemented** in the CLI, so the templates now *lead* the scaffolders.
+Captured while revising `new-artefact-template-gallery` to bring `/new/*` templates into the Approved [`artifact-frontmatter-convention`](../../features/artifact-frontmatter-convention/README.md) shape. Originally framed as "implement from scratch" — but a follow-up check found the work **already substantially exists**.
 
-## CLI obligations (all currently unimplemented)
+## Status correction (2026-06-05)
 
-- **`lint-format-required`** — flag missing `format:` or wrong-URL `format:`.
-- **`lint-status-mirror`** — flag missing/extra/drifted `status:`; `--fix` rewrites frontmatter from body.
-- **`footer-format-mirror`** lint — footer URL must equal frontmatter `format:`; `--fix` derives footer from `format:`.
-- **Scaffolder emission** — `feature/idea/task/plan new` + sidekick-capture emit `format:` (+ `status:`).
-- **`change-status` dual-write** — rewrite body `**Status:**` and frontmatter `status:` atomically.
-- **Migration sequencing** — ship rules grace/warning-only, migrate repos, then flip to error.
+The implementation lives on a **local, unpushed** `specscore-cli` branch: **`feat/frontmatter-convention-impl`** (Plan-driven, "Task 3–6", ~2,500 lines, 24 files). It covers nearly the whole convention:
 
-## Why it matters now
+- ✅ `lint-format-required` — `pkg/lint/format_field.go` (+ grace period)
+- ✅ `lint-status-mirror` — `pkg/lint/status_mirror.go` (missing/extra/drift)
+- ✅ `footer-format-mirror` + `--fix` — `pkg/lint/footer_format_mirror.go`
+- ✅ scaffolders `idea/feature/plan new` emit `format:`/`status:`
+- ✅ `change-status` dual-write — `pkg/lifecycle/rewrite.go`
+- ➖ `task new` absent — correct; `task` is board-managed (matches the `format:`-only gallery template)
 
-Until this lands, a *bare* CLI fetch (`cli-template-runtime-fetch`) yields a frontmatter'd artefact while an *embedded* scaffold does not. `task` is convention-classified status-bearing but the gallery template is `format:`-only (board-managed), so the grace period must cover `task` until the task-lifecycle status model is resolved.
+## Real next steps (land, don't re-implement)
 
-## Pushback
-
-Cross-repo (specscore-cli + coordinated migrations in specscore / ai-plugin-specscore / specstudio-skills). Another agent was implementing `plan new` — coordinate so its frontmatter emission isn't duplicated.
+1. **Coordinate** with the branch owner — it is live/unpushed.
+2. **Verify** build + tests clean (one early commit was `[WIP — tests pending]`; later commits claim 100% coverage — confirm).
+3. **Push → PR → review → merge** to `specscore-cli` main.
+4. **Run the cross-repo migration** (one-shot per repo: specscore, specscore-cli, ai-plugin-specscore, specstudio-skills), then flip the grace-period rules to error.
+5. Confirm the related bug seed `idea change-status silently reverts yet reports success` is closed by the dual-write work.
