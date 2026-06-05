@@ -1,6 +1,6 @@
 # Idea: New Artefact Templates (published at /new/)
 
-**Status:** Draft
+**Status:** Approved
 **Date:** 2026-06-05
 **Owner:** alex
 **Promotes To:** —
