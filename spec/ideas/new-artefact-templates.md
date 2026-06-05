@@ -1,9 +1,9 @@
 # Idea: New Artefact Templates (published at /new/)
 
-**Status:** Specified
+**Status:** Specifying
 **Date:** 2026-06-05
 **Owner:** alex
-**Promotes To:** new-artefact-template-gallery
+**Promotes To:** cli-template-runtime-fetch, new-artefact-template-gallery
 **Supersedes:** —
 **Related Ideas:** —
 
