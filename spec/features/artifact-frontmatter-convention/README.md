@@ -2,7 +2,7 @@
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/artifact-frontmatter-convention?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/artifact-frontmatter-convention?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/artifact-frontmatter-convention?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/artifact-frontmatter-convention?op=request-change) |
 
-**Status:** Under Review
+**Status:** Approved
 **Source Ideas:** artifact-frontmatter-convention
 
 ## Summary
