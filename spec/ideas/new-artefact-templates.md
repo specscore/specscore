@@ -1,6 +1,6 @@
 # Idea: New Artefact Templates (published at /new/)
 
-**Status:** Specifying
+**Status:** Specified
 **Date:** 2026-06-05
 **Owner:** alex
 **Promotes To:** new-artefact-template-gallery

@@ -1,8 +1,9 @@
 # Feature: New-Artefact Template Gallery
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/new-artefact-template-gallery?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/new-artefact-template-gallery?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/new-artefact-template-gallery?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/new-artefact-template-gallery?op=request-change) |
-**Status:** Draft
+**Status:** Approved
 **Source Ideas:** new-artefact-templates
+**Grade:** B
 
 ## Summary
 
