@@ -1,3 +1,6 @@
+---
+format: https://specscore.md/task-specification
+---
 # <Task Title>
 
 ## Dependencies

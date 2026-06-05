@@ -7,7 +7,7 @@
 
 ## Summary
 
-Publishes the canonical new-artefact templates as raw Markdown files on specscore.md — one per artefact type at `/new/<type>.md` — with a browsable index at `/new/`. Each published file is the bare, ready-to-fill skeleton (canonical section headings plus `<!-- … -->` authoring prompts), so humans, agents, and (via a later Feature) the CLI can fetch a valid starting point for a new artefact from one authoritative URL.
+Publishes the canonical new-artefact templates as raw Markdown files on specscore.md — one per artefact type at `/new/<type>.md` — with a browsable index at `/new/`. Each published file is the bare, ready-to-fill skeleton (canonical section headings plus `<!-- … -->` authoring prompts), so humans, agents, and (via a later Feature) the CLI can fetch a valid starting point for a new artefact from one authoritative URL. Each skeleton also carries the YAML frontmatter every artefact is required to declare under the Approved [Artifact Frontmatter Convention](../artifact-frontmatter-convention/README.md) — a `format:` spec-URL key on every type, plus a `status:` mirror on status-bearing types — so a filled-in template is convention-clean from the first byte.
 
 ## Problem
 
@@ -23,11 +23,26 @@ Template source files MUST live **outside** the `spec/` tree so that `specscore 
 
 #### REQ: template-content
 
-Each `new/<type>.md` source MUST contain only the lint-clean skeleton a new artefact of that type starts from: the canonical section headings and `<!-- … -->` authoring prompts, with no real content filled in. Where a `specscore <type> new` scaffolder exists, the skeleton MUST match the shape that scaffolder emits.
+Each `new/<type>.md` source MUST contain only the lint-clean skeleton a new artefact of that type starts from: the canonical section headings and `<!-- … -->` authoring prompts, with no real content filled in. The skeleton also includes the YAML frontmatter required by `template-frontmatter-format` and `template-frontmatter-status` below. Where a `specscore <type> new` scaffolder exists, the skeleton MUST match the shape that scaffolder emits once that scaffolder implements the convention's `scaffold-and-change-status` requirement (see Open Questions on sequencing).
 
 #### REQ: supported-types
 
 The gallery MUST publish a template for each supported artefact type: `idea`, `feature`, `plan`, `task`, `decision`, `issue`, `proposal`.
+
+### Frontmatter
+
+The published templates start from the YAML frontmatter every new artefact is required to carry under the Approved [Artifact Frontmatter Convention](../artifact-frontmatter-convention/README.md), so a filled-in template is convention-clean and a future `specscore … new` scaffold (once that Feature's `scaffold-and-change-status` lands) emits the same shape. This Feature owns the *published gallery* surface only; the lint rules and CLI dual-write that enforce the convention live in `specscore-cli` per that Feature.
+
+#### REQ: template-frontmatter-format
+
+Every `new/<type>.md` template MUST carry a `format:` key in YAML frontmatter whose value is the canonical spec URL for its type — `https://specscore.md/<type>-specification` — per [`artifact-frontmatter-convention#req:format-field`](../artifact-frontmatter-convention/README.md). This applies to every type in `supported-types`. Where the template also carries the human-visible footer line (`*This document follows the <url>*`), the `format:` value and the footer URL MUST be the same URL, per the convention's `footer-format-mirror`.
+
+#### REQ: template-frontmatter-status
+
+A `new/<type>.md` template for a **status-bearing** type MUST carry a `status:` frontmatter key whose value equals the template's body `**Status:**` token, in the same vocabulary, per [`artifact-frontmatter-convention#req:status-field`](../artifact-frontmatter-convention/README.md). For this gallery the status-bearing templates are `idea`, `feature`, `plan`, `decision`, and `proposal` (`proposal` is treated as status-bearing because it carries a body `**Status:**`; its formal addition to the convention's `status-concept-by-type` classification is tracked in Open Questions). Two types are special-cased:
+
+- **`task`** is **exempt** from `status:` for now — its status is board-managed (it has no body `**Status:**`), so it carries `format:` only. Full status-bearing alignment is deferred (see Open Questions).
+- **`issue`** carries `status:` **natively** in its existing YAML frontmatter — defined by the issue type's own spec and lint rules, not by the convention's `status-concept-by-type` (which does not list `issue`); it keeps that `status:` unchanged and only gains `format:`.
 
 ### Publishing
 
@@ -83,6 +98,24 @@ A template, once its `<!-- … -->` prompts are replaced with valid content and 
 **When** `specscore spec lint` runs
 **Then** it passes with zero violations.
 
+### AC: templates-carry-format (verifies REQ:template-frontmatter-format)
+
+**Given** the `new/` template sources
+**When** each `new/<type>.md` is inspected for every type in `supported-types`
+**Then** each carries a `format:` YAML-frontmatter key equal to `https://specscore.md/<type>-specification`, and for every template that also has a footer line the `format:` value equals the footer URL.
+
+### AC: status-bearing-templates-mirror-status (verifies REQ:template-frontmatter-status)
+
+**Given** the `idea`, `feature`, `plan`, `decision`, and `proposal` templates
+**When** each is inspected
+**Then** each carries a `status:` frontmatter key whose value equals its body `**Status:**` token (e.g. `idea` → `Draft`, `decision` → `Proposed`).
+
+### AC: task-template-format-only (verifies REQ:template-frontmatter-status)
+
+**Given** the board-managed `task` template, which has no body `**Status:**`
+**When** `new/task.md` is inspected
+**Then** it carries a `format:` frontmatter key and **no** `status:` key.
+
 ## Rehearse Integration
 
 The build/routing and lint-surface ACs are testable and have Rehearse stubs under `_tests/`:
@@ -92,7 +125,7 @@ The build/routing and lint-surface ACs are testable and have Rehearse stubs unde
 - `template-source-location-templates-outside-spec-tree.md`
 - `template-yields-valid-artefact-filled-template-lints-clean.md`
 
-`supported-set-present` and `template-is-empty-skeleton` are covered by inspection of the build output and the source files respectively; they reuse the same harness as the routing tests and do not get separate stubs.
+`supported-set-present` and `template-is-empty-skeleton` are covered by inspection of the build output and the source files respectively; they reuse the same harness as the routing tests and do not get separate stubs. The three frontmatter ACs (`templates-carry-format`, `status-bearing-templates-mirror-status`, `task-template-format-only`) are likewise covered by source-file inspection of the `new/` templates and reuse the same harness — no separate stubs.
 
 ## Not Doing / Out of Scope
 
@@ -102,6 +135,8 @@ The build/routing and lint-surface ACs are testable and have Rehearse stubs unde
 - **Localized templates** — English-canonical only; i18n is out of scope.
 - **Template versioning / pinning** — deferred; the published file is always "latest."
 - **Rewriting the existing `/<type>-specification` pages** — `/new/` is a new sibling namespace.
+- **The convention's lint rules and CLI dual-write/scaffold implementations** — `lint-format-required`, `lint-status-mirror`, and the `… new` / `change-status` frontmatter emission live in `specscore-cli` per [artifact-frontmatter-convention](../artifact-frontmatter-convention/README.md); this revision only brings the published gallery templates into the convention's frontmatter shape.
+- **Task's full status-bearing alignment and footer** — adding a body `**Status:**`, a `status:` mirror, and a footer to `task` is deferred (see Open Questions); this revision adds only `format:` to the task template.
 
 ## Assumption Carryover
 
@@ -115,6 +150,9 @@ From the source Idea `new-artefact-templates`:
 
 - Should each `/new/<type>.md` also get a human-friendly HTML rendering later, or is the raw `.md` plus the `/new/` index sufficient? (Out of scope for now; not blocking.)
 - How does a `plan` template stay in sync given there is no `specscore plan new` scaffolder to mirror? (Tracked; the template is hand-authored from the Plan specification for now.)
+- **Sequencing vs the scaffolders.** These template frontmatter additions *lead* the `specscore … new` scaffolders, which do not yet emit frontmatter (the convention's `scaffold-and-change-status` is unimplemented in `specscore-cli`). Per the convention's `migration-sequencing` grace period the two converge during that rollout; until then a bare CLI fetch (`cli-template-runtime-fetch`) yields a frontmatter'd artefact while an embedded scaffold does not. Not blocking, but the gallery and scaffolder changes should land in the same rollout window. (Tracked.)
+- **`task` full alignment.** `task` carries `format:` only here. Bringing it fully under the convention (body `**Status:**` + `status:` mirror + footer) depends on the task-lifecycle / `task new` status model, which is board-managed today. Note that the convention's `status-concept-by-type` *does* classify Task as status-bearing, so until `task` is aligned its template would trip `lint-status-mirror` case (a) ("status-bearing artefact missing `status:`"); the convention's `migration-sequencing` grace period must therefore stay in effect for `task` until that alignment lands. Recommend resolving in the task-lifecycle work, not here. (Tracked.)
+- **`proposal` classification + spec page.** `proposal` is treated as status-bearing here but is not yet in the convention's `status-concept-by-type` list, and no `https://specscore.md/proposal-specification` page is published yet — so its `format:` URL is pattern-derived pending that page, and its footer alignment follows the convention's `footer-format-mirror` rollout. Recommend the convention Feature formally add `proposal` and the page be published. (Tracked.)
 
 ---
 *This document follows the https://specscore.md/feature-specification*

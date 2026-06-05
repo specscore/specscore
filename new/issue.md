@@ -1,4 +1,5 @@
 ---
+format: https://specscore.md/issue-specification
 type: issue
 slug: <slug>
 status: open
