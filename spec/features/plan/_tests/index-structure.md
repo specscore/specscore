@@ -1,6 +1,6 @@
 # Scenario: Index structure
 
-**Validates:** [plan#req:index-completeness](../README.md#req-index-completeness), [plan#req:index-child-indentation](../README.md#req-index-child-indentation), [plan#req:index-roi-columns](../README.md#req-index-roi-columns), [plan#req:index-recently-closed](../README.md#req-index-recently-closed)
+**Validates:** [plans-index#req:required-sections](../../plans-index/README.md#req-required-sections), [plans-index#req:sub-plan-indentation](../../plans-index/README.md#req-sub-plan-indentation), [plans-index#req:contents-columns](../../plans-index/README.md#req-contents-columns), [plans-index#req:recently-closed-present](../../plans-index/README.md#req-recently-closed-present)
 
 ## Steps
 

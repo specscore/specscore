@@ -8,7 +8,7 @@
 
 A plan is a composite task -- a task that contains subtasks. It bridges feature specifications and change requests to executable work. Plans are mutable documents; snapshots provide immutable reference points for review, approval, and retrospective.
 
-There is one structural concept: the **task**. A task with children is a plan. A task without children is a leaf task. This is determined by structure, not declaration. Plans nest recursively -- there is no artificial depth limit. The typed shape of a single Plan is captured in the co-located [plan entity](plan.entity.md).
+There is one structural concept: the **task**. A task with children is a plan. A task without children is a leaf task. A plan is normally a single flat file (`spec/plans/{slug}.md`) whose tasks are inline `### Task N:` blocks; it MAY optionally be decomposed into sub-plans (recursive nesting, no depth limit) as a reserved advanced form. The typed shape of a single Plan is captured in the co-located [plan entity](plan.entity.md).
 
 ## Contents
 
@@ -66,124 +66,82 @@ graph LR
 
 ### Plan location
 
-All plans live under `spec/plans/` in the spec repository:
+A plan is a single Markdown file under `spec/plans/` in the spec repository:
 
 ```text
 spec/plans/
   README.md              <- index of all plans
-  {plan-slug}/
-    README.md            <- the plan document
+  {plan-slug}.md         <- the plan document (one flat file per plan)
 ```
 
 `{plan-slug}` is a URL/path-safe identifier (e.g., `add-batch-mode`, `user-auth`).
 
-#### REQ: plan-directory
+#### REQ: plan-file
 
-Every plan MUST reside in a dedicated directory under `spec/plans/` with a `README.md` file as the plan document.
+Every plan MUST be a single Markdown file `spec/plans/{plan-slug}.md`. This single-file form is the contract enforced by `specscore spec lint` (lint rule `P-003`). The optional decomposition of a plan into sub-plans (see [Recursive task and plan model](#recursive-task-and-plan-model)) is a reserved advanced form, not currently required or enforced.
 
 #### REQ: plan-slug-format
 
 Plan slugs MUST be lowercase, hyphen-separated, and URL-safe. Underscores, spaces, and special characters MUST NOT be used.
 
-#### REQ: features-field-uniform
+#### REQ: source-binding
 
-Every plan MUST list its affected features in the header. There is no distinction between single-feature and multi-feature plans -- every plan uniformly declares the features it touches.
+Every plan MUST declare exactly one source in its header: either a `**Source Feature:**` line naming the Feature it decomposes, or a `**Source:** idea:{slug}` line naming the Idea it plans directly. A plan that declares neither, or both, is invalid.
 
 ### Plan document structure
 
 ```markdown
 # Plan: Add batch mode to CLI
 
-**Status:** approved
-**Features:**
-  - [cli](../../features/cli/README.md)
-**Source type:** feature
-**Source:** [CLI feature spec](../../features/cli/)
-**Author:** @alex
-**Approver:** @jordan
-**Created:** 2026-03-14
-**Approved:** 2026-03-15
+**Status:** Approved
+**Source Feature:** cli
+**Date:** 2026-03-14
+**Owner:** @alex
+**Supersedes:** —
 
-## Context
+## Summary
 
-Why this plan exists. Links to the feature spec or the approved change
-request (proposal) that triggered it. 2-5 sentences establishing the
-problem and the high-level approach chosen.
+1-3 sentences. What this plan covers and how it decomposes the source
+Feature (or, for an idea-sourced plan, the source Idea).
 
-## Acceptance criteria
+## Approach
 
-- All new CLI flags appear in help output
-- End-to-end test: batch file with 100 items completes in under 10s
-- No breaking changes to existing single-item flow
+<=1 paragraph on the decomposition strategy: what was grouped, what was
+deferred and why.
 
 ## Tasks
 
-### 1. Define batch input schema
+### Task 1: Define batch input schema
+
+**Verifies:** cli#ac:batch-schema-validates
 
 Establish the YAML/JSON schema for batch input files. This determines
 the contract for all downstream tasks.
 
-**Depends on:** (none)
-**Produces:**
-  - `batch-input-schema.json` -- JSON Schema definition
+### Task 2: Implement batch parser
 
-**Acceptance criteria:**
-- Schema validates all example inputs from the feature spec
-- Schema rejects malformed inputs with actionable error messages
+**Verifies:** cli#ac:batch-parser-rejects-invalid
 
-### 2. Implement batch parser
+Parse and validate batch input files against the schema from Task 1,
+rejecting invalid files with per-field error messages.
 
-Parse and validate batch input files against the schema.
+### Task 3: Update CLI entry point
 
-**Depends on:** Task 1
-**Produces:**
-  - Batch parser module
+**Verifies:** cli#ac:batch-flag-in-help
 
-**Acceptance criteria:**
-- Validates input against schema from Task 1; rejects invalid files
-  with per-field error messages
-- Handles files up to 50MB without exceeding 256MB memory
+Add the `--batch <file>` flag and wire it to the parser; surface it in
+help output, mutually exclusive with positional arguments.
 
-#### 2.1. Add streaming support
+## Deferred AC Coverage
 
-For large batch files, parse line-by-line rather than loading into
-memory.
-
-**Acceptance criteria:**
-- Files over 10MB are streamed; memory stays under 256MB regardless of
-  file size
-
-### 3. Update CLI entry point
-
-Add `--batch <file>` flag and wire it to the parser.
-
-**Depends on:** Task 2
-
-**Acceptance criteria:**
-- Help output shows `--batch` flag with description
-- `--batch` and positional arguments are mutually exclusive with a
-  clear error message
-
-## Snapshots
-
-| Date | Git Hash | Action | Comment |
-|---|---|---|---|
-| 2026-03-15 | `a1b2c3d` | approved | Initial approval by @jordan |
-
-## Dependency graph
-
-Task 1 --> Task 2 --> Task 3
-
-## Risks and open decisions
-
-- Batch files over 10MB may need streaming -- Task 2.1 addresses this
-  but we may discover additional memory constraints.
-- Error reporting granularity: per-item or fail-fast? Defaulting to
-  per-item with `--fail-fast` flag.
+<!-- Omit this section entirely when no ACs are deferred. -->
 
 ## Open Questions
 
 None at this time.
+
+---
+*This document follows the https://specscore.md/plan-specification*
 ```
 
 #### REQ: plan-title-format
@@ -192,30 +150,24 @@ Every plan document MUST use the `# Plan: {Title}` format for its title. The `Pl
 
 #### REQ: plan-required-sections
 
-Every plan document MUST include the following sections: title (`# Plan: X`), header metadata fields, Context, Acceptance criteria, and Tasks. A Snapshots section, Dependency graph section, and Risks and open decisions section are OPTIONAL.
+Every plan document MUST include the following sections: title (`# Plan: X`), header metadata fields, `## Summary`, `## Approach`, `## Tasks`, and `## Open Questions`. A `## Deferred AC Coverage` section, `## Snapshots` section, and `## Dependency graph` section are OPTIONAL.
 
 ### Header fields
 
 | Field | Required | Description |
 |---|---|---|
 | **Status** | Yes | Current plan status (see [Plan statuses](#plan-statuses)) |
-| **Features** | Yes | List of affected features, each linking to its feature spec README |
-| **Source type** | Yes | `feature` or `change-request` |
-| **Source** | Yes | Link to the originating feature spec or approved proposal |
-| **Author** | Yes | Who wrote the plan |
-| **Approver** | On approval | Who approved the plan |
-| **Created** | Yes | Date the plan was created |
-| **Approved** | On approval | Date the plan was approved |
+| **Source Feature** | One of | Slug of the Feature this plan decomposes (feature-sourced plans) |
+| **Source** | One of | `idea:{slug}` naming the Idea this plan decomposes (idea-sourced plans) |
+| **Date** | Yes | Date the plan was created |
+| **Owner** | Yes | Who wrote the plan |
+| **Supersedes** | Yes | `—`, or the slug of an older plan this one wholesale-replaces |
 | **Effort** | No | `S` \| `M` \| `L` \| `XL` -- see [Optional ROI metadata](#optional-roi-metadata) |
 | **Impact** | No | `low` \| `medium` \| `high` \| `critical` -- see [Optional ROI metadata](#optional-roi-metadata) |
 
 #### REQ: required-header-fields
 
-Every plan MUST include these header fields: Status, Features, Source type, Source, Author, and Created. The Approver and Approved fields MUST be present when the plan status is `approved`. Effort and Impact are OPTIONAL.
-
-#### REQ: source-type-values
-
-The Source type field MUST be either `feature` or `change-request`. No other values are permitted.
+Every plan MUST include these header fields: Status, the source line (exactly one of `Source Feature` or `Source: idea:{slug}`, per [source-binding](#req-source-binding)), Date, Owner, and Supersedes. Effort and Impact are OPTIONAL.
 
 #### REQ: proposal-forward-reference
 
@@ -229,43 +181,64 @@ When a plan is triggered by a change request (proposal), the **Source** field li
 | Field  | Value                                             |
 |--------|---------------------------------------------------|
 | Status | `approved`                                        |
-| Plan   | [migrate-to-v2](../../../plans/migrate-to-v2/)    |
+| Plan   | [migrate-to-v2](../../../plans/migrate-to-v2.md)  |
 ```
 
 ### Plan statuses
 
-| Status | Description |
-|---|---|
-| `draft` | Plan is being written, not ready for review |
-| `in_review` | Submitted for human review |
-| `approved` | Reviewed and approved -- execution may proceed |
+A plan's status models its full lifecycle in one field, in three bands. The values are capitalized, matching the SpecScore-wide status vocabulary used by Features and Ideas; the frontmatter `status:` mirror (per [artifact-frontmatter-convention](../artifact-frontmatter-convention/README.md)) carries the same value verbatim.
 
-Plans do not have `completed` or `failed` statuses -- those are execution concerns. A plan is either being prepared (`draft`, `in_review`) or it has been approved (`approved`). Plans are mutable; if the approach needs to change after approval, edit the plan and create a new snapshot rather than creating a separate document.
+| Band | Status | Description | Set by |
+|---|---|---|---|
+| Prep | `Draft` | Plan is being written, not ready for review | Human author |
+| Prep | `In Review` | Submitted for review | Human author |
+| Prep | `Approved` | Reviewed and approved — ready/pending execution | Human author |
+| Execution | `Executing` | At least one task in progress | Derived by `lint --fix` |
+| Execution | `Blocked` | Tasks blocked; none progressing and none failed | Derived by `lint --fix` |
+| Execution | `Implemented` | All tasks complete | Derived by `lint --fix` |
+| Execution | `Failed` | A task failed/aborted and the plan cannot complete | Derived by `lint --fix` |
+| Disposition | `Withdrawn` | Abandoned | Human author |
+| Disposition | `Superseded` | Replaced by a named successor plan | Human author |
+
+The bands are sequential phases of one lifecycle, not concurrent: reaching `Executing` already implies the approval gate passed (or was deliberately bypassed), so `Approved` carries no additional current-state information during a run. The authority handoff sits at `Approved`: `lint --fix` only ever transitions from `Approved` onward (deriving the execution band from task-status rollup) and MUST NEVER overwrite a human-authored prep state. Plans are mutable; if the approach changes after approval, edit the plan and record a new snapshot rather than creating a separate document.
 
 #### REQ: valid-statuses
 
-A plan's Status field MUST be one of: `draft`, `in_review`, or `approved`. No other values are permitted.
+A plan's Status field MUST be one of: `Draft`, `In Review`, `Approved`, `Executing`, `Blocked`, `Implemented`, `Failed`, `Withdrawn`, or `Superseded`. No other values are permitted. A `Superseded` plan MUST carry a reference to its successor plan.
 
-#### REQ: no-execution-status
+#### REQ: execution-status-derived
 
-Plans MUST NOT carry `completed` or `failed` statuses. Completion tracking is an execution concern, not a plan concern.
+The execution-band statuses (`Executing`, `Blocked`, `Implemented`, `Failed`) MUST NOT be hand-authored. They are derived by `specscore spec lint --fix` from the rollup of the plan's task statuses (see [Status rollup](#status-rollup)), and `lint --fix` transitions only from `Approved` onward, never overwriting a `Draft`/`In Review`/`Approved` prep state.
 
 ### Status transitions
 
 ```mermaid
 graph LR
-    A["draft"]
-    B["in_review"]
-    C["approved"]
+    A["Draft"]
+    B["In Review"]
+    C["Approved"]
+    E["Executing"]
+    K["Blocked"]
+    I["Implemented"]
+    F["Failed"]
+    W["Withdrawn"]
+    S["Superseded"]
 
     A -->|submit| B
-    B -->|revisions<br/>requested| A
+    B -->|revisions| A
     B -->|approve| C
+    C -->|lint --fix rollup| E
+    E --> K
+    E --> I
+    E --> F
+    K --> E
+    C -->|abandon| W
+    C -->|replace| S
 ```
 
 #### REQ: status-transitions
 
-Plan status transitions MUST follow these rules: `draft` MAY transition to `in_review`; `in_review` MAY transition back to `draft` (revisions requested) or forward to `approved`. No other transitions are permitted.
+Plan status transitions MUST follow these rules. **Prep (human-authored):** `Draft` MAY transition to `In Review`; `In Review` MAY transition back to `Draft` (revisions requested) or forward to `Approved`. **Execution (derived by `lint --fix`, only from `Approved` onward):** `Approved` MAY transition to an execution-band status; execution statuses transition among themselves per the task-status rollup. **Disposition (human-authored):** `Approved` (or a later state) MAY transition to `Withdrawn` or `Superseded`. There is no resurrection from a disposition status — re-pursuing the work means authoring a new plan. No other transitions are permitted.
 
 ### Snapshots
 
@@ -289,13 +262,15 @@ When a plan includes snapshots, they MUST be recorded in a `## Snapshots` sectio
 
 #### REQ: snapshot-actions
 
-Snapshot actions include `approved`, `checkpoint`, `completed`, and user-defined values. The `approved` action SHOULD correspond to setting the plan status to `approved`.
+Snapshot actions include `approved`, `checkpoint`, `completed`, and user-defined values. The `approved` action SHOULD correspond to setting the plan status to `Approved`.
 
 #### REQ: snapshot-git-hash
 
 Each snapshot MUST reference a valid git commit hash that represents the plan's state at the time the snapshot was taken.
 
 ### Recursive task and plan model
+
+> **Optional / reserved advanced form.** The default and lint-enforced shape of a plan is a single flat file (`spec/plans/{slug}.md`, per [plan-file](#req-plan-file)) whose tasks are inline `### Task N:` blocks. The recursive directory decomposition described below is an OPTIONAL advanced form for very large plans; it is **not currently enforced or required** by `specscore spec lint` (which enforces the single-file contract via `P-003`). It is documented here as the reserved model for future sub-plan support.
 
 A plan is a composite task -- it contains other tasks. Some of those child tasks may themselves contain subtasks, making them sub-plans. This nesting is recursive with no artificial depth limit.
 
@@ -322,7 +297,7 @@ Whether something is a "plan" or a "task" is determined by structure: if it has 
 
 #### REQ: recursive-nesting
 
-Plans and tasks MAY nest to arbitrary depth. There is no maximum nesting level. Depth is a judgment call made by the plan author.
+In the optional directory form, plans and tasks MAY nest to arbitrary depth. There is no maximum nesting level. Depth is a judgment call made by the plan author. The single-file form (the default and lint-enforced shape) carries its tasks as inline `### Task N:` blocks rather than child directories.
 
 #### REQ: child-plan-format
 
@@ -338,19 +313,20 @@ A plan MAY contain both leaf tasks and sub-plans as direct children at the same 
 
 ### Status rollup
 
-A composite task's (plan's) status can be derived from its children. This is the default behavior for plans that do not set an explicit status override.
+Once a plan is `Approved`, its execution-band status is derived from the rollup of its task statuses. This is what `lint --fix` maintains; it never runs while the plan is in a prep state (`Draft`/`In Review`/`Approved` are human-owned).
 
-| Condition | Derived status |
+| Condition (task-status rollup) | Derived plan status |
 |---|---|
-| All children are `draft` or unstarted | `draft` |
-| At least one child is `in_review` and none are later | `in_review` |
-| All children are `approved` or `completed` | `approved` |
+| A task is `failed`/aborted and the plan cannot complete | `Failed` |
+| At least one task is `in_progress` | `Executing` |
+| Tasks are blocked; none in progress and none failed | `Blocked` |
+| All tasks are complete | `Implemented` |
 
-Status rollup is advisory -- a plan author MAY set an explicit status that overrides the derived value. Tooling SHOULD surface discrepancies between explicit and derived status.
+Precedence is top-to-bottom: `Failed` wins over `Executing`, which wins over `Blocked`, which wins over `Implemented`.
 
 #### REQ: status-rollup
 
-A composite task's status MAY be derived from the statuses of its children. Tooling SHOULD support automatic status rollup. An explicitly set status MUST take precedence over the derived value.
+When a plan is `Approved` or in an execution-band status, `specscore spec lint --fix` MUST derive the plan's execution-band status from the rollup of its task statuses per the precedence above. The rollup reads task status only — it MUST NOT write task status, and MUST NOT overwrite a human-authored prep (`Draft`/`In Review`/`Approved`) or disposition (`Withdrawn`/`Superseded`) status.
 
 ### Task count
 
@@ -385,40 +361,13 @@ This section is optional -- useful for complex plans, noise for simple sequentia
 
 Tasks whose `Depends on` value is `none` MUST be treated as parallel-eligible. Because `Depends on` is now required on every task (see [task#req:task-required-fields](../task/README.md#req-task-required-fields)), parallel-eligibility keys off the explicit `none` value rather than an absent field. The dependency graph determines the critical path; tasks with no dependencies MAY execute concurrently.
 
-### Plan-level and task-level acceptance criteria
+### Task-to-feature-AC traceability
 
-Acceptance criteria appear at two levels:
+In the flat single-file model, a plan does not embed its own acceptance-criteria sections. Instead, each task declares a `**Verifies:**` line naming one or more acceptance criteria of the source Feature (by `feature-slug#ac:<ac-slug>`) that the task implements. This is the plan's traceability mechanism — every task maps to the feature ACs it satisfies — and it is enforced by lint rule `P-001` (every plan task references at least one feature AC).
 
-- **Plan-level** (the `## Acceptance criteria` section): cross-cutting criteria that span multiple tasks. These inform integration and end-to-end tests.
-- **Task-level** (within each task): criteria specific to that task's deliverable. These inform unit and component tests.
+#### REQ: task-verifies-feature-ac
 
-Both levels can be consumed by execution tools to populate work item descriptions, giving agents and test authors clear targets.
-
-#### REQ: two-level-acceptance-criteria
-
-Plans MUST support acceptance criteria at two levels: plan-level (cross-cutting, in the `## Acceptance criteria` section) and task-level (per-task deliverables, inline within each task). Both levels are consumed by execution tools.
-
-Acceptance criteria can also use a subdirectory format for complex criteria:
-
-**Inline (simple).** Include them directly in the plan as bullet points. Suitable for straightforward criteria that fit in a line or two.
-
-**Subdirectory (complex).** For criteria that require scripts, multiple test cases, or extensive documentation, create `spec/plans/{plan-slug}/acs/{ac-slug}/` directories:
-
-```
-spec/plans/user-auth/
-  README.md
-  acs/
-    end-to-end-test/
-      README.md          # Describes the test
-      script.sh          # Test implementation
-      fixtures/
-        ...
-    security-audit/
-      README.md
-      checklist.md
-```
-
-This allows criteria to be as simple or as complex as needed without cluttering the plan document.
+Every task in a plan MUST declare a `**Verifies:**` line referencing one or more acceptance criteria of the plan's source Feature, in the form `feature-slug#ac:<ac-slug>` (comma-separated when more than one). A task with no such reference is rejected by lint rule `P-001`. Feature ACs that the plan does not yet cover are recorded under the optional `## Deferred AC Coverage` section. (Idea-sourced plans, which have no source Feature, are exempt from `P-001`.)
 
 ### Optional ROI metadata
 
@@ -472,10 +421,9 @@ Each affected feature's README includes a **Plans** section linking to plans tha
 
 | Plan                                                                  | Status    | Author | Approved   |
 |-----------------------------------------------------------------------|-----------|--------|------------|
-| [chat-feature](../../plans/chat-feature/)                             | draft     | @alex  | -          |
-| [chat-infrastructure](../../plans/chat-feature/chat-infrastructure/)  | draft     | @alex  | -          |
-| [user-auth](../../plans/user-auth/)                                   | approved  | @alex  | 2026-03-15 |
-| [add-batch-mode](../../plans/add-batch-mode/)                         | in_review | @alex  | -          |
+| [chat-feature](../../plans/chat-feature.md)                           | Draft     | @alex  | -          |
+| [user-auth](../../plans/user-auth.md)                                 | Approved  | @alex  | 2026-03-15 |
+| [add-batch-mode](../../plans/add-batch-mode.md)                       | In Review | @alex  | -          |
 ```
 
 A feature appearing in both a plan and its sub-plan is valid -- the plan covers it broadly, the sub-plan implements a slice. A feature linked only to a top-level plan (no sub-plan yet) signals "planned but not decomposed."
@@ -530,13 +478,13 @@ Something initiates the need for a plan:
 | Change request (proposal) approved | `spec/features/{feature}/proposals/{proposal}/` |
 | Manual request | Human decides work is needed |
 
-If auto-planning is enabled in the project configuration, tooling can automatically create a `draft` plan when a feature spec or proposal reaches `approved` status. If disabled (the default), a human or external tool initiates plan creation explicitly.
+If auto-planning is enabled in the project configuration, tooling can automatically create a `Draft` plan when a feature spec or proposal reaches `Approved` status. If disabled (the default), a human or external tool initiates plan creation explicitly.
 
 ### Stage 2: Author the plan
 
 The plan author (human or AI agent) writes the plan document following the structure defined above.
 
-**When authored by a human:** Write the markdown directly. The spec tooling scaffolds the directory and template.
+**When authored by a human:** Write the markdown directly. The spec tooling scaffolds the plan file and template (`specscore plan new`).
 
 **When authored by an AI agent:** The agent receives the feature spec or approved proposal as input context, along with relevant codebase context, and produces the plan document. The agent should have access to:
 
@@ -549,16 +497,16 @@ The plan author (human or AI agent) writes the plan document following the struc
 
 ```mermaid
 graph LR
-    A["draft"]
-    B["in_review"]
-    C["approved"]
+    A["Draft"]
+    B["In Review"]
+    C["Approved"]
 
     A -->|submit| B
     B -->|revisions<br/>requested| A
     B -->|approve| C
 ```
 
-The review process transitions the plan from `draft` to `in_review`, and upon approval sets the status to `approved`, records the approver and approval date, and creates an `approved` snapshot. The plan remains editable after approval -- future changes are tracked through additional snapshots.
+The review process transitions the plan from `Draft` to `In Review`, and upon approval sets the status to `Approved` and creates an `approved` snapshot. The plan remains editable after approval -- future changes are tracked through additional snapshots, and once execution begins `lint --fix` derives the execution-band status from task rollup.
 
 ### After approval: Execution handoff
 
@@ -680,21 +628,21 @@ Every plan document MUST end with an adherence footer per the [Adherence Footer 
 
 ### AC: plan-document-validity
 
-**Requirements:** plan#req:plan-title-format, plan#req:plan-required-sections, plan#req:required-header-fields, plan#req:source-type-values
+**Requirements:** plan#req:plan-title-format, plan#req:plan-required-sections, plan#req:required-header-fields, plan#req:source-binding
 
-A plan document has a correctly formatted title (`# Plan: {Title}`), all required sections present (Context, Acceptance criteria, Tasks), all required header fields populated (Status, Features, Source type, Source, Author, Created), and a valid Source type value (`feature` or `change-request`). A document that violates any of these is rejected by validation.
+A plan document has a correctly formatted title (`# Plan: {Title}`), all required sections present (`Summary`, `Approach`, `Tasks`, `Open Questions`), all required header fields populated (Status, the source line, Date, Owner, Supersedes), and exactly one source declared (`Source Feature` or `Source: idea:{slug}`). A document that violates any of these is rejected by validation.
 
 ### AC: plan-location-validity
 
-**Requirements:** plan#req:plan-directory, plan#req:plan-slug-format, plan#req:features-field-uniform
+**Requirements:** plan#req:plan-file, plan#req:plan-slug-format
 
-A plan resides in a dedicated directory under `spec/plans/` with a slug-formatted name and a `README.md` file. The plan uniformly declares all affected features in its header regardless of how many features are touched.
+A plan is a single slug-named Markdown file `spec/plans/{slug}.md` (not a directory). A plan written as a directory tree is rejected by the single-file lint contract; a flat file with a valid slug passes.
 
 ### AC: status-lifecycle
 
-**Requirements:** plan#req:valid-statuses, plan#req:no-execution-status, plan#req:status-transitions
+**Requirements:** plan#req:valid-statuses, plan#req:execution-status-derived, plan#req:status-transitions
 
-A plan's status is always one of `draft`, `in_review`, or `approved`. Status transitions follow the defined state machine. Plans never carry execution-level statuses like `completed` or `failed`.
+A plan's status is always one of the nine defined values (`Draft`, `In Review`, `Approved`, `Executing`, `Blocked`, `Implemented`, `Failed`, `Withdrawn`, `Superseded`). Prep statuses are human-authored; the execution-band statuses are derived by `lint --fix` from task-status rollup and are never hand-set, and `lint --fix` only transitions from `Approved` onward. Status transitions follow the defined state machine.
 
 ### AC: snapshot-integrity
 
@@ -704,9 +652,9 @@ Snapshots are recorded in a table with Date, Git Hash, Action, and Comment colum
 
 ### AC: plan-structure-constraints
 
-**Requirements:** plan#req:recursive-nesting, plan#req:mixed-children, plan#req:parallel-eligibility, plan#req:two-level-acceptance-criteria, plan#req:status-rollup
+**Requirements:** plan#req:recursive-nesting, plan#req:mixed-children, plan#req:parallel-eligibility, plan#req:task-verifies-feature-ac, plan#req:status-rollup
 
-Plans nest recursively with no artificial depth limit. Tasks and sub-plans coexist at the same level. Tasks whose `Depends on` is `none` are parallel-eligible. Acceptance criteria exist at both plan-level and task-level. Composite task status derives from children unless explicitly overridden.
+In the optional directory form, plans nest recursively with no artificial depth limit and tasks and sub-plans coexist at the same level; the default single-file form carries inline `### Task N:` blocks. Tasks whose `Depends on` is `none` are parallel-eligible. Each task declares a `**Verifies:**` line mapping it to the source Feature's acceptance criteria (enforced by `P-001`). Once `Approved`, the plan's execution-band status derives from its task-status rollup via `lint --fix`.
 
 ### AC: tasks-count
 
@@ -726,6 +674,8 @@ Affected features back-reference plans in a Plans table. Proposals triggered by 
 - What is the exact format for the plan task reference -- should it be structured metadata (YAML frontmatter) or a markdown convention (as shown in examples)?
 - Should the deviation report be generated automatically when all tasks complete, or only on demand?
 - `tasks_count` migration: existing plans gain `tasks_count` via `specscore spec lint --fix` on next touch (derived, never hand-authored), so no manual backfill is required. (Source Idea: `plan-granularity-improvement`.)
+- This Feature was reconciled to the flat single-file model that lint actually enforces, and its status enum was expanded to the full prep/execution/disposition lifecycle realizing the Approved `plan-status-lifecycle` Idea. Open from that Idea: exact rollup precedence on mixed task states (encoded here as Failed > Executing > Blocked > Implemented — confirm against real `implement` runs); what triggers `lint --fix` to recompute the execution band (every lint run vs a hook vs the `implement` checkpoints); and whether `Failed` requires human acknowledgement to leave.
+- The CLI enforcement of the expanded status enum and the `lint --fix` execution-band derivation are not yet implemented; until then plans use the prep-band statuses (`Draft`/`Approved`) as before. (Realizing Idea: `plan-status-lifecycle`.)
 
 ---
 *This document follows the https://specscore.md/feature-specification*

@@ -1,11 +1,12 @@
 # Idea: Plan Status Lifecycle — Prep, Execution, and Disposition in One Field
 
-**Status:** Approved
+**Status:** Archived
 **Date:** 2026-06-04
 **Owner:** alexander.trakhimenok
 **Promotes To:** —
 **Supersedes:** —
 **Related Ideas:** —
+**Archive Reason:** Realized (not abandoned) — specified in place by amending the canonical `plan` Feature; the idea-lifecycle has no terminal status for an amendment-only idea (Specifying+ requires a `Promotes To` target), so it is archived as done. Remaining CLI work is tracked in the `plan` Feature's Open Questions.
 
 ## Problem Statement
 
@@ -14,6 +15,8 @@ How might we model a Plan's full lifecycle in one status field — authored prep
 ## Context
 
 The canonical Plan status enum is draft/in_review/approved, locked by REQ:valid-statuses, REQ:no-execution-status, an AC:status-lifecycle, and a valid-status-values test. That blocks the operational queries an operator actually needs — show pending plans, plans executing, plans blocked, plans that failed to complete. This Idea overturns the no-execution-status principle. The states are sequential phases of ONE lifecycle, not two concurrent ones: reaching executing already implies the approval gate passed (or was deliberately bypassed), so approved carries no additional current-state information during a run — a single field suffices, with a clean authority handoff at approved (humans own draft to approved; lint --fix owns the derived execution rollup; authors own disposition). This Idea MERGES and supersedes the earlier plan-disposition-statuses draft. Two existing realities it reconciles: the REQ:status-rollup that currently rolls completed children up to approved (reinterpreted here to produce execution states), and the specstudio-skills plans already using non-canonical Implementing/Completed/Deprecated/Archived (a drift this canonicalizes). Note: a test currently REJECTS superseded — this reverses it.
+
+**Realized & archived (2026-06-05, not abandoned):** specified in place by amending the canonical `plan` Feature (flat single-file model + the full prep/execution/disposition status lifecycle) rather than promoting to a new Feature. Because the idea-lifecycle's `Specifying`/`Specified` statuses require a `Promotes To:` target and this Idea amends an existing Feature instead, it is archived as *done*. The remaining CLI enforcement of the expanded enum + `lint --fix` execution-band derivation is tracked in the `plan` Feature's Open Questions, not here.
 
 ## Recommended Direction
 

@@ -12,7 +12,7 @@ GIVEN a plan document with title `# Add batch mode to CLI` (missing `Plan:` pref
 WHEN the document is validated
 THEN validation rejects the document with an error indicating the `Plan:` prefix is required
 
-GIVEN a plan document that is missing the `## Context` section
+GIVEN a plan document that is missing the `## Summary` section
 WHEN the document is validated
 THEN validation rejects the document with an error listing the missing required section
 

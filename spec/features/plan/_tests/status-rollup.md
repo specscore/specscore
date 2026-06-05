@@ -4,22 +4,25 @@
 
 ## Steps
 
-GIVEN a plan with three child tasks all in `draft` status
-WHEN the plan's derived status is computed
-THEN the derived status is `draft`
+GIVEN an `Approved` plan whose tasks are all complete
+WHEN `specscore spec lint --fix` computes the execution-band rollup
+THEN the derived plan status is `Implemented`
 
-GIVEN a plan with two children: one `in_review` and one `draft`
-WHEN the plan's derived status is computed
-THEN the derived status is `in_review`
+GIVEN an `Approved` plan with at least one task `in_progress`
+WHEN the rollup is computed
+THEN the derived plan status is `Executing`
 
-GIVEN a plan with all children in `approved` status
-WHEN the plan's derived status is computed
-THEN the derived status is `approved`
+GIVEN an `Approved` plan whose tasks are blocked, with none in progress and none failed
+WHEN the rollup is computed
+THEN the derived plan status is `Blocked`
 
-GIVEN a plan with a derived status of `draft` but an explicitly set status of `in_review`
-WHEN the plan status is evaluated
-THEN the explicit status `in_review` takes precedence over the derived value
-AND tooling surfaces a discrepancy between the explicit and derived statuses
+GIVEN an `Approved` plan with a failed/aborted task and an in-progress task
+WHEN the rollup is computed
+THEN the derived plan status is `Failed` (Failed wins over Executing per the documented precedence)
+
+GIVEN a plan still in the `Draft` prep state
+WHEN `specscore spec lint --fix` runs
+THEN the rollup leaves the status untouched — `lint --fix` derives execution status only from `Approved` onward and never overwrites a human-authored prep state
 
 ---
 *This document follows the https://specscore.md/scenario-specification*

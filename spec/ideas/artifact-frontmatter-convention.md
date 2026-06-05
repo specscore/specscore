@@ -1,6 +1,6 @@
 # Idea: Artifact Frontmatter Convention — format + status fields
 
-**Status:** Specifying
+**Status:** Specified
 **Date:** 2026-05-19
 **Owner:** alexandertrakhimenok
 **Promotes To:** artifact-frontmatter-convention

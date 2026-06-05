@@ -9,7 +9,7 @@ Archived Ideas are indexed separately at [archived/README.md](archived/README.md
 | Idea | Status | Date | Owner | Promotes To |
 |------|--------|------|-------|-------------|
 | [adherence-footer-and-doc-type-registry](adherence-footer-and-doc-type-registry.md) | Specifying | 2026-04-20 | alexander.trakhimenok | adherence-footer, document-types-registry |
-| [artifact-frontmatter-convention](artifact-frontmatter-convention.md) | Specifying | 2026-05-19 | alexandertrakhimenok | artifact-frontmatter-convention |
+| [artifact-frontmatter-convention](artifact-frontmatter-convention.md) | Specified | 2026-05-19 | alexandertrakhimenok | artifact-frontmatter-convention |
 | [canonical-grade-metadata-field](canonical-grade-metadata-field.md) | Specified | 2026-05-29 | alex | canonical-grade-metadata-field |
 | [capability-and-platform-implementations](capability-and-platform-implementations.md) | Implementing | 2026-06-03 | alexander.trakhimenok | capability-and-platform-implementations |
 | [decision-and-decisions-index](decision-and-decisions-index.md) | Specified | 2026-04-20 | alexander.trakhimenok@gmail.com | decision, decisions-index |

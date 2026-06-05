@@ -5,8 +5,8 @@
 ## Steps
 
 GIVEN a plan with three tasks
-AND Task 1 has no `Depends on` field
-AND Task 2 has no `Depends on` field
+AND Task 1 has `Depends on: none`
+AND Task 2 has `Depends on: none`
 AND Task 3 depends on Task 1
 WHEN the dependency graph is computed
 THEN Task 1 and Task 2 are marked as parallel-eligible
