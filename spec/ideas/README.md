@@ -17,7 +17,7 @@ Archived Ideas are indexed separately at [archived/README.md](archived/README.md
 | [format-declaration-footer-and-frontmatter](format-declaration-footer-and-frontmatter.md) | Approved | 2026-06-02 | alex | — |
 | [idea-types-and-lifecycle](idea-types-and-lifecycle.md) | Draft | 2026-05-19 | alex | — |
 | [journal-and-summary](journal-and-summary.md) | Specifying | 2026-05-19 | alex | journal-and-summary |
-| [new-artefact-templates](new-artefact-templates.md) | Specified | 2026-06-05 | alex | new-artefact-template-gallery |
+| [new-artefact-templates](new-artefact-templates.md) | Specified | 2026-06-05 | alex | cli-template-runtime-fetch, new-artefact-template-gallery |
 | [plan-deferred-ac-hyphenated-slug](plan-deferred-ac-hyphenated-slug.md) | Draft | 2026-05-22 | alexander.trakhimenok@gmail.com | — |
 | [plan-granularity-improvement](plan-granularity-improvement.md) | Approved | 2026-06-04 | alexander.trakhimenok | — |
 | [plan-status-lifecycle](plan-status-lifecycle.md) | Approved | 2026-06-04 | alexander.trakhimenok | — |
