@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/decision-specification
+status: Proposed
+---
 # Decision: <Decision Name>
 
 **Status:** Proposed

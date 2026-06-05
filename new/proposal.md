@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/proposal-specification
+status: Draft
+---
 # Proposal: <Proposal Name>
 
 **Status:** Draft

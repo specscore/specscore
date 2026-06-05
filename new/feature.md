@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/feature-specification
+status: Draft
+---
 # Feature: <Feature Name>
 
 **Status:** Draft

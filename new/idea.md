@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/idea-specification
+status: Draft
+---
 # Idea: <Idea Name>
 
 **Status:** Draft

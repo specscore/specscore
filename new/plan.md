@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/plan-specification
+status: Draft
+---
 # Plan: <Plan Name>
 
 **Status:** Draft
