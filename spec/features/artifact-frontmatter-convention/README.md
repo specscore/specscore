@@ -7,7 +7,7 @@
 
 ## Summary
 
-Every SpecScore artifact carries two YAML-frontmatter fields: **`format:`** — the spec URL for its type (machine-readable, replacing the prose footer line `*This document follows the …*`) — and, for status-bearing types, **`status:`** — a mirror of the body `**Status:**` token. The body `**Status:**` stays canonical; frontmatter `status:` is a derived mirror kept in lockstep by the CLI and validated by lint. This is the generic convention the [drift-recap](../drift-recap/README.md) and [session-recap](../session-recap/README.md) Features name as a forward dependency: it defines the `format:` requirement and the **Status-concept classification** that determines which types carry `status:` and which (the status-less ones) must not.
+Every SpecScore artifact carries two YAML-frontmatter fields: **`format:`** — the spec URL for its type (machine-readable, mirrored by the human-visible footer line `*This document follows the …*`, which is **retained**, not replaced) — and, for status-bearing types, **`status:`** — a mirror of the body `**Status:**` token. The body `**Status:**` stays canonical; frontmatter `status:` is a derived mirror kept in lockstep by the CLI and validated by lint. The footer keeps a human-visible format surface for renderers that hide frontmatter; lint keeps the footer URL and frontmatter `format:` in sync. This reconciliation follows the Approved [Format Declaration — Footer + Frontmatter Mirror](../../ideas/format-declaration-footer-and-frontmatter.md) Idea, which supersedes the earlier footer-removal stance. This is the generic convention the [drift-recap](../drift-recap/README.md) and [session-recap](../session-recap/README.md) Features name as a forward dependency: it defines the `format:` requirement and the **Status-concept classification** that determines which types carry `status:` and which (the status-less ones) must not.
 
 ## Problem
 
@@ -42,11 +42,11 @@ The lint rules below consume this classification, so a single source of truth (t
 
 For status-bearing types, the body `**Status:**` line is the **canonical truth**; frontmatter `status:` is a derived mirror. Any frontmatter↔body Status drift MUST be a lint error, and `specscore spec lint --fix` MUST resolve it by rewriting the frontmatter from the body value. (Sidekick-seeds, which historically carried only frontmatter `status:`, gain a body `**Status:**` line so this rule has no exception — implementation gated on the seed-lifecycle CLI, tracked as a follow-on.)
 
-### Footer replacement
+### Footer mirror
 
-#### REQ: footer-replaced-by-format
+#### REQ: footer-format-mirror
 
-The `format:` frontmatter field **replaces** the legacy footer line `*This document follows the <url>*`. The footer-line convention (owned by [adherence-footer](../adherence-footer/README.md)) is retired by this Feature: post-migration the footer line is removed and `format:` is the sole format declaration. During migration (see `migration-sequencing`) the presence of a legacy footer MUST NOT be a violation; after the cutover the footer line MUST be absent.
+The `format:` frontmatter field and the footer line `*This document follows the <url>*` are **both retained** and carry the **same** canonical spec URL for the type. The footer-line convention (owned by [adherence-footer](../adherence-footer/README.md)) is **not** retired — it stays as the human-visible format surface for renderers that hide frontmatter. `specscore spec lint` MUST flag any artifact whose footer URL and frontmatter `format:` disagree (trailing slash optional, per adherence-footer `REQ: trailing-slash`). The frontmatter `format:` is **canonical** for the pair — it is static and type-derived — so `--fix` derives the footer URL from `format:`, never the reverse. (This mirrors the `status` model in spirit, where one surface is canonical and the other is a lint-synced derivative; the canonical surface differs per field — body for `status`, frontmatter for `format`.)
 
 ### Lint contract
 
@@ -68,7 +68,7 @@ Create verbs (`specscore feature new`, `idea new`, `task new`, and the sidekick-
 
 #### REQ: migration-sequencing
 
-To avoid a flag day across SpecScore-managed repos, the enforcing lint rules MUST ship behind a grace period (rule disabled or warning-only) so existing repos do not break on landing. Each repo is migrated by a one-shot, deterministic script (read body Status → write frontmatter `status:`; derive `format:` from type; strip the footer line), one commit per repo. After all target repos are migrated, the rules flip to error by default.
+To avoid a flag day across SpecScore-managed repos, the enforcing lint rules MUST ship behind a grace period (rule disabled or warning-only) so existing repos do not break on landing. Each repo is migrated by a one-shot, deterministic script (read body Status → write frontmatter `status:`; derive `format:` from type; keep the footer line and align its URL to `format:`), one commit per repo. After all target repos are migrated, the rules flip to error by default.
 
 ## Acceptance Criteria
 
@@ -104,13 +104,13 @@ To avoid a flag day across SpecScore-managed repos, the enforcing lint rules MUS
 **When** `specscore spec lint` runs
 **Then** the drift is reported as an error, and `--fix` rewrites the frontmatter to `status: Implementing` (the body wins).
 
-### AC: format-replaces-footer
+### AC: format-footer-mirror-enforced
 
-**Requirements:** artifact-frontmatter-convention#req:format-field, artifact-frontmatter-convention#req:footer-replaced-by-format
+**Requirements:** artifact-frontmatter-convention#req:format-field, artifact-frontmatter-convention#req:footer-format-mirror
 
-**Given** a migrated artifact carrying `format:` frontmatter and no footer line
+**Given** a migrated artifact carrying `format:` frontmatter and a footer line with a **different** URL
 **When** `specscore spec lint` runs
-**Then** the `format:` field satisfies the format-declaration requirement without any footer line; and during the migration grace period an artifact still carrying the legacy footer is not flagged for it.
+**Then** the footer↔`format:` mismatch is flagged; an artifact whose footer URL matches its `format:` passes; and `--fix` rewrites the footer URL from `format:` (frontmatter canonical), never the reverse.
 
 ### AC: scaffold-emits-fields
 
@@ -134,7 +134,7 @@ To avoid a flag day across SpecScore-managed repos, the enforcing lint rules MUS
 
 **Given** an un-migrated repo (footer line present, no frontmatter fields) and the lint rules shipped in grace mode
 **When** `specscore spec lint` runs before migration and again after the one-shot migration + rule cutover
-**Then** the pre-migration run does not error on the missing frontmatter / present footer, and the post-migration run enforces both rules (frontmatter required, footer absent).
+**Then** the pre-migration run does not error on the missing frontmatter, and the post-migration run enforces both rules (frontmatter required, footer URL matching `format:`).
 
 ## Rehearse Integration
 
@@ -152,7 +152,7 @@ Inherited from the source Idea and pinned here:
 
 ## Open Questions
 
-- **Format visibility after footer removal.** The footer line is human-visible at the bottom of rendered docs; frontmatter is hidden by some renderers (GitHub Markdown, IDE previews). Removing the footer trades human-visible format provenance for machine-readability. Confirm this is acceptable, or retain a minimal human-visible format hint elsewhere. (The source Idea decided removal; flagged here for ratification because it touches every artifact.)
+- **Format visibility — resolved.** The footer is **retained** alongside frontmatter `format:` (per the Approved [Format Declaration — Footer + Frontmatter Mirror](../../ideas/format-declaration-footer-and-frontmatter.md) Idea), so human-visible format provenance is preserved for renderers that hide frontmatter while frontmatter serves machine readers. Lint keeps the two in sync; frontmatter `format:` is canonical.
 - **Cross-repo migration ordering** — recommended: ship rules grace/flag-gated, migrate all target repos (`specscore`, `specscore-cli`, `ai-plugin-specscore`, `specstudio-skills`), then flip to error by default.
 - **Status-concept source of truth** — whether the per-type Status-concept flag lives in the document-types registry, each type's spec page, or a static loader list; decide at plan time.
 

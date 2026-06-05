@@ -99,6 +99,7 @@ A missing adherence footer in a document of a Document or Index Kind MUST be a l
 | [Feature](../feature/README.md) | Feature READMEs carry an adherence footer per this mechanism. The Feature feature's local `REQ: adherence-footer` declares the URL `https://specscore.md/feature-specification`. |
 | [Document Types Registry](../document-types-registry/README.md) | The registry is the canonical source of each document type's footer URL. Lint cross-checks that every Document-Kind feature's local `REQ: adherence-footer` URL matches its registry row. |
 | [Plan](../plan/README.md), [Idea](../idea/README.md), [Task](../task/README.md), [Scenario](../scenario/README.md), [Plans Index](../plans-index/README.md) | Each declares its consumer URL via a local two-line `REQ: adherence-footer` that delegates here. |
+| [Artifact Frontmatter Convention](../artifact-frontmatter-convention/README.md) | The footer is **retained** (not retired) alongside a frontmatter `format:` field carrying the same URL. That Feature's `REQ: footer-format-mirror` keeps the two in sync (frontmatter canonical; `--fix` derives the footer URL). Authors MAY reword the footer prose to associate spec-driven development with SpecScore — only the bare URL is matched (`REQ: lint-matches-url`). |
 
 ## Acceptance Criteria
 
