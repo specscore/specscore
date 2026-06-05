@@ -1,8 +1,9 @@
 # Feature: CLI Template Runtime-Fetch
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/cli-template-runtime-fetch?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/cli-template-runtime-fetch?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/cli-template-runtime-fetch?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/cli-template-runtime-fetch?op=request-change) |
-**Status:** Draft
+**Status:** Approved
 **Source Ideas:** new-artefact-templates
+**Grade:** B
 
 ## Summary
 
@@ -105,13 +106,14 @@ These ACs are testable against the CLI with a local test HTTP server (or an unro
 
 ## Dependencies
 
-- [new-artefact-template-gallery](../new-artefact-template-gallery/README.md) — publishes the `/new/<type>.md` templates this Feature fetches. Its placeholder tokens (`<Idea Name>`, `YYYY-MM-DD`, `<your-handle>`, …) are the substitution anchors for REQ:field-substitution.
+- [new-artefact-template-gallery](../new-artefact-template-gallery/README.md) — publishes the `/new/<type>.md` templates this Feature fetches. Its placeholder tokens are the substitution anchors for REQ:field-substitution: the shared `YYYY-MM-DD` (date) and `<your-handle>` (owner) tokens, plus each type's title token, which is that gallery page's H1 placeholder (e.g. `<Idea Name>` in `new/idea.md`, `<Feature Name>` in `new/feature.md`).
 
 ## Not Doing / Out of Scope
 
 - **Template versioning / pinning** — reconciling a newer published template against an older CLI's lint rules is deferred (inherited from the source Idea).
 - **Persistent caching** — the MVP fetches on each invocation; no on-disk template cache.
 - **Build-time auto-sync of the embedded fallback** — the embedded copy is maintained manually (the Idea's accepted trade-off); a CI parity check is a candidate follow-up, not part of this Feature.
+- **`plan` fetch wiring** — there is no `specscore plan new` verb, so `plan` is intentionally absent from REQ:fetch-at-create-time's verb list. Fetch is wired per-type only where a `… new` verb exists; the published `/new/plan.md` template remains copy-paste-only until such a verb is added.
 - **Template content** — owned by `new-artefact-template-gallery`; this Feature only consumes templates.
 - **"Template updated" notifications** — surfacing when a fetched template differs from the embedded copy is out of scope.
 
