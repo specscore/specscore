@@ -7,7 +7,7 @@ description: A composite task — a task with subtasks — that bridges Feature 
 properties:
   - name: id
     data_type: string
-    description: The plan's slug — the directory name under `spec/plans/`.
+    description: The plan's slug — the file name (without `.md`) under `spec/plans/`.
     checks:
       required: true
       min_length: 1
@@ -15,19 +15,24 @@ properties:
       pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
   - name: status
     data_type: string
-    description: Plan preparation stage. Plans do not carry execution statuses (`completed`, `failed`) — those live on tasks.
+    description: The plan's full-lifecycle status in one field, across three bands — prep (human-authored), execution (derived by `lint --fix` from task rollup), and disposition (human-authored).
     checks:
       required: true
       enum:
-        - draft
-        - in_review
-        - approved
+        - Draft
+        - In Review
+        - Approved
+        - Executing
+        - Blocked
+        - Implemented
+        - Failed
+        - Withdrawn
+        - Superseded
   - name: features
     data_type: array
-    description: Features this Plan affects.
+    description: Features this Plan affects (its source Feature for feature-sourced plans). Empty for idea-sourced plans, which bind to an Idea via the `Source` line instead.
     checks:
-      required: true
-      min_length: 1
+      required: false
       items:
         data_type: ref
         checks:
@@ -69,9 +74,9 @@ recursive definition.
 <!-- managed-by: specscore lint --fix -->
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `id` | string | yes | The plan's slug — the directory name under `spec/plans/`. |
-| `status` | string | yes | Plan preparation stage. Plans do not carry execution statuses (`completed`, `failed`) — those live on tasks. |
-| `features` | array | yes | Features this Plan affects. |
+| `id` | string | yes | The plan's slug — the file name (without `.md`) under `spec/plans/`. |
+| `status` | string | yes | The plan's full-lifecycle status in one field, across three bands — prep (human-authored), execution (derived by `lint --fix` from task rollup), and disposition (human-authored). |
+| `features` | array | no | Features this Plan affects (its source Feature for feature-sourced plans). Empty for idea-sourced plans, which bind to an Idea via the `Source` line instead. |
 | `tasks` | array | no | Subtasks that make up this Plan. Empty list means the Plan is a leaf Task. |
 | `tasks_count` | integer | no | Derived count of the Plan's direct child tasks. Maintained by `specscore spec lint --fix` and surfaced in frontmatter (per artifact-frontmatter-convention); never hand-authored. |
 <!-- end-managed -->

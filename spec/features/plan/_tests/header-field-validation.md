@@ -1,25 +1,24 @@
 # Scenario: Header field validation
 
-**Validates:** [plan#req:required-header-fields](../README.md#req-required-header-fields), [plan#req:source-type-values](../README.md#req-source-type-values)
+**Validates:** [plan#req:required-header-fields](../README.md#req-required-header-fields), [plan#req:source-binding](../README.md#req-source-binding)
 
 ## Steps
 
-GIVEN a plan document with Status, Features, Source type, Source, Author, and Created fields all present
-AND Source type is `feature`
+GIVEN a plan document with Status, a source line (`Source Feature: cli`), Date, Owner, and Supersedes fields all present
 WHEN the document is validated
 THEN validation passes for the header fields
 
-GIVEN a plan document missing the `**Author:**` field
+GIVEN a plan document missing the `**Owner:**` field
 WHEN the document is validated
-THEN validation rejects the document with an error listing `Author` as a missing required field
+THEN validation rejects the document with an error listing `Owner` as a missing required field
 
-GIVEN a plan with status `approved` that is missing the `**Approver:**` field
+GIVEN a plan document missing the `**Supersedes:**` field
 WHEN the document is validated
-THEN validation rejects the document with an error indicating `Approver` is required when status is `approved`
+THEN validation rejects the document with an error listing `Supersedes` as a missing required field
 
-GIVEN a plan with Source type set to `task`
+GIVEN an idea-sourced plan whose header declares `**Source:** idea:add-batch-mode` and all other required fields
 WHEN the document is validated
-THEN validation rejects the document with an error indicating Source type must be `feature` or `change-request`
+THEN validation passes (the source line satisfies the source-binding requirement without a `Source Feature` line)
 
 ---
 *This document follows the https://specscore.md/scenario-specification*

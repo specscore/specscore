@@ -8,7 +8,7 @@ GIVEN a plan with an `## Snapshots` section containing a table
 WHEN the snapshot table is validated
 THEN it contains columns: Date, Git Hash, Action, and Comment
 
-GIVEN a plan that transitions to `approved` status
+GIVEN a plan that transitions to `Approved` status
 WHEN a snapshot is created with action `approved` and a valid git commit hash
 THEN the snapshot row is added to the Snapshots table
 AND the git hash references a commit where the plan content matches the approved state
