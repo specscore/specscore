@@ -17,10 +17,9 @@ Archived Ideas are indexed separately at [archived/README.md](archived/README.md
 | [format-declaration-footer-and-frontmatter](format-declaration-footer-and-frontmatter.md) | Approved | 2026-06-02 | alex | — |
 | [idea-types-and-lifecycle](idea-types-and-lifecycle.md) | Draft | 2026-05-19 | alex | — |
 | [journal-and-summary](journal-and-summary.md) | Specifying | 2026-05-19 | alex | journal-and-summary |
-| [new-artefact-templates](new-artefact-templates.md) | Specified | 2026-06-05 | alex | cli-template-runtime-fetch, new-artefact-template-gallery |
+| [new-artefact-templates](new-artefact-templates.md) | Implemented | 2026-06-05 | alex | cli-template-runtime-fetch, new-artefact-template-gallery |
 | [plan-deferred-ac-hyphenated-slug](plan-deferred-ac-hyphenated-slug.md) | Draft | 2026-05-22 | alexander.trakhimenok@gmail.com | — |
 | [plan-granularity-improvement](plan-granularity-improvement.md) | Approved | 2026-06-04 | alexander.trakhimenok | — |
-| [plan-status-lifecycle](plan-status-lifecycle.md) | Approved | 2026-06-04 | alexander.trakhimenok | — |
 | [recap-artifacts-drift-and-session](recap-artifacts-drift-and-session.md) | Specifying | 2026-06-01 | alex | drift-recap, session-recap |
 | [rename-outstanding-questions-to-open-questions](rename-outstanding-questions-to-open-questions.md) | Approved | 2026-05-22 | alexandertrakhimenok | — |
 | [shared-index-feature](shared-index-feature.md) | Specifying | 2026-04-20 | alexander.trakhimenok | index |
