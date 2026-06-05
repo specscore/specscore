@@ -1,9 +1,9 @@
 # Idea: New Artefact Templates (published at /new/)
 
-**Status:** Approved
+**Status:** Specifying
 **Date:** 2026-06-05
 **Owner:** alex
-**Promotes To:** —
+**Promotes To:** new-artefact-template-gallery
 **Supersedes:** —
 **Related Ideas:** —
 
