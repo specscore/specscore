@@ -19,7 +19,7 @@ Templates ship embedded in the CLI binary, so fixing a skeleton requires a CLI r
 
 #### REQ: fetch-at-create-time
 
-Each `specscore <type> new` verb — `idea`, `feature`, `decision`, `issue`, `task`, `proposal` — MUST, at create-time, attempt to fetch the canonical template for that type from the published gallery before writing the new file.
+Each `specscore <type> new` verb — `idea`, `feature`, `decision`, `issue`, `proposal` — MUST, for a **bare** scaffold (no authored content supplied via flags, non-interactive), attempt to fetch the canonical template for that type from the published gallery before writing the new file. A scaffold that carries authored content (e.g. `--hmw`, `--description`, `--tags`, `--severity`) uses the embedded scaffolder instead — the static gallery template cannot carry per-invocation content — and performs no fetch.
 
 #### REQ: url-mapping
 
@@ -47,7 +47,7 @@ When the CLI falls back to the embedded template, it MUST print a one-line warni
 
 #### REQ: scaffold-parity
 
-For identical inputs, a file created via the fetch path (with the published template in sync with the embedded copy) MUST be byte-identical to the file created via the embedded fallback, so enabling runtime-fetch does not change scaffolder output while templates are in sync.
+For identical inputs, both the fetch path and the embedded-fallback path MUST produce a **lint-clean** artefact of the correct type with the **same metadata fields filled** (title, date, owner). The two are NOT required to be byte-identical: the gallery template and the embedded scaffolder are independently maintained (the thin-wrapper design), so section-body wording may differ. Enabling runtime-fetch therefore never yields an invalid artefact, even if the two sources have drifted.
 
 ## Acceptance Criteria
 
@@ -89,9 +89,9 @@ For identical inputs, a file created via the fetch path (with the published temp
 
 ### AC: fetch-and-fallback-parity (verifies REQ:scaffold-parity)
 
-**Given** the published idea template is in sync with the embedded copy
+**Given** the gallery serves the bare idea template
 **When** a file is created once with the gallery reachable and once unreachable, for identical inputs
-**Then** the two created files are byte-identical.
+**Then** both created files are lint-clean Ideas with the same Title, Date, and Owner (section-body wording may differ).
 
 ## Rehearse Integration
 
@@ -114,6 +114,7 @@ These ACs are testable against the CLI with a local test HTTP server (or an unro
 - **Persistent caching** — the MVP fetches on each invocation; no on-disk template cache.
 - **Build-time auto-sync of the embedded fallback** — the embedded copy is maintained manually (the Idea's accepted trade-off); a CI parity check is a candidate follow-up, not part of this Feature.
 - **`plan` fetch wiring** — there is no `specscore plan new` verb, so `plan` is intentionally absent from REQ:fetch-at-create-time's verb list. Fetch is wired per-type only where a `… new` verb exists; the published `/new/plan.md` template remains copy-paste-only until such a verb is added.
+- **`task` fetch wiring** — `task new` writes a *board-managed* entry (`tasks/<slug>/README.md` plus a row in `tasks/README.md`) rendered from a struct, not a free-form artefact template. Runtime-fetch does not fit that shape, so `task` keeps its current rendering and is excluded from the fetch verbs. The published `/new/task.md` remains copy-paste-only.
 - **Template content** — owned by `new-artefact-template-gallery`; this Feature only consumes templates.
 - **"Template updated" notifications** — surfacing when a fetched template differs from the embedded copy is out of scope.
 

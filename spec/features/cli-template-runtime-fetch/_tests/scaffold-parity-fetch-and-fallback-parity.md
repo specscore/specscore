@@ -4,10 +4,11 @@
 
 ## Steps
 
-GIVEN a test server serves an idea template identical to the CLI's embedded copy
+GIVEN a test server serves the bare idea template
 WHEN the user runs `specscore idea new my-idea --owner alex` with the server reachable
 AND the user runs the same command (fresh location) with the base URL unreachable
-THEN the two created `my-idea.md` files are byte-identical
+THEN both created `my-idea.md` files are lint-clean Ideas with the same Title, Date, and Owner
+AND section-body wording may differ between the two (independently-maintained templates)
 
 ---
 *This document follows the https://specscore.md/scenario-specification*
