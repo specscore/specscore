@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/decision-specification
+status: Accepted
+---
+
 # Decision: SpecScore Studio Deep-Link URL Scheme
 
 **Status:** Accepted

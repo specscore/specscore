@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Requirement without RFC 2119 keywords triggers a warning
 
 **Validates:** [requirement#req:rfc2119-keywords](../README.md#req-rfc2119-keywords)

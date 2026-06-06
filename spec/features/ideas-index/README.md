@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/feature-specification
+status: Draft
+---
+
 # Feature: Ideas Index
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/ideas-index?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/ideas-index?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/ideas-index?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/ideas-index?op=request-change) |

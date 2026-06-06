@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/idea-specification
+status: Implementing
+---
+
 # Idea: Capability and Platform Implementations
 
 **Status:** Implementing

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Explicit `studio:` values are used as-is
 
 **Validates:** [repo-config#req:studio-explicit-values](../README.md#req-studio-explicit-values)

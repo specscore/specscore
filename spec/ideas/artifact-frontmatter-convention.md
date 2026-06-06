@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/idea-specification
+status: Specified
+---
+
 # Idea: Artifact Frontmatter Convention — format + status fields
 
 **Status:** Specified

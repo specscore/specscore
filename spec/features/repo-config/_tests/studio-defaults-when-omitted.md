@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Omitted `studio:` block applies SpecScore.Studio defaults
 
 **Validates:** [repo-config#req:studio-default-when-omitted](../README.md#req-studio-default-when-omitted), [repo-config#req:studio-toolbar-mandatory-unless-opted-out](../README.md#req-studio-toolbar-mandatory-unless-opted-out)

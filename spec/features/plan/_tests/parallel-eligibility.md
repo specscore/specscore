@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Parallel eligibility
 
 **Validates:** [plan#req:parallel-eligibility](../README.md#req-parallel-eligibility)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Recursive nesting
 
 **Validates:** [plan#req:recursive-nesting](../README.md#req-recursive-nesting), [plan#req:child-plan-format](../README.md#req-child-plan-format)

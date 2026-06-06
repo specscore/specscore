@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: `idea new` fetches the published template before writing
 
 **Validates:** [cli-template-runtime-fetch#ac:fetches-published-template](../README.md#ac-fetches-published-template-verifies-reqfetch-at-create-time), [cli-template-runtime-fetch#req:fetch-at-create-time](../README.md#req-fetch-at-create-time)

@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/idea-specification
+status: Specified
+---
+
 # Idea: Canonical Grade body-metadata field
 
 **Status:** Specified

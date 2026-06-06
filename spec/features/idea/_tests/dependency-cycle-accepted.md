@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: `depends_on` cycle between ideas is accepted
 
 **Validates:** [idea#ac:related-ideas](../README.md#ac-related-ideas), [idea#req:cycles-allowed](../README.md#req-cycles-allowed)

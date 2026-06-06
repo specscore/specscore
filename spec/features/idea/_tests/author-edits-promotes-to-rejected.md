@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Author-edited `Promotes To` is rejected
 
 **Validates:** [idea#ac:promotion-lifecycle](../README.md#ac-promotion-lifecycle), [idea#req:promotes-to-managed](../README.md#req-promotes-to-managed)

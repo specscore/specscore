@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Decision missing required header fields is rejected
 
 **Validates:** [decision#ac:decision-header](../README.md#ac-decision-header), [decision#req:header-fields](../README.md#req-header-fields)

@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/feature-specification
+status: Approved
+---
+
 # Feature: Grade body-metadata field
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/canonical-grade-metadata-field?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/canonical-grade-metadata-field?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/canonical-grade-metadata-field?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/canonical-grade-metadata-field?op=request-change) |

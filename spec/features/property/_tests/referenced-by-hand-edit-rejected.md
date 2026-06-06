@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Hand-edit inside the managed `## Referenced by` section is rejected
 
 **Validates:** [property#ac:referenced-by-maintenance](../README.md#ac-referenced-by-maintenance), [property#req:referenced-by-managed](../README.md#req-referenced-by-managed)

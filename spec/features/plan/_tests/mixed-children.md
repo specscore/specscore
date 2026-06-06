@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Mixed children
 
 **Validates:** [plan#req:mixed-children](../README.md#req-mixed-children)

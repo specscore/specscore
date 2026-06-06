@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenarios-index-specification
+---
+
 # Grade body-metadata field — Test Scenarios
 
 Scenarios that verify the requirements defined in [Grade body-metadata field](../README.md).

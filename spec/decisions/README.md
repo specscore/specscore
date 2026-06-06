@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/decisions-index-specification
+---
+
 # SpecScore Decisions
 
 Decisions are durable, lintable records of choices made between two or more options — what was chosen, why, what was declined, and what was predicted. See the [Decision feature](../features/decision/README.md) for the full artifact schema, lifecycle, and validation rules.

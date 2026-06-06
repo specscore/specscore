@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Module specs, docs, and code paths resolve relative to `module.path`
 
 **Validates:** [repo-config#req:module-path-resolution](../README.md#req-module-path-resolution)

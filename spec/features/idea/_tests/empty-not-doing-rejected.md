@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Empty `Not Doing` section is rejected
 
 **Validates:** [idea#ac:idea-structure](../README.md#ac-idea-structure), [idea#req:not-doing-non-empty](../README.md#req-not-doing-non-empty)

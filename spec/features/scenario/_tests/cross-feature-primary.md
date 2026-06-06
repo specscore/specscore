@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Cross-feature scenario placed in primary feature
 
 **Validates:** [scenario#req:cross-feature-placement](../README.md#req-cross-feature-placement), [scenario#req:cross-feature-validates](../README.md#req-cross-feature-validates)

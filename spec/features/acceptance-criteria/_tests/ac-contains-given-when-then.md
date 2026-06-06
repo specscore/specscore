@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: AC containing Given/When/Then steps is rejected
 
 **Validates:** [acceptance-criteria#ac:ac-scenario-separation](../README.md#ac-ac-scenario-separation), [acceptance-criteria#req:abstract-not-concrete](../README.md#req-abstract-not-concrete)

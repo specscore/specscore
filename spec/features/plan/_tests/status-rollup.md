@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Status rollup
 
 **Validates:** [plan#req:status-rollup](../README.md#req-status-rollup)

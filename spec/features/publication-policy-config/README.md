@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/feature-specification
+status: Approved
+---
+
 # Feature: Publication Policy Config
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/publication-policy-config?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/publication-policy-config?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/publication-policy-config?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/publication-policy-config?op=request-change) |

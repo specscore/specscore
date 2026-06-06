@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Feature referencing a `Draft` idea is rejected
 
 **Validates:** [idea#ac:promotion-lifecycle](../README.md#ac-promotion-lifecycle), [idea#req:feature-cross-reference](../README.md#req-feature-cross-reference)

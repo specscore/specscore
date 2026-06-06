@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Archived idea outside `archived/` subdirectory is rejected
 
 **Validates:** [idea#ac:archival](../README.md#ac-archival), [idea#req:archived-location](../README.md#req-archived-location)

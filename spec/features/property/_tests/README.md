@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenarios-index-specification
+---
+
 # Scenarios: Property
 
 Test scenarios for the [Property](../README.md) specification.

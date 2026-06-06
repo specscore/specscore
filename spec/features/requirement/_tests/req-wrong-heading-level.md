@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Requirement at wrong heading level is rejected
 
 **Validates:** [requirement#req:heading-level](../README.md#req-heading-level)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenarios-index-specification
+---
+
 # Repo Config — Test Scenarios
 
 Scenarios that verify the requirements defined in [Repo Config](../README.md).

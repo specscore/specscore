@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenarios-index-specification
+---
+
 # Scenarios: CLI Template Runtime-Fetch
 
 Test scenarios for the [CLI Template Runtime-Fetch](../README.md) specification.

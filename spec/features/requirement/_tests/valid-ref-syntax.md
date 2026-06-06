@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Cross-reference uses correct identifier syntax
 
 **Validates:** [requirement#req:ref-syntax](../README.md#req-ref-syntax)

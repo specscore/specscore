@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Feature with children but no Contents section is rejected
 
 **Validates:** [feature#req:contents-when-children](../README.md#req-contents-when-children)

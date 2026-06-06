@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Decision with invalid filename format is rejected
 
 **Validates:** [decision#ac:filename-and-numbering](../README.md#ac-filename-and-numbering), [decision#req:filename-format](../README.md#req-filename-format)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Feature README without Acceptance Criteria section is rejected
 
 **Validates:** [acceptance-criteria#ac:empty-section-handling](../README.md#ac-empty-section-handling), [acceptance-criteria#req:section-required](../README.md#req-section-required)

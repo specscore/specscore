@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: `project.repositories` round-trips on read/write
 
 **Validates:** [repo-config#req:project-repositories](../README.md#req-project-repositories)

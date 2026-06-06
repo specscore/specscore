@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Template sources do not pollute the spec lint tree
 
 **Validates:** [new-artefact-template-gallery#ac:templates-outside-spec-tree](../README.md#ac-templates-outside-spec-tree-verifies-reqtemplate-source-location), [new-artefact-template-gallery#req:template-source-location](../README.md#req-template-source-location)

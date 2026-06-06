@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenarios-index-specification
+---
+
 # Scenarios: Source References
 
 Test scenarios for the [Source References](../README.md) specification.

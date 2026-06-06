@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Editing the body of an Accepted Decision is rejected
 
 **Validates:** [decision#ac:immutability](../README.md#ac-immutability), [decision#req:immutability-once-accepted](../README.md#req-immutability-once-accepted)

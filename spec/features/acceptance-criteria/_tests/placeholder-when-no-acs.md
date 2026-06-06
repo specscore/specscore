@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Empty AC section displays placeholder text
 
 **Validates:** [acceptance-criteria#ac:empty-section-handling](../README.md#ac-empty-section-handling), [acceptance-criteria#req:placeholder-when-empty](../README.md#req-placeholder-when-empty)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Step keywords must be uppercase
 
 **Validates:** [scenario#req:keywords-uppercase](../README.md#req-keywords-uppercase)

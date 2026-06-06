@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/decision-specification
+status: Accepted
+---
+
 # Decision: Recap/Verify Storage, Surfacing, and the Producer/Gate Boundary
 
 **Status:** Accepted

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Reference without comment prefix is not detected
 
 **Validates:** [source-references#req:comment-prefix-required](../README.md#req-comment-prefix-required)

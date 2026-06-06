@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: `specscore idea new` scaffold is lint-clean on exit
 
 **Validates:** [idea#ac:scaffold-behavior](../README.md#ac-scaffold-behavior), [idea#req:scaffold-command](../README.md#req-scaffold-command)

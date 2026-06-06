@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/feature-specification
+status: Approved
+---
+
 # Feature: Artifact Frontmatter Convention
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/artifact-frontmatter-convention?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/artifact-frontmatter-convention?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/artifact-frontmatter-convention?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/artifact-frontmatter-convention?op=request-change) |

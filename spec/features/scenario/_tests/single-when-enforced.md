@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Multiple WHEN steps are rejected
 
 **Validates:** [scenario#req:single-when](../README.md#req-single-when)

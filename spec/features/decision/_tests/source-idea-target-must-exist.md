@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Decision referencing non-existent Source Idea is rejected
 
 **Validates:** [decision#ac:decision-header](../README.md#ac-decision-header), [decision#req:source-idea-optional](../README.md#req-source-idea-optional)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Idea missing a required section is rejected
 
 **Validates:** [idea#ac:idea-structure](../README.md#ac-idea-structure), [idea#req:required-sections](../README.md#req-required-sections)

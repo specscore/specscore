@@ -36,6 +36,7 @@ properties:
         data_type: ref
         checks:
           entity_ref: ../feature/feature.entity.md
+format: https://specscore.md/entity-specification
 ---
 
 # Entity: Idea

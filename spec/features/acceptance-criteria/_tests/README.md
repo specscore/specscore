@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenarios-index-specification
+---
+
 # Scenarios: Acceptance Criteria
 
 Test scenarios for the [Acceptance Criteria](../README.md) specification.

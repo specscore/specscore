@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Hand-authored and scaffolded Decisions produce identical lint results
 
 **Validates:** [decision#ac:scaffold-behavior](../README.md#ac-scaffold-behavior), [decision#req:authoring-agnostic](../README.md#req-authoring-agnostic)

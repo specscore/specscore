@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Decision missing a required section is rejected
 
 **Validates:** [decision#ac:decision-structure](../README.md#ac-decision-structure), [decision#req:required-sections](../README.md#req-required-sections)

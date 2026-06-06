@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Property file outside `spec/features/**` is rejected
 
 **Validates:** [property#ac:location-and-naming](../README.md#ac-location-and-naming), [property#req:property-location](../README.md#req-property-location)

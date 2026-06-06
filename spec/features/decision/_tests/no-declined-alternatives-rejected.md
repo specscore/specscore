@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Decision with empty Declined Alternatives is rejected
 
 **Validates:** [decision#ac:decision-structure](../README.md#ac-decision-structure), [decision#req:declined-alternatives-non-empty](../README.md#req-declined-alternatives-non-empty)

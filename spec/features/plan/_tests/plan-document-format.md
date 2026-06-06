@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Plan document format
 
 **Validates:** [plan#req:plan-title-format](../README.md#req-plan-title-format), [plan#req:plan-required-sections](../README.md#req-plan-required-sections)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Missing host/org/repo context produces an error
 
 **Validates:** [source-references#req:unresolvable-context-error](../README.md#req-unresolvable-context-error)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Host/org/repo inferred from git remote origin
 
 **Validates:** [source-references#req:git-remote-default](../README.md#req-git-remote-default)

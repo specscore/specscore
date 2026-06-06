@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Author-written `Status: Implementing` or `Status: Specified` without matching features is rejected
 
 **Validates:** [idea#ac:promotion-lifecycle](../README.md#ac-promotion-lifecycle), [idea#req:derived-status-not-author-set](../README.md#req-derived-status-not-author-set)

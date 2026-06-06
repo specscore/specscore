@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenarios-index-specification
+---
+
 # Scenarios: Task
 
 Test scenarios for the [Task](../README.md) specification.

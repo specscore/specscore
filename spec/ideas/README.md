@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/ideas-index-specification
+---
+
 # SpecScore Ideas
 
 Ideas are pre-spec, lintable one-pagers that refine a vague concept into something concrete enough to promote into one or more Features. See the [Idea feature](../features/idea/README.md) for the full artifact schema, lifecycle, and validation rules.

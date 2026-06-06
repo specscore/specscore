@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Grade validated against the default A–F scale when no config
 
 **Validates:** [canonical-grade-metadata-field#req:grade-values-default](../README.md#req-grade-values-default), [canonical-grade-metadata-field#req:grade-value-validated](../README.md#req-grade-value-validated)

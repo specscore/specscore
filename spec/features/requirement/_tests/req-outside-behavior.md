@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Requirement outside Behavior section is rejected
 
 **Validates:** [requirement#req:topic-scoped](../README.md#req-topic-scoped)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Duplicate module paths are a hard error
 
 **Validates:** [repo-config#req:module-paths-unique](../README.md#req-module-paths-unique)

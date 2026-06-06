@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Feature back-reference
 
 **Validates:** [plan#req:feature-back-reference](../README.md#req-feature-back-reference)

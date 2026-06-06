@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Duplicate requirement slug within a feature is rejected
 
 **Validates:** [requirement#req:slug-unique](../README.md#req-slug-unique)

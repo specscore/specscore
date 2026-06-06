@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Status transition rules
 
 **Validates:** [plan#req:status-transitions](../README.md#req-status-transitions)
