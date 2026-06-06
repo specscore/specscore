@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Event policies resolve independently
 
 **Validates:** [publication-policy-config#req:event-policy](../README.md#req-event-policy)

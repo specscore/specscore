@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Reference to non-existent resource produces an error
 
 **Validates:** [source-references#req:nonexistent-is-error](../README.md#req-nonexistent-is-error)

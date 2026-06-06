@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Scenario without title prefix is rejected
 
 **Validates:** [scenario#req:title-prefix](../README.md#req-title-prefix)

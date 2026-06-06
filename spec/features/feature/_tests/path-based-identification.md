@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Feature identified by path relative to spec/features
 
 **Validates:** [feature#req:path-identification](../README.md#req-path-identification)

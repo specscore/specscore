@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Idea missing a required header field is rejected
 
 **Validates:** [idea#ac:idea-header](../README.md#ac-idea-header), [idea#req:header-fields](../README.md#req-header-fields)

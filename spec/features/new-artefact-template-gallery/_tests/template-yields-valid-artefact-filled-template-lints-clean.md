@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: A filled-in idea template passes lint
 
 **Validates:** [new-artefact-template-gallery#ac:filled-template-lints-clean](../README.md#ac-filled-template-lints-clean-verifies-reqtemplate-yields-valid-artefact), [new-artefact-template-gallery#req:template-yields-valid-artefact](../README.md#req-template-yields-valid-artefact)

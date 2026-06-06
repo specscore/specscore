@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Command-scoped event policy is available
 
 **Validates:** [publication-policy-config#req:command-policy](../README.md#req-command-policy)

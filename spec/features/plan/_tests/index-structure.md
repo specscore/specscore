@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Index structure
 
 **Validates:** [plans-index#req:required-sections](../../plans-index/README.md#req-required-sections), [plans-index#req:sub-plan-indentation](../../plans-index/README.md#req-sub-plan-indentation), [plans-index#req:contents-columns](../../plans-index/README.md#req-contents-columns), [plans-index#req:recently-closed-present](../../plans-index/README.md#req-recently-closed-present)

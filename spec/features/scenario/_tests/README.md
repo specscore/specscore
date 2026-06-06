@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenarios-index-specification
+---
+
 # Scenario Tests: Scenario
 
 Scenarios validating the [Scenario](../README.md) feature specification.

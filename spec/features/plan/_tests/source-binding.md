@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Plan source binding
 
 **Validates:** [plan#req:source-binding](../README.md#req-source-binding)

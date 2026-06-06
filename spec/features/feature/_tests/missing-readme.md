@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Feature directory without README is rejected
 
 **Validates:** [feature#req:directory-readme](../README.md#req-directory-readme)

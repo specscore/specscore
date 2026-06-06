@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Missing schema-header comment is a hard error
 
 **Validates:** [repo-config#req:schema-header-comment](../README.md#req-schema-header-comment)

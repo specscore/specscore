@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Problem Statement without `How Might We` framing emits a warning
 
 **Validates:** [idea#req:hmw-framing](../README.md#req-hmw-framing)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Schema-header comment must be on line 1
 
 **Validates:** [repo-config#req:schema-header-comment](../README.md#req-schema-header-comment)

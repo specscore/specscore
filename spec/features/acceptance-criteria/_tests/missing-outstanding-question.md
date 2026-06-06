@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Undefined ACs without corresponding Open Question fails validation
 
 **Validates:** [acceptance-criteria#ac:empty-section-handling](../README.md#ac-empty-section-handling), [acceptance-criteria#req:open-question-linkage](../README.md#req-outstanding-question-linkage)

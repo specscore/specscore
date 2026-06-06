@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: `docs_dir_name` defaults to `docs` when omitted
 
 **Validates:** [repo-config#req:docs-dir-name-default](../README.md#req-docs-dir-name-default)

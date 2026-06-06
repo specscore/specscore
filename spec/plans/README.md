@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/plans-index-specification
+---
+
 # SpecScore Plans
 
 Canonical index of all plans in this repository. Each plan lives in its own

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Grade must carry exactly one token
 
 **Validates:** [canonical-grade-metadata-field#req:grade-single-value](../README.md#req-grade-single-value)

@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/idea-specification
+status: Specifying
+---
+
 # Idea: Entity and Property Definitions
 
 **Status:** Specifying

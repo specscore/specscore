@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenarios-index-specification
+---
+
 # Scenarios: Decision
 
 Test scenarios for the [Decision](../README.md) specification.

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: New Decision must have Observed Consequences placeholder
 
 **Validates:** [decision#ac:decision-structure](../README.md#ac-decision-structure), [decision#req:observed-consequences-placeholder](../README.md#req-observed-consequences-placeholder)

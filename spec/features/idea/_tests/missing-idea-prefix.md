@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Idea title without `Idea:` prefix is rejected
 
 **Validates:** [idea#ac:idea-header](../README.md#ac-idea-header), [idea#req:title-format](../README.md#req-title-format)

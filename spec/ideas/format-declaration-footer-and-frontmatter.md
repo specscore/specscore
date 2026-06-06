@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/idea-specification
+status: Approved
+---
+
 # Idea: Format Declaration — Footer + Frontmatter Mirror
 
 **Status:** Approved

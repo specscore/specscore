@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Project publication event policy is valid
 
 **Validates:** [publication-policy-config#req:project-config-location](../README.md#req-project-config-location), [publication-policy-config#req:action-list](../README.md#req-action-list)

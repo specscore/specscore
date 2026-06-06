@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: `Implementing` or `Specified` status without a `Promotes To` target is rejected
 
 **Validates:** [idea#ac:promotion-lifecycle](../README.md#ac-promotion-lifecycle), [idea#req:implementing-requires-promotion](../README.md#req-implementing-requires-promotion), [idea#req:specified-requires-all-stable](../README.md#req-specified-requires-all-stable)

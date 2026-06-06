@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Reference preceded by comment prefix is detected
 
 **Validates:** [source-references#req:comment-prefix-required](../README.md#req-comment-prefix-required)

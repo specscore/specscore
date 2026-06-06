@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Creating a feature that references an idea transitions it to `Implementing` or `Specified`
 
 **Validates:** [idea#ac:promotion-lifecycle](../README.md#ac-promotion-lifecycle), [idea#req:implementing-derivation](../README.md#req-implementing-derivation), [idea#req:specified-derivation](../README.md#req-specified-derivation)

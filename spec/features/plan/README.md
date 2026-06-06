@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/feature-specification
+status: Stable
+---
+
 # Feature: Plan
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/plan?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/plan?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/plan?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/plan?op=request-change) |

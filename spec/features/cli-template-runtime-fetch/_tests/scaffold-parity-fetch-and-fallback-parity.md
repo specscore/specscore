@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Fetch path and fallback path produce byte-identical files
 
 **Validates:** [cli-template-runtime-fetch#ac:fetch-and-fallback-parity](../README.md#ac-fetch-and-fallback-parity-verifies-reqscaffold-parity), [cli-template-runtime-fetch#req:scaffold-parity](../README.md#req-scaffold-parity)

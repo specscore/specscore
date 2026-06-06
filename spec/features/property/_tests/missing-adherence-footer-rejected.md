@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Property file without an adherence footer is rejected
 
 **Validates:** [property#ac:adherence-footer-present](../README.md#ac-adherence-footer-present), [property#req:adherence-footer](../README.md#req-adherence-footer)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Board format validation
 
 **Validates:** [task#req:board-columns](../README.md#req-board-columns), [task#req:board-done-strikethrough](../README.md#req-board-done-strikethrough), [task#req:board-recently-finished](../README.md#req-board-recently-finished), [task#req:board-reflects-current-state](../README.md#req-board-reflects-current-state)

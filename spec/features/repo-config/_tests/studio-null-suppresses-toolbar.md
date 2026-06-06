@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: `studio: null` suppresses the toolbar in artifact documents
 
 **Validates:** [repo-config#req:studio-null-opts-out](../README.md#req-studio-null-opts-out)

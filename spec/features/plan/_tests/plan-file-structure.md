@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Plan file structure
 
 **Validates:** [plan#req:plan-file](../README.md#req-plan-file), [plan#req:plan-slug-format](../README.md#req-plan-slug-format)

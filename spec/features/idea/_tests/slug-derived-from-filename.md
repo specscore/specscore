@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Idea id is derived from the filename
 
 **Validates:** [idea#ac:idea-header](../README.md#ac-idea-header), [idea#req:id-is-slug](../README.md#req-id-is-slug)

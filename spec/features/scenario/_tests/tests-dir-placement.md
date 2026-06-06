@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Scenarios outside _tests are rejected
 
 **Validates:** [scenario#req:tests-dir-only](../README.md#req-tests-dir-only)

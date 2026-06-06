@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Hand-authored idea lints identically to a skill-authored idea
 
 **Validates:** [idea#ac:authoring-independence](../README.md#ac-authoring-independence), [idea#req:authoring-agnostic](../README.md#req-authoring-agnostic)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Unknown `Related Ideas` relationship is rejected
 
 **Validates:** [idea#ac:related-ideas](../README.md#ac-related-ideas), [idea#req:related-ideas-format](../README.md#req-related-ideas-format)

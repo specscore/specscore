@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Decision referencing non-existent affected Feature is rejected
 
 **Validates:** [decision#ac:affected-features](../README.md#ac-affected-features), [decision#req:affected-features-target-exists](../README.md#req-affected-features-target-exists)

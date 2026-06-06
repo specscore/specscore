@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Task verifies feature AC
 
 **Validates:** [plan#req:task-verifies-feature-ac](../README.md#req-task-verifies-feature-ac)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Open Questions with no items uses placeholder text
 
 **Validates:** [feature#ac:empty-state-text](../README.md#ac-empty-state-text), [feature#req:open-questions](../README.md#req-open-questions)

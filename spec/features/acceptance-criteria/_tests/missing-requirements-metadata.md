@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: AC without Requirements metadata is rejected
 
 **Validates:** [acceptance-criteria#ac:well-formed-ac](../README.md#ac-well-formed-ac), [acceptance-criteria#req:requirements-metadata](../README.md#req-requirements-metadata)

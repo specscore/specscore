@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Undefined ACs trigger a mandatory Open Question
 
 **Validates:** [feature#ac:empty-state-text](../README.md#ac-empty-state-text), [feature#req:ac-section](../README.md#req-ac-section)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenarios-index-specification
+---
+
 # Scenarios: Idea
 
 Test scenarios for the [Idea](../README.md) specification.

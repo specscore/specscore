@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Entity file without an adherence footer is rejected
 
 **Validates:** [entity#ac:adherence-footer-present](../README.md#ac-adherence-footer-present), [entity#req:adherence-footer](../README.md#req-adherence-footer)

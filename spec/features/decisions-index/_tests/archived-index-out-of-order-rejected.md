@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Archived decisions index out of chronological order is rejected
 
 **Validates:** [decisions-index#ac:archived-index](../README.md#ac-archived-index), [decisions-index#req:archived-index-chronological](../README.md#req-archived-index-chronological)

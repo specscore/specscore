@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/idea-specification
+status: Specified
+---
+
 # Idea: Studio Toolbar
 
 **Status:** Specified

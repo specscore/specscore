@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Decisions index rows out of numeric order are rejected
 
 **Validates:** [decisions-index#ac:index-table](../README.md#ac-index-table), [decisions-index#req:numeric-ordering](../README.md#req-numeric-ordering)

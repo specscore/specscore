@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenarios-index-specification
+---
+
 # Scenarios: Requirement
 
 Test scenarios for the [Requirement](../README.md) specification.

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Module `code:` paths are the lint scan roots for source references
 
 **Validates:** [repo-config#req:module-code-list](../README.md#req-module-code-list)

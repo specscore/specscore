@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Requirement with multiple independent obligations is flagged
 
 **Validates:** [requirement#req:single-obligation](../README.md#req-single-obligation)

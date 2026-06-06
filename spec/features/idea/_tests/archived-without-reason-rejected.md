@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Archived idea without an `Archive Reason` is rejected
 
 **Validates:** [idea#ac:archival](../README.md#ac-archival), [idea#req:archive-reason](../README.md#req-archive-reason)

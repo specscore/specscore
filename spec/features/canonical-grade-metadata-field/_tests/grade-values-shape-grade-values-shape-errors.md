@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Malformed grade.values is a hard error
 
 **Validates:** [canonical-grade-metadata-field#req:grade-values-shape](../README.md#req-grade-values-shape)

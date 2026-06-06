@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Modifying existing Observed Consequences entries is rejected
 
 **Validates:** [decision#ac:immutability](../README.md#ac-immutability), [decision#req:observed-consequences-append-only](../README.md#req-observed-consequences-append-only)

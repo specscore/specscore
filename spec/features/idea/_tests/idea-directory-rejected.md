@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Idea as a directory is rejected
 
 **Validates:** [idea#req:single-file](../README.md#req-single-file)

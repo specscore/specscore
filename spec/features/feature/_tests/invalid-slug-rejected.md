@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Feature slug with invalid characters is rejected
 
 **Validates:** [feature#req:slug-format](../README.md#req-slug-format)

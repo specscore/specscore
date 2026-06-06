@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/idea-specification
+status: Approved
+---
+
 # Idea: Rename Outstanding Questions to Open Questions
 
 **Status:** Approved

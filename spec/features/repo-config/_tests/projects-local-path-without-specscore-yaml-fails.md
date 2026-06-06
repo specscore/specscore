@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: `projects:` local path without nested `specscore.yaml` is a hard error
 
 **Validates:** [repo-config#req:projects-local-path-must-resolve](../README.md#req-projects-local-path-must-resolve)

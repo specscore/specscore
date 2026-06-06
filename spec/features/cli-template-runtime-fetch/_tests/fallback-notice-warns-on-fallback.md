@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Falling back prints a one-line stderr warning and still succeeds
 
 **Validates:** [cli-template-runtime-fetch#ac:warns-on-fallback](../README.md#ac-warns-on-fallback-verifies-reqfallback-notice), [cli-template-runtime-fetch#req:fallback-notice](../README.md#req-fallback-notice)

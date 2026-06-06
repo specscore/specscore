@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: AC without a prose condition statement is rejected
 
 **Validates:** [acceptance-criteria#ac:well-formed-ac](../README.md#ac-well-formed-ac), [acceptance-criteria#req:condition-statement](../README.md#req-condition-statement)

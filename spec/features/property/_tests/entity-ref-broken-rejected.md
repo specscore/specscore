@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: An entity's `ref:` to a non-existent property file is rejected
 
 **Validates:** [property#ac:entity-references-resolve](../README.md#ac-entity-references-resolve), [property#req:ref-target-exists](../README.md#req-ref-target-exists)

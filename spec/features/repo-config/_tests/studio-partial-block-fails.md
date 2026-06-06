@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Partially-specified `studio:` block is a hard error
 
 **Validates:** [repo-config#req:studio-explicit-values](../README.md#req-studio-explicit-values)

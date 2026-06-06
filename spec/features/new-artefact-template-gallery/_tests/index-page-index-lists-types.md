@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: The /new/ index lists and links every supported template
 
 **Validates:** [new-artefact-template-gallery#ac:index-lists-types](../README.md#ac-index-lists-types-verifies-reqindex-page), [new-artefact-template-gallery#req:index-page](../README.md#req-index-page)

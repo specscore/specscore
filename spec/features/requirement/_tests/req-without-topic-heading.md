@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Requirement directly under Behavior without topic heading is rejected
 
 **Validates:** [requirement#req:topic-scoped](../README.md#req-topic-scoped)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenarios-index-specification
+---
+
 # Scenarios: New-Artefact Template Gallery
 
 Test scenarios for the [New-Artefact Template Gallery](../README.md) specification.

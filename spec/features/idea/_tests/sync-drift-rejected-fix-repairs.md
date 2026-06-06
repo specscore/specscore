@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Strict lint fails on sync drift; `--fix` repairs it
 
 **Validates:** [idea#ac:sync-strictness](../README.md#ac-sync-strictness), [idea#req:sync-lint-strict](../README.md#req-sync-lint-strict)

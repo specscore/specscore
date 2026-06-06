@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: A cycle in the `inherits` graph is rejected
 
 **Validates:** [entity#ac:inheritance-additive-only](../README.md#ac-inheritance-additive-only), [entity#req:inherits-acyclic](../README.md#req-inherits-acyclic)

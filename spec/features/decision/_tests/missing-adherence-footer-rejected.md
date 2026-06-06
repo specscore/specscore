@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Decision without adherence footer is rejected
 
 **Validates:** [decision#ac:adherence-footer](../README.md#ac-adherence-footer), [decision#req:adherence-footer](../README.md#req-adherence-footer)

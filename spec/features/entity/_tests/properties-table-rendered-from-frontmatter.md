@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: The managed `## Properties` table is rendered from frontmatter on every `--fix` run
 
 **Validates:** [entity#ac:managed-sections-rendered](../README.md#ac-managed-sections-rendered), [entity#req:properties-table-managed](../README.md#req-properties-table-managed)

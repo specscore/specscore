@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Archived idea index entries out of chronological order are rejected and auto-fixed
 
 **Validates:** [idea#ac:archival](../README.md#ac-archival), [idea#req:archived-index-chronological](../README.md#req-archived-index-chronological)

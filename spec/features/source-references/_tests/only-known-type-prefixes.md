@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Only known type prefixes are recognized
 
 **Validates:** [source-references#req:type-prefix-set](../README.md#req-type-prefix-set)

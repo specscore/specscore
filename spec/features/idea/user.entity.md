@@ -27,6 +27,7 @@ properties:
     description: When this owner first appeared as the author of a SpecScore artifact.
     checks:
       required: false
+format: https://specscore.md/entity-specification
 ---
 
 # Entity: User

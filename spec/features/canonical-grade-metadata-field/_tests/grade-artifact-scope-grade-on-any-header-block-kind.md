@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Grade is validated on any artifact kind with a header block
 
 **Validates:** [canonical-grade-metadata-field#req:grade-artifact-scope](../README.md#req-grade-artifact-scope)

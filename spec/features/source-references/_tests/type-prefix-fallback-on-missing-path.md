@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Type prefix expansion falls back when expanded path does not exist
 
 **Validates:** [source-references#req:resolution-order](../README.md#req-resolution-order)

@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/feature-specification
+status: Approved
+---
+
 # Feature: Decisions Index
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decisions-index?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decisions-index?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decisions-index?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/decisions-index?op=request-change) |

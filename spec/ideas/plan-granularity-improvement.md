@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/idea-specification
+status: Approved
+---
+
 # Idea: Plan Granularity Improvement — Per-Task Dependencies and Model Tier
 
 **Status:** Approved

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: `Supersedes` target that is not archived is rejected
 
 **Validates:** [idea#ac:archival](../README.md#ac-archival), [idea#req:supersedes-target-archived](../README.md#req-supersedes-target-archived)

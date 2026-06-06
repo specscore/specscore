@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/idea-specification
+status: Draft
+---
+
 # Idea: Idea Types and Lifecycle
 
 **Status:** Draft

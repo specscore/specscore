@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/plan-specification
+status: approved
+---
+
 # Plan: Decision and Decisions-Index CLI Implementation
 
 **Status:** approved

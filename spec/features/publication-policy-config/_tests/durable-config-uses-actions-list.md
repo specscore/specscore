@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Shorthand publication choices persist as canonical actions
 
 **Validates:** [publication-policy-config#req:action-list](../README.md#req-action-list), [publication-policy-config#req:shorthand-normalization](../README.md#req-shorthand-normalization)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: A gradeable artifact with no Grade line lints clean
 
 **Validates:** [canonical-grade-metadata-field#req:grade-field-optional](../README.md#req-grade-field-optional)

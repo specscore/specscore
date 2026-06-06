@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Publication block is delegated to publication policy config
 
 **Validates:** [repo-config#req:publication-block-optional](../README.md#req-publication-block-optional), [repo-config#req:publication-schema-delegated](../README.md#req-publication-schema-delegated)

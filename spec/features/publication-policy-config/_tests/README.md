@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenarios-index-specification
+---
+
 # Publication Policy Config - Test Scenarios
 
 Scenarios that verify the requirements defined in [Publication Policy Config](../README.md).

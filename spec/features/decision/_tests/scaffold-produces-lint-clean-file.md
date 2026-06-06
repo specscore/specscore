@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: `specscore decision new` produces a lint-clean file
 
 **Validates:** [decision#ac:scaffold-behavior](../README.md#ac-scaffold-behavior), [decision#req:scaffold-command](../README.md#req-scaffold-command)

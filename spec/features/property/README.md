@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/feature-specification
+status: Approved
+---
+
 # Feature: Property
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/property?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/property?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/property?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/property?op=request-change) |

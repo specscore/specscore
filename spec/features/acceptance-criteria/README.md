@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/feature-specification
+status: Stable
+---
+
 # Feature: Acceptance Criteria
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/acceptance-criteria?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/acceptance-criteria?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/acceptance-criteria?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/acceptance-criteria?op=request-change) |

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Unknown prefix falls back to repo-root-relative path
 
 **Validates:** [source-references#req:resolution-order](../README.md#req-resolution-order)

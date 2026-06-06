@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Unknown fields at any level are preserved
 
 **Validates:** [repo-config#req:unknown-fields-preserved](../README.md#req-unknown-fields-preserved)

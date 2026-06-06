@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Decisions index without adherence footer is rejected
 
 **Validates:** [decisions-index#ac:adherence-footer](../README.md#ac-adherence-footer), [decisions-index#req:adherence-footer](../README.md#req-adherence-footer)
