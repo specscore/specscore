@@ -17,6 +17,7 @@ Archived Ideas are indexed separately at [archived/README.md](archived/README.md
 | [canonical-grade-metadata-field](canonical-grade-metadata-field.md) | Specified | 2026-05-29 | alex | canonical-grade-metadata-field |
 | [capability-and-platform-implementations](capability-and-platform-implementations.md) | Implementing | 2026-06-03 | alexander.trakhimenok | capability-and-platform-implementations |
 | [configurable-ideas-path](configurable-ideas-path.md) | Specified | 2026-06-07 | alex | configurable-ideas-path |
+| [cross-repo-plan-composition](cross-repo-plan-composition.md) | Approved | 2026-06-07 | alexander.trakhimenok | — |
 | [decision-and-decisions-index](decision-and-decisions-index.md) | Specified | 2026-04-20 | alexander.trakhimenok@gmail.com | decision, decisions-index |
 | [entity-and-property-definitions](entity-and-property-definitions.md) | Specifying | 2026-05-18 | alexander.trakhimenok | document-types-registry, entity, property |
 | [format-declaration-footer-and-frontmatter](format-declaration-footer-and-frontmatter.md) | Approved | 2026-06-02 | alex | — |
