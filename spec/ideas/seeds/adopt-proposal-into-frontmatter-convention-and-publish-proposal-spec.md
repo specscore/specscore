@@ -1,12 +1,7 @@
 ---
 type: sidekick-seed
-slug: adopt-proposal-into-frontmatter-convention-and-publish-proposal-spec
-captured_at: 2026-06-05T21:08:42Z
 captured_by: specstudio:verify
-captured_during: spec/features/new-artefact-template-gallery/README.md
-trigger: explicit
 status: queued
-synchestra_task: null
 ---
 # Adopt `proposal` into the frontmatter convention's status-concept-by-type, and publish a /proposal-specification page
 

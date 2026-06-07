@@ -1,12 +1,7 @@
 ---
 type: sidekick-seed
-slug: implement-artifact-frontmatter-convention-in-specscore-cli
-captured_at: 2026-06-05T21:08:42Z
 captured_by: specstudio:verify
-captured_during: spec/features/new-artefact-template-gallery/README.md
-trigger: explicit
 status: queued
-synchestra_task: null
 ---
 # Land the artifact-frontmatter-convention CLI impl — it already exists on a branch; push, review, merge, migrate
 

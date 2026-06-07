@@ -1,12 +1,7 @@
 ---
 type: sidekick-seed
-slug: add-optional-input-output-sections-to-specscore-feature
-captured_at: 2026-05-22T20:35:38Z
 captured_by: specstudio:ideate
-captured_during: spec/ideas/retrofit-skill.md
-trigger: explicit
 status: queued
-synchestra_task: null
 ---
 # Add optional Input/Output sections to SpecScore Feature schema — prose or YAML — to force explicit thinking about Feature contracts and give retrofit an interface-mapping target
 

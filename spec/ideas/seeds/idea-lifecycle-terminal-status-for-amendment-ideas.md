@@ -1,12 +1,7 @@
 ---
 type: sidekick-seed
-slug: idea-lifecycle-terminal-status-for-amendment-ideas
-captured_at: 2026-06-05T12:00:00Z
 captured_by: user
-captured_during: null
-trigger: explicit
 status: queued
-synchestra_task: null
 ---
 
 # Idea lifecycle has no terminal status for amendment-only Ideas (those that revise an existing Feature instead of promoting to a new one)

@@ -1,12 +1,7 @@
 ---
 type: sidekick-seed
-slug: remove-synchestra-references-from-specscore-code-repos
-captured_at: 2026-06-01T20:16:07Z
 captured_by: user
-captured_during: null
-trigger: explicit
 status: queued
-synchestra_task: null
 ---
 # Remove all "Synchestra" references from the SpecScore code repos (specscore + specscore-cli)
 

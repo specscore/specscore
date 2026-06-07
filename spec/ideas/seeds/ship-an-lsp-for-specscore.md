@@ -1,12 +1,7 @@
 ---
 type: sidekick-seed
-slug: ship-an-lsp-for-specscore
-captured_at: 2026-05-20T17:35:35Z
 captured_by: user
-captured_during: null
-trigger: explicit
 status: queued
-synchestra_task: null
 ---
 # Ship an LSP for SpecScore
 
