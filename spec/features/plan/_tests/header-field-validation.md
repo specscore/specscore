@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Header field validation
 
 **Validates:** [plan#req:required-header-fields](../README.md#req-required-header-fields), [plan#req:source-binding](../README.md#req-source-binding)

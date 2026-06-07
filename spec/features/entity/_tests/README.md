@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenarios-index-specification
+---
+
 # Scenarios: Entity
 
 Test scenarios for the [Entity](../README.md) specification.

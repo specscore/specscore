@@ -9,6 +9,7 @@ checks:
   pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
   trim: true
   lowercase: true
+format: https://specscore.md/property-specification
 ---
 
 # Property: email

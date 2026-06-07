@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Branch deny policy wins over allow policy
 
 **Validates:** [publication-policy-config#req:branch-policy](../README.md#req-branch-policy), [publication-policy-config#req:safety-constraints-monotonic](../README.md#req-safety-constraints-monotonic)

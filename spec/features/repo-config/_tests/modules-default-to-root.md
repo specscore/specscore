@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Omitted `modules:` behaves as a single implicit-root module
 
 **Validates:** [repo-config#req:modules-default](../README.md#req-modules-default)

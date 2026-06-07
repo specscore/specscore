@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Scenario correctly references an AC in its Validates field
 
 **Validates:** [acceptance-criteria#req:scenario-validates-ac](../README.md#req-scenario-validates-ac)

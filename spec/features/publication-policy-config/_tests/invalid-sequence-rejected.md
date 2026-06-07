@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Invalid publication action sequence is rejected
 
 **Validates:** [publication-policy-config#req:action-list](../README.md#req-action-list)

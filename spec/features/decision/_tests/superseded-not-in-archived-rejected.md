@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Superseded Decision not in archived directory is rejected
 
 **Validates:** [decision#ac:lifecycle](../README.md#ac-lifecycle), [decision#req:archived-location](../README.md#req-archived-location)

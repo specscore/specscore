@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Dependency resolution
 
 **Validates:** [task#req:dependency-sibling](../README.md#req-dependency-sibling), [task#req:dependency-cousin](../README.md#req-dependency-cousin), [task#req:dependency-cross-project](../README.md#req-dependency-cross-project), [task#req:dependency-blocks-execution](../README.md#req-dependency-blocks-execution)

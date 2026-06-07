@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: User publication config uses the project policy shape
 
 **Validates:** [publication-policy-config#req:user-config-location](../README.md#req-user-config-location)

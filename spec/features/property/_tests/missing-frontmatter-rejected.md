@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Property file without a YAML frontmatter block is rejected
 
 **Validates:** [property#ac:frontmatter-shape](../README.md#ac-frontmatter-shape), [property#req:frontmatter-required](../README.md#req-frontmatter-required)

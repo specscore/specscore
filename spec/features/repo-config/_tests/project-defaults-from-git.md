@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Omitted `project:` block infers from git remote and working directory
 
 **Validates:** [repo-config#req:project-block-optional](../README.md#req-project-block-optional), [repo-config#req:project-title-default](../README.md#req-project-title-default)

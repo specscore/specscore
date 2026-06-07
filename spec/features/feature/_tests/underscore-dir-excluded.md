@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Underscore-prefixed directory excluded from feature index
 
 **Validates:** [feature#req:underscore-reserved](../README.md#req-underscore-reserved)

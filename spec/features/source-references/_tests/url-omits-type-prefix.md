@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Expanded URL contains resolved path without type prefix
 
 **Validates:** [source-references#req:url-structure](../README.md#req-url-structure)

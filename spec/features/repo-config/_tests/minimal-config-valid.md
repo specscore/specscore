@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Minimal config (header only) is valid
 
 **Validates:** [repo-config#req:file-name](../README.md#req-file-name), [repo-config#req:empty-config-valid](../README.md#req-empty-config-valid)

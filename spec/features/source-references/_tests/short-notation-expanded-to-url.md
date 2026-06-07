@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Short notation is auto-expanded to canonical URL before commit
 
 **Validates:** [source-references#req:canonical-url-form](../README.md#req-canonical-url-form), [source-references#req:auto-expansion](../README.md#req-auto-expansion)

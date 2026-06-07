@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Two property items with the same `name` in one entity are rejected
 
 **Validates:** [entity#ac:frontmatter-shape](../README.md#ac-frontmatter-shape), [entity#req:properties-list-shape](../README.md#req-properties-list-shape)

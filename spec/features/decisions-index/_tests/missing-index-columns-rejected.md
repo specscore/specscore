@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Decisions index missing required columns is rejected
 
 **Validates:** [decisions-index#ac:index-table](../README.md#ac-index-table), [decisions-index#req:index-columns](../README.md#req-index-columns)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Unknown publication fields round-trip unchanged
 
 **Validates:** [publication-policy-config#req:unknown-fields-preserved](../README.md#req-unknown-fields-preserved)

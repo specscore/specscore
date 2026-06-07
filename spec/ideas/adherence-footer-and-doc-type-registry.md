@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/idea-specification
+status: Specifying
+---
+
 # Idea: Adherence Footer and Document Types Registry
 
 **Status:** Specifying

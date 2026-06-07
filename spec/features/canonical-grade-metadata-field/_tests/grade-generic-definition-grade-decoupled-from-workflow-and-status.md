@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Grade is decoupled from reviewer-gate workflow and from Status
 
 **Validates:** [canonical-grade-metadata-field#req:grade-generic-definition](../README.md#req-grade-generic-definition), [canonical-grade-metadata-field#req:grade-no-status-coupling](../README.md#req-grade-no-status-coupling)

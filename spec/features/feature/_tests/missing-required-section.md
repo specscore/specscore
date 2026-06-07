@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: README missing a required section is rejected
 
 **Validates:** [feature#ac:readme-structure](../README.md#ac-readme-structure), [feature#req:required-sections](../README.md#req-required-sections)

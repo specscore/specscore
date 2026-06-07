@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Idea slug with invalid characters is rejected
 
 **Validates:** [idea#req:slug-format](../README.md#req-slug-format)

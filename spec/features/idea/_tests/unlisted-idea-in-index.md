@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Idea missing from index is a validation error
 
 **Validates:** [idea#req:index-completeness](../README.md#req-index-completeness)

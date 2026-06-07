@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Grade must be the last header-block line, after Status
 
 **Validates:** [canonical-grade-metadata-field#req:grade-placement](../README.md#req-grade-placement)

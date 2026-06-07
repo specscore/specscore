@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/idea-specification
+status: Implemented
+---
+
 # Idea: New Artefact Templates (published at /new/)
 
 **Status:** Implemented

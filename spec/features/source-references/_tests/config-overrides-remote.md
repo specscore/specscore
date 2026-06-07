@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Project config overrides git remote inference
 
 **Validates:** [source-references#req:config-override](../README.md#req-config-override)

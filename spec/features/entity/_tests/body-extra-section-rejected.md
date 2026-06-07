@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Entity file with an extra body section beyond the allowed three is rejected
 
 **Validates:** [entity#ac:body-shape](../README.md#ac-body-shape), [entity#req:required-sections](../README.md#req-required-sections)

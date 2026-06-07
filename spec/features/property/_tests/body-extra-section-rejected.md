@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Property file with an extra body section beyond the allowed three is rejected
 
 **Validates:** [property#ac:body-shape](../README.md#ac-body-shape), [property#req:required-sections](../README.md#req-required-sections)

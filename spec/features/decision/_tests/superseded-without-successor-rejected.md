@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Superseded Decision without successor reference is rejected
 
 **Validates:** [decision#ac:lifecycle](../README.md#ac-lifecycle), [decision#req:superseded-requires-successor](../README.md#req-superseded-requires-successor)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Task status transitions
 
 **Validates:** [task#req:valid-task-statuses](../README.md#req-valid-task-statuses), [task#req:status-transitions](../README.md#req-status-transitions), [task#req:terminal-states](../README.md#req-terminal-states)

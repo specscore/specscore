@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/idea-specification
+status: Draft
+---
+
 # Idea: Plan Lint Accepts Hyphenated AC Slugs in `## Deferred AC Coverage`
 
 **Status:** Draft

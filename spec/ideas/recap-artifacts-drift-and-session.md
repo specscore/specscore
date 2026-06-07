@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/idea-specification
+status: Specifying
+---
+
 # Idea: Recap Artifacts — Drift Recap and Session Recap
 
 **Status:** Specifying

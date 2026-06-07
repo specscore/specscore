@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Unrecognized idea status value is rejected
 
 **Validates:** [idea#ac:idea-header](../README.md#ac-idea-header), [idea#req:status-values](../README.md#req-status-values)

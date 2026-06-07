@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Cross-repo reference requires @host/org/repo suffix
 
 **Validates:** [source-references#req:cross-repo-suffix](../README.md#req-cross-repo-suffix)

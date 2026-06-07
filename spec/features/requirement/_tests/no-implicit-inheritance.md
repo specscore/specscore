@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Sub-feature must explicitly reference parent requirement
 
 **Validates:** [requirement#req:no-inheritance](../README.md#req-no-inheritance)

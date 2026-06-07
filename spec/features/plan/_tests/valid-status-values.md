@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Valid status values
 
 **Validates:** [plan#req:valid-statuses](../README.md#req-valid-statuses), [plan#req:execution-status-derived](../README.md#req-execution-status-derived)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Key Assumptions table without a Must-be-true row is rejected
 
 **Validates:** [idea#ac:idea-structure](../README.md#ac-idea-structure), [idea#req:must-be-true-present](../README.md#req-must-be-true-present)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Decision with invalid status value is rejected
 
 **Validates:** [decision#ac:decision-header](../README.md#ac-decision-header), [decision#req:status-values](../README.md#req-status-values)

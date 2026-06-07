@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: `projects:` URL entries are preserved without dereferencing
 
 **Validates:** [repo-config#req:projects-list](../README.md#req-projects-list)

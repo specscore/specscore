@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Decisions index with wrong list-section heading is rejected
 
 **Validates:** [decisions-index#ac:list-section-heading](../README.md#ac-list-section-heading), [decisions-index#req:list-section-heading](../README.md#req-list-section-heading)

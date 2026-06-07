@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Valid scenario file accepted
 
 **Validates:** [scenario#req:title-prefix](../README.md#req-title-prefix), [scenario#req:steps-required](../README.md#req-steps-required), [scenario#req:filename-slug](../README.md#req-filename-slug)

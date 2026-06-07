@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: `Related Ideas` entry with a non-existent slug is rejected
 
 **Validates:** [idea#ac:related-ideas](../README.md#ac-related-ideas), [idea#req:related-ideas-target-exists](../README.md#req-related-ideas-target-exists)

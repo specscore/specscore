@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Decision without `Decision:` title prefix is rejected
 
 **Validates:** [decision#ac:decision-header](../README.md#ac-decision-header), [decision#req:title-format](../README.md#req-title-format)

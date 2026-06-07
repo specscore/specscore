@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Nested explicit module paths are a hard error
 
 **Validates:** [repo-config#req:module-paths-non-nested](../README.md#req-module-paths-non-nested)

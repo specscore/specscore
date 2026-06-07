@@ -52,6 +52,7 @@ properties:
     checks:
       required: false
       min: 0
+format: https://specscore.md/entity-specification
 ---
 
 # Entity: Plan

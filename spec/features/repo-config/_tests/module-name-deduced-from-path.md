@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Module name deduced from `path` basename, or `default` at root
 
 **Validates:** [repo-config#req:module-name-deduction](../README.md#req-module-name-deduction)

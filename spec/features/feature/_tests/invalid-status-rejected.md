@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Unrecognized status value is rejected
 
 **Validates:** [feature#ac:readme-structure](../README.md#ac-readme-structure), [feature#req:status-field](../README.md#req-status-field)

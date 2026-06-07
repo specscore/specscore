@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Decision backfilling a gap in the number sequence is rejected
 
 **Validates:** [decision#ac:filename-and-numbering](../README.md#ac-filename-and-numbering), [decision#req:number-assignment](../README.md#req-number-assignment)

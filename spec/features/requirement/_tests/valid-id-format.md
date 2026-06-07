@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Requirement is addressable by canonical ID
 
 **Validates:** [requirement#req:id-format](../README.md#req-id-format)

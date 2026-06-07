@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Explicit `project.host`/`org`/`repo` override git remote inference
 
 **Validates:** [repo-config#req:source-reference-overrides](../README.md#req-source-reference-overrides)

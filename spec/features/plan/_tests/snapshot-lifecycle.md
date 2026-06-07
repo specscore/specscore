@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Snapshot lifecycle
 
 **Validates:** [plan#req:snapshot-table-format](../README.md#req-snapshot-table-format), [plan#req:snapshot-actions](../README.md#req-snapshot-actions), [plan#req:snapshot-git-hash](../README.md#req-snapshot-git-hash)

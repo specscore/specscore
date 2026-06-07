@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/feature-specification
+status: Under Review
+---
+
 # Feature: Drift Recap
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/drift-recap?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/drift-recap?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/drift-recap?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/drift-recap?op=request-change) |

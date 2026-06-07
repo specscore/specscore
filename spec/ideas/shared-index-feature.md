@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/idea-specification
+status: Specifying
+---
+
 # Idea: Shared Index Feature
 
 **Status:** Specifying

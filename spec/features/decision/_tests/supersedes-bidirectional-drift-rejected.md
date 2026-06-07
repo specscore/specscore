@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Supersedes/Superseded By bidirectional drift is rejected
 
 **Validates:** [decision#ac:lifecycle](../README.md#ac-lifecycle), [decision#req:supersedes-bidirectional](../README.md#req-supersedes-bidirectional)

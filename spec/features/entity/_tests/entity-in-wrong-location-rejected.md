@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Entity file outside `spec/features/**` is rejected
 
 **Validates:** [entity#ac:location-and-naming](../README.md#ac-location-and-naming), [entity#req:entity-location](../README.md#req-entity-location)

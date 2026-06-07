@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Validates field uses correct link format
 
 **Validates:** [scenario#req:validates-format](../README.md#req-validates-format), [scenario#req:validates-optional](../README.md#req-validates-optional)

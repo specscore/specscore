@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Flow files live in flows subdirectory
 
 **Validates:** [scenario#req:flow-location](../README.md#req-flow-location), [scenario#req:flow-format](../README.md#req-flow-format)

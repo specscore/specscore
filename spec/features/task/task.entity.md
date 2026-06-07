@@ -58,6 +58,7 @@ properties:
     description: Optional exact, opaque model identifier; when present it takes precedence over `model` for this Task. Opaque to SpecScore — consumers interpret it.
     checks:
       required: false
+format: https://specscore.md/entity-specification
 ---
 
 # Entity: Task

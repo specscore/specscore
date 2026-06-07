@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Superseded Decision listed in active index is rejected
 
 **Validates:** [decisions-index#ac:index-table](../README.md#ac-index-table), [decisions-index#req:status-excludes-archived](../README.md#req-status-excludes-archived)

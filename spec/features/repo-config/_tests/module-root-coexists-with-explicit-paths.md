@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Implicit-root module coexists with explicit-path modules
 
 **Validates:** [repo-config#req:module-paths-non-nested](../README.md#req-module-paths-non-nested)

@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Plan step AC references a feature AC
 
 **Validates:** [acceptance-criteria#req:plan-ac-references](../README.md#req-plan-ac-references)

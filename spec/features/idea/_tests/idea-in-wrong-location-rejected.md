@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Idea outside `spec/ideas/` is rejected
 
 **Validates:** [idea#req:idea-location](../README.md#req-idea-location)

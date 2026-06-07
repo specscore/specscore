@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Type prefix expands to correct repo path
 
 **Validates:** [source-references#req:type-prefix-expansion](../README.md#req-type-prefix-expansion)

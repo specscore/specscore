@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Entity file without a YAML frontmatter block is rejected
 
 **Validates:** [entity#ac:frontmatter-shape](../README.md#ac-frontmatter-shape), [entity#req:frontmatter-required](../README.md#req-frontmatter-required)

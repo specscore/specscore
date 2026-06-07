@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenarios-index-specification
+---
+
 # Scenarios: Plan
 
 Test scenarios validating the plan feature requirements.

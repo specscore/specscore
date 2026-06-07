@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: `projects:` local-path entry resolves to a nested SpecScore project
 
 **Validates:** [repo-config#req:projects-list](../README.md#req-projects-list), [repo-config#req:projects-local-path-must-resolve](../README.md#req-projects-local-path-must-resolve)

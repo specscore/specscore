@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: AC wrapping a single requirement without added value is flagged
 
 **Validates:** [acceptance-criteria#req:no-duplicate-conditions](../README.md#req-no-duplicate-conditions)

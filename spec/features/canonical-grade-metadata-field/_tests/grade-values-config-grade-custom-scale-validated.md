@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/scenario-specification
+---
+
 # Scenario: Grade validated against a repo-configured value set
 
 **Validates:** [canonical-grade-metadata-field#req:grade-values-config](../README.md#req-grade-values-config), [canonical-grade-metadata-field#req:grade-value-validated](../README.md#req-grade-value-validated)
