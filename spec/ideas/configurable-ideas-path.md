@@ -1,14 +1,14 @@
 ---
 format: https://specscore.md/idea-specification
-status: Approved
+status: Specified
 ---
 
 # Idea: Configurable Ideas Path (Module-Level Path Overrides)
 
-**Status:** Approved
+**Status:** Specified
 **Date:** 2026-06-07
 **Owner:** alex
-**Promotes To:** —
+**Promotes To:** configurable-ideas-path
 **Supersedes:** —
 **Related Ideas:** —
 

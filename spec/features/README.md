@@ -41,6 +41,7 @@ Core features of the SpecScore specification framework. This table is the canoni
 | [capability-and-platform-implementations](capability-and-platform-implementations/README.md) | Implementing | — | https://specscore.md/feature-specification | — | — | Defines the Capability (platform-agnostic feature) and Implementation (per-platform realization) roles, the Implements reference, and the author-declared Implementation Matrix that makes cross-surface feature drift visible. |
 | [new-artefact-template-gallery](new-artefact-template-gallery/README.md) | Stable | — | https://specscore.md/feature-specification | — | — | Publishes the canonical new-artefact templates as raw Markdown files on specscore.md — one per artefact type at /new/<type>.md, with a browsable index at /new/. |
 | [cli-template-runtime-fetch](cli-template-runtime-fetch/README.md) | Stable | — | https://specscore.md/feature-specification | — | — | The specscore '… new' scaffolders fetch the canonical artefact template from the published gallery (specscore.md/new/<type>.md) at create-time, fill the known fields, and write the file — falling back to an embedded copy with a stderr warning when the site is unreachable. |
+| [configurable-ideas-path](configurable-ideas-path/README.md) | Approved | — | https://specscore.md/feature-specification | — | — | Resolve each module's ideas directory through repo-config's per-module path_overrides.ideas_path (default spec/ideas) via a single resolution contract that every reader uses, instead of a hardcoded spec/ideas literal. |
 
 ## Feature Hierarchy
 
