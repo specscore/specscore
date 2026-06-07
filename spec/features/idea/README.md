@@ -81,7 +81,7 @@ Unlike Features and Plans, Ideas are **files, not directories**. An Idea has no 
 
 #### REQ: idea-location
 
-Every feature-request Idea artifact MUST reside at `spec/ideas/<slug>.md` (active) or `spec/ideas/archived/<slug>.md` (archived). Every change-request Idea MUST reside at `spec/features/<feature-slug>/proposals/<slug>.md` where `<feature-slug>` matches the value of the Idea's `**Targets:**` field. Ideas at any other location are rejected by validation.
+Every feature-request Idea artifact MUST reside at `<ideas-dir>/<slug>.md` (active) or `<ideas-dir>/archived/<slug>.md` (archived), where `<ideas-dir>` is the module's resolved ideas directory — `spec/ideas` by default, or the value configured per [Configurable Ideas Path](../configurable-ideas-path/README.md). Every change-request Idea MUST reside at `spec/features/<feature-slug>/proposals/<slug>.md` where `<feature-slug>` matches the value of the Idea's `**Targets:**` field. Ideas at any other location are rejected by validation.
 
 #### REQ: slug-format
 
@@ -340,7 +340,7 @@ A feature-request Idea with `Status: Specifying`, `Status: Specified`, `Status: 
 
 #### REQ: archived-location
 
-A feature-request Idea with `Status: Archived` MUST reside at `spec/ideas/archived/<slug>.md`. An Idea file at the top level of `spec/ideas/` with `Status: Archived` is a validation error, as is an Archived file outside that directory. Moving the file is part of the archival transition. For change-request Ideas, archival leaves the file at `spec/features/<feature>/proposals/<slug>.md` — it is NOT moved to `spec/ideas/archived/`.
+A feature-request Idea with `Status: Archived` MUST reside at `<ideas-dir>/archived/<slug>.md`, where `<ideas-dir>` is the module's resolved ideas directory (default `spec/ideas`; see [Configurable Ideas Path](../configurable-ideas-path/README.md)). An Idea file at the top level of `<ideas-dir>` with `Status: Archived` is a validation error, as is an Archived file outside that directory. Moving the file is part of the archival transition. For change-request Ideas, archival leaves the file at `spec/features/<feature>/proposals/<slug>.md` — it is NOT moved to `spec/ideas/archived/`.
 
 #### REQ: archive-reason
 
