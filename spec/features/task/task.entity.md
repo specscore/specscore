@@ -58,6 +58,12 @@ properties:
     description: Optional exact, opaque model identifier; when present it takes precedence over `model` for this Task. Opaque to SpecScore — consumers interpret it.
     checks:
       required: false
+  - name: sub_plan
+    data_type: string
+    description: When set, this Task delegates its work to a separate sub-Plan rather than acting as a leaf — the master-side expression of master/sub-plan composition. The value is a Plan reference — a same-repo plan slug or a cross-repo `<repo-slug>:<plan-slug>` soft reference. Absent for ordinary leaf tasks. The referenced sub-plan declares this tree's master as its `parent`. Lint enforcement of the delegation ref is future work; `parent` (on the sub-plan) is the canonical, lint-validated link in the MVP.
+    checks:
+      required: false
+      max_length: 256
 format: https://specscore.md/entity-specification
 ---
 
@@ -85,6 +91,7 @@ Plan's `features` list.
 | `depends_on` | array | no | Other Tasks that must reach `complete` before this Task may transition from `queued` to `in_progress`. Required on tasks within non-terminal plans (the value is `none` when there are no dependencies); lint enforces. Grandfathered (optional) for tasks in terminal-status plans once those statuses exist. |
 | `model` | string | no | Capability tier the Task runs on when executed in isolation — one of small, medium, large, inherit. `inherit` runs on the ambient/session model. Required on tasks within non-terminal plans; lint enforces. Grandfathered for terminal-status plans once those statuses exist. |
 | `model_override` | string | no | Optional exact, opaque model identifier; when present it takes precedence over `model` for this Task. Opaque to SpecScore — consumers interpret it. |
+| `sub_plan` | string | no | When set, this Task delegates its work to a separate sub-Plan rather than acting as a leaf — the master-side expression of master/sub-plan composition. The value is a Plan reference — a same-repo plan slug or a cross-repo `<repo-slug>:<plan-slug>` soft reference. Absent for ordinary leaf tasks. The referenced sub-plan declares this tree's master as its `parent`. Lint enforcement of the delegation ref is future work; `parent` (on the sub-plan) is the canonical, lint-validated link in the MVP. |
 <!-- end-managed -->
 
 ## Referenced by
