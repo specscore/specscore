@@ -135,7 +135,7 @@ When a `projects:` entry is a local path, that path MUST resolve to a directory 
 
 ### Directory names
 
-Top-level overrides for the spec and docs directory names. These apply uniformly across all modules; per-module overrides are not supported in v1.
+Top-level overrides for the spec and docs directory names. These apply uniformly across all modules. Per-module, per-artifact-kind overrides are provided separately by `path_overrides` (see [Path overrides](#path-overrides) below), which currently covers only the ideas directory.
 
 | Field | Default | Description |
 |-------|---------|-------------|
@@ -149,6 +149,25 @@ When `specs_dir_name` is omitted, tools MUST treat the value as `specs`. The sam
 #### REQ: docs-dir-name-default
 
 When `docs_dir_name` is omitted, tools MUST treat the value as `docs`. The same name applies to every module.
+
+### Path overrides
+
+Per-module overrides for where individual artifact kinds live, declared under a module's optional `path_overrides` mapping. Unlike `specs_dir_name`/`docs_dir_name` (repo-wide, name-only), `path_overrides` is per-module and takes a full module-relative path, so a kind can be relocated out of the spec tree entirely. In v1 the only interpreted key is `ideas_path`; the resolution behavior is owned by the [Configurable Ideas Path](../configurable-ideas-path/README.md) Feature.
+
+```yaml
+modules:
+  - path: ""
+    path_overrides:
+      ideas_path: ideas        # ideas live at ./ideas instead of ./spec/ideas
+```
+
+#### REQ: path-overrides-optional
+
+A module's `path_overrides` is an OPTIONAL mapping. When absent, every artifact kind uses its default location. Keys other than `ideas_path` MUST round-trip on read/write unchanged (per `unknown-fields-preserved`) but are not interpreted in v1.
+
+#### REQ: ideas-path-field
+
+`path_overrides.ideas_path`, when present, MUST be a module-relative path string giving the directory for that module's Ideas; when absent the default is `spec/ideas`. An absolute path (leading `/`) or a value escaping the module root via `../` is a hard error naming the offending module. The path's resolution semantics are defined by [Configurable Ideas Path](../configurable-ideas-path/README.md).
 
 ### Modules
 
@@ -454,6 +473,14 @@ Unknown fields at any level survive read/write without warnings. Orchestrators c
 **Given** a project `specscore.yaml` with a `recaps:` block setting `enabled: true`, and a second one additionally setting `recaps.repo` while the layered-config Feature has not shipped
 **When** the config loader runs
 **Then** `recaps.enabled` is accepted (storage always targets the hub repo, which may be configured to equal the current code repo), and `recaps.repo` (likewise `recaps.user` / `journal.repo`) is rejected with a clear error pointing at the layered-config dependency; unknown fields under the blocks round-trip unchanged.
+
+### AC: path-overrides-loaded
+
+**Requirements:** repo-config#req:path-overrides-optional, repo-config#req:ideas-path-field
+
+**Given** a `specscore.yaml` with one module declaring `path_overrides.ideas_path: ideas` plus an unknown override key, one module with no `path_overrides`, and one module declaring `path_overrides.ideas_path: /ideas` (absolute)
+**When** the config loader runs
+**Then** the first module's `ideas_path` is read as `ideas` and its unknown key round-trips unchanged, the second module defaults to `spec/ideas`, and the third fails with a hard error naming that module and the absolute-path violation.
 
 ## Open Questions
 
