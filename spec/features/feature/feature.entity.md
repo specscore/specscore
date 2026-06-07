@@ -42,7 +42,7 @@ properties:
       max_length: 1000
   - name: source_ideas
     data_type: array
-    description: Ideas this Feature promotes. Many-to-many.
+    description: Ideas this Feature promotes. Many-to-many. Required-with-explicit-`none` — every Feature MUST carry a `**Source Ideas:**` line; the explicit-empty value is `—` (or `none`) for a Feature authored without an upstream Idea, so "specified without ideating" is a deliberate, lint-checkable choice rather than an implicit omission. Mirrors the `Task.depends_on` convention; presence is enforced by lint (`feature-source-ideas-required`), not by this entity check, and `lint --fix` backfills the explicit-empty sentinel.
     checks:
       required: false
       items:
@@ -89,7 +89,7 @@ co-location convention from the
 | `title` | string | yes | Human-readable title rendered after the `Feature:` prefix. |
 | `status` | string | yes | Spec maturity. |
 | `summary` | string | yes | One-to-three-sentence purpose statement. |
-| `source_ideas` | array | no | Ideas this Feature promotes. Many-to-many. |
+| `source_ideas` | array | no | Ideas this Feature promotes. Many-to-many. Required-with-explicit-`none` — every Feature MUST carry a `**Source Ideas:**` line; the explicit-empty value is `—` (or `none`) for a Feature authored without an upstream Idea, so "specified without ideating" is a deliberate, lint-checkable choice rather than an implicit omission. Mirrors the `Task.depends_on` convention; presence is enforced by lint (`feature-source-ideas-required`), not by this entity check, and `lint --fix` backfills the explicit-empty sentinel. |
 | `dependencies` | array | no | Other Features this Feature depends on. |
 <!-- end-managed -->
 
