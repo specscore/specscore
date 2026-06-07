@@ -1,12 +1,7 @@
 ---
 type: sidekick-seed
-slug: define-recap-artifacts-drift-recap-and-session-recap-storage
-captured_at: 2026-06-01T13:46:52Z
 captured_by: user
-captured_during: null
-trigger: explicit
 status: queued
-synchestra_task: null
 ---
 
 # Define recap artifacts in SpecScore — a code↔spec "drift recap" and a "session recap" type, with storage conventions

@@ -1,12 +1,7 @@
 ---
 type: sidekick-seed
-slug: promote-the-grade-feature-meta-field-into-the-canonical
-captured_at: 2026-05-29T09:16:00Z
 captured_by: user
-captured_during: null
-trigger: explicit
 status: queued
-synchestra_task: null
 ---
 # Promote the Grade Feature meta field into the canonical SpecScore schema
 

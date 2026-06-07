@@ -1,12 +1,7 @@
 ---
 type: sidekick-seed
-slug: allow-plans-to-attach-to-ideas-not-only-features
-captured_at: 2026-05-28T16:54:31Z
 captured_by: user
-captured_during: null
-trigger: explicit
 status: queued
-synchestra_task: null
 ---
 
 # Allow Plans to attach to Ideas, not only Features
