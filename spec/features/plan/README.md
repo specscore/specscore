@@ -92,7 +92,7 @@ Plan slugs MUST be lowercase, hyphen-separated, and URL-safe. Underscores, space
 
 #### REQ: source-binding
 
-Every plan MUST declare exactly one source in its header: either a `**Source Feature:**` line naming the Feature it decomposes, or a `**Source:** idea:{slug}` line naming the Idea it plans directly. A plan that declares neither, or both, is invalid.
+Every plan MUST declare exactly one source line in its header, in one of three forms: a `**Source Feature:**` line naming the Feature it decomposes (a Feature-sourced plan), a `**Source:** idea:{slug}` line naming the Idea it plans directly (an Idea-sourced plan), or a `**Source:** none` line (a source-less plan, not tied to any Feature or Idea). A plan that declares more than one source, or whose source line is absent or carries an unrecognized value, is invalid.
 
 ### Plan document structure
 
@@ -164,7 +164,7 @@ Every plan document MUST include the following sections: title (`# Plan: X`), he
 |---|---|---|
 | **Status** | Yes | Current plan status (see [Plan statuses](#plan-statuses)) |
 | **Source Feature** | One of | Slug of the Feature this plan decomposes (feature-sourced plans) |
-| **Source** | One of | `idea:{slug}` naming the Idea this plan decomposes (idea-sourced plans) |
+| **Source** | One of | `idea:{slug}` naming the Idea this plan decomposes (idea-sourced plans), or `none` for a source-less plan |
 | **Date** | Yes | Date the plan was created |
 | **Owner** | Yes | Who wrote the plan |
 | **Supersedes** | Yes | `—`, or the slug of an older plan this one wholesale-replaces |
@@ -174,7 +174,7 @@ Every plan document MUST include the following sections: title (`# Plan: X`), he
 
 #### REQ: required-header-fields
 
-Every plan MUST include these header fields: Status, the source line (exactly one of `Source Feature` or `Source: idea:{slug}`, per [source-binding](#req-source-binding)), Date, Owner, and Supersedes. Effort and Impact are OPTIONAL.
+Every plan MUST include these header fields: Status, the source line (exactly one of `Source Feature`, `Source: idea:{slug}`, or `Source: none`, per [source-binding](#req-source-binding)), Date, Owner, and Supersedes. Effort and Impact are OPTIONAL.
 
 #### REQ: proposal-forward-reference
 
@@ -656,7 +656,7 @@ Every plan document MUST end with an adherence footer per the [Adherence Footer 
 
 **Requirements:** plan#req:plan-title-format, plan#req:plan-required-sections, plan#req:required-header-fields, plan#req:source-binding
 
-A plan document has a correctly formatted title (`# Plan: {Title}`), all required sections present (`Summary`, `Approach`, `Tasks`, `Open Questions`), all required header fields populated (Status, the source line, Date, Owner, Supersedes), and exactly one source declared (`Source Feature` or `Source: idea:{slug}`). A document that violates any of these is rejected by validation.
+A plan document has a correctly formatted title (`# Plan: {Title}`), all required sections present (`Summary`, `Approach`, `Tasks`, `Open Questions`), all required header fields populated (Status, the source line, Date, Owner, Supersedes), and exactly one source declared (`Source Feature`, `Source: idea:{slug}`, or `Source: none`). A document that violates any of these is rejected by validation.
 
 ### AC: plan-location-validity
 
