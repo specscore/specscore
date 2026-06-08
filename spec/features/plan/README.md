@@ -167,6 +167,7 @@ Every plan document MUST include the following sections: title (`# Plan: X`), he
 | **Date** | Yes | Date the plan was created |
 | **Owner** | Yes | Who wrote the plan |
 | **Supersedes** | Yes | `—`, or the slug of an older plan this one wholesale-replaces |
+| **Parent** | No | The master plan this plan is a sub-plan of (master/sub-plan composition). A same-repo plan slug or a cross-repo `<repo-slug>:<plan-slug>` soft reference. Absent for root plans. See [Cross-repo plan composition](#cross-repo-plan-composition). Validated by lint rule `P-005`. |
 | **Effort** | No | `S` \| `M` \| `L` \| `XL` -- see [Optional ROI metadata](#optional-roi-metadata) |
 | **Impact** | No | `low` \| `medium` \| `high` \| `critical` -- see [Optional ROI metadata](#optional-roi-metadata) |
 
@@ -315,6 +316,25 @@ Tasks and sub-plans can coexist at the same level within a plan. There is no req
 #### REQ: mixed-children
 
 A plan MAY contain both leaf tasks and sub-plans as direct children at the same level. No restructuring is required to separate tasks from sub-plans.
+
+### Cross-repo plan composition
+
+The directory form above nests sub-plans physically inside one repo. **Cross-repo plan composition** is a distinct, lint-enforced form that composes **flat single-file plans** — including plans in *different repositories* — by reference rather than by directory nesting. It is the mechanism behind a single Idea fanning out into coordinated work across repos.
+
+A **master plan** is an ordinary single-file plan whose work is carried out by **sub-plans**. Each sub-plan is itself a flat single-file plan that names its master through the **Parent** header field (`**Parent:** <plan-ref>`). The reference is either a same-repo plan slug or a cross-repo `<repo-slug>:<plan-slug>` soft reference. On the master side, a task MAY delegate to a sub-plan via the Task entity's `sub_plan` property — the master-side expression of the same edge.
+
+```text
+specscore/spec/plans/cross-repo-master.md        <- master plan (root: no Parent)
+specscore-cli/spec/plans/sub-cli-bootstrap.md    <- **Parent:** specscore:cross-repo-master
+specscore/spec/plans/sub-entity-model.md         <- **Parent:** cross-repo-master   (same-repo)
+specstudio-skills/spec/plans/sub-skills.md       <- **Parent:** specscore:cross-repo-master
+```
+
+The canonical, navigable link is the child's **Parent** ref (child → master); composition is single-parent (a tree) in the MVP. Lint owns reference integrity per rule `P-005`: same-repo parents are resolved and checked for acyclicity; cross-repo `<repo-slug>:<plan-slug>` parents are validated **syntactically only** — the linter never scans sibling repositories, so a cross-repo parent is a best-effort, unresolved reference (like an external link). Cross-repo back-link maintenance and execution ordering across the tree are out of scope for this model and belong to the consuming skills.
+
+#### REQ: cross-repo-parent-ref
+
+A plan MAY declare a single `**Parent:** <plan-ref>` header field naming the master plan it is a sub-plan of. The value is a same-repo plan slug or a cross-repo `<repo-slug>:<plan-slug>` reference. A plan with no `**Parent:**` field is a root plan. Composition is single-parent in the MVP: a plan MUST NOT declare more than one parent. Reference validity (same-repo resolution and acyclicity; cross-repo syntactic-only checks) is enforced by `specscore spec lint` rule `P-005`, not by this document.
 
 ### Status rollup
 
