@@ -119,6 +119,15 @@ body {
   background: var(--cream-2);
 }
 
+.header-right a.gh-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  margin-left: 0.5rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* Hide dark mode toggle — no dark variant */
 #theme-toggle { display: none; }
 
