@@ -25,4 +25,12 @@ node_modules/
 public/*
 !public/*.webp
 !public/*.svg
+!public/*.jpg
+!public/*.png
 !public/README.md
+# blog/ subdirectory — static image assets for blog posts
+!public/blog/
+public/blog/*
+!public/blog/*.jpg
+!public/blog/*.png
+!public/blog/*.webp
