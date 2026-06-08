@@ -126,6 +126,7 @@ Task 1 is the bootstrap and gates everything. Tasks 2 and 3 parallelise after it
 | Date | Git Hash | Action | Comment |
 |---|---|---|---|
 | 2026-06-07 | — | drafted | Initial master plan: 6 tasks coordinating five cross-repo sub-plans, CLI-bootstrap first. Authored directory-form because today's P-002 rejects idea-sourced single-file plans. |
+| 2026-06-08 | — | implemented | All five Features implemented in code. specscore-cli: `plan new --parent`, lint `P-005`, `feature-source-ideas-required` + 27-file migration (100% coverage). specscore: `parent`/`sub_plan`/`source_ideas` entity model. specstudio-skills: `plan` + `implement` skills carry master/sub-plan authoring and the cross-repo coordinator. Dogfood verified: `P-005` validates the real cross-repo `**Parent:**` sub-plan. |
 
 ---
 *This document follows the https://specscore.md/plan-specification*
