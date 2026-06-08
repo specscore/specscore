@@ -11,12 +11,16 @@ import HeroGitHubLink from './HeroGitHubLink.astro';
   <div class="hero__inner">
     <div class="hero__copy">
       <h1 id="hero-title" class="hero__headline">
-        在 AI 构建出错误的东西之前,<br />先发现规格说明中的问题。
+        规格说明中的每一处歧义，<br />都是你的 AI 代理烧掉的 token。
       </h1>
+      <p class="hero__stakes">
+        然后是开发途中的一个澄清问题。然后是上线之后的一次修复。
+        然后是你一遍遍重新解释的上下文。
+      </p>
       <p class="hero__sub">
-        一种用于规格说明的开放文件格式——就像 JSON 之于数据。
-        并配有 CLI，供你的 AI 代理调用以查询、编辑和检查它们——
-        就像 <code>jq</code> 之于 JSON。
+        SpecScore 是一种用于规格说明的开放、可 lint 的文件格式——
+        就像 JSON 之于数据。并配有 CLI，供你的 AI 代理调用以查询和
+        编辑它们——就像 <code>jq</code> 之于 JSON。
       </p>
       <HeroGitHubLink repo="specscore/specscore" label="在 GitHub 上开源" />
       <div class="hero__cta">
