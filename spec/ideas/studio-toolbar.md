@@ -81,7 +81,7 @@ Artifact line rewrites (every feature README's old `> [View in SpecStudio](url) 
 
 - **New Features this would create:** Likely a single new Feature (working title "studio-toolbar") that defines the toolbar shape, the `?op=<verb>` URL grammar, and the new `studio-toolbar` lint rule.
 - **Existing Features affected:** `repo-config` — top-level block rename `viewer:` → `studio:`, default `studio.url` flips to `https://specscore.studio/`, REQs `viewer-default-when-omitted` / `viewer-explicit-values` / `viewer-null-opts-out` / `viewer-link-mandatory-unless-opted-out` all renamed and rescoped to the toolbar; `feature` — the README rendering convention currently producing the single "View in" line; `source-references` — URL-scheme alignment, both should use the same `/app/p/{host}/{org}/{repo}/...` grammar.
-- **Dependencies:** specstudio web app must accept the new path-style URLs with `?op=<verb>` before the Feature ships; existing `specscore.yaml` files and existing artifact lines must be migrated via a single CLI codegen pass in the same release.
+- **Dependencies:** SpecScore Studio `/app/` must accept the new path-style URLs with `?op=<verb>` before the Feature ships; existing `specscore.yaml` files and existing artifact lines must be migrated via a single CLI codegen pass in the same release.
 
 ## Open Questions
 
