@@ -1,6 +1,6 @@
 ---
 // Section 8 — Built on SpecScore.
-// Alphabetical order (DALgo, inGitDB, SpecScore Studio).
+// Alphabetical order (Codegrapher, DALgo, inGitDB, SpecScore Studio).
 // Visual weight intentionally quieter than Section 5.
 // No icons, no boxes — just top-hairline cards.
 ---
@@ -10,6 +10,15 @@
     <h2 id="ecosystem-title" class="ecosystem__title">Built on SpecScore.</h2>
 
     <ul class="ecosystem__grid">
+      <li class="eco-card">
+        <h3 class="eco-card__title">Codegrapher</h3>
+        <p class="eco-card__body">
+          Code-graph engine for fast code exploration and bidirectional spec↔code linkage.
+        </p>
+        <a class="eco-card__link" href="https://codegrapher.dev/" target="_blank">
+          codegrapher.dev <span aria-hidden="true">→</span>
+        </a>
+      </li>
       <li class="eco-card">
         <h3 class="eco-card__title">DALgo</h3>
         <p class="eco-card__body">
@@ -54,7 +63,7 @@
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-4);
   }
   .eco-card {

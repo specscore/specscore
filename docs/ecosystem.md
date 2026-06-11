@@ -40,6 +40,16 @@ Authors specifications through guided AI workflows in your editor.
 
 [specstudio-skills](https://github.com/specscore/specstudio-skills)
 
+## Codegrapher — The Map
+
+Indexes code into a queryable graph for fast exploration and spec↔code linkage.
+
+- Builds a knowledge graph of symbols and their relationships across the codebase
+- Lets AI agents navigate and trace code quickly instead of grepping
+- Links SpecScore specifications to the source that implements them, and back
+
+[codegrapher.dev](https://codegrapher.dev/)
+
 ## How They Fit Together
 
 ```
