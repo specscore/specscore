@@ -100,6 +100,12 @@ See [docs/ecosystem.md](docs/ecosystem.md) for the full architecture.
 
 ---
 
+## Code exploration & spec ↔ code linkage
+
+We use [Codegrapher](https://codegrapher.dev/) for efficient code exploration and bidirectional linkage between specifications and source code. Codegrapher indexes the codebase into a queryable knowledge graph of symbols and their relationships, letting AI agents navigate and trace code quickly instead of grepping — and connect SpecScore specs to the code that implements them, and back.
+
+---
+
 ## Used by
 
 Projects and tools built on SpecScore:
