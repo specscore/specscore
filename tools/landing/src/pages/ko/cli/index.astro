@@ -7,6 +7,7 @@ import SiteFooterKo from '../../../components/SiteFooterKo.astro';
 import LintExample from '../../../components/LintExample.astro';
 import HeroGitHubLink from '../../../components/HeroGitHubLink.astro';
 import QsTabsScript from '../../../components/QsTabsScript.astro';
+import InstallFromSourceKo from '../../../components/InstallFromSourceKo.astro';
 ---
 
 <BaseLayout
@@ -54,6 +55,7 @@ import QsTabsScript from '../../../components/QsTabsScript.astro';
           <button type="button" role="tab" id="qs-tab-unix" aria-controls="qs-panel-unix" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="unix">Linux / macOS</button>
           <button type="button" role="tab" id="qs-tab-win" aria-controls="qs-panel-win" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="win">Windows</button>
           <button type="button" role="tab" id="qs-tab-brew" aria-controls="qs-panel-brew" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="brew">Homebrew</button>
+          <button type="button" role="tab" id="qs-tab-src" aria-controls="qs-panel-src" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="src">From source</button>
         </div>
 
         <div id="qs-panel-unix" role="tabpanel" aria-labelledby="qs-tab-unix" class="qs-panel is-active" data-panel="unix">
@@ -64,6 +66,9 @@ import QsTabsScript from '../../../components/QsTabsScript.astro';
         </div>
         <div id="qs-panel-brew" role="tabpanel" aria-labelledby="qs-tab-brew" class="qs-panel" data-panel="brew" hidden>
 <pre class="terminal"><span class="prompt">$</span> brew install specscore/tap/specscore</pre>
+        </div>
+        <div id="qs-panel-src" role="tabpanel" aria-labelledby="qs-tab-src" class="qs-panel" data-panel="src" hidden>
+          <InstallFromSourceKo />
         </div>
 
         <p class="qs-more">

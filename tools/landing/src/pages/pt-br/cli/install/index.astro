@@ -4,6 +4,7 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
 import SiteFooterPtBr from '../../../../components/SiteFooterPtBr.astro';
+import InstallFromSourcePtBr from '../../../../components/InstallFromSourcePtBr.astro';
 ---
 
 <BaseLayout
@@ -135,16 +136,7 @@ import SiteFooterPtBr from '../../../../components/SiteFooterPtBr.astro';
     <section class="section" id="source" aria-labelledby="source-title">
       <div class="section-inner section-inner--prose">
         <h2 id="source-title" class="section-title">Compilar a partir do codigo-fonte</h2>
-        <p class="method-desc">
-          Requer <a class="xref" href="https://go.dev/">Go</a> 1.26 ou superior.
-          Instala o ultimo build de desenvolvimento do <code>main</code> —
-          pode incluir mudancas que ainda nao estao em um release taggeado.
-        </p>
-<pre class="terminal"><span class="prompt">$</span> go install github.com/specscore/specscore-cli/cmd/specscore@main</pre>
-        <p class="method-desc">
-          Para fixar uma versao especifica, troque <code>@main</code> por uma tag como
-          <code>@v0.4.2</code>, ou use <code>@latest</code> para o release taggeado mais recente.
-        </p>
+        <InstallFromSourcePtBr />
       </div>
     </section>
 

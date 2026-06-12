@@ -4,6 +4,7 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
 import SiteFooterRu from '../../../../components/SiteFooterRu.astro';
+import InstallFromSourceRu from '../../../../components/InstallFromSourceRu.astro';
 ---
 
 <BaseLayout
@@ -135,17 +136,7 @@ import SiteFooterRu from '../../../../components/SiteFooterRu.astro';
     <section class="section" id="source" aria-labelledby="source-title">
       <div class="section-inner section-inner--prose">
         <h2 id="source-title" class="section-title">Сборка из исходников</h2>
-        <p class="method-desc">
-          Требуется <a class="xref" href="https://go.dev/">Go</a> 1.26 или новее.
-          Устанавливает последнюю dev-сборку из ветки <code>main</code> —
-          может содержать изменения, ещё не вошедшие в тегированный релиз.
-        </p>
-<pre class="terminal"><span class="prompt">$</span> go install github.com/specscore/specscore-cli/cmd/specscore@main</pre>
-        <p class="method-desc">
-          Чтобы зафиксировать конкретную версию, замените <code>@main</code> на тег,
-          например <code>@v0.4.2</code>, или используйте <code>@latest</code> для последнего
-          тегированного релиза.
-        </p>
+        <InstallFromSourceRu />
       </div>
     </section>
 

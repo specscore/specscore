@@ -1,0 +1,32 @@
+---
+// "Build from source" content block — no title, no section wrapper.
+// Used by /cli/install/ (inside its <section> + <h2>) and
+// by the /cli/ quick-install tabs (as the "From source" panel).
+---
+<p class="method-desc">
+  Requires <a class="xref" href="https://go.dev/">Go</a> 1.26 or newer.
+  This installs the latest development build from <code>main</code> —
+  may include changes not yet in a tagged release.
+</p>
+<pre class="terminal"><span class="prompt">$</span> go install github.com/specscore/specscore-cli/cmd/specscore@main</pre>
+<p class="method-desc">
+  To pin a specific version, swap <code>@main</code> for a tag like
+  <code>@v0.4.2</code>, or use <code>@latest</code> for the most recent
+  tagged release.
+</p>
+
+<style>
+  .method-desc {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .method-desc code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+</style>

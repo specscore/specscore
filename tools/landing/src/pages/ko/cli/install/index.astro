@@ -4,6 +4,7 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../../components/SiteHeader.astro';
 import SiteFooterKo from '../../../../components/SiteFooterKo.astro';
+import InstallFromSourceKo from '../../../../components/InstallFromSourceKo.astro';
 ---
 
 <BaseLayout
@@ -138,17 +139,7 @@ import SiteFooterKo from '../../../../components/SiteFooterKo.astro';
     <section class="section" id="source" aria-labelledby="source-title">
       <div class="section-inner section-inner--prose">
         <h2 id="source-title" class="section-title">소스에서 빌드</h2>
-        <p class="method-desc">
-          <a class="xref" href="https://go.dev/">Go</a> 1.26 이상이 필요합니다.
-          <code>main</code> 브랜치의 최신 dev 빌드를 설치합니다 —
-          태그가 지정된 릴리스에 아직 포함되지 않은 변경사항이 있을 수 있습니다.
-        </p>
-<pre class="terminal"><span class="prompt">$</span> go install github.com/specscore/specscore-cli/cmd/specscore@main</pre>
-        <p class="method-desc">
-          특정 버전을 고정하려면 <code>@main</code>을 태그로 교체하세요.
-          예: <code>@v0.4.2</code>. 또는 최신 태그 릴리스를 위해
-          <code>@latest</code>를 사용하세요.
-        </p>
+        <InstallFromSourceKo />
       </div>
     </section>
 

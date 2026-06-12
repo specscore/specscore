@@ -5,6 +5,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooter from '../../../components/SiteFooter.astro';
+import InstallFromSource from '../../../components/InstallFromSource.astro';
 ---
 
 <BaseLayout
@@ -139,17 +140,7 @@ import SiteFooter from '../../../components/SiteFooter.astro';
     <section class="section" id="source" aria-labelledby="source-title">
       <div class="section-inner section-inner--prose">
         <h2 id="source-title" class="section-title">Build from source</h2>
-        <p class="method-desc">
-          Requires <a class="xref" href="https://go.dev/">Go</a> 1.26 or newer.
-          This installs the latest development build from <code>main</code> —
-          may include changes not yet in a tagged release.
-        </p>
-<pre class="terminal"><span class="prompt">$</span> go install github.com/specscore/specscore-cli/cmd/specscore@main</pre>
-        <p class="method-desc">
-          To pin a specific version, swap <code>@main</code> for a tag like
-          <code>@v0.4.2</code>, or use <code>@latest</code> for the most recent
-          tagged release.
-        </p>
+        <InstallFromSource />
       </div>
     </section>
 

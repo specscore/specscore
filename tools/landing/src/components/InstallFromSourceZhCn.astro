@@ -1,0 +1,29 @@
+---
+// "从源码构建" — 不含标题和 section 包装。
+---
+<p class="method-desc">
+  需要 <a class="xref" href="https://go.dev/">Go</a> 1.26 或更高版本。
+  安装 <code>main</code> 分支的最新开发构建——可能包含尚未纳入
+  正式发布标签的更改。
+</p>
+<pre class="terminal"><span class="prompt">$</span> go install github.com/specscore/specscore-cli/cmd/specscore@main</pre>
+<p class="method-desc">
+  要锁定特定版本，将 <code>@main</code> 替换为标签（如 <code>@v0.4.2</code>），
+  或使用 <code>@latest</code> 获取最新的正式发布。
+</p>
+
+<style>
+  .method-desc {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .method-desc code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+</style>

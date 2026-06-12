@@ -1,0 +1,30 @@
+---
+// "Сборка из исходников" — без заголовка и секционного обёртки.
+---
+<p class="method-desc">
+  Требуется <a class="xref" href="https://go.dev/">Go</a> 1.26 или новее.
+  Устанавливает последнюю dev-сборку из ветки <code>main</code> —
+  может содержать изменения, ещё не вошедшие в тегированный релиз.
+</p>
+<pre class="terminal"><span class="prompt">$</span> go install github.com/specscore/specscore-cli/cmd/specscore@main</pre>
+<p class="method-desc">
+  Чтобы зафиксировать конкретную версию, замените <code>@main</code> на тег,
+  например <code>@v0.4.2</code>, или используйте <code>@latest</code> для последнего
+  тегированного релиза.
+</p>
+
+<style>
+  .method-desc {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .method-desc code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+</style>
