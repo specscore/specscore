@@ -21,23 +21,163 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
           Como o SpecScore se compara.
         </h1>
         <p class="hero__sub">
-          Desenvolvimento orientado a especificações é um espaço em crescimento. Essas comparações são factuais, lado a lado, e honestas sobre onde cada ferramenta é mais forte.
+          Desenvolvimento orientado a especificações é um espaço em crescimento.
+          Estas comparações são factuais, lado a lado, e honestas sobre onde
+          cada ferramenta é mais forte.
         </p>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="comparisons-title">
+    <section class="section minis-section" aria-labelledby="comparisons-title">
       <div class="section-inner">
         <h2 id="comparisons-title" class="sr-only">Comparações</h2>
 
-        <div class="compare-grid">
-          <a href="/pt-br/vs/openspec/" class="compare-card">
-            <h3 class="compare-card__name">SpecScore vs OpenSpec</h3>
-            <p class="compare-card__desc">
-              Ambos escrevem especificações em Markdown. O OpenSpec as organiza — o SpecScore faz lint, pontua e rastreia. A comparação completa: formato, CLI, ciclo de vida, rastreabilidade, suporte a agentes.
-            </p>
-            <span class="compare-card__cta">Leia a comparação →</span>
+        <p class="minis__lead">
+          <span class="minis__brand">SpecScore</span>
+          <span class="minis__vs">vs</span>
+        </p>
+
+        <div class="minis">
+          <a href="/vs/plain-markdown/" class="mini">
+            <span class="mini__name">Plain Markdown</span>
+            <span class="mini__line">O padrão. O SpecScore é o que o seu Markdown vira ao crescer.</span>
           </a>
+          <a href="/pt-br/vs/openspec/" class="mini">
+            <span class="mini__name">OpenSpec</span>
+            <span class="mini__line">Uma boa rampa de entrada. O SpecScore são as proteções laterais.</span>
+          </a>
+          <a href="/vs/spec-kit/" class="mini">
+            <span class="mini__name">Spec Kit</span>
+            <span class="mini__line">O Spec Kit é o fluxo de trabalho. O SpecScore é o artefato.</span>
+          </a>
+          <a href="/vs/datarim/" class="mini">
+            <span class="mini__name">Datarim</span>
+            <span class="mini__line">O Datarim roda o pipeline. O SpecScore é o que ele deixa para trás.</span>
+          </a>
+          <a href="/vs/codespeak/" class="mini">
+            <span class="mini__name">CodeSpeak</span>
+            <span class="mini__line">O CodeSpeak aposta num compilador. O SpecScore aposta num formato.</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Cross-comparison matrix ── */}
+    <section class="section table-section" aria-labelledby="matrix-title">
+      <div class="section-inner">
+        <h2 id="matrix-title" class="section-title">SpecScore num relance.</h2>
+        <p class="section-note">
+          Uma visão de alto nível entre as ferramentas mais próximas. Cada uma
+          tem pontos fortes reais — siga uma comparação acima para a versão
+          honesta e detalhada.
+        </p>
+
+        <div class="table-wrap">
+          <table class="matrix-table" aria-label="SpecScore vs Plain Markdown, OpenSpec, Spec Kit, Datarim e CodeSpeak">
+            <thead>
+              <tr>
+                <th scope="col">Capacidade</th>
+                <th scope="col" class="matrix-table__own">SpecScore</th>
+                <th scope="col"><a href="/vs/plain-markdown/" class="matrix-table__link">Plain Markdown</a></th>
+                <th scope="col"><a href="/pt-br/vs/openspec/" class="matrix-table__link">OpenSpec</a></th>
+                <th scope="col"><a href="/vs/spec-kit/" class="matrix-table__link">Spec Kit</a></th>
+                <th scope="col"><a href="/vs/datarim/" class="matrix-table__link">Datarim</a></th>
+                <th scope="col"><a href="/vs/codespeak/" class="matrix-table__link">CodeSpeak</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Papel principal</td>
+                <td class="matrix-table__own">Formato de especificação com lint + CLI</td>
+                <td>Documentos livres (o padrão)</td>
+                <td>Framework de organização de especificações</td>
+                <td>Fluxo de trabalho / metodologia</td>
+                <td>Pacote de fluxo de trabalho para Claude Code</td>
+                <td>Compilador LLM (especificação → código)</td>
+              </tr>
+              <tr>
+                <td>Formato da especificação</td>
+                <td class="matrix-table__own">Markdown + YAML (estruturado)</td>
+                <td>Markdown livre</td>
+                <td>Markdown</td>
+                <td>Markdown livre</td>
+                <td>Markdown (no formato do fluxo de trabalho)</td>
+                <td>Inglês simples</td>
+              </tr>
+              <tr>
+                <td>Você mantém o seu código</td>
+                <td class="matrix-table__own"><span class="yes">Sim</span></td>
+                <td><span class="yes">Sim</span></td>
+                <td><span class="yes">Sim</span></td>
+                <td><span class="yes">Sim</span></td>
+                <td><span class="yes">Sim</span></td>
+                <td><span class="no">O código é gerado</span></td>
+              </tr>
+              <tr>
+                <td>Open source / gratuito</td>
+                <td class="matrix-table__own"><span class="yes">Sim</span> (CC BY / MIT)</td>
+                <td><span class="yes">Gratuito</span></td>
+                <td><span class="yes">Sim</span> (MIT)</td>
+                <td><span class="yes">Sim</span> (MIT)</td>
+                <td><span class="yes">Sim</span> (MIT)</td>
+                <td><span class="no">Sistema proprietário</span></td>
+              </tr>
+              <tr>
+                <td>Lint do conteúdo da especificação</td>
+                <td class="matrix-table__own"><span class="yes">Sim</span></td>
+                <td><span class="no">Não</span></td>
+                <td>Apenas estrutura</td>
+                <td><span class="no">Não</span></td>
+                <td><span class="no">Não</span></td>
+                <td>Não documentado</td>
+              </tr>
+              <tr>
+                <td>IDs de requisitos / ACs</td>
+                <td class="matrix-table__own"><span class="yes">Sim</span></td>
+                <td><span class="no">Não</span></td>
+                <td><span class="no">Não</span></td>
+                <td><span class="no">Não</span></td>
+                <td><span class="no">Não</span></td>
+                <td><span class="no">Não</span></td>
+              </tr>
+              <tr>
+                <td>Ciclo de vida imposto</td>
+                <td class="matrix-table__own"><span class="yes">Sim</span></td>
+                <td><span class="no">Não</span></td>
+                <td><span class="no">Não</span></td>
+                <td><span class="no">Não</span></td>
+                <td><span class="no">Não</span></td>
+                <td><span class="no">Não</span></td>
+              </tr>
+              <tr>
+                <td>Rastreabilidade código-para-especificação</td>
+                <td class="matrix-table__own"><span class="yes">Sim</span></td>
+                <td><span class="no">Não</span></td>
+                <td><span class="no">Não</span></td>
+                <td><span class="no">Não</span></td>
+                <td><span class="no">Não</span></td>
+                <td>Via regeneração</td>
+              </tr>
+              <tr>
+                <td>Dependência de runtime</td>
+                <td class="matrix-table__own">Nenhuma (binário Go)</td>
+                <td>Nenhuma</td>
+                <td>Node.js</td>
+                <td>Python</td>
+                <td>Claude Code</td>
+                <td>Compilador do fornecedor</td>
+              </tr>
+              <tr>
+                <td>Funciona com qualquer agente, ou nenhum</td>
+                <td class="matrix-table__own"><span class="yes">Sim</span></td>
+                <td>Leia cada arquivo</td>
+                <td>Muitos agentes</td>
+                <td>Muitos agentes</td>
+                <td>Claude Code</td>
+                <td>Através do CodeSpeak</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -49,18 +189,197 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
 </BaseLayout>
 
 <style>
-  .hero { padding: var(--space-6) var(--space-3) var(--space-5); background: var(--cream); }
-  .hero__inner { max-width: var(--max-prose); margin: 0 auto; animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms; }
-  .hero__headline { font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-3); }
-  .hero__sub { font-size: 1.125rem; color: var(--mid-ink); line-height: 1.55; }
-  @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-  .compare-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
-  .compare-card { display: block; background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-4); transition: border-color 160ms ease, box-shadow 160ms ease; text-decoration: none; color: inherit; }
-  .compare-card:hover { border-color: var(--graphite); box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06); }
-  .compare-card:focus-visible { outline: 2px solid var(--ink-blue); outline-offset: 2px; }
-  .compare-card__name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-2); }
-  .compare-card__desc { color: var(--mid-ink); font-size: var(--fs-body); line-height: 1.6; margin-bottom: var(--space-3); }
-  .compare-card__cta { font-family: var(--font-display); font-size: var(--fs-small); font-weight: 600; color: var(--validator-green); }
-  @media (max-width: 720px) { .compare-grid { grid-template-columns: 1fr; } }
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-4) var(--space-3) var(--space-2);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__headline {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-1);
+  }
+  .hero__sub {
+    font-size: 1rem;
+    color: var(--mid-ink);
+    line-height: 1.5;
+  }
+
+  /* Pull the mini-cards up tight under the hero */
+  .minis-section {
+    padding-top: var(--space-3);
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Screen-reader only ── */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ── Mini comparison cards ── */
+  .minis__lead {
+    text-align: center;
+    line-height: 1.05;
+    margin-bottom: var(--space-3);
+  }
+  .minis__brand {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .minis__vs {
+    display: block;
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+  }
+  .minis {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-2);
+  }
+  .mini {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-top: 2px solid var(--validator-green);
+    padding: var(--space-3);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+  }
+  .mini:hover {
+    border-color: var(--graphite);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
+  }
+  .mini:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+  }
+  .mini__name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .mini__line {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.45;
+  }
+
+  @media (max-width: 980px) {
+    .minis { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .minis { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ── Section title / note (matrix) ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .section-note {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-3);
+    max-width: 60ch;
+  }
+
+  /* ── Cross-comparison matrix ── */
+  .table-section { background: var(--cream-2); }
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+  .matrix-table th,
+  .matrix-table td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+  }
+  .matrix-table thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    border-bottom: 2px solid var(--graphite);
+    white-space: nowrap;
+  }
+  .matrix-table td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 160px;
+  }
+  .matrix-table td,
+  .matrix-table th {
+    min-width: 130px;
+  }
+  /* Highlight the SpecScore column */
+  .matrix-table__own {
+    background: var(--surface);
+    font-weight: 600;
+    color: var(--ink);
+    border-left: 2px solid var(--validator-green);
+    border-right: 2px solid var(--validator-green);
+  }
+  thead .matrix-table__own {
+    color: var(--validator-green);
+    border-bottom-color: var(--validator-green);
+  }
+  /* Column-header links to each comparison */
+  .matrix-table__link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--pale-ink);
+    transition: color 160ms ease, border-color 160ms ease;
+  }
+  .matrix-table__link:hover {
+    color: var(--validator-green);
+    border-bottom-color: var(--validator-green);
+  }
+  .matrix-table__link:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+  }
+  .matrix-table .yes {
+    color: var(--validator-green);
+    font-weight: 600;
+  }
+  .matrix-table .no {
+    color: var(--pale-ink);
+  }
 </style>

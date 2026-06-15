@@ -1,0 +1,115 @@
+---
+// Korean variant of Comparisons.astro — homepage band "How SpecScore compares."
+---
+
+<section class="compare section" aria-labelledby="compare-title">
+  <div class="section-inner">
+    <h2 id="compare-title" class="compare__title">SpecScore 비교 분석.</h2>
+    <p class="compare__sub">
+      스펙 기반 개발은 경쟁이 치열한 분야입니다. SpecScore가 대안들과
+      비교해 어디에 서 있는지 — 솔직하게 보여드립니다.
+    </p>
+
+    <div class="minis">
+      <a href="/vs/plain-markdown/" class="mini">
+        <span class="mini__name">Plain Markdown</span>
+        <span class="mini__line">기본값. SpecScore는 Markdown이 성장해 도달하는 지점입니다.</span>
+      </a>
+      <a href="/ko/vs/openspec/" class="mini">
+        <span class="mini__name">OpenSpec</span>
+        <span class="mini__line">확실한 진입로. SpecScore는 가드레일입니다.</span>
+      </a>
+      <a href="/vs/spec-kit/" class="mini">
+        <span class="mini__name">Spec Kit</span>
+        <span class="mini__line">Spec Kit은 워크플로우. SpecScore는 아티팩트입니다.</span>
+      </a>
+      <a href="/vs/datarim/" class="mini">
+        <span class="mini__name">Datarim</span>
+        <span class="mini__line">Datarim은 파이프라인을 실행하고, SpecScore는 그것이 남기는 결과물입니다.</span>
+      </a>
+      <a href="/vs/codespeak/" class="mini">
+        <span class="mini__name">CodeSpeak</span>
+        <span class="mini__line">CodeSpeak은 컴파일러에 베팅하고, SpecScore는 포맷에 베팅합니다.</span>
+      </a>
+    </div>
+
+    <p class="compare__more">
+      <a href="/ko/vs/" class="compare__more-link">전체 비교 보기 &rarr;</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .compare { background: var(--cream-2); }
+  .compare__title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+  }
+  .compare__sub {
+    font-size: 1.05rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+    max-width: 56ch;
+  }
+
+  /* ── Mini comparison cards ── */
+  .minis {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-2);
+  }
+  .mini {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-top: 2px solid var(--validator-green);
+    padding: var(--space-3);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+  }
+  .mini:hover {
+    border-color: var(--graphite);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
+  }
+  .mini:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+  }
+  .mini__name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .mini__line {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.45;
+  }
+
+  .compare__more {
+    margin-top: var(--space-3);
+  }
+  .compare__more-link {
+    font-family: var(--font-display);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--validator-green);
+    text-decoration: none;
+  }
+  .compare__more-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 980px) {
+    .minis { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .minis { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

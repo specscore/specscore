@@ -26,18 +26,155 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
       </div>
     </section>
 
-    <section class="section" aria-labelledby="comparisons-title">
+    <section class="section minis-section" aria-labelledby="comparisons-title">
       <div class="section-inner">
         <h2 id="comparisons-title" class="sr-only">对比列表</h2>
 
-        <div class="compare-grid">
-          <a href="/zh-cn/vs/openspec/" class="compare-card">
-            <h3 class="compare-card__name">SpecScore vs OpenSpec</h3>
-            <p class="compare-card__desc">
-              两者都用 Markdown 编写规范。OpenSpec 负责组织规范，SpecScore 则对规范进行 linting、评分和追溯。完整对比涵盖：格式、CLI、生命周期、可追溯性、AI 代理支持。
-            </p>
-            <span class="compare-card__cta">阅读完整对比 →</span>
+        <p class="minis__lead">
+          <span class="minis__brand">SpecScore</span>
+          <span class="minis__vs">vs</span>
+        </p>
+
+        <div class="minis">
+          <a href="/vs/plain-markdown/" class="mini">
+            <span class="mini__name">Plain Markdown</span>
+            <span class="mini__line">默认选择。SpecScore 是你的 Markdown 进阶后的样子。</span>
           </a>
+          <a href="/zh-cn/vs/openspec/" class="mini">
+            <span class="mini__name">OpenSpec</span>
+            <span class="mini__line">一个可靠的入门通道。SpecScore 是质量护栏。</span>
+          </a>
+          <a href="/vs/spec-kit/" class="mini">
+            <span class="mini__name">Spec Kit</span>
+            <span class="mini__line">Spec Kit 是工作流。SpecScore 是工件。</span>
+          </a>
+          <a href="/vs/datarim/" class="mini">
+            <span class="mini__name">Datarim</span>
+            <span class="mini__line">Datarim 运行流水线。SpecScore 是它留下的成果。</span>
+          </a>
+          <a href="/vs/codespeak/" class="mini">
+            <span class="mini__name">CodeSpeak</span>
+            <span class="mini__line">CodeSpeak 押注于编译器。SpecScore 押注于格式。</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Cross-comparison matrix ── */}
+    <section class="section table-section" aria-labelledby="matrix-title">
+      <div class="section-inner">
+        <h2 id="matrix-title" class="section-title">SpecScore 一览。</h2>
+        <p class="section-note">
+          与最接近的几款工具的高层对照视图。每款工具都有真正的优势 —
+          点击上方的对比，查看坦诚而详细的版本。
+        </p>
+
+        <div class="table-wrap">
+          <table class="matrix-table" aria-label="SpecScore 与 Plain Markdown、OpenSpec、Spec Kit、Datarim 和 CodeSpeak 的对比">
+            <thead>
+              <tr>
+                <th scope="col">能力</th>
+                <th scope="col" class="matrix-table__own">SpecScore</th>
+                <th scope="col"><a href="/vs/plain-markdown/" class="matrix-table__link">Plain Markdown</a></th>
+                <th scope="col"><a href="/zh-cn/vs/openspec/" class="matrix-table__link">OpenSpec</a></th>
+                <th scope="col"><a href="/vs/spec-kit/" class="matrix-table__link">Spec Kit</a></th>
+                <th scope="col"><a href="/vs/datarim/" class="matrix-table__link">Datarim</a></th>
+                <th scope="col"><a href="/vs/codespeak/" class="matrix-table__link">CodeSpeak</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>主要角色</td>
+                <td class="matrix-table__own">可 lint 的规范格式 + CLI</td>
+                <td>自由格式文档（默认）</td>
+                <td>规范组织框架</td>
+                <td>工作流 / 方法论</td>
+                <td>Claude Code 工作流套件</td>
+                <td>LLM 编译器（规范 → 代码）</td>
+              </tr>
+              <tr>
+                <td>规范格式</td>
+                <td class="matrix-table__own">Markdown + YAML（结构化）</td>
+                <td>自由格式 Markdown</td>
+                <td>Markdown</td>
+                <td>自由格式 Markdown</td>
+                <td>Markdown（工作流形态）</td>
+                <td>纯英文</td>
+              </tr>
+              <tr>
+                <td>代码归你所有</td>
+                <td class="matrix-table__own"><span class="yes">支持</span></td>
+                <td><span class="yes">支持</span></td>
+                <td><span class="yes">支持</span></td>
+                <td><span class="yes">支持</span></td>
+                <td><span class="yes">支持</span></td>
+                <td><span class="no">代码是生成的</span></td>
+              </tr>
+              <tr>
+                <td>开源 / 免费</td>
+                <td class="matrix-table__own"><span class="yes">支持</span>（CC BY / MIT）</td>
+                <td><span class="yes">免费</span></td>
+                <td><span class="yes">支持</span>（MIT）</td>
+                <td><span class="yes">支持</span>（MIT）</td>
+                <td><span class="yes">支持</span>（MIT）</td>
+                <td><span class="no">专有系统</span></td>
+              </tr>
+              <tr>
+                <td>规范内容 linting</td>
+                <td class="matrix-table__own"><span class="yes">支持</span></td>
+                <td><span class="no">不支持</span></td>
+                <td>仅文件结构</td>
+                <td><span class="no">不支持</span></td>
+                <td><span class="no">不支持</span></td>
+                <td>无文档说明</td>
+              </tr>
+              <tr>
+                <td>需求 / 验收标准 ID</td>
+                <td class="matrix-table__own"><span class="yes">支持</span></td>
+                <td><span class="no">不支持</span></td>
+                <td><span class="no">不支持</span></td>
+                <td><span class="no">不支持</span></td>
+                <td><span class="no">不支持</span></td>
+                <td><span class="no">不支持</span></td>
+              </tr>
+              <tr>
+                <td>强制执行的生命周期</td>
+                <td class="matrix-table__own"><span class="yes">支持</span></td>
+                <td><span class="no">不支持</span></td>
+                <td><span class="no">不支持</span></td>
+                <td><span class="no">不支持</span></td>
+                <td><span class="no">不支持</span></td>
+                <td><span class="no">不支持</span></td>
+              </tr>
+              <tr>
+                <td>代码到规范的可追溯性</td>
+                <td class="matrix-table__own"><span class="yes">支持</span></td>
+                <td><span class="no">不支持</span></td>
+                <td><span class="no">不支持</span></td>
+                <td><span class="no">不支持</span></td>
+                <td><span class="no">不支持</span></td>
+                <td>通过重新生成</td>
+              </tr>
+              <tr>
+                <td>运行时依赖</td>
+                <td class="matrix-table__own">无（Go 二进制文件）</td>
+                <td>无</td>
+                <td>Node.js</td>
+                <td>Python</td>
+                <td>Claude Code</td>
+                <td>厂商编译器</td>
+              </tr>
+              <tr>
+                <td>适用于任意代理，或不用代理</td>
+                <td class="matrix-table__own"><span class="yes">支持</span></td>
+                <td>读取每个文件</td>
+                <td>多种代理</td>
+                <td>多种代理</td>
+                <td>Claude Code</td>
+                <td>通过 CodeSpeak</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -49,18 +186,197 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
 </BaseLayout>
 
 <style>
-  .hero { padding: var(--space-6) var(--space-3) var(--space-5); background: var(--cream); }
-  .hero__inner { max-width: var(--max-prose); margin: 0 auto; animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms; }
-  .hero__headline { font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-3); }
-  .hero__sub { font-size: 1.125rem; color: var(--mid-ink); line-height: 1.55; }
-  @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-  .compare-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
-  .compare-card { display: block; background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-4); transition: border-color 160ms ease, box-shadow 160ms ease; text-decoration: none; color: inherit; }
-  .compare-card:hover { border-color: var(--graphite); box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06); }
-  .compare-card:focus-visible { outline: 2px solid var(--ink-blue); outline-offset: 2px; }
-  .compare-card__name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-2); }
-  .compare-card__desc { color: var(--mid-ink); font-size: var(--fs-body); line-height: 1.6; margin-bottom: var(--space-3); }
-  .compare-card__cta { font-family: var(--font-display); font-size: var(--fs-small); font-weight: 600; color: var(--validator-green); }
-  @media (max-width: 720px) { .compare-grid { grid-template-columns: 1fr; } }
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-4) var(--space-3) var(--space-2);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__headline {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-1);
+  }
+  .hero__sub {
+    font-size: 1rem;
+    color: var(--mid-ink);
+    line-height: 1.5;
+  }
+
+  /* Pull the mini-cards up tight under the hero */
+  .minis-section {
+    padding-top: var(--space-3);
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Screen-reader only ── */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ── Mini comparison cards ── */
+  .minis__lead {
+    text-align: center;
+    line-height: 1.05;
+    margin-bottom: var(--space-3);
+  }
+  .minis__brand {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .minis__vs {
+    display: block;
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+  }
+  .minis {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-2);
+  }
+  .mini {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-top: 2px solid var(--validator-green);
+    padding: var(--space-3);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+  }
+  .mini:hover {
+    border-color: var(--graphite);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
+  }
+  .mini:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+  }
+  .mini__name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .mini__line {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.45;
+  }
+
+  @media (max-width: 980px) {
+    .minis { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .minis { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ── Section title / note (matrix) ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .section-note {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-3);
+    max-width: 60ch;
+  }
+
+  /* ── Cross-comparison matrix ── */
+  .table-section { background: var(--cream-2); }
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+  .matrix-table th,
+  .matrix-table td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+  }
+  .matrix-table thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    border-bottom: 2px solid var(--graphite);
+    white-space: nowrap;
+  }
+  .matrix-table td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 160px;
+  }
+  .matrix-table td,
+  .matrix-table th {
+    min-width: 130px;
+  }
+  /* Highlight the SpecScore column */
+  .matrix-table__own {
+    background: var(--surface);
+    font-weight: 600;
+    color: var(--ink);
+    border-left: 2px solid var(--validator-green);
+    border-right: 2px solid var(--validator-green);
+  }
+  thead .matrix-table__own {
+    color: var(--validator-green);
+    border-bottom-color: var(--validator-green);
+  }
+  /* Column-header links to each comparison */
+  .matrix-table__link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--pale-ink);
+    transition: color 160ms ease, border-color 160ms ease;
+  }
+  .matrix-table__link:hover {
+    color: var(--validator-green);
+    border-bottom-color: var(--validator-green);
+  }
+  .matrix-table__link:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+  }
+  .matrix-table .yes {
+    color: var(--validator-green);
+    font-weight: 600;
+  }
+  .matrix-table .no {
+    color: var(--pale-ink);
+  }
 </style>

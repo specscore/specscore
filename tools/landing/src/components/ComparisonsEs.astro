@@ -1,0 +1,117 @@
+---
+// Variante en español de Comparisons.astro — banda de la página de inicio.
+// Presenta el hub /es/vs/ con una mini-tarjeta compacta por rival (nombre +
+// contraste en una línea), cada una enlazando a su comparación completa.
+---
+
+<section class="compare section" aria-labelledby="compare-title">
+  <div class="section-inner">
+    <h2 id="compare-title" class="compare__title">Cómo se compara SpecScore.</h2>
+    <p class="compare__sub">
+      El desarrollo basado en especificaciones es un espacio concurrido. Esto es
+      dónde se sitúa SpecScore frente a las alternativas — con honestidad.
+    </p>
+
+    <div class="minis">
+      <a href="/vs/plain-markdown/" class="mini">
+        <span class="mini__name">Plain Markdown</span>
+        <span class="mini__line">Lo predeterminado. SpecScore es a lo que evoluciona tu Markdown.</span>
+      </a>
+      <a href="/es/vs/openspec/" class="mini">
+        <span class="mini__name">OpenSpec</span>
+        <span class="mini__line">Una buena rampa de entrada. SpecScore son las barandas de seguridad.</span>
+      </a>
+      <a href="/vs/spec-kit/" class="mini">
+        <span class="mini__name">Spec Kit</span>
+        <span class="mini__line">Spec Kit es el flujo de trabajo. SpecScore es el artefacto.</span>
+      </a>
+      <a href="/vs/datarim/" class="mini">
+        <span class="mini__name">Datarim</span>
+        <span class="mini__line">Datarim ejecuta el pipeline. SpecScore es lo que queda después.</span>
+      </a>
+      <a href="/vs/codespeak/" class="mini">
+        <span class="mini__name">CodeSpeak</span>
+        <span class="mini__line">CodeSpeak apuesta por un compilador. SpecScore apuesta por un formato.</span>
+      </a>
+    </div>
+
+    <p class="compare__more">
+      <a href="/es/vs/" class="compare__more-link">Ver la comparación completa &rarr;</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .compare { background: var(--cream-2); }
+  .compare__title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+  }
+  .compare__sub {
+    font-size: 1.05rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+    max-width: 56ch;
+  }
+
+  /* ── Mini comparison cards ── */
+  .minis {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-2);
+  }
+  .mini {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-top: 2px solid var(--validator-green);
+    padding: var(--space-3);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+  }
+  .mini:hover {
+    border-color: var(--graphite);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
+  }
+  .mini:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+  }
+  .mini__name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .mini__line {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.45;
+  }
+
+  .compare__more {
+    margin-top: var(--space-3);
+  }
+  .compare__more-link {
+    font-family: var(--font-display);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--validator-green);
+    text-decoration: none;
+  }
+  .compare__more-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 980px) {
+    .minis { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .minis { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
