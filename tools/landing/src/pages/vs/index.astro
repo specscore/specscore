@@ -28,58 +28,35 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
       </div>
     </section>
 
-    <section class="section" aria-labelledby="comparisons-title">
+    <section class="section minis-section" aria-labelledby="comparisons-title">
       <div class="section-inner">
         <h2 id="comparisons-title" class="sr-only">Comparisons</h2>
 
-        <div class="compare-grid">
-          <a href="/vs/plain-markdown/" class="compare-card">
-            <h3 class="compare-card__name">SpecScore vs plain Markdown</h3>
-            <p class="compare-card__desc">
-              The real default — ad-hoc Markdown, Notion, Jira tickets.
-              Same Markdown, plus the structure an agent can lint, query,
-              and trace. How to graduate the specs you already have.
-            </p>
-            <span class="compare-card__cta">Read the comparison →</span>
-          </a>
+        <p class="minis__lead">
+          <span class="minis__brand">SpecScore</span>
+          <span class="minis__vs">vs</span>
+        </p>
 
-          <a href="/vs/openspec/" class="compare-card">
-            <h3 class="compare-card__name">SpecScore vs OpenSpec</h3>
-            <p class="compare-card__desc">
-              Both write specs in Markdown. OpenSpec organizes them —
-              SpecScore lints, scores, and traces them.
-              The full comparison: format, CLI, lifecycle, traceability, agent support.
-            </p>
-            <span class="compare-card__cta">Read the comparison →</span>
+        <div class="minis">
+          <a href="/vs/plain-markdown/" class="mini">
+            <span class="mini__name">Plain Markdown</span>
+            <span class="mini__line">The default. SpecScore is what your Markdown graduates to.</span>
           </a>
-
-          <a href="/vs/spec-kit/" class="compare-card">
-            <h3 class="compare-card__name">SpecScore vs Spec Kit</h3>
-            <p class="compare-card__desc">
-              Different layers. Spec Kit is the workflow; SpecScore is the
-              format the specs are written in. They compose — here's how, and
-              when to run both.
-            </p>
-            <span class="compare-card__cta">Read the comparison →</span>
+          <a href="/vs/openspec/" class="mini">
+            <span class="mini__name">OpenSpec</span>
+            <span class="mini__line">A solid on-ramp. SpecScore is the guardrails.</span>
           </a>
-
-          <a href="/vs/codespeak/" class="compare-card">
-            <h3 class="compare-card__name">SpecScore vs CodeSpeak</h3>
-            <p class="compare-card__desc">
-              Two bets. CodeSpeak compiles the spec into code you don't maintain.
-              SpecScore keeps your code and your specs open and portable.
-            </p>
-            <span class="compare-card__cta">Read the comparison →</span>
+          <a href="/vs/spec-kit/" class="mini">
+            <span class="mini__name">Spec Kit</span>
+            <span class="mini__line">Spec Kit is the workflow. SpecScore is the artifact.</span>
           </a>
-
-          <a href="/vs/datarim/" class="compare-card">
-            <h3 class="compare-card__name">SpecScore vs Datarim</h3>
-            <p class="compare-card__desc">
-              A Claude Code workflow pack vs an open format. Datarim runs the
-              pipeline; SpecScore is the portable, lintable artifact a workflow
-              can leave behind.
-            </p>
-            <span class="compare-card__cta">Read the comparison →</span>
+          <a href="/vs/datarim/" class="mini">
+            <span class="mini__name">Datarim</span>
+            <span class="mini__line">Datarim runs the pipeline. SpecScore is what it leaves behind.</span>
+          </a>
+          <a href="/vs/codespeak/" class="mini">
+            <span class="mini__name">CodeSpeak</span>
+            <span class="mini__line">CodeSpeak bets on a compiler. SpecScore bets on a format.</span>
           </a>
         </div>
       </div>
@@ -251,50 +228,66 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
     border: 0;
   }
 
-  /* ── Comparison cards ── */
-  .compare-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-3);
+  /* ── Mini comparison cards ── */
+  .minis__lead {
+    text-align: center;
+    line-height: 1.05;
+    margin-bottom: var(--space-3);
   }
-  .compare-card {
+  .minis__brand {
     display: block;
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .minis__vs {
+    display: block;
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+  }
+  .minis {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-2);
+  }
+  .mini {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
     background: var(--surface);
     border: 1px solid var(--hairline);
-    padding: var(--space-4);
-    transition: border-color 160ms ease, box-shadow 160ms ease;
+    border-top: 2px solid var(--validator-green);
+    padding: var(--space-3);
     text-decoration: none;
     color: inherit;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
   }
-  .compare-card:hover {
+  .mini:hover {
     border-color: var(--graphite);
     box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
   }
-  .compare-card:focus-visible {
+  .mini:focus-visible {
     outline: 2px solid var(--ink-blue);
     outline-offset: 2px;
   }
-  .compare-card__name {
+  .mini__name {
     font-family: var(--font-display);
-    font-size: 1.25rem;
+    font-size: 1.05rem;
     font-weight: 700;
-    margin-bottom: var(--space-2);
   }
-  .compare-card__desc {
+  .mini__line {
     color: var(--mid-ink);
-    font-size: var(--fs-body);
-    line-height: 1.6;
-    margin-bottom: var(--space-3);
-  }
-  .compare-card__cta {
-    font-family: var(--font-display);
     font-size: var(--fs-small);
-    font-weight: 600;
-    color: var(--validator-green);
+    line-height: 1.45;
   }
 
-  @media (max-width: 720px) {
-    .compare-grid { grid-template-columns: 1fr; }
+  @media (max-width: 980px) {
+    .minis { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .minis { grid-template-columns: repeat(2, 1fr); }
   }
 
   /* ── Section title / note (matrix) ── */
