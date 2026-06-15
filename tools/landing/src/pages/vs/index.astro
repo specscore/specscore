@@ -100,11 +100,11 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
               <tr>
                 <th scope="col">Capability</th>
                 <th scope="col" class="matrix-table__own">SpecScore</th>
-                <th scope="col">Plain Markdown</th>
-                <th scope="col">OpenSpec</th>
-                <th scope="col">Spec Kit</th>
-                <th scope="col">Datarim</th>
-                <th scope="col">CodeSpeak</th>
+                <th scope="col"><a href="/vs/plain-markdown/" class="matrix-table__link">Plain Markdown</a></th>
+                <th scope="col"><a href="/vs/openspec/" class="matrix-table__link">OpenSpec</a></th>
+                <th scope="col"><a href="/vs/spec-kit/" class="matrix-table__link">Spec Kit</a></th>
+                <th scope="col"><a href="/vs/datarim/" class="matrix-table__link">Datarim</a></th>
+                <th scope="col"><a href="/vs/codespeak/" class="matrix-table__link">CodeSpeak</a></th>
               </tr>
             </thead>
             <tbody>
@@ -360,6 +360,21 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
   thead .matrix-table__own {
     color: var(--validator-green);
     border-bottom-color: var(--validator-green);
+  }
+  /* Column-header links to each comparison */
+  .matrix-table__link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--pale-ink);
+    transition: color 160ms ease, border-color 160ms ease;
+  }
+  .matrix-table__link:hover {
+    color: var(--validator-green);
+    border-bottom-color: var(--validator-green);
+  }
+  .matrix-table__link:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
   }
   .matrix-table .yes {
     color: var(--validator-green);
