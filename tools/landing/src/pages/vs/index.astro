@@ -190,24 +190,29 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
 <style>
   /* ── Hero ── */
   .hero {
-    padding: var(--space-6) var(--space-3) var(--space-5);
+    padding: var(--space-4) var(--space-3) var(--space-2);
     background: var(--cream);
   }
   .hero__inner {
-    max-width: var(--max-prose);
+    max-width: var(--max-content);
     margin: 0 auto;
     animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
   }
   .hero__headline {
-    font-size: var(--fs-h2);
+    font-size: var(--fs-h3);
     font-weight: 700;
     letter-spacing: -0.01em;
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-1);
   }
   .hero__sub {
-    font-size: 1.125rem;
+    font-size: 1rem;
     color: var(--mid-ink);
-    line-height: 1.55;
+    line-height: 1.5;
+  }
+
+  /* Pull the mini-cards up tight under the hero */
+  .minis-section {
+    padding-top: var(--space-3);
   }
 
   @keyframes fade-in {
