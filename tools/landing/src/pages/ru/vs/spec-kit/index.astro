@@ -1,0 +1,595 @@
+---
+// /ru/vs/spec-kit/ — SpecScore vs GitHub Spec Kit comparison (ru).
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooterRu from '../../../../components/SiteFooterRu.astro';
+import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro';
+---
+
+<BaseLayout
+  lang="ru"
+  title="SpecScore vs Spec Kit — Честное сравнение."
+  description="Фактологическое сравнение SpecScore и GitHub Spec Kit: рабочий процесс против формата, линтинг, жизненный цикл, трассируемость и CLI. Они дополняют друг друга — вот как."
+  canonical="https://specscore.md/ru/vs/spec-kit/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href="/ru/vs/" class="xref">Сравнения</a></p>
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore vs Spec Kit
+        </h1>
+        <p class="hero__sub">
+          Они работают на разных уровнях. Spec Kit — это <strong>рабочий процесс</strong>:
+          управляемый процесс, который ведёт агента от идеи к реализации. SpecScore — это
+          <strong>формат</strong>, в котором написаны спецификации, плюс CLI, который их
+          линтует, запрашивает и прослеживает. Spec Kit может производить файлы SpecScore.
+        </p>
+      </div>
+    </section>
+
+    {/* ── What they share ── */}
+    <section class="section" aria-labelledby="shared-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="shared-title" class="section-title">Что у них общего.</h2>
+        <ul class="shared-list">
+          <li>Одна и та же путеводная звезда — спецификации до кода, с ИИ-агентами как полноценными читателями.</li>
+          <li>Спецификации живут в вашем репозитории как Markdown — с контролем версий и ревью через PR.</li>
+          <li>Оба с открытым исходным кодом под лицензией MIT.</li>
+          <li>Оба нацелены на Claude Code, Cursor, Copilot и других ИИ-агентов для кодинга.</li>
+        </ul>
+      </div>
+    </section>
+
+    {/* ── What Spec Kit does well ── */}
+    <section class="section" aria-labelledby="speckit-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="speckit-title" class="section-title">Сильные стороны Spec Kit.</h2>
+        <p class="section-note">
+          <a href="https://github.com/github/spec-kit" rel="nofollow noopener" target="_blank" class="xref">Spec Kit</a>
+          — это процесс разработки на основе спецификаций от GitHub Next.
+        </p>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Завершённый, мнениеориентированный процесс</h3>
+          <p class="credit-card__desc">
+            Spec Kit даёт вам всю дугу:
+            <code>constitution → specify → plan → tasks → implement</code>.
+            У каждого шага есть слэш-команда и промпт, спроектированный, чтобы держать
+            агента на рельсах. Если вам нужен процесс, Spec Kit вам его даёт.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Сильное распространение и узнаваемость</h3>
+          <p class="credit-card__desc">
+            При поддержке GitHub Next, с большим сообществом и растущей библиотекой
+            расширений. Для многих разработчиков Spec Kit — первый рабочий процесс
+            на основе спецификаций, с которым они сталкиваются.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Команды, не зависящие от агента</h3>
+          <p class="credit-card__desc">
+            Команды Spec Kit работают в Claude Code, Cursor, Copilot и других —
+            рабочий процесс ведёт агента независимо от того, какой из них вы запускаете.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Feature comparison table ── */}
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">Сравнение возможностей.</h2>
+        <p class="section-note">
+          Эти инструменты отвечают на разные вопросы, поэтому таблица сравнивает роли, а не победителей.
+        </p>
+
+        <div class="table-wrap">
+          <table class="compare-table" aria-label="Сравнение возможностей SpecScore и Spec Kit">
+            <thead>
+              <tr>
+                <th scope="col">Возможность</th>
+                <th scope="col">Spec Kit</th>
+                <th scope="col">SpecScore</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Основная роль</td>
+                <td>Рабочий процесс / методология</td>
+                <td><strong>Формат хранения + CLI</strong></td>
+              </tr>
+              <tr>
+                <td>Вывод спецификаций</td>
+                <td>Свободный Markdown</td>
+                <td><strong>Markdown + YAML frontmatter</strong> (структурированный)</td>
+              </tr>
+              <tr>
+                <td>Линтинг спецификаций</td>
+                <td>Нет</td>
+                <td><strong>Качество содержания</strong> — расплывчатые глаголы, отсутствующие критерии приёмки, висячие ссылки</td>
+              </tr>
+              <tr>
+                <td>ID требований / критериев приёмки</td>
+                <td>Нет</td>
+                <td><strong>Машинно-адресуемые ID</strong> (<code>REQ: slug</code>)</td>
+              </tr>
+              <tr>
+                <td>Статус жизненного цикла</td>
+                <td>Неявный (шаг рабочего процесса)</td>
+                <td><strong>Контролируемый</strong> — Draft → Approved → Implementing → Stable → Deprecated</td>
+              </tr>
+              <tr>
+                <td>Трассируемость кода к спецификациям</td>
+                <td>Нет</td>
+                <td><strong><code>specscore:</code> аннотации</strong> + <code>Verifies:</code> трейлеры коммитов</td>
+              </tr>
+              <tr>
+                <td>Запрос спецификаций из CLI</td>
+                <td>Скаффолдинг (<code>specify</code>, <code>plan</code>, <code>tasks</code>)</td>
+                <td><strong>API запросов</strong> — <code>feature list / show / deps</code>, <code>lint</code>, <code>code refs</code></td>
+              </tr>
+              <tr>
+                <td>Зависимость от среды выполнения</td>
+                <td>Python</td>
+                <td><strong>Нет</strong> — единый бинарный файл на Go</td>
+              </tr>
+              <tr>
+                <td>Интеграция с CI</td>
+                <td>Запуск рабочего процесса</td>
+                <td><strong><code>specscore lint</code></strong> завершается с ненулевым кодом, pre-commit хуки</td>
+              </tr>
+              <tr>
+                <td>Взаимосвязь</td>
+                <td colspan="2"><strong>Они дополняют друг друга</strong> — Spec Kit может производить файлы SpecScore</td>
+              </tr>
+              <tr>
+                <td>Лицензия</td>
+                <td>MIT</td>
+                <td>MIT</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Where SpecScore goes further ── */}
+    <section class="section" aria-labelledby="further-title">
+      <div class="section-inner">
+        <h2 id="further-title" class="section-title">Что добавляет SpecScore.</h2>
+
+        <div class="diff-grid">
+          <div class="diff-card">
+            <h3 class="diff-card__title">Вывод можно линтовать</h3>
+            <p class="diff-card__desc">
+              Spec Kit производит свободный Markdown — хороший или плохой, он отправляется.
+              SpecScore проверяет результат в два слоя: <code>lint</code> детерминированно
+              проверяет, что у каждого требования есть критерии приёмки, перекрёстные ссылки
+              разрешаются, а переходы статусов корректны, — а проверка ИИ
+              (<code>/review</code>, <code>/score</code>) ловит неоднозначные критерии и
+              расплывчатые глаголы.
+            </p>
+            <div class="diff-card__example">
+<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+  <span class="mark-fail">✗</span> R3  no acceptance criteria
+  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
+            </div>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Вывод можно запрашивать</h3>
+            <p class="diff-card__desc">
+              Spec Kit пишет файлы; чтобы прочитать их обратно, нужно их открыть. Спецификации
+              SpecScore отвечают на вопросы из CLI: <code>specscore feature list</code>,
+              <code>feature deps</code>, <code>code refs</code> — так что агент навигирует
+              по графу спецификаций, не читая каждый файл в репозитории.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">У каждого требования есть ID</h3>
+            <p class="diff-card__desc">
+              Spec Kit ссылается на требования прозой. SpecScore присваивает ID на основе
+              slug (<code>REQ: slug-format</code>) и ID критериев приёмки, которые сохраняются
+              при переименованиях, рефакторингах и передаче между агентами.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Жизненный цикл контролируется</h3>
+            <p class="diff-card__desc">
+              В Spec Kit стадия спецификации — это то, где вы находитесь в рабочем процессе.
+              В SpecScore жизненный цикл — это контролируемое поле статуса: Draft → Approved
+              → Implementing → Stable → Deprecated — валидируется линтером и переключается
+              командой <code>specscore change-status</code> из git-хуков или CI.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Код прослеживается до спецификаций</h3>
+            <p class="diff-card__desc">
+              У Spec Kit нет механизма трассируемости. В SpecScore есть аннотации
+              <code>specscore:</code> в исходниках и трейлеры <code>Verifies:</code>
+              в коммитах — запустите <code>specscore code refs</code> и получите
+              детерминированный ответ на вопрос «какой код реализует это требование?»
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Без зависимости от среды выполнения</h3>
+            <p class="diff-card__desc">
+              SpecScore — это единый бинарный файл на Go: нет среды выполнения для установки.
+              Работает в проектах на Go, Rust, Python, Java или JavaScript без добавления
+              чего-либо в инструментарий.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── When to use which ── */}
+    <section class="section" aria-labelledby="when-title">
+      <div class="section-inner">
+        <h2 id="when-title" class="section-title">Когда что использовать.</h2>
+
+        <div class="when-grid">
+          <div class="when-card">
+            <h3 class="when-card__title">Берите Spec Kit, когда…</h3>
+            <ul class="when-card__list">
+              <li>Вам нужен управляемый, мнениеориентированный процесс от идеи до реализации.</li>
+              <li>Вашей команде нужна дисциплина явных шагов specify / plan / tasks.</li>
+              <li>Вы стандартизируете то, как агенты управляются в команде.</li>
+            </ul>
+          </div>
+
+          <div class="when-card when-card--primary">
+            <h3 class="when-card__title">Используйте SpecScore, когда…</h3>
+            <ul class="when-card__list">
+              <li>Вам нужны спецификации, которые агенты могут линтовать, запрашивать и изменять, не читая каждый файл.</li>
+              <li>Вам нужна трассируемость кода к спецификациям с детерминированным ответом.</li>
+              <li>Вы строите крупную систему с множеством функций и переходов жизненного цикла.</li>
+              <li>Вы хотите ноль зависимостей от среды выполнения — один бинарный файл, языковой инструментарий не требуется.</li>
+              <li>Вам нужны гейты качества спецификаций в CI, которые завершаются с ненулевым кодом, как ESLint или <code>go vet</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── The integration opportunity ── */}
+    <section class="section" aria-labelledby="bridge-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="bridge-title" class="section-title">SpecScore расширяет Spec Kit — он его не заменяет.</h2>
+        <p class="prose-p">
+          Spec Kit — это процесс производства спецификации; SpecScore — это формат, в котором
+          эта спецификация может быть написана. Расширение Spec Kit, которое выдаёт формат
+          SpecScore, уже в разработке — запустите рабочий процесс Spec Kit и получите на выходе
+          спецификации, которые линтуются, запрашиваются и прослеживаются.
+        </p>
+        <p class="prose-p">
+          Выбирайте Spec Kit для процесса. Выбирайте SpecScore для артефакта. Запускайте оба,
+          когда хотите обоих.
+        </p>
+      </div>
+    </section>
+
+    <ComparisonFeedback page="spec-kit" />
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">Спецификации, которые проходят проверку.</h2>
+      <div class="final-cta__buttons">
+        <a href="/cli/install/" class="btn btn--primary">Установить CLI</a>
+        <a href="/ai/specstudio-skills/" class="btn btn--secondary">AI-навыки для вашего агента</a>
+        <a
+          href="https://github.com/specscore/specscore"
+          rel="noopener"
+          class="btn btn--tertiary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          Открытый код на GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <SiteFooterRu />
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__breadcrumb {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    margin-bottom: var(--space-2);
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Shared list ── */
+  .shared-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .shared-list li {
+    position: relative;
+    padding-left: 1.4rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+  }
+  .shared-list li::before {
+    content: '=';
+    position: absolute;
+    left: 0;
+    font-family: var(--font-code);
+    font-weight: 700;
+    color: var(--pale-ink);
+  }
+
+  /* ── Section note ── */
+  .section-note {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Credit cards ── */
+  .credit-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .credit-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .credit-card__desc {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    font-size: var(--fs-body);
+  }
+  .credit-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Feature comparison table ── */
+  .table-section { background: var(--cream-2); }
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+  .compare-table th,
+  .compare-table td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+  }
+  .compare-table thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    border-bottom: 2px solid var(--graphite);
+    white-space: nowrap;
+  }
+  .compare-table td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 160px;
+  }
+  .compare-table td:nth-child(2),
+  .compare-table td:nth-child(3) {
+    min-width: 200px;
+  }
+  .compare-table td code {
+    font-size: 0.88em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .compare-table strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ── Diff grid ── */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .diff-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+  }
+  .diff-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .diff-card__desc {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+  .diff-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .diff-card__example {
+    margin-top: var(--space-2);
+  }
+  .diff-card__example .terminal {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 860px) {
+    .diff-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── When to use which ── */
+  .when-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .when-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-4);
+  }
+  .when-card--primary {
+    border-color: var(--validator-green);
+    border-width: 2px;
+  }
+  .when-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .when-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .when-card__list li {
+    position: relative;
+    padding-left: 1.2rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+    font-size: var(--fs-small);
+  }
+  .when-card__list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--pale-ink);
+    font-family: var(--font-code);
+  }
+  .when-card--primary .when-card__list li::before {
+    color: var(--validator-green);
+  }
+  .when-card__list code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 860px) {
+    .when-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Bridge section ── */
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-2);
+  }
+  .prose-p:last-child {
+    margin-bottom: 0;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .prose-p code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+</style>

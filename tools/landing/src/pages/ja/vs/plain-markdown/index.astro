@@ -1,0 +1,591 @@
+---
+// /ja/vs/plain-markdown/ — SpecScore vs Plain Markdown / Notion / Jira (ja).
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooterJa from '../../../../components/SiteFooterJa.astro';
+import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro';
+---
+
+<BaseLayout
+  lang="ja"
+  title="SpecScore vs Plain Markdown — 誠実な比較"
+  description="SpecScore とデフォルトの選択肢（場当たり的な Markdown、Notion、Jira チケット）の事実に基づいた比較。同じ Markdown に、エージェントが lint・クエリ・トレースできる構造を加えます。"
+  canonical="https://specscore.md/ja/vs/plain-markdown/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href="/ja/vs/" class="xref">比較一覧</a></p>
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore vs Plain Markdown
+        </h1>
+        <p class="hero__sub">
+          ほとんどのチームはすでに「スペック」を持っています — docs フォルダの場当たり的な
+          Markdown、Notion ページ、Jira チケットとして。無料で、すでにそこにあり、
+          機能します。SpecScore は <strong>同じ Markdown</strong> に、
+          AI エージェントが lint・クエリし、コードまでトレースできる構造を加えたものです。
+        </p>
+      </div>
+    </section>
+
+    {/* ── What they share ── */}
+    <section class="section" aria-labelledby="shared-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="shared-title" class="section-title">共通点。</h2>
+        <ul class="shared-list">
+          <li>どちらも Markdown です — プレーンテキストで、人間が読め、diff に強い。</li>
+          <li>スペックはリポジトリに配置でき、バージョン管理され、PR でレビューされます。</li>
+          <li>独自フォーマットもロックインもありません — どんなエディタでも読めます。</li>
+          <li>あなたは散文を書き続け、SpecScore はそれを置き換えるのではなく、周囲に構造を加えます。</li>
+        </ul>
+      </div>
+    </section>
+
+    {/* ── What plain Markdown does well ── */}
+    <section class="section" aria-labelledby="default-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="default-title" class="section-title">デフォルトの優れた点。</h2>
+        <p class="section-note">
+          Plain Markdown、Notion、Jira こそが本当のデフォルトです。それだけの理由があります。
+        </p>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">学習コストゼロ</h3>
+          <p class="credit-card__desc">
+            スキーマも、必須フィールドも、ループに入る CLI もありません。ファイルを開いて、
+            書き始めるだけ。一度きりのメモや小さなプロジェクトなら、それがまさに正解です —
+            必要のない構造は摩擦でしかありません。
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">すでにインストール済み</h3>
+          <p class="credit-card__desc">
+            あなたのチームはすでに Notion、Confluence、あるいは <code>docs/</code> フォルダの中にいます。
+            導入するものも、移行するものもありません。最も摩擦の少ない選択肢は、
+            すでに使っているものです。
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">どこでも使える可搬性</h3>
+          <p class="credit-card__desc">
+            Plain Markdown はどこでも開け、どんなツールよりも長持ちします。SpecScore は
+            まさにこの性質の上に作られています — だからこそ SpecScore もデータベースではなく
+            Markdown なのです。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Feature comparison table ── */}
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">機能比較。</h2>
+        <p class="section-note">
+          違いはファイルそのものではなく — エージェントがそれで何ができるかです。
+        </p>
+
+        <div class="table-wrap">
+          <table class="compare-table" aria-label="SpecScore vs Plain Markdown 機能比較">
+            <thead>
+              <tr>
+                <th scope="col">機能</th>
+                <th scope="col">Plain Markdown / Notion</th>
+                <th scope="col">SpecScore</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>フォーマット</td>
+                <td>自由形式の Markdown / ドキュメント</td>
+                <td><strong>Markdown + YAML frontmatter</strong>（構造化）</td>
+              </tr>
+              <tr>
+                <td>要件の置き場所</td>
+                <td>Jira、Notion、Slack、誰かの頭の中</td>
+                <td><strong>リポジトリ内、コードの隣</strong></td>
+              </tr>
+              <tr>
+                <td>「このスペックは完成しているか？」</td>
+                <td>人間が読んで判断する</td>
+                <td><strong><code>specscore lint</code></strong> — 自動</td>
+              </tr>
+              <tr>
+                <td>曖昧さの検出</td>
+                <td>なし — 曖昧な動詞が黙ってリリースされる</td>
+                <td><strong>曖昧な動詞、欠落した AC、未解決の参照を検出</strong></td>
+              </tr>
+              <tr>
+                <td>要件 / AC ID</td>
+                <td>なし</td>
+                <td><strong>機械可読な ID</strong>（<code>REQ: slug</code>）</td>
+              </tr>
+              <tr>
+                <td>ライフサイクルステータス</td>
+                <td>暗黙的、追跡されていればの話</td>
+                <td><strong>強制</strong> — Draft → Approved → Implementing → Stable</td>
+              </tr>
+              <tr>
+                <td>コードからスペックへのトレーサビリティ</td>
+                <td>なし</td>
+                <td><strong><code>specscore:</code> アノテーション</strong> + <code>Verifies:</code> トレーラー</td>
+              </tr>
+              <tr>
+                <td>エージェントのナビゲーション</td>
+                <td>何かを探すたびに全ファイルを読む</td>
+                <td><strong>スペックグラフをクエリ</strong>（CLI から）</td>
+              </tr>
+              <tr>
+                <td>CI 品質ゲート</td>
+                <td>なし</td>
+                <td><strong><code>specscore lint</code></strong> がリンターのようにゼロ以外で終了</td>
+              </tr>
+              <tr>
+                <td>学習コスト</td>
+                <td><strong>なし</strong></td>
+                <td>学ぶべきフォーマット（段階的に）</td>
+              </tr>
+              <tr>
+                <td>コスト / ライセンス</td>
+                <td>無料</td>
+                <td>無料、オープンソース</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Where SpecScore goes further ── */}
+    <section class="section" aria-labelledby="further-title">
+      <div class="section-inner">
+        <h2 id="further-title" class="section-title">SpecScore がさらに進んでいる点。</h2>
+
+        <div class="diff-grid">
+          <div class="diff-card">
+            <h3 class="diff-card__title">曖昧さは解釈されるのではなく、検出される</h3>
+            <p class="diff-card__desc">
+              自由形式のスペックでは、すべてのエージェントとのやり取りが解釈から始まります —
+              「ログインは動作すべき」は、正解ともっともらしい誤りの間のコイン投げです。
+              SpecScore の <code>lint</code> は、エージェントが行動する前に、曖昧な動詞と
+              欠落した受け入れ基準を検出します。
+            </p>
+            <div class="diff-card__example">
+<pre class="terminal"><span class="prompt">$</span> specscore lint auth/login.md
+  <span class="mark-fail">✗</span> R1  <span class="dim">"should work" — 測定不能</span>
+  <span class="mark-fail">✗</span> R1  no acceptance criteria</pre>
+            </div>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">誤解が積み重なるのを止める</h3>
+            <p class="diff-card__desc">
+              あるエージェントが要件を読み違え、2つ目がその上に構築し、3つ目が両方に依存する —
+              そして気づくのは3つのエージェントを経た後です。構造化された受け入れ基準は、
+              すべてのエージェントに同じ合否条件を与えるため、解釈がエージェント間で
+              ドリフトしません。
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">コードがスペックまでトレースできる</h3>
+            <p class="diff-card__desc">
+              プレーンなドキュメントは、それを実装したコードへのリンクを持ちません。SpecScore は
+              <code>specscore:</code> ソースアノテーションと <code>Verifies:</code>
+              コミットトレーラーを加えます — <code>specscore code refs</code> が「この要件を
+              実装しているコードはどれか？」に確定的に答えます。
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">40枚のチケットの代わりに1つのスペック</h3>
+            <p class="diff-card__desc">
+              新しいチームメイト（あるいは新しいエージェント）は、40枚の Jira チケットと
+              Slack スレッドから意図を再構築する代わりに、すべての文脈を含む1つのフィーチャー
+              スペックを読みます。
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">エージェントは再読の代わりにクエリする</h3>
+            <p class="diff-card__desc">
+              docs フォルダでは「進行中のものは何か？」を知るにはファイルを開く必要があります。
+              SpecScore では <code>specscore feature list</code> で済みます — スペックグラフが
+              CLI から答えるため、エージェントはリポジトリの再読でコンテキストを浪費しません。
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">品質は CI で強制される</h3>
+            <p class="diff-card__desc">
+              自由形式のスペックにはゲートがありません — 書きかけのものも完成したものと同じくらい
+              簡単にマージされます。<code>specscore lint</code> は、ESLint や <code>go vet</code>
+              がコードを守るのと同じように、問題があればゼロ以外で終了します。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── When to use which ── */}
+    <section class="section" aria-labelledby="when-title">
+      <div class="section-inner">
+        <h2 id="when-title" class="section-title">使い分けの指針。</h2>
+
+        <div class="when-grid">
+          <div class="when-card">
+            <h3 class="when-card__title">Plain Markdown で十分なのは…</h3>
+            <ul class="when-card__list">
+              <li>一度きりのメモ、スパイク、または構造を必要としないほど小さなプロジェクトの場合。</li>
+              <li>ドキュメントから AI エージェントが構築せず — 人間が読んで理解するだけの場合。</li>
+              <li>誰かが実装する要件ではなく、ラフなアイデアを書き留めている場合。</li>
+            </ul>
+          </div>
+
+          <div class="when-card when-card--primary">
+            <h3 class="when-card__title">SpecScore を使うべきなのは…</h3>
+            <ul class="when-card__list">
+              <li>AI エージェントがスペックから構築する場合 — 曖昧さが誤ったコードになります。</li>
+              <li>複数のエージェントや人が同じ要件に依存する場合。</li>
+              <li>どのコードがどの要件を実装しているかを知る必要がある場合。</li>
+              <li>「このスペックは完成したか？」を会議ではなくツールが答えるべき場合。</li>
+              <li>すべてを再読するのがスケールしないほどプロジェクトが大きい場合。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── The adoption path ── */}
+    <section class="section" aria-labelledby="bridge-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="bridge-title" class="section-title">すでに持っているスペックを成長させる。</h2>
+        <p class="prose-p">
+          バックログを変換したり、ツールを変えたりする必要はありません。次のフィーチャーを選び、
+          そのための SpecScore スペックを書いて、<code>specscore lint</code> を実行してください —
+          チケットが見落としたものを検出するか確かめましょう。実装するときに <code>specscore:</code>
+          アノテーションを加えます。役に立った場合のみ、次のスプリントへ広げてください。
+        </p>
+        <p class="prose-p">
+          Plain Markdown は入り口です。SpecScore はその成長した先の姿です。
+        </p>
+      </div>
+    </section>
+
+    <ComparisonFeedback page="plain-markdown" />
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">合格するスペックを。</h2>
+      <div class="final-cta__buttons">
+        <a href="/cli/install/" class="btn btn--primary">CLI をインストール</a>
+        <a href="/ai/specstudio-skills/" class="btn btn--secondary">エージェント用 AI スキルを入手</a>
+        <a
+          href="https://github.com/specscore/specscore"
+          rel="noopener"
+          class="btn btn--tertiary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          GitHub でオープンソース公開中
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <SiteFooterJa />
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__breadcrumb {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    margin-bottom: var(--space-2);
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Shared list ── */
+  .shared-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .shared-list li {
+    position: relative;
+    padding-left: 1.4rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+  }
+  .shared-list li::before {
+    content: '=';
+    position: absolute;
+    left: 0;
+    font-family: var(--font-code);
+    font-weight: 700;
+    color: var(--pale-ink);
+  }
+
+  /* ── Section note ── */
+  .section-note {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Credit cards ── */
+  .credit-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .credit-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .credit-card__desc {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    font-size: var(--fs-body);
+  }
+  .credit-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Feature comparison table ── */
+  .table-section { background: var(--cream-2); }
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+  .compare-table th,
+  .compare-table td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+  }
+  .compare-table thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    border-bottom: 2px solid var(--graphite);
+    white-space: nowrap;
+  }
+  .compare-table td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 160px;
+  }
+  .compare-table td:nth-child(2),
+  .compare-table td:nth-child(3) {
+    min-width: 200px;
+  }
+  .compare-table td code {
+    font-size: 0.88em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .compare-table strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ── Diff grid ── */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .diff-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+  }
+  .diff-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .diff-card__desc {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+  .diff-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .diff-card__example {
+    margin-top: var(--space-2);
+  }
+  .diff-card__example .terminal {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 860px) {
+    .diff-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── When to use which ── */
+  .when-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .when-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-4);
+  }
+  .when-card--primary {
+    border-color: var(--validator-green);
+    border-width: 2px;
+  }
+  .when-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .when-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .when-card__list li {
+    position: relative;
+    padding-left: 1.2rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+    font-size: var(--fs-small);
+  }
+  .when-card__list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--pale-ink);
+    font-family: var(--font-code);
+  }
+  .when-card--primary .when-card__list li::before {
+    color: var(--validator-green);
+  }
+  .when-card__list code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 860px) {
+    .when-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Adoption section ── */
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-2);
+  }
+  .prose-p:last-child {
+    margin-bottom: 0;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .prose-p code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+</style>

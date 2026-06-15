@@ -1,0 +1,580 @@
+---
+// /ko/vs/datarim/ — SpecScore vs Datarim comparison (ko).
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooterKo from '../../../../components/SiteFooterKo.astro';
+import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro';
+---
+
+<BaseLayout
+  lang="ko"
+  title="SpecScore vs Datarim — 솔직한 비교."
+  description="SpecScore와 Datarim의 사실 기반 비교: Claude Code 워크플로우 팩 vs 개방적이고 이식 가능한 스펙 형식. 서로 다른 레이어 — 그리고 둘은 조합될 수 있습니다."
+  canonical="https://specscore.md/ko/vs/datarim/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href="/ko/vs/" class="xref">비교</a></p>
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore vs Datarim
+        </h1>
+        <p class="hero__sub">
+          서로 다른 레이어입니다. Datarim은 Claude Code를 위한 의견이 분명한
+          <strong>워크플로우 팩</strong>입니다 — 프로젝트를 요구사항에서 완료까지
+          실행하는 슬래시 명령들이죠. SpecScore는 스펙이 작성되는 <strong>개방형
+          형식</strong>이며, 그것을 lint하고, 쿼리하고, 추적하는 CLI를 더한 것입니다.
+          워크플로우는 그것을 대상으로 삼을 수 있습니다.
+        </p>
+      </div>
+    </section>
+
+    {/* ── What they share ── */}
+    <section class="section" aria-labelledby="shared-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="shared-title" class="section-title">공통점.</h2>
+        <ul class="shared-list">
+          <li>둘 다 AI 보조 개발에 구조화된 방법론을 가져옵니다.</li>
+          <li>둘 다 MIT 라이선스의 오픈 소스입니다.</li>
+          <li>둘 다 Claude Code 안에서 실행됩니다 — Datarim은 명령으로, SpecScore는 SpecStudio Skills를 통해.</li>
+          <li>둘 다 상태를 저장소의 Markdown으로 유지하며, 버전 관리됩니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    {/* ── What Datarim does well ── */}
+    <section class="section" aria-labelledby="datarim-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="datarim-title" class="section-title">Datarim이 잘하는 것.</h2>
+        <p class="section-note">
+          <a href="https://github.com/Arcanada-one/datarim" rel="nofollow noopener" target="_blank" class="xref">Datarim</a>
+          은 Claude Code를 위해 만들어진 범용 반복 워크플로우 프레임워크입니다.
+        </p>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">네이티브 슬래시 명령 UX</h3>
+          <p class="credit-card__desc">
+            명령으로 된 완전한 파이프라인 — <code>/dr-prd</code>, <code>/dr-plan</code>,
+            <code>/dr-design</code>, <code>/dr-do</code>, <code>/dr-qa</code> — 이
+            Claude Code에 자연스럽게 어울립니다. <code>~/.claude/</code>로 한 번의
+            <code>install.sh</code>만 하면 바로 실행됩니다.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">복잡도 인식 라우팅 (L1–L4)</h3>
+          <p class="credit-card__desc">
+            Datarim은 작업 규모를 파악해 그에 맞게 라우팅합니다: L1 빠른 수정은
+            계획을 건너뛰고, L4 대규모 변경은 여러 리뷰 사이클이 있는 단계적
+            파이프라인을 실행합니다. 격식을 규모에 맞추는 것은 정말 좋은 아이디어입니다.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Consilium과 다중 도메인 도달 범위</h3>
+          <p class="credit-card__desc">
+            그 "consilium"은 결정을 추천하기 전에 트레이드오프를 토론하는 에이전트
+            패널을 소집합니다. 그리고 소프트웨어 전용도 아닙니다 — Datarim은 연구,
+            법률, 콘텐츠 워크플로우도 대상으로 합니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Feature comparison table ── */}
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">기능 비교.</h2>
+        <p class="section-note">
+          하나는 워크플로우, 다른 하나는 형식입니다 — 표는 승자가 아니라 역할을 비교합니다.
+        </p>
+
+        <div class="table-wrap">
+          <table class="compare-table" aria-label="SpecScore vs Datarim 기능 비교">
+            <thead>
+              <tr>
+                <th scope="col">기능</th>
+                <th scope="col">Datarim</th>
+                <th scope="col">SpecScore</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>주요 역할</td>
+                <td>Claude Code 워크플로우 팩</td>
+                <td><strong>개방형 스펙 형식 + CLI</strong></td>
+              </tr>
+              <tr>
+                <td>실행 방식</td>
+                <td>슬래시 명령 (<code>/dr-*</code>)</td>
+                <td>형식 파일 + CLI <span class="dim">(+ Claude Code의 SpecStudio Skills)</span></td>
+              </tr>
+              <tr>
+                <td>상태 저장</td>
+                <td><code>backlog.md</code> + <code>CLAUDE.md</code> (워크플로우 형태)</td>
+                <td><strong>이식 가능한 <code>spec/</code> 트리</strong> (Markdown + YAML)</td>
+              </tr>
+              <tr>
+                <td>도구 없이도 유지됨</td>
+                <td>Datarim 런타임에 묶임</td>
+                <td><strong>예</strong> — 구조상 이식 가능</td>
+              </tr>
+              <tr>
+                <td>스펙 linting</td>
+                <td>없음</td>
+                <td><strong>콘텐츠 품질</strong> — 모호한 동사, 누락된 인수 기준, 끊어진 참조</td>
+              </tr>
+              <tr>
+                <td>요구사항 / 인수 기준 ID</td>
+                <td>없음</td>
+                <td><strong>기계 주소 지정 가능 ID</strong> (<code>REQ: slug</code>)</td>
+              </tr>
+              <tr>
+                <td>코드-스펙 추적성</td>
+                <td>없음</td>
+                <td><strong><code>specscore:</code> 어노테이션</strong> + <code>Verifies:</code> 트레일러</td>
+              </tr>
+              <tr>
+                <td>복잡도 라우팅 (L1–L4)</td>
+                <td><strong>예</strong></td>
+                <td>아니오 (워크플로우가 아니라 형식)</td>
+              </tr>
+              <tr>
+                <td>쿼리 가능한 스펙 그래프</td>
+                <td>아니오</td>
+                <td><strong>예</strong> — <code>feature list / show / deps</code></td>
+              </tr>
+              <tr>
+                <td>Claude Code에 묶임</td>
+                <td>그것을 위해 만들어짐</td>
+                <td><strong>아니오</strong> — 모든 에이전트, 또는 에이전트 없이도</td>
+              </tr>
+              <tr>
+                <td>라이선스</td>
+                <td>MIT</td>
+                <td>MIT / CC BY 4.0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Where SpecScore goes further ── */}
+    <section class="section" aria-labelledby="further-title">
+      <div class="section-inner">
+        <h2 id="further-title" class="section-title">SpecScore가 더하는 것.</h2>
+
+        <div class="diff-grid">
+          <div class="diff-card">
+            <h3 class="diff-card__title">출력이 워크플로우보다 오래 살아남습니다</h3>
+            <p class="diff-card__desc">
+              Datarim의 상태는 자체 백로그와 <code>CLAUDE.md</code> 형태로 존재합니다 —
+              Datarim을 실행하는 동안에는 가치가 있죠. SpecScore 스펙은 SpecScore
+              툴이 전혀 설치되지 않아도 읽고, lint하고, 쿼리할 수 있는 이식 가능한
+              형식입니다. 워크플로우는 바뀔 수 있습니다; 스펙은 당신과 함께 갑니다.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">스펙이 lint 가능합니다</h3>
+            <p class="diff-card__desc">
+              워크플로우는 작성을 안내하지만 결과를 게이트하지는 않습니다.
+              SpecScore의 <code>lint</code>는 모든 요구사항에 인수 기준이 있는지,
+              상호 참조가 해석되는지, 상태 전환이 유효한지 검사합니다.
+            </p>
+            <div class="diff-card__example">
+<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+  <span class="mark-fail">✗</span> R3  no acceptance criteria
+  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
+            </div>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">코드가 스펙으로 추적됩니다</h3>
+            <p class="diff-card__desc">
+              SpecScore는 <code>specscore:</code> 소스 어노테이션과
+              <code>Verifies:</code> 커밋 트레일러를 더합니다 — <code>specscore code refs</code>는
+              "어떤 코드가 이 요구사항을 구현하는가?"에 결정적으로 답합니다.
+              스펙을 만든 워크플로우와 무관하게요.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">하나의 에이전트에 묶이지 않음</h3>
+            <p class="diff-card__desc">
+              Datarim은 Claude Code를 위해 만들어졌습니다. SpecScore는 어떤 에이전트든
+              읽을 수 있는 형식이며, 어떤 CI든 실행할 수 있는 단일 Go 바이너리입니다 —
+              Claude Code도, <code>~/.claude/</code> 설치도 필요 없습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── When to use which ── */}
+    <section class="section" aria-labelledby="when-title">
+      <div class="section-inner">
+        <h2 id="when-title" class="section-title">언제 어떤 것을 사용할까.</h2>
+
+        <div class="when-grid">
+          <div class="when-card">
+            <h3 class="when-card__title">Datarim을 선택하세요…</h3>
+            <ul class="when-card__list">
+              <li>오늘 당장 Claude Code 안에서 완결적이고 의견이 분명한 파이프라인을 원하는 경우.</li>
+              <li>복잡도 인식 라우팅과 다중 에이전트 의사결정 의례를 중시하는 경우.</li>
+              <li>작업이 도메인을 넘나드는 경우 — 코드뿐 아니라 연구, 법률, 콘텐츠까지.</li>
+            </ul>
+          </div>
+
+          <div class="when-card when-card--primary">
+            <h3 class="when-card__title">SpecScore를 사용하세요…</h3>
+            <ul class="when-card__list">
+              <li>어떤 단일 워크플로우나 도구보다 오래 살아남는 스펙을 원하는 경우.</li>
+              <li>lint, ID, 라이프사이클, 코드-스펙 추적성이 필요한 경우.</li>
+              <li>Claude Code뿐 아니라 여러 에이전트를 — 또는 아무것도 없이 — 넘나들며 작업하는 경우.</li>
+              <li>에이전트가 저장소를 다시 읽는 대신 쿼리할 수 있는 CLI를 원하는 경우.</li>
+              <li>0이 아닌 코드로 종료하는 CI의 스펙 품질 게이트가 필요한 경우.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Two packs, one format ── */}
+    <section class="section" aria-labelledby="bridge-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="bridge-title" class="section-title">두 개의 워크플로우 팩, 하나의 개방형 형식.</h2>
+        <p class="prose-p">
+          Datarim과 SpecStudio Skills는 둘 다 Claude Code 위에 얹은 의견이 분명한
+          워크플로우입니다. SpecScore는 그 아래에 있는 개방형 형식입니다 — 파이프라인이
+          끝난 후에도 스펙이 이식 가능하고, lint 가능하며, 추적 가능하도록 워크플로우가
+          생산할 수 있는 아티팩트죠. SpecScore를 내보내는 Datarim은 그 UX를 유지하면서
+          지속적인 출력을 얻을 것입니다.
+        </p>
+        <p class="prose-p">
+          파이프라인을 위해서는 Datarim을 선택하세요. 그것이 남기는 아티팩트를 위해서는
+          SpecScore를 사용하세요.
+        </p>
+      </div>
+    </section>
+
+    <ComparisonFeedback page="datarim" />
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">통과하는 스펙.</h2>
+      <div class="final-cta__buttons">
+        <a href="/cli/install/" class="btn btn--primary">CLI 설치하기</a>
+        <a href="/ai/specstudio-skills/" class="btn btn--secondary">에이전트용 AI 스킬 받기</a>
+        <a
+          href="https://github.com/specscore/specscore"
+          rel="noopener"
+          class="btn btn--tertiary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          GitHub에서 오픈소스로 공개
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <SiteFooterKo />
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__breadcrumb {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    margin-bottom: var(--space-2);
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Shared list ── */
+  .shared-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .shared-list li {
+    position: relative;
+    padding-left: 1.4rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+  }
+  .shared-list li::before {
+    content: '=';
+    position: absolute;
+    left: 0;
+    font-family: var(--font-code);
+    font-weight: 700;
+    color: var(--pale-ink);
+  }
+
+  /* ── Section note ── */
+  .section-note {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Credit cards ── */
+  .credit-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .credit-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .credit-card__desc {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    font-size: var(--fs-body);
+  }
+  .credit-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Feature comparison table ── */
+  .table-section { background: var(--cream-2); }
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+  .compare-table th,
+  .compare-table td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+  }
+  .compare-table thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    border-bottom: 2px solid var(--graphite);
+    white-space: nowrap;
+  }
+  .compare-table td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 160px;
+  }
+  .compare-table td:nth-child(2),
+  .compare-table td:nth-child(3) {
+    min-width: 200px;
+  }
+  .compare-table td code {
+    font-size: 0.88em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .compare-table strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .compare-table .dim {
+    color: var(--pale-ink);
+  }
+
+  /* ── Diff grid ── */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .diff-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+  }
+  .diff-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .diff-card__desc {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+  .diff-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .diff-card__example {
+    margin-top: var(--space-2);
+  }
+  .diff-card__example .terminal {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 860px) {
+    .diff-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── When to use which ── */
+  .when-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .when-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-4);
+  }
+  .when-card--primary {
+    border-color: var(--validator-green);
+    border-width: 2px;
+  }
+  .when-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .when-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .when-card__list li {
+    position: relative;
+    padding-left: 1.2rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+    font-size: var(--fs-small);
+  }
+  .when-card__list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--pale-ink);
+    font-family: var(--font-code);
+  }
+  .when-card--primary .when-card__list li::before {
+    color: var(--validator-green);
+  }
+  .when-card__list code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 860px) {
+    .when-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Bridge section ── */
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-2);
+  }
+  .prose-p:last-child {
+    margin-bottom: 0;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .prose-p code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+</style>
