@@ -71,6 +71,16 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
             </p>
             <span class="compare-card__cta">Read the comparison →</span>
           </a>
+
+          <a href="/vs/datarim/" class="compare-card">
+            <h3 class="compare-card__name">SpecScore vs Datarim</h3>
+            <p class="compare-card__desc">
+              A Claude Code workflow pack vs an open format. Datarim runs the
+              pipeline; SpecScore is the portable, lintable artifact a workflow
+              can leave behind.
+            </p>
+            <span class="compare-card__cta">Read the comparison →</span>
+          </a>
         </div>
       </div>
     </section>
@@ -85,7 +95,7 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
         </p>
 
         <div class="table-wrap">
-          <table class="matrix-table" aria-label="SpecScore vs plain Markdown, OpenSpec, Spec Kit, and CodeSpeak">
+          <table class="matrix-table" aria-label="SpecScore vs plain Markdown, OpenSpec, Spec Kit, Datarim, and CodeSpeak">
             <thead>
               <tr>
                 <th scope="col">Capability</th>
@@ -93,6 +103,7 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
                 <th scope="col">Plain Markdown</th>
                 <th scope="col">OpenSpec</th>
                 <th scope="col">Spec Kit</th>
+                <th scope="col">Datarim</th>
                 <th scope="col">CodeSpeak</th>
               </tr>
             </thead>
@@ -103,6 +114,7 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
                 <td>Freeform docs (the default)</td>
                 <td>Spec organization framework</td>
                 <td>Workflow / methodology</td>
+                <td>Claude Code workflow pack</td>
                 <td>LLM compiler (spec → code)</td>
               </tr>
               <tr>
@@ -111,11 +123,13 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
                 <td>Freeform Markdown</td>
                 <td>Markdown</td>
                 <td>Freeform Markdown</td>
+                <td>Markdown (workflow-shaped)</td>
                 <td>Plain English</td>
               </tr>
               <tr>
                 <td>You keep your code</td>
                 <td class="matrix-table__own"><span class="yes">Yes</span></td>
+                <td><span class="yes">Yes</span></td>
                 <td><span class="yes">Yes</span></td>
                 <td><span class="yes">Yes</span></td>
                 <td><span class="yes">Yes</span></td>
@@ -127,6 +141,7 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
                 <td><span class="yes">Free</span></td>
                 <td><span class="yes">Yes</span> (MIT)</td>
                 <td><span class="yes">Yes</span> (MIT)</td>
+                <td><span class="yes">Yes</span> (MIT)</td>
                 <td><span class="no">Proprietary system</span></td>
               </tr>
               <tr>
@@ -135,11 +150,13 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
                 <td><span class="no">No</span></td>
                 <td>Structure only</td>
                 <td><span class="no">No</span></td>
+                <td><span class="no">No</span></td>
                 <td>Not documented</td>
               </tr>
               <tr>
                 <td>Requirement / AC IDs</td>
                 <td class="matrix-table__own"><span class="yes">Yes</span></td>
+                <td><span class="no">No</span></td>
                 <td><span class="no">No</span></td>
                 <td><span class="no">No</span></td>
                 <td><span class="no">No</span></td>
@@ -152,10 +169,12 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
                 <td><span class="no">No</span></td>
                 <td><span class="no">No</span></td>
                 <td><span class="no">No</span></td>
+                <td><span class="no">No</span></td>
               </tr>
               <tr>
                 <td>Code-to-spec traceability</td>
                 <td class="matrix-table__own"><span class="yes">Yes</span></td>
+                <td><span class="no">No</span></td>
                 <td><span class="no">No</span></td>
                 <td><span class="no">No</span></td>
                 <td><span class="no">No</span></td>
@@ -167,6 +186,7 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
                 <td>None</td>
                 <td>Node.js</td>
                 <td>Python</td>
+                <td>Claude Code</td>
                 <td>Vendor compiler</td>
               </tr>
               <tr>
@@ -175,6 +195,7 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
                 <td>Read every file</td>
                 <td>Many agents</td>
                 <td>Many agents</td>
+                <td>Claude Code</td>
                 <td>Through CodeSpeak</td>
               </tr>
             </tbody>
