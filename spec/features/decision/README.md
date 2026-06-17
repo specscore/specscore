@@ -203,7 +203,7 @@ Decision status values conform to the shared [status-vocabulary](../status-vocab
 | `Draft` | Author is drafting; body may change freely. Not yet under review. |
 | `In Review` | Drafted decision is being reviewed before adoption. Body may still change. |
 | `Approved` | Decision is adopted and in force. Body is frozen except `Observed Consequences`. |
-| `Rejected` | Decision was considered at review and turned down; it was never adopted. |
+| `Rejected` | Decision was considered at review and turned down; it was never adopted. File is moved to `spec/decisions/archived/`. `**Superseded By:**` remains `—`. |
 | `Superseded` | A newer Decision replaces this one. File is moved to `spec/decisions/archived/`. `**Superseded By:**` points to the successor. |
 | `Deprecated` | Decision is no longer in force but has no successor ("don't follow this anymore"). File is moved to `spec/decisions/archived/`. `**Superseded By:**` remains `—`. |
 
@@ -229,11 +229,11 @@ The `**Status:**` value MUST be one of: `Draft`, `In Review`, `Approved`, `Rejec
 
 #### REQ: archived-location
 
-A Decision with `Status: Superseded` or `Status: Deprecated` MUST reside at `spec/decisions/archived/<NNNN>-<slug>.md`. A Decision file at the top level of `spec/decisions/` with either status is a validation error, as is a Superseded or Deprecated file outside that directory. Moving the file is part of the status transition.
+A Decision with `Status: Superseded`, `Status: Deprecated`, or `Status: Rejected` MUST reside at `spec/decisions/archived/<NNNN>-<slug>.md`. A Decision file at the top level of `spec/decisions/` with any of these statuses is a validation error, as is a Superseded, Deprecated, or Rejected file outside that directory. Moving the file is part of the status transition. (`Draft`, `In Review`, and `Approved` Decisions remain at the top level of `spec/decisions/`.)
 
 #### REQ: superseded-requires-successor
 
-A Decision with `Status: Superseded` MUST have a non-empty `**Superseded By:**` field whose value is an existing Decision ID. A Decision with `Status: Deprecated` MUST have `**Superseded By:**` equal to `—`.
+A Decision with `Status: Superseded` MUST have a non-empty `**Superseded By:**` field whose value is an existing Decision ID. A Decision with `Status: Deprecated` or `Status: Rejected` MUST have `**Superseded By:**` equal to `—`.
 
 ### Immutability
 
@@ -324,7 +324,7 @@ Decisions do not carry an Open Questions section. An Approved Decision has no op
 |---|---|
 | [Idea](../idea/README.md) | A Decision MAY reference a source Idea via `**Source Idea:**`. The link is optional and one-directional; Ideas are not updated when a Decision cites them. |
 | [Feature](../feature/README.md) | A Decision lists constrained Features in `## Affected Features`. Feature READMEs MAY cite Decisions in prose but carry no managed back-link in this revision. |
-| [Decisions Index](../decisions-index/README.md) | Every active Decision has a row in `spec/decisions/README.md`. Every Superseded or Deprecated Decision has an entry in `spec/decisions/archived/README.md`. Completeness is enforced by the Decisions-Index feature. |
+| [Decisions Index](../decisions-index/README.md) | Every active Decision has a row in `spec/decisions/README.md`. Every Rejected, Superseded, or Deprecated Decision has an entry in `spec/decisions/archived/README.md`. Completeness is enforced by the Decisions-Index feature. |
 | [Adherence Footer](../adherence-footer/README.md) | Every Decision ends with a footer delegating to the Adherence Footer feature. URL: `https://specscore.md/decision-specification`. |
 | [Document Types Registry](../document-types-registry/README.md) | Decision is a `Document` Kind with URL `https://specscore.md/decision-specification` and Consumer Path `spec/decisions/**/*.md`. Its Index cross-reference is `decisions-index`. |
 | [Status Vocabulary](../status-vocabulary/README.md) | Canonical source of truth for Decision status values (`Draft`, `In Review`, `Approved`, `Rejected`, `Superseded`, `Deprecated`). The move from the legacy ADR words `Proposed`/`Accepted` to the shared prep band (`Draft` → `In Review` → `Approved`, with `Approved` doubling as the in-force state) was a deliberate cross-artifact consistency choice governed there. |
@@ -361,7 +361,7 @@ Every Decision filename matches `NNNN-<slug>.md`. Numbers are sequential (gaps p
 
 **Requirements:** decision#req:archived-location, decision#req:superseded-requires-successor, decision#req:superseded-by-managed, decision#req:supersedes-target-exists, decision#req:supersedes-bidirectional
 
-Superseded and Deprecated Decisions reside in `spec/decisions/archived/`. Superseded Decisions have non-empty `**Superseded By:**` pointing to an existing successor. `**Supersedes:**` and `**Superseded By:**` remain bidirectionally consistent; drift is a lint error.
+Rejected, Superseded, and Deprecated Decisions reside in `spec/decisions/archived/`. Superseded Decisions have non-empty `**Superseded By:**` pointing to an existing successor. `**Supersedes:**` and `**Superseded By:**` remain bidirectionally consistent; drift is a lint error.
 
 ### AC: immutability
 

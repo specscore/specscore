@@ -12,9 +12,9 @@ status: Approved
 
 ## Summary
 
-The decisions index — `spec/decisions/README.md` — is the canonical entry point for reviewing the architectural, product, and process choices made in a SpecScore repository. It inherits the shared shape of every SpecScore index from the [Index feature](../index/README.md) and declares only the decisions-specific overrides: the Index column set, the numeric ordering rule, and the exclusion of Superseded and Deprecated Decisions from the active index.
+The decisions index — `spec/decisions/README.md` — is the canonical entry point for reviewing the architectural, product, and process choices made in a SpecScore repository. It inherits the shared shape of every SpecScore index from the [Index feature](../index/README.md) and declares only the decisions-specific overrides: the Index column set, the numeric ordering rule, and the exclusion of Rejected, Superseded, and Deprecated Decisions from the active index.
 
-Superseded and Deprecated Decisions live at `spec/decisions/archived/README.md` in a chronological list (oldest first), per the [Decision feature's](../decision/README.md) archival rule. This feature covers only the active index; the archived index shape is specified within the Decision feature.
+Rejected, Superseded, and Deprecated Decisions live at `spec/decisions/archived/README.md` in a chronological list (oldest first), per the [Decision feature's](../decision/README.md) archival rule. This feature covers only the active index; the archived index shape is specified within the Decision feature.
 
 ## Problem
 
@@ -54,7 +54,7 @@ The Decisions table MUST include columns for #, Decision, Status, Date, Tags, an
 
 #### REQ: status-excludes-archived
 
-The Decisions table MUST NOT list any Decision whose `**Status:**` is `Superseded` or `Deprecated`. Archived Decisions MUST appear only in `spec/decisions/archived/README.md`. This REQ refines the shared [Index#req:completeness](../index/README.md#req-completeness): the universe for completeness is active Decisions only. Transitioning a Decision to `Superseded` or `Deprecated` triggers its removal from this index.
+The Decisions table MUST NOT list any Decision whose `**Status:**` is `Rejected`, `Superseded`, or `Deprecated`. Archived Decisions MUST appear only in `spec/decisions/archived/README.md`. This REQ refines the shared [Index#req:completeness](../index/README.md#req-completeness): the universe for completeness is active Decisions only. Transitioning a Decision to `Rejected`, `Superseded`, or `Deprecated` triggers its removal from this index.
 
 #### REQ: numeric-ordering
 
@@ -62,13 +62,13 @@ Rows in the Decisions table MUST appear in ascending order by the `#` column. A 
 
 ### Archived index (separate file)
 
-The archived decisions index at `spec/decisions/archived/README.md` is shaped by the [Decision feature's](../decision/README.md) archival rules, not this feature. It is a chronological list (oldest first) of Superseded and Deprecated Decisions, with each entry of the form:
+The archived decisions index at `spec/decisions/archived/README.md` is shaped by the [Decision feature's](../decision/README.md) archival rules, not this feature. It is a chronological list (oldest first) of Rejected, Superseded, and Deprecated Decisions, with each entry of the form:
 
 ```markdown
 - YYYY-MM-DD — [NNNN-slug](NNNN-slug.md) — <Status> — <reason or successor reference>
 ```
 
-The `reason or successor reference` is the successor Decision ID (`→ D-0042`) for Superseded entries, or the first paragraph of the Decision's `## Context` for Deprecated entries.
+The `reason or successor reference` is the successor Decision ID (`→ D-0042`) for Superseded entries, or the first paragraph of the Decision's `## Context` for Deprecated and Rejected entries.
 
 #### REQ: archived-index-chronological
 
@@ -101,13 +101,13 @@ The list-holding section uses the heading `## Decisions`. Other headings are rej
 
 **Requirements:** decisions-index#req:index-columns, decisions-index#req:status-excludes-archived, decisions-index#req:numeric-ordering
 
-The Decisions table includes all required columns (#, Decision, Status, Date, Tags, Affected) in order, excludes Superseded and Deprecated Decisions entirely, and appears in ascending numeric order by `#`.
+The Decisions table includes all required columns (#, Decision, Status, Date, Tags, Affected) in order, excludes Rejected, Superseded, and Deprecated Decisions entirely, and appears in ascending numeric order by `#`.
 
 ### AC: archived-index
 
 **Requirements:** decisions-index#req:archived-index-chronological
 
-The archived index at `spec/decisions/archived/README.md` lists every Superseded and Deprecated Decision in chronological order by `**Date:**` (oldest first). Ordering violations are rejected by lint and auto-fixable.
+The archived index at `spec/decisions/archived/README.md` lists every Rejected, Superseded, and Deprecated Decision in chronological order by `**Date:**` (oldest first). Ordering violations are rejected by lint and auto-fixable.
 
 ### AC: adherence-footer
 
