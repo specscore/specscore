@@ -1,12 +1,13 @@
 # Idea: Plan Status Lifecycle — Prep, Execution, and Disposition in One Field
 
-**Status:** Archived
+**Status:** Stale
+**Archived:** true
 **Date:** 2026-06-04
 **Owner:** alexander.trakhimenok
 **Promotes To:** —
 **Supersedes:** —
 **Related Ideas:** —
-**Archive Reason:** Realized (not abandoned) — specified in place by amending the canonical `plan` Feature; the idea-lifecycle has no terminal status for an amendment-only idea (Specifying+ requires a `Promotes To` target), so it is archived as done. Remaining CLI work is tracked in the `plan` Feature's Open Questions.
+**Archive Note:** Realized (not abandoned) — specified in place by amending the canonical `plan` Feature; the idea-lifecycle has no terminal status for an amendment-only idea (Specifying+ requires a `Promotes To` target), so it is archived as done. Remaining CLI work is tracked in the `plan` Feature's Open Questions.
 
 ## Problem Statement
 

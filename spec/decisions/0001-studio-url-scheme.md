@@ -1,11 +1,11 @@
 ---
 format: https://specscore.md/decision-specification
-status: Accepted
+status: Approved
 ---
 
 # Decision: SpecScore Studio Deep-Link URL Scheme
 
-**Status:** Accepted
+**Status:** Approved
 **Date:** 2026-05-22
 **Owner:** alexander.trakhimenok@gmail.com
 **Tags:** url, studio, contract, branding, security

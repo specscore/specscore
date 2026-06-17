@@ -1,11 +1,11 @@
 ---
 format: https://specscore.md/decision-specification
-status: Accepted
+status: Approved
 ---
 
 # Decision: Recap/Verify Storage, Surfacing, and the Producer/Gate Boundary
 
-**Status:** Accepted
+**Status:** Approved
 **Date:** 2026-06-02
 **Owner:** alexander.trakhimenok@gmail.com
 **Tags:** recap, verify, storage, hub, ci, agent-session, portfolio
