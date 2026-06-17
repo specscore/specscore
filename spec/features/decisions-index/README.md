@@ -43,7 +43,7 @@ The Decisions section holds a table with one row per active Decision. Required c
 |---|---|
 | # | Zero-padded four-digit Decision number, linked to the Decision file — e.g. `[0007](0007-postgres-over-mongo.md)` |
 | Decision | Plain-text title of the Decision (the part after `# Decision:` in the target file) |
-| Status | One of `Proposed` \| `Accepted` — the Decision's current `**Status:**`. `Superseded` and `Deprecated` Decisions are NEVER listed here. |
+| Status | One of `Draft` \| `In Review` \| `Approved` — the Decision's current `**Status:**` (for a Decision, `Approved` is the in-force state). `Rejected`, `Superseded`, and `Deprecated` Decisions are NEVER listed here. |
 | Date | The Decision's `**Date:**` field (`YYYY-MM-DD`) |
 | Tags | Comma-separated list from the Decision's `**Tags:**` field — or `—` when empty |
 | Affected | Comma-separated list of Feature slugs from the Decision's `## Affected Features` section — or `—` when empty |

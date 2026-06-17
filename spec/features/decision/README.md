@@ -14,7 +14,7 @@ status: Approved
 
 A decision is a **durable, lintable record of a choice made between two or more options** — what was chosen, why, what was declined, and what consequences were predicted and then observed. Decisions are SpecScore's Architecture-Decision-Record primitive, adapted to SpecScore conventions (markdown-body metadata, REQ blocks, AC blocks, adherence footer).
 
-A decision artifact is a single file at `spec/decisions/<NNNN>-<slug>.md` with fixed header fields and a fixed section schema. Decisions are **immutable once Accepted** — the body is frozen and further change requires a successor decision that supersedes the prior one. One section — `Observed Consequences` — is append-only and remains mutable for post-hoc observations.
+A decision artifact is a single file at `spec/decisions/<NNNN>-<slug>.md` with fixed header fields and a fixed section schema. Decisions are **immutable once Approved** — the body is frozen and further change requires a successor decision that supersedes the prior one. One section — `Observed Consequences` — is append-only and remains mutable for post-hoc observations.
 
 ## Problem
 
@@ -24,7 +24,7 @@ SpecScore already has artifacts for what will be built (`feature`), how it will 
 - **Superseded choices lose their audit chain.** When a team reverses course, the prior reasoning vanishes. Future reviewers cannot tell the difference between "we tried it and it failed" and "we never considered it in the first place."
 - **Implementation-time trade-offs have nowhere to live.** An Idea's `Alternatives Considered` section captures *pre-spec* options. Mid-implementation forks (sync vs async, library A vs library B, migrate now vs later) and externally-forced choices (compliance, vendor constraint) do not fit the Idea schema and end up undocumented.
 
-The Decision feature fills that gap with a typed, lintable artifact for "we chose X over Y and Z because …", numbered for citation, immutable once accepted, and superseded — never rewritten — when course changes.
+The Decision feature fills that gap with a typed, lintable artifact for "we chose X over Y and Z because …", numbered for citation, immutable once approved, and superseded — never rewritten — when course changes.
 
 ## Design Philosophy
 
@@ -46,8 +46,8 @@ Key tenets:
 
 - **Write at the point of choice.** Retrofitted decisions are vapid. A Decision is authored when the choice is being made — not reconstructed a week later.
 - **Declined alternatives are first-class.** The reason a future engineer opens a Decision is usually "why didn't we just do Y?" That answer must already be written.
-- **Immutable body, append-only observation.** Once Accepted, the body is frozen forever. `Observed Consequences` is the sole append-only exception — it is where reality gets compared to prediction.
-- **Supersede, never rewrite.** Course changes produce a new Decision that points at the old one. The old Decision stays readable as the state of thinking on the date it was accepted.
+- **Immutable body, append-only observation.** Once Approved, the body is frozen forever. `Observed Consequences` is the sole append-only exception — it is where reality gets compared to prediction.
+- **Supersede, never rewrite.** Course changes produce a new Decision that points at the old one. The old Decision stays readable as the state of thinking on the date it was approved.
 - **Stable numeric ID.** Decisions are numbered `NNNN-<slug>` for short citation (`D-0007`) in PRs, commits, and prose. Numbers are assigned at creation and never reused.
 
 ## Behavior
@@ -99,7 +99,7 @@ Decisions use the same markdown-body metadata convention as Features and Ideas �
 ```markdown
 # Decision: <Decision Title>
 
-**Status:** Proposed
+**Status:** Draft
 **Date:** YYYY-MM-DD
 **Owner:** <author identifier>
 **Tags:** — *(optional; comma-separated free-form tags)*
@@ -182,8 +182,8 @@ A Decision MUST include these sections, in this order:
 | Decision | Yes | The chosen option, stated briefly. |
 | Rationale | Yes | Why this option won. |
 | Declined Alternatives | Yes | See [REQ: declined-alternatives-non-empty](#req-declined-alternatives-non-empty). |
-| Consequences at Decision Time | Yes | Written at decision time. Immutable after Accepted. |
-| Observed Consequences | Yes | Empty state: "None observed yet." Append-only after Accepted. |
+| Consequences at Decision Time | Yes | Written at decision time. Immutable after Approved. |
+| Observed Consequences | Yes | Empty state: "None observed yet." Append-only after Approved. |
 | Affected Features | Yes | May be `None at this time.` when no Features are touched. |
 
 #### REQ: declined-alternatives-non-empty
@@ -196,28 +196,36 @@ At creation, the `Observed Consequences` section MUST contain the literal text `
 
 ### Status lifecycle
 
+Decision status values conform to the shared [status-vocabulary](../status-vocabulary/README.md). For a Decision, `Approved` plays a per-artifact role: it is both the shared-band "approved" value **and** the in-force state — once `Approved`, the decision is adopted and its body becomes frozen (the immutable-body discipline below). There is no separate "in force" status after `Approved`; the live decision rests at `Approved` until it is `Superseded` or `Deprecated`.
+
 | Status | Description |
 |---|---|
-| `Proposed` | Author is drafting; body may change freely. Not yet authoritative. |
-| `Accepted` | Decision is in force. Body is frozen except `Observed Consequences`. |
+| `Draft` | Author is drafting; body may change freely. Not yet under review. |
+| `In Review` | Drafted decision is being reviewed before adoption. Body may still change. |
+| `Approved` | Decision is adopted and in force. Body is frozen except `Observed Consequences`. |
+| `Rejected` | Decision was considered at review and turned down; it was never adopted. |
 | `Superseded` | A newer Decision replaces this one. File is moved to `spec/decisions/archived/`. `**Superseded By:**` points to the successor. |
 | `Deprecated` | Decision is no longer in force but has no successor ("don't follow this anymore"). File is moved to `spec/decisions/archived/`. `**Superseded By:**` remains `—`. |
 
 ```mermaid
 graph LR
-    A["Proposed"]
-    B["Accepted"]
-    C["Superseded"]
+    A["Draft"]
+    B["In Review"]
+    C["Approved"]
+    R["Rejected"]
+    S["Superseded"]
     D["Deprecated"]
 
-    A -->|accept| B
-    B -->|new Decision supersedes| C
-    B -->|no longer applies| D
+    A -->|submit for review| B
+    B -->|approve| C
+    B -->|turn down| R
+    C -->|new Decision supersedes| S
+    C -->|no longer applies| D
 ```
 
 #### REQ: status-values
 
-The `**Status:**` value MUST be one of: `Proposed`, `Accepted`, `Superseded`, `Deprecated`. Any other value is a validation error.
+The `**Status:**` value MUST be one of: `Draft`, `In Review`, `Approved`, `Rejected`, `Superseded`, `Deprecated`. Any other value is a validation error.
 
 #### REQ: archived-location
 
@@ -229,17 +237,17 @@ A Decision with `Status: Superseded` MUST have a non-empty `**Superseded By:**` 
 
 ### Immutability
 
-Accepted Decisions are immutable except for the `Observed Consequences` section. This is the feature's central discipline — without it, Decisions stop being trustworthy historical records.
+Approved Decisions are immutable except for the `Observed Consequences` section. This is the feature's central discipline — without it, Decisions stop being trustworthy historical records.
 
-#### REQ: immutability-once-accepted
+#### REQ: immutability-once-approved
 
-Once a Decision's `**Status:**` becomes `Accepted`, the body of every section EXCEPT `Observed Consequences` MUST NOT change. Lint MAY enforce this via a body-hash check stored out-of-band, or by treating any edit to an Accepted Decision (other than to `Observed Consequences`, `**Status:**`, or `**Superseded By:**`) as a validation error. Tooling details are left to the implementation; the invariant is non-negotiable.
+Once a Decision's `**Status:**` becomes `Approved`, the body of every section EXCEPT `Observed Consequences` MUST NOT change. Lint MAY enforce this via a body-hash check stored out-of-band, or by treating any edit to an Approved Decision (other than to `Observed Consequences`, `**Status:**`, or `**Superseded By:**`) as a validation error. Tooling details are left to the implementation; the invariant is non-negotiable.
 
 Editorial fixes (typo corrections, link repair, adherence-footer updates) are a known tension. This revision does NOT carve out an exception; fixes require a successor Decision. If this proves too strict in practice, a future revision may introduce a narrow `editorial` severity for whitespace- and punctuation-only diffs.
 
 #### REQ: observed-consequences-append-only
 
-Edits to the `Observed Consequences` section of an Accepted Decision MUST be additive only. Existing entries MUST NOT be modified or removed. New entries SHOULD be dated (`YYYY-MM-DD — <observation>`). Lint MAY enforce append-only semantics by comparing the section against its prior state; at minimum it MUST NOT flag additions as immutability violations.
+Edits to the `Observed Consequences` section of an Approved Decision MUST be additive only. Existing entries MUST NOT be modified or removed. New entries SHOULD be dated (`YYYY-MM-DD — <observation>`). Lint MAY enforce append-only semantics by comparing the section against its prior state; at minimum it MUST NOT flag additions as immutability violations.
 
 ### Supersession
 
@@ -280,7 +288,7 @@ The `specscore` CLI MUST provide `specscore decision new <slug>` that scaffolds 
 - **Number assignment.** The CLI determines the next sequence number per [REQ: number-assignment](#req-number-assignment) and embeds it in the filename. Authors do not supply the number.
 - **Pre-population.** Each required section is emitted with an inline HTML-comment prompt describing what belongs there. `Observed Consequences` is pre-populated with `None observed yet.` to satisfy [REQ: observed-consequences-placeholder](#req-observed-consequences-placeholder).
 - **Argument injection.** Values supplied via flags (`--title`, `--owner`, `--source-idea`, `--supersedes`, `--tags`, etc.) replace the corresponding prompt with real content.
-- **Always lint-clean on exit.** A generated file MUST pass `specscore lint` immediately — the inline prompts and `—` placeholders are designed so an untouched scaffold already validates (with `Status: Proposed`).
+- **Always lint-clean on exit.** A generated file MUST pass `specscore lint` immediately — the inline prompts and `—` placeholders are designed so an untouched scaffold already validates (with `Status: Draft`).
 
 #### REQ: authoring-agnostic
 
@@ -308,7 +316,7 @@ Decisions constrain Features but do not own them. A Feature README MAY cite one 
 
 ### Decisions and open questions
 
-Decisions do not carry an Open Questions section. An Accepted Decision has no open questions — that is the point. Open questions at authoring time belong in the `## Context` section as named unknowns.
+Decisions do not carry an Open Questions section. An Approved Decision has no open questions — that is the point. Open questions at authoring time belong in the `## Context` section as named unknowns.
 
 ## Interaction with Other Features
 
@@ -319,6 +327,7 @@ Decisions do not carry an Open Questions section. An Accepted Decision has no op
 | [Decisions Index](../decisions-index/README.md) | Every active Decision has a row in `spec/decisions/README.md`. Every Superseded or Deprecated Decision has an entry in `spec/decisions/archived/README.md`. Completeness is enforced by the Decisions-Index feature. |
 | [Adherence Footer](../adherence-footer/README.md) | Every Decision ends with a footer delegating to the Adherence Footer feature. URL: `https://specscore.md/decision-specification`. |
 | [Document Types Registry](../document-types-registry/README.md) | Decision is a `Document` Kind with URL `https://specscore.md/decision-specification` and Consumer Path `spec/decisions/**/*.md`. Its Index cross-reference is `decisions-index`. |
+| [Status Vocabulary](../status-vocabulary/README.md) | Canonical source of truth for Decision status values (`Draft`, `In Review`, `Approved`, `Rejected`, `Superseded`, `Deprecated`). The move from the legacy ADR words `Proposed`/`Accepted` to the shared prep band (`Draft` → `In Review` → `Approved`, with `Approved` doubling as the in-force state) was a deliberate cross-artifact consistency choice governed there. |
 
 ## Dependencies
 
@@ -356,9 +365,9 @@ Superseded and Deprecated Decisions reside in `spec/decisions/archived/`. Supers
 
 ### AC: immutability
 
-**Requirements:** decision#req:immutability-once-accepted, decision#req:observed-consequences-append-only
+**Requirements:** decision#req:immutability-once-approved, decision#req:observed-consequences-append-only
 
-An Accepted Decision's body is immutable except for `Observed Consequences`, which is append-only. Edits to any other section of an Accepted Decision fail lint. Appends to `Observed Consequences` are accepted; modifications or removals of existing entries are rejected.
+An Approved Decision's body is immutable except for `Observed Consequences`, which is append-only. Edits to any other section of an Approved Decision fail lint. Appends to `Observed Consequences` are accepted; modifications or removals of existing entries are rejected.
 
 ### AC: affected-features
 
@@ -384,7 +393,7 @@ None at this time.
 
 ## Open Questions
 
-- **Editorial carve-out: resolved — yes.** Lint should provide an `editorial` severity carve-out for whitespace- and punctuation-only diffs on Accepted Decisions. The strict rule proved too rigid in dogfooding; editorial fixes should not require a successor Decision. Implementation: a future revision adds a narrow `editorial` diff classification to the immutability check.
+- **Editorial carve-out: resolved — yes.** Lint should provide an `editorial` severity carve-out for whitespace- and punctuation-only diffs on Approved Decisions. The strict rule proved too rigid in dogfooding; editorial fixes should not require a successor Decision. Implementation: a future revision adds a narrow `editorial` diff classification to the immutability check.
 - **Multi-source-idea: resolved — yes.** `**Source Idea:**` should support a comma-separated list of Idea slugs in a future revision. Each referenced slug must resolve. Interaction with `Promotes To` bookkeeping: each listed Idea gets the Decision added to its promotion chain. Implementation deferred to the revision that introduces it.
 - **REQ↔Decision managed link: resolved — prose for now.** A REQ may cite a Decision in freeform prose (e.g. "see D-0007"). A managed header field is deferred until usage patterns justify the complexity.
 

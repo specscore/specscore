@@ -159,7 +159,7 @@ Every feature README title MUST use the `# Feature: {Title}` format. The `Featur
 
 #### REQ: status-field
 
-A `**Status:**` field MUST appear immediately after the title. The value MUST be one of: `Draft`, `Under Review`, `Approved`, `Implementing`, `Stable`, `Deprecated`.
+A `**Status:**` field MUST appear immediately after the title. The value MUST be one of: `Draft`, `In Review`, `Approved`, `Implementing`, `Stable`, `Amending`, `Rejected`, `Deprecated`.
 
 #### REQ: required-sections
 
@@ -220,32 +220,39 @@ When a feature has child directories (sub-features), its README MUST include a C
 | Status         | Description                                                                              |
 |----------------|------------------------------------------------------------------------------------------|
 | `Draft`        | Feature is being authored; design decisions remain open. Not yet ready for review.        |
-| `Under Review` | Feature is presented for review (reviewer subagent and/or human reviewer).                |
+| `In Review`    | Feature is presented for review (reviewer subagent and/or human reviewer).                |
 | `Approved`     | Feature has passed review; user has explicitly approved the spec.                         |
 | `Implementing` | Feature spec is approved; code is being written from it. Spec MAY still iterate in place. |
 | `Stable`       | Feature is fully specified and implemented; changes go through proposals.                 |
+| `Amending`     | A `Stable` Feature has an approved in-flight change being implemented (`Stable → Amending → Stable`). Distinct from first-build `Implementing` — a working implementation already exists. |
+| `Rejected`     | Feature was turned down at review (`In Review → Rejected`).                               |
 | `Deprecated`   | Feature is being phased out; a successor or removal plan exists.                          |
 
 ```mermaid
 graph LR
     A["Draft"]
-    B["Under Review"]
+    B["In Review"]
     C["Approved"]
     D["Implementing"]
     E["Stable"]
     F["Deprecated"]
+    G["Amending"]
+    H["Rejected"]
 
     A -->|present for review| B
     B -->|approved| C
     A -->|approved (fast path)| C
+    B -->|rejected| H
     C -->|build starts| D
     D -->|spec + impl complete| E
+    E -->|approved change in flight| G
+    G -->|change implemented| E
     E -->|superseded or removed| F
 ```
 
 These statuses describe the feature's **specification maturity** primarily, but `Implementing` and `Stable` also signal implementation phase. A feature can be `Stable` in spec while its implementation is still in development — the spec is the source of truth for desired behavior.
 
-The `Draft → Under Review → Approved → Implementing` quartet aligns with the parallel quartet on [Idea](../idea/README.md) so that the early-and-mid lifecycle vocabulary is consistent across artifact types. Post-`Implementing` states diverge to match each artifact's natural terminal lifecycle (Idea → `Specified` → `Archived`; Feature → `Stable` → `Deprecated`). The shared `Implementing` state means "the work of making this real is in progress" in both contexts: for an Idea, that work includes specifying-then-implementing its Features; for a Feature, that work is writing code from the approved spec.
+The `Draft → In Review → Approved → Implementing` quartet aligns with the parallel quartet on [Idea](../idea/README.md) so that the early-and-mid lifecycle vocabulary is consistent across artifact types. Post-`Implementing` states diverge to match each artifact's natural terminal lifecycle (Idea → `Specified` → `Implemented`; Feature → `Stable` → `Deprecated`). The shared `Implementing` state means "the work of making this real is in progress" in both contexts: for an Idea, that work includes specifying-then-implementing its Features; for a Feature, that work is writing code from the approved spec.
 
 ### Feature nesting and identification
 
@@ -303,7 +310,7 @@ When the field is present:
 
 - Its value MUST be either `—` (empty) or a comma-separated list of Idea slugs.
 - Every slug MUST resolve to an existing Idea file at `spec/ideas/<slug>.md` or `spec/ideas/archived/<slug>.md`.
-- Every referenced Idea MUST have `Status ∈ {Approved, Implementing, Specified}`. Referencing an Idea with `Status` of `Draft`, `Under Review`, or `Archived` is a validation error. `Implementing` is allowed because a Feature being added while an Idea is already mid-flight (other Features exist for it but not all are Stable) is a legitimate workflow.
+- Every referenced Idea MUST have `Status ∈ {Approved, Specifying, Specified, Implementing, Implemented}`. Referencing an Idea with `Status` of `Draft`, `In Review`, `Rejected`, or `Stale` — or an Idea that is **archived** (the orthogonal archived flag/location, not a status) — is a validation error. `Implementing` is allowed because a Feature being added while an Idea is already mid-flight (other Features exist for it but not all are Stable) is a legitimate workflow.
 - The relationship is many-to-many: a Feature MAY list multiple Source Ideas, and the same Idea MAY appear in the `**Source Ideas:**` of multiple Features.
 
 #### REQ: source-ideas-drive-idea-status
@@ -387,6 +394,7 @@ Feature behavior is configured through the repo config file. See [Repo Config](.
 | [Acceptance Criteria](../acceptance-criteria/README.md) | ACs are optional `### AC:` sections in the Acceptance Criteria section that bundle related requirements into composite verification conditions. |
 | [Scenario](../scenario/README.md) | Scenarios are concrete behavior examples in the feature's `_tests/` directory. They validate REQs or ACs with Given/When/Then flows. |
 | [Open Questions](../open-questions/README.md) | Every feature maintains an Open Questions section with the standard question lifecycle. |
+| [Status Vocabulary](../status-vocabulary/README.md) | Canonical source of truth for the Feature `**Status:**` values. The `In Review` / `Stable` / `Amending` choices (the documented divergences from the shared `Implemented` done role) are governed there; this Feature MUST NOT redefine a value that contradicts that set. |
 
 For tool integrations (CLI, UI, API, LSP), see [Synchestra](https://synchestra.io).
 
@@ -414,7 +422,7 @@ Sections with no content use their prescribed placeholder text. Open Questions s
 
 **Requirements:** feature#req:source-ideas-field, feature#req:source-ideas-drive-idea-status
 
-A Feature MAY declare zero or more source Ideas via a `**Source Ideas:**` header field. Every listed slug resolves to an existing Idea with `Status ∈ {Approved, Implementing, Specified}`; any other target (missing file, `Draft`, `Under Review`, or `Archived`) is rejected by lint. Adding or removing a slug triggers tooling to reconcile the referenced Idea's `**Promotes To:**` and `**Status:**` — Features never mutate Idea state directly.
+A Feature MAY declare zero or more source Ideas via a `**Source Ideas:**` header field. Every listed slug resolves to an existing Idea with `Status ∈ {Approved, Specifying, Specified, Implementing, Implemented}`; any other target (missing file, `Draft`, `In Review`, `Rejected`, `Stale`, or an archived Idea) is rejected by lint. Adding or removing a slug triggers tooling to reconcile the referenced Idea's `**Promotes To:**` and `**Status:**` — Features never mutate Idea state directly.
 
 ## Open Questions
 

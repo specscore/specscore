@@ -28,10 +28,12 @@ properties:
       required: true
       enum:
         - Draft
-        - Under Review
+        - In Review
         - Approved
         - Implementing
         - Stable
+        - Amending
+        - Rejected
         - Deprecated
   - name: summary
     data_type: string

@@ -21,9 +21,9 @@ Test scenarios for the [Idea](../README.md) specification.
 | [missing-hmw-framing-warning](missing-hmw-framing-warning.md) | [idea#req:hmw-framing](../README.md#req-hmw-framing) |
 | [invalid-status-rejected](invalid-status-rejected.md) | [idea#ac:idea-header](../README.md#ac-idea-header), [idea#req:status-values](../README.md#req-status-values) |
 | [specified-without-promotion-rejected](specified-without-promotion-rejected.md) | [idea#ac:promotion-lifecycle](../README.md#ac-promotion-lifecycle), [idea#req:specified-requires-promotion](../README.md#req-specified-requires-promotion) |
-| [archived-idea-outside-archived-dir-rejected](archived-idea-outside-archived-dir-rejected.md) | [idea#ac:archival](../README.md#ac-archival), [idea#req:archived-location](../README.md#req-archived-location) |
-| [archived-without-reason-rejected](archived-without-reason-rejected.md) | [idea#ac:archival](../README.md#ac-archival), [idea#req:archive-reason](../README.md#req-archive-reason) |
-| [supersedes-non-archived-rejected](supersedes-non-archived-rejected.md) | [idea#ac:archival](../README.md#ac-archival), [idea#req:supersedes-target-archived](../README.md#req-supersedes-target-archived) |
+| [archived-idea-outside-archived-dir-rejected](archived-idea-outside-archived-dir-rejected.md) | [idea#ac:archival](../README.md#ac-archival), [idea#req:archive-location](../README.md#req-archive-location) |
+| [rejected-without-reason-rejected](rejected-without-reason-rejected.md) | [idea#ac:archival](../README.md#ac-archival), [idea#req:terminal-disposition-transitions](../README.md#req-terminal-disposition-transitions) |
+| [supersedes-non-archived-rejected](supersedes-non-archived-rejected.md) | [idea#ac:archival](../README.md#ac-archival), [idea#req:supersedes-target-stale](../README.md#req-supersedes-target-stale) |
 | [invalid-related-ideas-syntax-rejected](invalid-related-ideas-syntax-rejected.md) | [idea#ac:related-ideas](../README.md#ac-related-ideas), [idea#req:related-ideas-format](../README.md#req-related-ideas-format) |
 | [related-ideas-broken-slug-rejected](related-ideas-broken-slug-rejected.md) | [idea#ac:related-ideas](../README.md#ac-related-ideas), [idea#req:related-ideas-target-exists](../README.md#req-related-ideas-target-exists) |
 | [dependency-cycle-accepted](dependency-cycle-accepted.md) | [idea#ac:related-ideas](../README.md#ac-related-ideas), [idea#req:cycles-allowed](../README.md#req-cycles-allowed) |

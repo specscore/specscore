@@ -113,7 +113,7 @@ A template, once its `<!-- … -->` prompts are replaced with valid content and 
 
 **Given** the `idea`, `feature`, `plan`, `decision`, and `proposal` templates
 **When** each is inspected
-**Then** each carries a `status:` frontmatter key whose value equals its body `**Status:**` token (e.g. `idea` → `Draft`, `decision` → `Proposed`).
+**Then** each carries a `status:` frontmatter key whose value equals its body `**Status:**` token (e.g. `idea` → `Draft`, `decision` → `Draft`).
 
 ### AC: task-template-format-only (verifies REQ:template-frontmatter-status)
 
