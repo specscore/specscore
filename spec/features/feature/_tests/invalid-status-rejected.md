@@ -12,7 +12,7 @@ GIVEN a feature README with title `# Feature: Authentication`
 AND the status field reads `**Status:** Ready`
 WHEN the spec linter validates the feature
 THEN the linter reports an error: "Ready" is not a valid status
-AND the error message lists the valid values: Draft, Under Review, Approved, Implementing, Stable, Deprecated
+AND the error message lists the valid values: Draft, In Review, Approved, Implementing, Stable, Amending, Rejected, Deprecated
 
 ---
 *This document follows the https://specscore.md/scenario-specification*

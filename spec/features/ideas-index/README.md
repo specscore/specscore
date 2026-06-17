@@ -42,7 +42,7 @@ The Index section holds a table with one row per active Idea. Required columns:
 | Column | Meaning |
 |---|---|
 | Idea | Link to the Idea file — e.g. an Idea named `my-idea` links to `my-idea.md` |
-| Status | One of `Draft` \| `Under Review` \| `Approved` \| `Implementing` \| `Specified` — the Idea's current `**Status:**` value, mirrored from the Idea file. `Archived` Ideas are NEVER listed here. |
+| Status | One of `Draft` \| `In Review` \| `Approved` \| `Specifying` \| `Specified` \| `Implementing` \| `Implemented` \| `Rejected` \| `Stale` — the Idea's current `**Status:**` value, mirrored from the Idea file. Archived Ideas (those with the archived flag / in `archived/`) are NEVER listed in the active index — archival is an orthogonal axis, not a status. |
 | Date | The Idea's `**Date:**` field (`YYYY-MM-DD`) |
 | Owner | The Idea's `**Owner:**` field |
 | Promotes To | Comma-separated list of Feature slugs from the Idea's `**Promotes To:**` field — or `—` when empty. Managed by tooling via the Idea feature's sync mechanism. |
@@ -53,7 +53,7 @@ The Index table MUST include columns for Idea, Status, Date, Owner, and Promotes
 
 #### REQ: status-excludes-archived
 
-The Index table MUST NOT list any Idea whose `**Status:**` is `Archived`. Archived Ideas MUST appear only in `spec/ideas/archived/README.md`. This REQ refines the shared [Index#req:completeness](../index/README.md#req-completeness): the universe for completeness is active Ideas only. Moving an Idea to Archived triggers its removal from this index.
+The Index table MUST NOT list any archived Idea — one with `**Archived:** true` and/or located under `spec/ideas/archived/`. Archived Ideas MUST appear only in `spec/ideas/archived/README.md`. This REQ refines the shared [Index#req:completeness](../index/README.md#req-completeness): the universe for completeness is active (non-archived) Ideas only — keyed off the archived axis, not any status value. Archiving an Idea triggers its removal from this index.
 
 #### REQ: index-row-tracks-idea
 

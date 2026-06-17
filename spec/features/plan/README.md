@@ -204,14 +204,16 @@ A plan's status models its full lifecycle in one field, in three bands. The valu
 | Execution | `Blocked` | Tasks blocked; none progressing and none failed | Derived by `lint --fix` |
 | Execution | `Implemented` | All tasks complete | Derived by `lint --fix` |
 | Execution | `Failed` | A task failed/aborted and the plan cannot complete | Derived by `lint --fix` |
+| Disposition | `Rejected` | Approach rejected outright at review (not sent back for revisions) | Human author |
 | Disposition | `Withdrawn` | Abandoned | Human author |
 | Disposition | `Superseded` | Replaced by a named successor plan | Human author |
+| Disposition | `Deprecated` | Approach no longer recommended, with no named successor | Human author |
 
 The bands are sequential phases of one lifecycle, not concurrent: reaching `Executing` already implies the approval gate passed (or was deliberately bypassed), so `Approved` carries no additional current-state information during a run. The authority handoff sits at `Approved`: `lint --fix` only ever transitions from `Approved` onward (deriving the execution band from task-status rollup) and MUST NEVER overwrite a human-authored prep state. Plans are mutable; if the approach changes after approval, edit the plan and record a new snapshot rather than creating a separate document.
 
 #### REQ: valid-statuses
 
-A plan's Status field MUST be one of: `Draft`, `In Review`, `Approved`, `Executing`, `Blocked`, `Implemented`, `Failed`, `Withdrawn`, or `Superseded`. No other values are permitted. A `Superseded` plan MUST carry a reference to its successor plan.
+A plan's Status field MUST be one of: `Draft`, `In Review`, `Approved`, `Executing`, `Blocked`, `Implemented`, `Failed`, `Rejected`, `Withdrawn`, `Superseded`, or `Deprecated`. No other values are permitted. A `Superseded` plan MUST carry a reference to its successor plan.
 
 #### REQ: execution-status-derived
 
@@ -228,12 +230,15 @@ graph LR
     K["Blocked"]
     I["Implemented"]
     F["Failed"]
+    R["Rejected"]
     W["Withdrawn"]
     S["Superseded"]
+    D["Deprecated"]
 
     A -->|submit| B
     B -->|revisions| A
     B -->|approve| C
+    B -->|reject| R
     C -->|lint --fix rollup| E
     E --> K
     E --> I
@@ -241,11 +246,12 @@ graph LR
     K --> E
     C -->|abandon| W
     C -->|replace| S
+    C -->|retire| D
 ```
 
 #### REQ: status-transitions
 
-Plan status transitions MUST follow these rules. **Prep (human-authored):** `Draft` MAY transition to `In Review`; `In Review` MAY transition back to `Draft` (revisions requested) or forward to `Approved`. **Execution (derived by `lint --fix`, only from `Approved` onward):** `Approved` MAY transition to an execution-band status; execution statuses transition among themselves per the task-status rollup. **Disposition (human-authored):** `Approved` (or a later state) MAY transition to `Withdrawn` or `Superseded`. There is no resurrection from a disposition status — re-pursuing the work means authoring a new plan. No other transitions are permitted.
+Plan status transitions MUST follow these rules. **Prep (human-authored):** `Draft` MAY transition to `In Review`; `In Review` MAY transition back to `Draft` (revisions requested), forward to `Approved`, or to `Rejected` (the approach is rejected outright, not sent back for revisions). **Execution (derived by `lint --fix`, only from `Approved` onward):** `Approved` MAY transition to an execution-band status; execution statuses transition among themselves per the task-status rollup. **Disposition (human-authored):** `Approved` (or a later state) MAY transition to `Withdrawn`, `Superseded`, or `Deprecated` (the approach is no longer recommended, with no named successor). There is no resurrection from a disposition status — re-pursuing the work means authoring a new plan. No other transitions are permitted.
 
 ### Snapshots
 
@@ -649,6 +655,7 @@ Every plan document MUST end with an adherence footer per the [Adherence Footer 
 | [Proposals](../proposals/README.md) | A proposal (change request) is a trigger for plan creation. Approved proposals link forward to their plan; plans link back to their source proposal. |
 | [Open Questions](../open-questions/README.md) | Plan tasks may surface open questions. These follow the existing question lifecycle. |
 | [Plans Index](../plans-index/README.md) | The plans-index feature specifies the `spec/plans/README.md` aggregation file that lists every Plan in a repo. Plan documents conform to `plan-specification`; the plans-index file conforms to `plans-index-specification`. |
+| [Status Vocabulary](../status-vocabulary/README.md) | The canonical source of truth for the legal Plan status values. The Plan set is `Draft`, `In Review`, `Approved`, `Executing`, `Blocked`, `Implemented`, `Failed`, `Rejected`, `Withdrawn`, `Superseded`, `Deprecated`; `Executing` (in-progress role) is a documented conscious divergence from the shared `Implementing` term, governed there. |
 
 ## Acceptance Criteria
 
@@ -668,7 +675,7 @@ A plan is a single slug-named Markdown file `spec/plans/{slug}.md` (not a direct
 
 **Requirements:** plan#req:valid-statuses, plan#req:execution-status-derived, plan#req:status-transitions
 
-A plan's status is always one of the nine defined values (`Draft`, `In Review`, `Approved`, `Executing`, `Blocked`, `Implemented`, `Failed`, `Withdrawn`, `Superseded`). Prep statuses are human-authored; the execution-band statuses are derived by `lint --fix` from task-status rollup and are never hand-set, and `lint --fix` only transitions from `Approved` onward. Status transitions follow the defined state machine.
+A plan's status is always one of the eleven defined values (`Draft`, `In Review`, `Approved`, `Executing`, `Blocked`, `Implemented`, `Failed`, `Rejected`, `Withdrawn`, `Superseded`, `Deprecated`). Prep statuses are human-authored; the execution-band statuses are derived by `lint --fix` from task-status rollup and are never hand-set, and `lint --fix` only transitions from `Approved` onward. Status transitions follow the defined state machine.
 
 ### AC: snapshot-integrity
 

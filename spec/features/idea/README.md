@@ -52,7 +52,7 @@ Key tenets inherited from the SDD skill family:
 - **Unsaved ideation is waste.** If a direction is worth discussing, it is worth a lint-clean artifact.
 - **Say no to 1,000 things.** The `Not Doing` section is load-bearing — an Idea without explicit exclusions is not an Idea.
 - **Types beat vibes.** An Idea that cannot pass `specscore lint` is not ready to be promoted.
-- **Stable IDs, mutable content.** The slug is a contract; the body is revised in place until the Idea reaches Implemented or is Archived.
+- **Stable IDs, mutable content.** The slug is a contract; the body is revised in place until the Idea reaches a terminal status (`Implemented`, `Rejected`, or `Stale`).
 - **One entity, two roles.** A proposal (also called a change request) is an Idea with a target, not a separate artifact type. One schema, one lifecycle, one CLI, one index.
 
 Ideas are **living until implemented**. Once `Status: Implemented`, the artifact is effectively frozen — further changes belong in the downstream Features, not in the Idea. While an Idea is `Implementing`, it MAY still be revised in place, since the work it describes is still in motion.
@@ -70,7 +70,7 @@ spec/ideas/
   <another-slug>.md
   archived/
     README.md            <- archived idea index
-    <old-slug>.md        <- an archived idea (Status: Archived)
+    <old-slug>.md        <- an archived idea (status retained; e.g. Rejected, Stale)
 
 spec/features/<feature-slug>/
   README.md              <- the Feature spec
@@ -82,7 +82,7 @@ Unlike Features and Plans, Ideas are **files, not directories**. An Idea has no 
 
 #### REQ: idea-location
 
-Every feature-request Idea artifact MUST reside at `<ideas-dir>/<slug>.md` (active) or `<ideas-dir>/archived/<slug>.md` (archived), where `<ideas-dir>` is the module's resolved ideas directory — `spec/ideas` by default, or the value configured per [Configurable Ideas Path](../configurable-ideas-path/README.md). Every change-request Idea MUST reside at `spec/features/<feature-slug>/proposals/<slug>.md` where `<feature-slug>` matches the value of the Idea's `**Targets:**` field. Ideas at any other location are rejected by validation.
+Every feature-request Idea artifact MUST reside at `<ideas-dir>/<slug>.md` (active) or `<ideas-dir>/archived/<slug>.md` (archived — see [REQ: archive-location](#req-archive-location)), where `<ideas-dir>` is the module's resolved ideas directory — `spec/ideas` by default, or the value configured per [Configurable Ideas Path](../configurable-ideas-path/README.md). Every change-request Idea MUST reside at `spec/features/<feature-slug>/proposals/<slug>.md` where `<feature-slug>` matches the value of the Idea's `**Targets:**` field. Ideas at any other location are rejected by validation.
 
 #### REQ: slug-format
 
@@ -149,7 +149,8 @@ Ideas use the **same markdown-body metadata convention as Features** — no YAML
 **Promotes To:** — *(managed by tooling; do not edit manually)*
 **Supersedes:** — *(optional; slug of an Idea this one replaces)*
 **Related Ideas:** — *(optional; typed links to other Ideas — see [Related Ideas](#related-ideas))*
-**Archive Reason:** — *(required only when Status is Archived)*
+**Archived:** false *(optional; archival axis — orthogonal to Status; see [Archival](#archival-is-an-orthogonal-axis))*
+**Archive Note:** — *(optional; free-form note tied to the archive action, not to a status)*
 ```
 
 Change-request Ideas carry additional fields:
@@ -166,7 +167,8 @@ Change-request Ideas carry additional fields:
 **Promotes To:** —
 **Supersedes:** —
 **Related Ideas:** —
-**Archive Reason:** —
+**Archived:** false
+**Archive Note:** —
 ```
 
 #### REQ: title-format
@@ -175,7 +177,7 @@ Every Idea title MUST use either `# Idea: <Title>` or `# Proposal: <Title>`. The
 
 #### REQ: header-fields
 
-Every Idea MUST include `**Status:**`, `**Date:**`, and `**Owner:**` fields immediately after the title. `**Promotes To:**`, `**Supersedes:**`, and `**Related Ideas:**` MUST be present (value `—` when empty). `**Archive Reason:**` is required only when `Status: Archived` (see [REQ: archive-reason](#req-archive-reason)). `**Type:**`, `**Targets:**`, and `**Phase:**` are optional — see [REQ: type-field](#req-type-field), [REQ: targets-required](#req-targets-required), and [REQ: phase-field](#req-phase-field) for when each is required or prohibited. When present, `**Type:**` and `**Targets:**` MUST appear after `**Status:**` and before `**Date:**`; `**Phase:**` MUST appear after `**Targets:**`.
+Every Idea MUST include `**Status:**`, `**Date:**`, and `**Owner:**` fields immediately after the title. `**Promotes To:**`, `**Supersedes:**`, and `**Related Ideas:**` MUST be present (value `—` when empty). `**Archived:**` and `**Archive Note:**` are optional and describe the orthogonal archival axis (see [REQ: archive-note](#req-archive-note)), not a status. `**Type:**`, `**Targets:**`, and `**Phase:**` are optional — see [REQ: type-field](#req-type-field), [REQ: targets-required](#req-targets-required), and [REQ: phase-field](#req-phase-field) for when each is required or prohibited. When present, `**Type:**` and `**Targets:**` MUST appear after `**Status:**` and before `**Date:**`; `**Phase:**` MUST appear after `**Targets:**`.
 
 #### REQ: id-is-slug
 
@@ -271,24 +273,28 @@ The `Problem Statement` section SHOULD contain exactly one "How Might We…" sen
 | Status | Description |
 |---|---|
 | `Draft` | First lint-clean write. Author is iterating. |
-| `Under Review` | Author has requested feedback from stakeholders. |
+| `In Review` | Author has requested feedback from stakeholders. |
 | `Approved` | Recommended Direction has been approved; ready for detailed specification. |
-| `Specifying` | A detailed specification is being written. For feature-request Ideas, this is derived when a Feature referencing this Idea exists at `Draft` or `Under Review`. For change-request Ideas, this is author-managed (set when detailed AC or a plan is being drafted). |
+| `Specifying` | A detailed specification is being written. For feature-request Ideas, this is derived when a Feature referencing this Idea exists at `Draft` or `In Review`. For change-request Ideas, this is author-managed (set when detailed AC or a plan is being drafted). |
 | `Specified` | Detailed spec/AC/plan exists; work hasn't started. For feature-request Ideas, derived when the referenced Feature reaches `Approved`. For change-request Ideas, author-managed. |
 | `Implementing` | Work is in progress. For feature-request Ideas, derived when the referenced Feature reaches `Implementing`. For change-request Ideas, author-managed. |
 | `Implemented` | Done. The promoted Feature shipped (feature-request) or the proposed change landed (change-request). The Idea stays visible in default listings and in its current file location — it is not moved or hidden. |
-| `Archived` | Idea was abandoned or superseded. Feature-request Ideas are moved to `spec/ideas/archived/<slug>.md`. Archived Ideas are hidden from `specscore idea list` by default (requires `--include-archived`). |
+| `Rejected` | Idea was considered and turned down at review (`In Review → Rejected`) — an explicit decision against it. Terminal. The disposition reason is captured as the transition reason. |
+| `Stale` | Idea passively decayed or lost relevance and was never carried forward — nobody decided against it. Terminal. Also the status a superseded predecessor Idea takes (this MVP has no Idea `Superseded` status). |
+
+Archival is **not** a status — see [Archival is an orthogonal axis](#archival-is-an-orthogonal-axis). Any Idea (including `Implemented`, `Rejected`, or `Stale`) MAY be archived without changing its `**Status:**`.
 
 ```mermaid
 graph LR
     A["Draft"]
-    B["Under Review"]
+    B["In Review"]
     C["Approved"]
     G["Specifying"]
     H["Specified"]
     D["Implementing"]
     I["Implemented"]
-    F["Archived"]
+    R["Rejected"]
+    S["Stale"]
 
     A -->|request feedback| B
     B -->|approved| C
@@ -297,23 +303,23 @@ graph LR
     G -->|spec complete| H
     H -->|work started| D
     D -->|work done| I
-    A -->|abandon| F
-    B -->|abandon| F
-    C -->|abandon| F
-    G -->|abandon| F
-    H -->|abandon| F
-    D -->|abandon| F
+    B -->|turned down| R
+    A -->|decayed| S
+    B -->|decayed| S
+    C -->|decayed| S
+    G -->|decayed| S
+    H -->|decayed| S
 ```
 
-The `Draft → Under Review → Approved` progression aligns with the parallel progression on [Feature](../feature/README.md) so that early lifecycle vocabulary is consistent across artifact types.
+The `Draft → In Review → Approved` progression aligns with the parallel progression on [Feature](../feature/README.md) so that early lifecycle vocabulary is consistent across artifact types. Archival is orthogonal to this diagram — see [Archival is an orthogonal axis](#archival-is-an-orthogonal-axis).
 
 #### REQ: status-values
 
-The `**Status:**` value MUST be one of: `Draft`, `Under Review`, `Approved`, `Specifying`, `Specified`, `Implementing`, `Implemented`, `Archived`. Any other value is a validation error.
+The `**Status:**` value MUST be one of: `Draft`, `In Review`, `Approved`, `Specifying`, `Specified`, `Implementing`, `Implemented`, `Rejected`, `Stale`. Any other value is a validation error. `Archived` is NOT a status — archival is an orthogonal axis (see [REQ: archival-not-a-status](../status-vocabulary/README.md#req-archival-not-a-status) and [Archival is an orthogonal axis](#archival-is-an-orthogonal-axis)).
 
 #### REQ: specifying-derivation
 
-For feature-request Ideas: `Status: Specifying` MUST be set if and only if at least one Feature in `spec/features/` lists the Idea's slug in its `**Source Ideas:**` field, AND every such referenced Feature has `Status` in {`Draft`, `Under Review`}. The transition is driven by Feature creation, not by the author.
+For feature-request Ideas: `Status: Specifying` MUST be set if and only if at least one Feature in `spec/features/` lists the Idea's slug in its `**Source Ideas:**` field, AND every such referenced Feature has `Status` in {`Draft`, `In Review`}. The transition is driven by Feature creation, not by the author.
 
 #### REQ: specified-derivation
 
@@ -339,17 +345,32 @@ For feature-request Ideas: an author (human or skill) MUST NOT directly write `*
 
 A feature-request Idea with `Status: Specifying`, `Status: Specified`, `Status: Implementing`, or `Status: Implemented` MUST have a non-empty `**Promotes To:**` list. The transition to these statuses is driven by Feature creation and status changes, not by the author. This rule does NOT apply to change-request Ideas, which always have `**Promotes To:** —`.
 
-#### REQ: archived-location
+#### REQ: terminal-disposition-transitions
 
-A feature-request Idea with `Status: Archived` MUST reside at `<ideas-dir>/archived/<slug>.md`, where `<ideas-dir>` is the module's resolved ideas directory (default `spec/ideas`; see [Configurable Ideas Path](../configurable-ideas-path/README.md)). An Idea file at the top level of `<ideas-dir>` with `Status: Archived` is a validation error, as is an Archived file outside that directory. Moving the file is part of the archival transition. For change-request Ideas, archival leaves the file at `spec/features/<feature>/proposals/<slug>.md` — it is NOT moved to `spec/ideas/archived/`.
+An Idea reaches a terminal disposition status in one of two ways:
 
-#### REQ: archive-reason
+- **`Rejected`** — an explicit decision against the Idea at review (`In Review → Rejected`). The transition is author-driven and is a **negative transition** that MUST carry a reason (recorded as the transition reason — e.g. via `specscore` change-status — not as a header field).
+- **`Stale`** — the Idea passively decayed or lost relevance and was never carried forward, reachable from any non-terminal status (`Draft`, `In Review`, `Approved`, `Specifying`, `Specified`). This is also the status a superseded predecessor Idea takes (see [Superseding](#superseding)); Idea has no `Superseded` status in this MVP.
 
-An Idea with `Status: Archived` MUST include a `**Archive Reason:**` header field with a non-empty value. Expected values are free-form but SHOULD categorize the reason (e.g. `abandoned`, `pivoted`, `superseded`, `no longer relevant`). Non-Archived Ideas MAY omit the field or set it to `—`.
+Both are terminal: an Idea at `Rejected` or `Stale` is not carried forward. The disposition is independent of archival — a `Rejected` or `Stale` Idea MAY or MAY NOT be archived.
+
+### Archival is an orthogonal axis
+
+Archival is a separate **action a user takes on an Idea, independent of its `**Status:**`**. It is the per-artifact mechanism for the orthogonal archival axis defined canonically in [status-vocabulary#req:archival-not-a-status](../status-vocabulary/README.md#req-archival-not-a-status). Archiving an Idea does NOT change its status: an archived `Rejected` Idea keeps `**Status:** Rejected`, an archived `Implemented` Idea keeps `**Status:** Implemented`. Any Idea, at any status, MAY be archived.
+
+The archival axis is represented by an `**Archived:**` frontmatter/header flag (`true`/`false`) and, for feature-request Ideas, relocation to `<ideas-dir>/archived/<slug>.md` — the same file-move mechanism the spec already uses (consistent with how [Decision](../decision/README.md) relocates `Superseded`/`Deprecated`). The discriminator for "is this archived / hidden" is the archived axis (the flag and/or the `archived/` location), NEVER `Status == Archived` (which does not exist).
+
+#### REQ: archive-location
+
+When a feature-request Idea is archived, it MUST reside at `<ideas-dir>/archived/<slug>.md`, where `<ideas-dir>` is the module's resolved ideas directory (default `spec/ideas`; see [Configurable Ideas Path](../configurable-ideas-path/README.md)), and its `**Archived:**` flag MUST be `true`. A non-archived Idea MUST reside at the top level of `<ideas-dir>` with `**Archived:** false` (or the flag absent). Moving the file is part of the archive action. The Idea's `**Status:**` is unchanged by archival — it retains its real terminal (or other) status. For change-request Ideas, archival sets `**Archived:** true` but leaves the file at `spec/features/<feature>/proposals/<slug>.md` — it is NOT moved to `spec/ideas/archived/`.
+
+#### REQ: archive-note
+
+An archived Idea MAY include an optional `**Archive Note:**` header field with a free-form note about the archive action (e.g. `filed away post-launch`, `cleaning up the backlog`). This note is tied to the **archive action**, not to a status — it is never required, and a non-archived Idea MAY omit it or set it to `—`. The *disposition* reason for why an Idea ended (its `Rejected`/`Stale` outcome) is captured separately as the terminal transition's reason (see [REQ: terminal-disposition-transitions](#req-terminal-disposition-transitions)), not in this field.
 
 #### REQ: archived-default-hidden
 
-`specscore idea list` MUST exclude Archived Ideas by default. Archived Ideas MUST be included only when the `--include-archived` flag is passed. All other statuses (including `Implemented`) MUST be visible in default listings.
+`specscore idea list` MUST exclude archived Ideas by default, keyed off the **archived axis** (the `**Archived:**` flag and/or the `archived/` location), NOT off any status value. Archived Ideas MUST be included only when the `--include-archived` flag is passed. All statuses (including `Implemented`, `Rejected`, and `Stale`) are visible in default listings when the Idea is not archived.
 
 ### Related Ideas
 
@@ -384,7 +405,7 @@ Every slug referenced in `**Related Ideas:**` MUST resolve to an Idea file under
 
 For feature-request Ideas, `Specifying`, `Specified`, `Implementing`, and `Implemented` are **derived statuses**: they reflect the existence and maturity of Features that reference the Idea. None is a state the author chooses. Three mechanisms can drive the transitions:
 
-1. **`specscore` CLI (authoritative).** `specscore idea sync` (equivalently `specscore lint --fix`) scans `spec/features/**/README.md` for `**Source Ideas:**` fields and the referenced Features' own `**Status:**` values, recomputes every feature-request Idea's `**Promotes To:**`, and updates `**Status:**` based on the derivation rules: `Specifying` (any referenced Feature at Draft or Under Review), `Specified` (all referenced Features at Approved), `Implementing` (any referenced Feature at Implementing), or `Implemented` (every referenced Feature at Stable). Running this command is the definitive way to reconcile feature-request Idea status.
+1. **`specscore` CLI (authoritative).** `specscore idea sync` (equivalently `specscore lint --fix`) scans `spec/features/**/README.md` for `**Source Ideas:**` fields and the referenced Features' own `**Status:**` values, recomputes every feature-request Idea's `**Promotes To:**`, and updates `**Status:**` based on the derivation rules: `Specifying` (any referenced Feature at Draft or In Review), `Specified` (all referenced Features at Approved), `Implementing` (any referenced Feature at Implementing), or `Implemented` (every referenced Feature at Stable). Running this command is the definitive way to reconcile feature-request Idea status.
 2. **Feature-creation and Feature-status-change tooling.** When `specscore feature new` (or an equivalent scaffolder) creates a Feature with `**Source Ideas:**`, or when a Feature transitions status, it performs the same update on each referenced Idea in the same commit.
 3. **Synchestra (optional).** When Synchestra is present, it watches for Feature changes and performs the update automatically, emitting `idea.specifying`, `idea.specified`, `idea.implementing`, and `idea.implemented` events. Standalone SpecScore users do not need Synchestra — the CLI is sufficient.
 
@@ -434,14 +455,14 @@ There are two indexes: one for active Ideas and one for archived Ideas.
 
 **Archived index** (`spec/ideas/archived/README.md`):
 
-1. A chronological list of Archived feature-request Ideas, ordered by the **Date** field (oldest first, newest at bottom) — not a full metadata table. Each entry is a line of the form `- YYYY-MM-DD — [slug](<slug>.md) — <archive reason>`.
+1. A chronological list of archived feature-request Ideas, ordered by the **Date** field (oldest first, newest at bottom) — not a full metadata table. Each entry is a line of the form `- YYYY-MM-DD — [slug](<slug>.md) — <status> — <archive note>`, where `<status>` is the Idea's retained `**Status:**` (e.g. `Rejected`, `Stale`, `Implemented`) and `<archive note>` is the optional `**Archive Note:**` (omitted when `—`).
 2. An **Open Questions** section.
 
 Archived change-request Ideas are NOT listed in the archived index (they remain at their feature-scoped path and are excluded from default listings via [REQ: archived-default-hidden](#req-archived-default-hidden)).
 
 #### REQ: index-completeness
 
-`spec/ideas/README.md` MUST list every active (non-Archived) Idea across all valid locations: `spec/ideas/` and `spec/features/*/proposals/`. `spec/ideas/archived/README.md` MUST list every Archived feature-request Idea in `spec/ideas/archived/`. An unlisted Idea on either side is a validation error.
+`spec/ideas/README.md` MUST list every active (non-archived) Idea across all valid locations: `spec/ideas/` and `spec/features/*/proposals/`. `spec/ideas/archived/README.md` MUST list every archived feature-request Idea in `spec/ideas/archived/`. An unlisted Idea on either side is a validation error.
 
 #### REQ: archived-index-chronological
 
@@ -451,13 +472,15 @@ Entries in `spec/ideas/archived/README.md` MUST appear in chronological order by
 
 An Idea whose scope has shifted enough to invalidate its assumptions MUST NOT be renamed. Instead, create a successor:
 
-1. Archive the predecessor: set `**Status:** Archived` and move the file to `spec/ideas/archived/<slug>.md` (feature-request) or leave in place (change-request).
+1. Retire the predecessor: set `**Status:** Stale` (Idea has no `Superseded` status in this MVP — that is a deferred open question on [status-vocabulary](../status-vocabulary/README.md)) and archive it (set `**Archived:** true`, and for feature-request Ideas move the file to `spec/ideas/archived/<slug>.md`; change-request Ideas stay in place). Archival is the orthogonal axis; the predecessor's `**Status:**` is `Stale`, not `Archived`.
 2. Create a new Idea with a new slug and list the predecessor slug in `**Supersedes:**`.
 3. The successor's `Context` section SHOULD explain what changed.
 
-#### REQ: supersedes-target-archived
+The `**Supersedes:**` / `**Promotes To:**` link semantics are unchanged by this archival model.
 
-If an Idea's `**Supersedes:**` list is non-empty, every referenced Idea MUST exist and have `Status: Archived`. For feature-request Ideas, the target MUST be under `spec/ideas/archived/`. For change-request Ideas, the target MAY be at `spec/features/*/proposals/` with `Status: Archived`.
+#### REQ: supersedes-target-stale
+
+If an Idea's `**Supersedes:**` list is non-empty, every referenced Idea MUST exist, have `Status: Stale`, and be archived (`**Archived:** true`). For feature-request Ideas, the target MUST be under `spec/ideas/archived/`. For change-request Ideas, the target MAY be at `spec/features/*/proposals/`.
 
 ## Relationship to Other Artifacts
 
@@ -499,7 +522,7 @@ When every Feature referencing a feature-request Idea is deleted or loses its re
 
 #### REQ: feature-cross-reference
 
-A Feature's `**Source Ideas:**` field MAY list zero or more Idea slugs. Each referenced Idea MUST exist and have `Status ∈ {Approved, Specifying, Specified, Implementing, Implemented}`. Referencing an Idea that is `Draft`, `Under Review`, or `Archived` is a validation error.
+A Feature's `**Source Ideas:**` field MAY list zero or more Idea slugs. Each referenced Idea MUST exist and have `Status ∈ {Approved, Specifying, Specified, Implementing, Implemented}`. Referencing an Idea that is `Draft`, `In Review`, `Rejected`, or `Stale` is a validation error.
 
 ### Ideas and plans
 
@@ -523,6 +546,7 @@ Every Idea document MUST end with an adherence footer per the [Adherence Footer 
 | [Plan](../plan/README.md) | Feature-request Ideas: no direct link (Plans reference Features; Features reference Ideas). Change-request Ideas: a plan MAY have `Source type: change-request` with the change-request Idea as Source. The `Source type: change-request` enum value on plans now points at a change-request Idea as the source object. |
 | [Ideas Index](../ideas-index/README.md) | The active index extends to include change-request Ideas from `spec/features/*/proposals/` with type-grouped sections. The `Type` column is added to the index table. |
 | [Repo Config](../repo-config/README.md) | `specscore.yaml` MAY declare whether Ideas are required before Features (policy knob, default off). |
+| [Status Vocabulary](../status-vocabulary/README.md) | Canonical source of truth for the legal Idea status set (`Draft`, `In Review`, `Approved`, `Specifying`, `Specified`, `Implementing`, `Implemented`, `Rejected`, `Stale`). Archival is **not** a status — it is the orthogonal axis defined by [REQ: archival-not-a-status](../status-vocabulary/README.md#req-archival-not-a-status); this Feature implements that axis via the `**Archived:**` flag and `archived/` relocation. |
 
 ## Dependencies
 
@@ -573,11 +597,11 @@ Then `specscore lint` accepts the status without checking Feature references
 
 ### AC: archival
 
-**Requirements:** idea#req:archived-location, idea#req:archive-reason, idea#req:supersedes-target-archived, idea#req:archived-index-chronological, idea#req:archived-default-hidden
+**Requirements:** idea#req:archive-location, idea#req:archive-note, idea#req:archived-default-hidden, idea#req:archived-index-chronological, idea#req:terminal-disposition-transitions, idea#req:supersedes-target-stale
 
-Given an Archived feature-request Idea at `spec/ideas/archived/<slug>.md` with a non-empty Archive Reason
+Given an archived feature-request Idea at `spec/ideas/archived/<slug>.md` with `**Archived:** true` and its real terminal `**Status:**` retained (e.g. `Rejected` or `Stale`, never `Archived` — which is not a legal status)
 When `specscore idea list` is run without `--include-archived`
-Then the Archived Idea is NOT shown; with `--include-archived` it IS shown; an Archived change-request Idea remains at its feature-scoped path
+Then the archived Idea is NOT shown (keyed off the archived axis, not status); with `--include-archived` it IS shown with its retained status; an archived change-request Idea keeps `**Archived:** true` at its feature-scoped path; archival never overwrites status (an archived `Implemented` Idea stays `Implemented`)
 
 ### AC: related-ideas
 

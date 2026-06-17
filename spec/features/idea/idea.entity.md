@@ -20,11 +20,24 @@ properties:
       required: true
       enum:
         - Draft
-        - Under Review
+        - In Review
         - Approved
-        - Implementing
+        - Specifying
         - Specified
-        - Archived
+        - Implementing
+        - Implemented
+        - Rejected
+        - Stale
+  - name: archived
+    data_type: boolean
+    description: Archival flag — the orthogonal archival axis (never a status). True when the Idea is filed out of active view; the Idea retains its real terminal status.
+    checks:
+      required: false
+  - name: archive_note
+    data_type: string
+    description: Optional free-form note tied to the archive action (not to a status).
+    checks:
+      required: false
   - name: owner
     ref: ./email.property.md
   - name: promotes_to
@@ -63,6 +76,8 @@ Co-located with the [idea Feature](README.md) alongside the existing
 |------|------|----------|-------------|
 | `id` | string | yes | The Idea's slug — the filename stem at `spec/ideas/<slug>.md` (or `spec/ideas/archived/<slug>.md`). |
 | `status` | string | yes | Idea lifecycle stage. |
+| `archived` | boolean | no | Archival flag — the orthogonal archival axis (never a status). True when the Idea is filed out of active view; the Idea retains its real terminal status. |
+| `archive_note` | string | no | Optional free-form note tied to the archive action (not to a status). |
 | `owner` | string *(via [email](email.property.md))* | yes | An RFC 5322 email address used to identify the human or service owner of a SpecScore artifact. |
 | `promotes_to` | array | no | Features authored from this Idea. Managed state — populated by tooling from each Feature's `**Source Ideas:**`. |
 <!-- end-managed -->

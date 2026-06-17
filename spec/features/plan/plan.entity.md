@@ -26,8 +26,10 @@ properties:
         - Blocked
         - Implemented
         - Failed
+        - Rejected
         - Withdrawn
         - Superseded
+        - Deprecated
   - name: features
     data_type: array
     description: Features this Plan affects (its source Feature for feature-sourced plans). Empty for idea-sourced plans, which bind to an Idea via the `Source` line instead.
