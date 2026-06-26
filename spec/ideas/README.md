@@ -33,6 +33,7 @@ Archived Ideas are indexed separately at [archived/README.md](archived/README.md
 | [spec-code-linking-via-codegraph](spec-code-linking-via-codegraph.md) | Draft | 2026-06-10 | trakhimenok | — |
 | [specscore-hub](specscore-hub.md) | Approved | 2026-06-01 | alex | — |
 | [studio-toolbar](studio-toolbar.md) | Specified | 2026-05-19 | alex | studio-toolbar |
+| [unify-task-status-vocabulary](unify-task-status-vocabulary.md) | Specified | 2026-06-26 | alex | unify-task-status-vocabulary |
 
 ## Open Questions
 
