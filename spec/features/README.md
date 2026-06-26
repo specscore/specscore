@@ -43,6 +43,7 @@ Core features of the SpecScore specification framework. This table is the canoni
 | [cli-template-runtime-fetch](cli-template-runtime-fetch/README.md) | Stable | — | https://specscore.md/feature-specification | — | — | The specscore '… new' scaffolders fetch the canonical artefact template from the published gallery (specscore.md/new/<type>.md) at create-time, fill the known fields, and write the file — falling back to an embedded copy with a stderr warning when the site is unreachable. |
 | [configurable-ideas-path](configurable-ideas-path/README.md) | Approved | — | https://specscore.md/feature-specification | — | — | Resolve each module's ideas directory through repo-config's per-module path_overrides.ideas_path (default spec/ideas) via a single resolution contract that every reader uses, instead of a hardcoded spec/ideas literal. |
 | [status-vocabulary](status-vocabulary/README.md) | Approved | — | https://specscore.md/feature-specification | — | — | TODO: Add description. |
+| [implementation-commit-provenance](implementation-commit-provenance/README.md) | Approved | — | https://specscore.md/feature-specification | — | — | An optional, write-once provenance record linking an implemented Task to the actual code commit that implemented it (<repo>@<sha>, optional branch), so lost work (rebase/merge) leaves durable evidence and a recovery pointer. Plan-level evidence rolls up from its tasks. |
 
 ## Feature Hierarchy
 
