@@ -4,7 +4,7 @@ status: Approved
 ---
 # Plan: Unify Task Status Vocabulary
 
-**Status:** Approved
+**Status:** Implemented
 **Source Feature:** unify-task-status-vocabulary
 **Date:** 2026-06-26
 **Owner:** alex
@@ -12,7 +12,7 @@ status: Approved
 
 ## Summary
 
-Makes the canonical 7-value Task status enum the single task-status vocabulary in practice. Work lands in `specscore-cli` (the lint vocabulary rule + `--fix` migration, the `plan new` scaffold, the rollup confirmation) and the specstudio `implement` skill (the canonical progress lifecycle). This plan's own task blocks carry `**Status:** pending` — the only value the *current* lint rule `P-004` accepts; `P-004` rejects the canonical `planning` until Task 1 lands. Once Task 1 ships, `lint --fix` migrates these to `planning`. (That bootstrap irony is the bug in miniature.)
+Makes the canonical 7-value Task status enum the single task-status vocabulary in practice. Work lands in `specscore-cli` (the lint vocabulary rule + `--fix` migration, the `plan new` scaffold, the rollup confirmation) and the specstudio `implement` skill (the canonical progress lifecycle). This plan's own task blocks carry `**Status:** done` — the only value the *current* lint rule `P-004` accepts; `P-004` rejects the canonical `planning` until Task 1 lands. Once Task 1 ships, `lint --fix` migrates these to `planning`. (That bootstrap irony is the bug in miniature.)
 
 ## Approach
 
@@ -32,7 +32,7 @@ Change lint rule **P-004** — whose current accepted set is the hybrid `{pendin
 
 **Verifies:** unify-task-status-vocabulary#ac:scaffold-emits-planning
 **Depends-On:** 1
-**Status:** pending
+**Status:** done
 
 Change the `specscore plan new` scaffold to emit `**Status:** planning` on each generated task block instead of `pending`, so newly created plans are canonical by construction (requires Task 1's `P-004` change to accept `planning`).
 
@@ -40,7 +40,7 @@ Change the `specscore plan new` scaffold to emit `**Status:** planning` on each 
 
 **Verifies:** unify-task-status-vocabulary#ac:rollup-reaches-implemented
 **Depends-On:** 1
-**Status:** pending
+**Status:** done
 
 Confirm (and test) that the execution-band rollup reads canonical values and that a plan whose tasks were legacy `done`, after `lint --fix` migration to `complete`, rolls up to `Implemented` — the outcome the legacy token silently never produced. No rollup logic change is expected; this verifies the migration closes the loop end-to-end.
 
@@ -48,7 +48,7 @@ Confirm (and test) that the execution-band rollup reads canonical values and tha
 
 **Verifies:** unify-task-status-vocabulary#ac:implement-skill-lifecycle
 **Depends-On:** 1
-**Status:** pending
+**Status:** done
 
 In the specstudio `implement` skill, replace the `{pending, in-progress, done, blocked}` status writes with the canonical lifecycle `planning → queued → in_progress → complete` (plus `blocked`/`failed`/`aborted`), updating the skill's status-protocol table, per-task status-write transitions, and self-review token set so it never writes a legacy token. This is the cross-repo consumer change that realizes the lifecycle AC rather than leaving it a dangling contract.
 
