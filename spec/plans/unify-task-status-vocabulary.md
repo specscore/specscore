@@ -24,7 +24,7 @@ Linear, enforcement-first. **Task 1** builds the lint vocabulary rule (flag any 
 
 **Verifies:** unify-task-status-vocabulary#ac:enum-is-sole-vocabulary, unify-task-status-vocabulary#ac:lint-flags-legacy, unify-task-status-vocabulary#ac:lint-fix-migrates-legacy
 **Depends-On:** —
-**Status:** pending
+**Status:** done
 
 Change lint rule **P-004** — whose current accepted set is the hybrid `{pending, in-progress, done, blocked, failed, aborted}` — to validate plan-inline task `**Status:**` against the canonical 7-value enum (`planning, queued, in_progress, blocked, complete, failed, aborted`). Plain `lint`: legacy tokens (`pending`/`done`/`in-progress`) are flagged naming their canonical replacement; any other non-enum token (e.g. `shipped`) is rejected with no mapping. Under `--fix`: rewrite the legacy tokens value-for-value (`pending`→`planning`, `done`→`complete`, `in-progress`→`in_progress`), changing nothing else.
 
