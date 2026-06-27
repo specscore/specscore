@@ -24,7 +24,7 @@ Linear, enforcement-first. **Task 1** builds the lint vocabulary rule (flag any 
 
 **Verifies:** unify-task-status-vocabulary#ac:enum-is-sole-vocabulary, unify-task-status-vocabulary#ac:lint-flags-legacy, unify-task-status-vocabulary#ac:lint-fix-migrates-legacy
 **Depends-On:** —
-**Status:** done
+**Status:** complete
 
 Change lint rule **P-004** — whose current accepted set is the hybrid `{pending, in-progress, done, blocked, failed, aborted}` — to validate plan-inline task `**Status:**` against the canonical 7-value enum (`planning, queued, in_progress, blocked, complete, failed, aborted`). Plain `lint`: legacy tokens (`pending`/`done`/`in-progress`) are flagged naming their canonical replacement; any other non-enum token (e.g. `shipped`) is rejected with no mapping. Under `--fix`: rewrite the legacy tokens value-for-value (`pending`→`planning`, `done`→`complete`, `in-progress`→`in_progress`), changing nothing else.
 
@@ -32,7 +32,7 @@ Change lint rule **P-004** — whose current accepted set is the hybrid `{pendin
 
 **Verifies:** unify-task-status-vocabulary#ac:scaffold-emits-planning
 **Depends-On:** 1
-**Status:** done
+**Status:** complete
 
 Change the `specscore plan new` scaffold to emit `**Status:** planning` on each generated task block instead of `pending`, so newly created plans are canonical by construction (requires Task 1's `P-004` change to accept `planning`).
 
@@ -40,7 +40,7 @@ Change the `specscore plan new` scaffold to emit `**Status:** planning` on each 
 
 **Verifies:** unify-task-status-vocabulary#ac:rollup-reaches-implemented
 **Depends-On:** 1
-**Status:** done
+**Status:** complete
 
 Confirm (and test) that the execution-band rollup reads canonical values and that a plan whose tasks were legacy `done`, after `lint --fix` migration to `complete`, rolls up to `Implemented` — the outcome the legacy token silently never produced. No rollup logic change is expected; this verifies the migration closes the loop end-to-end.
 
@@ -48,7 +48,7 @@ Confirm (and test) that the execution-band rollup reads canonical values and tha
 
 **Verifies:** unify-task-status-vocabulary#ac:implement-skill-lifecycle
 **Depends-On:** 1
-**Status:** done
+**Status:** complete
 
 In the specstudio `implement` skill, replace the `{pending, in-progress, done, blocked}` status writes with the canonical lifecycle `planning → queued → in_progress → complete` (plus `blocked`/`failed`/`aborted`), updating the skill's status-protocol table, per-task status-write transitions, and self-review token set so it never writes a legacy token. This is the cross-repo consumer change that realizes the lifecycle AC rather than leaving it a dangling contract.
 
