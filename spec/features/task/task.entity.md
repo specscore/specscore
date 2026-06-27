@@ -64,6 +64,12 @@ properties:
     checks:
       required: false
       max_length: 256
+  - name: implementation_commit
+    data_type: string
+    description: Optional single provenance reference naming the code commit that implemented this Task — a `<repo>@<sha>` soft reference with an optional trailing `(<branch>)`; `<repo>` is a repo slug or a full clone URL, and may be omitted for same-repo implementations (bare `<sha>`). Correctable via the CLI's corrective re-stamp path. Surfaced on the Task as the `**Implemented-by:**` field. Actor-supplied (never auto-derived from ambient HEAD) and validated syntactically only — the linter never scans the referenced repo to confirm the sha exists, mirroring the cross-repo `P-005` precedent. See the implementation-commit-provenance feature.
+    checks:
+      required: false
+      max_length: 256
 format: https://specscore.md/entity-specification
 ---
 
@@ -92,6 +98,7 @@ Plan's `features` list.
 | `model` | string | no | Capability tier the Task runs on when executed in isolation — one of small, medium, large, inherit. `inherit` runs on the ambient/session model. Required on tasks within non-terminal plans; lint enforces. Grandfathered for terminal-status plans once those statuses exist. |
 | `model_override` | string | no | Optional exact, opaque model identifier; when present it takes precedence over `model` for this Task. Opaque to SpecScore — consumers interpret it. |
 | `sub_plan` | string | no | When set, this Task delegates its work to a separate sub-Plan rather than acting as a leaf — the master-side expression of master/sub-plan composition. The value is a Plan reference — a same-repo plan slug or a cross-repo `<repo-slug>:<plan-slug>` soft reference. Absent for ordinary leaf tasks. The referenced sub-plan declares this tree's master as its `parent`. Lint enforcement of the delegation ref is future work; `parent` (on the sub-plan) is the canonical, lint-validated link in the MVP. |
+| `implementation_commit` | string | no | Optional single provenance reference naming the code commit that implemented this Task — a `<repo>@<sha>` soft reference with an optional trailing `(<branch>)`; `<repo>` is a repo slug or a full clone URL, and may be omitted for same-repo implementations (bare `<sha>`). Correctable via the CLI's corrective re-stamp path. Surfaced on the Task as the `**Implemented-by:**` field. Actor-supplied (never auto-derived from ambient HEAD) and validated syntactically only — the linter never scans the referenced repo to confirm the sha exists, mirroring the cross-repo `P-005` precedent. See the implementation-commit-provenance feature. |
 <!-- end-managed -->
 
 ## Referenced by

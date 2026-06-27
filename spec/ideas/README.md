@@ -22,6 +22,7 @@ Archived Ideas are indexed separately at [archived/README.md](archived/README.md
 | [entity-and-property-definitions](entity-and-property-definitions.md) | Specifying | 2026-05-18 | alexander.trakhimenok | document-types-registry, entity, property |
 | [format-declaration-footer-and-frontmatter](format-declaration-footer-and-frontmatter.md) | Approved | 2026-06-02 | alex | — |
 | [idea-types-and-lifecycle](idea-types-and-lifecycle.md) | Draft | 2026-05-19 | alex | — |
+| [implementation-commit-provenance](implementation-commit-provenance.md) | Specified | 2026-06-25 | alex | implementation-commit-provenance |
 | [journal-and-summary](journal-and-summary.md) | Specifying | 2026-05-19 | alex | journal-and-summary |
 | [new-artefact-templates](new-artefact-templates.md) | Implemented | 2026-06-05 | alex | cli-template-runtime-fetch, new-artefact-template-gallery |
 | [plan-deferred-ac-hyphenated-slug](plan-deferred-ac-hyphenated-slug.md) | Draft | 2026-05-22 | alexander.trakhimenok@gmail.com | — |
@@ -32,6 +33,7 @@ Archived Ideas are indexed separately at [archived/README.md](archived/README.md
 | [spec-code-linking-via-codegraph](spec-code-linking-via-codegraph.md) | Draft | 2026-06-10 | trakhimenok | — |
 | [specscore-hub](specscore-hub.md) | Approved | 2026-06-01 | alex | — |
 | [studio-toolbar](studio-toolbar.md) | Specified | 2026-05-19 | alex | studio-toolbar |
+| [unify-task-status-vocabulary](unify-task-status-vocabulary.md) | Specified | 2026-06-26 | alex | unify-task-status-vocabulary |
 
 ## Open Questions
 

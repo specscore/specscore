@@ -401,6 +401,10 @@ In the flat single-file model, a plan does not embed its own acceptance-criteria
 
 Every task in a plan MUST declare a `**Verifies:**` line referencing one or more acceptance criteria of the plan's source Feature, in the form `feature-slug#ac:<ac-slug>` (comma-separated when more than one). A task with no such reference is rejected by lint rule `P-001`. Feature ACs that the plan does not yet cover are recorded under the optional `## Deferred AC Coverage` section. (Idea-sourced plans, which have no source Feature, are exempt from `P-001`.)
 
+### Optional task id
+
+A task block MAY carry an optional `**Id:** <slug>` field — a stable, hyphen-separated identifier (matching the [Task entity](task.entity.md) `id` shape) used to address the inline task from tooling. Unlike the ordinal `Task N` (which shifts on reordering) or a title-derived slug (which breaks on title edits), the `**Id:**` is durable: it is the address `specscore task change-status --plan <slug> <id>` resolves against when stamping implementation-commit provenance on a plan-inline task. The field is optional and unenforced today; tooling that addresses plan-inline tasks requires it on the targeted block.
+
 ### Optional ROI metadata
 
 Two optional fields can be added to the plan document header:
