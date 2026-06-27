@@ -24,7 +24,7 @@ Linear, bottom-up. **Task 1** pins the data shape (the entity property — alrea
 
 **Verifies:** implementation-commit-provenance#ac:provenance-is-optional, implementation-commit-provenance#ac:provenance-never-inferred
 **Depends-On:** —
-**Status:** done
+**Status:** complete
 
 Define the optional `implementation_commit` property on the Task entity (`spec/features/task/task.entity.md`) and its document surface `**Implemented-by:**` — the typed data shape, optional and actor-supplied (never inferred from ambient `HEAD`). The property is already added; this task confirms the shape and the never-inferred guarantee that downstream code relies on.
 
@@ -32,7 +32,7 @@ Define the optional `implementation_commit` property on the Task entity (`spec/f
 
 **Verifies:** implementation-commit-provenance#ac:well-formed-ref-accepted, implementation-commit-provenance#ac:malformed-ref-rejected, implementation-commit-provenance#ac:same-repo-bare-sha
 **Depends-On:** 1
-**Status:** done
+**Status:** complete
 
 Implement the syntactic validator for the `<repo>@<sha> (<branch>)` reference (bare `<sha>` for same-repo), accepting on shape alone without resolving the repo. The code lands in `specscore-cli` (sub-plan `cli-task-change-status`); this task tracks the cross-cutting data-model ACs it satisfies.
 
@@ -40,7 +40,7 @@ Implement the syntactic validator for the `<repo>@<sha> (<branch>)` reference (b
 
 **Verifies:** implementation-commit-provenance#ac:plan-evidence-rolls-up, implementation-commit-provenance#ac:snapshots-stay-distinct
 **Depends-On:** 2
-**Status:** done
+**Status:** complete
 
 Implement the derived plan-level rollup of child tasks' `implementation_commit` values and surface it **query-only via `specscore plan info`** (no plan-body/frontmatter write), as evidence distinct from the plan `## Snapshots` Git Hash. Code lands in `specscore-cli` (`cli/plan/info` output); this task tracks the data-model ACs.
 
