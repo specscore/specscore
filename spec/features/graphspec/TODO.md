@@ -9,16 +9,13 @@ status, ownership representation, and command-event link direction — see decis
 
 ## Before Phase 3 (`graph lint`) — from the first consumer pilot (2026-07-08)
 
-All pilot blockers are resolved — Phase 3 is unblocked:
+All pilot findings are closed — **Phase 3 has no remaining blockers**:
 
-- ~~Canonicalize the model-source location and local module identity~~ — [decision 0006](../../decisions/0006-graphspec-model-source-location.md).
-- ~~Define `modelspec://` resolution (local, configured projects, cross-repo suffix)~~ — [decision 0007](../../decisions/0007-modelspec-reference-resolution.md).
-- ~~Decide cross-module ModelSpec references~~ — ModelSpec decision 0014 (module-qualified names, consumer-provided resolution; SpecScore is the resolver per 0007).
-
-Remaining small spec edits before implementation starts:
-
-- Define the relationship `metadata:` value shape; legalize zero-graph-artifact modules in lint rules; make the command `inputs` shape normative.
-- Remove the obsolete alternate core-root location from the CLI `graph new` spec; `graph new` scaffolds `models/` and collection READMEs; CLI validation spec references decision 0007 for `graph-model-ref-resolves` diagnostics.
+- ~~Model-source location and local module identity~~ — [decision 0006](../../decisions/0006-graphspec-model-source-location.md).
+- ~~`modelspec://` resolution (local, configured projects, cross-repo suffix)~~ — [decision 0007](../../decisions/0007-modelspec-reference-resolution.md).
+- ~~Cross-module ModelSpec references~~ — ModelSpec decision 0014.
+- ~~Relationship `metadata:` shape, command `inputs:` shape~~ — normative in the kind READMEs.
+- ~~Zero-graph-artifact modules, `graph new` scaffolding (`models/` + collection READMEs), model-ref-resolution diagnostics~~ — in the CLI graph specs.
 
 ## Near Term (v0.2)
 

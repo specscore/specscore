@@ -45,6 +45,7 @@ Rules:
 - **When required.** A RelationshipSpec artifact is required only when the relationship carries semantics beyond a typed reference: cross-module endpoints, metadata, cardinality constraints, or lifecycle. Intra-module structural references stay in the ModelSpec model.
 - **Ownership follows dependencies.** The owning module (derived from placement) MUST have both endpoint modules in its `dependsOn` closure. In practice the downstream module owns the relationship; a core module can never own a relationship targeting an extension-owned entity.
 - **Endpoints must resolve.** `from` and `to` reference existing entities by qualified ID. Speculative or union targets belong in prose and open questions, not in frontmatter fields.
+- **`metadata:` is an OPTIONAL flat map.** Keys are kebab-case or camelCase strings; each value is exactly one of: a scalar (string/number/boolean), a qualified graph reference (`core.space-role`-style), or a `modelspec://` reference. Nested maps and lists are not allowed in v0.2 — a relationship needing structured metadata is an association-object candidate. *(Shape fixed after the first consumer pilot used a `modelspec://` enum reference as role metadata.)*
 - **Association objects.** A relationship that accumulates identity, lifecycle, or audit history is a candidate for promotion to an entity (association object). The promotion rule is not yet normative.
 
 ## Acceptance Criteria

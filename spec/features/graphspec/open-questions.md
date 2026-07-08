@@ -13,16 +13,14 @@ RelationshipSpec first-class (yes, when semantic), ownership representation
 
 Expected to be answered by the Phase 2 pilot and Phase 3 lint work.
 
-Raised by the first consumer pilot (2026-07-08). The former Phase 3 blockers are
+All questions the first consumer pilot (2026-07-08) raised as Phase 3 blockers are
 resolved: model-source location and identity by placement
 ([decision 0006](../../decisions/0006-graphspec-model-source-location.md)),
 reference resolution including cross-repo
-([decision 0007](../../decisions/0007-modelspec-reference-resolution.md)), and
-cross-module ModelSpec references (ModelSpec decision 0014). Remaining:
-
-- What may a relationship's `metadata:` map contain? The pilot used `modelspec://` enum references successfully; lint needs a defined value shape (proposal: flat map of string → scalar | qualified graph ref | `modelspec://` ref).
-- May a module own zero graph artifacts (a pure structural provider whose surface is only ModelSpec)? The pilot says yes; ModuleSpec and lint rules should say so explicitly.
-- The command `inputs` item shape (`name` + `ref:` | `model:`) is currently shown only by example and needs a normative sentence in CommandSpec.
+([decision 0007](../../decisions/0007-modelspec-reference-resolution.md)),
+cross-module ModelSpec references (ModelSpec decision 0014), the relationship
+`metadata:` shape, the command `inputs:` shape, zero-graph-artifact modules, and
+absent-`sources` semantics (now in the kind READMEs). **No Phase 3 blockers remain.**
 
 - How should command failures be represented — prose, structured failure cases, or references to policies?
 - Should `possibleEvents` entries carry conditions (when does a create command emit its created event)?

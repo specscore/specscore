@@ -48,7 +48,7 @@ Rules:
 
 - **Command-event links are declared here, one-directionally.** `possibleEvents` on the command is the single authored source of command-to-event links. Events do not list commands; tooling derives an event's command triggers from CommandSpecs ([current decisions](../decisions.md)).
 - `possibleEvents` records possible outcomes, not a contract: a command may emit zero, one, or several of them.
-- Input structure references ModelSpec models or graph entities; commands embed no field definitions.
+- **`inputs:` items have a fixed shape.** Each item carries `name` (kebab-case, unique within the command) plus exactly one of `ref:` (a qualified graph reference) or `model:` (a `modelspec://` reference). Items with both, neither, or embedded field definitions are invalid — commands carry no structure of their own. *(Made normative after the first consumer pilot exercised both forms in one command.)*
 - Failure cases are documented in prose (`## Failure Cases`) until a normative representation is designed.
 
 ## Acceptance Criteria

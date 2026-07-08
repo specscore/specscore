@@ -21,29 +21,34 @@ language tree in this directory, restaged CLI specs, and the
 [review report](reviews/architecture-review-2026-07.md) /
 [lessons learned](lessons-learned.md).
 
-## Current
+### Phase 2 — Bookius pilot (2026-07, completed)
 
-### Phase 2 — Bookius pilot
-
-Validate the refined language with one focused booking-domain slice in the consumer's
-repository, authored strictly against v0.2 conventions: five kinds, bare IDs,
-unsuffixed filenames, derived ownership, `dependsOn`, one-directional command→event
-links, and at least one real ModelSpec model referenced via `modelspec://`. The pilot
-is a stress test — its job is to expose weaknesses in GraphSpec and ModelSpec, and
-every weakness found feeds back into the language before scope widens. The broader
-consumer graph is intentionally NOT expanded in this phase. See the
-[Phase 2 handoff](continuations/phase-2-handoff.md).
+Validated the refined language with one booking-domain slice in the consumer's
+repository, authored strictly against v0.2 conventions and run as a falsification
+exercise (see the [Phase 2 handoff](continuations/phase-2-handoff.md) for the
+brief). Outcome: the five-kind model, derived ownership, downstream relationship
+ownership, and one-directional command→event links all validated cleanly; the
+pilot's friction report drove decisions
+[0006](../../decisions/0006-graphspec-model-source-location.md) (model-source
+location, identity by placement, prose pairing) and
+[0007](../../decisions/0007-modelspec-reference-resolution.md) (reference
+resolution), ModelSpec decision 0014 (module-qualified references), and normative
+tightenings of the relationship `metadata:`, command `inputs:`, and event `sources`
+rules. One known validation gap is deliberately deferred (lifecycle states vs the
+model's status property — revisit before code generation).
 
 ## Next
 
-### Phase 3 — `specscore graph lint`
+### Phase 3 — `specscore graph lint` (unblocked, not started)
 
-Implement the v0.2 validation surface in `specscore-cli`: `graph new`, `graph lint`
+Implement the v0.2 tooling surface in `specscore-cli`, in this order: `graph lint`
 (rules: id-equals-filename-stem, id-kebab-case, no-module-prefix-in-id,
-reference-resolves, ownership-derivable, dependency-direction,
-relationship-owner-depends-on-endpoints), `graph list`, `graph refs`. Validate the
-Phase 2 pilot mechanically; wire `modelspec://` resolution to ModelSpec validation
-where available.
+reference-resolves, model-ref-resolution per decision 0007, ownership-derivable +
+no-owner-field, dependency-direction including model-level references,
+relationship-owner-depends-on-endpoints, metadata/inputs/sources shapes), then
+`graph new` (with module scaffolding: collection dirs + READMEs + `models/`), then
+`graph list` and `graph refs`. Acceptance target: the Phase 2 pilot graph lints
+clean, and seeded violations of each rule are caught.
 
 ## Deferred
 
