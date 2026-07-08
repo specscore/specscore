@@ -167,6 +167,7 @@ SpecScore specifications are Markdown files. SpecScore lives at [`specscore.md`]
 
 ## Design history
 
+- [ROADMAP](ROADMAP.md) — the family-level road to v1 and beyond
 - [Decisions index](spec/decisions/README.md) — accepted architecture decisions (ADRs)
 - [GraphSpec roadmap](spec/features/graphspec/roadmap.md) and [design history](spec/features/graphspec/README.md) — decisions, lessons learned, review reports, phase hand-offs
 - [Entities and properties](docs/entities-and-properties.md) — the legacy typed-data Doc-Kinds (frozen; new structural work uses [ModelSpec](https://github.com/specscore/modelspec))

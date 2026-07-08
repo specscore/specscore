@@ -22,6 +22,7 @@ Review reasoning that lives only in chat history is lost. Keeping polished revie
 | Review | Date | Outcome |
 |---|---|---|
 | [Architecture review 2026-07](architecture-review-2026-07.md) | 2026-07-08 | Accepted; produced decisions 0003/0004/0005 and the v0.2 language shape (five kinds, ModelSpec dependency, ID/naming syntax). |
+| [Public readiness review 2026-07](readiness-review-2026-07.md) | 2026-07-09 | Family-wide, five independent tracks. Verdict: ready for public preview, not beta/v1. Produced the [v1-readiness plan](../../../plans/v1-readiness.md) and the repository [ROADMAP](../../../../ROADMAP.md). |
 
 ## Acceptance Criteria
 
