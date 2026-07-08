@@ -52,32 +52,44 @@ idea/feature walkers (no GraphSpec-specific configuration). Both acceptance
 targets met: the Phase 2 pilot graph lints clean, and seeded violations are
 caught. `--fix` is deliberately omitted until a rule specifies fix semantics.
 
+### Phase 5 — Family Identity / Family Card validation (2026-07, completed)
+
+Third consumer domain, deliberately different in shape from booking and storage
+(person-centric identity and relationships). Outcome: zero language changes
+needed, lint-clean on first pass under the released CLI — and the sharpest
+findings yet, because this was the first domain to routinely put same-kind
+artifacts on both relationship endpoints and to model consent. Findings recorded
+as [v0.3 candidates](open-questions.md): role-labeled endpoints/participants (the
+one candidate language change), a home for policy/invariants, and derived
+model-property edges in tooling (association-object promotion hides endpoint
+edges from `graph refs`). Verdict: ready for broader consumer adoption, with the
+v0.3 questions to be settled before permission-heavy modules. Also served
+self-hosting milestone 5. The full friction report (FA1–FA7, including a CLI
+hardening list) lives in the consumer repository's pilot notes.
+
 ## Next
 
-The next phase is not yet committed; the deferred phases below are the candidates,
-gated on real consumer demand.
+The next phase is not yet committed; the deferred items below are the candidates
+— the v0.3 design questions and the phases gated on real consumer demand.
 
 ## Deferred
 
-### Phase 4 — OpenVaultDB validation
+### Phase 4 — OpenVaultDB standalone-consumption validation
 
 Exercise ModelSpec end-to-end with its primary non-SpecScore consumer: publish a
 pilot ModelSpec module and confirm OpenVaultDB can consume it (schema validation,
 backend mapping) without any GraphSpec or SpecScore dependency. Guards the
-independence promise of ModelSpec decision 0012.
-
-### Phase 5 — Family Identity / Family Card validation
-
-Second consumer domain, deliberately different in shape from booking
-(person-centric identity and relationships rather than resource reservation). Also
-serves self-hosting milestone 5 (a second example from an unrelated domain).
+independence promise of ModelSpec decision 0012. *(Distinct from the OpenVaultDB
+GraphSpec pilot shipped 2026-07-08, which validated GraphSpec reusability inside
+a SpecScore-managed tree — this phase validates the opposite seam and remains
+open.)*
 
 ### Phase 6 — Wider consumer graph
 
-Populate the consumer's remaining domains module by module, only after Phases 2–5
-have stabilized the vocabulary. Expect cross-repo graph roots to become a real
-requirement here (extending the `source-references` `@{host}/{org}/{repo}`
-convention per decision 0005).
+Populate the consumer's remaining domains module by module, only after the
+completed pilots' vocabulary has stabilized and the v0.3 candidates are settled.
+Expect cross-repo graph roots to become a real requirement here (following the
+URL-based reference rules of decision 0010, per decision 0005's deferral).
 
 ### GraphSpec v1
 

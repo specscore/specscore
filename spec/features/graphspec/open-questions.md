@@ -34,6 +34,30 @@ absent-`sources` semantics (now in the kind READMEs). **No Phase 3 blockers rema
   collision a consumer pilot hit was a lint-implementation defect, not a language
   gap).
 
+## v0.3 Candidates
+
+Raised by the third consumer pilot (a person-centric identity domain — the first
+to routinely put artifacts of the same kind on both ends of relationships and to
+model consent). Its conclusion: nothing broke and no new kinds were wanted, but
+these should be settled before permission-heavy domains are modelled.
+
+- **Role-labeled endpoints and participants.** When both relationship endpoints
+  are the same kind (person-to-person: guardian/ward, parent/child), the role of
+  each endpoint lives only in prose or the artifact id, and a `participants:`
+  ref-list is unlabeled (duplicates pass silently). Should endpoints and
+  participant lists carry role labels? *Top candidate for a language change.*
+- **A home for policy.** Cross-entity lifecycle invariants ("a consent is void
+  when its authorizing relationship is revoked"), conditional inputs ("this
+  input is required only for minors"), and actor qualification ("the
+  relationship's *guardian*, not any user") all landed in prose. Is a
+  policy/invariant layer a GraphSpec concern, a sibling spec, or permanently
+  prose? The pilot's notes form the requirements corpus.
+- **Derived model-property edges in tooling.** Promoting an association to an
+  entity (the language's own rule) makes its endpoints invisible to graph
+  reference queries — the edges now live in ModelSpec properties. Candidate CLI
+  answer: derive model-property edges (e.g. `graph refs --model-edges`) with no
+  language change.
+
 ## Future Questions
 
 Real, but safely deferred past v0.2.
@@ -41,6 +65,10 @@ Real, but safely deferred past v0.2.
 - How should lifecycle transitions (not just states) be represented, and when do they become normative?
 - When exactly is a relationship with metadata promoted to an association-object entity? A working signal exists — identity, lifecycle, or audit needs — but the promotion rule is not yet normative.
 - How should invariants and constraints that span multiple concepts be expressed?
+  (Escalated by the third consumer pilot — see the policy candidate above.)
+- Should structural subtype/is-a refinement be expressible (a concept that *is a*
+  specialization of another module's concept)? The third pilot found
+  reference-plus-prose workable; watch, don't change.
 - How should deprecation of graph artifacts be represented?
 - Should ModuleSpec describe runtime instances or only architectural modules?
 - Should `dependsOn` support qualifiers (e.g. weak/contract-only) once real graphs need them?
