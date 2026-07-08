@@ -28,6 +28,13 @@ absent-`sources` semantics (now in the kind READMEs). **No Phase 3 blockers rema
 - Should relationship cardinality be normative (linted) or descriptive in v0.2?
 - How should `graph lint` consume ModelSpec validation when resolving `modelspec://` references — embed a ModelSpec parser, shell out, or read the compiled JSON AST?
 - Lifecycle states live inline on the entity, with ModelSpec named enums reserved for data vocabularies. Does the pilot confirm this split, or do states need reuse across entities / generator access as enums?
+- Should a module node occupy a qualified-ID slot at all? A module named `<m>`
+  currently takes the qualified id `<m>.<m>`, so an entity with the same local id
+  collides with its own module (a second consumer pilot hit exactly this with a
+  containment-root entity named after its module and resolved it by pluralizing
+  the module id, matching the `reservations.booking` exemplar style). Options:
+  keep the collision (push toward plural module ids), exempt module nodes from
+  the qualified-ID namespace, or give modules a distinct reference form.
 
 ## Future Questions
 
