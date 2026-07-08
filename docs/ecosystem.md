@@ -20,6 +20,17 @@ Tests specifications automatically *before* implementation begins.
 
 [rehearse.ink](https://rehearse.ink)
 
+## ModelSpec — The Application Data Model
+
+Defines storage-neutral application data models.
+
+- Describes entities, properties, relationships, components, constraints, indexes, projections, migration metadata, and storage-neutral schemas
+- Independent from SpecScore, OpenVaultDB, GraphSpec, and any backend
+- Validated by SpecScore through linting, structural validation, and semantic checks
+- Consumed directly by OpenVaultDB for schema validation, migration planning, backend mapping, GraphQL generation, DTQL typing metadata, DALGO metadata, and backend generators
+
+[modelspec.org](https://modelspec.org)
+
 ## Synchestra — The Performance
 
 Orchestrates multi-agent work *across* specifications.
@@ -57,6 +68,8 @@ Author specs with SpecScore.Studio
          ↓
 Validate format with SpecScore
          ↓
+Validate ModelSpec when present
+         ↓
 Test specs with Rehearse
          ↓
 Orchestrate execution with Synchestra
@@ -66,6 +79,6 @@ Agents coordinate using SpecScore as the shared protocol
 
 ## Each Tool Standalone, Better Together
 
-You don't need the full ecosystem. SpecScore works with any orchestration tool — Jira, Linear, your own scripts. Rehearse works in any project that uses SpecScore-formatted specs. Synchestra is optimized for SpecScore but is not required. SpecScore.Studio is one way to author SpecScore artifacts — you can write them by hand or with any other editor.
+You don't need the full ecosystem. SpecScore works with any orchestration tool — Jira, Linear, your own scripts. Rehearse works in any project that uses SpecScore-formatted specs. ModelSpec can be adopted independently anywhere an application data model needs a storage-neutral source of truth. Synchestra is optimized for SpecScore but is not required. SpecScore.Studio is one way to author SpecScore artifacts — you can write them by hand or with any other editor.
 
 The recommended path: start with SpecScore. Add SpecScore.Studio when you want guided authoring in Claude Code. Add Rehearse when you want automated validation. Add Synchestra when you need multi-agent coordination.

@@ -16,6 +16,7 @@ The format is portable by construction. Adopt SpecScore with any AI-coding tool,
 We build with our own tooling:
 
 - **[SpecScore](https://specscore.md)** — specify requirements as `SpecScore.md` artifacts
+- **[ModelSpec](https://modelspec.org)** — define application data models once
 - **[SpecStudio](https://specscore.studio)** — author & manage specs across their lifecycle
 - **[inGitDB](https://ingitdb.com)** — store structured data in Git where applicable
 - **[DALgo](https://dalgo.io)** — data access layer for Go
@@ -105,6 +106,7 @@ A SpecScore feature looks like this:
 | Tool | Role | Status |
 |---|---|---|
 | **SpecScore** | The open specification format — this repository | Standard |
+| [ModelSpec](https://modelspec.org) *(repo: `modelspec`)* | Independent open specification language for application data models; SpecScore validates it but does not own its semantics | Bootstrap |
 | [SpecStudio Skills](https://github.com/specscore/specstudio-skills) *(repo: `specstudio-skills`)* | Opinionated SDD workflow Claude Code plugin — the entry gate for cold users | Live (MIT, free) |
 | [SpecScore Studio](https://specscore.studio) | Hosted web UI for SpecScore — Stage 0 minimal viewer (view documents + spec graph, navigate) live 2026-05-20 | Stage 0 viewer |
 | [Rehearse](https://github.com/specscore/rehearse) | Markdown-native test framework for SpecScore specs | Sibling, MIT |
@@ -126,6 +128,7 @@ Projects and tools built on SpecScore:
 - [**specscore-cli**](https://github.com/specscore/specscore-cli) — reference CLI: lint, query, and scaffold SpecScore specifications
 - [**specstudio-skills**](https://github.com/specscore/specstudio-skills) — Claude Code plugin: opinionated SDD authoring workflow for SpecScore
 - [**rehearse**](https://github.com/specscore/rehearse) — Markdown-native test framework that turns SpecScore specs into executable scenarios
+- [**modelspec**](https://github.com/specscore/modelspec) — independent specification for application data models; validated by SpecScore
 - [**spec-driven-todo-app**](https://github.com/specscore/spec-driven-todo-app) — demo todo app specified end-to-end across all four SpecScore layers
 - [**inGitDB**](https://github.com/ingitdb) — open-source Git-backed versioned database, specified with SpecScore
 - [**dal-go/dalgo**](https://github.com/dal-go/dalgo) — *(planned)* Go data access layer, SpecScore specification in progress

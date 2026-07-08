@@ -21,6 +21,7 @@ spec/
 2. **Schema:** What makes a valid specification (required fields, metadata, validation rules)
 3. **Mental Model:** Best practices for thinking about specifications as machine-readable blueprints
 4. **Standards:** How specs link to code, to each other, and to execution workflows
+5. **Validation integrations:** How SpecScore can validate independent specifications such as ModelSpec without owning their language semantics
 
 See [features/](features/README.md) for detailed specifications.
 
