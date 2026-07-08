@@ -37,18 +37,25 @@ tightenings of the relationship `metadata:`, command `inputs:`, and event `sourc
 rules. One known validation gap is deliberately deferred (lifecycle states vs the
 model's status property — revisit before code generation).
 
+### Phase 3 — `specscore graph` tooling (2026-07, completed)
+
+Implemented the v0.2 tooling surface in `specscore-cli`: `graph new` (module
+scaffolding with collection dirs + READMEs, retired kinds rejected with a pointer
+to ModelSpec), `graph lint` (18 `graph-*` rules covering IDs/kinds/ownership,
+inline-structure rejection, reference and `modelspec://` resolution per decision
+0007, dependency direction including HCL-level references,
+relationship-owner-covers-endpoints, metadata/inputs/sources/lifecycle shapes, and
+duplicate artifact/module/concept detection per decision 0009), `graph list`, and
+`graph refs --transitive`. ModelSpec sources are parsed with `hashicorp/hcl/v2`;
+graph-root discovery reuses the same repo-config module resolution as the
+idea/feature walkers (no GraphSpec-specific configuration). Both acceptance
+targets met: the Phase 2 pilot graph lints clean, and seeded violations are
+caught. `--fix` is deliberately omitted until a rule specifies fix semantics.
+
 ## Next
 
-### Phase 3 — `specscore graph lint` (unblocked, not started)
-
-Implement the v0.2 tooling surface in `specscore-cli`, in this order: `graph lint`
-(rules: id-equals-filename-stem, id-kebab-case, no-module-prefix-in-id,
-reference-resolves, model-ref-resolution per decision 0007, ownership-derivable +
-no-owner-field, dependency-direction including model-level references,
-relationship-owner-depends-on-endpoints, metadata/inputs/sources shapes), then
-`graph new` (with module scaffolding: collection dirs + READMEs + `models/`), then
-`graph list` and `graph refs`. Acceptance target: the Phase 2 pilot graph lints
-clean, and seeded violations of each rule are caught.
+The next phase is not yet committed; the deferred phases below are the candidates,
+gated on real consumer demand.
 
 ## Deferred
 
