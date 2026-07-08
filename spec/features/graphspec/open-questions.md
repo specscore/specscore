@@ -48,6 +48,7 @@ Real, but safely deferred past v0.2.
 - Should `dependsOn` support qualifiers (e.g. weak/contract-only) once real graphs need them?
 - When cross-repo graph roots land, how are distributed roots indexed and discovered, and what do version constraints look like on top of the `@{host}/{org}/{repo}` suffix? (Intra-repo per-module roots are resolved — [decision 0009](../../decisions/0009-per-module-graph-roots.md); only cross-repo distribution remains deferred.)
 - Should events reference dedicated payload models routinely, or is the subject entity's model usually sufficient?
+- Should there be an authoring convention for linking command/event bodies to existing topical prose instead of restating it? Both consumer pilots found artifact bodies inviting duplication of rationale that already lives in feature/topic documents; linking worked, but nothing normative says to prefer it.
 - How should event-to-event causation be represented, if at all?
 - Should WorkflowSpec, PolicySpec, or ProjectionSpec exist? Each must pass the decision 0004 admission rule; none has yet demonstrated a graph-native semantic not derivable from ModelSpec.
 - Consumer-derived modelling pressure points from the booking domain: is a bookable Resource an asset, a person, a union, or a reservations-module abstraction? Does Availability belong to scheduling, the resource-owning module, the reservations module, or a split?
