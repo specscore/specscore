@@ -39,6 +39,7 @@ Real, but safely deferred past v0.2.
 - How should deprecation of graph artifacts be represented?
 - Should ModuleSpec describe runtime instances or only architectural modules?
 - Should `dependsOn` support qualifiers (e.g. weak/contract-only) once real graphs need them?
+- **Intra-repo multi-root graphs (per-module graph roots).** Confirmed intent, deferred implementation: a repo whose `specscore.yaml` `modules:` partition file locations should be able to carry one graph root per module (matching "modules partition where files live, not the graph itself" and the bootstrap's distributed-roots intent). Everything decided in 0005/0006/0007 is root-count-agnostic; lifting the v0.2 single-root constraint only extends discovery (union of roots enumerated from repo config, resolution step 1 searches the union) plus a repo-wide GraphSpec-module-ID uniqueness rule. Design constraint when specified: SpecScore modules and GraphSpec modules are different concepts (code area vs bounded context, not 1:1) — keep one uniform layout (every root contains the full `modules/<graph-module-id>/…` shape; no "compact" root-is-the-module variant). Trigger: first monorepo consumer.
 - When cross-repo graph roots land, how are distributed roots indexed and discovered, and what do version constraints look like on top of the `@{host}/{org}/{repo}` suffix?
 - Should events reference dedicated payload models routinely, or is the subject entity's model usually sufficient?
 - How should event-to-event causation be represented, if at all?
