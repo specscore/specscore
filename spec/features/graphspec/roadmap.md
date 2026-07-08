@@ -75,8 +75,10 @@ convention per decision 0005).
 ### GraphSpec v1
 
 Freeze the core vocabulary; separate normative rules from rationale; evaluate
-self-hosting against the milestones in [BOOTSTRAP.md](BOOTSTRAP.md); extract
-GraphSpec to its own repository (as ModelSpec was) with migrated decision records.
+self-hosting against the milestones in [BOOTSTRAP.md](BOOTSTRAP.md). GraphSpec stays
+in this repository permanently as a SpecScore component — the previously planned
+extraction to its own repository was dropped by
+[decision 0008](../../decisions/0008-graphspec-is-a-specscore-component.md).
 
 ## Open Questions
 

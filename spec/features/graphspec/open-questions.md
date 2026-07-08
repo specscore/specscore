@@ -54,4 +54,4 @@ Open-ended; no phase currently depends on them.
 - Should GraphSpec eventually evolve into a DSL, and what would the migration from Markdown+YAML look like?
 - Should GraphSpec generate TypeSpec, OpenAPI, or diagrams — and which derived views earn maintenance?
 - How should shared/core modules avoid becoming dependency sinks as graphs grow?
-- At what maturity should GraphSpec become self-hosting (milestones in [BOOTSTRAP.md](BOOTSTRAP.md)), and when should it move to its own repository?
+- At what maturity should GraphSpec become self-hosting (milestones in [BOOTSTRAP.md](BOOTSTRAP.md))? This is now purely a documentation question — packaging is settled by [decision 0008](../../decisions/0008-graphspec-is-a-specscore-component.md) (GraphSpec stays in the SpecScore repository).

@@ -38,5 +38,4 @@ All pilot findings are closed — **Phase 3 has no remaining blockers**:
 - Add TypeSpec and OpenAPI generation experiments only after the core vocabulary stabilizes.
 - Define migration and deprecation conventions.
 - Specify cross-repo graph roots on top of the `source-references` `@{host}/{org}/{repo}` convention.
-- Plan extraction of GraphSpec to its own repository once v0.2 stabilizes.
-- Revisit self-hosting milestones.
+- Revisit self-hosting milestones (definition-in-GraphSpec-terms only; packaging is settled — GraphSpec stays in this repository per [decision 0008](../../decisions/0008-graphspec-is-a-specscore-component.md)).

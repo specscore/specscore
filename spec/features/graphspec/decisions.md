@@ -8,12 +8,26 @@ record for the foundational decisions is the repository Decision artifacts:
 - [0005 — Identifier, Reference, and File-Naming Syntax](../../decisions/0005-graphspec-id-and-reference-syntax.md)
 - [0006 — Model-Source Location and Identity by Placement](../../decisions/0006-graphspec-model-source-location.md)
 - [0007 — ModelSpec Reference Resolution](../../decisions/0007-modelspec-reference-resolution.md)
+- [0008 — GraphSpec Is A SpecScore Component](../../decisions/0008-graphspec-is-a-specscore-component.md)
 
 Fuller narrative reasoning lives in the
 [Phase 1 architecture review report](reviews/architecture-review-2026-07.md);
 rejected options are catalogued in [alternatives considered](alternatives-considered.md).
 
 ## Accepted Decisions
+
+### GraphSpec is a SpecScore component, not a standalone standard
+
+GraphSpec is not intended for use outside SpecScore and freely reuses SpecScore
+machinery: `specscore.yaml` (`modules:` for graph-root discovery, `projects:` for
+resolution), the `source-references` linkage model, artifact conventions, and shared
+lint/CLI/Studio infrastructure. The formerly planned v1 extraction to its own
+repository is dropped (plain-Markdown artifacts keep extraction *possible* if
+external demand ever materializes). *Why:* every mechanism a standalone GraphSpec
+would need already exists in SpecScore, and there is no adopter without SpecScore —
+unlike ModelSpec, which has real non-SpecScore consumers and stays independent. The
+layering rule is unaffected: GraphSpec never depends on FeatureSpec semantically.
+([0008](../../decisions/0008-graphspec-is-a-specscore-component.md))
 
 ### ModelSpec is the single structural language
 
@@ -151,7 +165,6 @@ ModelSpec supersedes. ([0003](../../decisions/0003-one-structural-language.md))
   language models more than entities; a rename buys marginal precision for real churn.
 - `ModuleSpec` (not ExtensionSpec) — consumer-neutral; product extensions are one
   implementation of modules.
-- GraphSpec remains part of the SpecScore family and does not replace SpecScore.
 - Consumer trees use `spec/graph/` (not `spec/knowledge-graph/`).
 - Normative examples use a neutral domain (`reservations`, `catalog`, `directory`,
   `identity`, `scheduling`); the public standard never names private consumers.

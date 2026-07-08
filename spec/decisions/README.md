@@ -17,6 +17,7 @@ Decisions are durable, lintable records of choices made between two or more opti
 | [0005](0005-graphspec-id-and-reference-syntax.md) | GraphSpec Identifier, Reference, and File-Naming Syntax | Approved | 2026-07-08 | graphspec, identifiers, references, naming, cross-repo | graphspec |
 | [0006](0006-graphspec-model-source-location.md) | GraphSpec Model-Source Location and Module Identity by Placement | Approved | 2026-07-08 | graphspec, modelspec, models, discovery, identity | graphspec |
 | [0007](0007-modelspec-reference-resolution.md) | ModelSpec Reference Resolution In SpecScore Trees | Approved | 2026-07-08 | graphspec, modelspec, references, resolution, cross-repo | graphspec, modelspec-validation |
+| [0008](0008-graphspec-is-a-specscore-component.md) | GraphSpec Is A SpecScore Component, Not A Standalone Standard | Approved | 2026-07-08 | graphspec, positioning, configuration, reuse, scope | graphspec |
 
 ## Open Questions
 
