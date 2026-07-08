@@ -17,7 +17,7 @@ It is a **component of SpecScore**, not a standalone standard ([decision 0008](.
 
 ## Contents
 
-Each first-level directory below this feature is a specification kind. GraphSpec v0.2 defines exactly five kinds, admitted under the rule in [decision 0004](../../decisions/0004-graphspec-kind-admission.md).
+Each first-level directory below this feature is a specification kind. GraphSpec defines six kinds: five core kinds admitted under the rule in [decision 0004](../../decisions/0004-graphspec-kind-admission.md), plus `policy` added by [decision 0013](../../decisions/0013-rules-and-policies.md).
 
 ```text
 graphspec/
@@ -26,6 +26,7 @@ graphspec/
     relationship/
     command/
     event/
+    policy/
 ```
 
 | Directory | Description |
@@ -35,6 +36,7 @@ graphspec/
 | [relationship/](relationship/README.md) | RelationshipSpec: semantic relationships between domain concepts. |
 | [command/](command/README.md) | CommandSpec: requested intentions. |
 | [event/](event/README.md) | EventSpec: facts that happened. |
+| [policy/](policy/README.md) | PolicySpec: machine-checkable domain constraints over graph operands (decision 0013). |
 | [glossary/](glossary/README.md) | Working definitions for GraphSpec terminology. |
 | [reviews/](reviews/README.md) | Long-term architecture review reports (the design-history "why"). |
 | [continuations/](continuations/README.md) | Phase hand-off documents for future sessions. |

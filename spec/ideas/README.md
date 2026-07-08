@@ -21,7 +21,7 @@ Archived Ideas are indexed separately at [archived/README.md](archived/README.md
 | [decision-and-decisions-index](decision-and-decisions-index.md) | Specified | 2026-04-20 | alexander.trakhimenok@gmail.com | decision, decisions-index |
 | [entity-and-property-definitions](entity-and-property-definitions.md) | Specifying | 2026-05-18 | alexander.trakhimenok | document-types-registry, entity, property |
 | [format-declaration-footer-and-frontmatter](format-declaration-footer-and-frontmatter.md) | Approved | 2026-06-02 | alex | — |
-| [graphspec](graphspec.md) | Specifying | 2026-07-08 | codex | graphspec, graphspec/command, graphspec/continuations, graphspec/entity, graphspec/event, graphspec/glossary, graphspec/module, graphspec/relationship, graphspec/reviews |
+| [graphspec](graphspec.md) | Specifying | 2026-07-08 | codex | graphspec, graphspec/command, graphspec/continuations, graphspec/entity, graphspec/event, graphspec/glossary, graphspec/module, graphspec/policy, graphspec/relationship, graphspec/reviews |
 | [idea-types-and-lifecycle](idea-types-and-lifecycle.md) | Draft | 2026-05-19 | alex | — |
 | [implementation-commit-provenance](implementation-commit-provenance.md) | Specified | 2026-06-25 | alex | implementation-commit-provenance |
 | [journal-and-summary](journal-and-summary.md) | Specifying | 2026-05-19 | alex | journal-and-summary |

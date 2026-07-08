@@ -50,10 +50,10 @@ these should be settled before permission-heavy domains are modelled.
   input is required only for minors"), and actor qualification ("the
   relationship's *guardian*, not any user") all landed in prose. Is a
   policy/invariant layer a GraphSpec concern, a sibling spec, or permanently
-  prose? The pilot's notes form the requirements corpus. **In design
-  discussion** — see the worked exploration in
-  [policy-layer.md](policy-layer.md) (three tiers, clause-vocabulary sketch,
-  open questions).
+  prose? The pilot's notes form the requirements corpus. **Resolved** by
+  [decision 0013](../../decisions/0013-rules-and-policies.md): Tier-1 `rules:`
+  blocks on artifacts + the `policy` kind with a typed clause vocabulary; no
+  expression language (worked exploration in [policy-layer.md](policy-layer.md)).
 - ~~**Derived model-property edges in tooling.**~~ **Resolved** CLI-side: `graph
   refs` derives edges from ModelSpec entity-reference properties by default
   (graph-navigation spec, REQ model-derived-edges); no language change was
