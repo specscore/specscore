@@ -219,6 +219,22 @@ triple-encode the artifact type.
 Rejected: structure is ModelSpec's job; the legacy Property Doc-Kind is frozen prior
 art, not a GraphSpec concept.
 
+### Path-based references (`modules/<m>/entities/<id>` instead of `<m>.<id>`)
+
+Rejected in favour of the dot form. References point at *concepts*, not files: when
+an artifact changes kind (a relationship promoted to an association-object entity)
+or a consumer tree changes layout, `directory.team-member` stays valid while a path
+reference breaks graph-wide. The dot form is also the one reference grammar shared
+across the family (ModelSpec decision 0014 settled `<module>.<Name>`, and ModelSpec
+is consumer-neutral — it cannot carry file locations in identity at all), and a path
+would re-encode the kind a third time, the same triple-encoding argument that killed
+kind-suffixed filenames. The trade is deliberate: path refs would disambiguate
+`entities/x` from `commands/x` for free, but GraphSpec instead asserts that a
+module's local IDs form one flat vocabulary — `reservations.booking` means exactly
+one concept — which is what `graph-duplicate-id` enforces. Modules themselves are
+bare-ID citizens outside that vocabulary. Paths remain the *human* layer: body
+prose uses ordinary relative Markdown links; frontmatter uses semantic refs.
+
 ## Open Questions
 
 See [open-questions.md](open-questions.md).
