@@ -21,6 +21,7 @@ Decisions are durable, lintable records of choices made between two or more opti
 | [0009](0009-per-module-graph-roots.md) | Per-Module Graph Roots | Approved | 2026-07-08 | graphspec, discovery, modules, configuration, multi-root | graphspec |
 | [0010](0010-references-are-urls.md) | References Are URLs | Approved | 2026-07-08 | references, linkage, modelspec, source-references, syntax | — |
 | [0011](0011-addressable-model-concepts.md) | Addressable Model Concepts and Kind Segments | Approved | 2026-07-08 | modelspec, references, namespaces, collections, recordsets | — |
+| [0012](0012-role-labeled-endpoints-and-participants.md) | Role-Labeled Relationship Endpoints and Event Participants | Approved | 2026-07-08 | graphspec, relationships, events, roles, semantics | graphspec |
 
 ## Open Questions
 

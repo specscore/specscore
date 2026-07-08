@@ -42,8 +42,8 @@ summary: A reservation for a bookable target during a time window.
 
 Rules:
 
-- `model:` is OPTIONAL. Domain modelling legitimately precedes structural modelling; an entity may exist before its ModelSpec model does. Lint SHOULD warn when a non-draft entity has no `model:` reference.
-- `model:` references resolve per [decision 0007](../../../decisions/0007-modelspec-reference-resolution.md): local graph root (placement, [decision 0006](../../../decisions/0006-graphspec-model-source-location.md)), then configured projects, then an explicit `@{host}/{org}/{repo}` suffix.
+- `model:` is OPTIONAL. Domain modelling legitimately precedes structural modelling; an entity may exist before its ModelSpec model does. Lint SHOULD warn when a non-draft entity has no `model:` reference. **Model-less is a module-local luxury**: the moment another module's ModelSpec needs to reference the entity's concept (`entity = "contactius.Contact"`), the model must exist — HCL references resolve against concepts, not graph artifacts, so a semantics-first entity blocks structural modelling in every dependent module (Family Identity pilot, finding FA2).
+- `model:` references resolve per [decision 0007](../../../decisions/0007-modelspec-reference-resolution.md): local graph root (placement, [decision 0006](../../../decisions/0006-graphspec-model-source-location.md)), then configured projects, then the explicit cross-repo authority form `modelspec://{host}/{org}/{repo}/…` ([decision 0010](../../../decisions/0010-references-are-urls.md)).
 - An entity MUST NOT embed structural definitions (`fields:`, `properties:`, checks). Structure belongs to the referenced ModelSpec model.
 - `lifecycle.states` is OPTIONAL and declares the domain lifecycle inline. Lifecycle is GraphSpec semantics; ModelSpec named enums are for data vocabularies.
 - The owning module is derived from the artifact's placement under a module root (`<module-root>/entities/<id>.md`).
