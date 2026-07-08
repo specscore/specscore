@@ -22,7 +22,7 @@ Two reference forms needed a resolution rule:
    [decision 0006](0006-graphspec-model-source-location.md) defined local module
    identity by placement).
 2. ModelSpec's own module-qualified names *inside* HCL sources
-   (`entity = "core.Space"`, `component = "calendarius.TimeWindow"` — ModelSpec
+   (`entity = "core.Space"`, `component = "scheduling.TimeWindow"` — ModelSpec
    decision 0014), whose resolution is explicitly consumer-provided so that
    ModelSpec never depends on SpecScore.
 
@@ -142,7 +142,8 @@ configuration, not inside the language.
 
 ## Observed Consequences
 
-None observed yet.
+- 2026-07-08: examples pseudonymized to the neutral domain (errata — the public
+  standard names no private consumer; no semantic change to the decision).
 
 ## Affected Features
 

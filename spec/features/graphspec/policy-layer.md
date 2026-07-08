@@ -1,14 +1,14 @@
 # GraphSpec Policy Layer — Design Exploration
 
 Discussion draft feeding a future decision (not itself normative). Escalated by the
-Family Identity pilot (findings FA5/FA6 in the backstage
+third consumer pilot (findings FA5/FA6 in the backstage
 `spec/graph/family-pilot-notes.md`), whose prose rules are this exploration's
 requirements corpus. Related open question: "A home for policy" in
 [open-questions.md](open-questions.md).
 
 ## The problem, shown in today's artifacts
 
-The `familycard.share-identity` command carries these rules **in prose only**
+The `sharing.share-identity` command carries these rules **in prose only**
 (Description + Failure Cases):
 
 | # | Rule (as written today) | What kind of rule it is |
@@ -28,10 +28,10 @@ back to the rule it verifies.
 
 ## What machine-readability would buy (use cases)
 
-- **UC1 — dangling-rule lint**: a rule mentioning `familycard.consent` or state
+- **UC1 — dangling-rule lint**: a rule mentioning `sharing.consent` or state
   `granted` breaks loudly when the entity or state changes.
 - **UC2 — rule identity & traceability**: each rule gets an addressable id
-  (`familycard.policies/guardian-consent-required`), so commits can carry
+  (`sharing.policies/guardian-consent-required`), so commits can carry
   `Verifies:` trailers and `specscore verify` can report per-rule coverage.
 - **UC3 — permission matrix**: "which commands is a `guardian` allowed to
   perform, over what?" becomes a query, not an audit.
@@ -45,15 +45,15 @@ back to the rule it verifies.
 Rules stay sentences, but gain identity and declared references:
 
 ```yaml
-# familycard/entities/identity-share.md
+# sharing/entities/identity-share.md
 rules:
   - id: ward-share-needs-consent          # R1
-    refs: [familycard.consent, familius.guardianship, contactius.contact]
+    refs: [sharing.consent, family.guardianship, directory.contact]
     text: >
       A share whose subject is a ward requires a granted consent whose
       guardianship's ward is the subject.
   - id: scope-within-consent              # R4
-    refs: [familycard.consent]
+    refs: [sharing.consent]
     text: A share's scope must fit within its consent's scope.
 ```
 
@@ -86,29 +86,29 @@ A sixth kind with its own collection (`policies/`), whose clauses are built from
 entities, commands, lifecycle states, enum values, roles, actors. No expressions.
 
 ```yaml
-# familycard/policies/guardian-consent-required.md   (R1 + R5 together)
+# sharing/policies/guardian-consent-required.md   (R1 + R5 together)
 kind: policy
 id: guardian-consent-required
 applies:
-  command: familycard.share-identity
+  command: sharing.share-identity
 when:                                  # condition on the command's inputs
   input: subject
-  is-role: {relationship: familius.household-member, role: child}
+  is-role: {relationship: family.household-member, role: child}
 requires:
-  - entity: familycard.consent
+  - entity: sharing.consent
     in-state: granted
-  - actor-is: {entity: familius.guardianship, model-role: guardian}   # R5
+  - actor-is: {entity: family.guardianship, model-role: guardian}   # R5
 summary: Sharing a ward's identity requires the guardian's granted consent.
 ```
 
 ```yaml
-# familycard/policies/consent-void-on-revocation.md   (R2 + R3)
+# sharing/policies/consent-void-on-revocation.md   (R2 + R3)
 kind: policy
 id: consent-void-on-revocation
 applies:
-  entity: familycard.consent
+  entity: sharing.consent
 invariant:
-  - when-referenced: {entity: familius.guardianship, in-state: revoked}
+  - when-referenced: {entity: family.guardianship, in-state: revoked}
     then: {self-state: revoked}
 ```
 
@@ -152,8 +152,8 @@ type list it is today.
    local, cross-cutting ones promote — mirroring the relationship→association-
    object rule), or is Tier 1 a temporary bridge?
 4. **Addressability prerequisite** — green-light designing state/enum-value
-   fragments (`modelspec:///familius.GuardianshipType#temporary`,
-   `familius.guardianship#state:revoked`) as part of this, or defer?
+   fragments (`modelspec:///family.GuardianshipType#temporary`,
+   `family.guardianship#state:revoked`) as part of this, or defer?
 
 ## Open Questions
 

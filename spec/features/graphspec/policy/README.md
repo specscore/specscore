@@ -41,14 +41,14 @@ id: guardian-consent-required
 name: GuardianConsentRequired
 status: draft
 applies:
-  command: familycard.share-identity
+  command: sharing.share-identity
 when:
   - input: subject
-  - is-role: {relationship: familius.household-member, role: child}
+  - is-role: {relationship: family.household-member, role: child}
 requires:
-  - entity: familycard.consent
+  - entity: sharing.consent
     in-state: granted
-  - actor-is: {entity: familius.guardianship, model-role: guardian}
+  - actor-is: {entity: family.guardianship, model-role: guardian}
 summary: Sharing a ward's identity requires the guardian's granted consent.
 ---
 ```

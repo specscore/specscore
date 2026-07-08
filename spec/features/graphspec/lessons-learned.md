@@ -113,7 +113,7 @@ the language, so future contributors do not have to re-derive it.
 
 ## Advice For Future Phases
 
-- **Treat the Bookius pilot as a falsification exercise.** Its success criterion is
+- **Treat the first consumer pilot as a falsification exercise.** Its success criterion is
   weaknesses found per artifact authored, not graph size. Model the hard parts
   (Resource, Availability, membership) rather than the easy ones, and write down
   every point where the language felt wrong — that list is the real deliverable.

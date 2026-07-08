@@ -15,7 +15,7 @@ status: Approved
 
 ## Context
 
-The Family Identity pilot (findings FA5/FA6) produced six domain rules that all
+The third consumer pilot (findings FA5/FA6) produced six domain rules that all
 landed in prose: conditional requirements across entities ("a ward's share needs a
 granted consent"), cross-entity lifecycle dependencies ("consent is void when its
 guardianship is revoked"), actor qualification ("only the guardianship's
@@ -50,16 +50,16 @@ extended only when a further pilot needs more:
 kind: policy
 id: guardian-consent-required
 applies:                      # REQUIRED: exactly one of command|entity|relationship
-  command: familycard.share-identity
+  command: sharing.share-identity
 when:                         # OPTIONAL: condition clauses (list)
   - input: subject            #   an input of the applies command
-  - is-role: {relationship: familius.household-member, role: child}
+  - is-role: {relationship: family.household-member, role: child}
 requires:                     # OPTIONAL: requirement clauses (list)
-  - entity: familycard.consent
+  - entity: sharing.consent
     in-state: granted
-  - actor-is: {entity: familius.guardianship, model-role: guardian}
+  - actor-is: {entity: family.guardianship, model-role: guardian}
 invariant:                    # OPTIONAL: only when applies names an entity
-  - when-referenced: {entity: familius.guardianship, in-state: revoked}
+  - when-referenced: {entity: family.guardianship, in-state: revoked}
     then: {self-state: revoked}
 summary: Sharing a ward's identity requires the guardian's granted consent.
 ```
@@ -128,14 +128,15 @@ prerequisite was approved anyway.
   (`graph-rules-shape`, `graph-policy-shape` + existing resolution rules),
   accepts enum-value fragments on modelspec references, and scaffolds
   `graph new policy`.
-- The Family Identity pilot migrates its six prose rules into `rules:` blocks
+- The third consumer pilot migrates its six prose rules into `rules:` blocks
   and two policy artifacts, retiring findings FA5/FA6 as OPEN items.
 - GraphSpec kind documentation gains a PolicySpec page; the "five kinds"
   phrasing is updated across the family.
 
 ## Observed Consequences
 
-None observed yet.
+- 2026-07-08: examples pseudonymized to the neutral domain (errata — the public
+  standard names no private consumer; no semantic change to the decision).
 
 ## Affected Features
 

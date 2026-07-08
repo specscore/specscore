@@ -15,14 +15,14 @@ status: Approved
 
 ## Context
 
-The Phase 5A Family Identity pilot (finding FA4) hit the same wall three times in
+The Phase 5A third consumer pilot (finding FA4) hit the same wall three times in
 one slice: the moment both sides of an association are the **same entity**, the
 language can no longer say *as what* they relate. `parent-of` joins
-`contactius.contact` to `contactius.contact` — "from is the parent" lived only in
+`directory.contact` to `directory.contact` — "from is the parent" lived only in
 prose and the artifact id. The `consent-granted` event has a guardian and a ward,
 both Contacts — a participants list is an unlabeled set of references, so the two
 roles collapsed into one entry (and a duplicated reference was silently
-meaningless). Bookius and OpenVaultDB never met this: their associations joined
+meaningless). The earlier consumer pilots never met this: their associations joined
 *different* kinds whose names did the labeling.
 
 ## Decision
@@ -33,14 +33,14 @@ or a map form:
 
 ```yaml
 # RelationshipSpec
-from: { ref: contactius.contact, role: parent }
-to:   { ref: contactius.contact, role: child }
+from: { ref: directory.contact, role: parent }
+to:   { ref: directory.contact, role: child }
 
 # EventSpec
 participants:
-  - familycard.family-card                       # unlabeled scalar — unchanged
-  - { ref: contactius.contact, role: guardian }
-  - { ref: contactius.contact, role: ward }
+  - sharing.identity-card                       # unlabeled scalar — unchanged
+  - { ref: directory.contact, role: guardian }
+  - { ref: directory.contact, role: ward }
 ```
 
 Rules:
@@ -109,12 +109,13 @@ binary relationships need. Revisit only if a real n-ary case arrives.
   tokens, map shape) plus the duplicate-participant and unlabeled-self-reference
   warnings; navigation and dependency rules treat labeled endpoints identically
   to scalar ones.
-- The Family Identity pilot adopts labels on `parent-of`, `consent-granted`, and
+- The third consumer pilot adopts labels on `parent-of`, `consent-granted`, and
   `identity-shared`, retiring finding FA4.
 
 ## Observed Consequences
 
-None observed yet.
+- 2026-07-08: examples pseudonymized to the neutral domain (errata — the public
+  standard names no private consumer; no semantic change to the decision).
 
 ## Affected Features
 

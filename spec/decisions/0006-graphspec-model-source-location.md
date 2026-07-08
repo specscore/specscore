@@ -57,7 +57,7 @@ identity is a packaging concern of the tree, not of the language.
 
 When model sources are compiled to the ModelSpec JSON AST, the serialization's
 globally-unique `module.id` is derived from repository identity plus module path
-(for example `github.com/<org>/<repo>/spec/graph/modules/bookius`), with the short
+(for example `github.com/<org>/<repo>/spec/graph/modules/reservations`), with the short
 name carried as `module.name`. Standalone ModelSpec consumers outside SpecScore
 trees keep using `module.id` and their own packaging; nothing in ModelSpec itself
 depends on this decision.
@@ -134,7 +134,7 @@ around structure is precisely the drift attractor decisions 0003/0004 closed.
 
 Rejected: the pairing already exists at the right altitude. The graph artifacts are
 the prose half — `booking.md` (EntitySpec) is the human document for `Booking` in
-`bookius.hcl`, the ModuleSpec README describes the module, RelationshipSpec
+`reservations.hcl`, the ModuleSpec README describes the module, RelationshipSpec
 artifacts describe relationships, and `models/README.md` is already mandatory. A
 required second prose home per HCL file would describe the same concepts in a third
 place and drift. Concepts with no graph node by design (components, enums) are
@@ -155,7 +155,8 @@ pairing.
 
 ## Observed Consequences
 
-None observed yet.
+- 2026-07-08: examples pseudonymized to the neutral domain (errata — the public
+  standard names no private consumer; no semantic change to the decision).
 
 ## Affected Features
 

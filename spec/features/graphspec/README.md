@@ -93,7 +93,7 @@ Design-history documents:
 ## Acceptance Criteria
 
 - GraphSpec bootstrap material is Markdown-first and YAML-backed where structure is useful.
-- GraphSpec defines exactly five specification kinds, each admitted under the decision 0004 rule.
+- GraphSpec defines exactly six specification kinds: five admitted under the decision 0004 rule, plus `policy` admitted by decision 0013's amendment of that list.
 - GraphSpec artifacts reference ModelSpec for structure and embed no `fields:`/`properties:` blocks.
 - Identifier, reference, and file-naming rules follow decision 0005.
 - Rationale, alternatives, and open questions are preserved alongside the scaffold.
