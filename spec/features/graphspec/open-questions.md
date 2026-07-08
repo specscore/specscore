@@ -1,65 +1,47 @@
 # Open Questions
 
-## Specification Kinds
+Unresolved architectural questions, organized by when they need answers. Questions
+resolved by the Phase 1 review decisions
+([0003](../../decisions/0003-one-structural-language.md),
+[0004](../../decisions/0004-graphspec-kind-admission.md),
+[0005](../../decisions/0005-graphspec-id-and-reference-syntax.md)) have been removed:
+PropertySpec (no — structure is ModelSpec), enum vs value object (both ModelSpec),
+RelationshipSpec first-class (yes, when semantic), ownership representation
+(derived), ID and file naming (decided), command-event link direction (one-way).
 
-- Should PropertySpec remain a first-class specification kind?
-- Should properties instead become intrinsic parts of EntitySpec and ValueObjectSpec?
-- Should RelationshipSpec remain first-class?
-- Should WorkflowSpec exist?
-- Should PolicySpec exist?
-- Should ProjectionSpec exist?
-- Should ModuleSpec own relationships as well as entities, commands, and events?
+## v0.2 Questions
 
-## Commands and Events
+Expected to be answered by the Phase 2 pilot and Phase 3 lint work.
 
-- Should commands reference events?
-- Should events reference commands?
-- Should command-event links be examples, possible triggers, or normative contracts?
-- How should events from integrations, timers, external systems, and automation be represented?
+- How should command failures be represented — prose, structured failure cases, or references to policies?
+- Should `possibleEvents` entries carry conditions (when does a create command emit its created event)?
+- Should event `sources` values be an open set or a controlled vocabulary?
+- Should relationship cardinality be normative (linted) or descriptive in v0.2?
+- How should `graph lint` consume ModelSpec validation when resolving `modelspec://` references — embed a ModelSpec parser, shell out, or read the compiled JSON AST?
+- Lifecycle states live inline on the entity, with ModelSpec named enums reserved for data vocabularies. Does the pilot confirm this split, or do states need reuse across entities / generator access as enums?
 
-## Ownership and Modules
+## Future Questions
 
-- How should cross-module ownership be represented?
+Real, but safely deferred past v0.2.
+
+- How should lifecycle transitions (not just states) be represented, and when do they become normative?
+- When exactly is a relationship with metadata promoted to an association-object entity? A working signal exists — identity, lifecycle, or audit needs — but the promotion rule is not yet normative.
+- How should invariants and constraints that span multiple concepts be expressed?
+- How should deprecation of graph artifacts be represented?
 - Should ModuleSpec describe runtime instances or only architectural modules?
-- Can a relationship be owned by one module while referencing entities owned by other modules?
-- How should shared modules and core modules avoid becoming dependency sinks?
-- How should distributed `graph/` roots across module repos be indexed and resolved?
-- Should GraphSpec add any link metadata beyond the unified SpecScore cross-repo linking system?
-- If version constraints are needed, should they live entirely in the unified SpecScore linkage model?
+- Should `dependsOn` support qualifiers (e.g. weak/contract-only) once real graphs need them?
+- When cross-repo graph roots land, how are distributed roots indexed and discovered, and what do version constraints look like on top of the `@{host}/{org}/{repo}` suffix?
+- Should events reference dedicated payload models routinely, or is the subject entity's model usually sufficient?
+- How should event-to-event causation be represented, if at all?
+- Should WorkflowSpec, PolicySpec, or ProjectionSpec exist? Each must pass the decision 0004 admission rule; none has yet demonstrated a graph-native semantic not derivable from ModelSpec.
+- Consumer-derived modelling pressure points from the booking domain: is a bookable Resource an asset, a person, a union, or a reservations-module abstraction? Does Availability belong to scheduling, the resource-owning module, the reservations module, or a split?
 
-## Modelling Semantics
+## Research Topics
 
-- Should inheritance be represented?
-- Should composition be represented?
-- Should mixins exist?
-- How should lifecycle/state machines be represented?
-- How should invariants and constraints be expressed?
-- How should permissions integrate with GraphSpec?
-- How should deprecation be represented?
+Open-ended; no phase currently depends on them.
 
-## Enums and Value Objects
-
-- Should EnumSpec remain independent?
-- Should enums become specialised ValueObjectSpec?
-- How should externally governed enumerations be represented?
-
-## Tooling and Generation
-
-- Should GraphSpec eventually evolve into a DSL?
-- Should GraphSpec generate TypeSpec?
-- Should GraphSpec generate OpenAPI?
-- Should GraphSpec generate diagrams?
-- What validation levels should exist?
-- What should be linted before the language is stable?
-
-## Self-Hosting
-
-- Should GraphSpec eventually become self-hosting?
-- At what maturity should GraphSpec stop being defined using FeatureSpec and begin defining itself?
-
-## Sneat-Derived Questions
-
-- Is a Space member best represented as a RelationshipSpec, a role assignment, an association object, or a specialised entity?
-- Is a bookable Resource an Assetus Asset, a Contact, a union of several entity types, or a Bookius abstraction?
-- Should Availability belong to Calendarius, Assetus, Bookius, or be split between calendar capacity and booking rules?
-- How should a core relationship reference a Contact owned by Contactius without creating an unwanted core-to-extension dependency?
+- How should permissions integrate with GraphSpec (on commands, policies, or both), and how do they relate to roles-as-data in ModelSpec enums?
+- Should GraphSpec eventually evolve into a DSL, and what would the migration from Markdown+YAML look like?
+- Should GraphSpec generate TypeSpec, OpenAPI, or diagrams — and which derived views earn maintenance?
+- How should shared/core modules avoid becoming dependency sinks as graphs grow?
+- At what maturity should GraphSpec become self-hosting (milestones in [BOOTSTRAP.md](BOOTSTRAP.md)), and when should it move to its own repository?

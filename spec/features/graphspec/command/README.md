@@ -17,41 +17,50 @@ Examples: CreateBooking, CancelBooking, InviteMember.
 
 ## Problem
 
-GraphSpec needs a way to describe requested intent without forcing every command into a fixed event-emission model.
+GraphSpec needs a way to describe requested intent without forcing every command into a fixed event-emission model, and without hand-maintained bidirectional command-event links that drift.
 
 ## Behavior
 
 Commands reference GraphSpec concepts. Commands may succeed or fail. Commands do not imply events as a language rule.
 
-Provisional shape:
+Shape (bare kebab-case `id`; references use computed qualified IDs; input types reference ModelSpec):
 
 ```yaml
 ---
 kind: command
 id: create-booking
 name: CreateBooking
-owner: bookius
 status: draft
-subject: bookius.Booking
+subject: reservations.booking
 actors:
-  - core.User
+  - identity.user
 inputs:
-  - resource
-  - timeWindow
+  - name: resource
+    ref: catalog.asset
+  - name: time-window
+    model: modelspec://scheduling.TimeWindow
 possibleEvents:
-  - bookius.BookingCreated
+  - reservations.booking-created
 ---
 ```
+
+Rules:
+
+- **Command-event links are declared here, one-directionally.** `possibleEvents` on the command is the single authored source of command-to-event links. Events do not list commands; tooling derives an event's command triggers from CommandSpecs ([current decisions](../decisions.md)).
+- `possibleEvents` records possible outcomes, not a contract: a command may emit zero, one, or several of them.
+- Input structure references ModelSpec models or graph entities; commands embed no field definitions.
+- Failure cases are documented in prose (`## Failure Cases`) until a normative representation is designed.
 
 ## Acceptance Criteria
 
 - CommandSpec is documented as requested intent.
-- Command-event references are described as possible links, not mandatory outcomes.
+- Command-event references are documented as possible links, authored only on the command side.
+- Inputs reference ModelSpec or graph concepts without embedding structure.
 
 ## Open Questions
 
-- Should commands reference possible events?
-- How should failures be represented?
+- Should failures become first-class (structured failure cases, policy references), and when?
+- Should `possibleEvents` entries carry conditions (when does CreateBooking emit BookingCreated)?
 - Should permissions live on commands, policies, or both?
 - How should idempotency and validation be described?
 

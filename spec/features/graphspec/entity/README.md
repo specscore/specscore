@@ -13,42 +13,52 @@ status: Draft
 
 EntitySpec describes a domain concept with identity.
 
-Examples: User, Space, Contact, Booking, Asset.
+Examples: User, Team, Contact, Booking, Asset.
+
+An entity artifact declares identity, ownership (derived from placement), lifecycle, and semantics. Its structure — properties, types, constraints — lives in a referenced [ModelSpec](https://github.com/specscore/modelspec) model, never inline ([decision 0003](../../../decisions/0003-one-structural-language.md)).
 
 ## Problem
 
-GraphSpec needs a durable way to describe things that can be referred to over time as the same thing, even as their properties or relationships change.
+GraphSpec needs a durable way to describe things that can be referred to over time as the same thing, even as their properties or relationships change — without becoming a second structural language.
 
 ## Behavior
 
-EntitySpec should eventually support identity, ownership, lifecycle, properties, relationships, invariants, permissions, examples, and deprecation.
+An entity artifact is the graph node for a domain concept with identity. It may be a relationship endpoint and the subject of commands and events.
 
-Provisional shape:
+Shape (per [decision 0005](../../../decisions/0005-graphspec-id-and-reference-syntax.md): bare kebab-case `id` equal to the filename stem, no `owner:` field, no module prefix):
 
 ```yaml
 ---
 kind: entity
 id: booking
 name: Booking
-owner: bookius
 status: draft
-identity:
-  type: stable-id
-summary: A reservation for a resource during a time window.
+model: modelspec://reservations.Booking
+lifecycle:
+  states: [requested, confirmed, cancelled]
+summary: A reservation for a bookable target during a time window.
 ---
 ```
+
+Rules:
+
+- `model:` is OPTIONAL. Domain modelling legitimately precedes structural modelling; an entity may exist before its ModelSpec model does. Lint SHOULD warn when a non-draft entity has no `model:` reference.
+- An entity MUST NOT embed structural definitions (`fields:`, `properties:`, checks). Structure belongs to the referenced ModelSpec model.
+- `lifecycle.states` is OPTIONAL and declares the domain lifecycle inline. Lifecycle is GraphSpec semantics; ModelSpec named enums are for data vocabularies.
+- The owning module is derived from the artifact's placement under a module root (`<module-root>/entities/<id>.md`).
 
 ## Acceptance Criteria
 
 - EntitySpec is documented as a GraphSpec kind for concepts with identity.
-- The README records that properties, lifecycle, inheritance, composition, and mixins are not yet settled.
+- The envelope references ModelSpec for structure and permits no inline field or property lists.
+- `model:` is optional with a lint warning for non-draft entities.
+- Lifecycle states may be declared inline on the entity.
 
 ## Open Questions
 
-- Are properties intrinsic to EntitySpec or references to PropertySpec?
-- Should entities declare relationships inline?
-- How should lifecycle be represented?
-- How should inheritance, composition, and mixins be handled?
+- How should lifecycle transitions (not just states) be represented, and when do they become normative?
+- Should entities be able to declare invariants that span the referenced model and the graph (e.g., "a confirmed booking has a resolved resource")?
+- When exactly is a relationship with metadata promoted to an association-object entity?
 
 ---
 *This document follows the https://specscore.md/feature-specification*

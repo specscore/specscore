@@ -8,7 +8,7 @@ status: Specifying
 **Status:** Specifying
 **Date:** 2026-07-08
 **Owner:** codex
-**Promotes To:** graphspec, graphspec/command, graphspec/entity, graphspec/enum, graphspec/event, graphspec/glossary, graphspec/module, graphspec/relationship, graphspec/value-object
+**Promotes To:** graphspec, graphspec/command, graphspec/continuations, graphspec/entity, graphspec/event, graphspec/glossary, graphspec/module, graphspec/relationship, graphspec/reviews
 **Supersedes:** —
 **Related Ideas:** —
 

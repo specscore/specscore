@@ -24,11 +24,13 @@ make ModelSpec a sub-language of SpecScore or GraphSpec.
 SpecScore needs a validation posture that is useful to ModelSpec adopters while
 preserving ownership boundaries:
 
-- ModelSpec defines entities, properties, relationships, components, constraints,
-  indexes, projections, migration metadata, and storage-neutral schemas.
+- ModelSpec defines entities, properties, relationships, components, named enums,
+  constraints, indexes, projections, migration metadata, and storage-neutral schemas.
 - SpecScore validates ModelSpec documents and reports diagnostics.
 - OpenVaultDB consumes ModelSpec directly and does not depend on SpecScore ownership.
-- GraphSpec remains independent and outside the ModelSpec architecture.
+- GraphSpec is a consumer of ModelSpec: it references ModelSpec models for structure
+  ([decision 0003](../../decisions/0003-one-structural-language.md)); ModelSpec never
+  references GraphSpec.
 
 ## Behavior
 
@@ -45,7 +47,9 @@ source of truth. SpecScore MUST NOT invent ModelSpec semantics.
 ### REQ: not-graphspec
 
 SpecScore MUST NOT represent ModelSpec as a GraphSpec sub-language. GraphSpec and
-ModelSpec solve different problems and have independent architectures.
+ModelSpec solve different problems and are independently specified; GraphSpec
+consumes ModelSpec one-directionally (graph artifacts reference ModelSpec models),
+and ModelSpec never depends on GraphSpec.
 
 ### REQ: cli-conventions
 

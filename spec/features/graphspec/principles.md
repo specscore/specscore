@@ -8,6 +8,14 @@ GraphSpec describes the domain vocabulary before implementation, API, UI, or tes
 
 The domain graph should be the canonical source for nouns, relationships, and lifecycle language used by downstream specs.
 
+## Structure Lives In ModelSpec
+
+GraphSpec owns semantics — modules, identity, ownership, relationships, commands, events, lifecycle. Properties, types, constraints, value objects, and enums are ModelSpec's job; graph artifacts reference ModelSpec models and never embed structural definitions.
+
+## One Authored Direction Per Link
+
+Where two artifacts relate (command and event, module and owned artifact), the link is authored in exactly one place and derived everywhere else. Bidirectional hand-maintained links drift.
+
 ## Markdown First
 
 Markdown is the primary authoring format. YAML provides structured data for tools.

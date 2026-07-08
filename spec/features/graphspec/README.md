@@ -13,33 +13,33 @@ status: Draft
 
 GraphSpec is a bootstrap specification language for describing connected domain models.
 
-It is part of the SpecScore family. GraphSpec is intended to own the domain vocabulary that other specifications reference.
+It is part of the SpecScore family. GraphSpec owns the domain vocabulary that other specifications reference: modules, entities, relationships, commands, events, ownership, and lifecycle. Structure — properties, types, constraints, value objects, enums — is owned by [ModelSpec](https://github.com/specscore/modelspec); GraphSpec references ModelSpec models instead of redefining them ([decision 0003](../../decisions/0003-one-structural-language.md)).
 
 ## Contents
 
-Each first-level directory below this feature is a provisional specification kind.
+Each first-level directory below this feature is a specification kind. GraphSpec v0.2 defines exactly five kinds, admitted under the rule in [decision 0004](../../decisions/0004-graphspec-kind-admission.md).
 
 ```text
 graphspec/
+    module/
     entity/
     relationship/
     command/
     event/
-    module/
-    value-object/
-    enum/
 ```
 
 | Directory | Description |
 |---|---|
-| [entity/](entity/README.md) | EntitySpec: domain concepts with identity. |
-| [relationship/](relationship/README.md) | RelationshipSpec: reusable relationship definitions. |
+| [module/](module/README.md) | ModuleSpec: architectural modules or bounded contexts, with declared dependencies. |
+| [entity/](entity/README.md) | EntitySpec: domain concepts with identity, referencing ModelSpec models for structure. |
+| [relationship/](relationship/README.md) | RelationshipSpec: semantic relationships between domain concepts. |
 | [command/](command/README.md) | CommandSpec: requested intentions. |
 | [event/](event/README.md) | EventSpec: facts that happened. |
-| [module/](module/README.md) | ModuleSpec: architectural modules or bounded contexts. |
-| [value-object/](value-object/README.md) | ValueObjectSpec: immutable concepts without identity. |
-| [enum/](enum/README.md) | EnumSpec: reusable enumerations. |
 | [glossary/](glossary/README.md) | Working definitions for GraphSpec terminology. |
+| [reviews/](reviews/README.md) | Long-term architecture review reports (the design-history "why"). |
+| [continuations/](continuations/README.md) | Phase hand-off documents for future sessions. |
+
+ValueObjectSpec and EnumSpec were removed in v0.2: value objects are ModelSpec components and enumerations are ModelSpec named enums. See [decision 0004](../../decisions/0004-graphspec-kind-admission.md) and [alternatives considered](alternatives-considered.md).
 
 ## Problem
 
@@ -51,11 +51,11 @@ This bootstrap is intentionally not a finished language definition. It preserves
 
 GraphSpec describes domain concepts and the relationships between them. The graph provides structure; metadata provides semantics.
 
-GraphSpec defines kind directories using singular names. Consumer projects should prefer plural directories such as `entities/`, `relationships/`, `commands/`, `events/`, and `modules/`.
+GraphSpec defines kind directories using singular names. Consumer projects use plural directories — `modules/`, `entities/`, `relationships/`, `commands/`, `events/` — with unsuffixed `<id>.md` filenames per [decision 0005](../../decisions/0005-graphspec-id-and-reference-syntax.md).
 
-GraphSpec consumer trees may be centralised or distributed. A system may keep one shared `spec/graph/`, one `graph/` tree per module, or dedicated module spec repositories next to code. Cross-repo references should use SpecScore's unified cross-repo linking system rather than a GraphSpec-specific link format.
+GraphSpec v0.2 supports one graph root per repository (default `spec/graph/`). Cross-repo graph references are deferred; when they land they extend the qualified-ID form with the `@{host}/{org}/{repo}` suffix convention established by the Stable `source-references` feature, rather than a GraphSpec-specific mechanism.
 
-GraphSpec artifacts are expected to be Markdown files with YAML frontmatter. This envelope is illustrative, not yet normative:
+GraphSpec artifacts are Markdown files with YAML frontmatter. Local IDs are bare lowercase kebab-case; the qualified form `<module-id>.<local-id>` is computed from directory placement, never stored. Structure is referenced from ModelSpec, not embedded:
 
 ```yaml
 ---
@@ -63,29 +63,37 @@ kind: entity
 id: booking
 name: Booking
 status: draft
-owner: bookius
-summary: A reservation for a resource during a time window.
+model: modelspec://reservations.Booking
+lifecycle:
+  states: [requested, confirmed, cancelled]
+summary: A reservation for a bookable target during a time window.
 ---
 ```
 
-GraphSpec is intended to be independent. FeatureSpec, ApiSpec, UiSpec, and TestSpec may reference GraphSpec; GraphSpec should not depend on FeatureSpec.
+Dependency directions:
+
+- GraphSpec depends on ModelSpec (one-directionally; ModelSpec never references GraphSpec).
+- FeatureSpec, ApiSpec, UiSpec, and TestSpec may reference GraphSpec; GraphSpec does not depend on them.
 
 During bootstrap, GraphSpec is hosted under `spec/features/graphspec/` because SpecScore already uses FeatureSpec as its organizing mechanism. This is a repository bootstrapping choice, not a permanent conceptual dependency.
 
-Supporting review documents:
+Design-history documents:
 
-- [Bootstrap rationale](BOOTSTRAP.md)
-- [Design principles](principles.md)
-- [Current decisions](current-decisions.md)
-- [Alternatives considered](alternatives-considered.md)
-- [Open questions](open-questions.md)
-- [Glossary](glossary/README.md)
-- [TODO](TODO.md)
+- [Roadmap](roadmap.md) — phase sequence with completed/current/next/deferred status
+- [Decisions](decisions.md) — accepted decisions with rationale, plus notable rejected alternatives
+- [Alternatives considered](alternatives-considered.md) — full catalogue of rejected options
+- [Open questions](open-questions.md) — unresolved questions by priority
+- [Lessons learned](lessons-learned.md) — architectural learning from Phase 1
+- [Reviews](reviews/README.md) — review reports (Phase 1: [architecture review 2026-07](reviews/architecture-review-2026-07.md))
+- [Continuations](continuations/README.md) — hand-offs ([Phase 2 handoff](continuations/phase-2-handoff.md))
+- [Bootstrap rationale](BOOTSTRAP.md), [design principles](principles.md), [glossary](glossary/README.md), [TODO](TODO.md)
 
 ## Acceptance Criteria
 
 - GraphSpec bootstrap material is Markdown-first and YAML-backed where structure is useful.
-- Specification kinds are documented as provisional, reviewable starting points.
+- GraphSpec defines exactly five specification kinds, each admitted under the decision 0004 rule.
+- GraphSpec artifacts reference ModelSpec for structure and embed no `fields:`/`properties:` blocks.
+- Identifier, reference, and file-naming rules follow decision 0005.
 - Rationale, alternatives, and open questions are preserved alongside the scaffold.
 - GraphSpec's intended independence from FeatureSpec is documented.
 - Consumer project naming conventions are documented separately from language kind names.

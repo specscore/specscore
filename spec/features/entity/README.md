@@ -12,6 +12,8 @@ status: Approved
 
 ## Summary
 
+> **Frozen.** This Doc-Kind is feature-frozen per [decision 0003 — One Structural Language](../../decisions/0003-one-structural-language.md): its contract, lint rules, and `specscore entity` CLI remain supported unchanged, but it accepts no new capabilities. New structural modelling work uses [ModelSpec](https://github.com/specscore/modelspec); a legacy-to-ModelSpec migration path will be specified before formal deprecation.
+
 An entity is a typed, machine-readable definition of a business object — a `User`, an `Order`, a `Money` value object — that one or more SpecScore [features](../feature/README.md) consume or produce. Entities live as single markdown files at `spec/features/**/<slug>.entity.md`, with YAML frontmatter as the **source of truth** for the singular/plural noun, optional inheritance, and the full structured `properties` list (including nested checks and embedded JSON Schemas).
 
 An entity's body has three sections: a hand-written `## Description`, a machine-rendered `## Properties` table (managed view over the frontmatter), and a machine-maintained `## Referenced by` (back-references to features and descendant entities). Properties are either inlined inside the entity's frontmatter or referenced from a standalone [Property](../property/README.md) file by URL or relative path.

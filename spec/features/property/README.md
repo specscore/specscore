@@ -12,6 +12,8 @@ status: Approved
 
 ## Summary
 
+> **Frozen.** This Doc-Kind is feature-frozen per [decision 0003 — One Structural Language](../../decisions/0003-one-structural-language.md): its contract, lint rules, and `specscore property` CLI remain supported unchanged, but it accepts no new capabilities. New structural modelling work uses [ModelSpec](https://github.com/specscore/modelspec); a legacy-to-ModelSpec migration path will be specified before formal deprecation.
+
 A property is a reusable, standalone definition of a single business data field — its data type, its validation checks, and a human-readable description. Properties are SpecScore's smallest typed unit of business data: an `email` property defined once can be referenced from `User`, `Customer`, and `Contact` [entities](../entity/README.md) without copy-paste duplication.
 
 A property artifact is a single markdown file at `spec/features/**/<slug>.property.md`. The YAML frontmatter is the **source of truth** — it carries the data type and the full set of structured checks in machine-readable form. The body has two sections: a hand-written `## Description` and a machine-maintained `## Referenced by` that lists every entity and feature that references the property.
