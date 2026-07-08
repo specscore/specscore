@@ -16,7 +16,7 @@ The format is portable by construction. Adopt SpecScore with any AI-coding tool,
 We build with our own tooling:
 
 - **[SpecScore](https://specscore.md)** — specify requirements as `SpecScore.md` artifacts
-- **[ModelSpec](https://modelspec.org)** — define application data models once
+- **[ModelSpec](https://github.com/specscore/modelspec)** — define application data models once
 - **[SpecStudio](https://specscore.studio)** — author & manage specs across their lifecycle
 - **[inGitDB](https://ingitdb.com)** — store structured data in Git where applicable
 - **[DALgo](https://dalgo.io)** — data access layer for Go
@@ -106,7 +106,8 @@ A SpecScore feature looks like this:
 | Tool | Role | Status |
 |---|---|---|
 | **SpecScore** | The open specification format — this repository | Standard |
-| [ModelSpec](https://modelspec.org) *(repo: `modelspec`)* | Independent open specification language for application data models; SpecScore validates it but does not own its semantics | Bootstrap |
+| [ModelSpec](https://github.com/specscore/modelspec) *(repo: `modelspec`)* | Independent open specification language for application data models — the single structural language of the family; SpecScore validates it but does not own its semantics | Bootstrap |
+| [GraphSpec](spec/features/graphspec/README.md) *(bootstrap in this repository)* | Specification language for connected domain models — modules, entities, relationships, commands, events; references ModelSpec for structure | Bootstrap (v0.2) |
 | [SpecStudio Skills](https://github.com/specscore/specstudio-skills) *(repo: `specstudio-skills`)* | Opinionated SDD workflow Claude Code plugin — the entry gate for cold users | Live (MIT, free) |
 | [SpecScore Studio](https://specscore.studio) | Hosted web UI for SpecScore — Stage 0 minimal viewer (view documents + spec graph, navigate) live 2026-05-20 | Stage 0 viewer |
 | [Rehearse](https://github.com/specscore/rehearse) | Markdown-native test framework for SpecScore specs | Sibling, MIT |
@@ -162,8 +163,13 @@ SpecScore specifications are Markdown files. SpecScore lives at [`specscore.md`]
 - [The SpecScore specification](spec/README.md)
 - [Installation guide](docs/installation.md)
 - [Ecosystem](docs/ecosystem.md)
-- [Entities and properties](docs/entities-and-properties.md)
 - [specscore.md/principles](https://specscore.md/principles) — the SpecScore worldview
+
+## Design history
+
+- [Decisions index](spec/decisions/README.md) — accepted architecture decisions (ADRs)
+- [GraphSpec roadmap](spec/features/graphspec/roadmap.md) and [design history](spec/features/graphspec/README.md) — decisions, lessons learned, review reports, phase hand-offs
+- [Entities and properties](docs/entities-and-properties.md) — the legacy typed-data Doc-Kinds (frozen; new structural work uses [ModelSpec](https://github.com/specscore/modelspec))
 
 ---
 
@@ -193,6 +199,6 @@ The `specscore` CLI was extracted from this repository on 2026-04-22. Its source
 
 ---
 
-## Outstanding questions
+## Open Questions
 
 None at this time.

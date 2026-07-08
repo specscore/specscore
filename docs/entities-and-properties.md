@@ -2,7 +2,7 @@
 
 How to add typed business-data definitions to a SpecScore repository.
 
-> **Status:** authoritative specs are at [`entity`](../spec/features/entity/README.md) and [`property`](../spec/features/property/README.md). This page is a friendlier walkthrough for authors. CLI support (`specscore entity …`, `specscore property …`, the lint passes that render managed sections) lives in [`specscore/specscore-cli`](https://github.com/specscore/specscore-cli) and is on its way; the format is ready to use now, with hand-authored managed sections, and will become fully automated as the CLI catches up.
+> **Frozen.** The `entity` and `property` Doc-Kinds are feature-frozen per [decision 0003 — One Structural Language](../spec/decisions/0003-one-structural-language.md): existing files, lint rules, and the shipped CLI support (`specscore entity …`, `specscore property …` in [`specscore/specscore-cli`](https://github.com/specscore/specscore-cli)) remain supported unchanged, but the Doc-Kinds accept no new capabilities. **New structural modelling work uses [ModelSpec](https://github.com/specscore/modelspec)**; a legacy-to-ModelSpec migration path will be specified before formal deprecation. This page remains the author walkthrough for repositories that already use the frozen Doc-Kinds. Authoritative specs: [`entity`](../spec/features/entity/README.md), [`property`](../spec/features/property/README.md).
 
 ## Two Doc-Kinds, One Pair
 

@@ -29,7 +29,7 @@ Defines storage-neutral application data models.
 - Validated by SpecScore through linting, structural validation, and semantic checks
 - Consumed directly by OpenVaultDB for schema validation, migration planning, backend mapping, GraphQL generation, DTQL typing metadata, DALGO metadata, and backend generators
 
-[modelspec.org](https://modelspec.org)
+[github.com/specscore/modelspec](https://github.com/specscore/modelspec) *(website modelspec.org planned)*
 
 ## Synchestra — The Performance
 
