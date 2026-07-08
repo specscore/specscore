@@ -7,6 +7,7 @@ record for the foundational decisions is the repository Decision artifacts:
 - [0004 — GraphSpec Kind Admission — Five Core Kinds](../../decisions/0004-graphspec-kind-admission.md)
 - [0005 — Identifier, Reference, and File-Naming Syntax](../../decisions/0005-graphspec-id-and-reference-syntax.md)
 - [0006 — Model-Source Location and Identity by Placement](../../decisions/0006-graphspec-model-source-location.md)
+- [0007 — ModelSpec Reference Resolution](../../decisions/0007-modelspec-reference-resolution.md)
 
 Fuller narrative reasoning lives in the
 [Phase 1 architecture review report](reviews/architecture-review-2026-07.md);
@@ -116,6 +117,17 @@ README, EntitySpec/RelationshipSpec artifacts, the mandatory `models/README.md`)
 their documentation. Markdown-embedded models and required paired `.md` files were
 both rejected as drift channels. *Why:* one identity rule family-wide; standalone
 ModelSpec tooling keeps consuming plain HCL. ([0006](../../decisions/0006-graphspec-model-source-location.md))
+
+### ModelSpec references resolve by placement, then configured projects, then explicit suffix
+
+`modelspec://<module>.<Name>[@{host}/{org}/{repo}]` and HCL module-qualified names
+resolve through one rule: local graph root (placement per 0006) → `specscore.yaml`
+`projects:` local paths → explicit `source-references`-style cross-repo suffix, with
+no implicit network fetch. SpecScore is thereby ModelSpec's consumer-resolver
+(ModelSpec decision 0014 keeps the syntax consumer-neutral), and model-level
+cross-module references count against the owning module's `dependsOn`. *Why:* one
+resolution rule family-wide; no registry, no second linking convention.
+([0007](../../decisions/0007-modelspec-reference-resolution.md))
 
 ### Single graph root in v0.2; cross-repo deferred
 
