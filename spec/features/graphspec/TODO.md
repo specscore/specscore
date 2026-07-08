@@ -9,11 +9,11 @@ status, ownership representation, and command-event link direction — see decis
 
 ## Before Phase 3 (`graph lint`) — from the first consumer pilot (2026-07-08)
 
-- Define ModelSpec module identity + the `modelspec://` resolution rule (with ModelSpec).
-- Decide cross-module ModelSpec references (qualified names vs forbid-with-convention).
-- Canonicalize the model-source location (`modules/<id>/models/*.hcl`) in decision 0005 or an amendment.
-- Define the relationship `metadata:` value shape; legalize zero-graph-artifact modules; make the command `inputs` shape normative.
-- Remove the obsolete alternate core-root location from the CLI `graph new` spec.
+- ~~Canonicalize the model-source location and local module identity~~ — done in [decision 0006](../../decisions/0006-graphspec-model-source-location.md) (`modules/<id>/models/*.hcl`, identity by placement, graph module as prose pairing).
+- Define the cross-root/cross-repo half of `modelspec://` resolution (reuse the `source-references` path-based model + `@{host}/{org}/{repo}` suffix).
+- Decide cross-module ModelSpec references (direction: ModelSpec-native qualified names, consumer-provided resolution).
+- Define the relationship `metadata:` value shape; legalize zero-graph-artifact modules in lint rules; make the command `inputs` shape normative.
+- Remove the obsolete alternate core-root location from the CLI `graph new` spec; `graph new` scaffolds `models/` and collection READMEs.
 
 ## Near Term (v0.2)
 

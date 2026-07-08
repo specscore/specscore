@@ -1,11 +1,12 @@
 # GraphSpec Decisions
 
 Accepted architectural decisions for GraphSpec, with concise rationale. The system of
-record for the three foundational decisions is the repository Decision artifacts:
+record for the foundational decisions is the repository Decision artifacts:
 
 - [0003 — One Structural Language](../../decisions/0003-one-structural-language.md)
 - [0004 — GraphSpec Kind Admission — Five Core Kinds](../../decisions/0004-graphspec-kind-admission.md)
 - [0005 — Identifier, Reference, and File-Naming Syntax](../../decisions/0005-graphspec-id-and-reference-syntax.md)
+- [0006 — Model-Source Location and Identity by Placement](../../decisions/0006-graphspec-model-source-location.md)
 
 Fuller narrative reasoning lives in the
 [Phase 1 architecture review report](reviews/architecture-review-2026-07.md);
@@ -105,6 +106,16 @@ data vocabularies (currency codes, roles-as-data). *Why:* lifecycle is domain
 semantics — transitions and who may trigger them — and defining states in one
 language while interpreting them in another would split a single concern. Flagged for
 revisit after the first consumer graph is populated.
+
+### Model sources: `models/*.hcl`, identity by placement, no paired prose
+
+A module's ModelSpec sources live at `<module-root>/models/*.hcl` and together form
+its one ModelSpec module, whose short name is the graph module ID (path-derived, like
+every other SpecScore identity). Sources stay pure HCL: the graph module (ModuleSpec
+README, EntitySpec/RelationshipSpec artifacts, the mandatory `models/README.md`) is
+their documentation. Markdown-embedded models and required paired `.md` files were
+both rejected as drift channels. *Why:* one identity rule family-wide; standalone
+ModelSpec tooling keeps consuming plain HCL. ([0006](../../decisions/0006-graphspec-model-source-location.md))
 
 ### Single graph root in v0.2; cross-repo deferred
 
