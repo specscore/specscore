@@ -29,7 +29,7 @@ Current working definitions:
 | Domain Graph | The canonical set of domain concepts, relationships, and semantic metadata. |
 | Module | An architectural boundary or bounded context that owns domain concepts and declares its dependencies (`dependsOn`). |
 | Entity | A domain concept with identity. Its structure lives in a referenced ModelSpec model. |
-| Model Reference | A `modelspec://<module>.<Name>` reference from a graph artifact to a ModelSpec model, component, or named enum. |
+| Model Reference | A `modelspec:///<module>.<Name>` URL from a graph artifact to a ModelSpec entity, component, or named enum — optionally `modelspec:///<module>.<kind>.<Name>` for collections and recordsets, or `modelspec://{host}/{org}/{repo}/…` cross-repo (decisions 0010/0011). |
 | Value Object | An immutable domain concept without identity — a ModelSpec component, referenced by graph artifacts, not a GraphSpec kind. |
 | Enum | A named controlled vocabulary — a ModelSpec named enum, referenced by graph artifacts, not a GraphSpec kind. Lifecycle states are the exception and live on the entity. |
 | Relationship | A named semantic connection between domain concepts; first-class only when it carries semantics beyond a typed reference. |

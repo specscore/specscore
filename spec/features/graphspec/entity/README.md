@@ -33,7 +33,7 @@ kind: entity
 id: booking
 name: Booking
 status: draft
-model: modelspec://reservations.Booking
+model: modelspec:///reservations.Booking
 lifecycle:
   states: [requested, confirmed, cancelled]
 summary: A reservation for a bookable target during a time window.

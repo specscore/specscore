@@ -10,6 +10,8 @@ record for the foundational decisions is the repository Decision artifacts:
 - [0007 — ModelSpec Reference Resolution](../../decisions/0007-modelspec-reference-resolution.md)
 - [0008 — GraphSpec Is A SpecScore Component](../../decisions/0008-graphspec-is-a-specscore-component.md)
 - [0009 — Per-Module Graph Roots](../../decisions/0009-per-module-graph-roots.md)
+- [0010 — References Are URLs](../../decisions/0010-references-are-urls.md)
+- [0011 — Addressable Model Concepts and Kind Segments](../../decisions/0011-addressable-model-concepts.md)
 
 Fuller narrative reasoning lives in the
 [Phase 1 architecture review report](reviews/architecture-review-2026-07.md);
@@ -40,7 +42,7 @@ examples); one source of truth is ModelSpec's entire value proposition. ([0003](
 
 ### GraphSpec reuses ModelSpec, one-directionally
 
-Graph entities reference ModelSpec models (`model: modelspec://reservations.Booking`)
+Graph entities reference ModelSpec models (`model: modelspec:///reservations.Booking`)
 instead of embedding fields. ModelSpec never references GraphSpec. *Why:*
 independence is about dependency direction, not mutual ignorance; the arrow never
 points out of ModelSpec, so ModelSpec adopters lose nothing. ([0003](../../decisions/0003-one-structural-language.md), ModelSpec decision 0012)
@@ -133,16 +135,50 @@ their documentation. Markdown-embedded models and required paired `.md` files we
 both rejected as drift channels. *Why:* one identity rule family-wide; standalone
 ModelSpec tooling keeps consuming plain HCL. ([0006](../../decisions/0006-graphspec-model-source-location.md))
 
-### ModelSpec references resolve by placement, then configured projects, then explicit suffix
+### ModelSpec references resolve by placement, then configured projects, then explicit repository
 
-`modelspec://<module>.<Name>[@{host}/{org}/{repo}]` and HCL module-qualified names
+`modelspec:///<module>.<Name>` (current repository) and HCL module-qualified names
 resolve through one rule: local graph root (placement per 0006) → `specscore.yaml`
-`projects:` local paths → explicit `source-references`-style cross-repo suffix, with
-no implicit network fetch. SpecScore is thereby ModelSpec's consumer-resolver
-(ModelSpec decision 0014 keeps the syntax consumer-neutral), and model-level
-cross-module references count against the owning module's `dependsOn`. *Why:* one
-resolution rule family-wide; no registry, no second linking convention.
-([0007](../../decisions/0007-modelspec-reference-resolution.md))
+`projects:` local paths → explicit repository in the URL authority
+(`modelspec://{host}/{org}/{repo}/<module>.<Name>`), with no implicit network
+fetch. SpecScore is thereby ModelSpec's consumer-resolver (ModelSpec decision 0014
+keeps the syntax consumer-neutral), and model-level cross-module references count
+against the owning module's `dependsOn`. *Why:* one resolution rule family-wide; no
+registry, no second linking convention.
+([0007](../../decisions/0007-modelspec-reference-resolution.md), grammar amended by
+[0010](../../decisions/0010-references-are-urls.md))
+
+### References are URLs
+
+Family rule: a scheme written with `//` honors RFC 3986 authority semantics —
+authority is the repository host, the path is `{org}/{repo}` plus the resource,
+and an empty authority (`modelspec:///…`) means the current repository. The former
+`@{host}/{org}/{repo}` suffix is removed from `modelspec://` references and from
+the source-references cross-repo shorthand (now
+`specscore://{host}/{org}/{repo}/{reference}` — a pure prefix swap away from its
+canonical `https://specscore.org/…` expansion). `?ref=<git-ref>` pins a branch,
+tag, or commit; the fragment is reserved for intra-resource addressing. Legacy
+forms are lint errors carrying the exact rewrite, applied by `--fix` — the first
+fixers with specified semantics. *Why:* the old grammar put case-sensitive concept
+names in the case-insensitive authority component; a scheme that invokes URL
+syntax must deliver URL semantics, and the break was free while both pilots used
+only local references. ([0010](../../decisions/0010-references-are-urls.md))
+
+### Modules are bare-ID citizens; the addressable trio gets kind segments
+
+Modules live in the bare-ID namespace (`vault`); owned artifacts live in the
+per-module qualified namespace (`vault.vault`) — a module node never occupies a
+qualified-ID slot, so a domain whose core entity names its context cannot collide
+with itself. The two-segment model reference resolves in one flat per-module
+namespace formed by entities, components, and enums (now normative); an optional
+kind segment (`modelspec:///vault.collections.vaults`, tokens
+`entities|components|enums|collections|recordsets`, reserved as concept names)
+makes collections and recordsets addressable — three-segment only, own scopes.
+Graph-to-graph references stay two-segment (kind-free references survive
+relationship→entity promotion); HCL is untouched (the attribute name is the kind
+selector, ModelSpec decision 0014). *Why:* the kind segment lives exactly where
+kinds are structural facts and is absent exactly where kinds are semantic
+judgments. ([0011](../../decisions/0011-addressable-model-concepts.md))
 
 ### Graph roots: repo-level plus per-module, unified; cross-repo deferred
 

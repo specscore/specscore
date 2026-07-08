@@ -28,7 +28,7 @@ Two concrete gaps exist:
 - **Language-agnostic** — the notation must work in any language's comment syntax. Detection requires a recognized comment prefix on the same line — no AST parsing, just a single-line regex match.
 - **Strict validation** — following Go's philosophy, references that point to non-existent resources are errors, not warnings. Invalid references are caught by linter, pre-commit hook, or PR check.
 - **Single prefix** — `specscore:` covers all resource types (features, plans, docs). One prefix to search, one parser to maintain, one convention to learn.
-- **Graceful cross-repo** — same-repo references omit host/org/repo for brevity. Cross-repo references append `@{host}/{org}/{repo}`. Host, org, and repo for the current context are inferred from git remote and can be overridden in `specscore.yaml`.
+- **Graceful cross-repo** — same-repo references omit host/org/repo for brevity. Cross-repo references use the URL authority form `specscore://{host}/{org}/{repo}/{reference}` ([decision 0010](../../decisions/0010-references-are-urls.md)). Host, org, and repo for the current context are inferred from git remote and can be overridden in `specscore.yaml`.
 
 ## Behavior
 
@@ -36,19 +36,22 @@ Two concrete gaps exist:
 
 ```
 specscore:{reference}
-specscore:{reference}@{host}/{org}/{repo}
+specscore://{host}/{org}/{repo}/{reference}
 ```
 
 - **`{reference}`** — either a type-prefixed shortcut or a repo-root-relative path (see [Resolution](#short-notation-resolution))
-- **`@{host}/{org}/{repo}`** — optional; omitted when referencing resources in the same project. `{host}` is the repository host (e.g., `github.com`, `bitbucket.org`, `gitlab.mycompany.com`)
+- **`specscore://{host}/{org}/{repo}/…`** — the cross-repo form; omitted (single-colon opaque form) when referencing resources in the same project. `{host}` is the repository host (e.g., `github.com`, `bitbucket.org`, `gitlab.mycompany.com`); the first two path segments after the authority are `{org}/{repo}`, matching the canonical URL structure.
+- **`?ref={git-ref}`** — optional on either form; pins a branch, tag, or commit ([decision 0010](../../decisions/0010-references-are-urls.md)). The fragment (`#`) remains reserved for heading anchors within the referenced document and MUST NOT carry version pins.
+
+Both forms are valid URIs: the single-colon form is an opaque URI, and the `//` form honors RFC 3986 authority semantics, so standard URL libraries parse both. The former `specscore:{reference}@{host}/{org}/{repo}` suffix notation was removed by [decision 0010](../../decisions/0010-references-are-urls.md).
 
 #### REQ: specscore-prefix
 
 Every source reference MUST begin with the `specscore:` prefix followed by a reference string. No other prefix is permitted for SpecScore annotations.
 
-#### REQ: cross-repo-suffix
+#### REQ: cross-repo-authority
 
-Cross-repo references MUST append `@{host}/{org}/{repo}` after the reference string. Same-repo references MUST NOT include the `@` suffix.
+Cross-repo references MUST use the authority form `specscore://{host}/{org}/{repo}/{reference}`. Same-repo references MUST use the single-colon form without an authority. The legacy `@{host}/{org}/{repo}` suffix MUST be reported as an error carrying the exact authority-form rewrite, and lint `--fix` MUST apply it.
 
 ### Resource type shortcuts
 
@@ -98,9 +101,14 @@ Every short reference expands to a canonical URL on `specscore.org`. The URL use
 specscore:{reference}
   -> https://specscore.org/{host}/{org}/{repo}/{resolved_path}
 
-specscore:{reference}@{host}/{org}/{repo}
+specscore://{host}/{org}/{repo}/{reference}
   -> https://specscore.org/{host}/{org}/{repo}/{resolved_path}
 ```
+
+The cross-repo scheme form is deliberately a pure prefix swap away from its
+canonical expansion — `specscore://` ↔ `https://specscore.org/` — so the scheme
+form, the canonical URL, and the Studio URL are three projections of one address.
+A `?ref={git-ref}` pin, when present, is carried through expansion unchanged.
 
 For same-repo references, `{host}/{org}/{repo}` is resolved at expansion time from git remote or project configuration.
 
@@ -110,9 +118,9 @@ For same-repo references, `{host}/{org}/{repo}` is resolved at expansion time fr
 |---|---|
 | `specscore:feature/cli/task/claim` | `https://specscore.org/github.com/acme/myproject/spec/features/cli/task/claim` |
 | `specscore:spec/features/cli/task/claim` | `https://specscore.org/github.com/acme/myproject/spec/features/cli/task/claim` |
-| `specscore:feature/agent-skills@github.com/acme/orchestrator` | `https://specscore.org/github.com/acme/orchestrator/spec/features/agent-skills` |
+| `specscore://github.com/acme/orchestrator/feature/agent-skills` | `https://specscore.org/github.com/acme/orchestrator/spec/features/agent-skills` |
 | `specscore:plan/v2-migration` | `https://specscore.org/github.com/acme/myproject/spec/plans/v2-migration` |
-| `specscore:doc/api/rest@bitbucket.org/acme/docs` | `https://specscore.org/bitbucket.org/acme/docs/docs/api/rest` |
+| `specscore://bitbucket.org/acme/docs/doc/api/rest` | `https://specscore.org/bitbucket.org/acme/docs/docs/api/rest` |
 | `specscore:README.md` | `https://specscore.org/github.com/acme/myproject/README.md` |
 
 #### REQ: url-structure
@@ -182,7 +190,7 @@ Users with uncommon comment syntax can open an issue to expand the prefix set, o
 
 **Two reference forms are recognized:**
 
-1. **Short notation** — `specscore:` prefix, then `{reference}[@{host}/{org}/{repo}]`
+1. **Short notation** — `specscore:` prefix: either the same-repo opaque form (`specscore:{reference}`) or the cross-repo authority form (`specscore://{host}/{org}/{repo}/{reference}`)
 2. **Expanded URLs** — `https://specscore.org/` prefix, then `{host}/{org}/{repo}/{resolved_path}`
 
 The linter auto-expands short notation to URLs, so committed code should only contain expanded URLs. The short form is accepted as input for authoring convenience.
@@ -197,7 +205,7 @@ The detection strategy MUST recognize exactly two reference forms: short notatio
 
 ### Host/org/repo resolution
 
-When a reference omits `@{host}/{org}/{repo}`, the current project's host, org, and repo must be inferred:
+When a reference has no authority (the same-repo single-colon form), the current project's host, org, and repo must be inferred:
 
 1. **Git remote** — parse `origin` remote URL to extract `{host}`, `{org}`, and `{repo}`. This is the default. For example, `git@github.com:acme/myproject.git` yields `github.com/acme/myproject`.
 2. **Project config override** — `specscore.yaml` may declare explicit values that override git remote inference. This handles forks, mirrors, and non-standard remote names.
@@ -212,7 +220,7 @@ project:
 
 #### REQ: git-remote-default
 
-When no `@{host}/{org}/{repo}` suffix is present and no project config override exists, the resolver MUST infer host, org, and repo from the `origin` git remote URL.
+When a reference carries no authority and no project config override exists, the resolver MUST infer host, org, and repo from the `origin` git remote URL.
 
 #### REQ: config-override
 
@@ -228,7 +236,8 @@ References are validated strictly — a reference to a non-existent resource is 
 |---|---|
 | Reference resolves | The resolved repo path does not exist in the target repository (after trying type prefix expansion and path fallback) |
 | Host/org/repo is resolvable | Same-repo reference but host/org/repo cannot be inferred (no git remote, no config override) |
-| Cross-repo is reachable | `@{host}/{org}/{repo}` points to a repository that is not accessible (optional — may be deferred to CI) |
+| Cross-repo is reachable | The `specscore://{host}/{org}/{repo}/…` authority points to a repository that is not accessible (optional — may be deferred to CI) |
+| Legacy notation | A `specscore:{ref}@{host}/{org}/{repo}` suffix form is an error carrying the exact authority-form rewrite (`--fix` applies it) |
 
 **Enforcement points:**
 
@@ -246,7 +255,7 @@ When a same-repo reference cannot resolve host/org/repo (no git remote and no pr
 
 #### REQ: cross-repo-reachability
 
-When a cross-repo reference uses `@{host}/{org}/{repo}`, the validator SHOULD verify that the target repository is accessible. This check MAY be deferred to CI.
+When a cross-repo reference names a repository in its authority form, the validator SHOULD verify that the target repository is accessible. This check MAY be deferred to CI.
 
 ### Integration with spec-aware tools
 
@@ -298,9 +307,9 @@ References to non-existent resources produce errors, not warnings. Missing host/
 
 ### AC: context-resolution
 
-**Requirements:** source-references#req:git-remote-default, source-references#req:config-override, source-references#req:cross-repo-suffix
+**Requirements:** source-references#req:git-remote-default, source-references#req:config-override, source-references#req:cross-repo-authority
 
-Same-repo references resolve host/org/repo from git remote by default. Project config overrides git remote inference. Cross-repo references use the explicit `@{host}/{org}/{repo}` suffix.
+Same-repo references resolve host/org/repo from git remote by default. Project config overrides git remote inference. Cross-repo references use the explicit `specscore://{host}/{org}/{repo}/{reference}` authority form; the legacy `@` suffix is rewritten by `--fix`.
 
 ## Open Questions
 

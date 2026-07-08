@@ -38,7 +38,7 @@ inputs:
   - name: resource
     ref: catalog.asset
   - name: time-window
-    model: modelspec://scheduling.TimeWindow
+    model: modelspec:///scheduling.TimeWindow
 possibleEvents:
   - reservations.booking-created
 ---
