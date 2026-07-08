@@ -13,6 +13,16 @@ RelationshipSpec first-class (yes, when semantic), ownership representation
 
 Expected to be answered by the Phase 2 pilot and Phase 3 lint work.
 
+Raised by the first consumer pilot (2026-07-08) — the first three **block Phase 3
+(`graph lint`)** because reference resolution depends on them:
+
+- How does a `modelspec://<module>.<Name>` reference resolve to a ModelSpec module? ModelSpec's HCL has no module-identity declaration and its JSON `module.id` is a URL-ish global identifier, not a short name — a resolution rule (and likely a ModelSpec module-identity block) is needed.
+- Where do ModelSpec sources live inside a graph tree? The pilot's convention is `modules/<module-id>/models/*.hcl`; decision 0005 should canonicalize a location so lint can discover models.
+- Should ModelSpec support cross-module references (property → entity in another module; embedding another module's component)? The pilot needed both; component reuse argues for qualified names rather than forbid-with-typed-id-convention.
+- What may a relationship's `metadata:` map contain? The pilot used `modelspec://` enum references successfully; lint needs a defined value shape (proposal: flat map of string → scalar | qualified graph ref | `modelspec://` ref).
+- May a module own zero graph artifacts (a pure structural provider whose surface is only ModelSpec)? The pilot says yes; ModuleSpec and lint rules should say so explicitly.
+- The command `inputs` item shape (`name` + `ref:` | `model:`) is currently shown only by example and needs a normative sentence in CommandSpec.
+
 - How should command failures be represented — prose, structured failure cases, or references to policies?
 - Should `possibleEvents` entries carry conditions (when does a create command emit its created event)?
 - Should event `sources` values be an open set or a controlled vocabulary?

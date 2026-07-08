@@ -7,6 +7,14 @@ status, ownership representation, and command-event link direction — see decis
 [0004](../../decisions/0004-graphspec-kind-admission.md), and
 [0005](../../decisions/0005-graphspec-id-and-reference-syntax.md).
 
+## Before Phase 3 (`graph lint`) — from the first consumer pilot (2026-07-08)
+
+- Define ModelSpec module identity + the `modelspec://` resolution rule (with ModelSpec).
+- Decide cross-module ModelSpec references (qualified names vs forbid-with-convention).
+- Canonicalize the model-source location (`modules/<id>/models/*.hcl`) in decision 0005 or an amendment.
+- Define the relationship `metadata:` value shape; legalize zero-graph-artifact modules; make the command `inputs` shape normative.
+- Remove the obsolete alternate core-root location from the CLI `graph new` spec.
+
 ## Near Term (v0.2)
 
 - Create one valid example for each of the five specification kinds, using bare IDs, unsuffixed filenames, and a `model:` reference to a real ModelSpec model.

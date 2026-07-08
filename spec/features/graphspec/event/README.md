@@ -43,7 +43,8 @@ sources:
 
 Rules:
 
-- **Events declare only non-command sources.** `sources` lists origins such as `timer`, `integration`, `external-system`, `automation`, and `manual-correction`. Command triggers are NOT listed on the event; tooling derives them from CommandSpec `possibleEvents` ([current decisions](../decisions.md)). This keeps the command-event link authored in exactly one place.
+- **Events declare only non-command sources.** `sources` lists origins such as `timer`, `integration`, `external-system`, `automation`, and `manual-correction`. Command triggers are NOT listed on the event; tooling derives them from CommandSpec `possibleEvents` ([decisions](../decisions.md)). This keeps the command-event link authored in exactly one place.
+- **An absent `sources` key means command-triggered only.** Omit the key when an event has no non-command origins; an explicitly empty `sources: []` states the same thing less clearly and SHOULD be a lint warning. *(Clarified by the first consumer pilot.)*
 - Event payload shape references the subject entity's ModelSpec model or dedicated ModelSpec models; events embed no field definitions.
 - EventSpec records factual history: an event artifact describes what the fact means, not how it is produced.
 
