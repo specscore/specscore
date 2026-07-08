@@ -106,7 +106,7 @@ A SpecScore feature looks like this:
 | Tool | Role | Status |
 |---|---|---|
 | **SpecScore** | The open specification format — this repository | Standard |
-| [ModelSpec](https://github.com/specscore/modelspec) *(repo: `modelspec`)* | Independent open specification language for application data models — the single structural language of the family; SpecScore validates it but does not own its semantics | Bootstrap |
+| [ModelSpec](https://github.com/specscore/modelspec) *(repo: `modelspec`)* | Independent open specification language for application data models — the single structural language of the ecosystem; SpecScore validates it but does not own its semantics | Bootstrap |
 | [GraphSpec](spec/features/graphspec/README.md) *(bootstrap in this repository)* | Specification language for connected domain models — modules, entities, relationships, commands, events; references ModelSpec for structure | Bootstrap (v0.2) |
 | [SpecStudio Skills](https://github.com/specscore/specstudio-skills) *(repo: `specstudio-skills`)* | Opinionated SDD workflow Claude Code plugin — the entry gate for cold users | Live (MIT, free) |
 | [SpecScore Studio](https://specscore.studio) | Hosted web UI for SpecScore — Stage 0 minimal viewer (view documents + spec graph, navigate) live 2026-05-20 | Stage 0 viewer |
@@ -167,7 +167,7 @@ SpecScore specifications are Markdown files. SpecScore lives at [`specscore.md`]
 
 ## Design history
 
-- [ROADMAP](ROADMAP.md) — the family-level road to v1 and beyond
+- [ROADMAP](ROADMAP.md) — the top-level road to v1 and beyond
 - [Decisions index](spec/decisions/README.md) — accepted architecture decisions (ADRs)
 - [GraphSpec roadmap](spec/features/graphspec/roadmap.md) and [design history](spec/features/graphspec/README.md) — decisions, lessons learned, review reports, phase hand-offs
 - [Entities and properties](docs/entities-and-properties.md) — the legacy typed-data Doc-Kinds (frozen; new structural work uses [ModelSpec](https://github.com/specscore/modelspec))

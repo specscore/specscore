@@ -1,9 +1,9 @@
-# SpecScore Family — Public Readiness Review — 2026-07
+# SpecScore Ecosystem — Public Readiness Review — 2026-07
 
 **Date:** 2026-07-09
-**Scope:** the whole family — SpecScore core, GraphSpec (six kinds, including the
+**Scope:** the whole ecosystem — SpecScore core, GraphSpec (six kinds, including the
 policy kind), ModelSpec, and the reference CLI — reviewed for public-adoption
-readiness. Hosted here because `reviews/` is the family's established review
+readiness. Hosted here because `reviews/` is the established review
 archive; the scope is wider than GraphSpec.
 **Method:** five independent review tracks (architecture & layering; per-standard
 language maturity; governance & publication; validation evidence; adoption
@@ -20,7 +20,7 @@ end.)
 ## Executive summary
 
 The conceptual architecture is sound and needs no redesign — every review track
-independently reached that conclusion. What stands between this family and public
+independently reached that conclusion. What stands between this ecosystem and public
 standard-hood is not design but **evidence, governance, and finish**: the value
 proposition has never been executed end-to-end, no one but the language's
 designer has ever authored against it, the normative content is not independently
@@ -34,7 +34,7 @@ single author, validated as a demonstration rather than as a standard.*
 behavior/boundary changes → GraphSpec") is genuinely usable; the dependency arrow
 never points out of ModelSpec; the kind-admission rule
 ([0004](../../../decisions/0004-graphspec-kind-admission.md)) is the strongest
-single governance artifact in the family; the policy kind passed that rule
+single governance artifact in the ecosystem; the policy kind passed that rule
 legitimately ([0013](../../../decisions/0013-rules-and-policies.md)); the refusal
 to build a constraint expression language is design maturity most standards lack.
 

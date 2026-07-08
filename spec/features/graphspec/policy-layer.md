@@ -1,9 +1,8 @@
 # GraphSpec Policy Layer — Design Exploration
 
 Discussion draft feeding a future decision (not itself normative). Escalated by the
-third consumer pilot (findings FA5/FA6 in the backstage
-`spec/graph/family-pilot-notes.md`), whose prose rules are this exploration's
-requirements corpus. Related open question: "A home for policy" in
+third consumer pilot (findings FA5/FA6 in that consumer's private pilot notes),
+whose prose rules are this exploration's requirements corpus. Related open question: "A home for policy" in
 [open-questions.md](open-questions.md).
 
 ## The problem, shown in today's artifacts

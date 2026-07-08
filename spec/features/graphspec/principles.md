@@ -34,7 +34,7 @@ The bootstrap should leave extension points, but should not invent abstractions 
 
 ## Independent Core
 
-GraphSpec should not depend on FeatureSpec. FeatureSpec and other SpecScore family members may reference GraphSpec.
+GraphSpec should not depend on FeatureSpec. FeatureSpec and other SpecScore ecosystem members may reference GraphSpec.
 
 ## Rationale Is First-Class
 

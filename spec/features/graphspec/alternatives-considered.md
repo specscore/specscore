@@ -4,7 +4,7 @@
 
 Decided: no.
 
-GraphSpec remains a domain modelling specification within the SpecScore family.
+GraphSpec remains a domain modelling specification within the SpecScore ecosystem.
 
 ## EntityGraphSpec
 

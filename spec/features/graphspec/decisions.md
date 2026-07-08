@@ -35,7 +35,7 @@ layering rule is unaffected: GraphSpec never depends on FeatureSpec semantically
 ### ModelSpec is the single structural language
 
 Properties, types, constraints, validation, value objects (components), named enums,
-collections, recordsets, and projections are ModelSpec concerns. No other family
+collections, recordsets, and projections are ModelSpec concerns. No other ecosystem
 member defines a competing structural vocabulary. *Why:* three overlapping structural
 languages existed (legacy entity/property Doc-Kinds, ModelSpec, GraphSpec's drifting
 examples); one source of truth is ModelSpec's entire value proposition. ([0003](../../decisions/0003-one-structural-language.md))
@@ -132,7 +132,7 @@ its one ModelSpec module, whose short name is the graph module ID (path-derived,
 every other SpecScore identity). Sources stay pure HCL: the graph module (ModuleSpec
 README, EntitySpec/RelationshipSpec artifacts, the mandatory `models/README.md`) is
 their documentation. Markdown-embedded models and required paired `.md` files were
-both rejected as drift channels. *Why:* one identity rule family-wide; standalone
+both rejected as drift channels. *Why:* one identity rule ecosystem-wide; standalone
 ModelSpec tooling keeps consuming plain HCL. ([0006](../../decisions/0006-graphspec-model-source-location.md))
 
 ### ModelSpec references resolve by placement, then configured projects, then explicit repository
@@ -143,14 +143,14 @@ resolve through one rule: local graph root (placement per 0006) → `specscore.y
 (`modelspec://{host}/{org}/{repo}/<module>.<Name>`), with no implicit network
 fetch. SpecScore is thereby ModelSpec's consumer-resolver (ModelSpec decision 0014
 keeps the syntax consumer-neutral), and model-level cross-module references count
-against the owning module's `dependsOn`. *Why:* one resolution rule family-wide; no
+against the owning module's `dependsOn`. *Why:* one resolution rule ecosystem-wide; no
 registry, no second linking convention.
 ([0007](../../decisions/0007-modelspec-reference-resolution.md), grammar amended by
 [0010](../../decisions/0010-references-are-urls.md))
 
 ### References are URLs
 
-Family rule: a scheme written with `//` honors RFC 3986 authority semantics —
+Ecosystem-wide rule: a scheme written with `//` honors RFC 3986 authority semantics —
 authority is the repository host, the path is `{org}/{repo}` plus the resource,
 and an empty authority (`modelspec:///…`) means the current repository. The former
 `@{host}/{org}/{repo}` suffix is removed from `modelspec://` references and from
@@ -206,7 +206,7 @@ ModelSpec supersedes. ([0003](../../decisions/0003-one-structural-language.md))
 
 ### Naming decisions
 
-- `GraphSpec` (not EntityGraphSpec, not DomainSpec) — established in the family; the
+- `GraphSpec` (not EntityGraphSpec, not DomainSpec) — established in the ecosystem; the
   language models more than entities; a rename buys marginal precision for real churn.
 - `ModuleSpec` (not ExtensionSpec) — consumer-neutral; product extensions are one
   implementation of modules.
@@ -237,7 +237,7 @@ entity. (Recorded in [decision 0004](../../decisions/0004-graphspec-kind-admissi
 
 The pre-review written record. Rejected because it demonstrably forced GraphSpec to
 redefine structure and would have produced two divergent structural vocabularies in
-one family.
+one ecosystem.
 
 ### GraphSpec keeps a "lightweight" inline-fields subset
 
@@ -261,7 +261,7 @@ Rejected in favour of the dot form. References point at *concepts*, not files: w
 an artifact changes kind (a relationship promoted to an association-object entity)
 or a consumer tree changes layout, `directory.team-member` stays valid while a path
 reference breaks graph-wide. The dot form is also the one reference grammar shared
-across the family (ModelSpec decision 0014 settled `<module>.<Name>`, and ModelSpec
+across the ecosystem (ModelSpec decision 0014 settled `<module>.<Name>`, and ModelSpec
 is consumer-neutral — it cannot carry file locations in identity at all), and a path
 would re-encode the kind a third time, the same triple-encoding argument that killed
 kind-suffixed filenames. The trade is deliberate: path refs would disambiguate

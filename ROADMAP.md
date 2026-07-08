@@ -1,6 +1,6 @@
-# SpecScore Family Roadmap — the road to v1 and beyond
+# SpecScore Roadmap — the road to v1 and beyond
 
-The family: **SpecScore** (the spec format and process), **GraphSpec** (the
+The SpecScore ecosystem: **SpecScore** (the spec format and process), **GraphSpec** (the
 domain-semantics layer — a component of SpecScore), **ModelSpec** (the
 independent structural language), and the **reference CLI**.
 
@@ -18,7 +18,7 @@ Work items for the next two milestones are tracked in the
 
 ## Milestone 1 — Public Preview *(next)*
 
-Publish the family openly, labeled experimental, and invite feedback.
+Publish the ecosystem openly, labeled experimental, and invite feedback.
 
 **Gate (must all hold before announcing):**
 
@@ -32,7 +32,7 @@ Publish the family openly, labeled experimental, and invite feedback.
   framed as a SpecScore component; the policy kind labeled provisional; only
   live domains referenced.
 - The CLI's Stable contracts hold (the `change-status` false-success defect is
-  fixed); licensing and CONTRIBUTING exist family-wide.
+  fixed); licensing and CONTRIBUTING exist across all repositories.
 
 **Success looks like:** strangers can find, read, and evaluate the standards
 without hitting a contradiction, a dead link, or an overclaim — and the first
@@ -68,7 +68,7 @@ second maintainer.**
 - The legacy entity/property Doc-Kinds have a specified migration path and a
   deprecation date.
 
-**Success looks like:** an outside team adopts the family for a real project and
+**Success looks like:** an outside team adopts the ecosystem for a real project and
 ships with it, filing issues against spec text rather than asking the author
 what the language means.
 
@@ -86,7 +86,7 @@ v1 is a starting line. Success beyond it:
   vocabulary.
 - **Scale:** characterized behavior at 50+ modules; shared-module
   dependency-sink guidance grounded in a real large graph.
-- **Self-hosting:** the family's own tooling described by its own graph — the
+- **Self-hosting:** the ecosystem's own tooling described by its own graph — the
   standard eating its own cooking.
 - **Community:** a contributor other than the founders lands a normative change
   end-to-end through the governance process.
@@ -101,4 +101,4 @@ reference CLI no longer the only implementation that matters.
 pilots, tooling, roles, rules & policies) lives in the
 [GraphSpec roadmap](spec/features/graphspec/roadmap.md) and
 [design-history documents](spec/features/graphspec/README.md). This document is
-the forward-looking, family-level view.*
+the forward-looking, top-level view.*

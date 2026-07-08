@@ -14,7 +14,7 @@ status: Draft
 
 Executes the accepted recommendations of the
 [public readiness review 2026-07](../features/graphspec/reviews/readiness-review-2026-07.md)
-across the family (SpecScore core, GraphSpec, the policy kind, ModelSpec, the
+across the ecosystem (SpecScore core, GraphSpec, the policy kind, ModelSpec, the
 reference CLI). The review's verdict — *ready for public preview, not beta, not
 v1* — defines two gates: Phase A (must-fix before announcing a public preview)
 and Phase B (before declaring v1). Strategic sequencing and success criteria live
@@ -85,7 +85,7 @@ code-graph snapshot.
 **Status:** pending
 
 Mark every aspirational claim as planned (ModelSpec generator targets, schema
-publication, unbuilt ApiSpec/UiSpec/TestSpec consumers); verify which family
+publication, unbuilt ApiSpec/UiSpec/TestSpec consumers); verify which ecosystem
 domains actually resolve and remove or clearly label dead ones; state on every
 public GraphSpec surface that it is a component of SpecScore, not a standalone
 standard; label the policy kind provisional (vocabulary subject to amendment
@@ -100,7 +100,7 @@ drift; align the GraphSpec host feature status with its shipped reality.
 Decide ModelSpec's normative-text license (align with CC-BY-4.0 or state why
 not, with an explicit patent-posture statement for both languages); add
 CONTRIBUTING to modelspec and specscore-cli; add a code of conduct and security
-policy family-wide.
+policy across all repositories.
 
 ### Task B1: Implementation-neutral conformance corpus
 
@@ -108,7 +108,7 @@ policy family-wide.
 **Status:** pending
 
 Create a versioned conformance suite in the spec repos (fixtures + expected
-verdicts) covering the graph rule family and ModelSpec validation, runnable
+verdicts) covering the graph-* rule set and ModelSpec validation, runnable
 without the reference CLI's internals; add `_tests/` corpora to the GraphSpec
 kinds; publish a normative rule catalog (each rule's semantics in MUST/SHOULD
 language, not a one-line description). Exit criterion: a second implementation
@@ -121,7 +121,7 @@ could be written and self-verified from spec text plus corpus alone.
 
 Build one downstream consumer that generates a working artifact from ModelSpec
 sources (candidate: SQL DDL or TypeScript types), exercised against a pilot
-graph. This is the first executable proof of the family's value proposition and
+graph. This is the first executable proof of the ecosystem's value proposition and
 the forcing function for the deferred lifecycle-vs-status seam (first pilot,
 finding F3), which must be resolved as part of this task.
 
@@ -175,5 +175,5 @@ Doc-Kind migration path with a deprecation date; plan GraphSpec's move out of
 
 Cross-repo graph roots; `?ref=` honoring beyond syntax; lifecycle transitions;
 union/polymorphic references; per-value enum metadata; multi-target `applies`
-and policies as navigation edges; a self-hosting graph for the family's own
+and policies as navigation edges; a self-hosting graph for the ecosystem's own
 tooling; 50-module scale characterization; feature-side model-reference lint.
