@@ -53,7 +53,7 @@ GraphSpec describes domain concepts and the relationships between them. The grap
 
 GraphSpec defines kind directories using singular names. Consumer projects use plural directories — `modules/`, `entities/`, `relationships/`, `commands/`, `events/` — with unsuffixed `<id>.md` filenames per [decision 0005](../../decisions/0005-graphspec-id-and-reference-syntax.md).
 
-GraphSpec v0.2 supports one graph root per repository (default `spec/graph/`). Cross-repo graph references are deferred; when they land they extend the qualified-ID form with the `@{host}/{org}/{repo}` suffix convention established by the Stable `source-references` feature, rather than a GraphSpec-specific mechanism.
+A repository's graph is the union of its graph roots: the repo-level root (default `spec/graph/`) plus one per configured SpecScore module (`<module.path>/<specs_dir>/graph/`, discovered through the standard repo-config machinery — [decision 0009](../../decisions/0009-per-module-graph-roots.md)). GraphSpec module IDs are unique across the union, and every root carries the same `modules/<id>/…` layout. Cross-repo graph references are deferred; when they land they extend the qualified-ID form with the `@{host}/{org}/{repo}` suffix convention established by the Stable `source-references` feature, rather than a GraphSpec-specific mechanism.
 
 GraphSpec artifacts are Markdown files with YAML frontmatter. Local IDs are bare lowercase kebab-case; the qualified form `<module-id>.<local-id>` is computed from directory placement, never stored. Structure is referenced from ModelSpec, not embedded:
 

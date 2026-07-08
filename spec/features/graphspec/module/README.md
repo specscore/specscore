@@ -47,7 +47,7 @@ Rules:
 - **`dependsOn` declares allowed outbound dependencies.** Any qualified reference from this module's artifacts to another module's artifacts requires that module in `dependsOn`. A reference to an undeclared module is a lint error.
 - **Relationship ownership follows dependencies.** A module may own a relationship only if its `dependsOn` closure covers both endpoint modules (see [RelationshipSpec](../relationship/README.md)).
 - **ModelSpec sources live at `<module-root>/models/*.hcl`** ([decision 0006](../../../decisions/0006-graphspec-model-source-location.md)). Together they form the module's one ModelSpec module, whose short name is the module ID (identity by placement). A module may be a pure structural provider (models only, no graph artifacts) or carry no `models/` at all. The graph module itself is the models' documentation — no paired `.md` per `.hcl` is required.
-- Modules are defined in the repository's single graph root in v0.2; distributed and cross-repo module roots are deferred per [decision 0005](../../../decisions/0005-graphspec-id-and-reference-syntax.md).
+- Modules are defined in the repository's graph roots — the repo-level root plus per-SpecScore-module roots, unified, with module IDs unique across the union ([decision 0009](../../../decisions/0009-per-module-graph-roots.md)). Cross-repo module roots remain deferred per [decision 0005](../../../decisions/0005-graphspec-id-and-reference-syntax.md).
 
 ## Acceptance Criteria
 

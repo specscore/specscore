@@ -18,6 +18,7 @@ Decisions are durable, lintable records of choices made between two or more opti
 | [0006](0006-graphspec-model-source-location.md) | GraphSpec Model-Source Location and Module Identity by Placement | Approved | 2026-07-08 | graphspec, modelspec, models, discovery, identity | graphspec |
 | [0007](0007-modelspec-reference-resolution.md) | ModelSpec Reference Resolution In SpecScore Trees | Approved | 2026-07-08 | graphspec, modelspec, references, resolution, cross-repo | graphspec, modelspec-validation |
 | [0008](0008-graphspec-is-a-specscore-component.md) | GraphSpec Is A SpecScore Component, Not A Standalone Standard | Approved | 2026-07-08 | graphspec, positioning, configuration, reuse, scope | graphspec |
+| [0009](0009-per-module-graph-roots.md) | Per-Module Graph Roots | Approved | 2026-07-08 | graphspec, discovery, modules, configuration, multi-root | graphspec |
 
 ## Open Questions
 

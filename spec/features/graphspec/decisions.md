@@ -9,6 +9,7 @@ record for the foundational decisions is the repository Decision artifacts:
 - [0006 — Model-Source Location and Identity by Placement](../../decisions/0006-graphspec-model-source-location.md)
 - [0007 — ModelSpec Reference Resolution](../../decisions/0007-modelspec-reference-resolution.md)
 - [0008 — GraphSpec Is A SpecScore Component](../../decisions/0008-graphspec-is-a-specscore-component.md)
+- [0009 — Per-Module Graph Roots](../../decisions/0009-per-module-graph-roots.md)
 
 Fuller narrative reasoning lives in the
 [Phase 1 architecture review report](reviews/architecture-review-2026-07.md);
@@ -143,13 +144,21 @@ cross-module references count against the owning module's `dependsOn`. *Why:* on
 resolution rule family-wide; no registry, no second linking convention.
 ([0007](../../decisions/0007-modelspec-reference-resolution.md))
 
-### Single graph root in v0.2; cross-repo deferred
+### Graph roots: repo-level plus per-module, unified; cross-repo deferred
 
-One graph root per repository (default `spec/graph/`). When cross-repo references
-land, they extend qualified IDs with the `@{host}/{org}/{repo}` suffix convention of
-the Stable `source-references` feature. *Why:* the previously cited "unified
-cross-repo linking system" did not exist as a spec; honest scoping beats an
-unspecified dependency in the language core.
+A repository's graph is the union of its graph roots: the repo-level root (default
+`spec/graph/`) plus one per configured SpecScore module
+(`<module.path>/<specs_dir>/graph/`, via the same repo-config machinery as all other
+tooling — no GraphSpec-specific configuration). GraphSpec module IDs are unique
+across the union; decision 0007's resolution step 1 searches the union; every root
+carries the uniform `modules/<id>/…` layout. *(0005's original v0.2 single-root
+stance was amended by [0009](../../decisions/0009-per-module-graph-roots.md) once
+[0008](../../decisions/0008-graphspec-is-a-specscore-component.md) licensed direct
+module-config reuse.)* Cross-repo distribution remains deferred: when it lands, it
+extends qualified IDs with the `@{host}/{org}/{repo}` suffix convention of the
+Stable `source-references` feature. *Why (unchanged):* honest scoping beats an
+unspecified dependency in the language core, and GraphSpec invents no second linking
+mechanism.
 
 ### Legacy entity/property Doc-Kinds are frozen
 
