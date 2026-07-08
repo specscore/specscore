@@ -67,6 +67,18 @@ SpecScore documentation MUST state that OpenVaultDB depends on ModelSpec, not
 SpecScore. SpecScore validation may be used in development or CI, but it is not a
 runtime ownership boundary.
 
+### REQ: no-required-modelspec
+
+SpecScore MUST NOT require every repository to define a non-empty ModelSpec. ModelSpec
+validation should run only when ModelSpec files are present, when repository
+configuration enables it, or when the caller explicitly targets ModelSpec validation.
+
+### REQ: hcl-and-json-validation-targets
+
+Initial validation planning SHOULD account for both HCL-authored ModelSpec source and
+compiled JSON AST serialization. HCL is the authored source format; JSON is the first
+machine-readable AST serialization.
+
 ## Acceptance Criteria
 
 ### AC: documentation-boundary
@@ -96,5 +108,5 @@ runtime ownership boundary.
 
 ## Open Questions
 
-- Should ModelSpec validation initially be enabled by `specscore lint modelspec`, by repository-wide lint, or by opt-in configuration?
-- Which ModelSpec serialization formats should SpecScore validate first?
+- What exact CLI spelling should explicitly target ModelSpec validation?
+- Should the first implementation validate HCL source, compiled JSON AST serialization, or both in one release?
