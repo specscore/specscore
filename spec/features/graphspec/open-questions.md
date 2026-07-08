@@ -41,22 +41,23 @@ to routinely put artifacts of the same kind on both ends of relationships and to
 model consent). Its conclusion: nothing broke and no new kinds were wanted, but
 these should be settled before permission-heavy domains are modelled.
 
-- **Role-labeled endpoints and participants.** When both relationship endpoints
-  are the same kind (person-to-person: guardian/ward, parent/child), the role of
-  each endpoint lives only in prose or the artifact id, and a `participants:`
-  ref-list is unlabeled (duplicates pass silently). Should endpoints and
-  participant lists carry role labels? *Top candidate for a language change.*
+- ~~**Role-labeled endpoints and participants.**~~ **Resolved** by
+  [decision 0012](../../decisions/0012-role-labeled-endpoints-and-participants.md):
+  endpoints and participants accept `{ref, role}` maps with single kebab-case
+  labels; role lists and enum-referencing roles declined with rationale.
 - **A home for policy.** Cross-entity lifecycle invariants ("a consent is void
   when its authorizing relationship is revoked"), conditional inputs ("this
   input is required only for minors"), and actor qualification ("the
   relationship's *guardian*, not any user") all landed in prose. Is a
   policy/invariant layer a GraphSpec concern, a sibling spec, or permanently
-  prose? The pilot's notes form the requirements corpus.
-- **Derived model-property edges in tooling.** Promoting an association to an
-  entity (the language's own rule) makes its endpoints invisible to graph
-  reference queries — the edges now live in ModelSpec properties. Candidate CLI
-  answer: derive model-property edges (e.g. `graph refs --model-edges`) with no
-  language change.
+  prose? The pilot's notes form the requirements corpus. **In design
+  discussion** — see the worked exploration in
+  [policy-layer.md](policy-layer.md) (three tiers, clause-vocabulary sketch,
+  open questions).
+- ~~**Derived model-property edges in tooling.**~~ **Resolved** CLI-side: `graph
+  refs` derives edges from ModelSpec entity-reference properties by default
+  (graph-navigation spec, REQ model-derived-edges); no language change was
+  needed.
 
 ## Future Questions
 
