@@ -15,6 +15,12 @@ The SpecScore format — how to write specs that lint clean.
 - [Decisions Index](/decisions-index-specification) — canonical index of Decision documents
 - [Entities & Properties](/entities-and-properties) — the full entity model
 
+## Writing good specs
+
+Craft guidance for turning requirements into clean specs.
+
+- [Asking Good Questions for Good Specs](/asking-good-questions) — how to question a fuzzy request into complete, unambiguous, verifiable acceptance criteria
+
 ## Getting started
 
 - [Install the CLI](/cli/install) — macOS, Linux, Windows

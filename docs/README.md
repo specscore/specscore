@@ -9,6 +9,7 @@ User-facing explanations, guides, and tutorials for SpecScore.
 | [for/](for/) | Role-based guides (developers, product owners, QAs, BAs, PMs, architects, AI agents) |
 | [ideas/](ideas/README.md) | Pre-specification ideation artifacts and analysis |
 | [ideas/workflow.md](ideas/workflow.md) | Narrative guide to the Idea artifact, lifecycle, and three authoring paths |
+| [asking-good-questions.md](asking-good-questions.md) | How to ask questions that turn fuzzy requests into complete, verifiable specs |
 | [superpowers/](superpowers/README.md) | Documentation related to Superpowers integration |
 | [ecosystem.md](ecosystem.md) | How SpecScore, SpecScore.Studio, Rehearse, ModelSpec, and Synchestra fit together |
 | [modelspec.md](modelspec.md) | How SpecScore validates ModelSpec without owning ModelSpec semantics |
