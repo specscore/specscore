@@ -80,6 +80,17 @@
       "llmsDescription": "How to question a fuzzy request into complete, unambiguous, verifiable acceptance criteria — the question checklist, sharpening techniques, anti-patterns, and the test of a good spec."
     },
     {
+      "source": "docs/example-login.md",
+      "slug": "example-login",
+      "title": "Explained by example: a login feature",
+      "nav": true,
+      "navLabel": "By example: a login feature",
+      "navGroup": "Specification",
+      "navOrder": 5.7,
+      "llmsGroup": "Guides",
+      "llmsDescription": "One login feature walked through SpecScore's full artifact model — Idea (and a draft sibling), nested Features tree, Decision, Change Request/proposal, thin ACs, and Rehearse proof."
+    },
+    {
       "source": "spec/features/repo-config/README.md",
       "slug": "repo-config",
       "title": "Repo Config",

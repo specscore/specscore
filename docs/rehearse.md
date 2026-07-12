@@ -14,6 +14,8 @@ Everything on this page is shipped and working today in `specscore-cli` — real
 
 ## Explained by example: testing a login page
 
+> For where this login test comes from — the Idea, the nested feature tree, the decision and the change request behind it — see [Explained by example: a login feature](/example-login).
+
 Your app has a login page. Users sign in three ways — email/password, Google, Facebook. Different flows, but after ANY successful sign-in the same things must be true: a hardened session cookie, a redirect to the dashboard. And each method must handle failure. How do you test that — for real — without copy-pasting the checks into every flow?
 
 Rehearse answers that in four moves, and each move is a real feature you can run today.

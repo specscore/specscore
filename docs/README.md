@@ -10,6 +10,7 @@ User-facing explanations, guides, and tutorials for SpecScore.
 | [ideas/](ideas/README.md) | Pre-specification ideation artifacts and analysis |
 | [ideas/workflow.md](ideas/workflow.md) | Narrative guide to the Idea artifact, lifecycle, and three authoring paths |
 | [asking-good-questions.md](asking-good-questions.md) | How to ask questions that turn fuzzy requests into complete, verifiable specs |
+| [example-login.md](example-login.md) | One login feature walked through the full artifact model — Idea, nested Features, Decision, Change Request, ACs, Rehearse |
 | [superpowers/](superpowers/README.md) | Documentation related to Superpowers integration |
 | [ecosystem.md](ecosystem.md) | How SpecScore, SpecScore.Studio, Rehearse, ModelSpec, and Synchestra fit together |
 | [rehearse.md](rehearse.md) | Plain-language explanation of Rehearse, the acceptance-evidence layer — what it does, how, and why |
