@@ -18,7 +18,7 @@ Tests specifications automatically *before* implementation begins.
 - Catches ambiguity and gaps before agents start building
 - Works with any project that uses the SpecScore format
 
-[rehearse.ink](https://rehearse.ink)
+Learn more: [Rehearse — in plain language](/rehearse) · [Rehearse vs. Established Testing Frameworks](/rehearse-vs-testing-frameworks) · [rehearse.ink](https://rehearse.ink)
 
 ## ModelSpec — The Application Data Model
 

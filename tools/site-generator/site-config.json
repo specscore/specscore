@@ -230,6 +230,28 @@
       "navOrder": 20
     },
     {
+      "source": "docs/rehearse.md",
+      "slug": "rehearse",
+      "title": "Rehearse — in plain language",
+      "nav": true,
+      "navLabel": "Rehearse",
+      "navGroup": "Resources",
+      "navOrder": 20.3,
+      "llmsGroup": "Guides",
+      "llmsDescription": "Plain-language explanation of Rehearse, SpecScore's acceptance-evidence layer: what it does, how scenarios run, what it deliberately does not do, and why."
+    },
+    {
+      "source": "docs/rehearse-vs-testing-frameworks.md",
+      "slug": "rehearse-vs-testing-frameworks",
+      "title": "Rehearse vs. Established Testing Frameworks",
+      "nav": true,
+      "navLabel": "Rehearse vs. Testing Frameworks",
+      "navGroup": "Resources",
+      "navOrder": 20.6,
+      "llmsGroup": "Guides",
+      "llmsDescription": "Why Rehearse is not a pytest/go-test rival but an acceptance-evidence layer: differences from Cucumber (no step-definition glue), honest limitations, and when to use it."
+    },
+    {
       "source": "docs/entities-and-properties.md",
       "slug": "entities-and-properties",
       "title": "Entities and Properties",
