@@ -12,11 +12,15 @@ Defines *what* gets built. An open specification format with validation tooling.
 
 ## Rehearse — The Rehearsal
 
-Tests specifications automatically *before* implementation begins.
+The acceptance-evidence layer: runs a spec's acceptance criteria *for real* and reports which promises are currently backed by evidence.
 
-- Validates that specs are complete, consistent, and testable
-- Catches ambiguity and gaps before agents start building
+- **Real execution, no glue code, no mocks** — scenarios are Markdown with executable steps (`bash`, `sql`, `hurl`, `graphql`) that run against the real system
+- **Reusable checks** — `**Use:** [label](url) with name=value` invokes a parameterized verification unit written once and reused across scenarios, so common checks aren't copy-pasted
+- **Thin acceptance criteria** — ACs live in `_acs/*.ac.md` as intent only; `specscore rehearse acs` generates a `## Acceptance Criteria` summary as a read-model
+- **Self-hosting** — Rehearse's own acceptance tests run in its CI
 - Works with any project that uses the SpecScore format
+
+*Shipped and working in `specscore-cli`, in active pre-v1 development.*
 
 Learn more: [Rehearse — in plain language](/rehearse) · [Rehearse vs. Established Testing Frameworks](/rehearse-vs-testing-frameworks) · [rehearse.ink](https://rehearse.ink)
 
@@ -70,7 +74,7 @@ Validate format with SpecScore
          ↓
 Validate ModelSpec when present
          ↓
-Test specs with Rehearse
+Run acceptance evidence with Rehearse
          ↓
 Orchestrate execution with Synchestra
          ↓
@@ -81,4 +85,4 @@ Agents coordinate using SpecScore as the shared protocol
 
 You don't need the full ecosystem. SpecScore works with any orchestration tool — Jira, Linear, your own scripts. Rehearse works in any project that uses SpecScore-formatted specs. ModelSpec can be adopted independently anywhere an application data model needs a storage-neutral source of truth. Synchestra is optimized for SpecScore but is not required. SpecScore.Studio is one way to author SpecScore artifacts — you can write them by hand or with any other editor.
 
-The recommended path: start with SpecScore. Add SpecScore.Studio when you want guided authoring in Claude Code. Add Rehearse when you want automated validation. Add Synchestra when you need multi-agent coordination.
+The recommended path: start with SpecScore. Add SpecScore.Studio when you want guided authoring in Claude Code. Add Rehearse when you want to run acceptance criteria for real and keep evidence current. Add Synchestra when you need multi-agent coordination.
