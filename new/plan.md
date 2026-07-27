@@ -24,7 +24,7 @@ status: Draft
 
 **Verifies:** <feature-slug>#ac:<ac-slug>
 **Depends-On:** —
-**Status:** pending
+**Status:** planning
 
 <!-- 1–3 sentences describing what this task implements. -->
 
@@ -32,7 +32,7 @@ status: Draft
 
 **Verifies:** <feature-slug>#ac:<ac-slug>
 **Depends-On:** 1
-**Status:** pending
+**Status:** planning
 
 <!-- 1–3 sentences describing what this task implements. -->
 
