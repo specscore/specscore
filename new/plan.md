@@ -22,6 +22,7 @@ status: Draft
 
 ### Task 1: <task name>
 
+**Id:** task-1
 **Verifies:** <feature-slug>#ac:<ac-slug>
 **Depends-On:** —
 **Status:** planning
@@ -30,6 +31,7 @@ status: Draft
 
 ### Task 2: <task name>
 
+**Id:** task-2
 **Verifies:** <feature-slug>#ac:<ac-slug>
 **Depends-On:** 1
 **Status:** planning
