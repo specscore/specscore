@@ -406,6 +406,22 @@ Every task in a plan MUST declare a `**Verifies:**` line referencing one or more
 
 A task block MAY carry an optional `**Id:** <slug>` field — a stable, hyphen-separated identifier (matching the [Task entity](task.entity.md) `id` shape) used to address the inline task from tooling. Unlike the ordinal `Task N` (which shifts on reordering) or a title-derived slug (which breaks on title edits), the `**Id:**` is durable: it is the address `specscore task change-status --plan <slug> <id>` resolves against when stamping implementation-commit provenance on a plan-inline task. The field is optional and unenforced today; tooling that addresses plan-inline tasks requires it on the targeted block.
 
+### Optional task note and evidence
+
+A task block MAY also carry two independent, optional annotation fields, written by `specscore task change-status --note=<text> --evidence=<ref>[,<ref>...]` immediately after `**Status:**` (and after `**Implemented-by:**` when provenance is written in the same call):
+
+```markdown
+**Status:** complete
+**Implemented-by:** sneat-co/chess@cfabf5e
+**Note:** shipped to production, verified live
+**Evidence:** cfabf5e, https://chessraiders.com/board/
+```
+
+- `**Note:**` is a free-text justification, unstructured and unvalidated.
+- `**Evidence:**` is a comma-separated list of supporting references — commit SHAs, PR URLs, file paths, deploy or monitoring links — also unstructured and unvalidated.
+
+Both are distinct from `**Implemented-by:**` (the [implementation-commit-provenance](../implementation-commit-provenance/README.md) feature's single, syntactically validated code reference): `**Implemented-by:**` answers "which commit did the work," while `**Note:**`/`**Evidence:**` answer "what backs the claim that it's actually done" — a broader category a strict commit-ref format cannot carry (e.g. a live-URL check or a manual QA note). Unlike the provenance flags (valid only with `--to=complete`), `--note`/`--evidence` are valid on **any** legal task transition. Neither field participates in the task-status transition matrix or the [status rollup](#status-rollup) — they are pure annotations.
+
 ### Optional ROI metadata
 
 Two optional fields can be added to the plan document header:
