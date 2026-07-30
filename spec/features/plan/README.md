@@ -236,6 +236,7 @@ graph LR
     D["Deprecated"]
 
     A -->|submit| B
+    A -->|approve| C
     B -->|revisions| A
     B -->|approve| C
     B -->|reject| R
@@ -251,7 +252,7 @@ graph LR
 
 #### REQ: status-transitions
 
-Plan status transitions MUST follow these rules. **Prep (human-authored):** `Draft` MAY transition to `In Review`; `In Review` MAY transition back to `Draft` (revisions requested), forward to `Approved`, or to `Rejected` (the approach is rejected outright, not sent back for revisions). **Execution (derived by `lint --fix`, only from `Approved` onward):** `Approved` MAY transition to an execution-band status; execution statuses transition among themselves per the task-status rollup. **Disposition (human-authored):** `Approved` (or a later state) MAY transition to `Withdrawn`, `Superseded`, or `Deprecated` (the approach is no longer recommended, with no named successor). There is no resurrection from a disposition status — re-pursuing the work means authoring a new plan. No other transitions are permitted.
+Plan status transitions MUST follow these rules. **Prep (human-authored):** `Draft` MAY transition to `In Review`, or directly to `Approved` (a fast-track that skips review); `In Review` MAY transition back to `Draft` (revisions requested), forward to `Approved`, or to `Rejected` (the approach is rejected outright, not sent back for revisions). **Execution (derived by `lint --fix`, only from `Approved` onward):** `Approved` MAY transition to an execution-band status; execution statuses transition among themselves per the task-status rollup. **Disposition (human-authored):** `Approved` (or a later state) MAY transition to `Withdrawn`, `Superseded`, or `Deprecated` (the approach is no longer recommended, with no named successor). There is no resurrection from a disposition status — re-pursuing the work means authoring a new plan. No other transitions are permitted.
 
 ### Snapshots
 
@@ -538,11 +539,12 @@ graph LR
     C["Approved"]
 
     A -->|submit| B
+    A -->|approve| C
     B -->|revisions<br/>requested| A
     B -->|approve| C
 ```
 
-The review process transitions the plan from `Draft` to `In Review`, and upon approval sets the status to `Approved` and creates an `approved` snapshot. The plan remains editable after approval -- future changes are tracked through additional snapshots, and once execution begins `lint --fix` derives the execution-band status from task rollup.
+The review process transitions the plan from `Draft` to `In Review`, and upon approval sets the status to `Approved` and creates an `approved` snapshot. A plan MAY also be approved directly from `Draft`, skipping `In Review`, when no separate review step is needed. The plan remains editable after approval -- future changes are tracked through additional snapshots, and once execution begins `lint --fix` derives the execution-band status from task rollup.
 
 ### After approval: Execution handoff
 
