@@ -169,6 +169,7 @@ Every plan document MUST include the following sections: title (`# Plan: X`), he
 | **Owner** | Yes | Who wrote the plan |
 | **Supersedes** | Yes | `—`, or the slug of an older plan this one wholesale-replaces |
 | **Parent** | No | The master plan this plan is a sub-plan of (master/sub-plan composition). A same-repo plan slug or a cross-repo `<repo-slug>:<plan-slug>` soft reference. Absent for root plans. See [Cross-repo plan composition](#cross-repo-plan-composition). Validated by lint rule `P-005`. |
+| **Coordination** | No | The repo/branch where this plan document's own mutations are authoritative -- `<owner>/<repo>@<branch>`. Absent means unrestricted (any repo/branch may mutate the plan, as before this field existed). See [Coordination branch](#coordination-branch). Validated by lint rule `P-010`. |
 | **Effort** | No | `S` \| `M` \| `L` \| `XL` -- see [Optional ROI metadata](#optional-roi-metadata) |
 | **Impact** | No | `low` \| `medium` \| `high` \| `critical` -- see [Optional ROI metadata](#optional-roi-metadata) |
 
@@ -343,6 +344,37 @@ The canonical, navigable link is the child's **Parent** ref (child → master); 
 #### REQ: cross-repo-parent-ref
 
 A plan MAY declare a single `**Parent:** <plan-ref>` header field naming the master plan it is a sub-plan of. The value is a same-repo plan slug or a cross-repo `<repo-slug>:<plan-slug>` reference. A plan with no `**Parent:**` field is a root plan. Composition is single-parent in the MVP: a plan MUST NOT declare more than one parent. Reference validity (same-repo resolution and acyclicity; cross-repo syntactic-only checks) is enforced by `specscore spec lint` rule `P-005`, not by this document.
+
+### Coordination branch
+
+A plan document is a single file that many parallel actors -- human or AI agent, each often on their own feature branch or in their own git worktree -- read and want to move forward at the same time. Without an agreed rule for *where* the plan document itself is mutated, two actors editing the same plan on different branches (adding tasks, walking a status) collide when their branches merge, and the collision has to be untangled by hand (e.g. two independently numbered `### Task 16:` blocks landing from two different feature branches).
+
+The **Coordination branch** is that agreed rule, declared once in the plan's own header:
+
+```markdown
+**Coordination:** specscore/specscore-cli@main
+```
+
+`<owner>/<repo>` is a GitHub owner/repository pair; `<branch>` is the branch name (which MAY itself contain `/`, e.g. `feature/plan-coordination-branch`). When present, every mutation to *this plan document* -- task status walks, new tasks, task renumbering, plan-status transitions, or any other edit to the file -- is authoritative only on that declared repo/branch. A plan with no `**Coordination:**` field carries no such restriction: it may be mutated from anywhere, exactly as before this field existed.
+
+The field draws a line between two kinds of truth that otherwise get conflated on a feature branch:
+
+- **Feature branches carry implementation.** Code changes, task completion evidence, everything a plan's tasks describe building.
+- **The coordination branch carries plan truth.** The plan document's own structure and status.
+
+An actor implementing a task on `feature/some-task` never needs to also own the authoritative copy of the plan file -- their task-completion report is applied on the coordination branch (directly, or via whatever routing the consuming tooling uses), rather than mutating a parallel copy of the plan that later has to be reconciled by hand.
+
+A **merge conflict in a plan file that declares `**Coordination:**`** is therefore a signal, not a chore: it means the separation was violated -- some actor mutated the plan document on a branch other than the declared one. The fix is to redo the mutation on the coordination branch (or to fix the tooling that let it happen elsewhere), not to hand-merge the conflicting hunks as if this were an ordinary content collision.
+
+Enforcement of the declared repo/branch -- checking the current invocation against it, refusing a mismatched mutation, and the override mechanism for exceptional cases -- is a CLI concern (`specscore-cli`), not this specification: this document defines only the field's syntax and intended meaning. See `specscore-cli`'s plan `change-status`/`reconcile` and task `change-status` Features for the enforcement contract.
+
+#### REQ: coordination-branch-format
+
+A plan MAY declare a single `**Coordination:** <owner>/<repo>@<branch>` header field. `<owner>/<repo>` MUST be a GitHub owner/repository pair (no `/` within either component); `<branch>` MUST be a non-empty git ref name (which MAY contain `/`). A plan with no `**Coordination:**` field is unrestricted. The reference is validated **syntactically only** by `specscore spec lint` (lint rule `P-010`), mirroring the cross-repo precedent of [cross-repo-parent-ref](#req-cross-repo-parent-ref) and the [implementation-commit-provenance](../implementation-commit-provenance/README.md) ref format: the linter never resolves or scans the named repository, and never checks whether the branch exists.
+
+#### REQ: coordination-branch-semantics
+
+When a plan declares `**Coordination:**`, all mutations to that plan document -- task status transitions, new tasks, task renumbering, plan-status transitions, and any other edit to the file -- are authoritative only on the declared `<branch>` of the declared `<owner>/<repo>`. Feature branches (and worktrees derived from them) carry implementation; the coordination branch carries plan truth. A merge conflict in a plan file that declares `**Coordination:**` indicates this separation was violated (a mutation landed on a branch other than the declared one), and MUST be treated as a process violation to fix at the source -- not as an ordinary merge chore to resolve hunk-by-hunk.
 
 ### Status rollup
 
