@@ -82,7 +82,7 @@ A Feature uses `Stable` for the done role instead of `Implemented`. Rationale: a
 
 #### REQ: feature-amending
 
-A Feature has an additional `Amending` state, entered from `Stable` when an approved change to an already-stable Feature is being implemented (`Stable` → `Amending` → `Stable`). Rationale: a stable Feature undergoing revision still *has* a working implementation, so it must not read as first-build `Implementing` (which implies no working version yet) nor as plain `Stable` (which hides the in-flight change). No other artifact has this role.
+A Feature has an additional `Amending` state for a change in flight against an already-agreed spec. It fills the **Change-in-flight** role (see [REQ: lifecycle-roles](#req-lifecycle-roles)) — a role defined by "a change is in flight," not by "an implementation exists" — so it is entered from *either* band in which a Feature can already be agreed: `Approved` (a design agreed but not yet built) or `Stable` (a design agreed and already built). `Amending` always exits back to the band it was entered from, never forward: `Approved` → `Amending` → `Approved`, or `Stable` → `Amending` → `Stable`. Rationale: in both cases the Feature already has agreement to build (or rebuild) against, so a revision in flight must not read as first-build `Implementing` (which implies no prior agreement was ever reached), and must not read as plain `Approved` or `Stable` (which would hide that a change is in flight). The two entry points are not interchangeable — an approved-but-unbuilt design and a stable, proven one differ in whether a working implementation exists, which is exactly why `Amending` returns to its own band rather than always landing on `Stable`: forcing `Approved` → `Amending` → `Stable` would make the Feature claim an implementation it never had. No other artifact has this role.
 
 #### REQ: parked-stale-vs-withdrawn
 
@@ -161,7 +161,7 @@ This Feature governs status **names and legal sets** only. Whether a status is h
 
 **Given** the Feature artifact
 **When** its done-role and change-in-flight values are checked
-**Then** the done role is `Stable` (not `Implemented`) and `Amending` is a legal value reachable from `Stable`.
+**Then** the done role is `Stable` (not `Implemented`) and `Amending` is a legal value reachable from both `Approved` and `Stable`, each returning to the band it was entered from (`Approved` → `Amending` → `Approved`, `Stable` → `Amending` → `Stable`) rather than always landing on `Stable`.
 
 ### AC: rejected-is-universal (verifies REQ:disposition-vocabulary)
 
