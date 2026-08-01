@@ -279,8 +279,8 @@ The `Problem Statement` section SHOULD contain exactly one "How Might We…" sen
 | `Specified` | Detailed spec/AC/plan exists; work hasn't started. For feature-request Ideas, derived when the referenced Feature reaches `Approved`. For change-request Ideas, author-managed. |
 | `Implementing` | Work is in progress. For feature-request Ideas, derived when the referenced Feature reaches `Implementing`. For change-request Ideas, author-managed. |
 | `Implemented` | Done. The promoted Feature shipped (feature-request) or the proposed change landed (change-request). The Idea stays visible in default listings and in its current file location — it is not moved or hidden. |
-| `Rejected` | Idea was considered and turned down — an explicit decision against it, from review (`In Review → Rejected`) or after approval but before specification work started (`Approved → Rejected`). Terminal. The disposition reason is captured as the transition reason. |
-| `Stale` | Idea passively decayed or lost relevance and was never carried forward — nobody decided against it. Terminal. Also the status a superseded predecessor Idea takes (this MVP has no Idea `Superseded` status). |
+| `Rejected` | Idea was considered and turned down — an explicit decision against it. Reachable from `In Review`, `Approved`, `Specifying`, `Specified`, or `Implementing` — an Idea can be actively turned down at any point before it ships, not only before specification starts. Terminal. The disposition reason is captured as the transition reason. |
+| `Stale` | Idea passively decayed or lost relevance and was never carried forward — nobody decided against it. Reachable from any non-terminal status, including `Implementing` (a build that simply petered out, as opposed to one that was actively cancelled). Terminal. Also the status a superseded predecessor Idea takes (this MVP has no Idea `Superseded` status). |
 
 Archival is **not** a status — see [Archival is an orthogonal axis](#archival-is-an-orthogonal-axis). Any Idea (including `Implemented`, `Rejected`, or `Stale`) MAY be archived without changing its `**Status:**`.
 
@@ -305,11 +305,15 @@ graph LR
     D -->|work done| I
     B -->|turned down| R
     C -->|turned down| R
+    G -->|turned down| R
+    H -->|turned down| R
+    D -->|turned down| R
     A -->|decayed| S
     B -->|decayed| S
     C -->|decayed| S
     G -->|decayed| S
     H -->|decayed| S
+    D -->|petered out| S
 ```
 
 The `Draft → In Review → Approved` progression aligns with the parallel progression on [Feature](../feature/README.md) so that early lifecycle vocabulary is consistent across artifact types. Archival is orthogonal to this diagram — see [Archival is an orthogonal axis](#archival-is-an-orthogonal-axis).
@@ -348,12 +352,12 @@ A feature-request Idea with `Status: Specifying`, `Status: Specified`, `Status: 
 
 #### REQ: terminal-disposition-transitions
 
-An Idea reaches a terminal disposition status in one of two ways:
+An Idea reaches a terminal disposition status in one of two ways, and the shared disposition vocabulary is available across the **entire** pre-terminal lifecycle, not just its early stages:
 
-- **`Rejected`** — an explicit decision against the Idea, reachable from `In Review` (`In Review → Rejected`) or from `Approved` (`Approved → Rejected`, an agreed-but-not-yet-specified Idea that is deliberately cancelled). The transition is author-driven and is a **negative transition** that MUST carry a reason (recorded as the transition reason — e.g. via `specscore` change-status — not as a header field).
-- **`Stale`** — the Idea passively decayed or lost relevance and was never carried forward, reachable from any non-terminal status (`Draft`, `In Review`, `Approved`, `Specifying`, `Specified`). This is also the status a superseded predecessor Idea takes (see [Superseding](#superseding)); Idea has no `Superseded` status in this MVP.
+- **`Rejected`** — an explicit decision against the Idea, reachable from `In Review`, `Approved`, `Specifying`, `Specified`, or `Implementing` (`In Review → Rejected`, `Approved → Rejected`, `Specifying → Rejected`, `Specified → Rejected`, `Implementing → Rejected`). The transition is author-driven and is a **negative transition** that MUST carry a reason (recorded as the transition reason — e.g. via `specscore` change-status — not as a header field).
+- **`Stale`** — the Idea passively decayed or lost relevance and was never carried forward, reachable from any non-terminal status (`Draft`, `In Review`, `Approved`, `Specifying`, `Specified`, `Implementing`). This is also the status a superseded predecessor Idea takes (see [Superseding](#superseding)); Idea has no `Superseded` status in this MVP.
 
-`Rejected` and `Stale` are not interchangeable even when both are reachable from the same status (e.g. `Approved`): `Rejected` is an active decision to turn the Idea down, `Stale` is passive decay — nobody decided against it, it simply was never carried forward (see [status-vocabulary#req:parked-stale-vs-withdrawn](../status-vocabulary/README.md#req-parked-stale-vs-withdrawn) for the shared-vocabulary distinction this mirrors). An `Approved` Idea that is deliberately cancelled before specification work starts is `Rejected`, not `Stale`.
+`Rejected` and `Stale` are not interchangeable even when both are reachable from the same status: `Rejected` is an **active** decision to turn the Idea down, `Stale` is **passive** decay — nobody decided against it, it simply was never carried forward (see [status-vocabulary#req:parked-stale-vs-withdrawn](../status-vocabulary/README.md#req-parked-stale-vs-withdrawn) for the shared-vocabulary distinction this mirrors). This holds at every stage: an `Approved` Idea that is deliberately cancelled before specification work starts is `Rejected`, not `Stale`; a `Specifying` or `Specified` Idea whose author gives up on it is `Rejected` if that is a decision, `Stale` if it is neglect; and an `Implementing` Idea whose build is actively called off is `Rejected`, while one that simply petered out — nobody decided against it, work just stopped — is `Stale`. Before this REQ, `Implementing` had no disposition exit of either kind (its only arc was `→ Implemented`), so a build that stalled or was cancelled had no legal terminal status to record that at all.
 
 Both are terminal: an Idea at `Rejected` or `Stale` is not carried forward. The disposition is independent of archival — a `Rejected` or `Stale` Idea MAY or MAY NOT be archived.
 
