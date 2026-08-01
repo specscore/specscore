@@ -221,12 +221,12 @@ When a feature has child directories (sub-features), its README MUST include a C
 |----------------|------------------------------------------------------------------------------------------|
 | `Draft`        | Feature is being authored; design decisions remain open. Not yet ready for review.        |
 | `In Review`    | Feature is presented for review (reviewer subagent and/or human reviewer).                |
-| `Approved`     | Feature has passed review; user has explicitly approved the spec.                         |
+| `Approved`     | Feature has passed review; user has explicitly approved the spec. Not yet built: MAY move forward (`→ Implementing`), be reworked in place (`→ Amending`), be cancelled (`→ Rejected`), or be retired (`→ Deprecated`) without ever being built. |
 | `Implementing` | Feature spec is approved; code is being written from it. Spec MAY still iterate in place. |
 | `Stable`       | Feature is fully specified and implemented; changes go through proposals.                 |
-| `Amending`     | A `Stable` Feature has an approved in-flight change being implemented (`Stable → Amending → Stable`). Distinct from first-build `Implementing` — a working implementation already exists. |
-| `Rejected`     | Feature was turned down at review (`In Review → Rejected`).                               |
-| `Deprecated`   | Feature is being phased out; a successor or removal plan exists.                          |
+| `Amending`     | An `Approved` or `Stable` Feature has an approved change in flight (`Approved → Amending → Approved`, or `Stable → Amending → Stable`). Distinct from first-build `Implementing` — the Feature already has agreement to build (or rebuild) against, and returns to the band it was amended from rather than always landing on `Stable`. |
+| `Rejected`     | Feature was turned down at review (`In Review → Rejected`) or cancelled after approval but before it was built (`Approved → Rejected`). |
+| `Deprecated`   | Feature is being phased out; a successor or removal plan exists. Reachable from `Draft`, `Approved`, `Implementing`, or `Stable` — a Feature can be honestly retired at any point, including before it is ever built. |
 
 ```mermaid
 graph LR
@@ -245,12 +245,18 @@ graph LR
     B -->|rejected| H
     C -->|build starts| D
     D -->|spec + impl complete| E
+    C -->|design reworked, not yet built| G
+    G -->|rework resolved, still unbuilt| C
     E -->|approved change in flight| G
     G -->|change implemented| E
+    C -->|cancelled before build| H
+    C -->|retired before build| F
     E -->|superseded or removed| F
 ```
 
 These statuses describe the feature's **specification maturity** primarily, but `Implementing` and `Stable` also signal implementation phase. A feature can be `Stable` in spec while its implementation is still in development — the spec is the source of truth for desired behavior.
+
+`Approved` has four legal exits, not one: forward into `Implementing` when a build starts, but also `Amending` (rework the agreed-but-unbuilt design in place, returning via `Amending → Approved`), `Rejected` (cancel an agreed design before it is built), and `Deprecated` (retire one). Without these, an approved design that has not yet been built could only ever be driven forward — it had no legal way to be reworked, cancelled, or retired. `Amending` entered from `Approved` returns to `Approved`, never to `Stable`: forcing it through `Stable` would make the Feature claim a working implementation it does not have. See [status-vocabulary#req:feature-amending](../status-vocabulary/README.md#req-feature-amending) for the shared-vocabulary rationale this mirrors.
 
 The `Draft → In Review → Approved → Implementing` quartet aligns with the parallel quartet on [Idea](../idea/README.md) so that the early-and-mid lifecycle vocabulary is consistent across artifact types. Post-`Implementing` states diverge to match each artifact's natural terminal lifecycle (Idea → `Specified` → `Implemented`; Feature → `Stable` → `Deprecated`). The shared `Implementing` state means "the work of making this real is in progress" in both contexts: for an Idea, that work includes specifying-then-implementing its Features; for a Feature, that work is writing code from the approved spec.
 
