@@ -1,6 +1,6 @@
 # Proposal: Require child links in the Contents table
 
-**Status:** Implementing
+**Status:** Implemented
 **Type:** change-request
 **Targets:** feature
 **Date:** 2026-08-05
