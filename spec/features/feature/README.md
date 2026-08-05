@@ -1,13 +1,13 @@
 ---
 format: https://specscore.md/feature-specification
-status: Stable
+status: Amending
 ---
 
 # Feature: Feature
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/feature?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/feature?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/feature?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/feature?op=request-change) |
 
-**Status:** Stable
+**Status:** Amending
 **Grade:** B
 
 ## Summary
@@ -212,7 +212,7 @@ Every feature README MUST end with an adherence footer per the [Adherence Footer
 
 When a feature has child directories (sub-features), its README MUST include a Contents section with:
 
-1. An index table listing each child directory with a description
+1. A Markdown index table listing each child directory with a description. Only the first contiguous table beneath the `## Contents` heading is the canonical child index; a loose child link or table row elsewhere in the README does not satisfy this requirement.
 2. A 1-7 sentence summary for each child, giving readers context without requiring them to open each child
 
 ### Feature statuses
