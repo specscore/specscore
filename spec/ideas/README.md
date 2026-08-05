@@ -14,6 +14,7 @@ Archived Ideas are indexed separately at [archived/README.md](archived/README.md
 |------|--------|------|-------|-------------|
 | [adherence-footer-and-doc-type-registry](adherence-footer-and-doc-type-registry.md) | Specifying | 2026-04-20 | alexander.trakhimenok | adherence-footer, document-types-registry |
 | [artifact-frontmatter-convention](artifact-frontmatter-convention.md) | Specified | 2026-05-19 | alexandertrakhimenok | artifact-frontmatter-convention |
+| [canonical-child-contents-table](../features/feature/proposals/canonical-child-contents-table.md) | Implemented | 2026-08-05 | codex | — |
 | [canonical-grade-metadata-field](canonical-grade-metadata-field.md) | Specified | 2026-05-29 | alex | canonical-grade-metadata-field |
 | [capability-and-platform-implementations](capability-and-platform-implementations.md) | Implementing | 2026-06-03 | alexander.trakhimenok | capability-and-platform-implementations |
 | [configurable-ideas-path](configurable-ideas-path.md) | Specified | 2026-06-07 | alex | configurable-ideas-path |

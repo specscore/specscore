@@ -17,6 +17,7 @@ Test scenarios for the [Feature](../README.md) specification.
 | [empty-outstanding-questions](empty-outstanding-questions.md) | [feature#ac:empty-state-text](../README.md#ac-empty-state-text), [feature#req:open-questions](../README.md#req-open-questions) |
 | [ac-not-defined-triggers-question](ac-not-defined-triggers-question.md) | [feature#ac:empty-state-text](../README.md#ac-empty-state-text), [feature#req:ac-section](../README.md#req-ac-section) |
 | [missing-contents-with-children](missing-contents-with-children.md) | [feature#req:contents-when-children](../README.md#req-contents-when-children) |
+| [loose-child-link-not-indexed](loose-child-link-not-indexed.md) | [feature#req:contents-when-children](../README.md#req-contents-when-children) |
 | [path-based-identification](path-based-identification.md) | [feature#req:path-identification](../README.md#req-path-identification) |
 | [unlisted-feature-in-index](unlisted-feature-in-index.md) | [feature#req:index-completeness](../README.md#req-index-completeness) |
 
