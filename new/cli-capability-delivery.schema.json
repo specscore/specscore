@@ -23,6 +23,8 @@
     },
     "capabilities": {
       "type": "array",
+      "uniqueItems": true,
+      "maxItems": 1000,
       "items": {
         "$ref": "#/$defs/capability"
       }
@@ -79,7 +81,40 @@
             { "type": "string", "minLength": 1, "maxLength": 1000 }
           ]
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "surfaces": {
+                "type": "object",
+                "properties": {
+                  "runtime": {
+                    "type": "object",
+                    "properties": { "status": { "enum": ["Planned", "Absent"] } },
+                    "required": ["status"]
+                  }
+                },
+                "required": ["runtime"]
+              }
+            },
+            "required": ["surfaces"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "surfaces": {
+                "type": "object",
+                "properties": {
+                  "help": { "type": "object", "properties": { "status": { "enum": ["Planned", "Absent"] } } },
+                  "ai_skill": { "type": "object", "properties": { "status": { "enum": ["Planned", "Absent"] } } }
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "status": {
       "enum": ["Full", "Partial", "Planned", "Absent"]
@@ -190,6 +225,7 @@
         "commands": {
           "type": "array",
           "uniqueItems": true,
+          "maxItems": 100,
           "items": { "$ref": "#/$defs/runtimeCommand" }
         },
         "limitation": { "$ref": "#/$defs/limitation" }
@@ -209,6 +245,7 @@
         "anchors": {
           "type": "array",
           "uniqueItems": true,
+          "maxItems": 100,
           "items": { "$ref": "#/$defs/helpAnchor" }
         },
         "limitation": { "$ref": "#/$defs/limitation" }
@@ -228,6 +265,7 @@
         "skills": {
           "type": "array",
           "uniqueItems": true,
+          "maxItems": 30,
           "items": { "$ref": "#/$defs/skillEvidence" }
         },
         "limitation": { "$ref": "#/$defs/limitation" }
@@ -247,6 +285,7 @@
         "references": {
           "type": "array",
           "uniqueItems": true,
+          "maxItems": 100,
           "items": { "$ref": "#/$defs/testEvidence" }
         },
         "limitation": { "$ref": "#/$defs/limitation" }
@@ -258,41 +297,41 @@
       ]
     },
     "fullOrPartialEvidence": {
-      "if": { "properties": { "status": { "enum": ["Full", "Partial"] } } },
-      "then": { "properties": { "commands": { "minItems": 1 } } }
+      "if": { "type": "object", "properties": { "status": { "enum": ["Full", "Partial"] } } },
+      "then": { "type": "object", "properties": { "commands": { "type": "array", "minItems": 1 } } }
     },
     "fullOrPartialAnchors": {
-      "if": { "properties": { "status": { "enum": ["Full", "Partial"] } } },
-      "then": { "properties": { "anchors": { "minItems": 1 } } }
+      "if": { "type": "object", "properties": { "status": { "enum": ["Full", "Partial"] } } },
+      "then": { "type": "object", "properties": { "anchors": { "type": "array", "minItems": 1 } } }
     },
     "fullOrPartialSkills": {
-      "if": { "properties": { "status": { "enum": ["Full", "Partial"] } } },
-      "then": { "properties": { "skills": { "minItems": 1 } } }
+      "if": { "type": "object", "properties": { "status": { "enum": ["Full", "Partial"] } } },
+      "then": { "type": "object", "properties": { "skills": { "type": "array", "minItems": 1 } } }
     },
     "fullOrPartialReferences": {
-      "if": { "properties": { "status": { "enum": ["Full", "Partial"] } } },
-      "then": { "properties": { "references": { "minItems": 1 } } }
+      "if": { "type": "object", "properties": { "status": { "enum": ["Full", "Partial"] } } },
+      "then": { "type": "object", "properties": { "references": { "type": "array", "minItems": 1 } } }
     },
     "nonFullLimitation": {
-      "if": { "properties": { "status": { "const": "Full" } } },
-      "then": { "properties": { "limitation": { "type": "null" } } },
-      "else": { "properties": { "limitation": { "type": "string", "minLength": 1 } } }
+      "if": { "type": "object", "properties": { "status": { "const": "Full" } } },
+      "then": { "type": "object", "properties": { "limitation": { "type": "null" } } },
+      "else": { "type": "object", "properties": { "limitation": { "type": "string", "minLength": 1 } } }
     },
     "noEvidenceWhenUnusable": {
-      "if": { "properties": { "status": { "enum": ["Planned", "Absent"] } } },
-      "then": { "properties": { "commands": { "maxItems": 0 } } }
+      "if": { "type": "object", "properties": { "status": { "enum": ["Planned", "Absent"] } } },
+      "then": { "type": "object", "properties": { "commands": { "type": "array", "maxItems": 0 } } }
     },
     "noAnchorsWhenUnusable": {
-      "if": { "properties": { "status": { "enum": ["Planned", "Absent"] } } },
-      "then": { "properties": { "anchors": { "maxItems": 0 } } }
+      "if": { "type": "object", "properties": { "status": { "enum": ["Planned", "Absent"] } } },
+      "then": { "type": "object", "properties": { "anchors": { "type": "array", "maxItems": 0 } } }
     },
     "noSkillsWhenUnusable": {
-      "if": { "properties": { "status": { "enum": ["Planned", "Absent"] } } },
-      "then": { "properties": { "skills": { "maxItems": 0 } } }
+      "if": { "type": "object", "properties": { "status": { "enum": ["Planned", "Absent"] } } },
+      "then": { "type": "object", "properties": { "skills": { "type": "array", "maxItems": 0 } } }
     },
     "noReferencesWhenUnusable": {
-      "if": { "properties": { "status": { "enum": ["Planned", "Absent"] } } },
-      "then": { "properties": { "references": { "maxItems": 0 } } }
+      "if": { "type": "object", "properties": { "status": { "enum": ["Planned", "Absent"] } } },
+      "then": { "type": "object", "properties": { "references": { "type": "array", "maxItems": 0 } } }
     }
   }
 }

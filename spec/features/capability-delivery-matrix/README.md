@@ -76,6 +76,14 @@ require evidence, non-Full surfaces require a limitation, and
 `Planned`/`Absent` surfaces contain no usable command, help, skill, or test
 evidence.
 
+JSON Schema enforces the manifest shape and prevents `Full`/`Partial` help or
+AI-skill claims when Runtime is `Planned`/`Absent`. Relational invariants that
+JSON Schema cannot express—ID prefix derived from `binary`, ID uniqueness and
+sort order, filesystem evidence resolution, command-tree coverage, and help or
+example parsing—are mandatory checker behavior, not advisory `x-specscore-*`
+metadata. A manifest is conformant only after both schema validation and that
+checker pass.
+
 ### Delivery surfaces and status
 
 Each capability has four surface statuses using the existing SpecScore parity
