@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://specscore.md/new/lesson-occurrence.schema.json",
+  "title": "SpecScore Lesson Occurrence",
+  "description": "Append-only, bounded evidence for one manifestation of a Lesson process gap. Original prompts, raw logs, raw diffs, credentials, and personal contact data are not valid occurrence data.",
+  "x-specscore-filename-matches": "id",
+  "x-specscore-requires-format-assertion": ["date-time"],
+  "x-specscore-content-policy": {
+    "forbidden_property_names": ["prompt", "original_prompt", "user_prompt", "agent_prompt", "raw_prompt", "raw_log", "log", "diff", "transcript", "authorization", "token", "password", "secret"],
+    "property_name_matching": "ASCII case-insensitive exact match",
+    "forbidden_value_patterns": [
+      "\\b(?:[Aa][Uu][Tt][Hh][Oo][Rr][Ii][Zz][Aa][Tt][Ii][Oo][Nn]|[Bb][Ee][Aa][Rr][Ee][Rr]|[Tt][Oo][Kk][Ee][Nn]|[Pp][Aa][Ss][Ss][Ww][Oo][Rr][Dd]|[Aa][Pp][Ii][_-]?[Kk][Ee][Yy])\\b\\s*[:=]",
+      "gh[pousr]_[A-Za-z0-9_]{20,}",
+      "AKIA[0-9A-Z]{16}",
+      "-----BEGIN (?:[A-Z ]+ )?PRIVATE KEY-----",
+      "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\\b"
+    ],
+    "prompt_policy": "Never store original user or agent prompts; write a short factual summary instead.",
+    "scanner": "Apply forbidden_property_names and forbidden_value_patterns to every property name and string value before write and validation; run any configured repository secret scanner as an additional check."
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "occurred_at", "summary", "context", "evidence", "redactions"],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])T(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](?:\\.[0-9]{1,9})?Z$",
+      "maxLength": 40
+    },
+    "summary": {
+      "$ref": "#/$defs/boundedString"
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "repository": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "string",
+              "pattern": "^[^/\\s]+/[^/\\s]+/[^/\\s]+$",
+              "maxLength": 500,
+              "allOf": [{ "$ref": "#/$defs/safeValue" }]
+            }
+          ]
+        },
+        "git": {
+          "anyOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/gitContext" }
+          ]
+        },
+        "worktree": {
+          "anyOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/worktreeContext" }
+          ]
+        },
+        "execution": {
+          "anyOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/executionContext" }
+          ]
+        }
+      }
+    },
+    "evidence": {
+      "$ref": "#/$defs/evidence"
+    },
+    "redactions": {
+      "type": "array",
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/boundedString"
+      }
+    }
+  },
+  "$defs": {
+    "boundedString": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "pattern": "^[^\\r\\n]+$",
+      "allOf": [{ "$ref": "#/$defs/safeValue" }]
+    },
+    "safeValue": {
+      "allOf": [
+        { "not": { "type": "string", "pattern": "\\b(?:[Aa][Uu][Tt][Hh][Oo][Rr][Ii][Zz][Aa][Tt][Ii][Oo][Nn]|[Bb][Ee][Aa][Rr][Ee][Rr]|[Tt][Oo][Kk][Ee][Nn]|[Pp][Aa][Ss][Ss][Ww][Oo][Rr][Dd]|[Aa][Pp][Ii][_-]?[Kk][Ee][Yy])\\b\\s*[:=]" } },
+        { "not": { "type": "string", "pattern": "gh[pousr]_[A-Za-z0-9_]{20,}" } },
+        { "not": { "type": "string", "pattern": "AKIA[0-9A-Z]{16}" } },
+        { "not": { "type": "string", "pattern": "-----BEGIN (?:[A-Z ]+ )?PRIVATE KEY-----" } },
+        { "not": { "type": "string", "pattern": "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\\b" } }
+      ]
+    },
+    "nullableBoundedString": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/boundedString" }
+      ]
+    },
+    "gitContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "commit": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{7,64}$" }
+          ]
+        },
+        "branch": {
+          "$ref": "#/$defs/nullableBoundedString"
+        }
+      }
+    },
+    "worktreeContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path_hint": {
+          "anyOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/repoRelativePath" }
+          ]
+        },
+        "id": {
+          "$ref": "#/$defs/nullableBoundedString"
+        }
+      }
+    },
+    "executionContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "anyOf": [
+            { "type": "null" },
+            { "enum": ["interactive", "automation", "ci", "unknown"] }
+          ]
+        },
+        "id": {
+          "$ref": "#/$defs/nullableBoundedString"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "ref"],
+      "properties": {
+        "kind": {
+          "enum": ["url", "path", "command", "none"]
+        },
+        "ref": {
+          "$ref": "#/$defs/nullableBoundedString"
+        }
+      },
+      "allOf": [
+        {
+          "if": { "type": "object", "properties": { "kind": { "const": "none" } } },
+          "then": { "type": "object", "properties": { "ref": { "type": "null" } } },
+          "else": { "type": "object", "properties": { "ref": { "$ref": "#/$defs/boundedString" } } }
+        },
+        {
+          "if": { "type": "object", "properties": { "kind": { "const": "url" } } },
+          "then": { "type": "object", "properties": { "ref": { "type": "string", "format": "uri", "pattern": "^https?://", "maxLength": 500 } } }
+        },
+        {
+          "if": { "type": "object", "properties": { "kind": { "const": "path" } } },
+          "then": { "type": "object", "properties": { "ref": { "$ref": "#/$defs/repoRelativePath" } } }
+        }
+      ]
+    },
+    "repoRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "pattern": "^[^\\\\/]+(?:/[^\\\\/]+)*$",
+      "allOf": [
+        { "$ref": "#/$defs/safeValue" },
+        { "not": { "pattern": "^[A-Za-z]:" } },
+        { "not": { "pattern": "(^|/)\\.\\.?(/|$)" } }
+      ]
+    }
+  }
+}

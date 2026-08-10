@@ -9,6 +9,7 @@ User-facing explanations, guides, and tutorials for SpecScore.
 | [for/](for/) | Role-based guides (developers, product owners, QAs, BAs, PMs, architects, AI agents) |
 | [ideas/](ideas/README.md) | Pre-specification ideation artifacts and analysis |
 | [ideas/workflow.md](ideas/workflow.md) | Narrative guide to the Idea artifact, lifecycle, and three authoring paths |
+| [lessons.md](lessons.md) | How compact Lessons and append-only occurrence evidence drive process improvement |
 | [asking-good-questions.md](asking-good-questions.md) | How to ask questions that turn fuzzy requests into complete, verifiable specs |
 | [example-login.md](example-login.md) | One login feature walked through the full artifact model — Idea, nested Features, Decision, Change Request, ACs, Rehearse |
 | [superpowers/](superpowers/README.md) | Documentation related to Superpowers integration |

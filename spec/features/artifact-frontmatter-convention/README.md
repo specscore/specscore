@@ -36,7 +36,7 @@ An artifact whose type **has a Status concept** (see `status-concept-by-type`) M
 
 Whether an artifact carries `status:` MUST be determined by its **type** (keyed by the `format:` value), not by file location. The classification:
 
-- **Status-bearing** (MUST carry `status:`): Idea, Feature, Plan, Task, Decision, sidekick-seed.
+- **Status-bearing** (MUST carry `status:`): Idea, Feature, Plan, Task, Decision, Lesson, sidekick-seed.
 - **Status-less** (MUST NOT carry `status:`): **drift-recap** and **session-recap** (both status-less per [Decision D-0002](../../decisions/0002-recap-storage-surfacing-and-producer-gate-boundary.md)), and Index / README pages.
 
 The lint rules below consume this classification, so a single source of truth (the document-types registry / per-type spec) MUST declare each type's Status-concept flag.

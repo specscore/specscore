@@ -28,6 +28,12 @@ This feature replaces `project-definition` with a simpler, more flexible schema.
 
 ## Behavior
 
+### Lesson classifications
+
+#### REQ: lessons-classifications
+
+A repository that uses Lessons MUST declare `lessons.classifications` in `specscore.yaml` as a non-empty list of unique lowercase, hyphen-separated strings. The list is the controlled vocabulary for [Lesson](../lesson/README.md) `**Classifications:**`; removing a value while any Lesson still uses it is a validation error. Repositories with no Lessons MAY omit the `lessons:` block until their first Lesson is created.
+
 ### File name and location
 
 The config file is `specscore.yaml` and lives at the repository root.

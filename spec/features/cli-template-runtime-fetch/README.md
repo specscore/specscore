@@ -24,7 +24,7 @@ Templates ship embedded in the CLI binary, so fixing a skeleton requires a CLI r
 
 #### REQ: fetch-at-create-time
 
-Each `specscore <type> new` verb — `idea`, `feature`, `decision`, `issue`, `proposal` — MUST, for a **bare** scaffold (no authored content supplied via flags, non-interactive), attempt to fetch the canonical template for that type from the published gallery before writing the new file. A scaffold that carries authored content (e.g. `--hmw`, `--description`, `--tags`, `--severity`) uses the embedded scaffolder instead — the static gallery template cannot carry per-invocation content — and performs no fetch.
+Each `specscore <type> new` verb — `idea`, `feature`, `decision`, `issue`, `proposal`, `lesson` — MUST, for a **bare** scaffold (no authored content supplied via flags, non-interactive), attempt to fetch the canonical template for that type from the published gallery before writing the new file. A scaffold that carries authored content (e.g. `--hmw`, `--description`, `--tags`, `--severity`) uses the embedded scaffolder instead — the static gallery template cannot carry per-invocation content — and performs no fetch.
 
 #### REQ: url-mapping
 

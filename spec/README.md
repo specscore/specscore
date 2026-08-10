@@ -12,6 +12,7 @@ spec/
 │                  # GraphSpec language bootstrap (features/graphspec/)
 ├── decisions/     # Accepted architecture decisions (ADR index)
 ├── ideas/         # Pre-specification one-pagers and captured seeds
+├── lessons/       # Durable process-improvement rules with append-only occurrence evidence
 └── plans/         # Ordered task plans that bridge specs to implementation
 ```
 
@@ -21,6 +22,7 @@ spec/
 | [features/graphspec/](features/graphspec/README.md) | The GraphSpec domain-modelling language: kinds, roadmap, decisions, design history |
 | [decisions/](decisions/README.md) | Why the architecture is the way it is (ADRs 0001–0005) |
 | [ideas/](ideas/README.md) | Work being shaped before it becomes a feature |
+| [lessons/](lessons/README.md) | Process-improvement rules and their bounded occurrence evidence |
 | [plans/](plans/README.md) | How accepted features get implemented |
 
 ## What SpecScore Defines
