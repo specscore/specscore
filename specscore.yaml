@@ -3,6 +3,14 @@
 project:
   title: SpecScore
 
+lessons:
+  classifications:
+    - process
+    - tooling
+    - validation
+    - documentation
+    - integration
+
 gates:
   specify:
     reviewers:

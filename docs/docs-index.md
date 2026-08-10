@@ -13,6 +13,7 @@ The SpecScore format — how to write specs that lint clean.
 - [Source References](/source-references-specification) — code-to-spec traceability
 - [Decision](/decision-specification) — Architecture Decision Records (ADRs)
 - [Decisions Index](/decisions-index-specification) — canonical index of Decision documents
+- [Lessons](/lesson-specification) — durable process-improvement rules with append-only occurrence evidence
 - [Entities & Properties](/entities-and-properties) — the full entity model
 
 ## Writing good specs

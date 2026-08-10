@@ -24,6 +24,8 @@ Core features of the SpecScore specification framework. This table is the canoni
 | [features-index](features-index/README.md) | Draft | Index | `https://specscore.md/features-index-specification` | `spec/features/README.md` | — | Canonical index of all top-level features in a repo |
 | [scenarios-index](scenarios-index/README.md) | Draft | Index | `https://specscore.md/scenarios-index-specification` | `spec/features/**/_tests/README.md` | — | Per-feature index of scenarios inside `_tests/` directories |
 | [task](task/README.md) | Stable | Document | `https://specscore.md/task-specification` | `spec/plans/**/tasks/*.md` | — | Discrete units of work within a plan |
+| [Lesson](lesson/README.md) | Approved | Document | `https://specscore.md/lesson-specification` | `spec/lessons/*/README.md` | [lessons-index](lessons-index/README.md) | A Lesson is the durable, compact rule learned from a process gap. It is separate from append-only Occurrences that evidence the gap, so a recurring problem enriches evidence without repeatedly rewriting the lesson that names the improvement. |
+| [Lessons Index](lessons-index/README.md) | Approved | Index | `https://specscore.md/lessons-index-specification` | `spec/lessons/README.md` | — | The Lessons Index at `spec/lessons/README.md` is the concise inventory of process-improvement Lessons. It presents recurrence as derived read-model data, never as a hand-maintained counter. |
 | [repo-config](repo-config/README.md) | Draft | Document | `https://specscore.md/repo-config` | `specscore.yaml` | — | SpecScore repo-level configuration: identity, modules, studio settings, publication policy, related projects |
 | [adherence-footer](adherence-footer/README.md) | Draft | Meta | — | — | — | The shared footer mechanism every Document-Kind feature delegates to |
 | [document-types-registry](document-types-registry/README.md) | Draft | Meta | — | — | — | This registry — canonical list of SpecScore document types |
@@ -66,6 +68,8 @@ spec/features/
 ├── features-index/            # How to structure this features index
 ├── scenarios-index/           # How to structure per-feature scenarios indexes
 ├── task/                      # How to define discrete units of work within a plan
+├── lesson/                    # Compact process-improvement rules with occurrence evidence
+├── lessons-index/             # How to structure the lessons index
 ├── repo-config/               # Repo-level config (specscore.yaml): identity, modules, studio, publication policy
 ├── adherence-footer/          # Shared footer mechanism
 ├── document-types-registry/   # Canonical list of document types (this registry)

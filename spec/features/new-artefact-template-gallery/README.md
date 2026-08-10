@@ -32,7 +32,7 @@ Each `new/<type>.md` source MUST contain only the lint-clean skeleton a new arte
 
 #### REQ: supported-types
 
-The gallery MUST publish a template for each supported artefact type: `idea`, `feature`, `plan`, `task`, `decision`, `issue`, `proposal`.
+The gallery MUST publish a template for each supported artefact type: `idea`, `feature`, `plan`, `task`, `decision`, `issue`, `proposal`, `lesson`.
 
 ### Frontmatter
 
@@ -44,7 +44,7 @@ Every `new/<type>.md` template MUST carry a `format:` key in YAML frontmatter wh
 
 #### REQ: template-frontmatter-status
 
-A `new/<type>.md` template for a **status-bearing** type MUST carry a `status:` frontmatter key whose value equals the template's body `**Status:**` token, in the same vocabulary, per [`artifact-frontmatter-convention#req:status-field`](../artifact-frontmatter-convention/README.md). For this gallery the status-bearing templates are `idea`, `feature`, `plan`, `decision`, and `proposal` (`proposal` is treated as status-bearing because it carries a body `**Status:**`; its formal addition to the convention's `status-concept-by-type` classification is tracked in Open Questions). Two types are special-cased:
+A `new/<type>.md` template for a **status-bearing** type MUST carry a `status:` frontmatter key whose value equals the template's body `**Status:**` token, in the same vocabulary, per [`artifact-frontmatter-convention#req:status-field`](../artifact-frontmatter-convention/README.md). For this gallery the status-bearing templates are `idea`, `feature`, `plan`, `decision`, `proposal`, and `lesson` (`proposal` is treated as status-bearing because it carries a body `**Status:**`; its formal addition to the convention's `status-concept-by-type` classification is tracked in Open Questions). Two types are special-cased:
 
 - **`task`** is **exempt** from `status:` for now — its status is board-managed (it has no body `**Status:**`), so it carries `format:` only. Full status-bearing alignment is deferred (see Open Questions).
 - **`issue`** carries `status:` **natively** in its existing YAML frontmatter — defined by the issue type's own spec and lint rules, not by the convention's `status-concept-by-type` (which does not list `issue`); it keeps that `status:` unchanged and only gains `format:`.
@@ -83,7 +83,7 @@ A template, once its `<!-- … -->` prompts are replaced with valid content and 
 
 **Given** the site has been built
 **When** the published `/new/` namespace is inspected
-**Then** a template file is published at `/new/<type>.md` for each of: `idea`, `feature`, `plan`, `task`, `decision`, `issue`, `proposal`.
+**Then** a template file is published at `/new/<type>.md` for each of: `idea`, `feature`, `plan`, `task`, `decision`, `issue`, `proposal`, `lesson`.
 
 ### AC: templates-outside-spec-tree (verifies REQ:template-source-location)
 
@@ -111,7 +111,7 @@ A template, once its `<!-- … -->` prompts are replaced with valid content and 
 
 ### AC: status-bearing-templates-mirror-status (verifies REQ:template-frontmatter-status)
 
-**Given** the `idea`, `feature`, `plan`, `decision`, and `proposal` templates
+**Given** the `idea`, `feature`, `plan`, `decision`, `proposal`, and `lesson` templates
 **When** each is inspected
 **Then** each carries a `status:` frontmatter key whose value equals its body `**Status:**` token (e.g. `idea` → `Draft`, `decision` → `Draft`).
 
