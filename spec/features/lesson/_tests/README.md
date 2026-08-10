@@ -10,6 +10,7 @@ End-to-end scenarios for the [Lesson](../README.md) specification.
 |---|---|
 | [append-only-enforcement-journey](append-only-enforcement-journey.md) | [lesson#ac:append-only-recurrence-journey](../README.md#ac-append-only-recurrence-journey), [lesson#ac:enforcement-journey](../README.md#ac-enforcement-journey) |
 | [legacy-and-supersession-journey](legacy-and-supersession-journey.md) | [lesson#ac:legacy-migration-journey](../README.md#ac-legacy-migration-journey), [lesson#ac:duplicate-supersession-journey](../README.md#ac-duplicate-supersession-journey) |
+| [scaffold-preflight-journey](scaffold-preflight-journey.md) | [lesson#ac:lesson-scaffold-preflight-journey](../README.md#ac-lesson-scaffold-preflight-journey) |
 
 ## Open Questions
 

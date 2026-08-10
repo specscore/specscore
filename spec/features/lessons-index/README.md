@@ -26,7 +26,7 @@ This feature inherits location, section, completeness, and footer rules from [In
 
 #### REQ: lesson-index-columns
 
-The `## Lessons` table MUST contain, in order: `Lesson`, `Status`, `Classifications`, `Occurrences`, `Last Occurred`, and `Enforcement`. `Lesson` links to `<slug>/README.md`; `Occurrences` and `Last Occurred` are derived from child occurrence JSON; `Enforcement` is the Lesson's declared `Control` or `—`. The index MAY be generated or refreshed by tooling, but authors do not edit derived cells to record a new occurrence.
+The `## Lessons` table MUST contain, in order: `Lesson`, `Status`, `Classifications`, `Occurrences`, `Last Occurred`, and `Enforcement`. `Lesson` links to `<slug>/README.md`; `Occurrences` and `Last Occurred` are derived from valid child occurrence JSON (`Last Occurred` is the maximum `occurred_at`, with lexical path only as a tie-breaker); `Enforcement` is the Lesson's declared `Control` or `—`. The index MAY be generated or refreshed by tooling, but authors do not edit derived cells to record a new occurrence.
 
 #### REQ: canonical-only
 

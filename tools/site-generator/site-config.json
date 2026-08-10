@@ -91,6 +91,17 @@
       "llmsDescription": "One login feature walked through SpecScore's full artifact model — Idea (and a draft sibling), nested Features tree, Decision, Change Request/proposal, thin ACs, and Rehearse proof."
     },
     {
+      "source": "docs/lessons.md",
+      "slug": "lessons",
+      "title": "Writing and Migrating Lessons",
+      "nav": false,
+      "navLabel": "Lessons guide",
+      "navGroup": "Specification",
+      "navOrder": 5.8,
+      "llmsGroup": "Guides",
+      "llmsDescription": "How to write compact process-improvement Lessons, add bounded occurrence evidence, and migrate legacy lesson files without losing history."
+    },
+    {
       "source": "spec/features/repo-config/README.md",
       "slug": "repo-config",
       "title": "Repo Config",
@@ -136,6 +147,18 @@
       "navOrder": 9,
       "llmsGroup": "Specifications",
       "llmsDescription": "Canonical index of active Decision documents in a repo. Inherits the shared Index shape with decisions-specific column set and numeric ordering.",
+      "llmsFull": true
+    },
+    {
+      "source": "spec/features/lesson/README.md",
+      "slug": "lesson-specification",
+      "title": "Lesson Specification",
+      "nav": true,
+      "navLabel": "Lesson",
+      "navGroup": "Specification",
+      "navOrder": 9.5,
+      "llmsGroup": "Specifications",
+      "llmsDescription": "Durable process-improvement rules with append-only, bounded occurrence evidence and a Recorded → Stated → Enforced ladder.",
       "llmsFull": true
     },
     {

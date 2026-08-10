@@ -18,6 +18,11 @@ describe('loadConfig', () => {
       config.sourceToSlug.get('spec/features/feature/README.md'),
       'feature-specification'
     );
+    assert.equal(
+      config.sourceToSlug.get('spec/features/lesson/README.md'),
+      'lesson-specification'
+    );
+    assert.equal(config.sourceToSlug.get('docs/lessons.md'), 'lessons');
   });
 
   it('builds sidebar groups from navGroup fields', async () => {
@@ -36,6 +41,7 @@ describe('loadConfig', () => {
     const specGroup = config.sidebarGroups.find((g) => g.label === 'Specification');
     assert.ok(specGroup, 'Specification group should exist');
     assert.ok(specGroup.items.some((p) => p.slug === 'feature-specification'));
+    assert.ok(specGroup.items.some((p) => p.slug === 'lesson-specification'));
   });
 
   it('excludes nav:false pages from sidebar groups', async () => {

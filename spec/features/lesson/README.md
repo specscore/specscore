@@ -35,6 +35,9 @@ spec/lessons/
     README.md
     occurrences/
       <uuid-v4>.json
+    legacy/                         # only when migration must retain raw bytes
+      README.md
+      <sha256-of-legacy-bytes>.md
 ```
 
 #### REQ: lesson-location
@@ -86,7 +89,7 @@ status: Recorded
 None at this time.
 
 ---
-*This document follows the https://specscore.md/feature-specification*
+*This document follows the https://specscore.md/lesson-specification*
 ```
 
 #### REQ: lesson-required-fields
@@ -127,7 +130,7 @@ An Occurrence is a one-time observation that a Lesson's gap manifested or was co
 
 #### REQ: occurrence-schema
 
-Every occurrence MUST have this shape; unknown fields are rejected:
+Every occurrence MUST conform to the published [Occurrence JSON Schema](/new/lesson-occurrence.schema.json); unknown fields are rejected. The schema is the machine-readable contract and this example is illustrative:
 
 ```json
 {
@@ -146,11 +149,13 @@ Every occurrence MUST have this shape; unknown fields are rejected:
 }
 ```
 
-`summary` is at most 500 Unicode code points; every string in `context`, `evidence.ref`, and `redactions` is at most 500; arrays contain at most 20 entries. Unavailable context is omitted or `null`. Values MUST NOT contain secrets, access tokens, personal contact data, raw prompts, complete logs, or raw diffs. `redactions` records omissions without disclosing their content. Git, worktree, and execution fields are generic context only; the format names no runtime or vendor.
+`id` MUST equal its filename without `.json`; the filename and `id` are UUID v4 values. `occurred_at` is an RFC 3339 UTC instant. `summary` is at most 500 Unicode code points; every string in `context`, `evidence.ref`, and `redactions` is at most 500; arrays contain at most 20 entries. Unavailable context is omitted or `null`.
+
+Values MUST NOT contain secrets, access tokens, personal contact data, raw prompts, complete logs, or raw diffs. In particular, the original user or agent prompt MUST NEVER be committed to an occurrence, even when it explains the gap. `redactions` records only the field or reason omitted, never the omitted content. Git, worktree, and execution fields are generic context only; the format names no runtime or vendor. A worktree `path_hint` is repository-relative or `redacted`, never an absolute path or a path containing `..`. The schema's `x-specscore-content-policy` defines the minimum credential patterns and scanner invocation every writer and validator MUST apply. Validators MUST reject unsupported fields, overlong values, known credential-bearing values, and raw-log or raw-prompt fields rather than silently discarding them.
 
 #### REQ: recurrence-derived
 
-Recurrence count, first occurrence time, last occurrence time, and status breakdown are derived by scanning valid child occurrence files in deterministic lexical path order. They MAY be shown by tooling or generated views, but are not author-maintained Lesson README fields. Adding an occurrence MUST NOT require a same-file update to the README or index. Invalid occurrence JSON fails validation rather than being silently omitted.
+Recurrence count, first occurrence time, last occurrence time, and status breakdown are derived by scanning valid child occurrence files. First and last are ordered by `occurred_at`; ties are broken by lexical occurrence path for a deterministic result. They MAY be shown by tooling or generated views, but are not author-maintained Lesson README fields. Adding an occurrence MUST NOT require a same-file update to the README or index. Invalid occurrence JSON fails validation rather than being silently omitted.
 
 ### Tracking and deterministic enforcement evidence
 
@@ -170,7 +175,7 @@ A Lesson at `Enforced` MUST have non-empty `**Control:**`, `**Verification:**`, 
 
 #### REQ: legacy-migration
 
-Legacy `spec/lessons/<slug>.md` artifacts remain readable during a compatibility window. Migration creates `spec/lessons/<slug>/README.md`, preserves original text under `## Process Gap` or a linked evidence reference, and sets `**Legacy Provenance:** spec/lessons/<slug>.md@<commit-or-uncommitted>`. Each independently useful historical incident becomes a new occurrence with `context.execution.kind: "unknown"` and a `redactions` entry where history lacks safe structured data. No occurrence is invented merely to populate a count.
+Legacy `spec/lessons/<slug>.md` artifacts remain readable during a compatibility window. Migration creates `spec/lessons/<slug>/README.md` and sets `**Legacy Provenance:** spec/lessons/<slug>.md@<commit-or-uncommitted>`. It preserves the original legacy bytes losslessly: a committed source MAY be referenced by immutable commit URL; an uncommitted source MUST be copied byte-for-byte to `legacy/<sha256-of-legacy-bytes>.md`, with `legacy/README.md` identifying that immutable snapshot. The compact `Process Gap` may summarize or link to that evidence; it is not a replacement for the preserved source. Each independently useful historical incident becomes a new occurrence with `context.execution.kind: "unknown"` and a `redactions` entry where history lacks safe structured data. No occurrence is invented merely to populate a count.
 
 During the window readers accept both paths but prefer the directory form; writers and scaffolders create only the directory form. A repository MUST NOT retain both forms for one slug after migration. Once configured repositories migrate, legacy-file support becomes a warning, then an error in a later CLI release; provenance remains valid indefinitely.
 
@@ -178,7 +183,7 @@ During the window readers accept both paths but prefer the directory form; write
 
 #### REQ: lesson-cli-commands
 
-`specscore lesson new <slug>` MUST scaffold the directory-form Lesson from `new/lesson.md` and create an empty `occurrences/` directory; it MUST NOT create a legacy `<slug>.md` file. `specscore lesson recur <slug>` MUST validate and append exactly one new occurrence file without rewriting the Lesson README. `specscore lesson info <slug>` computes recurrence metadata from occurrence files, and `specscore lesson change-status <slug>` enforces the status ladder and `Enforced` evidence preconditions. CLI consumers receive the same directory form whether the artifact was hand-authored or scaffolded.
+`specscore lesson new <slug>` MUST preflight the repository configuration before creating any path. If `specscore.yaml` or its non-empty `lessons.classifications` vocabulary is absent, it MUST fail with the configuration action needed and leave the working tree unchanged. Once configured, it MUST scaffold the directory-form Lesson from `new/lesson.md` and create an empty `occurrences/` directory; it MUST NOT create a legacy `<slug>.md` file. `specscore lesson recur <slug>` MUST validate and append exactly one new occurrence file without rewriting the Lesson README or index. `specscore lesson info <slug>` computes recurrence metadata from occurrence files, and `specscore lesson change-status <slug>` enforces the status ladder and `Enforced` evidence preconditions. CLI consumers receive the same directory form whether the artifact was hand-authored or scaffolded.
 
 ### Adherence footer
 
@@ -191,6 +196,7 @@ Every Lesson document MUST end with an adherence footer per the [Adherence Foote
 | Feature | Interaction |
 |---|---|
 | [Lessons Index](../lessons-index/README.md) | Lists canonical Lesson directories and displays derived recurrence metadata without becoming a writer for it. |
+| [Occurrence JSON Schema](/new/lesson-occurrence.schema.json) | Machine-readable, versioned validation contract for append-only occurrence files. |
 | [Repo Config](../repo-config/README.md) | `lessons.classifications` supplies the controlled vocabulary. |
 | [Artifact Frontmatter Convention](../artifact-frontmatter-convention/README.md) | Lesson is status-bearing and uses `format:`/`status:` mirror rules. |
 | [Decision](../decision/README.md) | A Decision records a chosen architecture path; a Lesson records how the process must improve. |
@@ -207,7 +213,7 @@ Given a repository with `lessons.classifications: [process, validation]`, when a
 
 **Requirements:** lesson#req:occurrence-schema, lesson#req:recurrence-derived, lesson#req:progressive-disclosure
 
-Given a valid canonical Lesson with one occurrence, when a second valid `occurrences/<uuid>.json` is added, then lint passes, lesson-info reports count two and deterministic first/last times, and the Lesson README and existing occurrence remain byte-identical. An oversized summary or a secret-bearing raw log fails validation.
+Given a valid canonical Lesson with one occurrence, when a second valid `occurrences/<uuid>.json` is added, then lint passes, lesson-info reports count two and deterministic first/last times ordered by `occurred_at` (then filename), and the Lesson README and existing occurrence remain byte-identical. An oversized summary, secret-bearing value, raw log, or original prompt fails validation.
 
 ### AC: enforcement-journey
 
@@ -232,6 +238,12 @@ Given legacy `spec/lessons/review-before-merge.md`, when migration runs, then it
 **Requirements:** lesson#req:lesson-cli-commands
 
 Given a configured repository, when `specscore lesson new review-before-merge` runs, then it creates the canonical README and empty occurrence directory. When `specscore lesson recur review-before-merge` records a valid observation, then exactly one new JSON file appears, recurrence metadata is visible through `lesson info`, and the README is unchanged.
+
+### AC: lesson-scaffold-preflight-journey
+
+**Requirements:** lesson#req:lesson-cli-commands, repo-config#req:lessons-classifications
+
+Given a repository without `specscore.yaml` or without a non-empty `lessons.classifications` vocabulary, when `specscore lesson new review-before-merge` runs, then it reports the missing configuration and creates or rewrites no files. Given a configured repository, the same command creates only the Lesson directory form and its empty occurrence directory.
 
 ## Open Questions
 

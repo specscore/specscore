@@ -171,6 +171,17 @@ ${listItems}
     });
     await writeFile(join(OUTPUT, 'new', 'index.html'), indexPage, 'utf-8');
     console.log('  new/index.html (index)');
+
+    // Lesson occurrences are JSON rather than Markdown artefacts. Publish their
+    // schema verbatim so API clients and CLI implementations use the exact same
+    // contract as the written Lesson specification.
+    const occurrenceSchema = 'lesson-occurrence.schema.json';
+    try {
+      await cp(join(newDir, occurrenceSchema), join(OUTPUT, 'new', occurrenceSchema));
+      console.log(`  new/${occurrenceSchema}`);
+    } catch (error) {
+      if (error?.code !== 'ENOENT') throw error;
+    }
   }
 
   // --- Blog ---

@@ -17,7 +17,7 @@ AND the Lessons Index reports recurrence metadata derived from the occurrence fi
 
 WHEN a second valid occurrence is added
 THEN the first occurrence and README remain byte-identical
-AND the derived count is two with first and last values computed from lexical occurrence paths
+AND the derived count is two with first and last values computed by `occurred_at`, then lexical occurrence path when timestamps tie
 
 WHEN the Lesson changes to `Enforced` while `Verification` is `checked manually`
 THEN lint rejects it

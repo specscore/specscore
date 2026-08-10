@@ -19,6 +19,11 @@ and the [New-Artefact Template Gallery feature](../spec/features/new-artefact-te
 | [decision.md](decision.md) | decision scaffolding |
 | [issue.md](issue.md) | issue scaffolding |
 | [proposal.md](proposal.md) | proposal scaffolding |
+| [lesson.md](lesson.md) | `specscore lesson new` |
+
+The [Lesson occurrence schema](lesson-occurrence.schema.json) is published alongside
+the Markdown templates. It is consumed by `specscore lesson recur` and validators;
+it is not itself a scaffold template.
 
 Edit templates here only in lockstep with the owning feature's spec — the template
 shape is part of the artifact contract that `specscore spec lint` enforces.

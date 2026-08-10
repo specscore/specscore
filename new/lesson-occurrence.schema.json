@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://specscore.md/new/lesson-occurrence.schema.json",
+  "title": "SpecScore Lesson Occurrence",
+  "description": "Append-only, bounded evidence for one manifestation of a Lesson process gap. Original prompts, raw logs, raw diffs, credentials, and personal contact data are not valid occurrence data.",
+  "x-specscore-filename-matches": "id",
+  "x-specscore-content-policy": {
+    "forbidden_property_names": ["prompt", "raw_prompt", "raw_log", "log", "diff", "transcript", "authorization", "token", "password", "secret"],
+    "forbidden_value_patterns": [
+      "(?i)\\b(?:authorization|bearer|token|password|api[_-]?key)\\b\\s*[:=]",
+      "gh[pousr]_[A-Za-z0-9_]{20,}",
+      "AKIA[0-9A-Z]{16}",
+      "-----BEGIN (?:[A-Z ]+ )?PRIVATE KEY-----"
+    ],
+    "prompt_policy": "Never store original user or agent prompts; write a short factual summary instead.",
+    "scanner": "Run the repository-standard secret scanner over every string value before write and validation."
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "occurred_at", "summary", "context", "evidence", "redactions"],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$",
+      "maxLength": 40
+    },
+    "summary": {
+      "$ref": "#/$defs/boundedString"
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "repository": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[^/\\s]+/[^/\\s]+/[^/\\s]+$", "maxLength": 500 }
+          ]
+        },
+        "git": {
+          "anyOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/gitContext" }
+          ]
+        },
+        "worktree": {
+          "anyOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/worktreeContext" }
+          ]
+        },
+        "execution": {
+          "anyOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/executionContext" }
+          ]
+        }
+      }
+    },
+    "evidence": {
+      "$ref": "#/$defs/evidence"
+    },
+    "redactions": {
+      "type": "array",
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/boundedString"
+      }
+    }
+  },
+  "$defs": {
+    "boundedString": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "nullableBoundedString": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/boundedString" }
+      ]
+    },
+    "gitContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "commit": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{7,64}$" }
+          ]
+        },
+        "branch": {
+          "$ref": "#/$defs/nullableBoundedString"
+        }
+      }
+    },
+    "worktreeContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path_hint": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "string",
+              "maxLength": 500,
+              "allOf": [
+                { "not": { "pattern": "^/" } },
+                { "not": { "pattern": "(^|/)\\.\\.(/|$)" } }
+              ]
+            }
+          ]
+        },
+        "id": {
+          "$ref": "#/$defs/nullableBoundedString"
+        }
+      }
+    },
+    "executionContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "anyOf": [
+            { "type": "null" },
+            { "enum": ["interactive", "automation", "ci", "unknown"] }
+          ]
+        },
+        "id": {
+          "$ref": "#/$defs/nullableBoundedString"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "ref"],
+      "properties": {
+        "kind": {
+          "enum": ["url", "path", "command", "none"]
+        },
+        "ref": {
+          "$ref": "#/$defs/nullableBoundedString"
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "kind": { "const": "none" } } },
+          "then": { "properties": { "ref": { "type": "null" } } },
+          "else": { "properties": { "ref": { "$ref": "#/$defs/boundedString" } } }
+        }
+      ]
+    }
+  }
+}

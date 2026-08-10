@@ -17,11 +17,11 @@ Use `spec/lessons/README.md` to find the current rule. Counts and last-occurrenc
 
 ## Safe occurrence context
 
-Occurrences may record generic repository, Git, worktree, and execution context. Keep every value bounded and factual. Omit unavailable values, redact secrets and personal information, and link to durable evidence instead of copying logs, prompts, or diffs.
+Occurrences may record generic repository, Git, worktree, and execution context. Keep every value bounded and factual. Omit unavailable values, redact secrets and personal information, and link to durable evidence instead of copying logs, prompts, or diffs. The original user or agent prompt must never be committed. The published [Occurrence JSON Schema](/new/lesson-occurrence.schema.json) is the exact machine-readable contract.
 
 ## Migrating older files
 
-The older single-file form `spec/lessons/<slug>.md` is accepted only during migration. Move it to `spec/lessons/<slug>/README.md`, record its original path and revision in `Legacy Provenance`, and create occurrence JSON only for safely representable history. Never invent history to fill a recurrence count.
+The older single-file form `spec/lessons/<slug>.md` is accepted only during migration. Move it to `spec/lessons/<slug>/README.md`, record its original path and revision in `Legacy Provenance`, and preserve the old bytes through an immutable commit reference or a `legacy/<sha256>.md` snapshot. Create occurrence JSON only for safely representable history. Never invent history to fill a recurrence count.
 
 ## Open Questions
 

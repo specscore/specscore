@@ -12,6 +12,7 @@ GIVEN a legacy file `spec/lessons/review-before-merge.md` with one safely repres
 WHEN the repository migrates it
 THEN it creates `spec/lessons/review-before-merge/README.md`
 AND it records the old path and revision in `Legacy Provenance`
+AND it preserves the legacy bytes through an immutable commit reference or `legacy/<sha256>.md`
 AND it creates at most one occurrence for the historical observation without inventing a recurrence count
 AND it removes the legacy file so both paths do not coexist
 

@@ -26,6 +26,7 @@ status: Recorded
 
 - **Occurrence store:** `occurrences/`
 - **Recurrence metadata:** derived from child JSON; never hand-maintained here.
+- **Occurrence schema:** `https://specscore.md/new/lesson-occurrence.schema.json`
 
 ## Enforcement
 
