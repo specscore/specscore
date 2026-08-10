@@ -141,7 +141,14 @@ async function build() {
     // new/ directory doesn't exist yet — skip
   }
 
-  if (templateFiles.length > 0) {
+  let schemaFiles = [];
+  try {
+    schemaFiles = (await readdir(newDir)).filter(f => f.endsWith('.schema.json')).sort();
+  } catch {
+    // new/ directory doesn't exist yet — skip
+  }
+
+  if (templateFiles.length > 0 || schemaFiles.length > 0) {
     await mkdir(join(OUTPUT, 'new'), { recursive: true });
 
     const entries = [];
@@ -153,9 +160,15 @@ async function build() {
       console.log(`  new/${file}`);
     }
 
+    const schemaEntries = schemaFiles.map(file => ({
+      type: file.replace(/\.schema\.json$/, ''),
+      file,
+    }));
     const listItems = entries.map(e =>
       `<li><a href="/new/${e.file}"><code>/new/${e.file}</code></a> — ${e.type} template</li>`
-    ).join('\n');
+    ).concat(schemaEntries.map(e =>
+      `<li><a href="/new/${e.file}"><code>/new/${e.file}</code></a> — ${e.type} JSON Schema</li>`
+    )).join('\n');
     const indexContent = `<h1>New-Artefact Templates</h1>
 <p>Blank, ready-to-fill skeletons for each SpecScore artefact type. Each link returns the raw Markdown you start a new artefact from — copy it, fill the prompts, and save it to its canonical path in your spec tree.</p>
 <ul>
@@ -172,15 +185,11 @@ ${listItems}
     await writeFile(join(OUTPUT, 'new', 'index.html'), indexPage, 'utf-8');
     console.log('  new/index.html (index)');
 
-    // Lesson occurrences are JSON rather than Markdown artefacts. Publish their
-    // schema verbatim so API clients and CLI implementations use the exact same
-    // contract as the written Lesson specification.
-    const occurrenceSchema = 'lesson-occurrence.schema.json';
-    try {
-      await cp(join(newDir, occurrenceSchema), join(OUTPUT, 'new', occurrenceSchema));
-      console.log(`  new/${occurrenceSchema}`);
-    } catch (error) {
-      if (error?.code !== 'ENOENT') throw error;
+    // Machine-readable contracts are published verbatim and in sorted order so
+    // clients and CLI implementations consume the same bytes as the specs.
+    for (const file of schemaFiles) {
+      await cp(join(newDir, file), join(OUTPUT, 'new', file));
+      console.log(`  new/${file}`);
     }
   }
 

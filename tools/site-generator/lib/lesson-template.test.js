@@ -22,7 +22,10 @@ describe('lesson template and occurrence schema', () => {
 
     assert.equal(schema.$id, 'https://specscore.md/new/lesson-occurrence.schema.json');
     assert.equal(schema['x-specscore-filename-matches'], 'id');
-    assert.equal(schema['x-specscore-content-policy'].scanner, 'Run the repository-standard secret scanner over every string value before write and validation.');
+    assert.equal(
+      schema['x-specscore-content-policy'].scanner,
+      'Apply forbidden_property_names and forbidden_value_patterns to every property name and string value before write and validation; run any configured repository secret scanner as an additional check.',
+    );
     assert.equal(schema.additionalProperties, false);
     assert.deepEqual(schema.required, [
       'schema_version', 'id', 'occurred_at', 'summary', 'context', 'evidence', 'redactions',
@@ -31,5 +34,8 @@ describe('lesson template and occurrence schema', () => {
     assert.match(schema.properties.id.pattern, /-4\[0-9a-f\]/);
     assert.equal(schema.properties.context.additionalProperties, false);
     assert.equal(schema.$defs.evidence.additionalProperties, false);
+    assert.ok(schema['x-specscore-content-policy'].forbidden_property_names.includes('original_prompt'));
+    assert.ok(schema['x-specscore-content-policy'].forbidden_value_patterns.some(pattern => pattern.includes('@')));
+    assert.equal(schema.$defs.repoRelativePath.type, 'string');
   });
 });

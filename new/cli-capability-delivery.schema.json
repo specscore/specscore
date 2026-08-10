@@ -1,0 +1,298 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://specscore.md/new/cli-capability-delivery.schema.json",
+  "title": "SpecScore CLI Capability Delivery Manifest",
+  "description": "Deterministic traceability from a CLI capability to runtime, built-in help, AI skills, and executable tests.",
+  "x-specscore-unique-key": "capabilities[].id",
+  "x-specscore-sorted-by": "capabilities[].id",
+  "x-specscore-id-prefix": "<binary>.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schema_version", "binary", "capabilities"],
+  "properties": {
+    "$schema": {
+      "const": "https://specscore.md/new/cli-capability-delivery.schema.json"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "binary": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "maxLength": 64
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/capability"
+      }
+    }
+  },
+  "$defs": {
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "feature_refs", "since", "surfaces", "notes"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+          "maxLength": 160
+        },
+        "feature_refs": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/$defs/boundedString"
+          }
+        },
+        "since": {
+          "anyOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/boundedString" }
+          ]
+        },
+        "deprecated": {
+          "type": "boolean"
+        },
+        "replacement": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$", "maxLength": 160 }
+          ]
+        },
+        "surfaces": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["runtime", "help", "ai_skill", "tests"],
+          "properties": {
+            "runtime": { "$ref": "#/$defs/runtimeSurface" },
+            "help": { "$ref": "#/$defs/helpSurface" },
+            "ai_skill": { "$ref": "#/$defs/skillSurface" },
+            "tests": { "$ref": "#/$defs/testSurface" }
+          }
+        },
+        "notes": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string", "minLength": 1, "maxLength": 1000 }
+          ]
+        }
+      }
+    },
+    "status": {
+      "enum": ["Full", "Partial", "Planned", "Absent"]
+    },
+    "boundedString": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "repoPath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "pattern": "^[^\\\\/]+(?:/[^\\\\/]+)*$",
+      "allOf": [
+        { "not": { "pattern": "^[A-Za-z]:" } },
+        { "not": { "pattern": "(^|/)\\.\\.?(/|$)" } }
+      ]
+    },
+    "limitation": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "string", "minLength": 1, "maxLength": 1000 }
+      ]
+    },
+    "runtimeCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "flags", "modes"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300,
+          "pattern": "^[a-z0-9][a-z0-9-]*(?: [a-z0-9][a-z0-9-]*)*$"
+        },
+        "flags": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 100,
+          "items": {
+            "type": "string",
+            "pattern": "^--[a-z0-9][a-z0-9-]*$"
+          }
+        },
+        "modes": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 30,
+          "items": {
+            "$ref": "#/$defs/boundedString"
+          }
+        }
+      }
+    },
+    "helpAnchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["command", "contains"],
+      "properties": {
+        "command": {
+          "$ref": "#/$defs/boundedString"
+        },
+        "contains": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "maxItems": 30,
+          "items": {
+            "$ref": "#/$defs/boundedString"
+          }
+        }
+      }
+    },
+    "skillEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "marker", "examples"],
+      "properties": {
+        "path": { "$ref": "#/$defs/repoPath" },
+        "marker": { "$ref": "#/$defs/boundedString" },
+        "examples": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 30,
+          "items": { "$ref": "#/$defs/boundedString" }
+        }
+      }
+    },
+    "testEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "name", "kind"],
+      "properties": {
+        "path": { "$ref": "#/$defs/repoPath" },
+        "name": { "$ref": "#/$defs/boundedString" },
+        "kind": {
+          "enum": ["unit", "integration", "conformance", "e2e"]
+        }
+      }
+    },
+    "runtimeSurface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "commands", "limitation"],
+      "properties": {
+        "status": { "$ref": "#/$defs/status" },
+        "commands": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/runtimeCommand" }
+        },
+        "limitation": { "$ref": "#/$defs/limitation" }
+      },
+      "allOf": [
+        { "$ref": "#/$defs/fullOrPartialEvidence" },
+        { "$ref": "#/$defs/nonFullLimitation" },
+        { "$ref": "#/$defs/noEvidenceWhenUnusable" }
+      ]
+    },
+    "helpSurface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "anchors", "limitation"],
+      "properties": {
+        "status": { "$ref": "#/$defs/status" },
+        "anchors": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/helpAnchor" }
+        },
+        "limitation": { "$ref": "#/$defs/limitation" }
+      },
+      "allOf": [
+        { "$ref": "#/$defs/fullOrPartialAnchors" },
+        { "$ref": "#/$defs/nonFullLimitation" },
+        { "$ref": "#/$defs/noAnchorsWhenUnusable" }
+      ]
+    },
+    "skillSurface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "skills", "limitation"],
+      "properties": {
+        "status": { "$ref": "#/$defs/status" },
+        "skills": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/skillEvidence" }
+        },
+        "limitation": { "$ref": "#/$defs/limitation" }
+      },
+      "allOf": [
+        { "$ref": "#/$defs/fullOrPartialSkills" },
+        { "$ref": "#/$defs/nonFullLimitation" },
+        { "$ref": "#/$defs/noSkillsWhenUnusable" }
+      ]
+    },
+    "testSurface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "references", "limitation"],
+      "properties": {
+        "status": { "$ref": "#/$defs/status" },
+        "references": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/testEvidence" }
+        },
+        "limitation": { "$ref": "#/$defs/limitation" }
+      },
+      "allOf": [
+        { "$ref": "#/$defs/fullOrPartialReferences" },
+        { "$ref": "#/$defs/nonFullLimitation" },
+        { "$ref": "#/$defs/noReferencesWhenUnusable" }
+      ]
+    },
+    "fullOrPartialEvidence": {
+      "if": { "properties": { "status": { "enum": ["Full", "Partial"] } } },
+      "then": { "properties": { "commands": { "minItems": 1 } } }
+    },
+    "fullOrPartialAnchors": {
+      "if": { "properties": { "status": { "enum": ["Full", "Partial"] } } },
+      "then": { "properties": { "anchors": { "minItems": 1 } } }
+    },
+    "fullOrPartialSkills": {
+      "if": { "properties": { "status": { "enum": ["Full", "Partial"] } } },
+      "then": { "properties": { "skills": { "minItems": 1 } } }
+    },
+    "fullOrPartialReferences": {
+      "if": { "properties": { "status": { "enum": ["Full", "Partial"] } } },
+      "then": { "properties": { "references": { "minItems": 1 } } }
+    },
+    "nonFullLimitation": {
+      "if": { "properties": { "status": { "const": "Full" } } },
+      "then": { "properties": { "limitation": { "type": "null" } } },
+      "else": { "properties": { "limitation": { "type": "string", "minLength": 1 } } }
+    },
+    "noEvidenceWhenUnusable": {
+      "if": { "properties": { "status": { "enum": ["Planned", "Absent"] } } },
+      "then": { "properties": { "commands": { "maxItems": 0 } } }
+    },
+    "noAnchorsWhenUnusable": {
+      "if": { "properties": { "status": { "enum": ["Planned", "Absent"] } } },
+      "then": { "properties": { "anchors": { "maxItems": 0 } } }
+    },
+    "noSkillsWhenUnusable": {
+      "if": { "properties": { "status": { "enum": ["Planned", "Absent"] } } },
+      "then": { "properties": { "skills": { "maxItems": 0 } } }
+    },
+    "noReferencesWhenUnusable": {
+      "if": { "properties": { "status": { "enum": ["Planned", "Absent"] } } },
+      "then": { "properties": { "references": { "maxItems": 0 } } }
+    }
+  }
+}

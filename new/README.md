@@ -21,9 +21,15 @@ and the [New-Artefact Template Gallery feature](../spec/features/new-artefact-te
 | [proposal.md](proposal.md) | proposal scaffolding |
 | [lesson.md](lesson.md) | `specscore lesson new` |
 
-The [Lesson occurrence schema](lesson-occurrence.schema.json) is published alongside
-the Markdown templates. It is consumed by `specscore lesson recur` and validators;
-it is not itself a scaffold template.
+Machine-readable contracts are published alongside the Markdown templates:
+
+| Schema | Purpose |
+|---|---|
+| [lesson-occurrence.schema.json](lesson-occurrence.schema.json) | Append-only, bounded Lesson occurrence records |
+| [cli-capability-delivery.schema.json](cli-capability-delivery.schema.json) | CLI runtime/help/AI-skill/test traceability manifests |
+
+Schemas are contracts consumed by validators and other tooling; they are not
+scaffold templates.
 
 Edit templates here only in lockstep with the owning feature's spec — the template
 shape is part of the artifact contract that `specscore spec lint` enforces.

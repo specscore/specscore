@@ -78,6 +78,7 @@ status: Recorded
 ## Tracking
 - **Occurrence store:** `occurrences/`
 - **Recurrence metadata:** derived from child JSON; never hand-maintained here.
+- **Occurrence schema:** `https://specscore.md/new/lesson-occurrence.schema.json`
 
 ## Enforcement
 **Control:** —
@@ -151,7 +152,7 @@ Every occurrence MUST conform to the published [Occurrence JSON Schema](/new/les
 
 `id` MUST equal its filename without `.json`; the filename and `id` are UUID v4 values. `occurred_at` is an RFC 3339 UTC instant. `summary` is at most 500 Unicode code points; every string in `context`, `evidence.ref`, and `redactions` is at most 500; arrays contain at most 20 entries. Unavailable context is omitted or `null`.
 
-Values MUST NOT contain secrets, access tokens, personal contact data, raw prompts, complete logs, or raw diffs. In particular, the original user or agent prompt MUST NEVER be committed to an occurrence, even when it explains the gap. `redactions` records only the field or reason omitted, never the omitted content. Git, worktree, and execution fields are generic context only; the format names no runtime or vendor. A worktree `path_hint` is repository-relative or `redacted`, never an absolute path or a path containing `..`. The schema's `x-specscore-content-policy` defines the minimum credential patterns and scanner invocation every writer and validator MUST apply. Validators MUST reject unsupported fields, overlong values, known credential-bearing values, and raw-log or raw-prompt fields rather than silently discarding them.
+Values MUST NOT contain secrets, access tokens, personal contact data, raw prompts, complete logs, or raw diffs. In particular, the original user or agent prompt MUST NEVER be committed to an occurrence, even when it explains the gap. `redactions` records only the field or reason omitted, never the omitted content. Git, worktree, and execution fields are generic context only; the format names no runtime or vendor. A worktree `path_hint` and `evidence.ref` whose kind is `path` are repository-relative or `redacted`, never absolute or containing `..`. The schema's `x-specscore-content-policy` defines the minimum property/value patterns every writer and validator MUST apply to every property name and string. A configured repository secret scanner is an additional check, not a replacement for that baseline. Validators MUST reject unsupported fields, overlong values, known credential/contact-bearing values, and raw-log or raw-prompt fields rather than silently discarding them.
 
 #### REQ: recurrence-derived
 
@@ -159,7 +160,7 @@ Recurrence count, first occurrence time, last occurrence time, and status breakd
 
 ### Tracking and deterministic enforcement evidence
 
-`## Tracking` is the stable pointer to `occurrences/` and declaration that recurrence is derived. `## Enforcement` contains the current control, reproducible verification, and proof location.
+`## Tracking` is the stable pointer to `occurrences/`, declaration that recurrence is derived, and exact published Occurrence schema URL. `## Enforcement` contains the current control, reproducible verification, and proof location.
 
 #### REQ: enforcement-evidence
 

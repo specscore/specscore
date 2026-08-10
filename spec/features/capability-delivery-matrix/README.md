@@ -52,8 +52,10 @@ NOT leak into runtime help or skills as usable commands.
 
 A CLI repository publishes one machine-readable manifest per binary, by
 default at `spec/capabilities/<binary>.json`. Repository configuration may
-declare another path for monorepos. The manifest has a versioned schema and
-contains:
+declare another path for monorepos. Every manifest MUST conform to the
+published [CLI Capability Delivery JSON Schema](/new/cli-capability-delivery.schema.json).
+The required top-level fields are `$schema`, `schema_version`, `binary`, and
+`capabilities`; unknown fields are rejected. Each capability contains:
 
 - binary/product identity and manifest schema version;
 - stable capability ID and optional SpecScore Feature/AC references;
@@ -61,11 +63,18 @@ contains:
 - help topic/command anchors;
 - AI skill package/path plus capability marker and example anchors;
 - executable test file/name or conformance-scenario references; and
-- optional `since`, deprecation/replacement and bounded notes.
+- nullable `since` and `notes`, plus optional `deprecated` and `replacement`.
 
 The manifest contains no generated timestamps or local paths, so identical
 inputs produce byte-identical output. Capability IDs are namespaced to the
 binary, for example `wb.worktree.abort` or `specscore.lesson.occurrence.add`.
+The `$schema` value is the exact published schema URL. Capability IDs MUST begin
+with `<binary>.`; they are unique and sorted by ID. Every evidence path is
+repository-relative and cannot contain `..`; every surface has an explicit
+`Full`, `Partial`, `Planned`, or `Absent` status. `Full`/`Partial` surfaces
+require evidence, non-Full surfaces require a limitation, and
+`Planned`/`Absent` surfaces contain no usable command, help, skill, or test
+evidence.
 
 ### Delivery surfaces and status
 

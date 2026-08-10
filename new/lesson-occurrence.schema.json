@@ -5,15 +5,17 @@
   "description": "Append-only, bounded evidence for one manifestation of a Lesson process gap. Original prompts, raw logs, raw diffs, credentials, and personal contact data are not valid occurrence data.",
   "x-specscore-filename-matches": "id",
   "x-specscore-content-policy": {
-    "forbidden_property_names": ["prompt", "raw_prompt", "raw_log", "log", "diff", "transcript", "authorization", "token", "password", "secret"],
+    "forbidden_property_names": ["prompt", "original_prompt", "user_prompt", "agent_prompt", "raw_prompt", "raw_log", "log", "diff", "transcript", "authorization", "token", "password", "secret"],
+    "property_name_matching": "ASCII case-insensitive exact match",
     "forbidden_value_patterns": [
-      "(?i)\\b(?:authorization|bearer|token|password|api[_-]?key)\\b\\s*[:=]",
+      "\\b(?:[Aa]uthorization|[Bb]earer|[Tt]oken|[Pp]assword|[Aa][Pp][Ii][_-]?[Kk]ey)\\b\\s*[:=]",
       "gh[pousr]_[A-Za-z0-9_]{20,}",
       "AKIA[0-9A-Z]{16}",
-      "-----BEGIN (?:[A-Z ]+ )?PRIVATE KEY-----"
+      "-----BEGIN (?:[A-Z ]+ )?PRIVATE KEY-----",
+      "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\\b"
     ],
     "prompt_policy": "Never store original user or agent prompts; write a short factual summary instead.",
-    "scanner": "Run the repository-standard secret scanner over every string value before write and validation."
+    "scanner": "Apply forbidden_property_names and forbidden_value_patterns to every property name and string value before write and validation; run any configured repository secret scanner as an additional check."
   },
   "type": "object",
   "additionalProperties": false,
@@ -111,14 +113,7 @@
         "path_hint": {
           "anyOf": [
             { "type": "null" },
-            {
-              "type": "string",
-              "maxLength": 500,
-              "allOf": [
-                { "not": { "pattern": "^/" } },
-                { "not": { "pattern": "(^|/)\\.\\.(/|$)" } }
-              ]
-            }
+            { "$ref": "#/$defs/repoRelativePath" }
           ]
         },
         "id": {
@@ -158,7 +153,25 @@
           "if": { "properties": { "kind": { "const": "none" } } },
           "then": { "properties": { "ref": { "type": "null" } } },
           "else": { "properties": { "ref": { "$ref": "#/$defs/boundedString" } } }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "url" } } },
+          "then": { "properties": { "ref": { "type": "string", "format": "uri", "pattern": "^https?://", "maxLength": 500 } } }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "path" } } },
+          "then": { "properties": { "ref": { "$ref": "#/$defs/repoRelativePath" } } }
         }
+      ]
+    },
+    "repoRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "pattern": "^[^\\\\/]+(?:/[^\\\\/]+)*$",
+      "allOf": [
+        { "not": { "pattern": "^[A-Za-z]:" } },
+        { "not": { "pattern": "(^|/)\\.\\.?(/|$)" } }
       ]
     }
   }
