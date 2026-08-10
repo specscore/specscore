@@ -184,6 +184,14 @@ A Lesson at `Enforced` MUST have non-empty `**Control:**`, `**Verification:**`, 
 
 Legacy `spec/lessons/<slug>.md` artifacts remain readable during a compatibility window. Migration creates `spec/lessons/<slug>/README.md` and sets `**Legacy Provenance:** spec/lessons/<slug>.md@<commit-or-uncommitted>`. It preserves the original legacy bytes losslessly: a committed source MAY be referenced by immutable commit URL; an uncommitted source MUST be copied byte-for-byte to `legacy/<sha256-of-legacy-bytes>.md`, with `legacy/README.md` identifying that immutable snapshot. The compact `Process Gap` may summarize or link to that evidence; it is not a replacement for the preserved source. Each independently useful historical incident becomes a new occurrence with `context.execution.kind: "unknown"` and a `redactions` entry where history lacks safe structured data. No occurrence is invented merely to populate a count.
 
+An observation selected to create the canonical Lesson still becomes exactly
+one child Occurrence; using it as the provider of the deduplicated rule MUST
+NOT make that incident disappear from occurrence statistics. A legacy
+recurrence marker that summarizes an unknown number of incidents becomes one
+evidence Occurrence for that marker, retaining aggregate-count ambiguity in
+its provenance; migration MUST NOT expand prose such as “at least twice” into
+invented child records.
+
 During the window readers accept both paths but prefer the directory form; writers and scaffolders create only the directory form. A repository MUST NOT retain both forms for one slug after migration. Once configured repositories migrate, legacy-file support becomes a warning, then an error in a later CLI release; provenance remains valid indefinitely.
 
 ### CLI behavior
@@ -238,7 +246,7 @@ Given canonical Lesson `review-before-merge`, when a later Lesson supersedes it,
 
 **Requirements:** lesson#req:legacy-migration
 
-Given legacy `spec/lessons/review-before-merge.md`, when migration runs, then it produces the directory-form README with legacy provenance, preserves safely representable history as child occurrence files, removes the old canonical path, and lint accepts the result. During the compatibility window the legacy file reads with a warning; after cutover it is rejected.
+Given legacy `spec/lessons/review-before-merge.md`, when migration runs, then it produces the directory-form README with legacy provenance, records the source observation that provided the new Lesson as one child Occurrence, preserves every other safely representable historical observation as its own child, removes the old canonical path, and lint accepts the result. A marker saying “at least twice” remains one aggregate-ambiguity evidence Occurrence rather than two invented incidents. During the compatibility window the legacy file reads with a warning; after cutover it is rejected.
 
 ### AC: cli-scaffold-and-recur-journey
 
