@@ -21,7 +21,7 @@ Occurrences may record generic repository, Git, worktree, and execution context.
 
 ## Migrating older files
 
-The older single-file form `spec/lessons/<slug>.md` is accepted only during migration. Move it to `spec/lessons/<slug>/README.md`, record its original path and revision in `Legacy Provenance`, and preserve the old bytes through an immutable commit reference or a `legacy/<sha256>.md` snapshot. Create occurrence JSON only for safely representable history. Never invent history to fill a recurrence count.
+The older single-file form `spec/lessons/<slug>.md` is accepted only during migration. Move it to `spec/lessons/<slug>/README.md`, record its original repository, full commit, path, byte range and hash in `Legacy Provenance`, and preserve the old bytes through that immutable commit reference. Apply refuses an uncommitted source; archive it privately or commit it to an authorized source repository first. It never republishes raw legacy prose inside committed Lesson artifacts. Create occurrence JSON only for safely representable history. Never invent history to fill a recurrence count.
 
 ## Open Questions
 

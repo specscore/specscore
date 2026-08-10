@@ -35,9 +35,6 @@ spec/lessons/
     README.md
     occurrences/
       <uuid-v4>.json
-    legacy/                         # only when migration must retain raw bytes
-      README.md
-      <sha256-of-legacy-bytes>.md
 ```
 
 #### REQ: lesson-location
@@ -182,7 +179,7 @@ A Lesson at `Enforced` MUST have non-empty `**Control:**`, `**Verification:**`, 
 
 #### REQ: legacy-migration
 
-Legacy `spec/lessons/<slug>.md` artifacts remain readable during a compatibility window. Migration creates `spec/lessons/<slug>/README.md` and sets `**Legacy Provenance:** spec/lessons/<slug>.md@<commit-or-uncommitted>`. It preserves the original legacy bytes losslessly: a committed source MAY be referenced by immutable commit URL; an uncommitted source MUST be copied byte-for-byte to `legacy/<sha256-of-legacy-bytes>.md`, with `legacy/README.md` identifying that immutable snapshot. The compact `Process Gap` may summarize or link to that evidence; it is not a replacement for the preserved source. Each independently useful historical incident becomes a new occurrence with `context.execution.kind: "unknown"` and a `redactions` entry where history lacks safe structured data. No occurrence is invented merely to populate a count.
+Legacy `spec/lessons/<slug>.md` artifacts remain readable during a compatibility window. Migration creates `spec/lessons/<slug>/README.md` and sets `**Legacy Provenance:** <repository>@<full-commit>:<path>#bytes=<start>-<end>;sha256=<block-hash>`. Apply requires the authoritative source bytes to match that immutable Git revision and records the source repository, path, full commit, whole-source hash, exact byte range, and block hash in a migration manifest. An uncommitted source is inventory-only: it MUST be committed to an authorized source repository or retained in a private, Git-excluded archive before apply. Tooling MUST NOT copy raw legacy prose into committed Lesson artifacts merely to make it content-addressed. The compact `Process Gap` may summarize or link to the immutable evidence; it is not a replacement for that source. Each independently useful historical incident becomes a new occurrence with `context.execution.kind: "unknown"` and a `redactions` entry where history lacks safe structured data. No occurrence is invented merely to populate a count.
 
 An observation selected to create the canonical Lesson still becomes exactly
 one child Occurrence; using it as the provider of the deduplicated rule MUST
