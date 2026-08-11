@@ -16,6 +16,38 @@ function occurrenceValidator(schema) {
   return ajv.compile(schema);
 }
 
+function contentPolicyViolations(schema, value, path = '$') {
+  const policy = schema['x-specscore-content-policy'];
+  const forbiddenNames = new Set(policy.forbidden_property_names.map(name => name.toLowerCase()));
+  const forbiddenPatterns = policy.forbidden_value_patterns.map(pattern => new RegExp(pattern));
+  const violations = [];
+
+  if (typeof value === 'string') {
+    if (forbiddenPatterns.some(pattern => pattern.test(value))) {
+      violations.push(`${path} contains a forbidden value`);
+    }
+    return violations;
+  }
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => violations.push(...contentPolicyViolations(schema, item, `${path}[${index}]`)));
+    return violations;
+  }
+  if (value && typeof value === 'object') {
+    for (const [name, item] of Object.entries(value)) {
+      if (forbiddenNames.has(name.toLowerCase())) {
+        violations.push(`${path}.${name} is a forbidden property name`);
+      }
+      violations.push(...contentPolicyViolations(schema, item, `${path}.${name}`));
+    }
+  }
+  return violations;
+}
+
+function validatesOccurrence(schema, occurrence) {
+  const validate = occurrenceValidator(schema);
+  return validate(occurrence) && contentPolicyViolations(schema, occurrence).length === 0;
+}
+
 function validOccurrence() {
   return {
     schema_version: 1,
@@ -60,7 +92,10 @@ describe('lesson template and occurrence schema', () => {
     ]);
     assert.equal(schema.properties.schema_version.const, 1);
     assert.match(schema.properties.id.pattern, /-4\[0-9a-f\]/);
-    assert.equal(schema.properties.context.additionalProperties, false);
+    assert.equal(schema.properties.context.maxProperties, 20);
+    assert.equal(schema.properties.context.additionalProperties.$ref, '#/$defs/contextValue');
+    assert.equal(schema.$defs.contextValue.anyOf[4].maxItems, 20);
+    assert.equal(schema.$defs.contextValue.anyOf[5].maxProperties, 20);
     assert.equal(schema.$defs.evidence.additionalProperties, false);
     assert.ok(schema['x-specscore-content-policy'].forbidden_property_names.includes('original_prompt'));
     assert.ok(schema['x-specscore-content-policy'].forbidden_value_patterns.some(pattern => pattern.includes('@')));
@@ -71,12 +106,28 @@ describe('lesson template and occurrence schema', () => {
     assert.equal(schema.$defs.repoRelativePath.type, 'string');
   });
 
-  it('accepts a bounded occurrence and rejects unsafe or ambiguous instances', async () => {
+  it('accepts opaque context and preserves unknown scalar, array, and nested values', async () => {
     const schema = JSON.parse(await readFile(occurrenceSchemaUrl, 'utf8'));
     const validate = occurrenceValidator(schema);
     const valid = validOccurrence();
 
+    valid.context = {
+      run: '42',
+      files: ['x.go'],
+      nested: { retry: true, attempt: 2, metadata: [null, { source: 'manual' }] },
+    };
     assert.equal(validate(valid), true, JSON.stringify(validate.errors));
+    assert.equal(validatesOccurrence(schema, valid), true);
+    assert.deepEqual(valid.context, {
+      run: '42',
+      files: ['x.go'],
+      nested: { retry: true, attempt: 2, metadata: [null, { source: 'manual' }] },
+    });
+  });
+
+  it('rejects unsafe or ambiguous occurrences and context values', async () => {
+    const schema = JSON.parse(await readFile(occurrenceSchemaUrl, 'utf8'));
+    const valid = validOccurrence();
 
     const mutations = [
       occurrence => { occurrence.occurred_at = 'not-a-dateZ'; },
@@ -90,12 +141,17 @@ describe('lesson template and occurrence schema', () => {
       occurrence => { occurrence.context.worktree.path_hint = '../outside'; },
       occurrence => { occurrence.context.worktree.path_hint = 'C:/outside'; },
       occurrence => { occurrence.context.worktree.path_hint = 'safe\\..\\outside'; },
+      occurrence => { occurrence.context.git = { unexpected: true }; },
+      occurrence => { occurrence.context = { nested: { agent_prompt: 'private input' } }; },
+      occurrence => { occurrence.context = { nested: ['safe', 'line one\nline two'] }; },
+      occurrence => { occurrence.context = { nested: { secret: 'not a credential' } }; },
+      occurrence => { occurrence.context = { nested: { token_value: 'TOKEN: abcdef' } }; },
       occurrence => { occurrence.original_prompt = 'copy of a private prompt'; },
     ];
     for (const mutate of mutations) {
       const occurrence = structuredClone(valid);
       mutate(occurrence);
-      assert.equal(validate(occurrence), false, `unexpectedly accepted ${JSON.stringify(occurrence)}`);
+      assert.equal(validatesOccurrence(schema, occurrence), false, `unexpectedly accepted ${JSON.stringify(occurrence)}`);
     }
 
     assert.notEqual('different-id.json', `${valid.id}.json`, 'filename/id matching is an external invariant');
