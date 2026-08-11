@@ -40,7 +40,13 @@
     },
     "context": {
       "type": "object",
-      "additionalProperties": false,
+      "maxProperties": 20,
+      "propertyNames": {
+        "$ref": "#/$defs/contextPropertyName"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/contextValue"
+      },
       "properties": {
         "repository": {
           "anyOf": [
@@ -106,6 +112,37 @@
       "anyOf": [
         { "type": "null" },
         { "$ref": "#/$defs/boundedString" }
+      ]
+    },
+    "contextPropertyName": {
+      "type": "string",
+      "maxLength": 500,
+      "pattern": "^[^\\r\\n]*$",
+      "allOf": [{ "$ref": "#/$defs/safeValue" }]
+    },
+    "contextString": {
+      "type": "string",
+      "maxLength": 500,
+      "pattern": "^[^\\r\\n]*$",
+      "allOf": [{ "$ref": "#/$defs/safeValue" }]
+    },
+    "contextValue": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "boolean" },
+        { "type": "number" },
+        { "$ref": "#/$defs/contextString" },
+        {
+          "type": "array",
+          "maxItems": 20,
+          "items": { "$ref": "#/$defs/contextValue" }
+        },
+        {
+          "type": "object",
+          "maxProperties": 20,
+          "propertyNames": { "$ref": "#/$defs/contextPropertyName" },
+          "additionalProperties": { "$ref": "#/$defs/contextValue" }
+        }
       ]
     },
     "gitContext": {
