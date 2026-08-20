@@ -2,6 +2,7 @@ name: Dogfood lint
 
 on:
   push:
+    branches: [main]
     paths:
       - 'spec/**'
       - '.github/workflows/dogfood.yml'

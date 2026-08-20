@@ -2,6 +2,7 @@ name: Site Generator CI
 
 on:
   push:
+    branches: [main]
     paths:
       - '.github/workflows/site-ci.yml'
       - 'tools/site-generator/**'
