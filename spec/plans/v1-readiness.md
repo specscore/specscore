@@ -60,12 +60,21 @@ so a committed rewrite of an Approved decision is detectable forever.
 ### Task A3: Decommission the PolyModel public footprint
 
 **Depends-On:** —
-**Status:** pending
+**Status:** complete
 
 Archive the public polymodel-org repositories with pointers to ModelSpec; record
 the supersession in a ModelSpec decision ("ModelSpec supersedes PolyModel") and
 in the archived repos' READMEs; redirect or park polymodel.org. No public
 ModelSpec launch while a stale sibling standard by the same author is live.
+
+**Completed 2026-08-22.** Supersession recorded as
+[ModelSpec decision 0016](https://github.com/specscore/modelspec/blob/main/spec/decisions/0016-modelspec-supersedes-polymodel.md).
+All four public `polymodel-org` repositories (`polymodel`, `polymodel-go`,
+`polymodel-cli`, `polymodel-org`) carry a retirement banner pointing at ModelSpec
+and are archived; `backstage` is private and was left alone. `polymodel.org` now
+301s to `modelspec.org` preserving path and query. `modelspec.org` is live as a
+preview. `polymodel-go` and `polymodel-cli` carried no tags, so archiving broke
+no published module. The launch gate this task guards is cleared.
 
 ### Task A4: CLI correctness gate
 
