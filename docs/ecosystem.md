@@ -28,7 +28,7 @@ Learn more: [Rehearse — in plain language](/rehearse) · [Rehearse vs. Establi
 
 Defines storage-neutral application data models.
 
-- Describes entities, properties, relationships, components, constraints, indexes, projections, migration metadata, and storage-neutral schemas
+- Describes record types and their fields, keys, references between record types, components, named enumerations, and constraints: storage-neutral schemas
 - Independent from SpecScore, OpenVaultDB, GraphSpec, and any backend
 - Validated by SpecScore through linting, structural validation, and semantic checks
 - Consumed directly by OpenVaultDB for schema validation, migration planning, backend mapping, GraphQL generation, DTQL typing metadata, DALGO metadata, and backend generators

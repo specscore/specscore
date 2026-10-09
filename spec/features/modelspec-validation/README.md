@@ -24,8 +24,10 @@ make ModelSpec a sub-language of SpecScore or GraphSpec.
 SpecScore needs a validation posture that is useful to ModelSpec adopters while
 preserving ownership boundaries:
 
-- ModelSpec defines entities, properties, relationships, components, named enums,
-  constraints, indexes, projections, migration metadata, and storage-neutral schemas.
+- ModelSpec defines record types and their fields (`entity` and `property` in its
+  earlier spelling), keys, references between record types, components, named enums,
+  and constraints: storage-neutral schemas. `projection`, `index`, and `migration` are
+  reserved words there, with no content.
 - SpecScore validates ModelSpec documents and reports diagnostics.
 - OpenVaultDB consumes ModelSpec directly and does not depend on SpecScore ownership.
 - GraphSpec is a consumer of ModelSpec: it references ModelSpec models for structure

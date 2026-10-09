@@ -28,7 +28,8 @@ aliases and ModelSpec-specific validation mature.
 ModelSpec is not a sub-language of GraphSpec.
 
 GraphSpec describes connected domain models. ModelSpec describes application data
-models, storage-neutral schemas, projections, and migration metadata.
+models and storage-neutral schemas. `projection`, `index`, and `migration` are
+reserved words in ModelSpec, with no content.
 
 OpenVaultDB consumes ModelSpec directly. It may use SpecScore validation in
 development or CI, but it depends on ModelSpec rather than SpecScore.

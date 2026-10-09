@@ -34,10 +34,13 @@ layering rule is unaffected: GraphSpec never depends on FeatureSpec semantically
 
 ### ModelSpec is the single structural language
 
-Properties, types, constraints, validation, value objects (components), named enums,
-collections, recordsets, and projections are ModelSpec concerns. No other ecosystem
-member defines a competing structural vocabulary. *Why:* three overlapping structural
-languages existed (legacy entity/property Doc-Kinds, ModelSpec, GraphSpec's drifting
+Properties, types, constraints, validation, value objects (components), and named
+enums are ModelSpec concerns. When decision 0003 was approved the list also named
+collections, recordsets, and projections; ModelSpec has since removed the first two
+and made `projection` a reserved word with no content (ModelSpec decision 0019).
+No other ecosystem member defines a competing structural vocabulary. *Why:* three
+overlapping structural languages existed (legacy entity/property Doc-Kinds, ModelSpec,
+GraphSpec's drifting
 examples); one source of truth is ModelSpec's entire value proposition. ([0003](../../decisions/0003-one-structural-language.md))
 
 ### GraphSpec reuses ModelSpec, one-directionally
@@ -170,15 +173,25 @@ Modules live in the bare-ID namespace (`vault`); owned artifacts live in the
 per-module qualified namespace (`vault.vault`) — a module node never occupies a
 qualified-ID slot, so a domain whose core entity names its context cannot collide
 with itself. The two-segment model reference resolves in one flat per-module
-namespace formed by entities, components, and enums (now normative); an optional
-kind segment (`modelspec:///vault.collections.vaults`, tokens
-`entities|components|enums|collections|recordsets`, reserved as concept names)
-makes collections and recordsets addressable — three-segment only, own scopes.
+namespace formed by record types (`entity` in ModelSpec's earlier spelling),
+components, and enums (now normative); an optional kind segment
+(`modelspec:///vault.records.Vault`, tokens `records|components|enums`, with
+`entities` still read as the earlier spelling of `records`) names the kind
+explicitly. Six names are reserved as concept names: the three tokens, `entities`,
+`collections`, and `recordsets`.
 Graph-to-graph references stay two-segment (kind-free references survive
 relationship→entity promotion); HCL is untouched (the attribute name is the kind
 selector, ModelSpec decision 0014). *Why:* the kind segment lives exactly where
 kinds are structural facts and is absent exactly where kinds are semantic
 judgments. ([0011](../../decisions/0011-addressable-model-concepts.md))
+
+As first decided, the tokens were `entities|components|enums|collections|recordsets`
+and the kind segment made collections and recordsets addressable, three-segment only,
+in scopes of their own. ModelSpec has since removed both constructs and renamed
+`entity` to `record` (ModelSpec decisions 0018 and 0019), so `collections` and
+`recordsets` are no longer kind segments.
+[Decision 0014](../../decisions/0014-records-kind-segment-and-removed-kind-segments.md)
+goes through decision 0011 sentence by sentence and says what is in force.
 
 ### Graph roots: repo-level plus per-module, unified; cross-repo deferred
 
