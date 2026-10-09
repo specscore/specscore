@@ -121,7 +121,7 @@ collisions for every domain whose core entity names its context (`vault`,
 
 ## Observed Consequences
 
-None observed yet.
+2026-10-09 — Succeeded in part. ModelSpec renamed `entity` to `record` and removed `collection` and `recordset` (its decisions 0018 and 0019, which its owner approved on 8 October 2026), and the `specscore` CLI follows from release v0.55.0: the kind segment accepts `records` and still accepts `entities` as the same kind, `collections` and `recordsets` are no longer kind segments, and `records` is reserved beside the five names above. The two graph namespaces, the namespace shared by the three concept kinds, the optional kind segment and the two places it does not go all stand. [Decision 0014](0014-records-kind-segment-and-removed-kind-segments.md), in review on this date, goes through this decision sentence by sentence. This file's headers do not record the succession: a `Supersedes` link would archive this decision whole.
 
 ## Affected Features
 
