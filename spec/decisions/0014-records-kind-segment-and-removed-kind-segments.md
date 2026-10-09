@@ -40,8 +40,8 @@ those two kind segments. And `entities` names a kind by a word ModelSpec has lef
 
 The `specscore` CLI follows the change from its release v0.55.0 of 9 October 2026
 ([specscore/specscore-cli#222](https://github.com/specscore/specscore-cli/pull/222)).
-Its specification says that decision 0011 predates the change and that "the decision
-that succeeds it is not yet recorded". This file is that record. In the proposal's
+Its specification said, at release v0.55.0, that decision 0011 predates the change and
+that "the decision that succeeds it is not yet recorded". This file is that record. In the proposal's
 order the CLI change belongs to Phase 3, "The neighbours follow", which lists
 "SpecScore's graph lint" among the readers that learn both spellings first. Of Phase 3
 the proposal says: "It waits for your word too."
@@ -104,38 +104,61 @@ segment for a collection or a recordset.
 
 When this record was written, the first sentence rested on a reading of the owner's
 approval of D2, and the second stated choices he had not ruled on. Both are set out
-below and among the unknowns above. On 9 October 2026 he approved the record as
-written, and both sentences with it.
+below and among the unknowns above. On 9 October 2026 he approved the record. His
+words are in the next subsection.
 
 ### Approved by the owner, 9 October 2026
 
-This record was written, reviewed and landed with the status In Review, because no
-card had put SpecScore's reference syntax to the owner. He approved it on 9 October
-2026, in two exchanges with the session that coordinates this work.
+This record was written and reviewed with the status In Review, because no card had
+put SpecScore's reference syntax to the owner. He approved it on 9 October 2026. Three
+exchanges of that day record it. Each was with the session that coordinates this work,
+which put the questions. The order given here is that session's account.
 
-He was first told, in a list of three pull requests that waited for him:
+First. The session told him, in a list of three pull requests that waited for him:
 
 > specscore/specscore#61: blocked by the dead Cloudflare build token; the decision in
 > it is "In Review" and is yours to approve.
 
-His answer, about the list: "All 3 approved".
+He answered, about the list: "All 3 approved". The session took that as approving the
+three landings and not this decision. On those words it landed specscore/specscore#61,
+the pull request that added this record, with the status In Review.
 
-An approved decision's text is frozen, so he was then asked:
+Second. An approved decision's text is frozen, so the session then asked him, as the
+first of four numbered questions:
 
 > Does "All 3 approved" also approve SpecScore decision 0014? I read it as approving
 > the three landings only, because an approved decision's text is frozen. If you meant
 > the decision too, say so and I'll flip it.
 
-His answer: "1 - yes". The question was the first of four numbered questions.
+He answered: "1 - yes". The session took that as yes to the question, and the status
+was changed to Approved in specscore/specscore#62. The answer can also be read as
+agreeing with the reading stated after the question, that only the landings were
+approved. So #62 was held, and he was asked once more.
 
-What the approval covers: this record as it stood on `main` when he answered, the day
-it landed there. That includes the statement that decision 0011 is succeeded in part.
-It includes the kind tokens `records`, `components` and `enums`, the reading of
-`entities` as `records`, the end of the kind segments `collections` and `recordsets`,
-the six reserved names, and the placing of `entities` as an error in ModelSpec's last
-step. Those points were the recorder's choices, and the notes below still say whose
-they were. They are now recorder's choices that the owner approved as part of this
-record. He was not asked about any of them singly.
+Third. The session asked, at the end of a message to him:
+
+> The one thing that would unblock work right now is your answer on SpecScore decision
+> 0014: does "1 - yes" approve the decision itself, or only the landings?
+> specscore/specscore#62 is reviewed and held on that.
+
+He answered, in full: "Yes, approves everything, both decision and landing."
+
+#### What the approval covers, and what it does not settle
+
+Recorder's note, not the owner's words. The quotations above are his. The rest of this
+subsection is the recorder's account of what three short answers approve. It was
+written after the second answer and amended after the third. It was not put to him
+point by point, and whether he has read it is not recorded.
+
+What the approval covers: this record as it then stood on `main`, where #61 had put
+it. The text on `main` did not change between that landing and his third answer. That
+text includes the statement that decision 0011 is succeeded in part. It includes the
+kind tokens `records`, `components` and `enums`, the reading of `entities` as
+`records`, the end of the kind segments `collections` and `recordsets`, the six
+reserved names, and the placing of `entities` as an error in ModelSpec's last step.
+Those points were the recorder's choices, and the notes below still say whose they
+were. They are now recorder's choices that the owner approved as part of this record.
+He was not asked about any of them singly.
 
 What the approval does not settle. He was not asked about, and did not answer, any of
 the unknowns named in the Context:
@@ -152,10 +175,14 @@ the unknowns named in the Context:
 - Whether a reference that spells `entities` is reported or rewritten. Nothing does
   either.
 
-Between his answer and the change of status, this subsection was added, the heading
-after it gained the words "for ModelSpec", and the sentences that spoke of the record
-as unapproved, or of the owner as not having ruled, were brought up to date. No token,
-name, rule or quotation in the record changed.
+What changed in this file after #61 landed it, all of it in #62: this subsection was
+added after the second answer, and its account of the exchanges was rewritten after
+the third; the heading after it gained the words "for ModelSpec"; the sentences that
+spoke of the record as unapproved, or of the owner as not having ruled, were brought
+up to date; and the two sentences about the CLI's specification now name release
+v0.55.0. No token, name, rule or quotation of the landed record changed. The changes
+made after the second answer were open in #62 when he gave his third. Those made after
+the third were not.
 
 ### What the owner decided for ModelSpec
 
@@ -280,7 +307,7 @@ release, made by running it. The rest say what this record states or leaves open
 | What | Standing | Since |
 |---|---|---|
 | ModelSpec renames `entity` to `record`, removes `collection` and `recordset`, and stages the rename. | Decided by the owner. | 8 October 2026. In force in ModelSpec's grammar from 9 October 2026, with its reference CLI version 0.2.0. |
-| This decision. | Approved by the owner, as written. | 9 October 2026. |
+| This decision. | Approved by the owner, as it then stood on `main`. | 9 October 2026. |
 | The kind segment `records` resolves. | Implemented. | `specscore` CLI release v0.55.0. |
 | The kind segment `entities` resolves as `records`. | Implemented. Not an error and not reported. | Unchanged in v0.55.0. |
 | The kind segments `collections` and `recordsets`. | An error, under the rule `graph-model-ref-resolves`. | v0.55.0. |
@@ -358,8 +385,8 @@ tests".
 - A feature specification that says what it reads names a record type. The lint for
   such references in feature specifications is still future work, as decision 0011
   said.
-- The CLI's specification can cite this decision where it says the successor is not
-  yet recorded. That sentence is in another repository.
+- The CLI's specification can cite this decision where, at release v0.55.0, it said
+  the successor is not yet recorded. That sentence is in another repository.
 - ModelSpec's open question about the reserved names stays open. This record states
   the list for the transition and not the final one.
 - Diagnostics of release v0.55.0 still call a record type an entity, as in "is an
