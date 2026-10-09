@@ -154,8 +154,8 @@ Recorder's note, not the owner's words. His words above are the three answers in
 quotation marks. The block quotations are the session's. The rest of this subsection
 is the recorder's account of what three short answers approve. It was written after
 the second answer and amended after the third. It was not put to him point by point,
-though four of the points had been listed for him in that message, and whether he has
-read it is not recorded.
+though the first of the four messages described above had listed for him the four
+things named there, and whether he has read it is not recorded.
 
 What the approval covers: this record as it then stood on `main`, where #61 had put
 it. The text on `main` did not change between that landing and his third answer. That
