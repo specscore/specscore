@@ -1,11 +1,11 @@
 ---
 format: https://specscore.md/decision-specification
-status: In Review
+status: Approved
 ---
 
 # Decision: Records Kind Segment, Collection And Recordset Segments Removed
 
-**Status:** In Review
+**Status:** Approved
 **Date:** 2026-10-09
 **Owner:** alexander.trakhimenok@gmail.com
 **Tags:** modelspec, references, namespaces, records, reserved-names
