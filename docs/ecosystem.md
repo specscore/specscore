@@ -31,7 +31,8 @@ Defines storage-neutral application data models.
 - Describes record types and their fields, keys, references between record types, components, named enumerations, and constraints: storage-neutral schemas
 - Independent from SpecScore, OpenVaultDB, GraphSpec, and any backend
 - Validated by SpecScore through linting, structural validation, and semantic checks
-- Consumed directly by OpenVaultDB for schema validation, migration planning, backend mapping, GraphQL generation, DTQL typing metadata, DALGO metadata, and backend generators
+- Read by OpenVaultDB today in one place: a database published to the OVDB Directory names the model it follows, and `ovdb publisher check` verifies that the recordsets it lists are the record types of that model
+- Intended for wider use by OpenVaultDB (schema validation, migration planning, backend mapping, GraphQL generation, DTQL typing metadata, DALGO metadata, and backend generators); none of that is implemented
 
 [github.com/specscore/modelspec](https://github.com/specscore/modelspec) *(website modelspec.org planned)*
 

@@ -43,11 +43,15 @@ The `specscore` CLI follows the change from its release v0.55.0 of 9 October 202
 Its specification says that decision 0011 predates the change and that "the decision
 that succeeds it is not yet recorded". This file is that record. In the proposal's
 order the CLI change belongs to Phase 3, "The neighbours follow", which lists
-"SpecScore's graph lint" among the readers that learn both spellings first.
+"SpecScore's graph lint" among the readers that learn both spellings first. Of Phase 3
+the proposal says: "It waits for your word too."
 
 What the owner was asked about SpecScore is narrow. The card for D2 says: "This
 supersedes part of decision 0014 and of SpecScore decision 0011". The 0014 it names is
-ModelSpec's decision of that number, not this file. The proposal's table
+ModelSpec's decision of that number, not this file. That his approval of the card
+covers the succession it names is the reading of the proposal's author, who marks it
+as his own: "I read that approval as covering the supersession; that reading is mine."
+The proposal's table
 of affected surfaces lists, for SpecScore and GraphSpec, "The reserved kind word
 entities in SpecScore decision 0011", with the treatment "Read both". Its hand-off
 says: "SpecScore decision 0011 needs a successor for the kind word." The same proposal
@@ -59,6 +63,24 @@ changed the CLI. The Decision section keeps the owner's answers apart from them.
 
 Named unknowns:
 
+- Whether the owner's approval of D2 covers the succession of decision 0011 at all.
+  It is the proposal author's reading, quoted above. The proposal puts it to the owner
+  as one of "Two readings of mine, for you to correct", and ModelSpec decision 0018
+  records it as a reading with no correction recorded. "Succeeded in part" rests on
+  it, here and in the entry on decision 0011.
+- Whether the CLI change was free to start. It is Phase 3 work, and Phase 3 waited for
+  the owner's word. ModelSpec decision 0022 records, in its observed consequences of 9
+  October 2026, that he lifted the condition that the format change wait, and marks as
+  a reading of his message that this released Phase 3 after Phase 2. The start of the
+  CLI change rests on that reading.
+- How "Addresses do not change", the last sentence of the wording he approved for D2,
+  squares with this record. The table in the Decision section shows two addresses that
+  resolved under decision 0011 and are errors now, by the removal in D3 and not by the
+  rename, and a third, the `entities` form, which this record places on the way to
+  being one. The proposal limits the sentence in its section 13: "The two-segment form
+  carries no kind word, so a renamed keyword does not reach it." Read that way it is
+  about two-segment addresses, and every one of them is unchanged. Whether the owner
+  read it that way, or as a promise about every address, is not recorded.
 - Which names stay reserved once the transition ends. Six are reserved today. Whether
   `entities`, `collections` and `recordsets` are released when they no longer name a
   kind is not decided here. ModelSpec lists the same question as open in its
@@ -76,28 +98,34 @@ Decision 0011 is succeeded in part. A model reference names a record type with t
 kind segment `records`, still reads `entities` as the same thing, and has no kind
 segment for a collection or a recordset.
 
+The first sentence rests on a reading of the owner's approval of D2. The second states
+choices he has not ruled on. Both are set out below and among the unknowns above.
+
 ### What the owner decided
 
 Three answers of 8 October 2026, quoted from the proposal. The card for D2 names
 decision 0011, as the Context says. No card and no answer states a kind token.
 
-D2, as the proposal words it:
+D2, in the wording he answered, which is the proposal's first version:
 
 > Rename ModelSpec's entity to record, called a record type in prose: the block, the
-> reference setting and the JSON key. Addresses do not change.
+> reference attribute and the JSON key. Addresses do not change.
 
-The owner's answer: "Approve record". The proposal notes that this card was edited
-after the answer: where it now says "setting", the wording he approved said
-"attribute".
+The owner's answer: "Approve record". The proposal's current text says "setting" where
+this says "attribute". It notes the edit and adds: "What you approved is the earlier
+wording."
 
 D3:
 
 > a. Remove collection and recordset from ModelSpec. b. Make projection, index and
 > migration reserved words with no content.
 
-The owner's answer: "part a, Remove both; part b, Reserve all three". The card says
-where the need behind decision 0011 goes: "After the change such a specification names
-the record type, and the recordset once a database exists."
+The owner's answer: "part a, Remove both; part b, Reserve all three". The card does
+not name decision 0011. It speaks of ModelSpec decision 0015: "0015 is recorded as
+yours and exists so that a feature specification can say what it reads. After the
+change such a specification names the record type, and the recordset once a database
+exists." Decision 0011 gives the same need in its own Context. That the two are one
+need is the recorder's observation.
 
 D13:
 
@@ -155,7 +183,11 @@ v0.55.0 for the second.
 
 ### Decision 0011, sentence by sentence
 
-The sentences of its Decision section, in order.
+Recorder's note, as in the subsection above. The sentences of decision 0011's Decision
+section, in order. The Standing column is the recorder's reading of each one against
+what ModelSpec has and what the CLI reads from release v0.55.0. Where it says
+"Succeeded", it states the consequences listed above, on which the owner has not
+ruled.
 
 | Decision 0011 says | Standing |
 |---|---|
@@ -172,14 +204,21 @@ The sentences of its Decision section, in order.
 | Graph-to-graph references stay two-segment. | Stands. |
 | HCL is untouched: the attribute name is the kind selector. | Stands. Its example is now spelled `record = "identity.Team"`, and `entity =` is still read (ModelSpec decision 0018). |
 
-Outside that section, the context and the four declined alternatives of decision 0011
-stand. So does its rationale, at the cost of six reserved words where it counted five.
-Three of its predicted consequences have changed. The resolver does not index
-collections and recordsets. ModelSpec documents no name scopes for them, and lists six
-reserved names. And a feature specification has no reference to a collection or a
-recordset: it names the record type it reads, by the two-segment form.
+Outside that section, also in the recorder's reading: the context and the four
+declined alternatives of decision 0011 stand. So does its rationale, at the cost of
+six reserved words where it counted five. Three of its predicted consequences have
+changed. The resolver does not index collections and recordsets. ModelSpec documents
+no name scopes for them, and lists six reserved names. And a feature specification has
+no reference to a collection or a recordset. What it does instead is the proposal
+author's sentence, from the proposal's section 3 and not from a card: "After the
+change such a statement names the record type it reads, by the two-part address that
+already works (module.Name)."
 
 ### Decided, implemented, and not yet
+
+Recorder's note. Only the first row is the owner's. The rows that name a release are
+observations of that release, made by running it. The rest say what this record
+proposes or leaves open.
 
 | What | Standing | Since |
 |---|---|---|
@@ -267,7 +306,8 @@ tests".
 - Diagnostics of release v0.55.0 still call a record type an entity, as in "is an
   entity, not an enum".
 - This repository has no graph module and no model file, so no artifact here changes.
-  Its GraphSpec glossary and decision log state the tokens as they are now.
+  Its GraphSpec glossary and decision log say how the CLI reads references from
+  release v0.55.0, and point here.
 
 ## Observed Consequences
 

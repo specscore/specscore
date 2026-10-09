@@ -173,25 +173,24 @@ Modules live in the bare-ID namespace (`vault`); owned artifacts live in the
 per-module qualified namespace (`vault.vault`) — a module node never occupies a
 qualified-ID slot, so a domain whose core entity names its context cannot collide
 with itself. The two-segment model reference resolves in one flat per-module
-namespace formed by record types (`entity` in ModelSpec's earlier spelling),
-components, and enums (now normative); an optional kind segment
-(`modelspec:///vault.records.Vault`, tokens `records|components|enums`, with
-`entities` still read as the earlier spelling of `records`) names the kind
-explicitly. Six names are reserved as concept names: the three tokens, `entities`,
-`collections`, and `recordsets`.
+namespace formed by entities, components, and enums (now normative); an optional
+kind segment (`modelspec:///vault.collections.vaults`, tokens
+`entities|components|enums|collections|recordsets`, reserved as concept names)
+makes collections and recordsets addressable — three-segment only, own scopes.
 Graph-to-graph references stay two-segment (kind-free references survive
 relationship→entity promotion); HCL is untouched (the attribute name is the kind
 selector, ModelSpec decision 0014). *Why:* the kind segment lives exactly where
 kinds are structural facts and is absent exactly where kinds are semantic
 judgments. ([0011](../../decisions/0011-addressable-model-concepts.md))
 
-As first decided, the tokens were `entities|components|enums|collections|recordsets`
-and the kind segment made collections and recordsets addressable, three-segment only,
-in scopes of their own. ModelSpec has since removed both constructs and renamed
-`entity` to `record` (ModelSpec decisions 0018 and 0019), so `collections` and
-`recordsets` are no longer kind segments.
-[Decision 0014](../../decisions/0014-records-kind-segment-and-removed-kind-segments.md)
-goes through decision 0011 sentence by sentence and says what is in force.
+That is decision 0011 as it was decided, and part of it is out of date. ModelSpec has
+since renamed `entity` to `record` and removed `collection` and `recordset` (ModelSpec
+decisions 0018 and 0019). The `specscore` CLI reads model references differently from
+release v0.55.0: the kind segment accepts `records` and still accepts `entities` as
+the same kind, `collections` and `recordsets` are no longer kind segments, and
+`records` is reserved as a concept name beside the five tokens above.
+[Decision 0014](../../decisions/0014-records-kind-segment-and-removed-kind-segments.md),
+in review and not yet accepted, records this.
 
 ### Graph roots: repo-level plus per-module, unified; cross-repo deferred
 
