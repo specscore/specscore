@@ -12,6 +12,7 @@ record for the foundational decisions is the repository Decision artifacts:
 - [0009 — Per-Module Graph Roots](../../decisions/0009-per-module-graph-roots.md)
 - [0010 — References Are URLs](../../decisions/0010-references-are-urls.md)
 - [0011 — Addressable Model Concepts and Kind Segments](../../decisions/0011-addressable-model-concepts.md)
+- [0014 — Records Kind Segment, Collection And Recordset Segments Removed](../../decisions/0014-records-kind-segment-and-removed-kind-segments.md)
 
 Fuller narrative reasoning lives in the
 [Phase 1 architecture review report](reviews/architecture-review-2026-07.md);
@@ -183,14 +184,25 @@ selector, ModelSpec decision 0014). *Why:* the kind segment lives exactly where
 kinds are structural facts and is absent exactly where kinds are semantic
 judgments. ([0011](../../decisions/0011-addressable-model-concepts.md))
 
-That is decision 0011 as it was decided, and part of it is out of date. ModelSpec has
-since renamed `entity` to `record` and removed `collection` and `recordset` (ModelSpec
-decisions 0018 and 0019). The `specscore` CLI reads model references differently from
-release v0.55.0: the kind segment accepts `records` and still accepts `entities` as
-the same kind, `collections` and `recordsets` are no longer kind segments, and
-`records` is reserved as a concept name beside the five tokens above.
-[Decision 0014](../../decisions/0014-records-kind-segment-and-removed-kind-segments.md),
-in review and not yet accepted, records this.
+That is decision 0011 as it was decided. Decision 0014, next, succeeds part of it.
+
+### Kind segments follow ModelSpec: `records`, and none for collections or recordsets
+
+ModelSpec renamed `entity` to `record` and removed `collection` and `recordset`
+(ModelSpec decisions 0018 and 0019), and the `specscore` CLI reads model references
+accordingly from release v0.55.0. The kind segment is one of
+`records|components|enums`; `entities` is still read as the earlier spelling of
+`records`; `collections` and `recordsets` are no longer kind segments; and six names
+are reserved as concept names (`records`, `entities`, `components`, `enums`,
+`collections`, `recordsets`). The rest of decision 0011 stands: the two namespaces,
+the namespace shared by record types, components, and enums, and the two places the
+kind segment does not go. Decision 0011 keeps its status and is not archived; the
+succession is recorded in decision 0014 and in dated entries on 0011. `entities`
+becomes an error in the last step of ModelSpec's staged order (ModelSpec decision
+0022), which is not in force. The final list of reserved names is left open. *Why:*
+the kind tokens name ModelSpec's kinds, so they follow when ModelSpec renames one kind
+and removes two. The owner approved the decision on 9 October 2026.
+([0014](../../decisions/0014-records-kind-segment-and-removed-kind-segments.md))
 
 ### Graph roots: repo-level plus per-module, unified; cross-repo deferred
 
