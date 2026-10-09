@@ -133,7 +133,12 @@ first of four numbered questions:
 He answered: "1 - yes". The session took that as yes to the question, and the status
 was changed to Approved in specscore/specscore#62. The answer can also be read as
 agreeing with the reading stated after the question, that only the landings were
-approved. So #62 was held, and he was asked once more.
+approved. So #62 was held, and the session put the question to him again, in four
+messages over the next 35 minutes. The first of those messages stated both readings
+and listed, "for reference", four things that approval makes the rule: the kind
+segment `records`, `entities` still read as its earlier spelling, no `collections` or
+`recordsets` segment, and `records` as a reserved name. The last is the one he
+answered.
 
 Third. The session asked, at the end of a message to him:
 
@@ -145,10 +150,12 @@ He answered, in full: "Yes, approves everything, both decision and landing."
 
 #### What the approval covers, and what it does not settle
 
-Recorder's note, not the owner's words. The quotations above are his. The rest of this
-subsection is the recorder's account of what three short answers approve. It was
-written after the second answer and amended after the third. It was not put to him
-point by point, and whether he has read it is not recorded.
+Recorder's note, not the owner's words. His words above are the three answers in
+quotation marks. The block quotations are the session's. The rest of this subsection
+is the recorder's account of what three short answers approve. It was written after
+the second answer and amended after the third. It was not put to him point by point,
+though four of the points had been listed for him in that message, and whether he has
+read it is not recorded.
 
 What the approval covers: this record as it then stood on `main`, where #61 had put
 it. The text on `main` did not change between that landing and his third answer. That
