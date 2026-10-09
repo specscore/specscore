@@ -34,10 +34,13 @@ layering rule is unaffected: GraphSpec never depends on FeatureSpec semantically
 
 ### ModelSpec is the single structural language
 
-Properties, types, constraints, validation, value objects (components), named enums,
-collections, recordsets, and projections are ModelSpec concerns. No other ecosystem
-member defines a competing structural vocabulary. *Why:* three overlapping structural
-languages existed (legacy entity/property Doc-Kinds, ModelSpec, GraphSpec's drifting
+Properties, types, constraints, validation, value objects (components), and named
+enums are ModelSpec concerns. When decision 0003 was approved the list also named
+collections, recordsets, and projections; ModelSpec has since removed the first two
+and made `projection` a reserved word with no content (ModelSpec decision 0019).
+No other ecosystem member defines a competing structural vocabulary. *Why:* three
+overlapping structural languages existed (legacy entity/property Doc-Kinds, ModelSpec,
+GraphSpec's drifting
 examples); one source of truth is ModelSpec's entire value proposition. ([0003](../../decisions/0003-one-structural-language.md))
 
 ### GraphSpec reuses ModelSpec, one-directionally
@@ -179,6 +182,15 @@ relationship→entity promotion); HCL is untouched (the attribute name is the ki
 selector, ModelSpec decision 0014). *Why:* the kind segment lives exactly where
 kinds are structural facts and is absent exactly where kinds are semantic
 judgments. ([0011](../../decisions/0011-addressable-model-concepts.md))
+
+That is decision 0011 as it was decided, and part of it is out of date. ModelSpec has
+since renamed `entity` to `record` and removed `collection` and `recordset` (ModelSpec
+decisions 0018 and 0019). The `specscore` CLI reads model references differently from
+release v0.55.0: the kind segment accepts `records` and still accepts `entities` as
+the same kind, `collections` and `recordsets` are no longer kind segments, and
+`records` is reserved as a concept name beside the five tokens above.
+[Decision 0014](../../decisions/0014-records-kind-segment-and-removed-kind-segments.md),
+in review and not yet accepted, records this.
 
 ### Graph roots: repo-level plus per-module, unified; cross-repo deferred
 

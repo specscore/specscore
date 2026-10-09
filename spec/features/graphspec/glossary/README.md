@@ -29,7 +29,7 @@ Current working definitions:
 | Domain Graph | The canonical set of domain concepts, relationships, and semantic metadata. |
 | Module | An architectural boundary or bounded context that owns domain concepts and declares its dependencies (`dependsOn`). |
 | Entity | A domain concept with identity. Its structure lives in a referenced ModelSpec model. |
-| Model Reference | A `modelspec:///<module>.<Name>` URL from a graph artifact to a ModelSpec entity, component, or named enum — optionally `modelspec:///<module>.<kind>.<Name>` for collections and recordsets, or `modelspec://{host}/{org}/{repo}/…` cross-repo (decisions 0010/0011). |
+| Model Reference | A `modelspec:///<module>.<Name>` URL from a graph artifact to a ModelSpec record type (`entity` in ModelSpec's earlier spelling), component, or named enum — optionally `modelspec:///<module>.<kind>.<Name>` with an explicit kind segment (as the `specscore` CLI reads it from release v0.55.0: `records`, `components`, or `enums`, with `entities` still read as `records`), or `modelspec://{host}/{org}/{repo}/…` cross-repo (decisions 0010/0011; [decision 0014](../../../decisions/0014-records-kind-segment-and-removed-kind-segments.md), in review, is the proposed record of what changed in 0011). |
 | Value Object | An immutable domain concept without identity — a ModelSpec component, referenced by graph artifacts, not a GraphSpec kind. |
 | Enum | A named controlled vocabulary — a ModelSpec named enum, referenced by graph artifacts, not a GraphSpec kind. Lifecycle states are the exception and live on the entity. |
 | Relationship | A named semantic connection between domain concepts; first-class only when it carries semantics beyond a typed reference. |
