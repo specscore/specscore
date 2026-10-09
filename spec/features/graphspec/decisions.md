@@ -197,9 +197,11 @@ are reserved as concept names (`records`, `entities`, `components`, `enums`,
 `collections`, `recordsets`). The rest of decision 0011 stands: the two namespaces,
 the namespace shared by record types, components, and enums, and the two places the
 kind segment does not go. Decision 0011 keeps its status and is not archived; the
-succession is recorded in decision 0014 and in dated entries on 0011. `entities`
-becomes an error in the last step of ModelSpec's staged order (ModelSpec decision
-0022), which is not in force. The final list of reserved names is left open. *Why:*
+succession is recorded in decision 0014 and in dated entries on 0011. Decision 0014
+places `entities` as an error in the last step of ModelSpec's staged order (ModelSpec
+decision 0022), with the approval that step requires. That is not in force, and
+whether that approval covers the kind segment is left open, as is the final list of
+reserved names. *Why:*
 the kind tokens name ModelSpec's kinds, so they follow when ModelSpec renames one kind
 and removes two. The owner approved the decision on 9 October 2026.
 ([0014](../../decisions/0014-records-kind-segment-and-removed-kind-segments.md))
