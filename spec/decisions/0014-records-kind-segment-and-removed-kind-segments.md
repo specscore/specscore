@@ -61,14 +61,17 @@ GraphSpec". No card put SpecScore's reference syntax to the owner. The token
 reserved names were worked out by the proposal's author and by the session that
 changed the CLI. The Decision section keeps the owner's answers apart from them.
 
-Named unknowns:
+Named unknowns, as they stood when this record was written. The owner's approval of 9
+October 2026 answers none of them; the Decision section says what it changes for the
+first.
 
 - Whether the owner's approval of D2 covers the succession of decision 0011 at all.
   It is the proposal author's reading, quoted above. The proposal puts it to the owner
   as one of "Two readings of mine, for you to correct", and ModelSpec decision 0018
-  records it as a reading with no correction recorded. "Succeeded in part" rests on
-  it. The entry on decision 0011 does not use those words: it says what changed and
-  calls this file the proposed record of a succession in part.
+  records it as a reading with no correction recorded. "Succeeded in part" rested on
+  it when this was written. The first entry on decision 0011 does not use those
+  words: it says what changed and calls this file the proposed record of a succession
+  in part.
 - Whether the CLI change was free to start. It is Phase 3 work, and Phase 3 waited for
   the owner's word. ModelSpec decision 0022 records, in its observed consequences of 9
   October 2026, that he lifted the condition that the format change wait, and marks as
@@ -99,10 +102,62 @@ Decision 0011 is succeeded in part. A model reference names a record type with t
 kind segment `records`, still reads `entities` as the same thing, and has no kind
 segment for a collection or a recordset.
 
-The first sentence rests on a reading of the owner's approval of D2. The second states
-choices he has not ruled on. Both are set out below and among the unknowns above.
+When this record was written, the first sentence rested on a reading of the owner's
+approval of D2, and the second stated choices he had not ruled on. Both are set out
+below and among the unknowns above. On 9 October 2026 he approved the record as
+written, and both sentences with it.
 
-### What the owner decided
+### Approved by the owner, 9 October 2026
+
+This record was written, reviewed and landed with the status In Review, because no
+card had put SpecScore's reference syntax to the owner. He approved it on 9 October
+2026, in two exchanges with the session that coordinates this work.
+
+He was first told, in a list of three pull requests that waited for him:
+
+> specscore/specscore#61: blocked by the dead Cloudflare build token; the decision in
+> it is "In Review" and is yours to approve.
+
+His answer, about the list: "All 3 approved".
+
+An approved decision's text is frozen, so he was then asked:
+
+> Does "All 3 approved" also approve SpecScore decision 0014? I read it as approving
+> the three landings only, because an approved decision's text is frozen. If you meant
+> the decision too, say so and I'll flip it.
+
+His answer: "1 - yes". The question was the first of four numbered questions.
+
+What the approval covers: this record as it stood on `main` when he answered, the day
+it landed there. That includes the statement that decision 0011 is succeeded in part.
+It includes the kind tokens `records`, `components` and `enums`, the reading of
+`entities` as `records`, the end of the kind segments `collections` and `recordsets`,
+the six reserved names, and the placing of `entities` as an error in ModelSpec's last
+step. Those points were the recorder's choices, and the notes below still say whose
+they were. They are now recorder's choices that the owner approved as part of this
+record. He was not asked about any of them singly.
+
+What the approval does not settle. He was not asked about, and did not answer, any of
+the unknowns named in the Context:
+
+- Whether his approval of D2 had already covered the succession of decision 0011. The
+  succession no longer rests on that reading alone, because he approved it here. What
+  D2's approval covered stays unanswered.
+- Whether the CLI change was free to start when it did.
+- How "Addresses do not change" was meant.
+- The final list of reserved names, once the transition ends. The six stay reserved
+  until a decision releases one.
+- Whether the approval that ModelSpec's last step requires covers the `entities` kind
+  segment, or making it an error needs an approval of its own.
+- Whether a reference that spells `entities` is reported or rewritten. Nothing does
+  either.
+
+Between his answer and the change of status, this subsection was added, the heading
+after it gained the words "for ModelSpec", and the sentences that spoke of the record
+as unapproved, or of the owner as not having ruled, were brought up to date. No token,
+name, rule or quotation in the record changed.
+
+### What the owner decided for ModelSpec
 
 Three answers of 8 October 2026, quoted from the proposal. The card for D2 names
 decision 0011, as the Context says. No card and no answer states a kind token.
@@ -139,8 +194,9 @@ The owner's answer: "Approve".
 ### What follows for model references
 
 Recorder's note, not the owner's words. Everything in this subsection is a consequence
-drawn by the proposal's author and by the session that changed the CLI. The owner has
-not ruled on it.
+drawn by the proposal's author and by the session that changed the CLI. The owner had
+not ruled on it when it was written. On 9 October 2026 he approved it as part of this
+record.
 
 ```text
 modelspec:///<module>.<Name>             # two-segment: record type | component | enum
@@ -187,8 +243,8 @@ v0.55.0 for the second.
 Recorder's note, as in the subsection above. The sentences of decision 0011's Decision
 section, in order. The Standing column is the recorder's reading of each one against
 what ModelSpec has and what the CLI reads from release v0.55.0. Where it says
-"Succeeded", it states the consequences listed above, on which the owner has not
-ruled.
+"Succeeded", it states the consequences listed above. The owner had not ruled on them
+when the table was written, and approved them with this record on 9 October 2026.
 
 | Decision 0011 says | Standing |
 |---|---|
@@ -217,29 +273,31 @@ already works (module.Name)."
 
 ### Decided, implemented, and not yet
 
-Recorder's note. Only the first row is the owner's. The rows that name a release are
-observations of that release, made by running it. The rest say what this record
-proposes or leaves open.
+Recorder's note. The first row is what the owner decided for ModelSpec, and the second
+is his approval of this record. The rows that name a release are observations of that
+release, made by running it. The rest say what this record states or leaves open.
 
 | What | Standing | Since |
 |---|---|---|
 | ModelSpec renames `entity` to `record`, removes `collection` and `recordset`, and stages the rename. | Decided by the owner. | 8 October 2026. In force in ModelSpec's grammar from 9 October 2026, with its reference CLI version 0.2.0. |
-| This decision. | Recorded. Its status is in the header above. | — |
+| This decision. | Approved by the owner, as written. | 9 October 2026. |
 | The kind segment `records` resolves. | Implemented. | `specscore` CLI release v0.55.0. |
 | The kind segment `entities` resolves as `records`. | Implemented. Not an error and not reported. | Unchanged in v0.55.0. |
 | The kind segments `collections` and `recordsets`. | An error, under the rule `graph-model-ref-resolves`. | v0.55.0. |
 | A concept named `records`. | An error, under the rule `graph-model-reserved-name`. | v0.55.0. The other five names were reserved before it. |
 | A model file that declares `collection`, `recordset`, `column`, `projection`, `index` or `migration`. | An error, under `graph-model-ref-resolves`. The removal is not staged. | v0.55.0. |
 | A model file in the earlier spelling: `entity`, `property`, `entity =`. | Read in full. One notice a file, under the advisory rule `graph-model-deprecated-spelling`, which never fails a run. | v0.55.0. |
-| The kind segment `entities` as an error. | Not in force. This record places it in ModelSpec's last step. The owner has not ruled on it, and nothing implements it. | — |
+| The kind segment `entities` as an error. | Not in force. This record places it in ModelSpec's last step, and the owner approved the record with that placing. Whether that step's approval covers it was not put to him, and nothing implements it. | — |
 | A notice for a reference that spells `entities`, and a `--fix` rule that rewrites it. | Not implemented. | — |
-| The final list of reserved names. | Not decided. | — |
+| The final list of reserved names. | Not decided. It was not put to the owner. | — |
 
 ### How the succession is recorded
 
-This file's `Supersedes` field is empty. Naming decision 0011 there would archive it
-whole, and most of it stands. Decision 0011 stays approved and unedited, and carries a
-dated entry in its observed consequences that names this decision.
+This file's `Supersedes` field is empty, and stays empty now that the record is
+approved. Naming decision 0011 there would archive it whole, and most of it stands.
+Decision 0011 stays approved and unedited. It carries two dated entries in its
+observed consequences that name this decision: one from when this record was in
+review, and one for its approval.
 
 ## Rationale
 
@@ -260,7 +318,7 @@ later breaks no model. Reserving a free name later could.
 ## Declined Alternatives
 
 None of these was put to the owner as a choice about SpecScore's syntax. Each names
-who weighed it.
+who weighed it. He approved the record that declines them on 9 October 2026.
 
 ### Name decision 0011 in the Supersedes field
 
