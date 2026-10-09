@@ -67,7 +67,8 @@ Named unknowns:
   It is the proposal author's reading, quoted above. The proposal puts it to the owner
   as one of "Two readings of mine, for you to correct", and ModelSpec decision 0018
   records it as a reading with no correction recorded. "Succeeded in part" rests on
-  it, here and in the entry on decision 0011.
+  it. The entry on decision 0011 does not use those words: it says what changed and
+  calls this file the proposed record of a succession in part.
 - Whether the CLI change was free to start. It is Phase 3 work, and Phase 3 waited for
   the owner's word. ModelSpec decision 0022 records, in its observed consequences of 9
   October 2026, that he lifted the condition that the format change wait, and marks as
@@ -238,7 +239,7 @@ proposes or leaves open.
 
 This file's `Supersedes` field is empty. Naming decision 0011 there would archive it
 whole, and most of it stands. Decision 0011 stays approved and unedited, and carries a
-dated entry in its observed consequences that points here.
+dated entry in its observed consequences that names this decision.
 
 ## Rationale
 
