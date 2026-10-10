@@ -404,7 +404,7 @@ tests".
 
 ## Observed Consequences
 
-None observed yet.
+2026-10-10 — ModelSpec took its last step without the kind segment. On this date ModelSpec made the earlier spelling in a model file an error for a model that is being checked, in its reference CLI from version 0.3.0 (ModelSpec decision 0022, the second of its two entries of 2026-10-10, which begins "Step 4 took effect", on `main` of `specscore/modelspec` at commit `3c149d2`). That entry gives the scope as it was put to the owner the same day, in four points, and his answer to it, "1 yes". The fourth point reads: "Only the reference CLI changes in this step; SpecScore's lint, the registries' checks and `ovdb` are not touched." So the kind segment `entities` was not made an error. This record places that error in ModelSpec's last step, and the step was taken without it; the row of the table under "Decided, implemented, and not yet" that gives it as not in force stands. No release of the `specscore` CLI was made for the step: v0.55.0 was still the latest when this entry was written, and what that table says of it was not run again for this entry. Recorder's reading, not the owner's words: his answer approves a scope for the step that leaves SpecScore's lint untouched, so it is not an approval of making the kind segment `entities` an error, and that has not been put to him. Of the other points this record leaves open, two are rows of that table and are as they were: whether a reference that spells `entities` is reported or rewritten, and the final list of reserved names. This entry says nothing of the other three.
 
 ## Affected Features
 
