@@ -66,11 +66,16 @@ The `specscore-md-deployment` artifact contains `site.tar.gz`: the complete `pub
 
 Automatic publication is disabled by default. Set the repository variable `CLOUDFLARE_DEPLOY_ENABLED` to `true` only when credentials and the production environment are ready. Every build still saves the artifact while publication is disabled; the run summary distinguishes the saved artifact from a deployment. An operator can download `site.tar.gz` and `site.tar.gz.sha256`, verify and extract them, and publish the exact packaged output with the pinned Wrangler command below, without rebuilding.
 
+Set `EXPECTED_SOURCE_SHA` to the full `head_sha` from the verified GitHub Actions run that produced the downloaded artifact.
+
 ```sh
+set -eu
+: "${EXPECTED_SOURCE_SHA:?Set to the verified GitHub run head_sha}"
 mkdir deployment
 shasum -a 256 -c site.tar.gz.sha256
 tar -xzf site.tar.gz -C deployment
 cd deployment
+test "$(cat REVISION)" = "$EXPECTED_SOURCE_SHA"
 npm exec --yes --package=wrangler@4.120.1 -- wrangler deploy --config wrangler.jsonc --no-bundle
 ```
 
