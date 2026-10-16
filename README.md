@@ -126,6 +126,7 @@ We use [Codegrapher](https://codegrapher.dev/) for efficient code exploration an
 
 Projects and tools built on SpecScore:
 
+- [**DataTug**](https://datatug.app) — uses SpecScore feature, acceptance, and plan contracts to define product intent and guide development; [the tools behind DataTug](https://datatug.app/en/under-the-hood/tools-we-built/).
 - [**specscore-cli**](https://github.com/specscore/specscore-cli) — reference CLI: lint, query, and scaffold SpecScore specifications
 - [**specstudio-skills**](https://github.com/specscore/specstudio-skills) — Claude Code plugin: opinionated SDD authoring workflow for SpecScore
 - [**rehearse**](https://github.com/specscore/rehearse) — Markdown-native test framework that turns SpecScore specs into executable scenarios
