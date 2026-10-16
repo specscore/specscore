@@ -1,6 +1,6 @@
 # site-generator
 
-Static site builder for [`https://specscore.md`](https://specscore.md). Reads the repo's Markdown (specs, docs, blog) plus [`site-config.json`](site-config.json) and writes the generated site into the repo root's `public/` directory, which Cloudflare Pages rebuilds from sources and serves.
+Static site builder for [`https://specscore.md`](https://specscore.md). Reads the repo's Markdown (specs, docs, blog) plus [`site-config.json`](site-config.json) and writes the generated site into the repo root's `public/` directory, which GitHub Actions assembles with the Astro landing and publishes as a saved artifact to Cloudflare Workers.
 
 ## Quick start
 
@@ -13,7 +13,7 @@ pnpm build          # build the site into ../../public
 pnpm clean          # remove ../../public
 ```
 
-`pnpm` is pinned via the workflow's `packageManager` setting; see [`.github/workflows/site-ci.yml`](../../.github/workflows/site-ci.yml) for the CI version of this build.
+`pnpm` is pinned by the workflow setup step; see [`.github/workflows/site-ci.yml`](../../.github/workflows/site-ci.yml) for the CI version of this build.
 
 ## Layout
 

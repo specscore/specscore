@@ -5,115 +5,140 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/site-ci.yml'
+      - 'wrangler.jsonc'
       - 'tools/site-generator/**'
       - 'tools/landing/**'
+      - 'tools/cf-build.sh'
       - 'new/**'
       - 'spec/**'
       - 'docs/**'
       - 'blog/**'
+      - '_headers'
+      - '_redirects'
   pull_request:
     paths:
       - '.github/workflows/site-ci.yml'
+      - 'wrangler.jsonc'
       - 'tools/site-generator/**'
       - 'tools/landing/**'
+      - 'tools/cf-build.sh'
       - 'new/**'
       - 'spec/**'
       - 'docs/**'
       - 'blog/**'
+      - '_headers'
+      - '_redirects'
   workflow_dispatch:
 
 permissions:
   contents: read
 
+env:
+  WRANGLER_SEND_METRICS: 'false'
+
 concurrency:
   group: site-ci-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build-and-deploy:
+    # Keep the existing SpecScore check ID registered for branch protection.
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v6
-
-      - uses: pnpm/action-setup@v5
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
-          version: 10
-
-      - uses: actions/setup-node@v6
+          persist-credentials: false
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5
         with:
-          node-version: 22
+          version: 11.20.0
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.20.0'
           cache: pnpm
           cache-dependency-path: |
             tools/site-generator/pnpm-lock.yaml
             tools/landing/pnpm-lock.yaml
-
-      - name: Install site-generator dependencies
-        working-directory: tools/site-generator
-        run: pnpm install --frozen-lockfile
-
-      # No headless browser install needed — Mermaid renders client-side from a CDN.
-
+      - name: Build complete site with frozen dependencies
+        run: sh tools/cf-build.sh
       - name: Run site-generator tests
-        working-directory: tools/site-generator
-        run: pnpm test
-
-      - name: Build docs site (emits public/)
-        working-directory: tools/site-generator
-        run: pnpm build
-
-      # --- Landing page (Astro, owns the homepage at `/`) ---
-      # The landing is a separate Astro sub-project that ships only one route.
-      # We build it after the docs site so its `index.html` overwrites the
-      # docs-style landing the site-generator emits. Everything else in
-      # public/ (docs pages, blog, ideas, install scripts) keeps coming
-      # from the site-generator unchanged. See tools/landing/README.md.
-
-      - name: Install landing dependencies
-        working-directory: tools/landing
-        run: pnpm install --frozen-lockfile
-
-      - name: Build landing (Astro)
-        working-directory: tools/landing
-        run: pnpm build
-
-      - name: Merge landing into public/ (Astro index.html wins)
-        run: cp -r tools/landing/dist/. public/
-
-      - name: Verify no unrendered mermaid fences in HTML
+        run: pnpm --dir tools/site-generator test
+      - name: Verify generated pages and Cloudflare rules
         run: |
+          test -s public/index.html
+          cmp _headers public/_headers
+          cmp _redirects public/_redirects
+          test ! -e public/README.md
           if grep -r '```mermaid' public/*.html; then
-            echo "ERROR: Found unrendered mermaid fences in HTML output"
+            echo '::error::Found unrendered Mermaid fences'
             exit 1
           fi
-
-      - name: Verify mermaid blocks present and loader script wired
-        run: |
           for f in public/feature-specification.html public/plan-specification.html; do
-            if ! grep -q '<pre class="mermaid">' "$f"; then
-              echo "ERROR: No <pre class=\"mermaid\"> block in $f"
-              exit 1
-            fi
-            if ! grep -q 'mermaid.esm.min.mjs' "$f"; then
-              echo "ERROR: Mermaid loader script not present in $f"
-              exit 1
-            fi
+            grep -q '<pre class="mermaid">' "$f"
+            grep -q 'mermaid.esm.min.mjs' "$f"
           done
-
-      - name: Verify Cloudflare-only config not bundled into build output
+      - name: Package deployment output
         run: |
-          if [ -f public/_headers ] || [ -f public/_redirects ]; then
-            echo "ERROR: _headers/_redirects must not be inside public/ (Cloudflare-only files)"
-            exit 1
+          test -s public/index.html
+          mkdir -p "$RUNNER_TEMP/deployment"
+          cp -R public wrangler.jsonc "$RUNNER_TEMP/deployment/"
+          printf '%s\n' "$GITHUB_SHA" > "$RUNNER_TEMP/deployment/REVISION"
+          tar -czf "$RUNNER_TEMP/site.tar.gz" -C "$RUNNER_TEMP/deployment" .
+          (cd "$RUNNER_TEMP" && sha256sum site.tar.gz > site.tar.gz.sha256)
+      - name: Save deployment artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: specscore-md-deployment
+          path: |
+            ${{ runner.temp }}/site.tar.gz
+            ${{ runner.temp }}/site.tar.gz.sha256
+          if-no-files-found: error
+          retention-days: 7
+      - name: Summarize saved artifact
+        env:
+          DEPLOY_ENABLED: ${{ vars.CLOUDFLARE_DEPLOY_ENABLED }}
+        run: |
+          echo 'Deployment artifact: specscore-md-deployment (site.tar.gz plus SHA-256 checksum).' >> "$GITHUB_STEP_SUMMARY"
+          if [ "$DEPLOY_ENABLED" != true ]; then
+            echo 'Automatic publication is disabled. This run saved the build artifact; it did not deploy it.' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'Production publication requires main, a successful build, and the production environment gate. See the deploy job for its result.' >> "$GITHUB_STEP_SUMMARY"
           fi
 
-      # Deployment is handled by Cloudflare Pages' Git integration
-      # (configured in the CF dashboard; builds via tools/cf-build.sh on every
-      # push to main). This workflow only builds, tests, and verifies the site
-      # as CI — it does not deploy. The retired Firebase Hosting fallback
-      # (Authenticate to GCP + Deploy to Firebase Hosting) was removed on
-      # 2026-05-29; its GCP Workload Identity auth had broken after the org
-      # rename and Firebase is no longer a deploy target.
+  deploy:
+    needs: build-and-deploy
+    if: vars.CLOUDFLARE_DEPLOY_ENABLED == 'true' && github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: production
+      url: https://specscore.md
+    concurrency:
+      group: specscore-md-production
+      cancel-in-progress: false
+    steps:
+      # No checkout or project dependency installation: deploy this run's bytes.
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.20.0'
+      - name: Download this run's deployment artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: specscore-md-deployment
+          path: artifact
+      - name: Verify checksum and restore deployment output
+        run: |
+          (cd artifact && sha256sum --check site.tar.gz.sha256)
+          mkdir deployment
+          tar -xzf artifact/site.tar.gz -C deployment
+          # Verify source-sha before granting the artifact deployment credentials.
+          test "$(cat deployment/REVISION)" = "$GITHUB_SHA"
+      - name: Publish built artifact to Cloudflare Workers
+        working-directory: deployment
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo '::error::Missing CLOUDFLARE_API_TOKEN'; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo '::error::Missing CLOUDFLARE_ACCOUNT_ID'; exit 1; }
+          npm exec --yes --package=wrangler@4.120.1 -- wrangler deploy --config wrangler.jsonc --no-bundle

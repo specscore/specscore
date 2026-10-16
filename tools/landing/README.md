@@ -21,26 +21,11 @@ pnpm build
 
 Produces static HTML + assets in `tools/landing/dist/`. Output is plain HTML — no Astro adapter, no server runtime.
 
-## Wiring into the deploy pipeline (TBD)
+## Deployment pipeline
 
-The Astro `dist/` needs to be merged into the parent repo's `public/` folder so Cloudflare Pages serves it from `/`.
+GitHub Actions runs [`../../tools/cf-build.sh`](../cf-build.sh), which builds the docs first, then all Astro landing variants, and copies `dist/.` into the parent `public/` directory. The Astro homepages overwrite the docs fallback homepages. The script also places `_headers` and `_redirects` at the publish root.
 
-Suggested CF Pages build command (extend the one in [`../../WEBSITE-STACK.md`](../../WEBSITE-STACK.md)):
-
-```sh
-pnpm install --frozen-lockfile \
-  && pnpm --filter specscore-site-generator build \
-  && pnpm --filter specscore-landing build \
-  && cp -r tools/landing/dist/* public/ \
-  && cp _headers _redirects public/
-```
-
-Notes for whoever wires this up:
-
-1. **Order matters.** The custom site-generator emits `public/index.html` (current homepage). Astro's `dist/index.html` must be copied **after** so it overwrites — otherwise the docs index wins and the landing is never served.
-2. **Asset collisions.** Astro outputs to `dist/_astro/*` by default. That namespace shouldn't collide with anything from the custom generator. Verify by inspecting `tools/landing/dist/` after a build.
-3. **`/hero.png` and `/favicon.svg`** live in `tools/landing/public/` and are copied to the root of `dist/` by Astro. They land at `public/hero.png` and `public/favicon.svg` after the merge step.
-4. **Build runs on deploy.** Cloudflare Pages rebuilds `public/` from sources via `tools/cf-build.sh` on every push to `main`, so the landing build runs as part of that script — `public/` itself is a gitignored artifact, not committed.
+[Site Generator CI](../../.github/workflows/site-ci.yml) tests and saves the complete output as a deployment artifact. Its production job downloads that run's artifact and publishes it to the `specscore-md` Cloudflare Worker without rebuilding. See [`../../WEBSITE-STACK.md`](../../WEBSITE-STACK.md) for credentials and environment configuration. Generated `public/` and `dist/` files are not committed.
 
 ## Design conventions
 
