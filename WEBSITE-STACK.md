@@ -18,7 +18,7 @@ The site uses **two coexisting build stacks**: the custom Node.js generator for 
 | Docs templates | Hand-rolled HTML | `tools/site-generator/{template,landing,blog-*}.html` | Docs only |
 | **Landing** | **Astro 5** | [`tools/landing/`](tools/landing/) | **`/` only** |
 | Output | Side-by-side `.html` + `.md` (docs); `index.html` + assets (landing) | `public/` | — |
-| Hosting | **Cloudflare Pages** | see [Hosting](#hosting) | — |
+| Hosting | **Cloudflare Workers static assets** | see [Hosting](#hosting) | — |
 
 ### The two-stack rule
 
@@ -47,72 +47,55 @@ tools/site-generator/build.js              tools/landing/  (pnpm build)
                         (Astro's index.html overwrites the docs one)
         │
         ▼
-Cloudflare Pages
-(re-runs both builds + merge from sources via tools/cf-build.sh,
- then places _headers/_redirects at the publish-dir root from
- repo-root sources)
+GitHub Actions: sh tools/cf-build.sh
+(assembles public/ including _headers/_redirects)
+        │
+        ▼
+Saved deployment artifact → Cloudflare Workers (no rebuild)
 ```
 
 ---
 
 ## Hosting
 
-**Cloudflare Pages** is the sole hosting target (active since 2026-05-21). It builds from sources — CF runs [`tools/cf-build.sh`](tools/cf-build.sh) in its own runner on every push to `main`, regenerates `public/`, and serves the result. Per-PR preview deploys come via the git integration out of the box.
+The production site is the Cloudflare Worker `specscore-md`, configured by [`wrangler.jsonc`](wrangler.jsonc). GitHub Actions owns the build and publication in [`site-ci.yml`](.github/workflows/site-ci.yml).
 
-Because CF Pages builds from sources, **`_headers` / `_redirects` are source files at the repo root and are NOT committed into `public/`** — `cf-build.sh` copies them to the publish-dir root during the build. A CI guard in [`site-ci.yml`](.github/workflows/site-ci.yml) fails the build if either file leaks into `public/` before that step.
+On relevant pull requests, pushes to `main`, and manual runs, the build job runs `sh tools/cf-build.sh` with frozen pnpm lockfiles. The script builds the docs generator, builds all localized Astro landings, merges them into `public/`, copies the root `_headers` and `_redirects`, and removes the generated development README. The job tests the generator and checks the assembled output.
 
-> **Provider history.** The site was previously deployable to Firebase Hosting as a fallback; that path was retired on 2026-05-29 — the `firebase.json` / `.firebaserc` config and the `site-ci.yml` deploy step were removed after its GCP Workload Identity auth broke post org-rename. The stack stays provider-portable: moving to another static host (Netlify, Vercel, Firebase, …) is a config-translation exercise, not a re-architecture.
+The `specscore-md-deployment` artifact contains `site.tar.gz`: the complete `public/` directory, `wrangler.jsonc`, and a `REVISION` file recording the source SHA. Archiving preserves hidden assets. Only a push to `main` or a manual run on `main` enters the `production` environment and downloads that same run's artifact. It checks `REVISION`, then publishes with pinned Wrangler and `--no-bundle`. No site build runs during publication.
 
-### Cloudflare Pages
+Automatic publication is disabled by default. Set the repository variable `CLOUDFLARE_DEPLOY_ENABLED` to `true` only when credentials and the production environment are ready. Every build still saves the artifact while publication is disabled; the run summary distinguishes the saved artifact from a deployment. An operator can download `site.tar.gz` and `site.tar.gz.sha256`, verify and extract them, and publish the exact packaged output with the pinned Wrangler command below, without rebuilding.
 
-**Cloudflare Pages builds from sources** — configured via the Cloudflare dashboard, CF runs its own build runner against the connected git repo, regenerates `public/`, and serves the result. There is no committed CF project-config file; the build command and output directory are set in the dashboard (see below).
+Set `EXPECTED_SOURCE_SHA` to the full `head_sha` from the verified GitHub Actions run that produced the downloaded artifact.
 
-| File | Purpose |
-|---|---|
-| [`_headers`](_headers) | Source-of-truth for per-path response headers: serves `*.md` as `text/markdown`, attaches `Link: rel="alternate"` to canonical HTML pages, and sets `Content-Type` + `Cache-Control` on `/install/get-cli{,.ps1}`. Lives at the **repo root only** — CF Pages' build command places it at the publish-dir root. |
-| [`_redirects`](_redirects) | Source-of-truth for Cloudflare's HTTP redirects. Currently 301s legacy `/get-cli{,.ps1}` paths to the canonical `/install/get-cli{,.ps1}`. Same placement contract as `_headers`. |
+```sh
+set -eu
+: "${EXPECTED_SOURCE_SHA:?Set to the verified GitHub run head_sha}"
+mkdir deployment
+shasum -a 256 -c site.tar.gz.sha256
+tar -xzf site.tar.gz -C deployment
+cd deployment
+test "$(cat REVISION)" = "$EXPECTED_SOURCE_SHA"
+npm exec --yes --package=wrangler@4.120.1 -- wrangler deploy --config wrangler.jsonc --no-bundle
+```
 
-**Notable Cloudflare-only behavior:**
-- `_headers` syntax: path on its own line, headers indented two spaces below. See the [Cloudflare Pages headers docs](https://developers.cloudflare.com/pages/configuration/headers/).
-- `_redirects` syntax: `<source> <destination> <status>` per line. See the [Cloudflare Pages redirects docs](https://developers.cloudflare.com/pages/configuration/redirects/).
-- Clean URLs (no trailing slash, `/foo` → `foo.html`) are CF Pages defaults — no config needed.
-- Per-PR preview deploys via the git integration are available out of the box.
+The operator supplies `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` through the existing local environment; credentials are not part of the artifact.
 
-**Required CF Pages project config (when setting up):**
+### Required GitHub configuration
 
-| Setting | Value |
-|---|---|
-| Build command | see [CF Pages build command](#cf-pages-build-command) below |
-| Build output directory | `public` |
-| Root directory | repo root |
+- `CLOUDFLARE_API_TOKEN` secret, available to this repository and authorized to deploy `specscore-md`.
+- `CLOUDFLARE_ACCOUNT_ID` variable for the existing account (account identifiers are not secrets).
+- A `production` environment restricted to `main`, with any required deployment approvals.
 
-#### CF Pages build command
+After the first GitHub deployment is verified, retire the legacy Cloudflare Git production build trigger so there is one publication owner. Cloudflare receives built assets; it does not rebuild the website. Pull requests validate and save artifacts without production credentials or preview publication.
 
-Paste this exact string into the CF dashboard's **Build command** field:
+### Build locally
 
 ```sh
 sh tools/cf-build.sh
 ```
 
-That's the entire build command. The script at [`tools/cf-build.sh`](tools/cf-build.sh) orchestrates both sub-project builds and assembles `public/` for deploy.
-
-What the script does, in order:
-1. Install docs-generator deps.
-2. Build the docs site → `public/*.html` + `public/*.md` (including a fallback `public/index.html`).
-3. Install landing deps.
-4. Build the Astro landing → `tools/landing/dist/`.
-5. Merge `tools/landing/dist/*` into `public/`. Astro's `index.html` overwrites the docs-style one; Astro's `_astro/`, `hero*.webp`, and `favicon.svg` land alongside the docs assets.
-6. Copy the CF config files (`_headers`, `_redirects`) into `public/` so Cloudflare reads them at the publish-dir root. (The CI guard fails the docs build if they leak into `public/` before this step.)
-
-Why a script rather than inlining the full chain in the dashboard: the CF dashboard's command field is a single-string text input, and long multi-command pastes can pick up stray newlines that break the shell chain in confusing ways. A version-controlled script is reviewable in PRs and immune to that class of bug.
-
-`pnpm --dir` is used inside the script (rather than `pnpm --filter`) because the repo has no top-level pnpm workspace. Both sub-projects (`tools/site-generator` and `tools/landing`) keep their own `package.json` + `pnpm-lock.yaml` independently.
-
-**Manual deploy fallback:**
-```sh
-sh tools/cf-build.sh
-npx wrangler pages deploy public --project-name=specscore
-```
+The root `_headers` and `_redirects` remain source files; the build copies them into the generated, gitignored `public/`. Workers static assets reads these files to apply response headers and redirects. See [Workers headers](https://developers.cloudflare.com/workers/static-assets/headers/) and [Workers redirects](https://developers.cloudflare.com/workers/static-assets/redirects/).
 
 ---
 
@@ -135,7 +118,7 @@ Because LLM tools and downstream agents fetch the `.md` files by URL, the **on-d
 
 ### 3. Pure static + per-path headers
 
-Cloudflare Pages handles the content negotiation we need with declarative config (`_headers` / `_redirects`) — no server, edge function, or custom runtime, exactly the constraint we want for a docs/spec site. The stack stays provider-portable: swapping to another static host is a config-translation exercise, not a re-architecture.
+Cloudflare Workers static assets handles the content negotiation we need with declarative config (`_headers` / `_redirects`) — no server, edge function, or custom runtime, exactly the constraint we want for a docs/spec site. The stack stays provider-portable: swapping to another static host is a config-translation exercise, not a re-architecture.
 
 ### 4. The custom generator is small
 
