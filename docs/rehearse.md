@@ -130,7 +130,7 @@ Each scenario is a Markdown file that mixes human-readable description with real
 A few touches under the hood:
 
 - **Steps can pass data forward.** An early step captures a value (say, an ID); a later step reuses it via `{{name}}` placeholders — a "context bag" shared within one scenario. It's the same `{{name}}` substitution the `session-hardened` check uses for its `response_file` param.
-- **It speaks several languages.** Steps aren't only `bash`; there are also `sql`, `dtql`, `hurl` (HTTP), and `graphql` blocks — so the sign-in POST could be a real `hurl` request instead of a `printf`.
+- **It speaks several languages.** Steps aren't only `bash`; there are also `sql`, `tugql`, `hurl` (HTTP), and `graphql` blocks — so the sign-in POST could be a real `hurl` request instead of a `printf`.
 - **Checks are reusable, not copy-pasted.** That's Act 2: a common verification is written once as a parameterized *check*, then invoked from any scenario with `**Use:** [label](url) with name=value`. Fix the check in one place and every scenario that uses it stays honest.
 - **Nested branches are first-class.** That's Act 3: one `## Given` setup with multiple `### When` / `#### Then` branches runs as several independent cases sharing the setup.
 - **It's honest about missing tools.** If a scenario needs a program that isn't installed, Rehearse *skips* it with a warning rather than pretending it failed.
