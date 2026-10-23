@@ -1,0 +1,585 @@
+---
+// /zh-tw/vs/plain-markdown/ — SpecScore vs plain Markdown / Notion / Jira (zh-tw).
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooterZhTw from '../../../../components/SiteFooterZhTw.astro';
+import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro';
+---
+
+<BaseLayout
+  lang="zh-TW"
+  title="SpecScore vs Plain Markdown — 客觀對比"
+  description="SpecScore 與預設方案（臨時 Markdown、Notion、Jira 工單）基於事實的對比。同樣的 Markdown，外加代理可以 lint、查詢並追溯到程式碼的結構。"
+  canonical="https://specscore.md/zh-tw/vs/plain-markdown/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href="/zh-tw/vs/" class="xref">對比列表</a></p>
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore vs Plain Markdown
+        </h1>
+        <p class="hero__sub">
+          大多數團隊已經有了「規範」——以 docs 資料夾裡的臨時 Markdown、Notion 頁面或
+          Jira 工單的形式存在。它免費、它早已就位、它能用。SpecScore 就是<strong>同樣的
+          Markdown</strong>，外加 AI 代理可以 lint、查詢並追溯回程式碼的結構。
+        </p>
+      </div>
+    </section>
+
+    {/* ── What they share ── */}
+    <section class="section" aria-labelledby="shared-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="shared-title" class="section-title">兩者的共同點。</h2>
+        <ul class="shared-list">
+          <li>無論哪種方式都是 Markdown——純文字、人類可讀、對 diff 友善。</li>
+          <li>規範可以放在儲存庫中，受版本控制，並在 PR 中審查。</li>
+          <li>沒有專有格式，沒有鎖定——你可以在任何編輯器中閱讀它。</li>
+          <li>你繼續撰寫散文；SpecScore 在它周圍新增結構，而不是取代它。</li>
+        </ul>
+      </div>
+    </section>
+
+    {/* ── What plain Markdown does well ── */}
+    <section class="section" aria-labelledby="default-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="default-title" class="section-title">預設方案的優勢。</h2>
+        <p class="section-note">
+          Plain Markdown、Notion 和 Jira 才是真正的預設選擇。它們當之無愧。
+        </p>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">零學習曲線</h3>
+          <p class="credit-card__desc">
+            沒有 schema、沒有必填欄位、流程中沒有 CLI。打開一個檔案，開始打字。
+            對於一次性的筆記或微型專案來說，這恰到好處——你不需要的結構只是摩擦。
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">早已安裝就位</h3>
+          <p class="credit-card__desc">
+            你的團隊已經在用 Notion、Confluence 或一個 <code>docs/</code> 資料夾。
+            無需採用任何新東西，無需遷移。摩擦最小的選項就是你已經在用的那個。
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">普遍可攜</h3>
+          <p class="credit-card__desc">
+            Plain Markdown 在任何地方都能打開，並且比任何工具都更長久。SpecScore 正是建立在
+            這一特性之上——這也是為什麼 SpecScore 同樣採用 Markdown，而非資料庫。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Feature comparison table ── */}
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">功能對比。</h2>
+        <p class="section-note">
+          差別不在於檔案本身——而在於代理能用它做什麼。
+        </p>
+
+        <div class="table-wrap">
+          <table class="compare-table" aria-label="SpecScore 與 Plain Markdown 功能對比">
+            <thead>
+              <tr>
+                <th scope="col">能力</th>
+                <th scope="col">Plain Markdown / Notion</th>
+                <th scope="col">SpecScore</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>格式</td>
+                <td>自由格式 Markdown / 文件</td>
+                <td><strong>Markdown + YAML frontmatter</strong>（結構化）</td>
+              </tr>
+              <tr>
+                <td>需求存放在哪裡</td>
+                <td>Jira、Notion、Slack、某人的腦子裡</td>
+                <td><strong>在儲存庫中，緊挨著程式碼</strong></td>
+              </tr>
+              <tr>
+                <td>「這份規範完整嗎？」</td>
+                <td>由人閱讀並判斷</td>
+                <td><strong><code>specscore lint</code></strong> — 自動完成</td>
+              </tr>
+              <tr>
+                <td>歧義偵測</td>
+                <td>無 — 模糊動詞悄無聲息地發布</td>
+                <td><strong>標記模糊動詞、缺失的驗收標準、懸空引用</strong></td>
+              </tr>
+              <tr>
+                <td>需求 / 驗收標準 ID</td>
+                <td>無</td>
+                <td><strong>機器可定址的 ID</strong>（<code>REQ: slug</code>）</td>
+              </tr>
+              <tr>
+                <td>生命週期狀態</td>
+                <td>隱式，如果有追蹤的話</td>
+                <td><strong>強制執行</strong> — Draft → Approved → Implementing → Stable</td>
+              </tr>
+              <tr>
+                <td>程式碼到規範的可追溯性</td>
+                <td>無</td>
+                <td><strong><code>specscore:</code> 註解</strong> + <code>Verifies:</code> 結尾註記</td>
+              </tr>
+              <tr>
+                <td>代理導覽</td>
+                <td>讀取每個檔案才能找到任何東西</td>
+                <td><strong>從 CLI 查詢規範圖譜</strong></td>
+              </tr>
+              <tr>
+                <td>CI 品質門禁</td>
+                <td>無</td>
+                <td><strong><code>specscore lint</code></strong> 回傳非零結束代碼，像 linter 一樣</td>
+              </tr>
+              <tr>
+                <td>學習曲線</td>
+                <td><strong>無</strong></td>
+                <td>需要學習一種格式（可漸進）</td>
+              </tr>
+              <tr>
+                <td>成本 / 授權條款</td>
+                <td>免費</td>
+                <td>免費、開源</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Where SpecScore goes further ── */}
+    <section class="section" aria-labelledby="further-title">
+      <div class="section-inner">
+        <h2 id="further-title" class="section-title">SpecScore 更進一步之處。</h2>
+
+        <div class="diff-grid">
+          <div class="diff-card">
+            <h3 class="diff-card__title">歧義被捕捉，而非被解讀</h3>
+            <p class="diff-card__desc">
+              使用自由格式規範時，每次代理互動都從解讀開始——
+              「登入應該能用」在正確與貌似合理但錯誤之間是一場擲硬幣。
+              SpecScore 的 <code>lint</code> 會在代理據此行動之前標記出模糊的動詞和缺失的
+              驗收標準。
+            </p>
+            <div class="diff-card__example">
+<pre class="terminal"><span class="prompt">$</span> specscore lint auth/login.md
+  <span class="mark-fail">✗</span> R1  <span class="dim">"should work" — unmeasurable</span>
+  <span class="mark-fail">✗</span> R1  no acceptance criteria</pre>
+            </div>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">誤解不再層層累積</h3>
+            <p class="diff-card__desc">
+              一個代理誤讀了需求，第二個在其基礎上構建，第三個又依賴前兩者——
+              而你在三個代理之後才察覺。結構化的驗收標準讓每個代理擁有相同的
+              通過/失敗條件，因此解讀不會在它們之間發生漂移。
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">程式碼可追溯回規範</h3>
+            <p class="diff-card__desc">
+              純文件與實作它們的程式碼之間沒有任何連結。SpecScore 新增了
+              <code>specscore:</code> 來源註解和 <code>Verifies:</code>
+              提交結尾註記——<code>specscore code refs</code> 能確定性地回答「哪些程式碼
+              實作了這個需求？」。
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">一份規範勝過四十個工單</h3>
+            <p class="diff-card__desc">
+              一位新隊友（或一個全新的代理）只需閱讀一份包含全部情境的功能規範，
+              而不必從四十個 Jira 工單和一條 Slack 討論串中重建意圖。
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">代理查詢，而非反覆閱讀</h3>
+            <p class="diff-card__desc">
+              在 docs 資料夾裡，要找出「哪些正在進行中？」意味著逐個打開檔案。
+              在 SpecScore 中，那就是 <code>specscore feature list</code>——規範圖譜
+              從 CLI 給出答案，因此代理不必為反覆閱讀儲存庫而消耗情境。
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">品質在 CI 中強制執行</h3>
+            <p class="diff-card__desc">
+              自由格式規範沒有門禁——寫了一半的規範與完整的規範一樣容易合併。
+              <code>specscore lint</code> 在出現問題時回傳非零結束代碼，
+              就像 ESLint 或 <code>go vet</code> 守護程式碼一樣。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── When to use which ── */}
+    <section class="section" aria-labelledby="when-title">
+      <div class="section-inner">
+        <h2 id="when-title" class="section-title">何時使用哪個。</h2>
+
+        <div class="when-grid">
+          <div class="when-card">
+            <h3 class="when-card__title">以下情境適合 Plain Markdown……</h3>
+            <ul class="when-card__list">
+              <li>這是一次性的筆記、一次探針，或一個小到不需要結構的專案。</li>
+              <li>不會有 AI 代理基於該文件建構——人讀了就明白。</li>
+              <li>你在記錄一個粗略的想法，而非某人將要實作的需求。</li>
+            </ul>
+          </div>
+
+          <div class="when-card when-card--primary">
+            <h3 class="when-card__title">以下情境適合使用 SpecScore……</h3>
+            <ul class="when-card__list">
+              <li>AI 代理基於規範建構——歧義會變成錯誤的程式碼。</li>
+              <li>多個代理或多人依賴同一批需求。</li>
+              <li>你需要知道哪些程式碼實作了哪個需求。</li>
+              <li>「這份規範完成了嗎？」應由工具回答，而非靠開會。</li>
+              <li>專案大到反覆閱讀所有內容已經無法擴展。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── The adoption path ── */}
+    <section class="section" aria-labelledby="bridge-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="bridge-title" class="section-title">讓你已有的規範進階。</h2>
+        <p class="prose-p">
+          你無需轉換你的待辦清單，也無需更換工具。挑選你的下一個功能，
+          為它寫一份 SpecScore 規範，執行 <code>specscore lint</code>——看看它是否
+          捕捉到你的工單遺漏的東西。實作它時新增 <code>specscore:</code> 註解。
+          只有在它真正有幫助時，才擴展到下一個 sprint。
+        </p>
+        <p class="prose-p">
+          Plain Markdown 是入口匝道。SpecScore 是它進階後的樣子。
+        </p>
+      </div>
+    </section>
+
+    <ComparisonFeedback page="plain-markdown" />
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">通過檢查的規範。</h2>
+      <div class="final-cta__buttons">
+        <a href="/zh-tw/cli/install/" class="btn btn--primary">安裝 CLI</a>
+        <a href="/zh-tw/ai/specstudio-skills/" class="btn btn--secondary">取得 AI 代理技能</a>
+        <a
+          href="https://github.com/specscore/specscore"
+          rel="noopener"
+          class="btn btn--tertiary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          在 GitHub 上開源
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <SiteFooterZhTw />
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__breadcrumb {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    margin-bottom: var(--space-2);
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Shared list ── */
+  .shared-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .shared-list li {
+    position: relative;
+    padding-left: 1.4rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+  }
+  .shared-list li::before {
+    content: '=';
+    position: absolute;
+    left: 0;
+    font-family: var(--font-code);
+    font-weight: 700;
+    color: var(--pale-ink);
+  }
+
+  /* ── Section note ── */
+  .section-note {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Credit cards ── */
+  .credit-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .credit-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .credit-card__desc {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    font-size: var(--fs-body);
+  }
+  .credit-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Feature comparison table ── */
+  .table-section { background: var(--cream-2); }
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+  .compare-table th,
+  .compare-table td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+  }
+  .compare-table thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    border-bottom: 2px solid var(--graphite);
+    white-space: nowrap;
+  }
+  .compare-table td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 160px;
+  }
+  .compare-table td:nth-child(2),
+  .compare-table td:nth-child(3) {
+    min-width: 200px;
+  }
+  .compare-table td code {
+    font-size: 0.88em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .compare-table strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ── Diff grid ── */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .diff-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+  }
+  .diff-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .diff-card__desc {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+  .diff-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .diff-card__example {
+    margin-top: var(--space-2);
+  }
+  .diff-card__example .terminal {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 860px) {
+    .diff-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── When to use which ── */
+  .when-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .when-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-4);
+  }
+  .when-card--primary {
+    border-color: var(--validator-green);
+    border-width: 2px;
+  }
+  .when-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .when-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .when-card__list li {
+    position: relative;
+    padding-left: 1.2rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+    font-size: var(--fs-small);
+  }
+  .when-card__list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--pale-ink);
+    font-family: var(--font-code);
+  }
+  .when-card--primary .when-card__list li::before {
+    color: var(--validator-green);
+  }
+  .when-card__list code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 860px) {
+    .when-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Adoption section ── */
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-2);
+  }
+  .prose-p:last-child {
+    margin-bottom: 0;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .prose-p code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+</style>

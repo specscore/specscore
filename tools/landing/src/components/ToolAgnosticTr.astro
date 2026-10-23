@@ -1,0 +1,32 @@
+---
+// Turkish variant of ToolAgnostic.astro.
+---
+
+<section class="agnostic section" aria-labelledby="agnostic-title">
+  <div class="section-inner section-inner--prose">
+    <h2 id="agnostic-title" class="agnostic__title">
+      Kendi araçlarınızı getirin.
+    </h2>
+    <p class="agnostic__body">
+      SpecScore sadece reponuzdaki dosyalardan ibarettir. Kaydolmanız gereken
+      bir SaaS yoktur. Zorunlu bir orkestratör yoktur. Linear, Jira, GitHub Projects,
+      bir klasördeki düz Markdown ile veya hiçbir proje yönetim aracı olmadan kullanın.
+      Format ve linter için görevlerinizin nerede yaşadığı fark etmez.
+    </p>
+  </div>
+</section>
+
+<style>
+  .agnostic { background: var(--cream); }
+  .agnostic__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .agnostic__body {
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.65;
+  }
+</style>

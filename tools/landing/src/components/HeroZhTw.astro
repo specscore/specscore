@@ -1,0 +1,116 @@
+---
+// Traditional Chinese variant of Hero.astro.
+// Structure / CSS classes match the English Hero exactly; only the prose changes.
+// Product names (SpecStudio, SpecScore, Claude Code, GitHub) stay English.
+import { Image } from 'astro:assets';
+import heroImage from '../assets/hero.webp';
+import HeroGitHubLink from './HeroGitHubLink.astro';
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__inner">
+    <div class="hero__copy">
+      <h1 id="hero-title" class="hero__headline">
+        規格說明中的每一處歧義，<br />都是你的 AI 代理燒掉的 token。
+      </h1>
+      <p class="hero__stakes">
+        然後是開發途中的一個澄清問題。然後是上線之後的一次修復。
+        然後是你一遍遍重新解釋的上下文。
+      </p>
+      <p class="hero__sub">
+        SpecScore 是一種用於規格說明的開放、可 lint 的檔案格式——
+        就像 JSON 之於資料。並配有 CLI，供你的 AI 代理呼叫以查詢和
+        編輯它們——就像 <code>jq</code> 之於 JSON。
+      </p>
+      <HeroGitHubLink repo="specscore/specscore" label="在 GitHub 上開源" />
+      <div class="hero__cta">
+        <a href="/zh-tw/ai/" class="btn btn--primary">取得 AI 技能外掛</a>
+        <a href="/zh-tw/cli/" class="btn btn--secondary">安裝 CLI</a>
+      </div>
+    </div>
+
+    <figure
+      class="hero__art"
+      aria-label="一份 SpecScore 規格說明呈現在奶油色的繪圖紙上：兩項需求通過檢查（綠色勾選），一項未通過（紅色標記）。"
+    >
+      <Image
+        src={heroImage}
+        widths={[700, 1050, 1400]}
+        sizes="(max-width: 860px) 88vw, 52vw"
+        alt=""
+        loading="eager"
+        decoding="async"
+      />
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-7);
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .hero__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 45fr 55fr;
+    gap: var(--space-6);
+    align-items: center;
+  }
+  .hero__copy {
+    animation: hero-copy-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 280ms;
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    max-width: 42ch;
+    line-height: 1.5;
+  }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .hero__art {
+    margin: 0;
+    animation: hero-art-in 700ms cubic-bezier(0.22, 0.61, 0.36, 1) both 100ms;
+  }
+  .hero__art img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @keyframes hero-copy-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0);   }
+  }
+  @keyframes hero-art-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0);    }
+  }
+
+  @media (max-width: 860px) {
+    .hero {
+      padding: var(--space-5) var(--space-3) var(--space-5);
+    }
+    .hero__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    .hero__art {
+      order: -1;
+      max-width: 460px;
+    }
+  }
+</style>

@@ -1,0 +1,332 @@
+---
+// /tr/vs/openspec/ — SpecScore vs OpenSpec comparison (Turkish).
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooterTr from '../../../../components/SiteFooterTr.astro';
+import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro';
+---
+
+<BaseLayout
+  lang="tr"
+  title="SpecScore vs OpenSpec — Dürüst Karşılaştırma."
+  description="SpecScore ve OpenSpec'in objektif ve yan yana karşılaştırması: spesifikasyon formatı, linting, yaşam döngüsü, izlenebilirlik, CLI ve ajan desteği. Her ikisi konusunda da dürüst."
+  canonical="https://specscore.md/tr/vs/openspec/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href="/tr/vs/" class="xref">Karşılaştırmalar</a></p>
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore vs OpenSpec
+        </h1>
+        <p class="hero__sub">
+          Her ikisi de spesifikasyonları Markdown olarak, kodunuzun yanına, yapay zeka ajanlarının okuyabileceği şekilde koyar. Farklı soruları yanıtlarlar: OpenSpec spesifikasyonları düzenler ve ajanlar için komutlar üretir. SpecScore ise spesifikasyon içeriğini doğrular, yaşam döngüsünü uygular ve kodu gereksinimlere geri izler.
+        </p>
+      </div>
+    </section>
+
+    {/* ── What they share ── */}
+    <section class="section" aria-labelledby="shared-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="shared-title" class="section-title">Ortak noktaları.</h2>
+        <ul class="shared-list">
+          <li>Spesifikasyonlar deponuzda Markdown dosyaları olarak yaşar — sürüm kontrollü ve PR'larda incelenebilir.</li>
+          <li>Her ikisi de MIT lisansı altında açık kaynaklıdır.</li>
+          <li>Her ikisi de Given/When/Then kabul kriterlerini kullanır.</li>
+          <li>Her ikisi de yapay zeka ajanlarını spesifikasyonların birinci sınıf tüketicisi olarak destekler.</li>
+        </ul>
+      </div>
+    </section>
+
+    {/* ── What OpenSpec does well ── */}
+    <section class="section" aria-labelledby="openspec-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="openspec-title" class="section-title">OpenSpec'in iyi yaptığı şeyler.</h2>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">En geniş ajan desteği</h3>
+          <p class="credit-card__desc">
+            OpenSpec, üretilen beceri (skill) dosyaları aracılığıyla 29 yapay zeka ajanını destekler — Claude, Cursor, Copilot, Gemini, Windsurf, Cline ve daha fazlası. Ajanınız listedeyse, OpenSpec yapılandırma gerektirmeden entegre olur.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Düşük giriş engeli</h3>
+          <p class="credit-card__desc">
+            <code>npm install -g @fission-ai/openspec &amp;&amp; openspec init</code> ile hemen spesifikasyon yazmaya başlarsınız. Öğrenecek bir şema, zorunlu frontmatter yoktur. Özellikle mevcut projeler için basit olacak şekilde tasarlanmıştır.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Temiz değişiklik deltaları modeli</h3>
+          <p class="credit-card__desc">
+            OpenSpec'in spesifikasyonları geliştirmek için kullandığı <code>ADDED / MODIFIED / REMOVED</code> formatı iyi tasarlanmıştır. Her değişiklik; bir teklif, delta spesifikasyonları ve görevler içeren bir klasördür — değişiklik önermenin yapılandırılmış bir yoludur.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Feature comparison table ── */}
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">Özellik karşılaştırması.</h2>
+
+        <div class="table-wrap">
+          <table class="compare-table" aria-label="SpecScore vs OpenSpec özellik karşılaştırması">
+            <thead>
+              <tr>
+                <th scope="col">Yetenek</th>
+                <th scope="col">OpenSpec</th>
+                <th scope="col">SpecScore</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Spesifikasyon formatı</td>
+                <td>Markdown (frontmatter yok)</td>
+                <td>Markdown + YAML frontmatter</td>
+              </tr>
+              <tr>
+                <td>Spesifikasyon linting</td>
+                <td>Yalnızca dosya yapısı</td>
+                <td><strong>İçerik kalitesi</strong> — belirsiz fiiller, eksik AC'ler, askıda referanslar</td>
+              </tr>
+              <tr>
+                <td>Gereksinim kimlikleri</td>
+                <td>Yok (başlıkla referans verilir)</td>
+                <td><strong>Slug tabanlı</strong> (<code>REQ: slug-format</code>)</td>
+              </tr>
+              <tr>
+                <td>Kabul kriteri kimlikleri</td>
+                <td>Yok</td>
+                <td><strong>Makine tarafından adreslenebilir kimlikler</strong></td>
+              </tr>
+              <tr>
+                <td>Yaşam döngüsü durumu</td>
+                <td>Örtük (dosya konumu)</td>
+                <td><strong>Uygulanan</strong> — Draft → Under Review → Approved → Implementing → Stable → Deprecated</td>
+              </tr>
+              <tr>
+                <td>Koddan spesifikasyona izlenebilirlik</td>
+                <td>Yok</td>
+                <td><strong><code>specscore:</code> açıklamaları</strong> + <code>Verifies:</code> commit fragmanları</td>
+              </tr>
+              <tr>
+                <td>Alt özellikler (Sub-features)</td>
+                <td>Hayır</td>
+                <td><strong>Evet</strong> (iç içe dizinler)</td>
+              </tr>
+              <tr>
+                <td>Çapraz referanslar</td>
+                <td>Biçimsel mekanizma yok</td>
+                <td><strong>Bağımlılıklar, Kaynak Fikirler, plan referansları</strong></td>
+              </tr>
+              <tr>
+                <td>CI entegrasyonu</td>
+                <td>Temel (<code>openspec validate</code>)</td>
+                <td>Yapılandırılabilir önem düzeyi ve pre-commit kancaları ile <strong><code>specscore lint</code></strong></td>
+              </tr>
+              <tr>
+                <td>Ajan desteği</td>
+                <td><strong>29 ajan</strong></td>
+                <td>Birincil olarak Claude Code + herhangi bir ajan için CLI</td>
+              </tr>
+              <tr>
+                <td>Şema özelleştirme</td>
+                <td><strong>Evet</strong> (<code>schema.yaml</code>, fork/init)</td>
+                <td>Sabit şema (tasarım gereği tutarlılık)</td>
+              </tr>
+              <tr>
+                <td>Değişiklik teklifleri</td>
+                <td><strong>Delta modeli</strong> (ADDED/MODIFIED/REMOVED)</td>
+                <td>Değişiklik Fikirleri + teklifler</td>
+              </tr>
+              <tr>
+                <td>Çalışma zamanı bağımlılığı</td>
+                <td>Node.js 20.19+</td>
+                <td><strong>Yok</strong> — tek bir Go ikili dosyası</td>
+              </tr>
+              <tr>
+                <td>Lisans</td>
+                <td>MIT</td>
+                <td>MIT</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Where SpecScore goes further ── */}
+    <section class="section" aria-labelledby="further-title">
+      <div class="section-inner">
+        <h2 id="further-title" class="section-title">SpecScore'un daha ileri gittiği alanlar.</h2>
+
+        <div class="diff-grid">
+          <div class="diff-card">
+            <h3 class="diff-card__title">Doğrulama, dosya yapısının ötesine geçer</h3>
+            <p class="diff-card__desc">
+              OpenSpec'in <code>validate</code> komutu dosya yapısını doğrular — dosyanın var olup olmadığını, doğru bölümlere sahip olup olmadığını. SpecScore ise iki katmanda daha fazlasını doğrular: <code>lint</code>, içerik ilişkilerini deterministik olarak denetler — her gereksinimin kabul kriterleri vardır, çapraz referanslar çözümlenir, durum geçişleri geçerlidir — ve bir yapay zeka denetçisi (<code>/review</code>, <code>/score</code>) hiçbir linter'ın yakalayamayacağı şeyleri yakalar: belirsiz kriterler ve muğlak fiiller.
+            </p>
+            <div class="diff-card__example">
+<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+  <span class="mark-fail">✗</span> R3  no acceptance criteria
+  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
+            </div>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Her gereksinim makine tarafından okunabilir bir kimliğe sahiptir</h3>
+            <p class="diff-card__desc">
+              OpenSpec gereksinimlere başlıkla referans verir — bu da yeniden adlandırmalara karşı kırılgandır. SpecScore, yeniden adlandırmalara, yeniden düzenlemelere ve ajanlar arası devirlere karşı hayatta kalan slug tabanlı kimlikler (<code>REQ: slug-format</code>) ve AC kimlikleri atar.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Yaşam döngüsü çıkarılmaz, zorunlu kılınır</h3>
+            <p class="diff-card__desc">
+              OpenSpec'te bir spesifikasyonun yaşam döngüsü dosya konumudur: <code>specs/</code> (mevcut), <code>changes/</code> (önerilen), <code>archive/</code> (tamamlanan). SpecScore'da ise yaşam döngüsü zorunlu bir durum alanıdır — Draft → Under Review → Approved → Implementing → Stable → Deprecated — lint tarafından doğrulanır, git kancalarından veya CI'dan <code>specscore change-status</code> ile geçişi sağlanır.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Kod, spesifikasyonlara geri izlenir</h3>
+            <p class="diff-card__desc">
+              OpenSpec'in izlenebilirlik mekanizması yoktur. SpecScore, kod yorumlarında <code>specscore:</code> açıklamalarına ve commit'lerde <code>Verifies:</code> fragmanlarına sahiptir. <code>specscore code refs</code> komutunu çalıştırın ve "bu gereksinimi hangi kod uyguluyor?" sorusuna deterministik bir yanıt alın.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Çalışma zamanı bağımlılığı yok</h3>
+            <p class="diff-card__desc">
+              OpenSpec, Node.js 20.19+ gerektirir. SpecScore ise tek bir Go ikili dosyasıdır — çalışma zamanı yok, <code>node_modules</code> yok. Araç zincirine Node eklemeden Go, Rust, Python, Java projelerinde çalışır.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Bileştirilebilir yapay nesne hiyerarşisi</h3>
+            <p class="diff-card__desc">
+              OpenSpec spesifikasyonları etki alanına göre düzdür. SpecScore tipli bir hiyerarşiye sahiptir: Fikirler (Ideas) Özelliklere (Features) yükseltilir, Özellikler gereksinimleri ve AC'leri içerir, Planlar AC'lere referans verir, Görevler (Tasks) Planlara referans verir. Tüm ilişkiler CLI üzerinden makine tarafından gezilebilir.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── When to use which ── */}
+    <section class="section" aria-labelledby="when-title">
+      <div class="section-inner">
+        <h2 id="when-title" class="section-title">Hangisi ne zaman kullanılmalı?</h2>
+
+        <div class="when-grid">
+          <div class="when-card">
+            <h3 class="when-card__title">Şu durumlarda OpenSpec ile başlayın…</h3>
+            <ul class="when-card__list">
+              <li>Cursor, Copilot veya Claude dışı diğer ajanları kullanıyorsanız ve kutudan çıktığı gibi entegrasyona ihtiyacınız varsa.</li>
+              <li>Mevcut bir kod tabanına ilk kez spesifikasyon ekliyorsanız ve sıfır sürtünme istiyorsanız.</li>
+              <li>Ekibiniz katı kurallar yerine şema esnekliğine değer veriyorsa.</li>
+            </ul>
+          </div>
+
+          <div class="when-card when-card--primary">
+            <h3 class="when-card__title">Şu durumlarda SpecScore'u kullanın…</h3>
+            <ul class="when-card__list">
+              <li>Spesifikasyon kalite kontrolüne ihtiyacınız varsa — lint, ajanlar üzerinde token israf etmeden önce belirsizlikleri yakalar.</li>
+              <li>Koddan spesifikasyona izlenebilirliğe ihtiyacınız varsa — "bu gereksinimi hangi kod uyguluyor?" deterministik bir yanıt döndürür.</li>
+              <li>Birçok özellik, alt özellik ve yaşam döngüsü geçişi içeren büyük bir sistem inşa ediyorsanız.</li>
+              <li>Sıfır çalışma zamanı bağımlılığı istiyorsanız — tek bir ikili dosya, Node.js gerekmez.</li>
+              <li>CI'da spesifikasyon kalite kapılarına ihtiyacınız varsa — <code>specscore lint</code>, tıpkı ESLint veya <code>go vet</code> gibi hatalarda sıfır olmayan çıkış koduyla sonlanır.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── The integration opportunity ── */}
+    <section class="section" aria-labelledby="bridge-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="bridge-title" class="section-title">Birbirini dışlamazlar.</h2>
+        <p class="prose-p">
+          SpecScore, OpenSpec'in <code>spec.md</code> dosyalarını lint edebilir. OpenSpec ile başlayan ekipler, geçiş yapmadan SpecScore'un kalite katmanını ekleyebilir — halihazırda sahip olduğunuz spesifikasyonları doğrulayın, ihtiyaç duyduğunuzda izlenebilirlik ekleyin, ekibiniz büyüdüğünde yaşam döngüsünü uygulayın.
+        </p>
+        <p class="prose-p">
+          OpenSpec iyi bir giriş rampasıdır. SpecScore ise güvenlik korkuluklarıdır.
+        </p>
+      </div>
+    </section>
+
+    <ComparisonFeedback page="openspec" />
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">Geçen spesifikasyonlar.</h2>
+      <div class="final-cta__buttons">
+        <a href="/tr/cli/install/" class="btn btn--primary">CLI'ı kurun</a>
+        <a href="/tr/ai/specstudio-skills/" class="btn btn--secondary">Ajanınız için yapay zeka becerilerini edinin</a>
+        <a href="https://github.com/specscore/specscore" rel="noopener" class="btn btn--tertiary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" /></svg>
+          GitHub'da Açık Kaynak
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <SiteFooterTr />
+</BaseLayout>
+
+<style>
+  .hero { padding: var(--space-6) var(--space-3) var(--space-5); background: var(--cream); }
+  .hero__inner { max-width: var(--max-prose); margin: 0 auto; animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms; }
+  .hero__breadcrumb { font-family: var(--font-code); font-size: var(--fs-small); color: var(--pale-ink); margin-bottom: var(--space-2); }
+  .hero__headline { font-size: var(--fs-hero); font-weight: 700; line-height: 1.04; letter-spacing: -0.02em; margin-bottom: var(--space-3); }
+  .hero__sub { font-size: 1.125rem; color: var(--mid-ink); line-height: 1.55; max-width: 52ch; }
+  @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .section-title { font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-3); }
+  .shared-list { list-style: none; margin: 0; padding: 0; }
+  .shared-list li { position: relative; padding-left: 1.4rem; color: var(--mid-ink); line-height: 1.6; margin-bottom: var(--space-1); }
+  .shared-list li::before { content: '='; position: absolute; left: 0; font-family: var(--font-code); font-weight: 700; color: var(--pale-ink); }
+  .credit-card { background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-3); margin-bottom: var(--space-2); }
+  .credit-card__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; margin-bottom: var(--space-1); }
+  .credit-card__desc { color: var(--mid-ink); line-height: 1.6; font-size: var(--fs-body); }
+  .credit-card__desc code { font-size: 0.9em; background: var(--cream); padding: 0.05em 0.3em; border-radius: 2px; }
+  .table-section { background: var(--cream-2); }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .compare-table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); line-height: 1.5; }
+  .compare-table th, .compare-table td { text-align: left; padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  .compare-table thead th { font-family: var(--font-display); font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-ink); border-bottom: 2px solid var(--graphite); white-space: nowrap; }
+  .compare-table td:first-child { font-weight: 500; white-space: nowrap; min-width: 160px; }
+  .compare-table td:nth-child(2), .compare-table td:nth-child(3) { min-width: 200px; }
+  .compare-table td code { font-size: 0.88em; background: var(--surface); padding: 0.05em 0.3em; border-radius: 2px; }
+  .compare-table strong { font-weight: 600; color: var(--ink); }
+  .diff-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+  .diff-card { background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-3); }
+  .diff-card__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; margin-bottom: var(--space-1); }
+  .diff-card__desc { color: var(--mid-ink); font-size: var(--fs-small); line-height: 1.6; }
+  .diff-card__desc code { font-size: 0.9em; background: var(--cream-2); padding: 0.05em 0.3em; border-radius: 2px; }
+  .diff-card__example { margin-top: var(--space-2); }
+  .diff-card__example .terminal { font-size: 0.78rem; line-height: 1.6; }
+  @media (max-width: 860px) { .diff-grid { grid-template-columns: 1fr; } }
+  .when-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+  .when-card { background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-4); }
+  .when-card--primary { border-color: var(--validator-green); border-width: 2px; }
+  .when-card__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; margin-bottom: var(--space-2); }
+  .when-card__list { list-style: none; margin: 0; padding: 0; }
+  .when-card__list li { position: relative; padding-left: 1.2rem; color: var(--mid-ink); line-height: 1.6; margin-bottom: var(--space-1); font-size: var(--fs-small); }
+  .when-card__list li::before { content: '→'; position: absolute; left: 0; color: var(--pale-ink); font-family: var(--font-code); }
+  .when-card--primary .when-card__list li::before { color: var(--validator-green); }
+  .when-card__list code { font-size: 0.9em; background: var(--cream-2); padding: 0.05em 0.3em; border-radius: 2px; }
+  @media (max-width: 860px) { .when-grid { grid-template-columns: 1fr; } }
+  .prose-p { color: var(--mid-ink); line-height: 1.65; margin-bottom: var(--space-2); }
+  .prose-p:last-child { margin-bottom: 0; font-weight: 500; color: var(--ink); }
+  .prose-p code { font-size: 0.9em; background: var(--cream-2); padding: 0.05em 0.3em; border-radius: 2px; }
+  .final-cta { background: var(--cream-2); padding: var(--space-7) var(--space-3); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+  .final-cta__inner { max-width: var(--max-content); margin: 0 auto; text-align: center; }
+  .final-cta__title { font-size: clamp(2.2rem, 4.2vw, 3.2rem); margin-bottom: var(--space-4); letter-spacing: -0.02em; line-height: 1.05; }
+  .final-cta__buttons { display: inline-flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+</style>

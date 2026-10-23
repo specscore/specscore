@@ -23,7 +23,7 @@
 // entire job without the failure modes above.
 
 export type LangCode =
-  | 'en' | 'es' | 'pt-br' | 'ru' | 'uk' | 'ja' | 'zh-cn' | 'ko';
+  | 'en' | 'es' | 'de' | 'fr' | 'it' | 'pl' | 'pt-br' | 'ru' | 'tr' | 'uk' | 'ja' | 'zh-cn' | 'zh-tw' | 'ko';
 
 export interface Lang {
   code: LangCode;
@@ -35,22 +35,34 @@ export interface Lang {
 export const langs: Lang[] = [
   { code: 'en',    label: 'English',        tag: 'en'    },
   { code: 'es',    label: 'Español',        tag: 'es'    },
+  { code: 'de',    label: 'Deutsch',        tag: 'de'    },
+  { code: 'fr',    label: 'Français',       tag: 'fr'    },
+  { code: 'it',    label: 'Italiano',       tag: 'it'    },
+  { code: 'pl',    label: 'Polski',         tag: 'pl'    },
   { code: 'pt-br', label: 'Português (BR)', tag: 'pt-BR' },
   { code: 'ru',    label: 'Русский',        tag: 'ru'    },
+  { code: 'tr',    label: 'Türkçe',         tag: 'tr'    },
   { code: 'uk',    label: 'Українська',     tag: 'uk'    },
   { code: 'ja',    label: '日本語',          tag: 'ja'    },
   { code: 'zh-cn', label: '中文',            tag: 'zh-CN' },
+  { code: 'zh-tw', label: '繁體中文',         tag: 'zh-TW' },
   { code: 'ko',    label: '한국어',           tag: 'ko'    },
 ];
 
 // Detect the current locale from a URL pathname like "/ru/cli/install/".
 export function localeFromPath(path: string): LangCode {
-  if (path.startsWith('/ru'))    return 'ru';
-  if (path.startsWith('/uk'))    return 'uk';
-  if (path.startsWith('/es'))    return 'es';
   if (path.startsWith('/pt-br')) return 'pt-br';
-  if (path.startsWith('/ja'))    return 'ja';
   if (path.startsWith('/zh-cn')) return 'zh-cn';
+  if (path.startsWith('/zh-tw')) return 'zh-tw';
+  if (path.startsWith('/es'))    return 'es';
+  if (path.startsWith('/de'))    return 'de';
+  if (path.startsWith('/fr'))    return 'fr';
+  if (path.startsWith('/it'))    return 'it';
+  if (path.startsWith('/pl'))    return 'pl';
+  if (path.startsWith('/ru'))    return 'ru';
+  if (path.startsWith('/tr'))    return 'tr';
+  if (path.startsWith('/uk'))    return 'uk';
+  if (path.startsWith('/ja'))    return 'ja';
   if (path.startsWith('/ko'))    return 'ko';
   return 'en';
 }
@@ -58,7 +70,7 @@ export function localeFromPath(path: string): LangCode {
 // Strip the locale prefix from a pathname to get the route portion.
 // e.g. "/es/vs/openspec/" → "/vs/openspec/", "/" → "/".
 export function routeFromPath(path: string): string {
-  return path.replace(/^\/(es|pt-br|ru|uk|ja|zh-cn|ko)(\/|$)/, '/');
+  return path.replace(/^\/(es|de|fr|it|pl|pt-br|ru|tr|uk|ja|zh-cn|zh-tw|ko)(\/|$)/, '/');
 }
 
 // Build a URL that switches the current route to a given locale.

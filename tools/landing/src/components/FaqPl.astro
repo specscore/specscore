@@ -1,0 +1,188 @@
+---
+// Polish variant of Faq.astro.
+// HTML structure + CSS classes match the English original exactly; only
+// the prose changes. Anchor hrefs target /pl/faq/#...
+---
+
+<section class="faq-teaser section" aria-labelledby="faq-teaser-title">
+  <div class="section-inner">
+    <h2 id="faq-teaser-title" class="faq-teaser__title">
+      Masz pytania?
+    </h2>
+    <p class="faq-teaser__lead">
+      Oto pytania, które powracają najczęściej. Każde z nich prowadzi
+      do pełnej odpowiedzi na <a href="/pl/faq/" class="faq-teaser__indexlink">stronie FAQ</a>.
+    </p>
+
+    <div class="faq-teaser__list">
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          Czym różni się SpecScore od spec-kit?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            spec-kit to metodologia; SpecScore to format zapisu
+            specyfikacji, które tworzysz, oraz narzędzie CLI. Współpracują
+            ze sobą — rozszerzenie spec-kit zapisujące w formacie
+            SpecScore jest w przygotowaniu.
+          </p>
+          <a href="/pl/faq/#vs-spec-kit" class="faq-teaser__more">
+            Pełna odpowiedź →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          Czym różnią się SpecStudio Skills od Superpowers i agent-skills?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            Idea jest zbliżona — wszystkie trzy prowadzą agentów AI
+            przez etapy ideate → specify → plan → implement. SpecStudio
+            Skills zapisuje artefakty w formacie SpecScore i używa
+            CLI <code>specscore</code> do zapytań i zmian statusu;
+            pozostałe odczytują i modyfikują pliki bezpośrednio. Wybierz
+            SpecStudio, gdy liczy się zużycie tokenów.
+          </p>
+          <a href="/pl/faq/#vs-superpowers" class="faq-teaser__more">
+            Pełna odpowiedź →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          Po co CLI — czy nie wystarczy zainstalować samych skilli?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            Skille nie są w stanie niezawodnie egzekwować spójności
+            referencyjnej, zwracać przefiltrowanych wyników bez czytania
+            każdego pliku ani aktualizować odpowiedniego pola statusu
+            w odpowiednim czasie. CLI wykonuje każde z tych zadań jednym
+            wywołaniem. Skille, by zrobić to samo, muszą czytać każdy plik.
+          </p>
+          <a href="/pl/faq/#why-cli" class="faq-teaser__more">
+            Pełna odpowiedź →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          Dlaczego „SpecScore” — co tak właściwie ocenia?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            Dwa znaczenia, oba zamierzone. Partytura (score) — uporządkowany
+            zapis wymagań. Oraz dosłowna ocena jakości — linter w CLI
+            to ocena deterministyczna, a skill <code>/score</code> to
+            ocena dojrzałości w skali A–F wystawiana przez AI.
+          </p>
+          <a href="/pl/faq/#naming" class="faq-teaser__more">
+            Pełna odpowiedź →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          Gdzie są dane liczbowe dotyczące oszczędności tokenów?
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            Dokładne, pomierzone zestawienie porównawcze jest przygotowywane
+            przed publikacją na Habr. Z punktu widzenia architektury: CLI
+            zwraca zwięzłą listę o ustalonej strukturze; zwykły agent
+            zamiast tego musi wczytać N całych dokumentów.
+          </p>
+          <a href="/pl/faq/#token-savings" class="faq-teaser__more">
+            Pełna odpowiedź →
+          </a>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-teaser { background: var(--cream); }
+  .faq-teaser__title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+  }
+  .faq-teaser__lead {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    max-width: 60ch;
+    line-height: 1.6;
+    text-wrap: balance;
+  }
+  .faq-teaser__indexlink {
+    color: var(--ink-blue);
+    border-bottom: 1px solid currentColor;
+  }
+
+  .faq-teaser__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--hairline);
+    max-width: 70ch;
+  }
+
+  .faq-teaser__item {
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .faq-teaser__q {
+    padding: var(--space-3) 0;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .faq-teaser__q::-webkit-details-marker { display: none; }
+  .faq-teaser__q::after {
+    content: "+";
+    font-family: var(--font-code);
+    font-size: 1.25rem;
+    color: var(--mid-ink);
+    font-weight: 400;
+    transition: transform 140ms ease;
+  }
+  .faq-teaser__item[open] .faq-teaser__q::after {
+    content: "–";
+  }
+
+  .faq-teaser__a {
+    padding-bottom: var(--space-3);
+    color: var(--mid-ink);
+    line-height: 1.6;
+  }
+  .faq-teaser__a p {
+    margin: 0 0 var(--space-2);
+  }
+  .faq-teaser__a code {
+    background: var(--cream-2);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+    font-size: 0.9em;
+    color: var(--ink);
+  }
+  .faq-teaser__more {
+    display: inline-block;
+    color: var(--ink-blue);
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    border-bottom: 1px solid currentColor;
+  }
+</style>

@@ -1,0 +1,597 @@
+---
+// /fr/vs/spec-kit/ — Comparaison SpecScore vs GitHub Spec Kit.
+// Honnête, factuelle, côte à côte. Spec Kit est un flux de travail/une méthodologie ;
+// SpecScore est le format d'artefact qu'il peut cibler. Ils se composent.
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooterFr from '../../../../components/SiteFooterFr.astro';
+import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro';
+---
+
+<BaseLayout
+  lang="fr"
+  title="SpecScore vs Spec Kit — Comparaison honnête."
+  description="Une comparaison objective et côte à côte de SpecScore et GitHub Spec Kit : flux de travail vs format, linting, cycle de vie, traçabilité et CLI. Ils se composent — voici comment."
+  canonical="https://specscore.md/fr/vs/spec-kit/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href="/fr/vs/" class="xref">Comparaisons</a></p>
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore vs Spec Kit
+        </h1>
+        <p class="hero__sub">
+          Ils opèrent à des niveaux distincts. Spec Kit est un <strong>flux de travail</strong> —
+          un processus guidé qui mène un agent de l'idée à l'implémentation.
+          SpecScore est le <strong>format</strong> dans lequel les spécifications sont rédigées, assorti d'un CLI
+          qui les linte, les interroge et les trace. Spec Kit peut générer des fichiers SpecScore.
+        </p>
+      </div>
+    </section>
+
+    {/* ── What they share ── */}
+    <section class="section" aria-labelledby="shared-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="shared-title" class="section-title">Ce qu'ils partagent.</h2>
+        <ul class="shared-list">
+          <li>La même étoile polaire — des spécifications avant le code, avec les agents d'IA comme lecteurs de premier rang.</li>
+          <li>Les spécifications résident dans votre dépôt en Markdown — versionnées, révisables dans les pull requests.</li>
+          <li>Tous deux sont open source sous licence MIT.</li>
+          <li>Tous deux ciblent Claude Code, Cursor, Copilot et d'autres agents de codage IA.</li>
+        </ul>
+      </div>
+    </section>
+
+    {/* ── What Spec Kit does well ── */}
+    <section class="section" aria-labelledby="speckit-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="speckit-title" class="section-title">Ce que Spec Kit fait bien.</h2>
+        <p class="section-note">
+          <a href="https://github.com/github/spec-kit" rel="nofollow noopener" target="_blank" class="xref">Spec Kit</a>
+          est un flux de travail de développement piloté par les spécifications conçu par GitHub Next.
+        </p>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Un processus complet et affirmé</h3>
+          <p class="credit-card__desc">
+            Spec Kit vous offre l'ensemble du cycle :
+            <code>constitution → specify → plan → tasks → implement</code>.
+            Chaque étape dispose d'une commande slash et d'un prompt conçus pour maintenir l'agent
+            sur les rails. Si vous voulez un processus éprouvé, Spec Kit vous en livre un clé en main.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Forte notoriété et large distribution</h3>
+          <p class="credit-card__desc">
+            Soutenu par GitHub Next, avec une vaste communauté et une bibliothèque croissante d'extensions.
+            Pour de nombreux développeurs, Spec Kit est le premier flux de travail
+            fondé sur les spécifications qu'ils découvrent.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Commandes agnostiques de l'agent</h3>
+          <p class="credit-card__desc">
+            Les commandes de Spec Kit fonctionnent dans Claude Code, Cursor, Copilot et plus encore —
+            le flux de travail guide l'agent quel que soit celui que vous utilisez.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Feature comparison table ── */}
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">Comparaison des fonctionnalités.</h2>
+        <p class="section-note">
+          Ces outils répondent à des problématiques différentes : le tableau compare donc des rôles, pas des vainqueurs.
+        </p>
+
+        <div class="table-wrap">
+          <table class="compare-table" aria-label="Comparaison des fonctionnalités SpecScore vs Spec Kit">
+            <thead>
+              <tr>
+                <th scope="col">Capacité</th>
+                <th scope="col">Spec Kit</th>
+                <th scope="col">SpecScore</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Rôle principal</td>
+                <td>Flux de travail / méthodologie</td>
+                <td><strong>Format de stockage + CLI</strong></td>
+              </tr>
+              <tr>
+                <td>Format produit</td>
+                <td>Markdown libre</td>
+                <td><strong>Markdown + frontmatter YAML</strong> (structuré)</td>
+              </tr>
+              <tr>
+                <td>Linting de spécifications</td>
+                <td>Aucun</td>
+                <td><strong>Qualité de contenu</strong> — verbes vagues, ACs manquants, références orphelines</td>
+              </tr>
+              <tr>
+                <td>IDs d'exigences / ACs</td>
+                <td>Aucun</td>
+                <td><strong>IDs adressables par machine</strong> (<code>REQ: slug</code>)</td>
+              </tr>
+              <tr>
+                <td>État du cycle de vie</td>
+                <td>Implicite (étape du flux)</td>
+                <td><strong>Appliqué</strong> — Draft → Approved → Implementing → Stable → Deprecated</td>
+              </tr>
+              <tr>
+                <td>Traçabilité code-vers-spécification</td>
+                <td>Aucune</td>
+                <td><strong>Annotations <code>specscore:</code></strong> + remorques de commit <code>Verifies:</code></td>
+              </tr>
+              <tr>
+                <td>Interroger les specs depuis le CLI</td>
+                <td>Échafaudage (<code>specify</code>, <code>plan</code>, <code>tasks</code>)</td>
+                <td><strong>API de requête</strong> — <code>feature list / show / deps</code>, <code>lint</code>, <code>code refs</code></td>
+              </tr>
+              <tr>
+                <td>Dépendance de runtime</td>
+                <td>Python</td>
+                <td><strong>Aucune</strong> — binaire Go autonome unique</td>
+              </tr>
+              <tr>
+                <td>Intégration CI</td>
+                <td>Exécuter le flux</td>
+                <td><strong><code>specscore lint</code></strong> code de sortie non nul, hooks pre-commit</td>
+              </tr>
+              <tr>
+                <td>Relation</td>
+                <td colspan="2"><strong>Ils se composent</strong> — Spec Kit peut générer des fichiers SpecScore</td>
+              </tr>
+              <tr>
+                <td>Licence</td>
+                <td>MIT</td>
+                <td>MIT</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Where SpecScore goes further ── */}
+    <section class="section" aria-labelledby="further-title">
+      <div class="section-inner">
+        <h2 id="further-title" class="section-title">Ce que SpecScore apporte en plus.</h2>
+
+        <div class="diff-grid">
+          <div class="diff-card">
+            <h3 class="diff-card__title">La sortie est vérifiable par linter</h3>
+            <p class="diff-card__desc">
+              Spec Kit produit du Markdown libre — qu'il soit rigoureux ou incomplet, il est livré tel quel.
+              SpecScore vérifie le résultat sur deux plans : <code>lint</code>
+              contrôle de manière déterministe que chaque exigence comporte des critères d'acceptation,
+              que les références croisées sont résolues et que les transitions d'état sont valides — et un réviseur
+              IA (<code>/review</code>, <code>/score</code>) détecte les critères ambigus
+              et les verbes flous.
+            </p>
+            <div class="diff-card__example">
+<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+  <span class="mark-fail">✗</span> R3  no acceptance criteria
+  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
+            </div>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">La sortie est interrogeable</h3>
+            <p class="diff-card__desc">
+              Spec Kit écrit des fichiers ; les relire impose d'ouvrir chaque document. Les spécifications SpecScore
+              répondent aux requêtes directement depuis le CLI : <code>specscore feature list</code>,
+              <code>feature deps</code>, <code>code refs</code> — permettant à un agent d'explorer
+              le graphe de spécifications sans devoir lire l'intégralité du dépôt.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Chaque exigence possède un ID</h3>
+            <p class="diff-card__desc">
+              Spec Kit fait référence aux exigences par de la prose textuelle. SpecScore attribue des IDs stables
+              (<code>REQ: slug-format</code>) et des identifiants d'ACs qui survivent aux renommages,
+              aux réorganisations et aux passages de relais entre agents.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Le cycle de vie est formellement appliqué</h3>
+            <p class="diff-card__desc">
+              Dans Spec Kit, l'étape d'une spécification correspond simplement à l'endroit où vous en êtes dans le processus.
+              Dans SpecScore, le cycle de vie est un champ d'état appliqué — Draft → Approved
+              → Implementing → Stable → Deprecated — validé par le linter et transitionné
+              par <code>specscore change-status</code> depuis vos hooks git ou votre CI.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Le code remonte jusqu'aux spécifications</h3>
+            <p class="diff-card__desc">
+              Spec Kit n'embarque aucun mécanisme de traçabilité. SpecScore fournit
+              des annotations source <code>specscore:</code> et des remorques de commit <code>Verifies:</code>
+              — lancez <code>specscore code refs</code> pour obtenir une réponse déterministe
+              à la question « quel code implémente cette exigence ? »
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Aucune dépendance de runtime</h3>
+            <p class="diff-card__desc">
+              SpecScore est un binaire Go autonome unique — aucun interpréteur à installer.
+              Il s'intègre naturellement dans les dépôts Go, Rust, Python, Java ou TypeScript sans
+              encombrer votre chaîne d'outils.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── When to use which ── */}
+    <section class="section" aria-labelledby="when-title">
+      <div class="section-inner">
+        <h2 id="when-title" class="section-title">Quand choisir l'un ou l'autre.</h2>
+
+        <div class="when-grid">
+          <div class="when-card">
+            <h3 class="when-card__title">Tournez-vous vers Spec Kit quand…</h3>
+            <ul class="when-card__list">
+              <li>Vous cherchez un processus guidé et cadré, de l'idée brute à l'implémentation.</li>
+              <li>Votre équipe a besoin de la rigueur d'étapes séquentielles specify / plan / tasks.</li>
+              <li>Vous standardisez la méthode d'orchestration des agents au sein d'une équipe.</li>
+            </ul>
+          </div>
+
+          <div class="when-card when-card--primary">
+            <h3 class="when-card__title">Utilisez SpecScore quand…</h3>
+            <ul class="when-card__list">
+              <li>Vous avez besoin de spécifications que les agents peuvent linter, interroger et muter sans relire chaque fichier.</li>
+              <li>Vous exigez une traçabilité code-vers-spécification déterministe.</li>
+              <li>Vous développez un vaste système avec de nombreuses fonctionnalités et transitions d'état.</li>
+              <li>Vous voulez zéro dépendance de runtime — un seul binaire, aucun runtime de langage imposé.</li>
+              <li>Vous voulez des barrières de qualité de spécifications en CI qui échouent avec un code de sortie non nul, à l'instar d'ESLint ou de <code>go vet</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── The integration opportunity ── */}
+    <section class="section" aria-labelledby="bridge-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="bridge-title" class="section-title">SpecScore prolonge Spec Kit — il ne le remplace pas.</h2>
+        <p class="prose-p">
+          Spec Kit est le processus guidant l'élaboration d'une spécification ; SpecScore est le format
+          dans lequel cette spécification peut être enregistrée. Une extension Spec Kit émettant au format
+          SpecScore est en cours de conception — suivez le flux de travail Spec Kit et obtenez des spécifications qui se linent,
+          s'interrogent et se tracent automatiquement.
+        </p>
+        <p class="prose-p">
+          Choisissez Spec Kit pour le processus. Choisissez SpecScore pour l'artefact. Adoptez les deux
+          pour bénéficier du meilleur des deux mondes.
+        </p>
+      </div>
+    </section>
+
+    <ComparisonFeedback page="spec-kit" />
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">Des specs qui passent.</h2>
+      <div class="final-cta__buttons">
+        <a href="/fr/cli/install/" class="btn btn--primary">Installer le CLI</a>
+        <a href="/fr/ai/specstudio-skills/" class="btn btn--secondary">Obtenir les skills IA pour votre agent</a>
+        <a
+          href="https://github.com/specscore/specscore"
+          rel="noopener"
+          class="btn btn--tertiary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          Open source sur GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <SiteFooterFr />
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__breadcrumb {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    margin-bottom: var(--space-2);
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Shared list ── */
+  .shared-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .shared-list li {
+    position: relative;
+    padding-left: 1.4rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+  }
+  .shared-list li::before {
+    content: '=';
+    position: absolute;
+    left: 0;
+    font-family: var(--font-code);
+    font-weight: 700;
+    color: var(--pale-ink);
+  }
+
+  /* ── Section note ── */
+  .section-note {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Credit cards ── */
+  .credit-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .credit-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .credit-card__desc {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    font-size: var(--fs-body);
+  }
+  .credit-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Feature comparison table ── */
+  .table-section { background: var(--cream-2); }
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+  .compare-table th,
+  .compare-table td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+  }
+  .compare-table thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    border-bottom: 2px solid var(--graphite);
+    white-space: nowrap;
+  }
+  .compare-table td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 160px;
+  }
+  .compare-table td:nth-child(2),
+  .compare-table td:nth-child(3) {
+    min-width: 200px;
+  }
+  .compare-table td code {
+    font-size: 0.88em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .compare-table strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ── Diff grid ── */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .diff-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+  }
+  .diff-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .diff-card__desc {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+  .diff-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .diff-card__example {
+    margin-top: var(--space-2);
+  }
+  .diff-card__example .terminal {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 860px) {
+    .diff-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── When to use which ── */
+  .when-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .when-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-4);
+  }
+  .when-card--primary {
+    border-color: var(--validator-green);
+    border-width: 2px;
+  }
+  .when-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .when-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .when-card__list li {
+    position: relative;
+    padding-left: 1.2rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+    font-size: var(--fs-small);
+  }
+  .when-card__list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--pale-ink);
+    font-family: var(--font-code);
+  }
+  .when-card--primary .when-card__list li::before {
+    color: var(--validator-green);
+  }
+  .when-card__list code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 860px) {
+    .when-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Bridge section ── */
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-2);
+  }
+  .prose-p:last-child {
+    margin-bottom: 0;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .prose-p code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+</style>

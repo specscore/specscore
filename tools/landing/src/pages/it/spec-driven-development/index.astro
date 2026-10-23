@@ -1,0 +1,299 @@
+---
+// /it/spec-driven-development/ — pillar page (Italian).
+// Neutral-reference-first explainer on spec-driven development, with AI as
+// the narrative spine. SpecScore appears as the named recommended
+// implementation in the "in practice" section + FAQ only.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooterIt from '../../../components/SiteFooterIt.astro';
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: 'Sviluppo guidato dalle specifiche per agenti IA',
+      description:
+        'Cos\'è lo sviluppo guidato dalle specifiche, perché è fondamentale per gli agenti IA, come funziona il workflow e come si confronta con TDD e la programmazione basata solo su prompt.',
+      inLanguage: 'it',
+      datePublished: '2026-05-29',
+      dateModified: '2026-05-29',
+      mainEntityOfPage: 'https://specscore.md/it/spec-driven-development/',
+      image: 'https://specscore.md/hero-og.webp',
+      author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      publisher: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      about: {
+        '@type': 'DefinedTerm',
+        name: 'Sviluppo guidato dalle specifiche',
+        description:
+          'Una metodologia di sviluppo software in cui una specifica scritta — requisiti e criteri di accettazione — funge da fonte di verità rispetto alla quale il codice viene costruito e verificato.',
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Lo sviluppo guidato dalle specifiche è la stessa cosa dello sviluppo guidato dai test (TDD)?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'No. Il TDD guida l\'implementazione partendo da test che falliscono, a livello di codice. Lo sviluppo guidato dalle specifiche opera a un livello superiore: fissa prima il comportamento previsto e i criteri di accettazione in una specifica scritta. Sono complementari — i criteri di accettazione di una specifica diventano spesso i test che guidano il TDD.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Lo sviluppo guidato dalle specifiche ti rallenta?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Aggiunge tempo prima di scrivere codice ed elimina il tempo sprecato a rifare ciò che era sbagliato. Per script usa-e-getta il costo non conviene. Per qualsiasi cosa generata su larga scala da un agente IA, o che un team debba mantenere, scrivere prima la specifica è quasi sempre più veloce dall\'inizio alla fine.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Qual è la differenza tra una specifica e un PRD?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Un PRD è in genere prosa discorsiva per persone. Una specifica nello sviluppo guidato dalle specifiche è strutturata e verificabile con test — requisiti discreti con criteri di accettazione espliciti — in modo che sia i revisori umani sia gli agenti IA possano operare su di essa con precisione.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Come utilizzano una specifica gli agenti di programmazione IA?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Quando la specifica è leggibile dalla macchina, l\'agente la interroga per ottenere i requisiti e i criteri di accettazione rilevanti per il suo task corrente invece di caricare l\'intero codebase, e poi confronta il proprio risultato con tali criteri — una salvaguardia contro codice plausibile ma errato.',
+          },
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  lang="it"
+  title="Sviluppo guidato dalle specifiche per agenti IA — Guida completa | SpecScore"
+  description="Sviluppo guidato dalle specifiche significa scrivere una specifica verificabile prima del codice, affinché gli agenti IA costruiscano la cosa giusta. Cos'è, come funziona e il confronto con TDD."
+  canonical="https://specscore.md/it/spec-driven-development/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
+  </Fragment>
+
+  <SiteHeader />
+
+  <main>
+    <!-- 1. Definition block + TL;DR -->
+    <section class="sdd-hero" aria-labelledby="sdd-title">
+      <div class="sdd-hero__inner">
+        <h1 id="sdd-title" class="sdd-hero__headline">Sviluppo guidato dalle specifiche per agenti IA</h1>
+        <p class="sdd-hero__lede">
+          <strong>Lo sviluppo guidato dalle specifiche (SDD) è una metodologia in cui una specifica
+          scritta e verificabile — requisiti e criteri di accettazione — funge da fonte di verità rispetto
+          alla quale il codice viene costruito e verificato.</strong> Invece di passare direttamente da un
+          prompt o un ticket al codice, si concorda prima cosa deve fare il software e poi si
+          costruisce in base a tale specifica. Ora che gli agenti IA scrivono gran parte del codice, la
+          specifica è ciò che assicura che costruiscano la cosa giusta.
+        </p>
+        <ul class="sdd-takeaways">
+          <li>La specifica è la fonte di verità; il codice ne deriva e viene verificato a fronte di essa.</li>
+          <li>I requisiti sono accompagnati da criteri di accettazione espliciti, così "fatto" è verificabile, non soggettivo.</li>
+          <li>Gli agenti IA interrogano la specifica per comprendere l'intento anziché tirarlo a indovinare dal codice — meno codice errato.</li>
+          <li>È complementare allo sviluppo guidato dai test (TDD), non un sostituto.</li>
+        </ul>
+        <p class="sdd-updated">Ultimo aggiornamento: maggio 2026</p>
+      </div>
+    </section>
+
+    <!-- 2. What is SDD -->
+    <section class="sdd-section" aria-labelledby="what-title">
+      <div class="sdd-section__inner">
+        <h2 id="what-title">Cos'è lo sviluppo guidato dalle specifiche?</h2>
+        <p>
+          L'approccio ribalta il consueto ordine di lavoro. Anziché considerare
+          la specifica come documentazione scritta a posteriori — o saltarla del tutto —
+          l'SDD rende la specifica l'artefatto primario. Codice, test e revisioni
+          fanno tutti riferimento ad essa.
+        </p>
+        <p>
+          Una specifica in questo senso non è un muro di testo. È strutturata: un insieme di
+          <strong>requisiti</strong>, ciascuno con <strong>criteri di accettazione</strong>
+          espliciti che indicano, in termini verificabili, cosa deve essere vero affinché il requisito
+          sia considerato soddisfatto. Questa struttura è ciò che permette a un revisore, a una suite di
+          test e a un agente IA di interpretare lo stesso documento nello stesso identico modo.
+        </p>
+        <p>
+          La specifica è inoltre un <strong>artefatto vivente</strong>. Quando i requisiti cambiano, la
+          specifica cambia per prima e il codice segue di conseguenza — così la specifica non diventa mai
+          finzione.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. Why it matters now (AI spine) -->
+    <section class="sdd-section" aria-labelledby="why-title">
+      <div class="sdd-section__inner">
+        <h2 id="why-title">Perché è fondamentale adesso: l'IA ha alzato la posta</h2>
+        <p>
+          Gli agenti IA di programmazione generano codice molto più velocemente di quanto un essere
+          umano possa leggerlo. Questo sposta il collo di bottiglia. La parte difficile non è più scrivere
+          l'implementazione — è
+          <strong>specificare l'intento con sufficiente chiarezza affinché il codice generato
+          sia effettivamente quello desiderato</strong>. Un agente a cui viene fornito un prompt vago produrrà
+          inevitabilmente qualcosa di plausibile ma errato, alla velocità della macchina.
+        </p>
+        <p>
+          La specifica è il guardrail. Quando il comportamento atteso e i criteri di
+          accettazione sono messi per iscritto, l'agente ha un obiettivo chiaro verso cui costruire e
+          una checklist con cui verificare — e un revisore umano ha un punto fermo
+          da approvare prima ancora che esista una sola riga di codice. L'SDD è il modo con cui i team
+          evitano che la velocità dell'IA si trasformi in ore di correzioni e rilavorazioni.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. How it works -->
+    <section class="sdd-section" aria-labelledby="how-title">
+      <div class="sdd-section__inner">
+        <h2 id="how-title">Come funziona lo sviluppo guidato dalle specifiche</h2>
+        <p>Il flusso di lavoro è un ciclo, non un documento statico:</p>
+        <ol class="sdd-steps">
+          <li><strong>Cattura l'intento.</strong> Registra la direzione iniziale — il problema, l'obiettivo, le domande aperte — prima di impegnarti in una soluzione.</li>
+          <li><strong>Specifica il comportamento.</strong> Trasforma la direzione concordata in requisiti, ciascuno con criteri di accettazione espliciti e verificabili.</li>
+          <li><strong>Scomponi in un piano.</strong> Suddividi la specifica in task ordinati, ciascuno citando i criteri di accettazione che soddisfa.</li>
+          <li><strong>Implementa.</strong> Costruisci task per task — un essere umano o un agente IA — in base alla specifica.</li>
+          <li><strong>Verifica rispetto ai criteri.</strong> Controlla il risultato rispetto ai criteri di accettazione, non in base all'intuito.</li>
+          <li><strong>Mantieni viva la specifica.</strong> Quando i requisiti cambiano, aggiorna prima la specifica; il codice seguirà.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. Benefits -->
+    <section class="sdd-section" aria-labelledby="benefits-title">
+      <div class="sdd-section__inner">
+        <h2 id="benefits-title">Vantaggi dello sviluppo guidato dalle specifiche</h2>
+        <ul class="sdd-benefits">
+          <li>I disaccordi emergono durante la revisione della specifica — costo minimo — anziché dopo l'implementazione — costo elevato.</li>
+          <li>"Fatto" è un concetto oggettivo, perché i criteri di accettazione sono verificabili con test.</li>
+          <li>La specifica è il contesto condiviso per tutti: prodotto, ingegneria e agenti IA.</li>
+          <li>I cambiamenti sono tracciabili — ogni task fa riferimento ai criteri che soddisfa.</li>
+        </ul>
+        <h3>Perché aiuta specificamente gli agenti IA</h3>
+        <ul class="sdd-benefits">
+          <li><strong>Intento leggibile dalla macchina:</strong> l'agente legge direttamente i requisiti anziché dedurli dal codice.</li>
+          <li><strong>Meno contesto da caricare:</strong> l'agente interroga la sezione rilevante della specifica anziché l'intero repository.</li>
+          <li><strong>Output verificabile:</strong> i criteri di accettazione offrono all'agente un obiettivo concreto di successo/fallimento.</li>
+          <li><strong>Tracciabilità:</strong> il codice generato può essere ricollegato al requisito che lo ha originato.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. Comparison -->
+    <section class="sdd-section" aria-labelledby="vs-title">
+      <div class="sdd-section__inner">
+        <h2 id="vs-title">Sviluppo guidato dalle specifiche a confronto con altre pratiche</h2>
+        <div class="sdd-table-wrap">
+          <table class="sdd-table">
+            <thead>
+              <tr><th>Pratica</th><th>Fonte di verità</th><th>Relazione con l'SDD</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Sviluppo guidato dai test (TDD)</td><td>Test a livello di codice che falliscono</td><td>Complementare — i criteri di accettazione diventano i test.</td></tr>
+              <tr><td>PRD tradizionale</td><td>Prosa scritta per esseri umani</td><td>Meno strutturato; non direttamente verificabile con test né leggibile da macchine.</td></tr>
+              <tr><td>Solo prompt ("vibe coding")</td><td>Il prompt e le congetture del modello</td><td>Nessun obiettivo duraturo e revisionabile — ciò che l'SDD è nato per risolvere.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Per un confronto dettagliato tra SpecScore e altri strumenti per specifiche, consulta
+          <a href="/it/vs/">le pagine di confronto</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 7. Tradeoffs -->
+    <section class="sdd-section" aria-labelledby="limits-title">
+      <div class="sdd-section__inner">
+        <h2 id="limits-title">Compromessi e quando non usarlo</h2>
+        <p>
+          Lo sviluppo guidato dalle specifiche non è gratuito. Sposta l'impegno
+          a monte nel pensare e scrivere prima che qualsiasi codice venga eseguito,
+          il che è una scelta errata per uno script usa-e-getta o un esperimento
+          rapido. E una specifica è utile solo se viene mantenuta aggiornata — una
+          specifica abbandonata diventa fuorviante, peggiore di nessuna specifica.
+          L'SDD ripaga l'investimento quando il lavoro è abbastanza ampio da
+          richiedere pianificazione, deve essere mantenuto nel tempo, o viene
+          affidato a un agente IA per la costruzione su larga scala.
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. In practice (SpecScore) -->
+    <section class="sdd-section" aria-labelledby="practice-title">
+      <div class="sdd-section__inner">
+        <h2 id="practice-title">Praticare lo sviluppo guidato dalle specifiche con agenti IA</h2>
+        <p>
+          Per fare SDD con agenti IA servono due cose: un <strong>formato di specifica
+          leggibile dalla macchina</strong> che sia il tuo team che i tuoi agenti
+          comprendano, e un <strong>modo per consentire agli agenti di leggere,
+          scrivere e convalidare</strong> tali specifiche.
+        </p>
+        <p>
+          <strong>SpecScore</strong> è un'implementazione mirata esattamente a questo.
+          È un formato aperto Markdown + YAML per feature, requisiti e criteri di
+          accettazione — semplici file nel tuo repository — affiancato da una CLI
+          che i tuoi agenti invocano per interrogarli, modificarli ed eseguirne il
+          lint. Poiché la struttura è leggibile dalla macchina, un agente può
+          chiedere "su cosa dovrei lavorare adesso?" e ricevere i requisiti aperti
+          con i rispettivi criteri di accettazione, per poi verificare il proprio
+          lavoro a fronte di essi. È indipendente dagli strumenti e open source.
+        </p>
+        <p>
+          Inizia con le <a href="/it/ai/">Skill IA per il tuo agente di programmazione</a> o
+          <a href="/it/cli/">installa la CLI</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. FAQ -->
+    <section class="sdd-section" aria-labelledby="faq-title">
+      <div class="sdd-section__inner">
+        <h2 id="faq-title">Domande frequenti</h2>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Lo sviluppo guidato dalle specifiche è la stessa cosa dello sviluppo guidato dai test (TDD)?</p>
+          <p class="sdd-faq__a">No. Il TDD guida l'implementazione partendo da test che falliscono, a livello di codice. Lo sviluppo guidato dalle specifiche opera a un livello superiore: fissa prima il comportamento previsto e i criteri di accettazione in una specifica scritta. Sono complementari — i criteri di accettazione di una specifica diventano spesso i test che guidano il TDD.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Lo sviluppo guidato dalle specifiche ti rallenta?</p>
+          <p class="sdd-faq__a">Aggiunge tempo prima di scrivere codice ed elimina il tempo sprecato a rifare ciò che era sbagliato. Per script usa-e-getta il costo non conviene. Per qualsiasi cosa generata su larga scala da un agente IA, o che un team debba mantenere, scrivere prima la specifica è quasi sempre più veloce dall'inizio alla fine.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Qual è la differenza tra una specifica e un PRD?</p>
+          <p class="sdd-faq__a">Un PRD è in genere prosa discorsiva per persone. Una specifica nello sviluppo guidato dalle specifiche è strutturata e verificabile con test — requisiti discreti con criteri di accettazione espliciti — in modo che sia i revisori umani sia gli agenti IA possano operare su di essa con precisione.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Come utilizzano una specifica gli agenti di programmazione IA?</p>
+          <p class="sdd-faq__a">Quando la specifica è leggibile dalla macchina, l'agente la interroga per ottenere i requisiti e i criteri di accettazione rilevanti per il suo task corrente invece di caricare l'intero codebase, e poi confronta il proprio risultato con tali criteri — una salvaguardia contro codice plausibile ma errato.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. CTA -->
+  <section class="sdd-cta" aria-labelledby="cta-title">
+    <div class="sdd-cta__inner">
+      <h2 id="cta-title">Inizia a sviluppare in base alle specifiche con il tuo agente IA</h2>
+      <p>SpecScore offre al tuo agente un formato di specifica aperto e una CLI per interrogarlo ed eseguirne il lint.</p>
+      <div class="sdd-cta__buttons">
+        <a href="/it/ai/" class="btn btn--primary">Ottieni le skill IA per il tuo agente</a>
+        <a href="/it/cli/" class="btn btn--secondary">Installa la CLI</a>
+      </div>
+    </div>
+  </section>
+
+  <SiteFooterIt />
+</BaseLayout>

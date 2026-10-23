@@ -1,0 +1,118 @@
+---
+// Traditional Chinese variant of Comparisons.astro — homepage band
+// "How SpecScore compares." Teases the /zh-tw/vs/ hub with a compact
+// mini-card per rival (name + one-line contrast), each linking to its
+// full comparison. The full matrix lives on /zh-tw/vs/, not here.
+---
+
+<section class="compare section" aria-labelledby="compare-title">
+  <div class="section-inner">
+    <h2 id="compare-title" class="compare__title">SpecScore 與同類工具的比較。</h2>
+    <p class="compare__sub">
+      規範驅動開發是一個擁擠的領域。這裡坦誠地說明 SpecScore
+      相較於各種替代方案的定位。
+    </p>
+
+    <div class="minis">
+      <a href="/zh-tw/vs/plain-markdown/" class="mini">
+        <span class="mini__name">Plain Markdown</span>
+        <span class="mini__line">預設選擇。SpecScore 是你的 Markdown 進階後的樣子。</span>
+      </a>
+      <a href="/zh-tw/vs/openspec/" class="mini">
+        <span class="mini__name">OpenSpec</span>
+        <span class="mini__line">一個可靠的入門通道。SpecScore 是品質護欄。</span>
+      </a>
+      <a href="/zh-tw/vs/spec-kit/" class="mini">
+        <span class="mini__name">Spec Kit</span>
+        <span class="mini__line">Spec Kit 是工作流程。SpecScore 是產物。</span>
+      </a>
+      <a href="/zh-tw/vs/datarim/" class="mini">
+        <span class="mini__name">Datarim</span>
+        <span class="mini__line">Datarim 執行管線。SpecScore 是它留下的成果。</span>
+      </a>
+      <a href="/zh-tw/vs/codespeak/" class="mini">
+        <span class="mini__name">CodeSpeak</span>
+        <span class="mini__line">CodeSpeak 押注於編譯器。SpecScore 押注於格式。</span>
+      </a>
+    </div>
+
+    <p class="compare__more">
+      <a href="/zh-tw/vs/" class="compare__more-link">查看完整對比 &rarr;</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .compare { background: var(--cream-2); }
+  .compare__title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+  }
+  .compare__sub {
+    font-size: 1.05rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+    max-width: 56ch;
+  }
+
+  /* ── Mini comparison cards ── */
+  .minis {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-2);
+  }
+  .mini {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-top: 2px solid var(--validator-green);
+    padding: var(--space-3);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+  }
+  .mini:hover {
+    border-color: var(--graphite);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
+  }
+  .mini:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+  }
+  .mini__name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .mini__line {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.45;
+  }
+
+  .compare__more {
+    margin-top: var(--space-3);
+  }
+  .compare__more-link {
+    font-family: var(--font-display);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--validator-green);
+    text-decoration: none;
+  }
+  .compare__more-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 980px) {
+    .minis { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .minis { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

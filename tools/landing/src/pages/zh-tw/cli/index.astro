@@ -1,0 +1,347 @@
+---
+// SpecScore CLI — product page (zh-TW).
+// Open-source linter for SpecScore specifications.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooterZhTw from '../../../components/SiteFooterZhTw.astro';
+import LintExample from '../../../components/LintExample.astro';
+import HeroGitHubLink from '../../../components/HeroGitHubLink.astro';
+import QsTabsScript from '../../../components/QsTabsScript.astro';
+import InstallFromSourceZhTw from '../../../components/InstallFromSourceZhTw.astro';
+---
+
+<BaseLayout
+  lang="zh-TW"
+  title="SpecScore CLI — 像檢查程式碼一樣檢查你的規格說明。"
+  description="開源的 SpecScore 規格檢查器。從命令列或 CI 管線驗證功能、需求和驗收標準。無需帳號，無遙測。"
+  canonical="https://specscore.md/zh-tw/cli/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero: copy left, terminal demo right ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          像檢查程式碼一樣<br />檢查你的規格說明。
+        </h1>
+        <div class="hero__copy">
+          <p class="hero__sub">
+            SpecScore CLI 從命令列驗證功能、需求和驗收標準。
+            在本地執行，整合到 CI，或讓你的 AI 代理呼叫它。
+            開源，無需帳號，無遙測。
+          </p>
+          <HeroGitHubLink repo="specscore/specscore-cli" label="在 GitHub 上開源" />
+          <div class="hero__cta">
+            <a href="/zh-tw/cli/install/" class="btn btn--primary">安裝</a>
+          </div>
+        </div>
+
+        <div
+          class="hero__art"
+          role="img"
+          aria-label="specscore lint 的終端機輸出：R1 和 R2 具有驗收標準（綠色勾選）；R3 沒有驗收標準、一個 Related Feature 連結無法解析、缺少必需的 Open Questions 章節（紅色叉號）。3 個問題，exit 1。"
+        >
+<LintExample />
+        </div>
+      </div>
+    </section>
+
+    {/* ── 快速安裝 ── */}
+    <section class="section" id="install" aria-labelledby="install-title">
+      <div class="section-inner">
+        <h2 id="install-title" class="section-title">60 秒安裝。</h2>
+
+        <div class="qs-tabs" role="tablist" aria-label="適合你作業系統的安裝命令">
+          <button type="button" role="tab" id="qs-tab-unix" aria-controls="qs-panel-unix" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="unix">Linux / macOS</button>
+          <button type="button" role="tab" id="qs-tab-win" aria-controls="qs-panel-win" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="win">Windows</button>
+          <button type="button" role="tab" id="qs-tab-brew" aria-controls="qs-panel-brew" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="brew">Homebrew</button>
+          <button type="button" role="tab" id="qs-tab-src" aria-controls="qs-panel-src" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="src">From source</button>
+        </div>
+
+        <div id="qs-panel-unix" role="tabpanel" aria-labelledby="qs-tab-unix" class="qs-panel is-active" data-panel="unix">
+<pre class="terminal"><span class="prompt">$</span> curl -fsSL https://specscore.md/install/get-cli | sh</pre>
+        </div>
+        <div id="qs-panel-win" role="tabpanel" aria-labelledby="qs-tab-win" class="qs-panel" data-panel="win" hidden>
+<pre class="terminal"><span class="prompt">PS&gt;</span> powershell -c "irm https://specscore.md/install/get-cli.ps1 | iex"</pre>
+        </div>
+        <div id="qs-panel-brew" role="tabpanel" aria-labelledby="qs-tab-brew" class="qs-panel" data-panel="brew" hidden>
+<pre class="terminal"><span class="prompt">$</span> brew install specscore/tap/specscore</pre>
+        </div>
+        <div id="qs-panel-src" role="tabpanel" aria-labelledby="qs-tab-src" class="qs-panel" data-panel="src" hidden>
+          <InstallFromSourceZhTw />
+        </div>
+
+        <p class="qs-more">
+          <a class="xref" href="/zh-tw/cli/install/">所有安裝方式 →</a>
+        </p>
+      </div>
+    </section>
+
+    {/* ── 功能特性 ── */}
+    <section class="section features-section" aria-labelledby="features-title">
+      <div class="section-inner">
+        <h2 id="features-title" class="section-title">你將獲得什麼。</h2>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3 class="feature-card__title">Lint</h3>
+            <p class="feature-card__desc">
+              驗證結構、元資料、交叉引用和 AC 唯一性。
+              按需求輸出 pass/fail 報告，附修復建議。
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-card__title">Score</h3>
+            <p class="feature-card__desc">
+              以 0-100 分評估規格完整性。發現遺漏的參與者、
+              觸發器、錯誤狀態、安全模型和限制。
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-card__title">CI 就緒</h3>
+            <p class="feature-card__desc">
+              出錯時返回非零結束代碼。將 <code>specscore lint</code>
+              整合到你的 CI 管線中，與 ESLint、Prettier 和測試並行執行。
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-card__title">無遙測</h3>
+            <p class="feature-card__desc">
+              CLI 不向外發送任何資料。規格和評分保留在你的機器上。
+              無需帳號、無需 API 金鑰、不依賴雲端服務。
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-card__title">可攜性</h3>
+            <p class="feature-card__desc">
+              單一可執行檔。支援 macOS、Linux、Windows。零相依。
+              適用於任何 Markdown 規格目錄。
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-card__title">開源</h3>
+            <p class="feature-card__desc">
+              MIT 授權條款。原始碼在
+              <a class="xref" href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a>。
+              永久免費。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── 與 AI 代理配合使用 ── */}
+    <section class="section" aria-labelledby="agents-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="agents-title" class="section-title">與 AI 代理配合使用。</h2>
+        <p class="prose-p">
+          CLI 是兩個 Claude Code 外掛底層的引擎。如果你的代理在撰寫規格，
+          CLI 會在代理寫任何程式碼之前告訴你規格是否合格。
+        </p>
+        <div class="agent-links">
+          <a href="/zh-tw/ai/specstudio-skills/" class="btn btn--secondary">SpecStudio Skills</a>
+          <a href="/zh-tw/ai/cli-skills/" class="btn btn--tertiary">CLI Skills（輕量包裝）</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {/* ── 最終 CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">通過檢查的規格說明。</h2>
+      <div class="final-cta__buttons">
+        <a href="/zh-tw/cli/install/" class="btn btn--primary">安裝 CLI</a>
+        <a href="/zh-tw/ai/specstudio-skills/" class="btn btn--secondary">取得 AI 技能外掛</a>
+        <a
+          href="https://github.com/specscore/specscore-cli"
+          rel="noopener"
+          class="btn btn--tertiary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          在 GitHub 上開源
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <SiteFooterZhTw />
+</BaseLayout>
+
+<style>
+  /* ── Hero: two-column on desktop (copy left, terminal right),
+        stacked on mobile. Mirrors the landing hero's rhythm. ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-7);
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .hero__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 30fr 70fr;
+    gap: var(--space-3) var(--space-6);
+    align-items: center;
+  }
+  .hero__copy {
+    animation: hero-copy-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 280ms;
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__inner > .hero__headline {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.55;
+    max-width: 42ch;
+  }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .hero__art {
+    animation: hero-art-in 700ms cubic-bezier(0.22, 0.61, 0.36, 1) both 100ms;
+    min-width: 0;
+  }
+  .hero__art pre.terminal {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.65;
+  }
+
+  @keyframes hero-copy-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes hero-art-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 860px) {
+    .hero { padding: var(--space-5) var(--space-3) var(--space-6); }
+    .hero__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    .hero__copy { order: 1; }
+    .hero__art  { order: 2; }
+  }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .section-intro {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+  }
+  .section-intro code {
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-size: 0.92em;
+    color: var(--ink);
+  }
+
+  /* ── Features grid ── */
+  .features-section { background: var(--cream-2); }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+  }
+  .feature-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .feature-card__desc {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+  .feature-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 860px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .features-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── AI agents section ── */
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+  .agent-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--space-3);
+  }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+</style>
+
+<QsTabsScript />

@@ -1,0 +1,30 @@
+---
+// Bloc de contenu « Compiler depuis les sources » — sans titre ni conteneur de section.
+// Utilisé par /fr/cli/install/ et par les onglets d'installation rapide /fr/cli/.
+---
+<pre class="terminal"><span class="prompt">$</span> go install github.com/specscore/specscore-cli/cmd/specscore@main</pre>
+<p class="method-desc">
+  Nécessite <a class="xref" href="https://go.dev/">Go</a> 1.26 ou supérieur.
+  Installe la dernière version de développement depuis <code>main</code> —
+  peut inclure des modifications non encore disponibles dans une version balisée.
+</p>
+<p class="method-desc">
+  Pour figer une version spécifique, remplacez <code>@main</code> par un tag comme
+  <code>@v0.4.2</code>, ou utilisez <code>@latest</code> pour la version balisée la plus récente.
+</p>
+
+<style>
+  .method-desc {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .method-desc code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+</style>

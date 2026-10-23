@@ -1,0 +1,239 @@
+---
+// ai-plugin-specscore (CLI Skills) — Turkish translation.
+// Canonical URL: specscore.md/tr/ai/cli-skills/
+// Product names (SpecScore, Claude Code, SpecStudio Skills, ai-plugin-specscore) stay English.
+// Slash-command names and terminal content stay English.
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooterTr from '../../../../components/SiteFooterTr.astro';
+import QsTabsScript from '../../../../components/QsTabsScript.astro';
+---
+
+<BaseLayout
+  lang="tr"
+  title="CLI Skills — Claude Code İçinde SpecScore CLI"
+  description="SpecScore CLI'ını sarmalayan hafif Claude Code eklentisi. specscore lint, feature, task ve change-status komutlarını yerel eklenti komutları olarak sunar."
+  canonical="https://specscore.md/tr/ai/cli-skills/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          Claude Code içinde SpecScore CLI.
+        </h1>
+        <p class="hero__sub">
+          <code>ai-plugin-specscore</code>, açık kaynaklı
+          <a class="xref" href="/tr/cli/">SpecScore CLI</a>'ını sarmalayan hafif bir Claude Code
+          eklentisidir. <code>specscore lint</code>, <code>specscore feature</code>,
+          <code>specscore task</code> ve <code>specscore change-status</code> komutlarını
+          yerel eklenti komutları olarak sunar — kabuktan çıkış yapmadan, bağlam değiştirmeden.
+        </p>
+        <div class="hero__install" id="install">
+          <div class="qs-tabs" role="tablist" aria-label="Kurulum yöntemi">
+            <button type="button" role="tab" id="qs-tab-claude" aria-controls="qs-panel-claude" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="claude">Claude Code</button>
+            <button type="button" role="tab" id="qs-tab-setup" aria-controls="qs-panel-setup" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="setup">Diğer yapay zeka ajanları</button>
+            <button type="button" role="tab" id="qs-tab-manual" aria-controls="qs-panel-manual" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="manual">Manuel</button>
+          </div>
+
+          <div id="qs-panel-claude" role="tabpanel" aria-labelledby="qs-tab-claude" class="qs-panel is-active" data-panel="claude">
+<pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
+<span class="prompt">$</span> /plugin install cli-skills@specscore</pre>
+          </div>
+          <div id="qs-panel-setup" role="tabpanel" aria-labelledby="qs-tab-setup" class="qs-panel" data-panel="setup" hidden>
+<pre class="terminal"><span class="prompt">$</span> specscore agent setup &lt;ajan-adı&gt;</pre>
+            <p class="qs-note">
+              Ajanınız için doğru talimat dosyasını yazar —
+              <code>claude</code>, <code>copilot</code>, <code>cursor</code>, <code>codex</code>,
+              <code>antigravity.google</code>, <code>pi.dev</code> veya <code>opencode</code>.
+              SpecScore tarafından yönetilen bir proje içinde çalıştırın.
+              <a class="xref" href="/tr/cli/">SpecScore CLI</a> gerektirir.
+            </p>
+          </div>
+          <div id="qs-panel-manual" role="tabpanel" aria-labelledby="qs-tab-manual" class="qs-panel" data-panel="manual" hidden>
+<pre class="terminal"><span class="prompt">$</span> git clone https://github.com/specscore/ai-plugin-specscore
+<span class="prompt">$</span> cp -r ai-plugin-specscore/skills /yol/ajan/skills/</pre>
+            <p class="qs-note">
+              Eklenti reposunu klonlayın ve <code>skills/</code> dizinini
+              ajanınızın beceri dosyalarını yüklediği konuma kopyalayın.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner section-inner--prose">
+        <p class="prose-p">
+          Bu, yapay zeka ajanınızın içinde kullanmak için SpecScore CLI'ının üzerine kurulu
+          <strong>hafif bir sarmalayıcıdır</strong> — daha fazlası değil. İş akışı dayatması
+          yok, yaşam döngüsü orkestrasyonu yok, eğik çizgi komut hattı yok.
+        </p>
+        <p class="prose-p">
+          Spesifikasyon odaklı geliştirmenin rehberli iş akışını istiyorsanız —
+          <code>/ideate</code>, <code>/specify</code>, <code>/plan</code>,
+          <code>/implement</code> —
+          <a class="xref" href="/tr/ai/specstudio-skills/">SpecStudio Skills</a>'i yükleyin.
+          Her ikisi de aynı SpecScore CLI üzerine inşa edilmiştir.
+        </p>
+
+        <div class="callout">
+          <strong>Hangisinin ne zaman kullanılacağı:</strong>
+          <ul class="callout-list">
+            <li><strong>CLI Skills</strong> — SpecScore'u zaten biliyorsunuz ve ham CLI'ı ajan döngünüzde istiyorsunuz.</li>
+            <li><strong>SpecStudio Skills</strong> — SpecScore'da yenisiniz ve rehberli bir iş akışı istiyorsunuz.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Komutlar ── */}
+    <section class="section" aria-labelledby="commands-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="commands-title" class="section-title">Komutlar</h2>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-lint</h3>
+          <p class="cmd-desc">Bir spesifikasyon ağacını veya tek bir dosyayı lint eder. Kural başına geçti/kaldı durumunu bildirir.</p>
+<pre class="terminal"><span class="prompt">&gt;</span> /specscore-lint spec/features/password-reset/
+<span class="mark-pass">PASS</span>  Feature: password-reset
+  <span class="mark-pass">PASS</span>  has title, status, and description
+  <span class="mark-pass">PASS</span>  requirements have acceptance criteria
+  <span class="mark-pass">PASS</span>  all AC IDs are unique</pre>
+        </div>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-feature</h3>
+          <p class="cmd-desc">SpecScore özelliklerini listeler, inceler veya taslağını oluşturur.</p>
+        </div>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-task</h3>
+          <p class="cmd-desc">Proje görev panosunu okur ve besler.</p>
+        </div>
+
+        <div class="cmd-block">
+          <h3 class="cmd-name">/specscore-change-status</h3>
+          <p class="cmd-desc">Bir Feature veya Idea'yı yaşam döngüsü boyunca bir durumdan diğerine geçirir.</p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Araç geliştiricileri için ── */}
+    <section class="section" aria-labelledby="builders-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="builders-title" class="section-title">Araç geliştiricileri için</h2>
+        <p class="prose-p">
+          <code>ai-plugin-specscore</code>, SpecScore üzerinde kendi iş akışı eklentisini
+          oluşturan herkesin CLI yüzeyini yeniden uygulamadan ona bağımlı olabilmesi için
+          vardır. SpecStudio Skills'e bir topluluk alternatifi yazıyorsanız, temel altyapınız budur.
+        </p>
+        <p class="prose-p">
+          Kaynak kod
+          <a class="xref" href="https://github.com/specscore/ai-plugin-specscore">specscore/ai-plugin-specscore</a>
+          adresindedir — MIT lisansı, sonsuza kadar ücretsiz.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  {/* ── Footer ── */}
+  <SiteFooterTr />
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__headline {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1rem;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+  }
+  .hero__sub code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+  .hero__install { margin-bottom: var(--space-2); }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Sections ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+  .prose-p:last-child { margin-bottom: 0; }
+  .prose-p code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+
+  /* ── Callout ── */
+  .callout {
+    margin-top: var(--space-4);
+    padding: var(--space-2) var(--space-3);
+    border-left: 3px solid var(--hairline);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.6;
+  }
+  .callout-list {
+    margin: var(--space-1) 0 0;
+    padding-left: 1.25rem;
+  }
+  .callout-list li { margin-bottom: 0.35rem; }
+
+  /* ── Command blocks ── */
+  .cmd-block {
+    margin-bottom: var(--space-4);
+  }
+  .cmd-block:last-child { margin-bottom: 0; }
+  .cmd-name {
+    font-family: var(--font-code);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: var(--space-1);
+  }
+  .cmd-desc {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-2);
+    line-height: 1.55;
+  }
+</style>
+
+<QsTabsScript />

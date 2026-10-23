@@ -1,0 +1,501 @@
+---
+// German variant of /validators.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooterDe from '../../../components/SiteFooterDe.astro';
+import LintExample from '../../../components/LintExample.astro';
+import ScoreExample from '../../../components/ScoreExample.astro';
+---
+
+<BaseLayout
+  lang="de"
+  title="Was SpecScore validiert – und was es nicht kann."
+  description="SpecScore prüft deine Spezifikationen mit zwei Validatoren: einem deterministischen Linter und einem KI-Reviewer. Sieh genau, was jeder erkennt – und wo automatische Validierung endet und dein Urteilsvermögen beginnt."
+  canonical="https://specscore.md/de/validators/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero: orient the cold reader, then show lint passing ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          Was SpecScore<br />validiert.
+        </h1>
+        <div class="hero__copy">
+          <p class="hero__sub">
+            SpecScore ist ein offenes Markdown-Format für Features, Anforderungen
+            und Akzeptanzkriterien – geprüft durch zwei Validatoren: einen
+            deterministischen <strong>Linter</strong> und einen <strong>KI-Reviewer</strong>.
+            Hier ist, was jeder erkennt und wo die automatische
+            Prüfung endet.
+          </p>
+          <p class="hero__context">
+            Neu bei SpecScore? <a class="xref" href="/de/">Hier starten</a> ·
+            <a class="xref" href="/de/cli/">Die CLI</a> ·
+            <a class="xref" href="/de/ai/">KI-Skills</a>
+          </p>
+        </div>
+
+        <div
+          class="hero__art"
+          role="img"
+          aria-label="Terminalausgabe: specscore lint auf einer Checkout-Spezifikation besteht alle 24 Anforderungen – Struktur, Referenzen und IDs gültig, kein Index-Drift oder tote Links. 0 Probleme, Exit 0."
+        >
+<pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/
+
+  <span class="mark-pass">✓</span> 24 requirements — structure, references, IDs valid
+  <span class="mark-pass">✓</span> no index drift · no broken links · no slug collisions
+
+  <span class="dim">0 problems   exit 0</span></pre>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Die drei Schichten ── */}
+    <section class="section" aria-labelledby="layers-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="layers-title" class="section-title">Drei Schichten, nicht eine.</h2>
+        <p class="prose-p">
+          SpecScore validiert in Schichten, beginnend mit dem Günstigsten und
+          Zuverlässigsten. Der <strong>Linter</strong> ist deterministisch – schnell,
+          kostenlos, läuft bei jedem Commit. Das <strong>KI-Review</strong> ist
+          probabilistisch – tiefer, verbraucht Tokens, erkennt Dinge, die der Linter
+          nicht fassen kann. Das <strong>menschliche Urteilsvermögen</strong> ist die
+          dritte Schicht: Die Nahtstellen, die die ersten beiden nicht schließen,
+          brauchen weiterhin einen Menschen – heute schließt kein Tool sie zuverlässig.
+          Die beiden automatischen Schichten ergänzen sich, sie sind nicht redundant:
+          Der Linter erfasst, was KI nicht verlässlich garantieren kann; die KI
+          erfasst, was der Linter nicht erreicht.
+        </p>
+      </div>
+    </section>
+
+    {/* ── Was jeder Validator prüft ── */}
+    <section class="section validators-section" aria-labelledby="checks-title">
+      <div class="section-inner">
+        <h2 id="checks-title" class="section-title">Was jeder Validator prüft.</h2>
+        <div class="vcols">
+          <div class="vcol">
+            <div class="validator__head">
+              <span class="validator__layer">Schicht 1</span>
+              <h3 class="validator__title">Linter CLI</h3>
+              <span class="validator__kind">deterministisch</span>
+            </div>
+            <p class="validator__lead">
+              Dasselbe Ergebnis bei jedem Lauf, ohne LLM, ohne Kosten. Wenn es hier
+              besteht, ist es ein Fakt – keine Meinung.
+            </p>
+            <div
+              class="checks-terminal"
+              role="img"
+              aria-label="Ausgabe von specscore lint: R1 und R2 haben Akzeptanzkriterien; R3 hat keine, ein Related Feature-Link löst nicht auf und der Pflichtabschnitt Open Questions fehlt. 3 Probleme, Exit 1."
+            >
+              <LintExample />
+            </div>
+            <ul class="vlist">
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Referenzielle Integrität – Links lösen auf, IDs sind eindeutig</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Strukturelle Konventionen – Pflichtabschnitte, Frontmatter-Form</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Statushygiene und Index-Drift</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Slug-Kollisionen</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Gültigkeit der Präfixe in Metadatenfeldern (z. B. <code>Related Ideas:</code>)</li>
+            </ul>
+          </div>
+          <div class="vcol">
+            <div class="validator__head">
+              <span class="validator__layer">Schicht 2</span>
+              <h3 class="validator__title">KI-Review und Score</h3>
+              <span class="validator__kind">nicht deterministisch</span>
+            </div>
+            <p class="validator__lead">
+              Liest nach Sinn und Logik, genau wie ein menschlicher Reviewer – und
+              ist, wie ein Mensch, nicht vollkommen wiederholbar.
+            </p>
+            <div
+              class="checks-terminal"
+              role="img"
+              aria-label="Ausgabe von /score: Die Spezifikation erhält die Note B mit zwei konkreten Hinweisen – ein vager Auslöser in AC-2 und ein fehlender Fehlerpfad in AC-3."
+            >
+              <ScoreExample />
+            </div>
+            <ul class="vlist">
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> ACs als überprüfbare Given/When/Then-Szenarien formuliert</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Interne Konsistenz innerhalb eines Artefakts</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Vage Formulierungen oder Fülltext</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Lesbarkeit für einen menschlichen Reviewer</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Handlungsrelevantes Feedback für Autoren mit Schweregraden</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Reifegradbewertung von A bis F</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Was sie nicht erkennen ── */}
+    <section class="section limits-section" id="limits" aria-labelledby="limits-title">
+      <div class="section-inner">
+        <h2 id="limits-title" class="section-title">Was sie nicht erkennen.</h2>
+        <p class="section-lead">
+          Kein Validator zaubert. Hier endet die Reichweite jedes einzelnen – damit du
+          genau weißt, wo dein eigenes Urteilsvermögen gefordert ist.
+        </p>
+        <div class="vcols">
+          <div class="vcol">
+            <div class="validator__head">
+              <span class="validator__layer">Schicht 1</span>
+              <h3 class="validator__title">Linter CLI</h3>
+            </div>
+            <ul class="vlist">
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Implizite Widersprüche über tiefe Hierarchien hinweg</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Drift zwischen Spezifikation und Code <span class="vnote">(wird mit <code>specstudio:recap</code> besser)</span></li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Die semantische Korrektheit von Akzeptanzkriterien</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Ob eine Benennung wirklich Sinn ergibt</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Ob die Anforderungen das gestellte Problem lösen</li>
+            </ul>
+          </div>
+          <div class="vcol">
+            <div class="validator__head">
+              <span class="validator__layer">Schicht 2</span>
+              <h3 class="validator__title">KI-Review und Score</h3>
+              <span class="validator__kind">erkennt unzuverlässig</span>
+            </div>
+            <ul class="vlist">
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Vollständige Reproduzierbarkeit zwischen Durchläufen – Urteile können im Rahmen variieren</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Widersprüche zwischen Artefakten in einem großen Baum ohne explizite Quervergleiche</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Ob die Anforderungen das Problem tatsächlich lösen – zeigt offensichtliche Lücken auf, übersieht domänenspezifische Details</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Vererbte Tendenzen des zugrunde liegenden LLMs</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Semantische Korrektheit mit absoluter Gewissheit</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Alles, was die Rubrik nicht gewichtet</li>
+            </ul>
+          </div>
+        </div>
+
+        <ol class="bands" aria-label="Die drei Validierungsschichten nach Reichweite geordnet">
+          <li class="band">
+            <span class="band__step">1</span>
+            <h3 class="band__title">Der Linter reicht bis hier</h3>
+            <p class="band__desc">
+              Struktur, Referenzen, Hygiene. Günstig und sicher – aber blind für den Sinn.
+            </p>
+          </li>
+          <li class="band band--mid">
+            <span class="band__step">2</span>
+            <h3 class="band__title">Die KI reicht bis hier</h3>
+            <p class="band__desc">
+              Sinn, Klarheit, Kohärenz innerhalb eines Artefakts. Tiefer – aber probabilistisch und schwach bei großen Bäumen.
+            </p>
+          </li>
+          <li class="band band--human">
+            <span class="band__step">3</span>
+            <h3 class="band__title">Liegt weiterhin bei dir</h3>
+            <p class="band__desc">
+              Das systemweite Gesamturteil – eine Aufgabe, die heute kein Tool verlässlich leisten kann, sodass sie weiterhin einen Menschen erfordert.
+            </p>
+          </li>
+        </ol>
+
+        <div class="worked">
+          <h3 class="worked__title">Der Fall, vor dem dich kein Werkzeug bewahrt</h3>
+          <p class="worked__body">
+            Stell dir einen echten, tiefen Spezifikationsbaum vor. Feature A erfordert
+            <em>X</em>. Feature B erfordert <em>Y</em>. Feature C erfordert
+            <em>Z</em>. Dann erfordert Feature D stillschweigend etwas, das B
+            widerspricht – aber nur, wenn A ebenfalls aktiv ist. Der Linter sieht vier
+            gültige, sauber verlinkte Dokumente und besteht. Der KI-Reviewer liest die
+            Artefakte einzeln und hat keinen Anlass, alle vier zu laden und die
+            Dreiecks-Interaktion zu bemerken.
+          </p>
+          <p class="worked__body">
+            <strong>Keine der beiden Schichten erkennt dies zuverlässig – und wir tun nicht so,
+            als ob.</strong> Genau diese Art von Widerspruch ist der Grund, warum die dritte
+            Schicht existiert. SpecScores Aufgabe ist es, den Baum so navigierbar zu machen,
+            dass ein Mensch, der die Nahtstellen prüft, den Konflikt <em>finden kann</em> – offene
+            Fragen steigen in der Hierarchie nach oben, verwandte Anforderungen sind nur eine
+            Abfrage entfernt –, nicht zu behaupten, ein Tool hätte ihn bereits gefunden.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {/* ── Finaler CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">Ehrliche Werkzeuge, ehrliche Spezifikationen.</h2>
+      <div class="final-cta__buttons">
+        <a href="/de/cli/install/" class="btn btn--primary">CLI installieren</a>
+        <a href="/de/ai/specstudio-skills/" class="btn btn--secondary">KI-Skills für deinen Agenten</a>
+        <a
+          href="https://github.com/specscore/specscore-cli"
+          rel="noopener"
+          class="btn btn--tertiary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          Open-Source auf GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <SiteFooterDe />
+</BaseLayout>
+
+<style>
+  /* ── Hero (mirrors /cli two-column rhythm) ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-7);
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .hero__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 38fr 62fr;
+    gap: var(--space-3) var(--space-6);
+    align-items: center;
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+  }
+  .hero__inner > .hero__headline {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+  .hero__copy {
+    animation: hero-copy-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 280ms;
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+  .hero__sub strong { color: var(--ink); }
+  .hero__context {
+    margin-top: var(--space-3);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+  }
+  .hero__art {
+    animation: hero-art-in 700ms cubic-bezier(0.22, 0.61, 0.36, 1) both 100ms;
+    min-width: 0;
+  }
+  .hero__art pre.terminal {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.65;
+  }
+
+  @keyframes hero-copy-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes hero-art-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 860px) {
+    .hero { padding: var(--space-5) var(--space-3) var(--space-6); }
+    .hero__inner { grid-template-columns: 1fr; gap: var(--space-4); }
+    .hero__copy { order: 1; }
+    .hero__art  { order: 2; }
+  }
+
+  /* ── Section scaffolding ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .section-lead {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    max-width: 60ch;
+    margin-bottom: var(--space-4);
+  }
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+  }
+  .prose-p strong { color: var(--ink); }
+
+  /* ── Validator columns (used by both "checks" and "#limits") ── */
+  .validators-section { background: var(--cream); }
+  .limits-section {
+    background: var(--cream-2);
+    scroll-margin-top: var(--space-5);
+  }
+
+  .validator__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .validator__layer {
+    font-family: var(--font-display);
+    font-size: var(--fs-tiny);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--pale-ink);
+  }
+  .validator__title {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .validator__kind {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+  .validator__lead {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+  }
+
+  .checks-terminal {
+    margin-bottom: var(--space-3);
+  }
+  .checks-terminal pre.terminal {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.65;
+  }
+
+  .vcols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+  }
+  .vlist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .vlist li {
+    position: relative;
+    padding-left: 1.6rem;
+    color: var(--ink);
+    line-height: 1.5;
+    font-size: var(--fs-small);
+  }
+  .vlist code {
+    font-size: 0.9em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .mark {
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    font-family: var(--font-code);
+  }
+  .mark--pass { color: var(--validator-green); }
+  .mark--fail { color: var(--mark-red); }
+  .vnote { color: var(--pale-ink); }
+
+  @media (max-width: 640px) {
+    .vcols { grid-template-columns: 1fr; gap: var(--space-4); }
+  }
+
+  /* ── Synthesis bands ── */
+  .bands {
+    list-style: none;
+    margin: var(--space-5) 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+  .band {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-top: 3px solid var(--validator-green);
+    padding: var(--space-3);
+  }
+  .band--mid { border-top-color: var(--ink-blue); }
+  .band--human { border-top-color: var(--mark-red); }
+  .band__step {
+    font-family: var(--font-display);
+    font-size: var(--fs-small);
+    font-weight: 700;
+    color: var(--pale-ink);
+  }
+  .band__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin: var(--space-1) 0;
+  }
+  .band__desc {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 720px) {
+    .bands { grid-template-columns: 1fr; }
+  }
+
+  /* ── Worked example ── */
+  .worked {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-left: 3px solid var(--ink);
+    padding: var(--space-4);
+  }
+  .worked__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .worked__body {
+    color: var(--mid-ink);
+    line-height: 1.65;
+  }
+  .worked__body + .worked__body { margin-top: var(--space-2); }
+  .worked__body strong { color: var(--ink); }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+</style>

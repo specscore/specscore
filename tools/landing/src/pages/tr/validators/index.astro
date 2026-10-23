@@ -1,0 +1,496 @@
+---
+// Turkish variant of /validators.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooterTr from '../../../components/SiteFooterTr.astro';
+import LintExample from '../../../components/LintExample.astro';
+import ScoreExample from '../../../components/ScoreExample.astro';
+---
+
+<BaseLayout
+  lang="tr"
+  title="SpecScore Neyi Doğrular — ve Neyi Doğrulayamaz."
+  description="SpecScore, spesifikasyonlarınızı iki doğrulayıcıyla denetler: deterministik bir linter ve bir yapay zeka inceleyicisi. Her birinin tam olarak neyi yakaladığını — ve otomatik doğrulamanın nerede bitip sizin muhakemenizin nerede başladığını görün."
+  canonical="https://specscore.md/tr/validators/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero: orient the cold reader, then show lint passing ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore<br />neyi doğrular.
+        </h1>
+        <div class="hero__copy">
+          <p class="hero__sub">
+            SpecScore; özellikler, gereksinimler ve kabul kriterleri için açık bir Markdown
+            formatıdır — iki doğrulayıcı tarafından denetlenir: deterministik bir
+            <strong>linter</strong> ve bir <strong>yapay zeka inceleyicisi</strong>.
+            İşte her birinin neyi yakaladığı ve otomatik incelemenin nerede durduğu.
+          </p>
+          <p class="hero__context">
+            SpecScore'da yeni misiniz? <a class="xref" href="/tr/">Buradan başlayın</a> ·
+            <a class="xref" href="/tr/cli/">CLI</a> ·
+            <a class="xref" href="/tr/ai/">Yapay Zeka Becerileri</a>
+          </p>
+        </div>
+
+        <div
+          class="hero__art"
+          role="img"
+          aria-label="Terminal çıktısı: bir checkout spesifikasyonu üzerinde çalışan specscore lint tüm 24 gereksinimi geçer — geçerli yapı, referanslar ve ID'ler, dizin kayması veya kırık bağlantı yok. 0 sorun, çıkış kodu 0."
+        >
+<pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/
+
+  <span class="mark-pass">✓</span> 24 requirements — structure, references, IDs valid
+  <span class="mark-pass">✓</span> no index drift · no broken links · no slug collisions
+
+  <span class="dim">0 problems   exit 0</span></pre>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Üç katman ── */}
+    <section class="section" aria-labelledby="layers-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="layers-title" class="section-title">Bir değil, üç katman.</h2>
+        <p class="prose-p">
+          SpecScore, en ucuz ve en kesin olandan başlayarak katmanlar halinde doğrular.
+          <strong>Linter</strong> deterministiktir — hızlıdır, ücretsizdir, her commit'te çalışır.
+          <strong>Yapay zeka incelemesi</strong> olasılıksaldır — daha derindir, token tüketir,
+          linter'ın erişemediği şeyleri yakalar. <strong>İnsan muhakemesi</strong> üçüncü katmandır:
+          ilk iki katmanın kapatamadığı dikiş yerleri hala bir insana ihtiyaç duyar — bugün hiçbir
+          araç bunları güvenilir biçimde kapatamaz. İki otomatik katman birbirinin tamamlayıcısıdır,
+          tekrarlayıcısı değil: linter yapay zekanın koruyamayacağı şeyleri yakalar; yapay zeka ise
+          linter'ın ulaşamayacağı şeyleri yakalar.
+        </p>
+      </div>
+    </section>
+
+    {/* ── Her doğrulayıcı neyi denetler ── */}
+    <section class="section validators-section" aria-labelledby="checks-title">
+      <div class="section-inner">
+        <h2 id="checks-title" class="section-title">Her doğrulayıcı neyi denetler.</h2>
+        <div class="vcols">
+          <div class="vcol">
+            <div class="validator__head">
+              <span class="validator__layer">Katman 1</span>
+              <h3 class="validator__title">Linter CLI</h3>
+              <span class="validator__kind">deterministik</span>
+            </div>
+            <p class="validator__lead">
+              Her çalıştırmada aynı sonuç, LLM yok, maliyet yok. Burada geçiyorsa,
+              bu bir fikir değil gerçektir.
+            </p>
+            <div
+              class="checks-terminal"
+              role="img"
+              aria-label="specscore lint çıktısı: R1 ve R2 kabul kriterlerine sahiptir; R3'ün kriteri yoktur, Related Feature bağlantısı çözülemez ve zorunlu Open Questions bölümü eksiktir. 3 sorun, çıkış kodu 1."
+            >
+              <LintExample />
+            </div>
+            <ul class="vlist">
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Referans bütünlüğü — bağlantılar çözülür, ID'ler benzersizdir</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Yapısal kurallar — zorunlu bölümler, frontmatter biçimi</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Durum hijyeni ve indeks kayması</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Slug çakışmaları</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Meta veri alanlarındaki öneklerin geçerliliği (örn. <code>Related Ideas:</code>)</li>
+            </ul>
+          </div>
+          <div class="vcol">
+            <div class="validator__head">
+              <span class="validator__layer">Katman 2</span>
+              <h3 class="validator__title">Yapay zeka ile inceleme ve puanlama</h3>
+              <span class="validator__kind">deterministik olmayan</span>
+            </div>
+            <p class="validator__lead">
+              İnsan bir incelemecinin yapacağı gibi anlam arayarak okur — ve bir insan gibi
+              tamamen tekrarlanabilir değildir.
+            </p>
+            <div
+              class="checks-terminal"
+              role="img"
+              aria-label="/score çıktısı: spesifikasyon iki eyleme geçirilebilir gözlemle B notu alır — AC-2'de belirsiz bir tetikleyici ve AC-3'te eksik bir hata yolu."
+            >
+              <ScoreExample />
+            </div>
+            <ul class="vlist">
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Doğrulanabilir Given/When/Then olarak yazılmış kabul kriterleri (AC'ler)</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Bir yapı taşı içinde içsel tutarlılık</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Belirsiz veya dolgu içerikler</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> İnsan bir incelemeci için okunabilirlik</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> Önem derecesiyle birlikte yazar için eyleme geçirilebilir geri bildirim</li>
+              <li><span class="mark mark--pass" aria-hidden="true">✓</span> A'dan F'ye kadar bir olgunluk notu</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── #limits — Neyi yakalayamazlar ── */}
+    <section class="section limits-section" id="limits" aria-labelledby="limits-title">
+      <div class="section-inner">
+        <h2 id="limits-title" class="section-title">Neyi yakalayamazlar.</h2>
+        <p class="section-lead">
+          Hiçbir doğrulayıcı sihirli değildir. İşte her birinin durduğu yer — böylece
+          kendi muhakemenizin hala nerede devreye girmesi gerektiğini tam olarak bilirsiniz.
+        </p>
+        <div class="vcols">
+          <div class="vcol">
+            <div class="validator__head">
+              <span class="validator__layer">Katman 1</span>
+              <h3 class="validator__title">Linter CLI</h3>
+            </div>
+            <ul class="vlist">
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Derin hiyerarşiler boyunca örtük çelişkiler</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Spesifikasyon ile kod arasındaki kayma <span class="vnote">(<code>specstudio:recap</code> geldiğinde iyileşecek)</span></li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Kabul kriterlerinin anlamsal doğruluğu</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Bir ismin gerçekten mantıklı olup olmadığı</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Gereksinimlerin ortaya konan sorunu çözüp çözmediği</li>
+            </ul>
+          </div>
+          <div class="vcol">
+            <div class="validator__head">
+              <span class="validator__layer">Katman 2</span>
+              <h3 class="validator__title">Yapay zeka ile inceleme ve puanlama</h3>
+              <span class="validator__kind">tutarsız bir şekilde yakalar</span>
+            </div>
+            <ul class="vlist">
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Çalıştırmalar arasında tam tekrarlanabilirlik — kararlar belirli bir aralıkta değişebilir</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Açık çapraz kontroller olmadan büyük bir ağaçta yapı taşları arasındaki çelişkiler</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Gereksinimlerin sorunu gerçekten çözüp çözmediği — bariz boşlukları işaretler, alana özgü ayrıntıları atlar</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Alttaki LLM'den miras kalan önyargılar</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Mutlak kesinlikle anlamsal doğruluk</li>
+              <li><span class="mark mark--fail" aria-hidden="true">✗</span> Değerlendirme kılavuzunun (rubric) ağırlıklandırmadığı herhangi bir şey</li>
+            </ul>
+          </div>
+        </div>
+
+        <ol class="bands" aria-label="Kapsam sırasına göre üç doğrulama katmanı">
+          <li class="band">
+            <span class="band__step">1</span>
+            <h3 class="band__title">Linter buraya kadar ulaşır</h3>
+            <p class="band__desc">
+              Yapı, referanslar, hijyen. Ucuz ve güvenli — ama anlama karşı kördür.
+            </p>
+          </li>
+          <li class="band band--mid">
+            <span class="band__step">2</span>
+            <h3 class="band__title">Yapay zeka buraya kadar ulaşır</h3>
+            <p class="band__desc">
+              Anlam, netlik, yapı taşı içinde tutarlılık. Daha derin — ama olasılıksal ve büyük bir ağaçta zayıf.
+            </p>
+          </li>
+          <li class="band band--human">
+            <span class="band__step">3</span>
+            <h3 class="band__title">Hala size bağlıdır</h3>
+            <p class="band__desc">
+              Tüm sistem genelindeki çapraz muhakeme — bugün hiçbir aracın güvenilir şekilde yapamayacağı bir iş, bu yüzden hala bir insan incelemeci gerektirir.
+            </p>
+          </li>
+        </ol>
+
+        <div class="worked">
+          <h3 class="worked__title">Hiçbir aracın sizi kurtaramayacağı durum</h3>
+          <p class="worked__body">
+            Gerçek ve derin bir spesifikasyon ağacı hayal edin. Feature&nbsp;A, <em>X</em> gerektirir.
+            Feature&nbsp;B, <em>Y</em> gerektirir. Feature&nbsp;C, <em>Z</em> gerektirir.
+            Ardından Feature&nbsp;D, sessizce B ile çelişen bir şey gerektirir — ancak yalnızca A da
+            aktif olduğunda. Linter dört geçerli ve iyi bağlanmış belge görür ve geçer. Yapı
+            taşlarını tek tek okuyan yapay zeka inceleyicisinin dördünü birden yüklemek ve bu üç yönlü
+            etkileşimi fark etmek için hiçbir nedeni yoktur.
+          </p>
+          <p class="worked__body">
+            <strong>İki katman da bunu güvenilir bir şekilde yakalayamaz — ve aksini iddia etmeyeceğiz.</strong>
+            Tam olarak bu tür bir çelişki, üçüncü katmanın var olma nedenidir. SpecScore'un görevi,
+            dikiş yerlerini inceleyen bir insanın çatışmayı <em>bulabilmesi</em> için ağacı yeterince gezilebilir
+            kılmaktır — açık sorular hiyerarşide yukarı çıkar, ilgili gereksinimler bir sorgu uzaklığındadır —
+            bir aracın bunu zaten bulduğunu iddia etmek değildir.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">Dürüst araçlar, dürüst spesifikasyonlar.</h2>
+      <div class="final-cta__buttons">
+        <a href="/tr/cli/install/" class="btn btn--primary">CLI'yı yükleyin</a>
+        <a href="/tr/ai/specstudio-skills/" class="btn btn--secondary">Ajanınız için AI becerileri</a>
+        <a
+          href="https://github.com/specscore/specscore-cli"
+          rel="noopener"
+          class="btn btn--tertiary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          GitHub'da açık kaynak
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <SiteFooterTr />
+</BaseLayout>
+
+<style>
+  /* ── Hero (mirrors /cli two-column rhythm) ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-7);
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .hero__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 38fr 62fr;
+    gap: var(--space-3) var(--space-6);
+    align-items: center;
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+  }
+  .hero__inner > .hero__headline {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+  .hero__copy {
+    animation: hero-copy-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 280ms;
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+  .hero__sub strong { color: var(--ink); }
+  .hero__context {
+    margin-top: var(--space-3);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+  }
+  .hero__art {
+    animation: hero-art-in 700ms cubic-bezier(0.22, 0.61, 0.36, 1) both 100ms;
+    min-width: 0;
+  }
+  .hero__art pre.terminal {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.65;
+  }
+
+  @keyframes hero-copy-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes hero-art-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 860px) {
+    .hero { padding: var(--space-5) var(--space-3) var(--space-6); }
+    .hero__inner { grid-template-columns: 1fr; gap: var(--space-4); }
+    .hero__copy { order: 1; }
+    .hero__art  { order: 2; }
+  }
+
+  /* ── Section scaffolding ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .section-lead {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    max-width: 60ch;
+    margin-bottom: var(--space-4);
+  }
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+  }
+  .prose-p strong { color: var(--ink); }
+
+  /* ── Validator columns (used by both "checks" and "#limits") ── */
+  .validators-section { background: var(--cream); }
+  .limits-section {
+    background: var(--cream-2);
+    scroll-margin-top: var(--space-5);
+  }
+
+  .validator__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .validator__layer {
+    font-family: var(--font-display);
+    font-size: var(--fs-tiny);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--pale-ink);
+  }
+  .validator__title {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .validator__kind {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+  .validator__lead {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+  }
+
+  .checks-terminal {
+    margin-bottom: var(--space-3);
+  }
+  .checks-terminal pre.terminal {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.65;
+  }
+
+  .vcols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+  }
+  .vlist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .vlist li {
+    position: relative;
+    padding-left: 1.6rem;
+    color: var(--ink);
+    line-height: 1.5;
+    font-size: var(--fs-small);
+  }
+  .vlist code {
+    font-size: 0.9em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .mark {
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    font-family: var(--font-code);
+  }
+  .mark--pass { color: var(--validator-green); }
+  .mark--fail { color: var(--mark-red); }
+  .vnote { color: var(--pale-ink); }
+
+  @media (max-width: 640px) {
+    .vcols { grid-template-columns: 1fr; gap: var(--space-4); }
+  }
+
+  /* ── Synthesis bands ── */
+  .bands {
+    list-style: none;
+    margin: var(--space-5) 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+  .band {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-top: 3px solid var(--validator-green);
+    padding: var(--space-3);
+  }
+  .band--mid { border-top-color: var(--ink-blue); }
+  .band--human { border-top-color: var(--mark-red); }
+  .band__step {
+    font-family: var(--font-display);
+    font-size: var(--fs-small);
+    font-weight: 700;
+    color: var(--pale-ink);
+  }
+  .band__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin: var(--space-1) 0;
+  }
+  .band__desc {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 720px) {
+    .bands { grid-template-columns: 1fr; }
+  }
+
+  /* ── Worked example ── */
+  .worked {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-left: 3px solid var(--ink);
+    padding: var(--space-4);
+  }
+  .worked__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .worked__body {
+    color: var(--mid-ink);
+    line-height: 1.65;
+  }
+  .worked__body + .worked__body { margin-top: var(--space-2); }
+  .worked__body strong { color: var(--ink); }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+</style>

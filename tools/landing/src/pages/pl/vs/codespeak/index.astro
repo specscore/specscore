@@ -1,0 +1,551 @@
+---
+// /pl/vs/codespeak/ — SpecScore vs CodeSpeak comparison (Polish).
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooterPl from '../../../../components/SiteFooterPl.astro';
+import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro';
+---
+
+<BaseLayout
+  lang="pl"
+  title="SpecScore vs CodeSpeak — Rzetelne porównanie."
+  description="Obiektywne zestawienie SpecScore i CodeSpeak: specyfikacja-jako-kod vs specyfikacja-jako-kontrakt, generowanie kodu, przenośność, linting i identyfikowalność."
+  canonical="https://specscore.md/pl/vs/codespeak/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href="/pl/vs/" class="xref">Porównania</a></p>
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore vs CodeSpeak
+        </h1>
+        <p class="hero__sub">
+          Dwie różne odpowiedzi na pytanie „czemu powinna służyć specyfikacja”. CodeSpeak traktuje specyfikację jako
+          <strong>kod źródłowy</strong> — LLM ją kompiluje, a Ty utrzymujesz specyfikację
+          zamiast kodu. SpecScore traktuje specyfikację jako <strong>otwarty i
+          trwały kontrakt</strong> — zachowujesz swój kod, a dowolny agent (lub żaden) może ją czytać,
+          sprawdzać linterem i śledzić powiązania.
+        </p>
+      </div>
+    </section>
+
+    {/* ── Co mają ze sobą wspólnego ── */}
+    <section class="section" aria-labelledby="shared-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="shared-title" class="section-title">Co mają ze sobą wspólnego.</h2>
+        <ul class="shared-list">
+          <li>Oba rozwiązania stawiają specyfikację w centrum rozwoju oprogramowania.</li>
+          <li>Oba zostały stworzone dla świata wspieranego przez AI — intencja przed implementacją.</li>
+          <li>Oba dążą do tego, by oprogramowanie zmieniało się poprzez modyfikację samej specyfikacji.</li>
+        </ul>
+      </div>
+    </section>
+
+    {/* ── W czym wyróżnia się CodeSpeak ── */}
+    <section class="section" aria-labelledby="codespeak-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="codespeak-title" class="section-title">W czym wyróżnia się CodeSpeak.</h2>
+        <p class="section-note">
+          <a href="https://codespeak.dev/" rel="nofollow noopener" target="_blank" class="xref">CodeSpeak</a>
+          to system programowania napędzany przez LLM, który kompiluje specyfikacje w języku naturalnym do kodu.
+        </p>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Odważna teza poparta autorytetem</h3>
+          <p class="credit-card__desc">
+            „Utrzymuj specyfikację, a nie kod” to autentyczne przeformułowanie problemu,
+            a nie drobna optymalizacja. Koncepcja pochodzi od twórcy języka Kotlin
+            i zasługuje na poważne potraktowanie: jeśli specyfikacja jest źródłem prawdy,
+            wygenerowany kod staje się jedynie szczegółem implementacyjnym.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Przejęcie kodu do specyfikacji</h3>
+          <p class="credit-card__desc">
+            Polecenie <code>codespeak takeover</code> analizuje istniejący kod źródłowy i generuje specyfikację
+            odwzorowującą jego zachowanie — co stanowi płynną ścieżkę wejścia dla systemów legacy,
+            ze zgłaszaną kompresją objętości rzędu 5–10×.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Odzyskiwanie intencji z sesji agentów</h3>
+          <p class="credit-card__desc">
+            Intent Studio w CodeSpeak wyodrębnia wymagania z wcześniejszych rozmów z agentem —
+            zbierając intencję, którą już wyraziłeś, zamiast zmuszać Cię do pisania
+            specyfikacji od pustej kartki.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Tabela porównawcza ── */}
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">Porównanie możliwości.</h2>
+        <p class="section-note">
+          Oba narzędzia przyjęły zupełnie odmienne założenia, dlatego poniższa tabela porównuje filozofię i mechanikę, a nie wyłania zwycięzców.
+        </p>
+
+        <div class="table-wrap">
+          <table class="compare-table" aria-label="Porównanie funkcji SpecScore vs CodeSpeak">
+            <thead>
+              <tr>
+                <th scope="col">Cecha</th>
+                <th scope="col">CodeSpeak</th>
+                <th scope="col">SpecScore</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Źródło prawdy</td>
+                <td>Specyfikacja (wejście do kompilatora)</td>
+                <td><strong>Specyfikacja to kontrakt; kod to produkt</strong></td>
+              </tr>
+              <tr>
+                <td>Wygenerowany kod</td>
+                <td>Tworzony przez LLM, nieutrzymywany ręcznie</td>
+                <td><strong>Ty i Twoi agenci piszecie kod i macie nad nim pełną kontrolę</strong></td>
+              </tr>
+              <tr>
+                <td>Format specyfikacji</td>
+                <td>Język naturalny, zdefiniowany przez CodeSpeak</td>
+                <td><strong>Otwarty standard Markdown + YAML</strong>, publiczny schemat</td>
+              </tr>
+              <tr>
+                <td>Specyfikacja → kod</td>
+                <td>Główna funkcja (własnościowy kompilator LLM)</td>
+                <td>Poza zakresem formatu — implementuje dowolny agent</td>
+              </tr>
+              <tr>
+                <td>Działa bez dostawcy</td>
+                <td>Specyfikacje kompilują się wyłącznie przez CodeSpeak</td>
+                <td><strong>Tak</strong> — specyfikacje działają z dowolnym agentem lub bez</td>
+              </tr>
+              <tr>
+                <td>Linting specyfikacji</td>
+                <td>Brak dokumentacji</td>
+                <td><strong>Jakość treści</strong> — nieprecyzyjne czasowniki, brakujące AC, wiszące linki</td>
+              </tr>
+              <tr>
+                <td>Trazowalność kodu do specyfikacji</td>
+                <td>Poprzez ponowne generowanie</td>
+                <td><strong>Adnotacje <code>specscore:</code></strong> + stopki commitów <code>Verifies:</code></td>
+              </tr>
+              <tr>
+                <td>Determinizm</td>
+                <td>Kompilacja LLM (niedeterministyczna)</td>
+                <td><strong>Deterministyczne zapytania CLI</strong>; tradycyjnie pisany kod</td>
+              </tr>
+              <tr>
+                <td>Kod → specyfikacja</td>
+                <td><strong><code>codespeak takeover</code></strong></td>
+                <td><code>survey</code> + redagowanie</td>
+              </tr>
+              <tr>
+                <td>Otwartość</td>
+                <td>System własnościowy</td>
+                <td><strong>Otwarty</strong> — format CC BY 4.0, narzędzia MIT / Apache-2.0</td>
+              </tr>
+              <tr>
+                <td>Dojrzałość</td>
+                <td>Wczesna wersja alfa</td>
+                <td>Używany produkcyjnie</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Czym różni się SpecScore ── */}
+    <section class="section" aria-labelledby="further-title">
+      <div class="section-inner">
+        <h2 id="further-title" class="section-title">W czym różni się SpecScore.</h2>
+
+        <div class="diff-grid">
+          <div class="diff-card">
+            <h3 class="diff-card__title">Zachowujesz własny kod</h3>
+            <p class="diff-card__desc">
+              CodeSpeak generuje i regeneruje implementację; kod jest jedynie
+              produktem ubocznym, a nie trwałym aktywem. SpecScore pozostawia kod
+              tam, gdzie jego miejsce — w Twoich rękach, w Twoim języku, możliwy
+              do weryfikacji linijka po linijce. Specyfikacja dodaje przejrzystość
+              i trazowalność, nie odbierając kontroli nad kodem.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Twoje specyfikacje są w pełni przenośne</h3>
+            <p class="diff-card__desc">
+              Specyfikacja CodeSpeak ma wartość tylko dlatego, że kompiluje ją CodeSpeak.
+              Specyfikacja SpecScore ma wartość sama w sobie — to ustrukturyzowany
+              Markdown, który przeczyta dowolny agent, przydatny nawet bez
+              zainstalowanych narzędzi SpecScore. Korzystaj z dowolnymi narzędziami
+              i zrezygnuj, kiedy tylko zechcesz.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Niejednoznaczność jest wykrywana, zanim przyniesie straty</h3>
+            <p class="diff-card__desc">
+              W przypadku kompilatora LLM nieprecyzyjna specyfikacja skutkuje błędnym kodem
+              w momencie budowania. Mechanizm <code>lint</code> w SpecScore wyłapuje nieostre
+              czasowniki, brakujące kryteria akceptacji i wiszące referencje, <em>zanim</em>
+              agent w ogóle przystąpi do pracy.
+            </p>
+            <div class="diff-card__example">
+<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+  <span class="mark-fail">✗</span> R3  no acceptance criteria
+  <span class="mark-fail">✗</span> verb  <span class="dim">"handle gracefully" — niemierzalne</span></pre>
+            </div>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Determinizm i pełna identyfikowalność</h3>
+            <p class="diff-card__desc">
+              Odpowiedź CodeSpeak na pytanie „który kod to realizuje?” brzmi: „cały,
+              wygenerowany na nowo”. Odpowiedź SpecScore wskazuje konkretny plik
+              i linię poprzez <code>specscore code refs</code> oraz stopki commitów
+              <code>Verifies:</code> — deterministycznie, audytowalnie i w sposób czytelny dla diffa.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Strukturalny graf powiązanych artefaktów</h3>
+            <p class="diff-card__desc">
+              Jednostką w CodeSpeak jest pojedynczy plik specyfikacji w prozie. SpecScore opiera się
+              na typowanej hierarchii — pomysły Idea awansują do Feature, Features zawierają
+              wymagania Requirements i kryteria AC z unikalnymi ID, plany Plan odwołują się do AC,
+              a zadania Task do Planu — w pełni maszynowo nawigowalne.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Brak zewnętrznego dostawcy w procesie budowania</h3>
+            <p class="diff-card__desc">
+              SpecScore to pojedynczy plik binarny w Go. Linter działa w potokach CI
+              oraz hookach pre-commit bez logowania, bez odpytywania zewnętrznych API
+              i bez kosztownych zapytań do LLM w Twoim buildzie.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Kiedy wybrać które rozwiązanie ── */}
+    <section class="section" aria-labelledby="when-title">
+      <div class="section-inner">
+        <h2 id="when-title" class="section-title">Kiedy wybrać które rozwiązanie.</h2>
+
+        <div class="when-grid">
+          <div class="when-card">
+            <h3 class="when-card__title">Wybierz CodeSpeak, gdy…</h3>
+            <ul class="when-card__list">
+              <li>Chcesz całkowicie przestać utrzymywać kod i uczynić specyfikację jedynym źródłem prawdy.</li>
+              <li>Akceptujesz pełną zależność od kompilatora konkretnego dostawcy.</li>
+              <li>Chcesz skondensować istniejący codebase w znacznie krótszą specyfikację.</li>
+            </ul>
+          </div>
+
+          <div class="when-card when-card--primary">
+            <h3 class="when-card__title">Wybierz SpecScore, gdy…</h3>
+            <ul class="when-card__list">
+              <li>Chcesz, by specyfikacje przetrwały każde pojedyncze narzędzie — pełna przenośność z założenia.</li>
+              <li>Chcesz zachować swój kod, we własnym języku, podlegający standardowemu code review.</li>
+              <li>Wymagasz bezwzględnej weryfikacji jakości specyfikacji — linter wcześnie wykrywa niejasności.</li>
+              <li>Potrzebujesz deterministycznej trazowalności kodu do wymagań.</li>
+              <li>Nie chcesz żadnego zewnętrznego dostawcy ani zapytań LLM w potoku CI/CD.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Dwie odmienne koncepcje ── */}
+    <section class="section" aria-labelledby="bets-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="bets-title" class="section-title">Dwie odmienne koncepcje.</h2>
+        <p class="prose-p">
+          CodeSpeak to zakład na kompilator: przekazujesz mu specyfikację i ufasz, że poprawnie
+          wyprodukuje oraz odtworzy kod. SpecScore to zakład na otwarty format: dbasz o to, by specyfikacja
+          była uniwersalna i przenośna, kod pozostaje Twój, a dowolny agent może na niej pracować.
+        </p>
+        <p class="prose-p">
+          Jedno wymienia przenośność na dźwignię automatyzacji. Drugie daje pełną niezależność — oraz deterministyczną weryfikację.
+        </p>
+      </div>
+    </section>
+
+    <ComparisonFeedback page="codespeak" />
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">Specyfikacje, które przechodzą lint.</h2>
+      <div class="final-cta__buttons">
+        <a href="/pl/cli/install/" class="btn btn--primary">Zainstaluj CLI</a>
+        <a href="/pl/ai/specstudio-skills/" class="btn btn--secondary">Skille AI dla Twojego agenta</a>
+        <a
+          href="https://github.com/specscore/specscore"
+          rel="noopener"
+          class="btn btn--tertiary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          Open source na GitHubie
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <SiteFooterPl />
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__breadcrumb {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    margin-bottom: var(--space-2);
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+
+  .shared-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .shared-list li {
+    position: relative;
+    padding-left: 1.4rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+  }
+  .shared-list li::before {
+    content: '=';
+    position: absolute;
+    left: 0;
+    font-family: var(--font-code);
+    font-weight: 700;
+    color: var(--pale-ink);
+  }
+
+  .section-note {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-3);
+    max-width: 60ch;
+  }
+
+  .credit-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-left: 3px solid var(--graphite);
+    padding: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+  .credit-card:last-child { margin-bottom: 0; }
+  .credit-card__title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .credit-card__desc {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .table-section { background: var(--cream-2); }
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+  .compare-table th,
+  .compare-table td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+  }
+  .compare-table thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    border-bottom: 2px solid var(--graphite);
+  }
+  .compare-table td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 160px;
+  }
+  .compare-table td:nth-child(2),
+  .compare-table td:nth-child(3) {
+    min-width: 200px;
+  }
+
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .diff-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+  }
+  .diff-card__title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .diff-card__desc {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .diff-card__example {
+    margin-top: var(--space-2);
+  }
+  .diff-card__example pre.terminal {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 720px) {
+    .diff-grid { grid-template-columns: 1fr; }
+  }
+
+  .when-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+  .when-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-4);
+  }
+  .when-card--primary {
+    border-top: 3px solid var(--validator-green);
+  }
+  .when-card__title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .when-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .when-card__list li {
+    position: relative;
+    padding-left: 1.3rem;
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+    margin-bottom: var(--space-1);
+  }
+  .when-card__list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    font-family: var(--font-code);
+    color: var(--pale-ink);
+  }
+  .when-card--primary .when-card__list li::before {
+    color: var(--validator-green);
+  }
+
+  @media (max-width: 640px) {
+    .when-grid { grid-template-columns: 1fr; }
+  }
+
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+  .prose-p:last-child { margin-bottom: 0; }
+
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+</style>

@@ -1,0 +1,258 @@
+---
+// /it/faq/ — Frequently asked questions (Italian).
+// Italian variant of /faq/index.astro. Anchor IDs stay verbatim
+// (vs-spec-kit, vs-superpowers, why-cli, naming, token-savings) so the
+// homepage teaser link targets land correctly.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import FinalCta from '../../../components/FinalCtaIt.astro';
+import SiteFooter from '../../../components/SiteFooterIt.astro';
+---
+
+<BaseLayout
+  lang="it"
+  title="FAQ — SpecScore"
+  description="Risposte oneste alle domande poste dai revisori: come si differenzia SpecScore da spec-kit, perché esiste una CLI oltre alle skill, cosa significa «Score» e come viene misurato il risparmio di token."
+  canonical="https://specscore.md/it/faq/"
+>
+  <SiteHeader />
+
+  <main>
+    <section class="faq-hero" aria-labelledby="faq-hero-title">
+      <div class="faq-hero__inner">
+        <h1 id="faq-hero-title" class="faq-hero__headline">
+          Domande poste realmente dai revisori.
+        </h1>
+        <p class="faq-hero__sub">
+          Raccolte dal feedback pre-lancio. Ciascuna risposta è quella
+          sincera, non uno slogan di marketing.
+        </p>
+      </div>
+    </section>
+
+    <section class="faq-body section" aria-labelledby="faq-list-title">
+      <div class="section-inner">
+        <h2 id="faq-list-title" class="sr-only">Elenco FAQ</h2>
+
+        <article class="faq-item">
+          <h2 id="vs-spec-kit" class="faq-item__q">
+            Come si differenzia SpecScore da spec-kit?
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              <strong>spec-kit è una metodologia — un processo per scrivere specifiche.</strong>
+              SpecScore è un <strong>formato di archiviazione</strong> per le
+              specifiche che scrivi, più una CLI per interrogarle e modificarle. I
+              due si integrano a vicenda: spec-kit può produrre file SpecScore, e
+              un'estensione per spec-kit che scrive in formato SpecScore è già in
+              lavorazione.
+            </p>
+            <p>
+              Scegli spec-kit quando hai bisogno di un processo. Scegli SpecScore
+              quando hai bisogno di specifiche che gli agenti IA possano
+              verificare con linter, interrogare e modificare senza leggere ogni
+              singolo file nel repository. Usa entrambi quando desideri entrambi.
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <h2 id="vs-superpowers" class="faq-item__q">
+            In cosa si differenziano le SpecStudio Skills da Superpowers e agent-skills?
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              Simili nello spirito. Tutte e tre sono raccolte di skill che
+              guidano gli agenti IA attraverso ideate → specify → plan →
+              implement. La differenza è meccanica, non filosofica.
+            </p>
+            <p>
+              <strong>SpecStudio Skills scrive i suoi artefatti nel formato
+              SpecScore</strong> (una struttura definita di Markdown + YAML)
+              e richiama la CLI <code>specscore</code> per query, linting
+              e modifiche di stato. Superpowers e agent-skills, per lo più,
+              leggono e modificano i file direttamente dal testo delle
+              istruzioni della skill.
+            </p>
+            <p>
+              Scegli SpecStudio Skills quando il consumo di token è cruciale — la
+              CLI restituisce una risposta strutturata a <em>«tutte le Feature
+              aperte con domande irrisolte»</em> in una singola chiamata,
+              mentre una skill basata su file legge N documenti per
+              rispondere alla stessa cosa.
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <h2 id="why-cli" class="faq-item__q">
+            Perché una CLI — non posso semplicemente installare le skill?
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              Le skill possono leggere e scrivere file. Non possono, in modo
+              affidabile:
+            </p>
+            <ul>
+              <li>garantire l'integrità referenziale nell'albero delle specifiche (che i link si risolvano, gli ID siano univoci, gli indici siano sincronizzati);</li>
+              <li>restituire un elenco filtrato di «Feature aperte con domande irrisolte» senza leggere ogni file;</li>
+              <li>aggiornare il campo di stato appropriato al momento giusto in ciascun artefatto.</li>
+            </ul>
+            <p>
+              La CLI offre agli agenti una chiamata pulita per ogni operazione —
+              nello stesso modo in cui <code>jq</code> offre una chiamata
+              pulita per interrogare JSON. Le sole skill consumano più token,
+              divergono più spesso e dimenticano di aggiornare gli indici.
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <h2 id="naming" class="faq-item__q">
+            Perché si chiama «SpecScore» — cosa misura?
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              «Score» si presta a due letture, entrambe volute.
+            </p>
+            <p>
+              <strong>Partitura.</strong> Uno spartito strutturato di requisiti —
+              proprio come una partitura musicale struttura parti, voci e tempi.
+              Apri un albero SpecScore e dovresti poterlo leggere come un
+              direttore d'orchestra legge una partitura: gerarchia, parti,
+              riferimenti, tutto visibile a colpo d'occhio.
+            </p>
+            <p>
+              <strong>Un voto letterale di qualità.</strong> Il linter della CLI
+              è il punteggio deterministico (la struttura della specifica
+              regge?). La <a href="https://specscore.studio/app/github.com/specscore/specstudio-skills/spec/ideas/manual-review-and-score-commands">skill <code>/score</code></a>
+              è la valutazione espressa dall'IA — un voto di maturità da A ad F
+              per ciascun artefatto, con feedback per asse per l'autore. La
+              metà «Score» del nome diventa una funzionalità prodotta dallo
+              strumento, non solo un'aspirazione.
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <h2 id="token-savings" class="faq-item__q">
+            Mostrami i dati sul risparmio di token.
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              Un confronto analitico affiancato e misurato è in preparazione e
+              sarà pubblicato prima del post su Habr — lo stesso task («su
+              cosa dovrei lavorare adesso?»), eseguito due volte: una volta con
+              un agente senza CLI che legge documenti, e un'altra con lo
+              stesso agente che invoca la CLI di SpecScore. Conteggio dei
+              token e tempo di risposta per entrambi i casi.
+            </p>
+            <p>
+              In attesa di tali numeri, il vantaggio è strutturale: un agente
+              che chiede alla CLI le Feature aperte e le domande irrisolte
+              riceve una risposta breve e strutturata. Lo stesso agente senza
+              CLI legge N documenti — con N spesso nell'ordine delle dozzine.
+              L'interfaccia della CLI è progettata appositamente per evitare
+              questo dispendio di letture.
+            </p>
+          </div>
+        </article>
+
+        <p class="faq-extend">
+          Altre domande, o una formulazione più mirata di qualcuna di queste?
+          Apri una issue su
+          <a href="https://github.com/specscore/specscore/issues">specscore/specscore</a>;
+          questa pagina è la FAQ canonica e cresce sulla base di domande reali
+          poste dai revisori.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <FinalCta />
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap; border: 0;
+  }
+
+  .faq-hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .faq-hero__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+  }
+  .faq-hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+    max-width: 22ch;
+  }
+  .faq-hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    max-width: 50ch;
+    line-height: 1.5;
+  }
+
+  .faq-body { background: var(--surface); }
+
+  .faq-item {
+    border-top: 1px solid var(--hairline);
+    padding: var(--space-4) 0;
+    max-width: 70ch;
+  }
+  .faq-item:last-of-type { border-bottom: 1px solid var(--hairline); }
+  .faq-item__q {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+    scroll-margin-top: var(--space-4);
+  }
+  .faq-item__a p,
+  .faq-item__a ul {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-2);
+  }
+  .faq-item__a ul {
+    padding-left: 1.25rem;
+  }
+  .faq-item__a li {
+    margin-bottom: 0.4rem;
+  }
+  .faq-item__a a {
+    color: var(--ink-blue);
+    border-bottom: 1px solid currentColor;
+  }
+  .faq-item__a code {
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  .faq-extend {
+    margin-top: var(--space-5);
+    font-size: 0.95rem;
+    color: var(--mid-ink);
+    max-width: 60ch;
+  }
+  .faq-extend a {
+    color: var(--ink-blue);
+    border-bottom: 1px solid currentColor;
+  }
+</style>

@@ -1,0 +1,595 @@
+---
+// /it/vs/plain-markdown/ — Confronto tra SpecScore e Plain Markdown / Notion / Jira.
+// La scelta predefinita è il concorrente più tosto. Non combatterla frontalmente —
+// posiziona SpecScore come l'evoluzione naturale delle tue specifiche Markdown esistenti.
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooterIt from '../../../../components/SiteFooterIt.astro';
+import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro';
+---
+
+<BaseLayout
+  lang="it"
+  title="SpecScore vs Plain Markdown — Confronto onesto."
+  description="Un confronto oggettivo tra SpecScore e la scelta predefinita: Markdown ad-hoc, Notion e ticket Jira. Lo stesso Markdown, con in più la struttura che gli agenti possono verificare con lint, interrogare e tracciare."
+  canonical="https://specscore.md/it/vs/plain-markdown/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href="/it/vs/" class="xref">Confronti</a></p>
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore vs Plain Markdown
+        </h1>
+        <p class="hero__sub">
+          La maggior parte dei team ha già delle "specifiche" — come Markdown
+          improvvisato in una cartella docs, pagine Notion o ticket Jira. È
+          gratuito, già disponibile e funziona. SpecScore è lo <strong>stesso Markdown</strong>,
+          con in più la struttura che un agente IA può verificare tramite lint, interrogare e tracciare
+          direttamente fino al codice.
+        </p>
+      </div>
+    </section>
+
+    {/* ── What they share ── */}
+    <section class="section" aria-labelledby="shared-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="shared-title" class="section-title">Cosa hanno in comune.</h2>
+        <ul class="shared-list">
+          <li>È comunque Markdown — testo semplice, leggibile da umani, amico dei diff.</li>
+          <li>Le specifiche possono risiedere nel repository, con controllo versione e revisionate nelle pull request.</li>
+          <li>Nessun formato proprietario, nessun lock-in — puoi leggerlo in qualsiasi editor.</li>
+          <li>Continui a scrivere testo in prosa; SpecScore aggiunge struttura attorno ad esso, non al suo posto.</li>
+        </ul>
+      </div>
+    </section>
+
+    {/* ── What plain Markdown does well ── */}
+    <section class="section" aria-labelledby="default-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="default-title" class="section-title">Cosa fa bene l'approccio standard.</h2>
+        <p class="section-note">
+          Plain Markdown, Notion e Jira sono lo standard di fatto. E se lo sono meritato.
+        </p>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Zero curva di apprendimento</h3>
+          <p class="credit-card__desc">
+            Nessuno schema, nessun campo obbligatorio, nessuna CLI nel flusso. Apri un file,
+            inizia a scrivere. Per una nota isolata o un progetto minuscolo, è
+            esattamente la scelta giusta — la struttura di cui non hai bisogno è solo attrito.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">È già installato</h3>
+          <p class="credit-card__desc">
+            Il tuo team è già su Notion, Confluence o usa una cartella <code>docs/</code>.
+            Nulla da adottare, nulla da migrare. L'opzione a minor attrito è quella che
+            stai già usando.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Universalmente portabile</h3>
+          <p class="credit-card__desc">
+            Il semplice Markdown si apre ovunque e sopravvive a qualsiasi strumento.
+            SpecScore è costruito proprio su questa proprietà — ecco perché
+            anche SpecScore è Markdown, non un database.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Feature comparison table ── */}
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">Confronto delle funzionalità.</h2>
+        <p class="section-note">
+          La differenza non sta nel file — sta in ciò che un agente può farci.
+        </p>
+
+        <div class="table-wrap">
+          <table class="compare-table" aria-label="Confronto delle funzionalità SpecScore vs Plain Markdown">
+            <thead>
+              <tr>
+                <th scope="col">Capacità</th>
+                <th scope="col">Plain Markdown / Notion</th>
+                <th scope="col">SpecScore</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Formato</td>
+                <td>Markdown libero / documenti</td>
+                <td><strong>Markdown + YAML frontmatter</strong> (strutturato)</td>
+              </tr>
+              <tr>
+                <td>Dove risiedono i requisiti</td>
+                <td>Jira, Notion, Slack, nella testa di qualcuno</td>
+                <td><strong>Nel repository, accanto al codice</strong></td>
+              </tr>
+              <tr>
+                <td>"Questa specifica è completa?"</td>
+                <td>Un essere umano la legge e decide</td>
+                <td><strong><code>specscore lint</code></strong> — automatico</td>
+              </tr>
+              <tr>
+                <td>Rilevamento dell'ambiguità</td>
+                <td>Nessuno — i verbi vaghi passano inosservati</td>
+                <td><strong>Verbi vaghi, AC mancanti e riferimenti orfani segnalati</strong></td>
+              </tr>
+              <tr>
+                <td>ID per requisiti / AC</td>
+                <td>Nessuno</td>
+                <td><strong>ID indirizzabili via software</strong> (<code>REQ: slug</code>)</td>
+              </tr>
+              <tr>
+                <td>Stato del ciclo di vita</td>
+                <td>Implicito, se tracciato</td>
+                <td><strong>Applicato rigorosamente</strong> — Draft → Approved → Implementing → Stable</td>
+              </tr>
+              <tr>
+                <td>Tracciabilità codice-a-specifica</td>
+                <td>Nessuna</td>
+                <td><strong>Annotazioni <code>specscore:</code></strong> + trailer <code>Verifies:</code></td>
+              </tr>
+              <tr>
+                <td>Navigazione per gli agenti</td>
+                <td>Leggere ogni file per trovare qualcosa</td>
+                <td><strong>Interrogare il grafo delle specifiche</strong> da CLI</td>
+              </tr>
+              <tr>
+                <td>Controllo di qualità in CI</td>
+                <td>Nessuno</td>
+                <td><strong><code>specscore lint</code></strong> termina con codice non-zero, come un linter</td>
+              </tr>
+              <tr>
+                <td>Curva di apprendimento</td>
+                <td><strong>Nessuna</strong></td>
+                <td>Un unico formato da imparare (incrementale)</td>
+              </tr>
+              <tr>
+                <td>Costo / licenza</td>
+                <td>Gratuito</td>
+                <td>Gratuito, open source</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Where SpecScore goes further ── */}
+    <section class="section" aria-labelledby="further-title">
+      <div class="section-inner">
+        <h2 id="further-title" class="section-title">Dove SpecScore va oltre.</h2>
+
+        <div class="diff-grid">
+          <div class="diff-card">
+            <h3 class="diff-card__title">L'ambiguità viene rilevata, non interpretata</h3>
+            <p class="diff-card__desc">
+              Con le specifiche in testo libero, ogni interazione con un agente inizia con
+              l'interpretazione — "il login dovrebbe funzionare" è una scommessa tra
+              corretto e plausibile-ma-sbagliato. Il comando <code>lint</code> di SpecScore
+              segnala il verbo vago e il criterio di accettazione mancante prima che un
+              agente agisca su di essi.
+            </p>
+            <div class="diff-card__example">
+<pre class="terminal"><span class="prompt">$</span> specscore lint auth/login.md
+  <span class="mark-fail">✗</span> R1  <span class="dim">"should work" — non misurabile</span>
+  <span class="mark-fail">✗</span> R1  no acceptance criteria</pre>
+            </div>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Gli errori di interpretazione smettono di accumularsi</h3>
+            <p class="diff-card__desc">
+              Un agente fraintende un requisito, un secondo costruisce su di esso, un
+              terzo dipende da entrambi — e te ne accorgi tre agenti più tardi. Criteri
+              di accettazione strutturati offrono a ogni agente le medesime
+              condizioni di successo/fallimento, evitando derive interpretative.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Il codice risale alla specifica</h3>
+            <p class="diff-card__desc">
+              I semplici documenti non hanno alcun legame con il codice che li implementa. SpecScore aggiunge
+              annotazioni di origine <code>specscore:</code> e trailer di commit <code>Verifies:</code>
+              — <code>specscore code refs</code> risponde in modo deterministico a "¿quale codice
+              implementa questo requisito?".
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Una specifica al posto di quaranta ticket</h3>
+            <p class="diff-card__desc">
+              Un nuovo collega (o un nuovo agente) legge una specifica di
+              feature con tutto il contesto necessario, invece di dover ricostruire l'intento iniziale
+              da quaranta ticket Jira e una discussione su Slack.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Gli agenti interrogano invece di rileggere tutto</h3>
+            <p class="diff-card__desc">
+              In una cartella di documenti, scoprire "cosa è in corso?" significa aprire ogni file.
+              In SpecScore basta <code>specscore feature list</code> — il grafo delle specifiche
+              risponde da CLI, evitando che gli agenti consumino contesto rileggendo il repository.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">La qualità è applicata in CI</h3>
+            <p class="diff-card__desc">
+              Le specifiche in testo libero non hanno filtri — un documento incompleto viene
+              unito con la stessa facilità di uno perfetto. <code>specscore lint</code> esce con
+              codice non-zero in caso di problemi, proteggendo la documentazione proprio come ESLint o <code>go vet</code> proteggono il codice.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── When to use which ── */}
+    <section class="section" aria-labelledby="when-title">
+      <div class="section-inner">
+        <h2 id="when-title" class="section-title">Quando usare l'uno o l'altro.</h2>
+
+        <div class="when-grid">
+          <div class="when-card">
+            <h3 class="when-card__title">Plain Markdown va benissimo se…</h3>
+            <ul class="when-card__list">
+              <li>È una nota isolata, uno spike o un progetto troppo piccolo per aver bisogno di struttura.</li>
+              <li>Nessun agente IA implementerà a partire dal documento — un umano lo legge e lo capisce al volo.</li>
+              <li>Stai semplicemente annotando un'idea di massima, non un requisito che qualcuno deve implementare.</li>
+            </ul>
+          </div>
+
+          <div class="when-card when-card--primary">
+            <h3 class="when-card__title">Scegli SpecScore se…</h3>
+            <ul class="when-card__list">
+              <li>Un agente IA sviluppa a partire dalla specifica — l'ambiguità si traduce direttamente in codice errato.</li>
+              <li>Più agenti o persone dipendono dagli stessi requisiti.</li>
+              <li>Hai bisogno di sapere con precisione quale codice implementa ciascun requisito.</li>
+              <li>"Questa specifica è pronta?" deve ricevere risposta da uno strumento, non da una riunione.</li>
+              <li>Il progetto è abbastanza grande da rendere insostenibile rileggere ogni volta l'intero repository.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── The adoption path ── */}
+    <section class="section" aria-labelledby="bridge-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="bridge-title" class="section-title">Fai evolvere le specifiche che hai già.</h2>
+        <p class="prose-p">
+          Non serve convertire tutto il tuo backlog né stravolgere i tuoi strumenti. Scegli la tua prossima feature,
+          scrivi per essa una specifica SpecScore ed esegui <code>specscore lint</code> — verifica se
+          individua problemi sfuggiti al tuo ticket. Aggiungi annotazioni <code>specscore:</code>
+          durante l'implementazione. Estendi l'uso allo sprint successivo solo se ne hai tratto un beneficio reale.
+        </p>
+        <p class="prose-p">
+          Il semplice Markdown è la rampa di accesso. SpecScore è l'evoluzione naturale.
+        </p>
+      </div>
+    </section>
+
+    <ComparisonFeedback page="plain-markdown" />
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">Specifiche che superano la prova.</h2>
+      <div class="final-cta__buttons">
+        <a href="/it/cli/install/" class="btn btn--primary">Installa la CLI</a>
+        <a href="/it/ai/specstudio-skills/" class="btn btn--secondary">Ottieni le skill IA per il tuo agente</a>
+        <a
+          href="https://github.com/specscore/specscore"
+          rel="noopener"
+          class="btn btn--tertiary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          Open source su GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <SiteFooterIt />
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__breadcrumb {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    margin-bottom: var(--space-2);
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Shared list ── */
+  .shared-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .shared-list li {
+    position: relative;
+    padding-left: 1.4rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+  }
+  .shared-list li::before {
+    content: '=';
+    position: absolute;
+    left: 0;
+    font-family: var(--font-code);
+    font-weight: 700;
+    color: var(--pale-ink);
+  }
+
+  /* ── Section note ── */
+  .section-note {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Credit cards ── */
+  .credit-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .credit-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .credit-card__desc {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    font-size: var(--fs-body);
+  }
+  .credit-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Feature comparison table ── */
+  .table-section { background: var(--cream-2); }
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+  .compare-table th,
+  .compare-table td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+  }
+  .compare-table thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    border-bottom: 2px solid var(--graphite);
+    white-space: nowrap;
+  }
+  .compare-table td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 160px;
+  }
+  .compare-table td:nth-child(2),
+  .compare-table td:nth-child(3) {
+    min-width: 200px;
+  }
+  .compare-table td code {
+    font-size: 0.88em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .compare-table strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ── Diff grid ── */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .diff-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+  }
+  .diff-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .diff-card__desc {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+  .diff-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .diff-card__example {
+    margin-top: var(--space-2);
+  }
+  .diff-card__example .terminal {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 860px) {
+    .diff-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── When to use which ── */
+  .when-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .when-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-4);
+  }
+  .when-card--primary {
+    border-color: var(--validator-green);
+    border-width: 2px;
+  }
+  .when-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .when-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .when-card__list li {
+    position: relative;
+    padding-left: 1.2rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+    font-size: var(--fs-small);
+  }
+  .when-card__list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--pale-ink);
+    font-family: var(--font-code);
+  }
+  .when-card--primary .when-card__list li::before {
+    color: var(--validator-green);
+  }
+  .when-card__list code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 860px) {
+    .when-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Bridge section ── */
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-2);
+  }
+  .prose-p:last-child {
+    margin-bottom: 0;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .prose-p code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+</style>

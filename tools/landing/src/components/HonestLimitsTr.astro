@@ -1,0 +1,38 @@
+---
+// Turkish variant of HonestLimits.astro — honest-limits teaser.
+// Links to the dedicated /tr/validators/#limits section.
+---
+
+<section class="limits-teaser section section--flush-top" aria-labelledby="limits-teaser-title">
+  <div class="section-inner section-inner--prose">
+    <h2 id="limits-teaser-title" class="limits-teaser__title">
+      İşte yakalayamayacağı şeyler.
+    </h2>
+    <p class="limits-teaser__body">
+      Her şeyi yakalayabileceğini iddia eden bir linter yalan söylüyordur. SpecScore
+      katmanlı bir sistemdir — deterministik bir linter, bir yapay zeka inceleyicisi ve
+      sizin kendi muhakemeniz — ve her katmanın gerçek bir sınırı vardır. Hepsini yazdık:
+      linter'ın neyi yakaladığı, yapay zekanın neyi yakaladığı ve henüz hiçbir araç
+      yapamadığı için neyin tamamen size kaldığı.
+    </p>
+    <p class="limits-teaser__cta">
+      <a class="xref" href="/tr/validators/#limits">Linter'ın yakalayamayacağı şeyler →</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .limits-teaser { background: var(--cream); }
+  .limits-teaser__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .limits-teaser__body {
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+</style>

@@ -1,0 +1,469 @@
+---
+// /fr/spec-driven-development/ — pillar page (French).
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooterFr from '../../../components/SiteFooterFr.astro';
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: "Développement piloté par les spécifications pour agents d'IA",
+      description:
+        "Qu'est-ce que le développement piloté par les spécifications, pourquoi il est crucial pour les agents d'IA, comment fonctionne le workflow et comment il se compare au TDD et au simple prompt.",
+      inLanguage: 'fr',
+      datePublished: '2026-05-29',
+      dateModified: '2026-05-29',
+      mainEntityOfPage: 'https://specscore.md/fr/spec-driven-development/',
+      image: 'https://specscore.md/hero-og.webp',
+      author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      publisher: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      about: {
+        '@type': 'DefinedTerm',
+        name: 'Développement piloté par les spécifications',
+        description:
+          "Une pratique de développement logiciel dans laquelle une spécification écrite — exigences et critères d'acceptation — constitue la source de vérité contre laquelle le code est construit et vérifié.",
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Le développement piloté par les spécifications est-il identique au développement piloté par les tests ?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              "Non. Le TDD guide l'implémentation à partir de tests qui échouent au niveau du code. Le développement piloté par les spécifications intervient un niveau au-dessus : il fige d'abord le comportement prévu et les critères d'acceptation dans une spécification écrite. Ils sont complémentaires — les critères d'acceptation d'une spécification deviennent souvent les tests qui guident ensuite le TDD.",
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Le développement piloté par les spécifications vous ralentit-il ?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              "Il demande du temps avant d'écrire le code et élimine le temps passé à reconstruire ce qui n'allait pas. Pour des scripts jetables, le coût n'en vaut pas la peine. Pour tout ce qu'un agent d'IA génère à grande échelle, ou qu'une équipe doit maintenir, écrire la spécification en premier s'avère généralement plus rapide de bout en bout.",
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Quelle est la différence entre une spécification et un PRD ?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              "Un PRD est le plus souvent une prose rédigée pour des humains. Une spécification dans le développement piloté par les spécifications est structurée et testable — des exigences distinctes assorties de critères d'acceptation explicites — afin que réviseurs et agents d'IA puissent agir dessus avec précision.",
+          },
+        },
+        {
+          '@type': 'Question',
+          name: "Comment les agents d'IA de codage utilisent-ils une spécification ?",
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              "Quand la spécification est lisible par une machine, l'agent l'interroge pour obtenir les exigences et critères d'acceptation pertinents pour sa tâche actuelle plutôt que de charger tout le codebase, puis compare sa production à ces critères — un garde-fou face au code plausible mais incorrect.",
+          },
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  lang="fr"
+  title="Développement piloté par les spécifications pour agents d'IA — Guide complet | SpecScore"
+  description="Le développement piloté par les spécifications consiste à rédiger une spécification testable avant le code, pour que les agents d'IA construisent la bonne chose. Définition, fonctionnement et comparaison avec le TDD et le vibe coding."
+  canonical="https://specscore.md/fr/spec-driven-development/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
+  </Fragment>
+
+  <SiteHeader />
+
+  <main>
+    <!-- 1. Definition block + TL;DR -->
+    <section class="sdd-hero" aria-labelledby="sdd-title">
+      <div class="sdd-hero__inner">
+        <h1 id="sdd-title" class="sdd-hero__headline">Développement piloté par les spécifications pour agents d'IA</h1>
+        <p class="sdd-hero__lede">
+          <strong>Le développement piloté par les spécifications (SDD) est une pratique dans laquelle une spécification
+          écrite et testable — exigences et critères d'acceptation — constitue la source de vérité contre
+          laquelle le code est construit et vérifié.</strong> Plutôt que de passer directement d'un
+          prompt ou d'un ticket au code, vous convenez d'abord de ce que le logiciel doit faire, puis vous
+          construisez selon cette spécification. Alors que les agents d'IA écrivent une part croissante du code, la
+          spécification est ce qui leur permet de construire ce qu'il faut.
+        </p>
+        <ul class="sdd-takeaways">
+          <li>La spécification est la source de vérité ; le code en dérive et s'y conforme.</li>
+          <li>Les exigences s'accompagnent de critères d'acceptation explicites, ainsi l'état « terminé » est testable et non subjectif.</li>
+          <li>Les agents d'IA interrogent la spécification pour en saisir l'intention au lieu de la déduire du code — moins d'erreurs de construction.</li>
+          <li>C'est un complément au développement piloté par les tests, pas un substitut.</li>
+        </ul>
+        <p class="sdd-updated">Dernière mise à jour : mai 2026</p>
+      </div>
+    </section>
+
+    <!-- 2. What is SDD -->
+    <section class="sdd-section" aria-labelledby="what-title">
+      <div class="sdd-section__inner">
+        <h2 id="what-title">Qu'est-ce que le développement piloté par les spécifications ?</h2>
+        <p>
+          Le développement piloté par les spécifications inverse l'ordre habituel du travail. Au lieu de traiter
+          la spécification comme une documentation rédigée a posteriori — ou de la négliger entièrement —,
+          le SDD en fait l'artefact principal. Le code, les tests et la révision s'y réfèrent tous.
+        </p>
+        <p>
+          Une spécification en ce sens n'est pas un pavé de texte. Elle est structurée : un ensemble d'<strong>exigences</strong>,
+          chacune dotée de <strong>critères d'acceptation</strong> explicites précisant, en termes vérifiables, ce qui doit
+          être vrai pour que l'exigence soit satisfaite. C'est cette structure qui permet à un réviseur, à une suite de
+          tests et à un agent d'IA d'interpréter le même document de façon identique.
+        </p>
+        <p>
+          La spécification est en outre un <strong>artefact vivant</strong>. Lorsque les besoins évoluent, la
+          spécification est modifiée en premier et le code suit — évitant ainsi que la spécification ne devienne obsolète ou fictive.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. Why it matters now (AI spine) -->
+    <section class="sdd-section" aria-labelledby="why-title">
+      <div class="sdd-section__inner">
+        <h2 id="why-title">Pourquoi c'est capital aujourd'hui : l'IA a changé la donne</h2>
+        <p>
+          Les agents d'IA génèrent du code bien plus vite qu'un humain ne peut le lire. Le goulot d'étranglement
+          s'est déplacé. La difficulté ne consiste plus à écrire l'implémentation — elle consiste à
+          <strong>spécifier l'intention avec suffisamment de précision pour que le code généré
+          soit celui attendu</strong>. Face à un prompt imprécis, un agent produira assurément
+          un résultat plausible mais erroné, et ce à la vitesse de la machine.
+        </p>
+        <p>
+          La spécification est le garde-fou. Dès lors que le comportement attendu et les critères d'acceptation
+          sont couchés par écrit, l'agent dispose d'une cible sans ambiguïté vers laquelle converger et
+          d'une checklist de validation — et le réviseur humain dispose d'une base stable
+          à approuver avant qu'aucune ligne de code n'existe. Le SDD est le moyen pour les équipes
+          d'éviter que la rapidité de l'IA ne se transforme en réécriture permanente.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. How it works -->
+    <section class="sdd-section" aria-labelledby="how-title">
+      <div class="sdd-section__inner">
+        <h2 id="how-title">Comment fonctionne le développement piloté par les spécifications</h2>
+        <p>Le workflow forme une boucle, pas un document ponctuel :</p>
+        <ol class="sdd-steps">
+          <li><strong>Capturer l'intention.</strong> Consignez l'orientation encore brute — le problème, l'objectif, les questions ouvertes — avant de vous engager sur une solution.</li>
+          <li><strong>Spécifier le comportement.</strong> Transformez l'orientation convenue en exigences, chacune dotée de critères d'acceptation explicites et testables.</li>
+          <li><strong>Décomposer en un plan.</strong> Divisez la spécification en tâches ordonnées, chacune citant les critères d'acceptation qu'elle satisfait.</li>
+          <li><strong>Implémenter.</strong> Construisez tâche par tâche — un humain ou un agent d'IA — selon la spécification.</li>
+          <li><strong>Vérifier par rapport aux critères.</strong> Contrôlez le résultat face aux critères d'acceptation, pas au jugé.</li>
+          <li><strong>Garder la spécification vivante.</strong> Lorsque les exigences changent, mettez à jour la spécification d'abord ; le code suit.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. Benefits -->
+    <section class="sdd-section" aria-labelledby="benefits-title">
+      <div class="sdd-section__inner">
+        <h2 id="benefits-title">Bénéfices du développement piloté par les spécifications</h2>
+        <ul class="sdd-benefits">
+          <li>Les désaccords surgissent lors de la révision de la spécification — peu coûteuse — plutôt qu'après l'implémentation — très coûteuse.</li>
+          <li>L'état « terminé » est objectif car les critères d'acceptation sont vérifiables.</li>
+          <li>La spécification constitue un contexte partagé par tous : produit, ingénierie et agents d'IA.</li>
+          <li>Les changements sont traçables — chaque tâche renvoie aux critères qu'elle remplit.</li>
+        </ul>
+        <h3>Pourquoi cela aide tout particulièrement les agents d'IA</h3>
+        <ul class="sdd-benefits">
+          <li><strong>Intention lisible par machine :</strong> l'agent lit directement les exigences au lieu de les inférer du code.</li>
+          <li><strong>Moins de contexte à charger :</strong> l'agent interroge la portion utile de la spécification au lieu du dépôt entier.</li>
+          <li><strong>Sortie vérifiable :</strong> les critères d'acceptation fournissent à l'agent un objectif précis de succès ou d'échec.</li>
+          <li><strong>Traçabilité :</strong> le code généré peut être rattaché à l'exigence qui l'a justifié.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. Comparison -->
+    <section class="sdd-section" aria-labelledby="vs-title">
+      <div class="sdd-section__inner">
+        <h2 id="vs-title">Développement piloté par les spécifications face aux pratiques voisines</h2>
+        <div class="sdd-table-wrap">
+          <table class="sdd-table">
+            <thead>
+              <tr><th>Pratique</th><th>Source de vérité</th><th>Relation avec le SDD</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Développement piloté par les tests</td><td>Tests qui échouent au niveau du code</td><td>Complémentaire — les critères d'acceptation deviennent les tests.</td></tr>
+              <tr><td>PRD traditionnel</td><td>Prose rédigée pour des humains</td><td>Moins structuré ; pas directement testable ni lisible par machine.</td></tr>
+              <tr><td>Prompts seuls (« vibe coding »)</td><td>Le prompt et l'intuition du modèle</td><td>Sans cible durable ni révisable — ce que le SDD vise à corriger.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Pour une comparaison détaillée de SpecScore face à d'autres outils de spécification, consultez
+          <a href="/fr/vs/">les pages de comparaison</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 7. Tradeoffs -->
+    <section class="sdd-section" aria-labelledby="limits-title">
+      <div class="sdd-section__inner">
+        <h2 id="limits-title">Compromis et quand ne pas l'utiliser</h2>
+        <p>
+          Le développement piloté par les spécifications n'est pas gratuit. Il reporte l'effort vers la réflexion
+          et l'écriture avant que le moindre code ne tourne, ce qui est inadapté pour un script jetable
+          ou une expérimentation rapide. Et une spécification n'aide que si elle reste à jour — une
+          spécification abandonnée devient trompeuse, pire que l'absence de spécification. Le SDD vaut la peine quand le travail est
+          assez vaste pour être planifié, est destiné à être maintenu, ou doit être délégué à un agent
+          d'IA pour une construction à grande échelle.
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. In practice (SpecScore) -->
+    <section class="sdd-section" aria-labelledby="practice-title">
+      <div class="sdd-section__inner">
+        <h2 id="practice-title">Pratiquer le développement piloté par les spécifications avec des agents d'IA</h2>
+        <p>
+          Pour pratiquer le SDD avec des agents d'IA, vous avez besoin de deux éléments : un <strong>format de spécification lisible
+          par machine</strong> que votre équipe et vos agents comprennent, et un <strong>moyen pour les agents
+          de lire, écrire et valider</strong> ces spécifications.
+        </p>
+        <p>
+          <strong>SpecScore</strong> en est précisément une implémentation. C'est un format ouvert
+          Markdown + YAML pour les features, exigences et critères d'acceptation — de simples fichiers
+          dans votre dépôt — associé à un CLI que vos agents appellent pour les interroger, les
+          modifier et les passer au linter. La structure étant lisible par machine, un agent peut
+          demander « sur quoi devrais-je travailler ensuite ? » et recevoir les exigences ouvertes avec leurs
+          critères d'acceptation, puis vérifier son travail par rapport à eux. Il est agnostique vis-à-vis des
+          outils et open source.
+        </p>
+        <p>
+          Commencez avec les <a href="/fr/ai/">Skills IA pour votre agent de programmation</a> ou
+          <a href="/fr/cli/">installez le CLI</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. FAQ -->
+    <section class="sdd-section" aria-labelledby="faq-title">
+      <div class="sdd-section__inner">
+        <h2 id="faq-title">Questions fréquentes</h2>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Le développement piloté par les spécifications est-il identique au développement piloté par les tests ?</p>
+          <p class="sdd-faq__a">Non. Le TDD guide l'implémentation à partir de tests qui échouent au niveau du code. Le développement piloté par les spécifications intervient un niveau au-dessus : il fige d'abord le comportement prévu et les critères d'acceptation dans une spécification écrite. Ils sont complémentaires — les critères d'acceptation d'une spécification deviennent souvent les tests qui guident ensuite le TDD.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Le développement piloté par les spécifications vous ralentit-il ?</p>
+          <p class="sdd-faq__a">Il demande du temps avant d'écrire le code et élimine le temps passé à reconstruire ce qui n'allait pas. Pour des scripts jetables, le coût n'en vaut pas la peine. Pour tout ce qu'un agent d'IA génère à grande échelle, ou qu'une équipe doit maintenir, écrire la spécification en premier s'avère généralement plus rapide de bout en bout.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Quelle est la différence entre une spécification et un PRD ?</p>
+          <p class="sdd-faq__a">Un PRD est le plus souvent une prose rédigée pour des humains. Une spécification dans le développement piloté par les spécifications est structurée et testable — des exigences distinctes assorties de critères d'acceptation explicites — afin que réviseurs et agents d'IA puissent agir dessus avec précision.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Comment les agents d'IA de codage utilisent-ils une spécification ?</p>
+          <p class="sdd-faq__a">Quand la spécification est lisible par une machine, l'agent l'interroge pour obtenir les exigences et critères d'acceptation pertinents pour sa tâche actuelle plutôt que de charger tout le codebase, puis compare sa production à ces critères — un garde-fou face au code plausible mais incorrect.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. CTA -->
+  <section class="sdd-cta" aria-labelledby="cta-title">
+    <div class="sdd-cta__inner">
+      <h2 id="cta-title">Commencez à construire à partir de spécifications avec votre agent d'IA</h2>
+      <p>SpecScore donne à votre agent un format de spécification ouvert et un CLI pour l'interroger et le linter.</p>
+      <div class="sdd-cta__buttons">
+        <a href="/fr/ai/" class="btn btn--primary">Obtenez des skills IA pour votre agent</a>
+        <a href="/fr/cli/" class="btn btn--secondary">Installez le CLI</a>
+      </div>
+    </div>
+  </section>
+
+  <SiteFooterFr />
+</BaseLayout>
+
+<style>
+  .sdd-hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .sdd-hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+  }
+  .sdd-hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .sdd-hero__lede {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: var(--space-4);
+  }
+  .sdd-takeaways {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-3);
+    border-left: 2px solid var(--validator-green);
+    padding-left: var(--space-3);
+  }
+  .sdd-takeaways li {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+  }
+  .sdd-takeaways li:last-child { margin-bottom: 0; }
+  .sdd-updated {
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    margin: 0;
+  }
+
+  .sdd-section {
+    padding: var(--space-5) var(--space-3);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .sdd-section:nth-of-type(even) {
+    background: var(--surface);
+  }
+  .sdd-section__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+  }
+  .sdd-section h2 {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .sdd-section h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+  }
+  .sdd-section p {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-3);
+  }
+  .sdd-section p:last-child { margin-bottom: 0; }
+  .sdd-section p strong { color: var(--ink); }
+
+  .sdd-steps {
+    padding-left: 1.25rem;
+    margin: 0 0 var(--space-3);
+  }
+  .sdd-steps li {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+  }
+  .sdd-steps li strong { color: var(--ink); }
+
+  .sdd-benefits {
+    padding-left: 1.25rem;
+    margin: 0 0 var(--space-3);
+  }
+  .sdd-benefits li {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+  }
+  .sdd-benefits li strong { color: var(--ink); }
+
+  .sdd-table-wrap {
+    overflow-x: auto;
+    margin: var(--space-3) 0 var(--space-4);
+  }
+  .sdd-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .sdd-table th {
+    text-align: left;
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 2px solid var(--graphite);
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--mid-ink);
+  }
+  .sdd-table td {
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 1px solid var(--hairline);
+    color: var(--mid-ink);
+    line-height: 1.5;
+    vertical-align: top;
+  }
+  .sdd-table td:first-child {
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .sdd-faq__item {
+    border-top: 1px solid var(--hairline);
+    padding: var(--space-3) 0;
+  }
+  .sdd-faq__item:first-of-type { border-top: 2px solid var(--graphite); }
+  .sdd-faq__q {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: var(--space-2);
+  }
+  .sdd-faq__a {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--mid-ink);
+    margin: 0;
+  }
+
+  .sdd-cta {
+    padding: var(--space-6) var(--space-3);
+    background: var(--cream);
+    text-align: center;
+  }
+  .sdd-cta__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+  }
+  .sdd-cta h2 {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+  }
+  .sdd-cta p {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    font-size: 1.05rem;
+  }
+  .sdd-cta__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 600px) {
+    .sdd-hero__headline { font-size: 2rem; }
+    .sdd-cta__buttons { flex-direction: column; align-items: stretch; }
+  }
+</style>

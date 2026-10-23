@@ -1,0 +1,29 @@
+---
+// German variant of InstallFromSource.astro.
+---
+<pre class="terminal"><span class="prompt">$</span> go install github.com/specscore/specscore-cli/cmd/specscore@main</pre>
+<p class="method-desc">
+  Erfordert <a class="xref" href="https://go.dev/">Go</a> 1.26 oder neuer.
+  Dies installiert den neuesten Entwicklungs-Build von <code>main</code> –
+  kann Änderungen enthalten, die noch nicht in einem getaggten Release sind.
+</p>
+<p class="method-desc">
+  Um eine bestimmte Version festzupinnen, ersetze <code>@main</code> durch einen Tag wie
+  <code>@v0.4.2</code>, oder verwende <code>@latest</code> für das aktuellste getaggte Release.
+</p>
+
+<style>
+  .method-desc {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .method-desc code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+</style>

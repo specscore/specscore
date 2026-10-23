@@ -1,0 +1,477 @@
+---
+// /pl/spec-driven-development/ — pillar page (Polish).
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooterPl from '../../../components/SiteFooterPl.astro';
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: 'Rozwój sterowany specyfikacją dla agentów AI',
+      description:
+        'Czym jest rozwój sterowany specyfikacją (SDD), dlaczego ma kluczowe znaczenie dla agentów AI, jak wygląda proces i czym różni się od TDD oraz programowania opartego wyłącznie na promptach.',
+      inLanguage: 'pl',
+      datePublished: '2026-05-29',
+      dateModified: '2026-05-29',
+      mainEntityOfPage: 'https://specscore.md/pl/spec-driven-development/',
+      image: 'https://specscore.md/hero-og.webp',
+      author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      publisher: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      about: {
+        '@type': 'DefinedTerm',
+        name: 'Rozwój sterowany specyfikacją',
+        description:
+          'Praktyka inżynierii oprogramowania, w której pisemna specyfikacja — wymagania i kryteria akceptacji — stanowi źródło prawdy, według którego buduje się i weryfikuje kod.',
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Czy rozwój sterowany specyfikacją to to samo co test-driven development (TDD)?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Nie. TDD steruje implementacją za pomocą niezaliczonych testów na poziomie kodu. Rozwój sterowany specyfikacją działa poziom wyżej: najpierw ustala planowane zachowanie i kryteria akceptacji w spisanej specyfikacji. Te podejścia się uzupełniają — kryteria akceptacji ze specyfikacji często stają się testami napędzającymi TDD.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Czy rozwój sterowany specyfikacją spowalnia pracę?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Wymaga poświęcenia czasu przed napisaniem kodu, ale eliminuje czas marnowany na poprawianie tego, co zrobiono błędnie. W przypadku jednorazowych skryptów koszt jest nieuzasadniony. W przypadku wszystkiego, co agent AI generuje na większą skalę lub co zespół musi utrzymać, napisanie specyfikacji w pierwszej kolejności okazuje się szybsze od początku do końca.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Jaka jest różnica między specyfikacją a dokumentem PRD?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'PRD to najczęściej proza skierowana do ludzi. Specyfikacja w SDD jest ustrukturyzowana i testowalna — dyskretne wymagania z jawnymi kryteriami akceptacji — dzięki czemu zarówno recenzenci, jak i agenci AI mogą działać precyzyjnie.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Jak agenci programistyczni AI korzystają ze specyfikacji?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Gdy specyfikacja jest czytelna maszynowo, agent odpytuje ją o wymagania i kryteria akceptacji istotne dla bieżącego zadania zamiast ładować cały codebase, a następnie weryfikuje wynik z tymi kryteriami — chroniąc przed kodem pozornie poprawnym, lecz niezgodnym z celem.',
+          },
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  lang="pl"
+  title="Rozwój sterowany specyfikacją dla agentów AI — Kompletny przewodnik | SpecScore"
+  description="Rozwój sterowany specyfikacją (SDD) oznacza pisanie testowalnej specyfikacji przed kodem, aby agenci AI budowali to, co trzeba. Czym jest, jak działa i czym różni się od TDD oraz promptowania."
+  canonical="https://specscore.md/pl/spec-driven-development/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
+  </Fragment>
+
+  <SiteHeader />
+
+  <main>
+    <!-- 1. Definition block + TL;DR -->
+    <section class="sdd-hero" aria-labelledby="sdd-title">
+      <div class="sdd-hero__inner">
+        <h1 id="sdd-title" class="sdd-hero__headline">Rozwój sterowany specyfikacją dla agentów AI</h1>
+        <p class="sdd-hero__lede">
+          <strong>Rozwój sterowany specyfikacją (SDD) to praktyka inżynierska, w której pisemna,
+          testowalna specyfikacja — wymagania i kryteria akceptacji — stanowi źródło prawdy,
+          według którego tworzy się i weryfikuje kod.</strong> Zamiast przechodzić bezpośrednio
+          z promptu lub ticketu do kodu, najpierw uzgadniasz, co oprogramowanie ma robić,
+          a dopiero potem budujesz według tej specyfikacji. Teraz, gdy agenci AI piszą dużą
+          część kodu, specyfikacja jest tym, co powstrzymuje ich przed budowaniem niewłaściwych rzeczy.
+        </p>
+        <ul class="sdd-takeaways">
+          <li>Specyfikacja jest źródłem prawdy; kod z niej wynika i jest z nią weryfikowany.</li>
+          <li>Wymaganiom towarzyszą jawne kryteria akceptacji, więc pojęcie „ukończone” jest testowalne, a nie subiektywne.</li>
+          <li>Agenci AI sprawdzają w specyfikacji intencję zamiast zgadywać ją z kodu — mniej poprawek i zmarnowanych tokenów.</li>
+          <li>To uzupełnienie Test-Driven Development (TDD), a nie jego zamiennik.</li>
+        </ul>
+        <p class="sdd-updated">Ostatnia aktualizacja: maj 2026</p>
+      </div>
+    </section>
+
+    <!-- 2. What is SDD -->
+    <section class="sdd-section" aria-labelledby="what-title">
+      <div class="sdd-section__inner">
+        <h2 id="what-title">Czym jest rozwój sterowany specyfikacją?</h2>
+        <p>
+          Rozwój sterowany specyfikacją odwraca typową kolejność prac. Zamiast traktować
+          specyfikację jako dokumentację pisaną po fakcie — albo zupełnie z niej rezygnować —
+          SDD czyni ze specyfikacji główny artefakt projektu. Kod, testy i recenzje
+          odnoszą się bezpośrednio do niej.
+        </p>
+        <p>
+          Specyfikacja w tym ujęciu to nie ściana tekstu. Jest precyzyjnie ustrukturyzowana:
+          to zestaw <strong>wymagań</strong>, z których każde posiada jawne
+          <strong>kryteria akceptacji</strong> określające w testowalny sposób, co musi
+          zostać spełnione. Taka struktura pozwala człowiekowi recenzującemu kod,
+          zestawowi testów oraz agentowi AI interpretować ten sam dokument dokładnie tak samo.
+        </p>
+        <p>
+          Specyfikacja to ponadto <strong>żywy artefakt</strong>. Kiedy zmieniają się wymagania,
+          najpierw aktualizowana jest specyfikacja, a dopiero za nią podąża kod —
+          dzięki czemu specyfikacja nigdy nie staje się fikcją.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. Why it matters now (AI spine) -->
+    <section class="sdd-section" aria-labelledby="why-title">
+      <div class="sdd-section__inner">
+        <h2 id="why-title">Dlaczego to ważne teraz: AI podnosi stawkę</h2>
+        <p>
+          Programistyczne agenty AI generują kod znacznie szybciej, niż człowiek jest
+          w stanie go przeczytać. To przesuwa wąskie gardło projektu. Trudnością nie jest
+          już samo napisanie implementacji — jest nią
+          <strong>zdefiniowanie intencji na tyle jasno, aby wygenerowany kod był dokładnie
+          tym, o co chodziło</strong>. Agent, który otrzyma niejasny prompt, z pełną
+          pewnością siebie wygeneruje kod prawdopodobny, lecz błędny — i to z zawrotną prędkością.
+        </p>
+        <p>
+          Specyfikacja staje się barierką ochronną. Kiedy ustalone zachowanie i kryteria
+          akceptacji są spisane, agent ma jednoznaczny cel oraz gotową listę kontrolną
+          do weryfikacji — a programista ma konkretną podstawę do akceptacji, zanim
+          powstanie choćby linijka kodu. SDD to sposób, w jaki zespoły zapobiegają
+          sytuacji, w której wysoka prędkość AI zamienia się w lawinę poprawek.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. How it works -->
+    <section class="sdd-section" aria-labelledby="how-title">
+      <div class="sdd-section__inner">
+        <h2 id="how-title">Jak działa rozwój sterowany specyfikacją</h2>
+        <p>Proces jest pętlą, a nie jednorazowym dokumentem:</p>
+        <ol class="sdd-steps">
+          <li><strong>Uchwyć intencję.</strong> Zapisz wstępny kierunek — problem, cel, otwarte pytania — zanim wybierzesz konkretne rozwiązanie.</li>
+          <li><strong>Zdefiniuj zachowanie.</strong> Przekształć uzgodniony kierunek w wymagania, każde z jawnymi, testowalnymi kryteriami akceptacji.</li>
+          <li><strong>Podziel na plan.</strong> Rozbij specyfikację na uporządkowane zadania, z których każde wskazuje spełniane kryteria akceptacji.</li>
+          <li><strong>Zaimplementuj.</strong> Buduj zadanie po zadaniu — programista lub agent AI — ściśle według specyfikacji.</li>
+          <li><strong>Zweryfikuj z kryteriami.</strong> Sprawdź wynik z kryteriami akceptacji, a nie na podstawie subiektywnego wrażenia.</li>
+          <li><strong>Utrzymuj specyfikację przy życiu.</strong> Gdy wymagania ulegną zmianie, zaktualizuj najpierw specyfikację; kod powstaje w ślad za nią.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. Benefits -->
+    <section class="sdd-section" aria-labelledby="benefits-title">
+      <div class="sdd-section__inner">
+        <h2 id="benefits-title">Korzyści z rozwoju sterowanego specyfikacją</h2>
+        <ul class="sdd-benefits">
+          <li>Rozbieżności ujawniają się na etapie przeglądu specyfikacji — tanio — zamiast po implementacji — drogo.</li>
+          <li>Status „ukończone” staje się obiektywny, ponieważ kryteria akceptacji są testowalne.</li>
+          <li>Specyfikacja stanowi wspólny kontekst dla wszystkich: produktu, inżynierii i agentów AI.</li>
+          <li>Zmiany są w pełni identyfikowalne — każde zadanie odnosi się do kryteriów, które realizuje.</li>
+        </ul>
+        <h3>Dlaczego w szczególności pomaga agentom AI</h3>
+        <ul class="sdd-benefits">
+          <li><strong>Maszynowo czytelna intencja:</strong> agent czyta wymagania bezpośrednio, zamiast wnioskować o nich z kodu.</li>
+          <li><strong>Mniej kontekstu do załadowania:</strong> agent odpytuje tylko odpowiedni fragment specyfikacji zamiast wczytywać całe repozytorium.</li>
+          <li><strong>Weryfikowalny wynik:</strong> kryteria akceptacji dają agentowi konkretny warunek pass/fail.</li>
+          <li><strong>Trazowalność:</strong> wygenerowany kod można bezpośrednio powiązać z wymaganiem, które było powodem jego powstania.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. Comparison -->
+    <section class="sdd-section" aria-labelledby="vs-title">
+      <div class="sdd-section__inner">
+        <h2 id="vs-title">Rozwój sterowany specyfikacją na tle innych praktyk</h2>
+        <div class="sdd-table-wrap">
+          <table class="sdd-table">
+            <thead>
+              <tr><th>Praktyka</th><th>Źródło prawdy</th><th>Relacja z SDD</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Test-Driven Development (TDD)</td><td>Niezaliczone testy na poziomie kodu</td><td>Uzupełniające — kryteria akceptacji stają się testami.</td></tr>
+              <tr><td>Tradycyjny PRD</td><td>Prosa pisana dla ludzi</td><td>Mniej ustrukturyzowany; nietestowalny bezpośrednio i nieczytelny dla maszyn.</td></tr>
+              <tr><td>Same prompty („vibe coding”)</td><td>Prompt i domysły modelu</td><td>Brak trwałego, weryfikowalnego punktu odniesienia — problem, który rozwiązuje SDD.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Szczegółowe zestawienie SpecScore z innymi narzędziami do specyfikacji znajdziesz na
+          <a href="/pl/vs/">stronach z porównaniami</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 7. Tradeoffs -->
+    <section class="sdd-section" aria-labelledby="limits-title">
+      <div class="sdd-section__inner">
+        <h2 id="limits-title">Kompromisy i kiedy nie stosować SDD</h2>
+        <p>
+          Rozwój sterowany specyfikacją nie jest darmowy. Przenosi wysiłek na analizę
+          i precyzyjne pisanie przed uruchomieniem kodu, co jest chybionym podejściem
+          w przypadku jednorazowego skryptu czy szybkiego eksperymentu. Ponadto specyfikacja
+          pomaga tylko wtedy, gdy jest aktualizowana — porzucona specyfikacja wprowadza
+          w błąd i jest gorsza niż jej brak. SDD zwraca się z nawiązką, gdy praca
+          jest na tyle duża, że wymaga planowania, kod ma być utrzymywany lub zadanie
+          zostaje przekazane agentowi AI do masowej realizacji.
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. In practice (SpecScore) -->
+    <section class="sdd-section" aria-labelledby="practice-title">
+      <div class="sdd-section__inner">
+        <h2 id="practice-title">SDD z agentami AI w praktyce</h2>
+        <p>
+          Aby realizować SDD z agentami AI, potrzebujesz dwóch rzeczy: <strong>maszynowo czytelnego
+          formatu specyfikacji</strong>, zrozumiałego zarówno dla zespołu, jak i agentów,
+          oraz <strong>sposobu, w jaki agenci mogą odczytywać, zapisywać i walidować</strong>
+          te specyfikacje.
+        </p>
+        <p>
+          <strong>SpecScore</strong> to implementacja dokładnie takiego rozwiązania. Jest to otwarty
+          format Markdown + YAML dla funkcji, wymagań i kryteriów akceptacji — zwykłe pliki
+          w Twoim repozytorium — połączony z CLI, które agenci wywołują w celu odpytywania,
+          edycji i lintowania. Ponieważ struktura jest czytelna maszynowo, agent może zapytać:
+          „nad czym powinienem teraz pracować?”, otrzymać otwarte wymagania z ich kryteriami
+          akceptacji, a następnie zweryfikować z nimi swoją pracę. Jest niezależny od
+          narzędzi i w pełni open source.
+        </p>
+        <p>
+          Zacznij od <a href="/pl/ai/">Skilli AI dla Twojego agenta</a> lub
+          <a href="/pl/cli/">zainstaluj CLI</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. FAQ -->
+    <section class="sdd-section" aria-labelledby="faq-title">
+      <div class="sdd-section__inner">
+        <h2 id="faq-title">Często zadawane pytania</h2>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Czy rozwój sterowany specyfikacją to to samo co test-driven development (TDD)?</p>
+          <p class="sdd-faq__a">Nie. TDD steruje implementacją za pomocą niezaliczonych testów na poziomie kodu. Rozwój sterowany specyfikacją działa poziom wyżej: najpierw ustala planowane zachowanie i kryteria akceptacji w spisanej specyfikacji. Te podejścia się uzupełniają — kryteria akceptacji ze specyfikacji często stają się testami napędzającymi TDD.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Czy rozwój sterowany specyfikacją spowalnia pracę?</p>
+          <p class="sdd-faq__a">Wymaga poświęcenia czasu przed napisaniem kodu, ale eliminuje czas marnowany na poprawianie tego, co zrobiono błędnie. W przypadku jednorazowych skryptów koszt jest nieuzasadniony. W przypadku wszystkiego, co agent AI generuje na większą skalę lub co zespół musi utrzymać, napisanie specyfikacji w pierwszej kolejności okazuje się szybsze od początku do końca.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Jaka jest różnica między specyfikacją a dokumentem PRD?</p>
+          <p class="sdd-faq__a">PRD to najczęściej proza skierowana do ludzi. Specyfikacja w SDD jest ustrukturyzowana i testowalna — dyskretne wymagania z jawnymi kryteriami akceptacji — dzięki czemu zarówno recenzenci, jak i agenci AI mogą działać precyzyjnie.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Jak agenci programistyczni AI korzystają ze specyfikacji?</p>
+          <p class="sdd-faq__a">Gdy specyfikacja jest czytelna maszynowo, agent odpytuje ją o wymagania i kryteria akceptacji istotne dla bieżącego zadania zamiast ładować cały codebase, a następnie weryfikuje wynik z tymi kryteriami — chroniąc przed kodem pozornie poprawnym, lecz niezgodnym z celem.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. CTA -->
+  <section class="sdd-cta" aria-labelledby="cta-title">
+    <div class="sdd-cta__inner">
+      <h2 id="cta-title">Zacznij budować w oparciu o specyfikacje ze swoim agentem AI</h2>
+      <p>SpecScore daje Twojemu agentowi otwarty format specyfikacji oraz CLI do ich odpytywania i weryfikacji.</p>
+      <div class="sdd-cta__buttons">
+        <a href="/pl/ai/" class="btn btn--primary">Skille AI dla Twojego agenta</a>
+        <a href="/pl/cli/" class="btn btn--secondary">Zainstaluj CLI</a>
+      </div>
+    </div>
+  </section>
+
+  <SiteFooterPl />
+</BaseLayout>
+
+<style>
+  .sdd-hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .sdd-hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+  }
+  .sdd-hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .sdd-hero__lede {
+    font-size: 1.15rem;
+    color: var(--ink);
+    line-height: 1.55;
+    margin-bottom: var(--space-4);
+  }
+  .sdd-takeaways {
+    margin: 0 0 var(--space-3) 0;
+    padding-left: 1.25rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+  }
+  .sdd-takeaways li {
+    margin-bottom: 0.35rem;
+  }
+  .sdd-updated {
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    font-family: var(--font-code);
+    margin: 0;
+  }
+
+  .sdd-section {
+    padding: var(--space-5) var(--space-3);
+  }
+  .sdd-section:nth-of-type(even) {
+    background: var(--surface);
+  }
+  .sdd-section:nth-of-type(odd) {
+    background: var(--cream);
+  }
+  .sdd-section__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+  }
+  .sdd-section__inner h2 {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .sdd-section__inner h3 {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+  }
+  .sdd-section__inner p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+  .sdd-section__inner p:last-child {
+    margin-bottom: 0;
+  }
+  .sdd-section__inner p strong {
+    color: var(--ink);
+  }
+
+  .sdd-steps {
+    margin: var(--space-3) 0 0 0;
+    padding-left: 1.25rem;
+    color: var(--mid-ink);
+    line-height: 1.65;
+  }
+  .sdd-steps li {
+    margin-bottom: 0.75rem;
+  }
+  .sdd-steps strong {
+    color: var(--ink);
+  }
+
+  .sdd-benefits {
+    margin: var(--space-2) 0 var(--space-3) 0;
+    padding-left: 1.25rem;
+    color: var(--mid-ink);
+    line-height: 1.65;
+  }
+  .sdd-benefits li {
+    margin-bottom: 0.5rem;
+  }
+  .sdd-benefits strong {
+    color: var(--ink);
+  }
+
+  .sdd-table-wrap {
+    overflow-x: auto;
+    margin: var(--space-3) 0;
+  }
+  .sdd-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small);
+  }
+  .sdd-table th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--mid-ink);
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .sdd-table td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--hairline);
+    color: var(--mid-ink);
+    line-height: 1.5;
+    vertical-align: top;
+  }
+  .sdd-table td:first-child {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .sdd-faq__item {
+    border-top: 1px solid var(--hairline);
+    padding: var(--space-3) 0;
+  }
+  .sdd-faq__item:last-child {
+    border-bottom: 1px solid var(--hairline);
+  }
+  .sdd-faq__q {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin-bottom: var(--space-1);
+  }
+  .sdd-faq__a {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .sdd-cta {
+    background: var(--cream-2);
+    padding: var(--space-6) var(--space-3);
+    text-align: center;
+    border-top: 1px solid var(--hairline);
+  }
+  .sdd-cta__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+  }
+  .sdd-cta h2 {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+  }
+  .sdd-cta p {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.55;
+  }
+  .sdd-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+</style>

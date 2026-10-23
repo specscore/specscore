@@ -1,0 +1,276 @@
+---
+// Polish variant of Problems.astro.
+---
+
+<section class="problems section" id="problems" aria-labelledby="problems-title">
+  <div class="section-inner">
+    <h2 id="problems-title" class="problems__title">Co zawodzi, gdy go brakuje.</h2>
+
+    <ul class="problems__grid">
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌀</span> Specyfikacje dryfują.</h3>
+        <p class="problem-card__pain">
+          Specyfikacja w dokumencie, wątek na Slacku i kod w
+          PR po cichu rozmijają się tygodniami. Nikt nie wie,
+          która wersja ustaleń jest kanoniczna.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Rozwiązanie</p>
+        <p class="problem-card__fix">
+          Jedna kanoniczna specyfikacja, w repozytorium, wersjonowana z kodem.
+          <code>specscore lint</code> uruchamia się w CI przy każdym
+          pushu; historia gita to pełny audyt. Specyfikacja, wątek i
+          PR nie mogą się rozjechać — współdzielą ten sam recenzowany
+          plik.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌫️</span> AC pozostają niejasne.</h3>
+        <p class="problem-card__pain">
+          <em>"Elegancko obsługuje błędy"</em> miało znaczyć
+          <em>"pokaż powiadomienie toast i wycofaj zmiany."</em> A może
+          <em>"zaloguj i ponów próbę?"</em> Agent musi zgadywać.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Rozwiązanie</p>
+        <p class="problem-card__fix">
+          Linter wychwytuje niejednoznaczne kryteria, zanim powstanie choćby
+          linijka kodu. Czasownik nie przechodzi linta, bo brakuje
+          mu konkretnego obiektu lub warunku. Poprawienie ostrzeżenia
+          zmusza do zdefiniowania, co tak naprawdę oznacza
+          <em>"obsługuje"</em>.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🤖</span> Agenci dostarczają nie to, co trzeba.</h3>
+        <p class="problem-card__pain">
+          Ludzie dopowiadają sobie kontekst, pytają, uściślają. Agenci
+          AI tego nie robią — wdrażają wzorzec, który najczęściej
+          pojawiał się w ich danych treningowych. Kod przechodzi review,
+          bo robi <strong>coś</strong> sensownego. Tyle że nie to,
+          co miałeś na myśli.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Rozwiązanie</p>
+        <p class="problem-card__fix">
+          Ustrukturyzowane wejście. Agenci AI deterministycznie parsują
+          identyfikatory REQ, AC oraz scenariusze
+          <code>GIVEN&nbsp;/&nbsp;WHEN&nbsp;/&nbsp;THEN</code>
+          — nie ma tu miejsca na domysły. Zadania w Planie muszą
+          wskazywać identyfikatory AC, które realizują, dzięki czemu to,
+          co zbudowano, można w każdej chwili zweryfikować ze specyfikacją.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔁</span> Płacisz podwójnie za mętną specyfikację.</h3>
+        <p class="problem-card__pain">
+          Agent buduje coś na podstawie niejednoznacznego opisu, zauważasz
+          błąd i promptujesz ponownie — na cztery różne sposoby.
+          Każda niedokończona funkcja i każda powtórka kosztują tokeny.
+          Im bardziej mętna specyfikacja, tym więcej rund potrzeba na jej ukończenie.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Rozwiązanie</p>
+        <p class="problem-card__fix">
+          Przeanalizuj specyfikację linterem, zanim uruchomisz agenta.
+          <code>specscore lint</code> z góry odrzuca nieprecyzyjne
+          czasowniki i brakujące kryteria akceptacji, więc agent od razu
+          implementuje konkretny opis zamiast błądzić w kolejnych próbach.
+          Najtańsze wywołanie agenta to to, którego nie musisz powtarzać.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">💸</span> Agenci płacą za ponowne czytanie specyfikacji.</h3>
+        <p class="problem-card__pain">
+          Agent AI odpowiadając na pytanie <em>"co zależy od tej
+          funkcji?"</em> czyta całe README funkcji. Potem indeks
+          każdego rodzica. Potem sąsiednie funkcje na wszelki
+          wypadek. Każde zapytanie to ponowne parsowanie. Tokeny
+          ulatują, rośnie opóźnienie, a wraz z nim rachunek.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Rozwiązanie</p>
+        <p class="problem-card__fix">
+          Strukturalne zapytania zamiast czytania plików.
+          <code>specscore feature tree</code> zwraca hierarchię jako
+          YAML; <code>feature deps</code> przechodzi cały łańcuch
+          zależności; <code>feature info</code> zwraca status,
+          właściciela i otwarte pytania — wszystko w jednym wywołaniu.
+          Agent porusza się po grafie, a nie po tekście.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔗</span> Kod zapomina o swojej specyfikacji.</h3>
+        <p class="problem-card__pain">
+          Sześć miesięcy później debugujesz funkcję i nikt nie pamięta,
+          które wymaganie ona realizuje. Powiązanie między kodem a
+          specyfikacją istniało tylko w czyjejś głowie, a ta osoba
+          odeszła z pracy. PR, który ją wprowadził, leży w archiwum.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Rozwiązanie</p>
+        <p class="problem-card__fix">
+          Adnotacje w kodzie źródłowym. Komentarze takie jak
+          <code>// specscore: features/checkout/apply-discount/R1.AC-2</code>
+          sprawiają, że powiązanie jest czytelne maszynowo i przetrwa
+          każdy refaktoring. <code>specscore code deps</code> odpowiada
+          na pytanie <em>"jaką specyfikację implementuje ten plik?"</em> w
+          jednym wywołaniu; linter natychmiast zgłasza referencje
+          wskazujące na usunięte specyfikacje.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🏷️</span> Zmiany statusu rozjeżdżają się.</h3>
+        <p class="problem-card__pain">
+          Zmieniasz status funkcji z <em>Draft</em> na <em>Approved</em>
+          w jej README, ale nadrzędny indeks funkcji wciąż ma wpisane
+          Draft. Trzy tygodnie później agent czytający indeks uważa,
+          że funkcja jest w trakcie zmian. Status istnieje w dwóch
+          miejscach i te miejsca sobie przeczą.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Rozwiązanie</p>
+        <p class="problem-card__fix">
+          Polecenie <code>specscore feature change-status</code> zmienia
+          pole Status w pliku funkcji i synchronizuje wiersz w indeksie
+          w jednym atomowym kroku — błąd lintera wycofuje zmianę.
+          Status istnieje w jednym kanonicznym miejscu, a indeks jest jego
+          generowanym widokiem.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">📋</span> Specyfikacje zapominają o tym, czego nie wiedzą.</h3>
+        <p class="problem-card__pain">
+          Specyfikacja wygląda na dopiętą — dopóki nie przypomnisz sobie,
+          że pytanie <em>"a co ze strefami czasowymi?"</em> przepadło
+          w wątku na Slacku dwa miesiące temu i nigdy nie trafiło do
+          dokumentu. Jesteś w trakcie implementacji i nikt nie pamięta
+          odpowiedzi.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Rozwiązanie</p>
+        <p class="problem-card__fix">
+          Każda funkcja w SpecScore ma obowiązkową sekcję
+          <strong>Outstanding Questions</strong>. Linter odrzuca
+          funkcje, które ją pomijają — pusta sekcja jest w porządku
+          (<code>"None at this time."</code>), ale jej brak już nie.
+          Nierozstrzygnięte kwestie są widoczne w dokumencie, dostępne
+          przez CLI i nie da się o nich zapomnieć.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .problems { background: var(--cream); }
+
+  .problems__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-5);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .problems__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    column-count: 3;
+    column-width: 0;
+    column-gap: var(--space-4);
+    column-fill: balance;
+  }
+
+  .problem-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 2px;
+    padding: var(--space-3);
+    box-shadow:
+      0 1px 2px rgba(26, 26, 26, 0.04),
+      0 3px 8px rgba(26, 26, 26, 0.06);
+    break-inside: avoid;
+    margin-bottom: var(--space-4);
+  }
+  .problem-card:last-child { margin-bottom: 0; }
+  .problem-card__name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0 0 var(--space-2);
+  }
+  .problem-card__emoji {
+    margin-right: 0.35em;
+    font-size: 1.05em;
+    vertical-align: -0.05em;
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  }
+  .problem-card__pain {
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 var(--space-3);
+  }
+  .problem-card__pain em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    color: var(--ink);
+  }
+  .problem-card__pain strong { font-weight: 700; color: var(--ink); }
+
+  .problem-card__rule {
+    height: 1px;
+    background: var(--hairline);
+    margin: 0 0 var(--space-3);
+  }
+
+  .problem-card__fix-label {
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--validator-green);
+    margin: 0 0 var(--space-2);
+  }
+  .problem-card__fix {
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .problem-card__fix code {
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-size: 0.92em;
+    color: var(--ink);
+  }
+  .problem-card__fix em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    color: var(--ink);
+  }
+
+  @media (max-width: 599px) {
+    .problems__grid { column-count: 1; }
+  }
+</style>

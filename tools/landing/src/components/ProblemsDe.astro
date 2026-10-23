@@ -1,0 +1,301 @@
+---
+// German variant of Problems.astro.
+---
+
+<section class="problems section" id="problems" aria-labelledby="problems-title">
+  <div class="section-inner">
+    <h2 id="problems-title" class="problems__title">Was ohne sie schiefgeht.</h2>
+
+    <ul class="problems__grid">
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌀</span> Spezifikationen driften ab.</h3>
+        <p class="problem-card__pain">
+          Die Spezifikation im Dokument, der Thread in Slack und der Code im
+          PR weichen wochenlang stillschweigend voneinander ab. Niemand weiß,
+          welche Version des Gesprächs kanonisch ist.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Die Lösung</p>
+        <p class="problem-card__fix">
+          Eine einzige kanonische Spezifikation im Repository, versioniert zusammen
+          mit dem Code. <code>specscore lint</code> läuft in der CI bei jedem
+          Push; die Git-Historie ist der Prüfpfad. Spezifikation, Thread und
+          PR können nicht unbemerkt voneinander abweichen – sie teilen sich
+          dieselbe geprüfte Datei.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌫️</span> AC bleiben vage.</h3>
+        <p class="problem-card__pain">
+          <em>„Fehler elegant behandeln“</em> sollte eigentlich heißen:
+          <em>„Toast anzeigen und zurückrollen.“</em> Oder war es
+          <em>„loggen und wiederholen“?</em> Der Agent muss raten.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Die Lösung</p>
+        <p class="problem-card__fix">
+          Der Linter fängt mehrdeutige Kriterien ab, bevor auch nur eine
+          Zeile Code geschrieben wird. Das Verb fällt durch das Linting, weil
+          ihm ein konkretes Objekt oder eine Bedingung fehlt. Die Warnung zu
+          beheben zwingt dich aufzuschreiben, was <em>„behandeln“</em>
+          tatsächlich bedeutet.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🤖</span> Agenten liefern das Falsche.</h3>
+        <p class="problem-card__pain">
+          Menschen interpolieren, fragen nach, klären auf. KI-Agenten
+          nicht – sie implementieren das Muster, das in ihren
+          Trainingsdaten am häufigsten vorkam. Der Code besteht das
+          Review, weil er <strong>irgendetwas</strong> Sinnvolles tut.
+          Nur eben nicht das, was du meintest.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Die Lösung</p>
+        <p class="problem-card__fix">
+          Strukturierte Eingabe. KI-Agenten parsen REQ-IDs, AC-IDs
+          und <code>GIVEN&nbsp;/&nbsp;WHEN&nbsp;/&nbsp;THEN</code>-Szenarien
+          deterministisch – es gibt nichts zu interpolieren. Jeder
+          Plan muss die AC-IDs nennen, die jede Aufgabe erfüllt, sodass
+          das Gebaute immer gegen das Spezifizierte überprüfbar bleibt.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔁</span> Du zahlst doppelt für eine vage Spezifikation.</h3>
+        <p class="problem-card__pain">
+          Der Agent baut etwas anhand eines mehrdeutigen Briefings, du
+          bemerkst den Fehler und promptest ihn erneut – auf vier
+          verschiedene Arten. Jedes halbfertige Feature und jeder
+          Neuversuch kostet Tokens. Je vager die Spezifikation, desto
+          mehr Runden vergehen bis zum Ziel.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Die Lösung</p>
+        <p class="problem-card__fix">
+          Linte die Spezifikation, bevor der Agent startet.
+          <code>specscore lint</code> weist vage Verben und fehlende
+          Akzeptanzkriterien von vornherein ab, sodass der Agent ein
+          konkretes Briefing einmal umsetzt, anstatt über mehrere
+          Schleifen hinweg zu raten. Der günstigste Agenten-Durchlauf
+          ist der, den du nicht wiederholen musst.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">💸</span> Agenten zahlen dafür, deine Spezifikationen neu zu lesen.</h3>
+        <p class="problem-card__pain">
+          Ein KI-Agent, der beantworten soll: <em>„Was hängt von diesem
+          Feature ab?“</em>, liest das gesamte README des Features.
+          Dann jeden übergeordneten Index. Dann geschwisterliche Features
+          zur Sicherheit. Jede Abfrage ist ein neuer Parsing-Vorgang.
+          Tokens verpuffen; die Latenz steigt; und die Rechnung steigt mit.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Die Lösung</p>
+        <p class="problem-card__fix">
+          Strukturierte Abfragen statt Datei-Lesen.
+          <code>specscore feature tree</code> liefert die Hierarchie
+          als YAML; <code>feature deps</code> durchläuft die transitive
+          Abhängigkeitskette; <code>feature info</code> liefert Status,
+          Owner und offene Fragen – jeweils in einem einzigen Aufruf.
+          Der Agent navigiert den Graphen, nicht die Prosa.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔗</span> Code vergisst seine Spezifikation.</h3>
+        <p class="problem-card__pain">
+          Sechs Monate später debuggst du eine Funktion und niemand
+          erinnert sich mehr, welches Feature sie implementiert. Die
+          Verknüpfung zwischen Code und Spezifikation lebte in jemandes
+          Kopf – und diese Person ist längst weg. Der PR, der sie
+          einführte, liegt tief im Archiv.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Die Lösung</p>
+        <p class="problem-card__fix">
+          Quellcode-Annotationen. Kommentare wie
+          <code>// specscore: features/checkout/apply-discount/R1.AC-2</code>
+          machen die Verknüpfung maschinenlesbar und überstehen jedes
+          Refactoring. <code>specscore code deps</code> beantwortet
+          <em>„Welche Spezifikation implementiert diese Datei?“</em> in
+          einem einzigen Aufruf; der Linter markiert Referenzen auf
+          gelöschte Spezifikationen.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🏷️</span> Statusänderungen laufen auseinander.</h3>
+        <p class="problem-card__pain">
+          Du änderst ein Feature in seinem README von <em>Draft</em>
+          auf <em>Approved</em>, aber der übergeordnete features-index
+          führt es weiterhin als Draft. Drei Wochen später liest ein
+          Agent den Index und glaubt, es sei noch im Review. Der Status
+          lebt an zwei Stellen – und sie widersprechen sich.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Die Lösung</p>
+        <p class="problem-card__fix">
+          <code>specscore feature change-status</code> schreibt das
+          Status-Feld des Features um und synchronisiert die Zeile im
+          features-index in einem atomaren Schritt neu – schlägt der
+          Lint fehl, wird die Änderung rückgängig gemacht. Der Status
+          existiert an einem einzigen kanonischen Ort; der Index ist
+          eine daraus generierte Ansicht.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">📋</span> Spezifikationen vergessen, was sie nicht wissen.</h3>
+        <p class="problem-card__pain">
+          Eine Spezifikation liest sich, als sei alles geklärt – bis
+          dir einfällt, dass die Frage <em>„Und was ist mit Zeitzonen?“</em>
+          vor zwei Monaten in einem Slack-Thread unterging und nie im
+          Dokument landete. Jetzt bist du mitten in der Implementierung
+          und niemand kennt die Antwort.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Die Lösung</p>
+        <p class="problem-card__fix">
+          Jedes SpecScore-Feature hat einen Pflichtabschnitt
+          <strong>Outstanding Questions</strong>. Der Linter lehnt
+          Features ab, die ihn auslassen – leer ist in Ordnung
+          (<code>"None at this time."</code>), aber fehlend nicht.
+          Ungelöste Fragen stehen sichtbar im Dokument, sind per
+          CLI abfragbar und können nicht vergessen werden.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .problems { background: var(--cream); }
+
+  .problems__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-5);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* Pinterest-style masonry via CSS multi-column. CSS Grid `masonry` is
+     still behind a flag in 2026 — multi-column is the portable answer.
+     `column-count` says "3 columns"; `column-width: 0` removes the
+     implicit minimum-width heuristic that some browsers use to silently
+     reduce the column count when content has wide intrinsic min-widths.
+     `column-fill: balance` keeps column heights as equal as possible. */
+  .problems__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    column-count: 3;
+    column-width: 0;
+    column-gap: var(--space-4);
+    column-fill: balance;
+  }
+
+  /* Paper card — matches the hero illustration's "paper lifts off the
+     cream desk" register. White surface on cream section, hairline
+     border, soft two-stop ink shadow.
+
+     `break-inside: avoid` keeps each card intact in one column.
+     `margin-bottom` (not gap) creates inter-card spacing within a
+     column — gap doesn't apply across multi-column layouts. */
+  .problem-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 2px;
+    padding: var(--space-3);
+    box-shadow:
+      0 1px 2px rgba(26, 26, 26, 0.04),
+      0 3px 8px rgba(26, 26, 26, 0.06);
+    break-inside: avoid;
+    margin-bottom: var(--space-4);
+  }
+  /* The last card in each column shouldn't have trailing margin —
+     `:last-child` of the <ul> covers the truly-last card; multi-column
+     fill handles the per-column tails. */
+  .problem-card:last-child { margin-bottom: 0; }
+  .problem-card__name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0 0 var(--space-2);
+  }
+  .problem-card__emoji {
+    margin-right: 0.35em;
+    font-size: 1.05em;
+    vertical-align: -0.05em;
+    /* System emoji font stack — keeps the page's mono+Inter pairing for
+       the rest of the text while letting the emoji render in the OS's
+       native colour set. */
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  }
+  .problem-card__pain {
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 var(--space-3);
+  }
+  .problem-card__pain em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    color: var(--ink);
+  }
+  .problem-card__pain strong { font-weight: 700; color: var(--ink); }
+
+  .problem-card__rule {
+    height: 1px;
+    background: var(--hairline);
+    margin: 0 0 var(--space-3);
+  }
+
+  .problem-card__fix-label {
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--validator-green);
+    margin: 0 0 var(--space-2);
+  }
+  .problem-card__fix {
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .problem-card__fix code {
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-size: 0.92em;
+    color: var(--ink);
+  }
+  .problem-card__fix em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    color: var(--ink);
+  }
+
+  /* 3 columns at typical viewport widths; collapse straight to 1 on
+     narrow mobile (skipping a 2-column middle state — it never reads
+     well with cards of widely varying height). */
+  @media (max-width: 599px) {
+    .problems__grid { column-count: 1; }
+  }
+</style>

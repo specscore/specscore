@@ -1,0 +1,280 @@
+---
+// /zh-tw/spec-driven-development/ — pillar page (Traditional Chinese).
+// Neutral-reference-first explainer on spec-driven development, with AI as
+// the narrative spine. SpecScore appears as the named recommended
+// implementation in the "in practice" section + FAQ only.
+// Design: docs/superpowers/specs/2026-05-29-spec-driven-development-pillar-page-design.md
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooterZhTw from '../../../components/SiteFooterZhTw.astro';
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: '面向 AI 編碼代理的規範驅動開發',
+      description:
+        '什麼是規範驅動開發，為什麼它對 AI 編碼代理很重要，工作流程如何運作，以及它與 TDD 和僅靠提示詞的編碼相比有何不同。',
+      inLanguage: 'zh-TW',
+      datePublished: '2026-05-29',
+      dateModified: '2026-05-29',
+      mainEntityOfPage: 'https://specscore.md/zh-tw/spec-driven-development/',
+      image: 'https://specscore.md/hero-og.webp',
+      author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      publisher: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      about: {
+        '@type': 'DefinedTerm',
+        name: '規範驅動開發',
+        description:
+          '一種軟體開發實踐，其中書面規範——需求與驗收標準——是構建程式碼並據以驗證程式碼的唯一可信來源。',
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: '規範驅動開發和測試驅動開發是一回事嗎？',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              '不是。TDD 在程式碼層面從失敗的測試驅動實現。規範驅動開發在更上一層運作：它先把預期行為和驗收標準固定在一份書面規範中。兩者是互補的——規範中的驗收標準往往會成為 TDD 隨後驅動的那些測試。',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: '規範驅動開發會拖慢你嗎？',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              '它在寫程式碼之前增加了時間，卻減少了重做錯誤東西所花的時間。對於一次性指令稿，這點開銷並不值得。但對於 AI 代理大規模生成的東西，或團隊必須維護的東西，先寫規範通常從頭到尾都更快。',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: '規範和 PRD 有什麼區別？',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'PRD 通常是面向人的散文。規範驅動開發中的規範是結構化且可測試的——帶有明確驗收標準的離散需求——因此評審者和 AI 代理都能據以精確地行動。',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'AI 編碼代理如何使用規範？',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              '當規範可被機器讀取時，代理會向它查詢與當前任務相關的需求和驗收標準，而不是載入整個程式碼庫，然後對照這些標準檢查自己的輸出——這是對看似合理卻錯誤的程式碼的一道防護。',
+          },
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  lang="zh-TW"
+  title="面向 AI 代理的規範驅動開發 — 完整指南 | SpecScore"
+  description="規範驅動開發意味著在寫程式碼之前先寫一份可測試的規範，讓 AI 編碼代理構建正確的東西。它是什麼、如何運作，以及它與 TDD 和僅靠提示詞的編碼相比有何不同。"
+  canonical="https://specscore.md/zh-tw/spec-driven-development/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
+  </Fragment>
+
+  <SiteHeader />
+
+  <main>
+    <!-- 1. Definition block + TL;DR -->
+    <section class="sdd-hero" aria-labelledby="sdd-title">
+      <div class="sdd-hero__inner">
+        <h1 id="sdd-title" class="sdd-hero__headline">面向 AI 編碼代理的規範驅動開發</h1>
+        <p class="sdd-hero__lede">
+          <strong>規範驅動開發（SDD）是一種實踐，其中一份書面、可測試的規範——需求與驗收標準——
+          是構建程式碼並據以驗證程式碼的唯一可信來源。</strong> 與其直接從提示詞或工單走向程式碼，
+          你先就軟體必須做什麼達成一致，然後按照這份規範來構建。如今 AI 代理已經在編寫大量程式碼，
+          規範正是讓它們持續構建正確東西的關鍵。
+        </p>
+        <ul class="sdd-takeaways">
+          <li>規範是唯一可信來源；程式碼由它衍生，並對照它來檢查。</li>
+          <li>需求與明確的驗收標準配對，因此「完成」是可測試的，而非主觀的。</li>
+          <li>AI 代理向規範查詢意圖，而不是從程式碼中猜測——更少的錯誤構建。</li>
+          <li>它與測試驅動開發互補，而非取而代之。</li>
+        </ul>
+        <p class="sdd-updated">最後更新：2026年5月</p>
+      </div>
+    </section>
+
+    <!-- 2. What is SDD -->
+    <section class="sdd-section" aria-labelledby="what-title">
+      <div class="sdd-section__inner">
+        <h2 id="what-title">什麼是規範驅動開發？</h2>
+        <p>
+          規範驅動開發顛倒了通常的工作順序。它不把規範當作事後補寫的文件——也不把它完全跳過——
+          而是讓規範成為首要的產物。程式碼、測試和評審都追溯回它。
+        </p>
+        <p>
+          這個意義上的規範不是一堵文字牆。它是結構化的：一組
+          <strong>需求</strong>，每條都帶有明確的<strong>驗收標準</strong>，
+          以可測試的措辭說明要讓該需求被滿足，什麼必須為真。正是這種結構，
+          讓評審者、測試套件和 AI 代理都能以相同的方式解讀同一份文件。
+        </p>
+        <p>
+          規範還是一個<strong>活的產物</strong>。當需求改變時，規範先改變，程式碼隨之跟進——
+          因此規範永遠不會漂移成虛構。
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. Why it matters now (AI spine) -->
+    <section class="sdd-section" aria-labelledby="why-title">
+      <div class="sdd-section__inner">
+        <h2 id="why-title">為什麼現在重要：AI 抬高了賭注</h2>
+        <p>
+          AI 編碼代理生成程式碼的速度遠快於人能閱讀它的速度。這轉移了瓶頸。難的部分不再是敲出實現，
+          而是
+          <strong>把意圖說明得足夠清楚，使生成的程式碼就是你想要的程式碼</strong>。
+          一個被給到模糊提示詞的代理，會自信產出看似合理卻錯誤的東西，而且是以機器的速度。
+        </p>
+        <p>
+          規範就是那道護欄。當預期行為和驗收標準被寫下來，代理就有了一個明確的構建目標，
+          以及一份據以驗證的檢查清單——而人類評審者在任何程式碼存在之前，就有了一個固定的東西可以核准。
+          SDD 是團隊避免讓 AI 的速度變成 AI 重工的方式。
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. How it works -->
+    <section class="sdd-section" aria-labelledby="how-title">
+      <div class="sdd-section__inner">
+        <h2 id="how-title">規範驅動開發如何運作</h2>
+        <p>工作流程是一個循環，而不是一份一次性的文件：</p>
+        <ol class="sdd-steps">
+          <li><strong>捕捉意圖。</strong> 在確定解決方案之前，先記錄尚未成形的方向——問題、目標、未決問題。</li>
+          <li><strong>規定行為。</strong> 把達成一致的方向轉化為需求，每條都帶有明確、可測試的驗收標準。</li>
+          <li><strong>分解為計畫。</strong> 把規範拆成循序的任務，每個任務都引用它所滿足的驗收標準。</li>
+          <li><strong>實現。</strong> 按照規範，逐個任務地構建——由人或 AI 代理完成。</li>
+          <li><strong>對照標準驗證。</strong> 用驗收標準而非感覺來檢查結果。</li>
+          <li><strong>讓規範保持鮮活。</strong> 當需求改變時，先更新規範；程式碼隨之跟進。</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. Benefits -->
+    <section class="sdd-section" aria-labelledby="benefits-title">
+      <div class="sdd-section__inner">
+        <h2 id="benefits-title">規範驅動開發的好處</h2>
+        <ul class="sdd-benefits">
+          <li>分歧在規範評審期間浮現——成本低——而不是在實現之後——成本高。</li>
+          <li>「完成」是客觀的，因為驗收標準是可測試的。</li>
+          <li>規範是所有人的共享上下文：產品、工程和 AI 代理。</li>
+          <li>變更可追溯——每個任務都指回它所滿足的標準。</li>
+        </ul>
+        <h3>為什麼它對 AI 代理尤其有幫助</h3>
+        <ul class="sdd-benefits">
+          <li><strong>機器可讀的意圖：</strong> 代理直接讀取需求，而不是從程式碼中推斷它們。</li>
+          <li><strong>需要載入的上下文更少：</strong> 代理查詢規範中相關的一片，而不是整個程式碼儲存庫。</li>
+          <li><strong>可驗證的輸出：</strong> 驗收標準給代理一個具體的通過/不通過目標。</li>
+          <li><strong>可追溯性：</strong> 生成的程式碼可以回溯到促成它的需求。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. Comparison -->
+    <section class="sdd-section" aria-labelledby="vs-title">
+      <div class="sdd-section__inner">
+        <h2 id="vs-title">規範驅動開發與相關實踐的對比</h2>
+        <div class="sdd-table-wrap">
+          <table class="sdd-table">
+            <thead>
+              <tr><th>實踐</th><th>唯一可信來源</th><th>與 SDD 的關係</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>測試驅動開發</td><td>程式碼層面失敗的測試</td><td>互補——驗收標準成為那些測試。</td></tr>
+              <tr><td>傳統 PRD</td><td>為人撰寫的散文</td><td>結構化程度較低；不能直接測試，也不可被機器讀取。</td></tr>
+              <tr><td>僅靠提示詞（“vibe coding”）</td><td>提示詞和模型的猜測</td><td>沒有持久、可評審的目標——這正是 SDD 存在要修復的問題。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          要檢視 SpecScore 與其他規範工具的詳細對比，請參見
+          <a href="/zh-tw/vs/">對比頁面</a>。
+        </p>
+      </div>
+    </section>
+
+    <!-- 7. Tradeoffs -->
+    <section class="sdd-section" aria-labelledby="limits-title">
+      <div class="sdd-section__inner">
+        <h2 id="limits-title">權衡，以及何時不要使用它</h2>
+        <p>
+          規範驅動開發並非免費。它把精力前置到在任何程式碼執行之前去思考和書寫，
+          對於一次性指令稿或用完即棄的實驗來說，這是一筆錯誤的交易。而且規範只有在保持最新時才有幫助——
+          一份任其腐爛的規範會變得具有誤導性，比沒有還糟。當工作大到值得規劃、需要被維護，
+          或要交給 AI 代理大規模構建時，SDD 才會獲得回報。
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. In practice (SpecScore) -->
+    <section class="sdd-section" aria-labelledby="practice-title">
+      <div class="sdd-section__inner">
+        <h2 id="practice-title">在實踐中與 AI 代理一起做規範驅動開發</h2>
+        <p>
+          要與 AI 代理一起執行 SDD，你需要兩樣東西：一種你的團隊和代理都能理解的<strong>機器可讀的
+          規範格式</strong>，以及一種讓代理<strong>讀取、寫入和驗證</strong>這些規範的方式。
+        </p>
+        <p>
+          <strong>SpecScore</strong> 正是這樣的一種實現。它是一種面向特性、需求和驗收標準的開放
+          Markdown + YAML 格式——你儲存庫中的純檔案——並配有一個 CLI，供你的代理呼叫以查詢、
+          編輯和 lint 它們。由於結構是機器可讀的，代理可以問「我接下來該構建什麼？」，
+          得到未完成的需求及其驗收標準，然後對照它們檢查自己的工作。它與工具無關，且開源。
+        </p>
+        <p>
+          從 <a href="/zh-tw/ai/">面向你的編碼代理的 AI 技能</a>開始，或
+          <a href="/zh-tw/cli/">安裝 CLI</a>。
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. FAQ -->
+    <section class="sdd-section" aria-labelledby="faq-title">
+      <div class="sdd-section__inner">
+        <h2 id="faq-title">常見問題</h2>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">規範驅動開發和測試驅動開發是一回事嗎？</p>
+          <p class="sdd-faq__a">不是。TDD 在程式碼層面從失敗的測試驅動實現。規範驅動開發在更上一層運作：它先把預期行為和驗收標準固定在一份書面規範中。兩者是互補的——規範中的驗收標準往往會成為 TDD 隨後驅動的那些測試。</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">規範驅動開發會拖慢你嗎？</p>
+          <p class="sdd-faq__a">它在寫程式碼之前增加了時間，卻減少了重做錯誤東西所花的時間。對於一次性指令稿，這點開銷並不值得。但對於 AI 代理大規模生成的東西，或團隊必須維護的東西，先寫規範通常從頭到尾都更快。</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">規範和 PRD 有什麼區別？</p>
+          <p class="sdd-faq__a">PRD 通常是面向人的散文。規範驅動開發中的規範是結構化且可測試的——帶有明確驗收標準的離散需求——因此評審者和 AI 代理都能據以精確地行動。</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">AI 編碼代理如何使用規範？</p>
+          <p class="sdd-faq__a">當規範可被機器讀取時，代理會向它查詢與當前任務相關的需求和驗收標準，而不是載入整個程式碼庫，然後對照這些標準檢查自己的輸出——這是對看似合理卻錯誤的程式碼的一道防護。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. CTA -->
+  <section class="sdd-cta" aria-labelledby="cta-title">
+    <div class="sdd-cta__inner">
+      <h2 id="cta-title">與你的 AI 代理一起開始規範驅動的構建</h2>
+      <p>SpecScore 為你的代理提供一種開放的規範格式，以及一個用於查詢和 lint 它的 CLI。</p>
+      <div class="sdd-cta__buttons">
+        <a href="/zh-tw/ai/" class="btn btn--primary">為你的代理取得 AI 技能</a>
+        <a href="/zh-tw/cli/" class="btn btn--secondary">安裝 CLI</a>
+      </div>
+    </div>
+  </section>
+
+  <SiteFooterZhTw />
+</BaseLayout>

@@ -1,0 +1,294 @@
+---
+// /de/spec-driven-development/ — pillar page (German).
+// Neutral-reference-first explainer on spec-driven development, with AI as
+// the narrative spine. SpecScore appears as the named recommended
+// implementation in the "in practice" section + FAQ only.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooterDe from '../../../components/SiteFooterDe.astro';
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: 'Spezifikationsgetriebene Entwicklung für KI-Agenten',
+      description:
+        'Was spezifikationsgetriebene Entwicklung (SDD) ist, warum sie für KI-Agenten wichtig ist, wie der Workflow funktioniert und wie sie sich im Vergleich zu TDD und rein prompt-basierter Programmierung verhält.',
+      inLanguage: 'de',
+      datePublished: '2026-05-29',
+      dateModified: '2026-05-29',
+      mainEntityOfPage: 'https://specscore.md/de/spec-driven-development/',
+      image: 'https://specscore.md/hero-og.webp',
+      author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      publisher: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      about: {
+        '@type': 'DefinedTerm',
+        name: 'Spezifikationsgetriebene Entwicklung',
+        description:
+          'Eine Softwareentwicklungspraxis, bei der eine schriftliche Spezifikation – Anforderungen und Akzeptanzkriterien – die Quelle der Wahrheit ist, gegen die Code gebaut und verifiziert wird.',
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Ist spezifikationsgetriebene Entwicklung dasselbe wie testgetriebene Entwicklung?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Nein. TDD steuert die Implementierung anhand fehlschlagender Tests auf Code-Ebene. Spezifikationsgetriebene Entwicklung setzt eine Ebene höher an: Sie fixiert zuerst das beabsichtigte Verhalten und die Akzeptanzkriterien in einer schriftlichen Spezifikation. Sie ergänzen sich gegenseitig – die Akzeptanzkriterien einer Spezifikation werden oft zu den Tests, die dann das TDD steuern.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Verlangsamt einen spezifikationsgetriebene Entwicklung?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Sie erfordert Zeit, bevor Code geschrieben wird, und spart Zeit ein, die sonst für das Umbauen falscher Lösungen draufgeht. Für Wegwerf-Skripte lohnt sich der Aufwand nicht. Für alles, was ein KI-Agent in größerem Umfang generiert oder was ein Team langfristig pflegen muss, ist das Vorab-Schreiben der Spezifikation von Anfang bis Ende meist schneller.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Was ist der Unterschied zwischen einer Spezifikation und einem PRD?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Ein PRD ist meist Fließtext für Menschen. Eine Spezifikation in der spezifikationsgetriebenen Entwicklung ist strukturiert und testbar – diskrete Anforderungen mit expliziten Akzeptanzkriterien –, sodass sowohl menschliche Reviewer als auch KI-Agenten präzise danach handeln können.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Wie nutzen KI-Coding-Agenten eine Spezifikation?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Wenn die Spezifikation maschinenlesbar ist, fragt der Agent gezielt die für seine aktuelle Aufgabe relevanten Anforderungen und Akzeptanzkriterien ab, statt die gesamte Codebasis einzulesen. Anschließend prüft er sein Ergebnis gegen diese Kriterien – ein Schutzschild gegen plausiblen, aber falschen Code.',
+          },
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  lang="de"
+  title="Spezifikationsgetriebene Entwicklung für KI-Agenten — Vollständiger Leitfaden | SpecScore"
+  description="Spezifikationsgetriebene Entwicklung (SDD) bedeutet, eine testbare Spezifikation vor dem Code zu schreiben, damit KI-Agenten das Richtige bauen. Was es ist, wie es funktioniert und wie es sich mit TDD vergleicht."
+  canonical="https://specscore.md/de/spec-driven-development/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
+  </Fragment>
+
+  <SiteHeader />
+
+  <main>
+    <!-- 1. Definition block + TL;DR -->
+    <section class="sdd-hero" aria-labelledby="sdd-title">
+      <div class="sdd-hero__inner">
+        <h1 id="sdd-title" class="sdd-hero__headline">Spezifikationsgetriebene Entwicklung für KI-Agenten</h1>
+        <p class="sdd-hero__lede">
+          <strong>Spezifikationsgetriebene Entwicklung (Spec-Driven Development, SDD) ist eine Praxis, bei der eine
+          schriftliche, testbare Spezifikation – Anforderungen und Akzeptanzkriterien – die Quelle der Wahrheit ist,
+          gegen die Code gebaut und verifiziert wird.</strong> Statt direkt von einem
+          Prompt oder einem Ticket zum Code überzugehen, vereinbart man zuerst, was die Software tun soll, und baut
+          anschließend nach dieser Spezifikation. Da KI-Agenten heute einen Großteil des Codes schreiben, sorgt
+          die Spezifikation dafür, dass sie das Richtige bauen.
+        </p>
+        <ul class="sdd-takeaways">
+          <li>Die Spezifikation ist die Quelle der Wahrheit; Code wird aus ihr abgeleitet und gegen sie geprüft.</li>
+          <li>Anforderungen werden von expliziten Akzeptanzkriterien begleitet – „fertig“ ist testbar, nicht subjektiv.</li>
+          <li>KI-Agenten fragen die Spezifikation nach der Absicht ab, statt sie aus dem Code zu erraten – weniger Fehlbauten.</li>
+          <li>Es ergänzt testgetriebene Entwicklung (TDD), ersetzt sie aber nicht.</li>
+        </ul>
+        <p class="sdd-updated">Zuletzt aktualisiert: Mai 2026</p>
+      </div>
+    </section>
+
+    <!-- 2. What is SDD -->
+    <section class="sdd-section" aria-labelledby="what-title">
+      <div class="sdd-section__inner">
+        <h2 id="what-title">Was ist spezifikationsgetriebene Entwicklung?</h2>
+        <p>
+          Spezifikationsgetriebene Entwicklung kehrt die übliche Arbeitsreihenfolge um. Anstatt die
+          Spezifikation als nachträgliche Dokumentation zu behandeln – oder sie ganz wegzulassen –,
+          macht SDD die Spezifikation zum primären Artefakt. Code, Tests und Reviews
+          beziehen sich alle direkt auf sie.
+        </p>
+        <p>
+          Eine Spezifikation in diesem Sinne ist keine endlose Textwand. Sie ist strukturiert: eine Menge von
+          <strong>Anforderungen (Requirements)</strong>, jede mit expliziten <strong>Akzeptanzkriterien (Acceptance Criteria)</strong>,
+          die in testbaren Begriffen beschreiben, was erfüllt sein muss, damit die Anforderung als abgeschlossen gilt.
+          Diese Struktur ermöglicht es Reviewern, Test-Suiten und KI-Agenten gleichermaßen, dasselbe
+          Dokument auf dieselbe Weise zu interpretieren.
+        </p>
+        <p>
+          Die Spezifikation ist zudem ein <strong>lebendiges Artefakt</strong>. Wenn sich Anforderungen ändern,
+          wird zuerst die Spezifikation angepasst und der Code folgt danach – so driftet die Spezifikation
+          nie zur Fiktion ab.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. Why it matters now (AI spine) -->
+    <section class="sdd-section" aria-labelledby="why-title">
+      <div class="sdd-section__inner">
+        <h2 id="why-title">Warum es jetzt wichtig ist: KI erhöht die Einsätze</h2>
+        <p>
+          KI-Coding-Agenten erzeugen Code viel schneller, als ein Mensch ihn lesen kann. Das
+          verschiebt den Engpass. Der schwierige Teil ist nicht mehr das Schreiben der
+          Implementierung – sondern
+          <strong>die Absicht so präzise zu spezifizieren, dass der generierte Code genau der Code ist, den du wolltest</strong>.
+          Ein Agent, der mit einem vagen Prompt gefüttert wird, liefert mit hoher Zuverlässigkeit
+          etwas Plausibles, aber Falsches – und das in Maschinengeschwindigkeit.
+        </p>
+        <p>
+          Die Spezifikation dient als Leitplanke. Wenn das beabsichtigte Verhalten und die
+          Akzeptanzkriterien schriftlich fixiert sind, hat der Agent ein unmissverständliches Ziel, auf das er
+          hinarbeiten kann, und eine Checkliste zur Verifizierung – und ein menschlicher Reviewer hat
+          eine feste Grundlage zur Freigabe, bevor auch nur eine Zeile Code existiert. SDD ist der Weg,
+          wie Teams verhindern, dass KI-Geschwindigkeit in KI-Nacharbeit umschlägt.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. How it works -->
+    <section class="sdd-section" aria-labelledby="how-title">
+      <div class="sdd-section__inner">
+        <h2 id="how-title">Wie spezifikationsgetriebene Entwicklung funktioniert</h2>
+        <p>Der Workflow ist eine Schleife, kein einmaliges Dokument:</p>
+        <ol class="sdd-steps">
+          <li><strong>Absicht erfassen.</strong> Halte die grobe Richtung fest – das Problem, das Ziel, offene Fragen –, bevor du dich auf eine Lösung festlegst.</li>
+          <li><strong>Verhalten spezifizieren.</strong> Übertrage die vereinbarte Richtung in Anforderungen, jede mit expliziten, testbaren Akzeptanzkriterien.</li>
+          <li><strong>In einen Plan zerlegen.</strong> Teile die Spezifikation in geordnete Aufgaben auf, von denen jede die Akzeptanzkriterien nennt, die sie erfüllt.</li>
+          <li><strong>Implementieren.</strong> Setze Aufgabe für Aufgabe um – ob Mensch oder KI-Agent – immer entlang der Spezifikation.</li>
+          <li><strong>Gegen Kriterien verifizieren.</strong> Prüfe das Ergebnis gegen die Akzeptanzkriterien, nicht nach Bauchgefühl.</li>
+          <li><strong>Spezifikation lebendig halten.</strong> Wenn sich Anforderungen ändern, aktualisiere zuerst die Spezifikation; der Code folgt.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. Benefits -->
+    <section class="sdd-section" aria-labelledby="benefits-title">
+      <div class="sdd-section__inner">
+        <h2 id="benefits-title">Vorteile spezifikationsgetriebener Entwicklung</h2>
+        <ul class="sdd-benefits">
+          <li>Meinungsverschiedenheiten werden während des Spezifikations-Reviews sichtbar – kostengünstig – statt nach der Implementierung – teuer.</li>
+          <li>„Fertig“ ist objektiv, weil die Akzeptanzkriterien überprüfbar sind.</li>
+          <li>Die Spezifikation ist der gemeinsame Kontext für alle: Produkt, Entwicklung und KI-Agenten.</li>
+          <li>Änderungen bleiben nachvollziehbar – jede Aufgabe verweist auf die Kriterien, die sie erfüllt.</li>
+        </ul>
+        <h3>Warum es speziell KI-Agenten hilft</h3>
+        <ul class="sdd-benefits">
+          <li><strong>Maschinenlesbare Absicht:</strong> Der Agent liest Anforderungen direkt aus, anstatt sie aus Code zu erraten.</li>
+          <li><strong>Weniger Kontext zu laden:</strong> Der Agent ruft nur den relevanten Teil der Spezifikation ab, statt das gesamte Repository einzulesen.</li>
+          <li><strong>Verifizierbares Ergebnis:</strong> Akzeptanzkriterien geben dem Agenten ein klares Pass/Fail-Ziel.</li>
+          <li><strong>Rückverfolgbarkeit:</strong> Generierter Code lässt sich direkt auf die Anforderung zurückführen, die ihn veranlasst hat.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. Comparison -->
+    <section class="sdd-section" aria-labelledby="vs-title">
+      <div class="sdd-section__inner">
+        <h2 id="vs-title">Spezifikationsgetriebene Entwicklung im Vergleich</h2>
+        <div class="sdd-table-wrap">
+          <table class="sdd-table">
+            <thead>
+              <tr><th>Praxis</th><th>Quelle der Wahrheit</th><th>Verhältnis zu SDD</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Testgetriebene Entwicklung (TDD)</td><td>Fehlschlagende Tests auf Code-Ebene</td><td>Ergänzend – Akzeptanzkriterien werden zu Tests.</td></tr>
+              <tr><td>Klassisches PRD</td><td>Fließtext für Menschen</td><td>Weniger strukturiert; nicht direkt testbar oder maschinenlesbar.</td></tr>
+              <tr><td>Reines Prompting („Vibe Coding“)</td><td>Der Prompt und die Vermutung des Modells</td><td>Kein dauerhaftes, überprüfbares Ziel – genau das, was SDD löst.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Einen detaillierten Vergleich von SpecScore mit anderen Spezifikations-Tools findest du auf
+          <a href="/de/vs/">unserer Vergleichsseite</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 7. Tradeoffs -->
+    <section class="sdd-section" aria-labelledby="limits-title">
+      <div class="sdd-section__inner">
+        <h2 id="limits-title">Kompromisse und wann man es nicht nutzen sollte</h2>
+        <p>
+          Spezifikationsgetriebene Entwicklung ist nicht kostenlos. Sie verlagert den Aufwand nach
+          vorne – in das Nachdenken und Aufschreiben, bevor Code ausgeführt wird. Für ein einmaliges
+          Wegwerfskript oder ein schnelles Experiment ist das der falsche Tausch. Zudem hilft eine
+          Spezifikation nur, wenn sie gepflegt wird – eine veraltete Spezifikation stiftet Verwirrung
+          und ist schlimmer als gar keine. SDD zahlt sich aus, wenn die Arbeit planungsbedürftig ist,
+          langfristig gewartet werden soll oder an einen KI-Agenten zur Umsetzung übergeben wird.
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. In practice (SpecScore) -->
+    <section class="sdd-section" aria-labelledby="practice-title">
+      <div class="sdd-section__inner">
+        <h2 id="practice-title">Spezifikationsgetriebene Entwicklung mit KI in der Praxis</h2>
+        <p>
+          Um SDD mit KI-Agenten zu betreiben, brauchst du zwei Dinge: ein <strong>maschinenlesbares
+          Spezifikationsformat</strong>, das dein Team und deine Agenten gleichermaßen verstehen, und einen <strong>Weg
+          für Agenten, diese Spezifikationen zu lesen, zu schreiben und zu validieren</strong>.
+        </p>
+        <p>
+          <strong>SpecScore</strong> ist genau das. Es ist ein offenes Markdown + YAML-Format
+          für Features, Anforderungen und Akzeptanzkriterien – einfache Dateien in deinem Repository –,
+          kombiniert mit einer CLI, die deine Agenten aufrufen, um Spezifikationen abzufragen, zu
+          bearbeiten und zu linten. Weil die Struktur maschinenlesbar ist, kann ein Agent fragen:
+          „Woran sollte ich als Nächstes bauen?“, erhält die offenen Anforderungen mit ihren
+          Akzeptanzkriterien und prüft seine Arbeit dagegen ab. Es ist werkzeugagnostisch und Open Source.
+        </p>
+        <p>
+          Starte mit den <a href="/de/ai/">KI-Skills für deinen Coding-Agenten</a> oder
+          <a href="/de/cli/">installiere die CLI</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. FAQ -->
+    <section class="sdd-section" aria-labelledby="faq-title">
+      <div class="sdd-section__inner">
+        <h2 id="faq-title">Häufig gestellte Fragen</h2>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Ist spezifikationsgetriebene Entwicklung dasselbe wie testgetriebene Entwicklung?</p>
+          <p class="sdd-faq__a">Nein. TDD steuert die Implementierung anhand fehlschlagender Tests auf Code-Ebene. Spezifikationsgetriebene Entwicklung setzt eine Ebene höher an: Sie fixiert zuerst das beabsichtigte Verhalten und die Akzeptanzkriterien in einer schriftlichen Spezifikation. Sie ergänzen sich gegenseitig – die Akzeptanzkriterien einer Spezifikation werden oft zu den Tests, die dann das TDD steuern.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Verlangsamt einen spezifikationsgetriebene Entwicklung?</p>
+          <p class="sdd-faq__a">Sie erfordert Zeit, bevor Code geschrieben wird, und spart Zeit ein, die sonst für das Umbauen falscher Lösungen draufgeht. Für Wegwerf-Skripte lohnt sich der Aufwand nicht. Für alles, was ein KI-Agent in größerem Umfang generiert oder was ein Team langfristig pflegen muss, ist das Vorab-Schreiben der Spezifikation von Anfang bis Ende meist schneller.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Was ist der Unterschied zwischen einer Spezifikation und einem PRD?</p>
+          <p class="sdd-faq__a">Ein PRD ist meist Fließtext für Menschen. Eine Spezifikation in der spezifikationsgetriebenen Entwicklung ist strukturiert und testbar – diskrete Anforderungen mit expliziten Akzeptanzkriterien –, sodass sowohl menschliche Reviewer als auch KI-Agenten präzise danach handeln können.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Wie nutzen KI-Coding-Agenten eine Spezifikation?</p>
+          <p class="sdd-faq__a">Wenn die Spezifikation maschinenlesbar ist, fragt der Agent gezielt die für seine aktuelle Aufgabe relevanten Anforderungen und Akzeptanzkriterien ab, statt die gesamte Codebasis einzulesen. Anschließend prüft er sein Ergebnis gegen diese Kriterien – ein Schutzschild gegen plausiblen, aber falschen Code.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. CTA -->
+  <section class="sdd-cta" aria-labelledby="cta-title">
+    <div class="sdd-cta__inner">
+      <h2 id="cta-title">Starte spezifikationsgetriebene Entwicklung mit deinem KI-Agenten</h2>
+      <p>SpecScore gibt deinem Agenten ein offenes Spezifikationsformat und eine CLI zum Abfragen und Linten an die Hand.</p>
+      <div class="sdd-cta__buttons">
+        <a href="/de/ai/" class="btn btn--primary">KI-Skills für deinen Agenten</a>
+        <a href="/de/cli/" class="btn btn--secondary">CLI installieren</a>
+      </div>
+    </div>
+  </section>
+
+  <SiteFooterDe />
+</BaseLayout>
