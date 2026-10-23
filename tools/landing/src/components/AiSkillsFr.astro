@@ -1,0 +1,290 @@
+---
+// French variant of AiSkills.astro.
+// Slash-command names stay English (they're literal command strings).
+// Terminal mockups have French prose in the user-input lines.
+---
+
+<section class="aiskills section" id="ai-skills" aria-labelledby="aiskills-title">
+  <div class="section-inner">
+    <h2 id="aiskills-title" class="aiskills__title">
+      La façon la plus simple de commencer : SpecStudio Skills pour agents d'IA.
+    </h2>
+    <p class="aiskills__intro">
+      <a class="xref" href="https://github.com/specscore/specstudio-skills">SpecStudio Skills</a>
+      est un plugin Claude Code qui transforme le cycle de vie de SpecScore
+      en quatre commandes slash. Installez-le une fois, puis exécutez-les dans l'ordre —
+      de l'idée brute jusqu'au plan exécutable.
+    </p>
+
+    <div class="aiskills__install">
+<pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
+<span class="prompt">$</span> /plugin install specstudio@specscore</pre>
+    </div>
+
+    {/* Autocomplete-style overview card — static, no tab logic */}
+    <div class="aiskills__overview" aria-label="Commandes SpecStudio en un coup d'œil">
+      <div class="terminal-frame__head">
+        <span class="terminal-frame__title">Claude Code</span>
+        <span class="terminal-frame__hint">autocomplétion</span>
+      </div>
+<pre class="terminal terminal-frame__body"><span class="prompt">&gt;</span> /specstudio:
+   <span class="ac-cmd">/specstudio:ideate</span>     <span class="dim">Ajuster une idée brute en une SpecScore Idea</span>
+   <span class="ac-cmd">/specstudio:specify</span>    <span class="dim">Transformer une Idea approuvée en spécification de Feature</span>
+   <span class="ac-cmd">/specstudio:plan</span>       <span class="dim">Décomposer une Feature en un Plan de tâches</span>
+   <span class="ac-cmd">/specstudio:implement</span>  <span class="dim">Exécuter la prochaine tâche du Plan</span></pre>
+    </div>
+
+    {/* Step tabs — pick a command, see how you'd invoke it */}
+    <div class="ais-tabs" role="tablist" aria-label="Commandes de SpecStudio">
+      <button type="button" role="tab" id="ais-tab-ideate"    aria-controls="ais-panel-ideate"    aria-selected="true"  tabindex="0"  class="ais-tab is-active" data-step="0">/ideate</button>
+      <span class="ais-tab-arrow" aria-hidden="true">→</span>
+      <button type="button" role="tab" id="ais-tab-specify"   aria-controls="ais-panel-specify"   aria-selected="false" tabindex="-1" class="ais-tab"           data-step="1">/specify</button>
+      <span class="ais-tab-arrow" aria-hidden="true">→</span>
+      <button type="button" role="tab" id="ais-tab-plan"      aria-controls="ais-panel-plan"      aria-selected="false" tabindex="-1" class="ais-tab"           data-step="2">/plan</button>
+      <span class="ais-tab-arrow" aria-hidden="true">→</span>
+      <button type="button" role="tab" id="ais-tab-implement" aria-controls="ais-panel-implement" aria-selected="false" tabindex="-1" class="ais-tab"           data-step="3">/implement</button>
+    </div>
+
+    <div class="ais-viewport" aria-live="polite">
+      <div class="ais-track" data-index="0" style="transform: translateX(0%);">
+        <div class="ais-panel" role="tabpanel" id="ais-panel-ideate" aria-labelledby="ais-tab-ideate">
+          <div class="terminal-frame">
+            <div class="terminal-frame__head">
+              <span class="terminal-frame__title">Claude Code</span>
+              <span class="terminal-frame__hint">/ideate</span>
+            </div>
+<pre class="terminal terminal-frame__body"><span class="prompt">&gt;</span> /ideate Réfléchissons à ce que devrait être l'écran du panier pour le tunnel de commande.</pre>
+          </div>
+        </div>
+
+        <div class="ais-panel" role="tabpanel" id="ais-panel-specify" aria-labelledby="ais-tab-specify">
+          <div class="terminal-frame">
+            <div class="terminal-frame__head">
+              <span class="terminal-frame__title">Claude Code</span>
+              <span class="terminal-frame__hint">/specify</span>
+            </div>
+<pre class="terminal terminal-frame__body"><span class="prompt">&gt;</span> /specify Spécifions spec/ideas/checkout-basket.md</pre>
+          </div>
+        </div>
+
+        <div class="ais-panel" role="tabpanel" id="ais-panel-plan" aria-labelledby="ais-tab-plan">
+          <div class="terminal-frame">
+            <div class="terminal-frame__head">
+              <span class="terminal-frame__title">Claude Code</span>
+              <span class="terminal-frame__hint">/plan</span>
+            </div>
+<pre class="terminal terminal-frame__body"><span class="prompt">&gt;</span> /plan Planifier l'implémentation de spec/features/checkout/basket/README.md</pre>
+          </div>
+        </div>
+
+        <div class="ais-panel" role="tabpanel" id="ais-panel-implement" aria-labelledby="ais-tab-implement">
+          <div class="terminal-frame">
+            <div class="terminal-frame__head">
+              <span class="terminal-frame__title">Claude Code</span>
+              <span class="terminal-frame__hint">/implement</span>
+            </div>
+<pre class="terminal terminal-frame__body"><span class="prompt">&gt;</span> /implement Exécuter spec/plans/checkout-basket/README.md</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="aiskills__foot">
+      Gratuit pour les dépôts publics et open source. Le code du plugin
+      est disponible sur
+      <a class="xref" href="https://github.com/specscore/specstudio-skills">specscore/specstudio-skills</a> — sous licence MIT.
+    </p>
+  </div>
+</section>
+
+<style>
+  .aiskills { background: var(--cream-2); }
+
+  .aiskills__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .aiskills__intro {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+  }
+  .aiskills__install {
+    margin-bottom: var(--space-5);
+  }
+  .aiskills__foot {
+    margin-top: var(--space-3);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+
+  /* --- Autocomplete overview card --- */
+  .aiskills__overview {
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+    margin-bottom: var(--space-4);
+  }
+  .aiskills__overview .terminal-frame__body {
+    margin: 0;
+    padding: var(--space-3);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    border: none;
+    border-radius: 0;
+  }
+  .ac-cmd {
+    color: var(--ink);
+    font-weight: 600;
+    display: inline-block;
+    min-width: 170px;
+  }
+
+  /* --- Tabs --- */
+  .ais-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .ais-tab {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    padding: 0.55rem 0.95rem;
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: var(--mid-ink);
+    cursor: pointer;
+    transition: color 120ms ease, border-color 160ms ease;
+  }
+  .ais-tab:hover { color: var(--ink); }
+  .ais-tab:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: -2px;
+  }
+  .ais-tab.is-active {
+    color: var(--ink);
+    border-bottom-color: var(--validator-green);
+    font-weight: 600;
+  }
+  .ais-tab-arrow {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0.25rem 2px;
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    color: var(--pale-ink);
+    user-select: none;
+  }
+
+  /* --- Viewport & track --- */
+  .ais-viewport {
+    overflow: hidden;
+    border-left: 1px solid var(--hairline);
+    border-right: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .ais-track {
+    display: flex;
+    width: 400%;
+    transition: transform 280ms ease-in-out;
+    will-change: transform;
+  }
+  .ais-panel {
+    width: 25%;
+    flex: 0 0 25%;
+    box-sizing: border-box;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ais-track { transition: none; }
+  }
+
+  /* --- Terminal frame inside each panel --- */
+  .terminal-frame { border: none; }
+  .terminal-frame__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0.875rem;
+    border-bottom: 1px solid var(--hairline);
+    background: var(--cream);
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+  .terminal-frame__title {
+    color: var(--graphite);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .terminal-frame__hint { color: var(--pale-ink); }
+  .terminal-frame__body {
+    margin: 0;
+    padding: var(--space-4);
+    background: var(--surface);
+    border: none;
+    border-radius: 0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+  }
+
+  @media (max-width: 600px) {
+    .ac-cmd { min-width: auto; display: block; }
+    .ais-tab { padding: 0.5rem 0.6rem; font-size: 0.78rem; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var tabs = document.querySelectorAll('.ais-tab');
+    var track = document.querySelector('.ais-track');
+    var panels = document.querySelectorAll('.ais-panel');
+    if (!tabs.length || !track) return;
+
+    var step = panels.length;
+    var stride = 100 / step;
+
+    function activate(stepStr, focus) {
+      var idx = parseInt(stepStr, 10);
+      if (isNaN(idx)) return;
+      tabs.forEach(function (t) {
+        var on = t.getAttribute('data-step') === stepStr;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.setAttribute('tabindex', on ? '0' : '-1');
+        if (on && focus) t.focus();
+      });
+      panels.forEach(function (p, i) {
+        p.setAttribute('aria-hidden', i === idx ? 'false' : 'true');
+      });
+      track.style.transform = 'translateX(-' + (idx * stride) + '%)';
+      track.setAttribute('data-index', String(idx));
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        activate(tab.getAttribute('data-step'), false);
+      });
+      tab.addEventListener('keydown', function (ev) {
+        var key = ev.key;
+        if (key !== 'ArrowRight' && key !== 'ArrowLeft' &&
+            key !== 'Home' && key !== 'End') return;
+        ev.preventDefault();
+        var i = Array.prototype.indexOf.call(tabs, ev.currentTarget);
+        var next;
+        if (key === 'ArrowRight') next = (i + 1) % tabs.length;
+        else if (key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        else if (key === 'Home') next = 0;
+        else next = tabs.length - 1;
+        activate(String(next), true);
+      });
+    });
+  })();
+</script>

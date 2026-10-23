@@ -1,0 +1,576 @@
+---
+// /it/vs/datarim/ — Confronto tra SpecScore e Datarim.
+// Datarim è un workflow pack per Claude Code; SpecScore è il formato aperto
+// a cui un flusso di lavoro può puntare. Nessun attacco — due pack, un formato aperto.
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooterIt from '../../../../components/SiteFooterIt.astro';
+import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro';
+---
+
+<BaseLayout
+  lang="it"
+  title="SpecScore vs Datarim — Confronto onesto."
+  description="Un confronto oggettivo tra SpecScore e Datarim: un workflow pack per Claude Code vs un formato di specifica aperto e portabile. Livelli diversi — e componibili."
+  canonical="https://specscore.md/it/vs/datarim/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href="/it/vs/" class="xref">Confronti</a></p>
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore vs Datarim
+        </h1>
+        <p class="hero__sub">
+          Livelli diversi. Datarim è un <strong>workflow pack</strong> opinionato per
+          Claude Code — comandi slash che guidano un progetto dai requisiti al
+          completamento. SpecScore è il <strong>formato aperto</strong> in cui sono scritte le specifiche,
+          oltre a una CLI per verificarle con lint, interrogarle e tracciarle. Un flusso di lavoro può adottarlo come target.
+        </p>
+      </div>
+    </section>
+
+    {/* ── What they share ── */}
+    <section class="section" aria-labelledby="shared-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="shared-title" class="section-title">Cosa hanno in comune.</h2>
+        <ul class="shared-list">
+          <li>Entrambi portano una metodologia strutturata nello sviluppo assistito dall'IA.</li>
+          <li>Entrambi sono open source con licenza MIT.</li>
+          <li>Entrambi girano dentro Claude Code — Datarim come comandi, SpecScore tramite SpecStudio Skills.</li>
+          <li>Entrambi mantengono il proprio stato come Markdown nel repository, tracciato sotto controllo versione.</li>
+        </ul>
+      </div>
+    </section>
+
+    {/* ── What Datarim does well ── */}
+    <section class="section" aria-labelledby="datarim-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="datarim-title" class="section-title">Cosa fa bene Datarim.</h2>
+        <p class="section-note">
+          <a href="https://github.com/Arcanada-one/datarim" rel="nofollow noopener" target="_blank" class="xref">Datarim</a>
+          è un framework universale per flussi di lavoro iterativi creato per Claude Code.
+        </p>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">UX nativa basata su comandi slash</h3>
+          <p class="credit-card__desc">
+            Un'intera pipeline sotto forma di comandi — <code>/dr-prd</code>, <code>/dr-plan</code>,
+            <code>/dr-design</code>, <code>/dr-do</code>, <code>/dr-qa</code> — perfettamente
+            integrati in Claude Code. Un <code>install.sh</code> in <code>~/.claude/</code>
+            e sei subito operativo.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Routing basato sulla complessità (L1–L4)</h3>
+          <p class="credit-card__desc">
+            Datarim dimensiona il lavoro e definisce il percorso di conseguenza: un fix rapido L1 salta
+            la pianificazione, mentre una modifica importante L4 esegue una pipeline a fasi con più
+            cicli di revisione. Adattare la formalità alla portata del lavoro è un'ottima intuizione.
+          </p>
+        </div>
+
+        <div class="credit-card">
+          <h3 class="credit-card__title">Consilium e portata multidominio</h3>
+          <p class="credit-card__desc">
+            Il suo "consilium" riunisce un panel di agenti per discutere i compromessi prima di
+            raccomandare una decisione. E non riguarda solo il software — Datarim supporta
+            anche flussi di lavoro di ricerca, legali e di contenuti.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Feature comparison table ── */}
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">Confronto delle funzionalità.</h2>
+        <p class="section-note">
+          Uno è un flusso di lavoro, l'altro un formato — la tabella confronta i ruoli, non i vincitori.
+        </p>
+
+        <div class="table-wrap">
+          <table class="compare-table" aria-label="Confronto delle funzionalità SpecScore vs Datarim">
+            <thead>
+              <tr>
+                <th scope="col">Funzionalità</th>
+                <th scope="col">Datarim</th>
+                <th scope="col">SpecScore</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ruolo principale</td>
+                <td>Workflow pack per Claude Code</td>
+                <td><strong>Formato di specifica aperto + CLI</strong></td>
+              </tr>
+              <tr>
+                <td>Modalità di esecuzione</td>
+                <td>Comandi slash (<code>/dr-*</code>)</td>
+                <td>File di formato + CLI <span class="dim">(+ SpecStudio Skills in Claude Code)</span></td>
+              </tr>
+              <tr>
+                <td>Archiviazione dello stato</td>
+                <td><code>backlog.md</code> + <code>CLAUDE.md</code> (struttura legata al workflow)</td>
+                <td><strong>Albero <code>spec/</code> portabile</strong> (Markdown + YAML)</td>
+              </tr>
+              <tr>
+                <td>Sopravvive senza lo strumento</td>
+                <td>Legato al runtime di Datarim</td>
+                <td><strong>Sì</strong> — portabile per progettazione</td>
+              </tr>
+              <tr>
+                <td>Linting delle specifiche</td>
+                <td>Nessuno</td>
+                <td><strong>Qualità dei contenuti</strong> — verbi vaghi, AC mancanti, riferimenti orfani</td>
+              </tr>
+              <tr>
+                <td>ID per requisiti / AC</td>
+                <td>Nessuno</td>
+                <td><strong>ID indirizzabili via software</strong> (<code>REQ: slug</code>)</td>
+              </tr>
+              <tr>
+                <td>Tracciabilità codice-a-specifica</td>
+                <td>Nessuna</td>
+                <td><strong>Annotazioni <code>specscore:</code></strong> + trailer <code>Verifies:</code></td>
+              </tr>
+              <tr>
+                <td>Routing per complessità (L1–L4)</td>
+                <td><strong>Sì</strong></td>
+                <td>No (formato, non flusso di lavoro)</td>
+              </tr>
+              <tr>
+                <td>Grafo delle specifiche interrogabile</td>
+                <td>No</td>
+                <td><strong>Sì</strong> — <code>feature list / show / deps</code></td>
+              </tr>
+              <tr>
+                <td>Vincolato a Claude Code</td>
+                <td>Progettato appositamente</td>
+                <td><strong>No</strong> — qualsiasi agente, o nessuno</td>
+              </tr>
+              <tr>
+                <td>Licenza</td>
+                <td>MIT</td>
+                <td>MIT / CC BY 4.0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Where SpecScore goes further ── */}
+    <section class="section" aria-labelledby="further-title">
+      <div class="section-inner">
+        <h2 id="further-title" class="section-title">Cosa aggiunge SpecScore.</h2>
+
+        <div class="diff-grid">
+          <div class="diff-card">
+            <h3 class="diff-card__title">L'output sopravvive al flusso di lavoro</h3>
+            <p class="diff-card__desc">
+              Lo stato di Datarim risiede nel suo backlog e nel formato di <code>CLAUDE.md</code> —
+              utile finché utilizzi Datarim. Le specifiche di SpecScore sono un formato portabile che
+              rimane leggibile, verificabile via lint e interrogabile senza alcun tooling SpecScore installato.
+              Il flusso di lavoro può cambiare; le specifiche restano con te.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Le specifiche sono verificabili tramite lint</h3>
+            <p class="diff-card__desc">
+              Un flusso di lavoro guida la stesura, ma non valida il risultato. Il
+              comando <code>lint</code> di SpecScore verifica che ogni requisito abbia criteri di accettazione,
+              che i riferimenti incrociati siano risolti e che le transizioni di stato siano valide.
+            </p>
+            <div class="diff-card__example">
+<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
+  <span class="mark-fail">✗</span> R3  no acceptance criteria
+  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
+            </div>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Il codice risale alle specifiche</h3>
+            <p class="diff-card__desc">
+              SpecScore aggiunge annotazioni di origine <code>specscore:</code> e
+              trailer di commit <code>Verifies:</code> — <code>specscore code refs</code>
+              risponde in modo deterministico a "quale codice implementa questo requisito?",
+              a prescindere dal flusso di lavoro che ha prodotto la specifica.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <h3 class="diff-card__title">Non è vincolato a un singolo agente</h3>
+            <p class="diff-card__desc">
+              Datarim è progettato per Claude Code. SpecScore è un formato leggibile da qualsiasi agente
+              e un unico binario Go eseguibile in qualsiasi CI — senza Claude Code
+              e senza richiedere alcuna installazione in <code>~/.claude/</code>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── When to use which ── */}
+    <section class="section" aria-labelledby="when-title">
+      <div class="section-inner">
+        <h2 id="when-title" class="section-title">Quando usare l'uno o l'altro.</h2>
+
+        <div class="when-grid">
+          <div class="when-card">
+            <h3 class="when-card__title">Scegli Datarim se…</h3>
+            <ul class="when-card__list">
+              <li>Vuoi una pipeline completa e opinionata dentro Claude Code oggi stesso.</li>
+              <li>Apprezzi il routing basato sulla complessità e un processo decisionale multiagente.</li>
+              <li>Il tuo lavoro spazia su più ambiti — ricerca, legale, contenuti, non solo codice.</li>
+            </ul>
+          </div>
+
+          <div class="when-card when-card--primary">
+            <h3 class="when-card__title">Usa SpecScore se…</h3>
+            <ul class="when-card__list">
+              <li>Vuoi specifiche che sopravvivano a qualsiasi singolo workflow o strumento.</li>
+              <li>Hai bisogno di lint, ID, ciclo di vita e tracciabilità codice-a-specifica.</li>
+              <li>Lavori con più agenti diversi — o nessuno — e non solo con Claude Code.</li>
+              <li>Vuoi una CLI che gli agenti possano interrogare invece di dover rileggere l'intero repository.</li>
+              <li>Hai bisogno di controlli di qualità delle specifiche in CI con codici di uscita non-zero.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Two packs, one format ── */}
+    <section class="section" aria-labelledby="bridge-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="bridge-title" class="section-title">Due workflow pack, un formato aperto.</h2>
+        <p class="prose-p">
+          Datarim e SpecStudio Skills sono entrambi flussi di lavoro opinionati costruiti su Claude
+          Code. SpecScore è il formato aperto sottostante — l'artefatto prodotto dal flusso di lavoro
+          affinché le specifiche rimangano portabili, verificabili via lint e tracciabili anche dopo la fine della pipeline.
+          Se Datarim includesse il formato SpecScore, manterrebbe la propria UX guadagnando un output durevole.
+        </p>
+        <p class="prose-p">
+          Scegli Datarim per la pipeline. Usa SpecScore per l'artefatto che lascia sul campo.
+        </p>
+      </div>
+    </section>
+
+    <ComparisonFeedback page="datarim" />
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">Specifiche che superano la prova.</h2>
+      <div class="final-cta__buttons">
+        <a href="/it/cli/install/" class="btn btn--primary">Installa la CLI</a>
+        <a href="/it/ai/specstudio-skills/" class="btn btn--secondary">Ottieni le skill IA per il tuo agente</a>
+        <a
+          href="https://github.com/specscore/specscore"
+          rel="noopener"
+          class="btn btn--tertiary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          Open source su GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <SiteFooterIt />
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__breadcrumb {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    margin-bottom: var(--space-2);
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Shared list ── */
+  .shared-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .shared-list li {
+    position: relative;
+    padding-left: 1.4rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+  }
+  .shared-list li::before {
+    content: '=';
+    position: absolute;
+    left: 0;
+    font-family: var(--font-code);
+    font-weight: 700;
+    color: var(--pale-ink);
+  }
+
+  /* ── Section note ── */
+  .section-note {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Credit cards ── */
+  .credit-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .credit-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .credit-card__desc {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    font-size: var(--fs-body);
+  }
+  .credit-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Feature comparison table ── */
+  .table-section { background: var(--cream-2); }
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+  .compare-table th,
+  .compare-table td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+  }
+  .compare-table thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    border-bottom: 2px solid var(--graphite);
+    white-space: nowrap;
+  }
+  .compare-table td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 160px;
+  }
+  .compare-table td:nth-child(2),
+  .compare-table td:nth-child(3) {
+    min-width: 200px;
+  }
+  .compare-table td code {
+    font-size: 0.88em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .compare-table strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ── Diff grid ── */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .diff-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+  }
+  .diff-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .diff-card__desc {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+  .diff-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .diff-card__example {
+    margin-top: var(--space-2);
+  }
+  .diff-card__example .terminal {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 860px) {
+    .diff-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── When to use which ── */
+  .when-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .when-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-4);
+  }
+  .when-card--primary {
+    border-color: var(--validator-green);
+    border-width: 2px;
+  }
+  .when-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .when-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .when-card__list li {
+    position: relative;
+    padding-left: 1.2rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+    font-size: var(--fs-small);
+  }
+  .when-card__list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--pale-ink);
+    font-family: var(--font-code);
+  }
+  .when-card--primary .when-card__list li::before {
+    color: var(--validator-green);
+  }
+  .when-card__list code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 860px) {
+    .when-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Bridge section ── */
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-2);
+  }
+  .prose-p:last-child {
+    margin-bottom: 0;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .prose-p code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+</style>

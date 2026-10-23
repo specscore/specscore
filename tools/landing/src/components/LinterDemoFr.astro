@@ -1,0 +1,122 @@
+---
+// French variant of LinterDemo.astro — Check your spec in two passes.
+// Two-column: the deterministic linter and the non-deterministic AI review/score.
+// Terminal output stays English — it's literal CLI stdout.
+import LintExample from './LintExample.astro';
+import ScoreExample from './ScoreExample.astro';
+---
+
+<section class="passes section" aria-labelledby="passes-title">
+  <div class="section-inner">
+    <h2 id="passes-title" class="passes__title">Vérifiez votre spécification en deux passes.</h2>
+    <p class="passes__intro">
+      Un linter déterministe et rapide, puis une revue par IA plus approfondie —
+      exécutés sur la spécification que vous venez de voir. Deux passes, deux formes de
+      certitude.
+    </p>
+
+    <div class="passes__grid">
+      {/* ── Pass 1 — the linter (shipped, real output) ── */}
+      <div class="pass">
+        <div class="pass__head">
+          <h3 class="pass__name">Exécutez le linter.</h3>
+          <span class="pass__kind">deterministic</span>
+        </div>
+        <div
+          class="pass__terminal"
+          role="img"
+          aria-label="Sortie de terminal de specscore lint : R1 et R2 ont des critères d'acceptation (coches vertes) ; R3 n'en a aucun, un lien Related Feature ne résout pas et la section obligatoire Open Questions est manquante (marques rouges). 3 problèmes, exit 1."
+        >
+          <LintExample />
+        </div>
+        <p class="pass__caption">
+          Le même résultat à chaque exécution. Gratuit, rapide, s'exécute à chaque commit.
+        </p>
+      </div>
+
+      {/* ── Pass 2 — AI review/score (Approved Idea, labeled preview) ── */}
+      <div class="pass">
+        <div class="pass__head">
+          <h3 class="pass__name">Révisez et évaluez avec l'IA.</h3>
+          <span class="pass__kind">non-deterministic</span>
+        </div>
+        <div
+          class="pass__terminal"
+          role="img"
+          aria-label="Une revue par IA : la spécification obtient une note B avec deux remarques concrètes — un déclencheur flou dans AC-2 et un cas d'erreur absent dans AC-3."
+        >
+          <ScoreExample />
+        </div>
+        <p class="pass__caption">
+          Lit pour en saisir le sens, comme un réviseur humain.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .passes { background: var(--cream); }
+  .passes__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .passes__intro {
+    font-size: 1.05rem;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-5);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .passes__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+  .pass {
+    display: flex;
+    flex-direction: column;
+  }
+  .pass__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .pass__name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  .pass__kind {
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    color: var(--mid-ink);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .pass__terminal {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    min-height: 380px;
+  }
+  .pass__caption {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    margin-top: var(--space-2);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 860px) {
+    .passes__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+    .pass__terminal {
+      min-height: auto;
+    }
+  }
+</style>

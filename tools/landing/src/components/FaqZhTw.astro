@@ -1,0 +1,187 @@
+---
+// Traditional Chinese variant of Faq.astro.
+// HTML structure + CSS classes match the English original exactly; only
+// the prose changes. Anchor hrefs target /zh-tw/faq/#... (the Traditional
+// Chinese FAQ page, which keeps the same anchor IDs as the English one).
+---
+
+<section class="faq-teaser section" aria-labelledby="faq-teaser-title">
+  <div class="section-inner">
+    <h2 id="faq-teaser-title" class="faq-teaser__title">
+      還有疑問？
+    </h2>
+    <p class="faq-teaser__lead">
+      以下是大家最常問的問題。每條都連結到
+      <a href="/zh-tw/faq/" class="faq-teaser__indexlink">FAQ 頁面</a>的完整答案。
+    </p>
+
+    <div class="faq-teaser__list">
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          SpecScore 和 spec-kit 有什麼區別？
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            spec-kit 是一種方法論；SpecScore 是你所寫規格說明的儲存格式，
+            外加一個 CLI。兩者可以組合——一個能輸出 SpecScore 的
+            spec-kit 擴充功能正在開發中。
+          </p>
+          <a href="/zh-tw/faq/#vs-spec-kit" class="faq-teaser__more">
+            完整答案 →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          SpecStudio Skills 與 Superpowers、agent-skills 有何不同？
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            理念相近——三者都引導 AI 代理走完 ideate → specify →
+            plan → implement。SpecStudio Skills 以 SpecScore 格式寫出
+            產物，並透過 <code>specscore</code> CLI 完成查詢和狀態變更；
+            另外兩者主要直接讀寫檔案。當 token 消耗很重要時，選 SpecStudio。
+          </p>
+          <a href="/zh-tw/faq/#vs-superpowers" class="faq-teaser__more">
+            完整答案 →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          為什麼要 CLI——只裝技能不行嗎？
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            技能無法可靠地保證引用完整性，無法在不讀取所有檔案的情況下
+            返回篩選後的查詢結果，也無法在合適的時機更新正確的狀態欄位。
+            CLI 用一次呼叫就能完成每一項。技能要做同樣的事，得讀完每個檔案。
+          </p>
+          <a href="/zh-tw/faq/#why-cli" class="faq-teaser__more">
+            完整答案 →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          為什麼叫「SpecScore」——它在給什麼評分？
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            兩層含義，都是有意為之。Partitura（總譜）——一份結構化的
+            需求總譜。以及字面上的品質評分——CLI 檢查器給出確定性的分數，
+            <code>/score</code> 技能則是 AI 評判的 A–F 就緒度評級。
+          </p>
+          <a href="/zh-tw/faq/#naming" class="faq-teaser__more">
+            完整答案 →
+          </a>
+        </div>
+      </details>
+
+      <details class="faq-teaser__item">
+        <summary class="faq-teaser__q">
+          token 節省的數據在哪裡？
+        </summary>
+        <div class="faq-teaser__a">
+          <p>
+            實測的並排對比正在準備，會在 Habr 文章前發布。從結構上看：
+            CLI 返回一個小的結構化列表；而普通代理則要讀 N 份文件。
+          </p>
+          <a href="/zh-tw/faq/#token-savings" class="faq-teaser__more">
+            完整答案 →
+          </a>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-teaser { background: var(--cream); }
+  .faq-teaser__title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+  }
+  .faq-teaser__lead {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    max-width: 60ch;
+    line-height: 1.6;
+    text-wrap: balance;
+  }
+  .faq-teaser__indexlink {
+    color: var(--ink-blue);
+    border-bottom: 1px solid currentColor;
+  }
+
+  .faq-teaser__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--hairline);
+    max-width: 70ch;
+  }
+
+  .faq-teaser__item {
+    border-bottom: 1px solid var(--hairline);
+  }
+  .faq-teaser__item[open] {
+    background: var(--cream-2);
+  }
+  .faq-teaser__q {
+    cursor: pointer;
+    list-style: none;
+    padding: var(--space-3);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .faq-teaser__q::-webkit-details-marker { display: none; }
+  .faq-teaser__q::after {
+    content: "+";
+    font-family: var(--font-code);
+    color: var(--mid-ink);
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: transform 160ms ease;
+  }
+  .faq-teaser__item[open] .faq-teaser__q::after {
+    content: "−";
+  }
+  .faq-teaser__q:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: -2px;
+  }
+
+  .faq-teaser__a {
+    padding: 0 var(--space-3) var(--space-3);
+  }
+  .faq-teaser__a p {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-2);
+    max-width: 60ch;
+  }
+  .faq-teaser__a code {
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .faq-teaser__more {
+    display: inline-block;
+    color: var(--ink-blue);
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    border-bottom: 1px solid currentColor;
+  }
+</style>

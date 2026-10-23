@@ -1,0 +1,240 @@
+---
+// /zh-tw/faq/ — Frequently asked questions (Traditional Chinese).
+// Traditional Chinese variant of /faq/index.astro. Anchor IDs stay
+// verbatim (vs-spec-kit, vs-superpowers, why-cli, naming, token-savings)
+// so the homepage teaser link targets land correctly.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import FinalCta from '../../../components/FinalCtaZhTw.astro';
+import SiteFooter from '../../../components/SiteFooterZhTw.astro';
+---
+
+<BaseLayout
+  lang="zh-TW"
+  title="FAQ — SpecScore"
+  description="對評審者真正提出的問題給出誠實回答：SpecScore 與 spec-kit 的區別、為什麼在技能之外還要有 CLI、「Score」是什麼意思、token 節省的數據從哪裡來。"
+  canonical="https://specscore.md/zh-tw/faq/"
+>
+  <SiteHeader />
+
+  <main>
+    <section class="faq-hero" aria-labelledby="faq-hero-title">
+      <div class="faq-hero__inner">
+        <h1 id="faq-hero-title" class="faq-hero__headline">
+          評審者真正問過的問題。
+        </h1>
+        <p class="faq-hero__sub">
+          來自發布前的同行回饋。每個答案都是誠實版，不是行銷版。
+        </p>
+      </div>
+    </section>
+
+    <section class="faq-body section" aria-labelledby="faq-list-title">
+      <div class="section-inner">
+        <h2 id="faq-list-title" class="sr-only">FAQ 列表</h2>
+
+        <article class="faq-item">
+          <h2 id="vs-spec-kit" class="faq-item__q">
+            SpecScore 和 spec-kit 有什麼區別？
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              <strong>spec-kit 是一種方法論——寫規格說明的流程。</strong>
+              SpecScore 是你所寫規格說明的<strong>儲存格式</strong>，外加
+              一個用於查詢和編輯的 CLI。兩者可以組合：spec-kit 能產生
+              SpecScore 檔案，一個以 SpecScore 格式輸出的 spec-kit 擴充功能
+              正在開發中。
+            </p>
+            <p>
+              需要流程時選 spec-kit。需要 AI 代理無需讀取儲存庫中每個檔案
+              就能進行 lint、查詢和變更的規格說明時，選 SpecScore。
+              兩者都要的時候，就都用。
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <h2 id="vs-superpowers" class="faq-item__q">
+            SpecStudio Skills 與 Superpowers、agent-skills 有何不同？
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              理念相近。三者都是引導 AI 代理走完 ideate → specify →
+              plan → implement 的技能庫。差異在機制上，不在理念上。
+            </p>
+            <p>
+              <strong>SpecStudio Skills 以 SpecScore 格式
+              （定義好的 Markdown + YAML 結構）寫出產物</strong>，並透過
+              <code>specscore</code> CLI 完成查詢、lint 和狀態變更。
+              Superpowers 和 agent-skills 主要透過技能文字直接讀寫檔案。
+            </p>
+            <p>
+              當 token 消耗很重要時，選 SpecStudio Skills——CLI 透過一次
+              呼叫就能給出 <em>"所有帶未決問題的開放 Feature"</em>
+              這樣的結構化答案，而基於檔案的技能要回答同樣的問題，
+              就得讀 N 份文件。
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <h2 id="why-cli" class="faq-item__q">
+            為什麼要 CLI——只裝技能不行嗎？
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              技能可以讀寫檔案。但它們無法可靠地做到：
+            </p>
+            <ul>
+              <li>在整棵規格樹上保證引用完整性（連結能解析、ID 唯一、索引保持同步）；</li>
+              <li>不讀取每個檔案就返回一份過濾後的「帶未決問題的開放 Feature」列表；</li>
+              <li>在每個產物上、在正確的時機、變更正確的狀態欄位。</li>
+            </ul>
+            <p>
+              CLI 讓代理在每項任務上只需一次乾淨的呼叫——就像
+              <code>jq</code> 讓你只需一次乾淨的呼叫就能查詢 JSON。
+              單靠技能則消耗更多 token、更容易漂移、還經常忘記更新索引。
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <h2 id="naming" class="faq-item__q">
+            為什麼叫「SpecScore」——它在給什麼評分？
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              "Score"可以有兩種解讀，且都是有意為之。
+            </p>
+            <p>
+              <strong>Partitura（總譜）。</strong>一份結構化的需求總譜——
+              就像樂譜組織聲部、聲線和時序那樣。打開一棵 SpecScore 樹，
+              你應該能像指揮讀總譜那樣去讀它：階層、聲部、引用，一目了然。
+            </p>
+            <p>
+              <strong>字面意義上的品質評級。</strong>CLI 檢查器是
+              確定性的分數（規格的結構是否站得住？）。
+              <a href="https://specscore.studio/app/github.com/specscore/specstudio-skills/spec/ideas/manual-review-and-score-commands"><code>/score</code> 技能</a>
+              是 AI 評判的分數——每個產物的 A–F 就緒度評級，並附給作者
+              逐項回饋。名字裡"Score"的那一半，從一種願景變成了
+              工具實際產出的能力。
+            </p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <h2 id="token-savings" class="faq-item__q">
+            把 token 節省數據拿出來看看。
+          </h2>
+          <div class="faq-item__a">
+            <p>
+              實測的並排對比正在進行中，會在 Habr 文章前發布——同一項任務
+              （「我接下來該做什麼？」）跑兩次：一次是普通代理讀文件，
+              一次是同一個代理呼叫 SpecScore CLI。兩邊都給出 token 計數
+              和回應時間。
+            </p>
+            <p>
+              在那些數字落地之前，主張是結構層面的：向 CLI 詢問開放
+              Feature 和未決問題的代理，得到的是一份小而結構化的回應；
+              沒有 CLI 的同一個代理則要讀 N 份文件——N 通常以十計。
+              CLI 的介面正是為了避開這種扇出讀取而設計的。
+            </p>
+          </div>
+        </article>
+
+        <p class="faq-extend">
+          還有別的問題，或者對其中某條有更尖銳的版本？請到
+          <a href="https://github.com/specscore/specscore/issues">specscore/specscore</a>
+          開一個 issue——這頁是 FAQ 的權威版本，它從真實評審者的提問中生長而來。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <FinalCta />
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap; border: 0;
+  }
+
+  .faq-hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .faq-hero__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+  }
+  .faq-hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+    max-width: 22ch;
+  }
+  .faq-hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    max-width: 50ch;
+    line-height: 1.5;
+  }
+
+  .faq-body { background: var(--surface); }
+
+  .faq-item {
+    border-top: 1px solid var(--hairline);
+    padding: var(--space-4) 0;
+    max-width: 70ch;
+  }
+  .faq-item:last-of-type { border-bottom: 1px solid var(--hairline); }
+  .faq-item__q {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+    scroll-margin-top: var(--space-4);
+  }
+  .faq-item__a p,
+  .faq-item__a ul {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-2);
+  }
+  .faq-item__a ul {
+    padding-left: 1.25rem;
+  }
+  .faq-item__a li {
+    margin-bottom: 0.4rem;
+  }
+  .faq-item__a a {
+    color: var(--ink-blue);
+    border-bottom: 1px solid currentColor;
+  }
+  .faq-item__a code {
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  .faq-extend {
+    margin-top: var(--space-5);
+    font-size: 0.95rem;
+    color: var(--mid-ink);
+    max-width: 60ch;
+  }
+  .faq-extend a {
+    color: var(--ink-blue);
+    border-bottom: 1px solid currentColor;
+  }
+</style>

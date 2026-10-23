@@ -1,0 +1,38 @@
+---
+// French variant of HonestLimits.astro — honest-limits teaser.
+// Links to the dedicated /fr/validators/#limits section.
+---
+
+<section class="limits-teaser section section--flush-top" aria-labelledby="limits-teaser-title">
+  <div class="section-inner section-inner--prose">
+    <h2 id="limits-teaser-title" class="limits-teaser__title">
+      Voici ce qu'il ne détectera pas.
+    </h2>
+    <p class="limits-teaser__body">
+      Un linter qui prétend tout détecter ment. SpecScore est un
+      système en couches — un linter déterministe, un réviseur par IA et votre propre
+      jugement — et chaque couche a des limites réelles. Nous les avons toutes documentées : ce
+      que le linter détecte, ce que l'IA détecte et ce qui relève toujours de vous car
+      aucun outil ne peut encore s'en charger.
+    </p>
+    <p class="limits-teaser__cta">
+      <a class="xref" href="/fr/validators/#limits">Ce que le linter ne détectera pas →</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .limits-teaser { background: var(--cream); }
+  .limits-teaser__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .limits-teaser__body {
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+</style>

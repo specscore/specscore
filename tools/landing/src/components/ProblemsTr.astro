@@ -1,0 +1,270 @@
+---
+// Turkish variant of Problems.astro.
+---
+
+<section class="problems section" id="problems" aria-labelledby="problems-title">
+  <div class="section-inner">
+    <h2 id="problems-title" class="problems__title">Olmadığında ne bozulur?</h2>
+
+    <ul class="problems__grid">
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌀</span> Spesifikasyonlar senkronizasyonunu kaybeder.</h3>
+        <p class="problem-card__pain">
+          Belgedeki spesifikasyon, Slack'teki tartışma ve PR'daki kod
+          haftalarca sessizce birbirinden uzaklaşır. Kimse konuşmanın hangi
+          sürümünün kanonik olduğunu bilemez.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Çözüm</p>
+        <p class="problem-card__fix">
+          Tek bir kanonik spesifikasyon; reponun içinde, kodla birlikte
+          sürüm kontrolünde. <code>specscore lint</code> her push'ta CI
+          üzerinde çalışır; git geçmişi denetim izidir. Spesifikasyon,
+          tartışma ve PR sessizce ayrılamaz — inceleme altındaki aynı
+          dosyayı paylaşırlar.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🌫️</span> Kabul kriterleri belirsiz kalır.</h3>
+        <p class="problem-card__pain">
+          <em>"Hataları zarif bir şekilde ele al"</em> ifadesi
+          <em>"bir toast mesajı göster ve geri al"</em> anlamına mı geliyordu?
+          Yoksa <em>"logla ve yeniden dene"</em> miydi? Ajan tahmin
+          yürütmek zorunda kalır.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Çözüm</p>
+        <p class="problem-card__fix">
+          Linter, tek bir satır kod yazılmadan önce belirsiz kriterleri
+          yakalar. Fiil linter'dan geçemez çünkü somut bir nesnesi veya
+          koşulu yoktur. Uyarıyı çözmek, <em>"ele al"</em> ifadesinin
+          gerçekte ne anlama geldiğini açıkça yazmanızı zorunlu kılar.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🤖</span> Ajanlar amaçlanmayan şeyleri teslim eder.</h3>
+        <p class="problem-card__pain">
+          İnsanlar yorumlar, soru sorar, netleştirir. Yapay zeka ajanları
+          ise bunu yapmaz — eğitim verilerindeki en yaygın deseni uygularlar.
+          Kod incelemeden geçer çünkü mantıklı <strong>bir şeyler</strong>
+          yapıyordur. Yalnızca sizin amaçladığınız şey değildir.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Çözüm</p>
+        <p class="problem-card__fix">
+          Yapılandırılmış girdi. Yapay zeka ajanları REQ ID'lerini, AC
+          ID'lerini ve <code>GIVEN&nbsp;/&nbsp;WHEN&nbsp;/&nbsp;THEN</code>
+          senaryolarını deterministik olarak ayrıştırır — yorumlanacak hiçbir şey
+          kalmaz. Her Plan görevi karşıladığı AC ID'lerine atıfta bulunmalıdır;
+          böylece inşa edilen şey, belirtilen şeye karşı her zaman doğrulanabilir.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔁</span> Belirsiz bir spesifikasyon için iki kat ödersiniz.</h3>
+        <p class="problem-card__pain">
+          Ajan belirsiz bir talimata dayanarak bir şeyler inşa eder, yanlış
+          olduğunu görürsünüz ve dört farklı şekilde yeniden istersiniz.
+          Yarım yamalak her özellik ve her yeniden deneme token olarak
+          faturalandırılır. Spesifikasyon ne kadar belirsizse, doğru sonuca
+          ulaşmak o kadar çok tur gerektirir.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Çözüm</p>
+        <p class="problem-card__fix">
+          Ajan çalışmadan önce spesifikasyonu lint edin.
+          <code>specscore lint</code> belirsiz fiilleri ve eksik kabul
+          kriterlerini en başından reddeder; böylece ajan denemeler arasında
+          tahmin yürütmek yerine tek seferde somut bir talimatı uygular. En ucuz
+          çalıştırma, tekrarlamak zorunda kalmadığınız çalıştırmadır.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">💸</span> Ajanlar spesifikasyonlarınızı yeniden okumak için para harcar.</h3>
+        <p class="problem-card__pain">
+          <em>"Bu özelliğe ne bağımlı?"</em> sorusuna yanıt veren bir yapay zeka
+          ajanı özelliğin tüm README'sini okur. Ardından her üst dizin indeksini.
+          Ardından ne olur ne olmaz diye kardeş özellikleri. Her sorgu yeni bir
+          ayrıştırmadır. Tokenlar erir, gecikme artar ve maliyet yükselir.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Çözüm</p>
+        <p class="problem-card__fix">
+          Dosya okuma yerine yapılandırılmış sorgular.
+          <code>specscore feature tree</code> hiyerarşiyi YAML olarak döndürür;
+          <code>feature deps</code> geçişli bağımlılık zincirini tarar;
+          <code>feature info</code> durumu, sorumluyu ve açık soruları
+          sunar — her biri tek bir çağrıda. Ajan düz metni değil, grafı dolaşır.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🔗</span> Kod spesifikasyonunu unutur.</h3>
+        <p class="problem-card__pain">
+          Altı ay sonra bir fonksiyonu debug ediyorsunuz ve kimse onun hangi
+          özelliği uyguladığını hatırlamıyor. Kod ile spesifikasyon arasındaki
+          bağ birinin aklındaydı ve o kişi artık şirkette değil. Onu getiren
+          PR ise arşivlerde kayboldu.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Çözüm</p>
+        <p class="problem-card__fix">
+          Kaynak kod içi açıklamalar (annotations).
+          <code>// specscore: features/checkout/apply-discount/R1.AC-2</code>
+          gibi yorumlar bağı makine tarafından okunabilir kılar ve her
+          refactoring'e dayanır. <code>specscore code deps</code> tek çağrıda
+          <em>"bu dosya hangi spesifikasyonu uyguluyor?"</em> sorusunu yanıtlar;
+          linter silinmiş spesifikasyonları gösteren referansları uyarır.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">🏷️</span> Durum değişiklikleri gözden kaçar.</h3>
+        <p class="problem-card__pain">
+          Bir özelliği README dosyasında <em>Draft</em> durumundan
+          <em>Approved</em> durumuna taşırsınız, ancak üst dizindeki features-index
+          onu hala Draft olarak listeler. Üç hafta sonra indeksi okuyan bir ajan
+          özelliğin hala incelemede olduğunu düşünür. Durum iki yerde yaşar ve
+          birbiriyle çelişir.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Çözüm</p>
+        <p class="problem-card__fix">
+          <code>specscore feature change-status</code> özelliğin Status alanını
+          yeniden yazar ve features-index satırını tek bir atomik adımda yeniden
+          senkronize eder — lint başarısız olursa değişiklik geri alınır. Durum
+          tek bir kanonik yerde yaşar; indeks bu durumun oluşturulmuş bir görünümüdür.
+        </p>
+      </li>
+
+      <li class="problem-card">
+        <h3 class="problem-card__name"><span class="problem-card__emoji" aria-hidden="true">📋</span> Spesifikasyonlar bilmediklerini unutur.</h3>
+        <p class="problem-card__pain">
+          Bir spesifikasyon tamamlanmış gibi görünür — ta ki
+          <em>"peki saat dilimlerine ne oluyor?"</em> sorusunun iki ay önceki bir
+          Slack yazışmasında kaybolduğunu ve hiçbir zaman belgeye girmediğini
+          hatırlayana kadar. Şimdi geliştirme aşamasındasınız ve kimse cevabın ne
+          olduğunu bilmiyor.
+        </p>
+        <div class="problem-card__rule" aria-hidden="true"></div>
+        <p class="problem-card__fix-label">Çözüm</p>
+        <p class="problem-card__fix">
+          Her SpecScore özelliğinin zorunlu bir <strong>Outstanding Questions</strong>
+          bölümü vardır. Linter bu bölümü atlayan özellikleri reddeder — boş olması
+          kabul edilir (<code>"None at this time."</code>), ancak tamamen eksik olması
+          reddedilir. Çözülmemiş sorular belgede görünür, CLI'dan sorgulanabilir ve
+          unutulması imkansızdır.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .problems { background: var(--cream); }
+
+  .problems__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-5);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .problems__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    column-count: 3;
+    column-width: 0;
+    column-gap: var(--space-4);
+    column-fill: balance;
+  }
+
+  .problem-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 2px;
+    padding: var(--space-3);
+    box-shadow:
+      0 1px 2px rgba(26, 26, 26, 0.04),
+      0 3px 8px rgba(26, 26, 26, 0.06);
+    break-inside: avoid;
+    margin-bottom: var(--space-4);
+  }
+  .problem-card:last-child { margin-bottom: 0; }
+  .problem-card__name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0 0 var(--space-2);
+  }
+  .problem-card__emoji {
+    margin-right: 0.35em;
+    font-size: 1.05em;
+    vertical-align: -0.05em;
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  }
+  .problem-card__pain {
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 var(--space-3);
+  }
+  .problem-card__pain em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    color: var(--ink);
+  }
+  .problem-card__pain strong { font-weight: 700; color: var(--ink); }
+
+  .problem-card__rule {
+    height: 1px;
+    background: var(--hairline);
+    margin: 0 0 var(--space-3);
+  }
+
+  .problem-card__fix-label {
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--validator-green);
+    margin: 0 0 var(--space-2);
+  }
+  .problem-card__fix {
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .problem-card__fix code {
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-size: 0.92em;
+    color: var(--ink);
+  }
+  .problem-card__fix em {
+    font-style: normal;
+    background: var(--cream-2);
+    padding: 0.05em 0.35em;
+    border-radius: 2px;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    color: var(--ink);
+  }
+
+  @media (max-width: 599px) {
+    .problems__grid { column-count: 1; }
+  }
+</style>

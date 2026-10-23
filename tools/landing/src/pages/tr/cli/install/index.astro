@@ -1,0 +1,170 @@
+---
+// CLI Installation — Turkish translation.
+// Commands and code blocks stay English. Headings and descriptions translated.
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooterTr from '../../../../components/SiteFooterTr.astro';
+import InstallFromSourceTr from '../../../../components/InstallFromSourceTr.astro';
+---
+
+<BaseLayout
+  lang="tr"
+  title="SpecScore CLI Kurulumu"
+  description="specscore CLI'ı macOS, Linux veya Windows'a curl, Homebrew, PowerShell, WinGet, Scoop aracılığıyla veya kaynaktan derleyerek kurun."
+  canonical="https://specscore.md/tr/cli/install/"
+>
+  <SiteHeader />
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__eyebrow">
+          <a href="/tr/cli/" class="xref">SpecScore CLI</a>
+        </p>
+        <h1 id="hero-title" class="hero__headline">Kurulum</h1>
+        <p class="hero__sub">
+          Ortamınıza en uygun yöntemi seçin. Tüm yöntemler aynı
+          <a class="xref" href="https://github.com/specscore/specscore-cli/releases">GitHub sürümünden</a>
+          aynı <code>specscore</code> ikili dosyasını kurar.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="quick-install" aria-labelledby="quick-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="quick-title" class="section-title">Hızlı kurulum (macOS ve Linux)</h2>
+<pre class="terminal"><span class="prompt">$</span> curl -fsSL https://specscore.md/install/get-cli | sh</pre>
+        <p class="method-desc">
+          Komut dosyası işletim sisteminizi ve mimarinizi algılar, GitHub'daki en son sürümden
+          uygun arşivi indirir, SHA-256 sağlama toplamını doğrular ve <code>specscore</code>
+          ikili dosyasını <code>/usr/local/bin</code> (veya <code>/usr/local/bin</code> yazılabilir
+          değilse <code>~/.local/bin</code>) dizinine kurar.
+        </p>
+
+        <h3 class="subsection-title">Seçenekler</h3>
+        <table class="options-table">
+          <thead>
+            <tr><th>Değişken</th><th>Varsayılan</th><th>Açıklama</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>SPECSCORE_VERSION</code></td>
+              <td><code>latest</code></td>
+              <td>Kurulacak sürüm etiketi, örn. <code>v0.1.0</code>.</td>
+            </tr>
+            <tr>
+              <td><code>SPECSCORE_INSTALL_DIR</code></td>
+              <td><code>/usr/local/bin</code> veya <code>~/.local/bin</code></td>
+              <td>İkili dosyanın kurulacağı dizin.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="method-desc">Belirli bir sürümü <code>~/.local/bin</code> dizinine kurma:</p>
+<pre class="terminal"><span class="prompt">$</span> curl -fsSL https://specscore.md/install/get-cli | \
+  SPECSCORE_VERSION=v0.1.0 SPECSCORE_INSTALL_DIR="$HOME/.local/bin" sh</pre>
+
+        <h3 class="subsection-title">Çalıştırmadan önce inceleyin</h3>
+        <p class="method-desc">Çalıştırmadan önce komut dosyasını incelemeyi tercih ederseniz:</p>
+<pre class="terminal"><span class="prompt">$</span> curl -fsSL https://specscore.md/install/get-cli -o get-cli.sh
+<span class="prompt">$</span> less get-cli.sh
+<span class="prompt">$</span> sh get-cli.sh</pre>
+      </div>
+    </section>
+
+    <section class="section" id="homebrew" aria-labelledby="brew-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="brew-title" class="section-title">Homebrew (macOS ve Linux)</h2>
+<pre class="terminal"><span class="prompt">$</span> brew install specscore/tap/specscore</pre>
+        <p class="method-desc">
+          İlk kurulumda <code>specscore/homebrew-tap</code> tap'ini ekler ve
+          yeni sürümleri buradan takip eder.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="windows" aria-labelledby="win-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="win-title" class="section-title">Windows</h2>
+        <p class="method-desc">
+          Üç yöntemden birini seçin — tümü aynı GitHub sürümünden aynı ikili dosyayı kurar.
+        </p>
+
+        <h3 class="subsection-title">PowerShell</h3>
+<pre class="terminal"><span class="prompt">PS&gt;</span> powershell -c "irm https://specscore.md/install/get-cli.ps1 | iex"</pre>
+        <p class="method-desc">
+          Komut dosyası mimarinizi algılar, en son sürümden ilgili <code>.zip</code>
+          dosyasını indirir, SHA-256 sağlama toplamını doğrular, <code>specscore.exe</code>
+          dosyasını <code>%LOCALAPPDATA%\Programs\specscore\bin</code> dizinine kurar ve bu dizini
+          kullanıcı <code>PATH</code> ortam değişkeninize ekler. Yönetici izinleri gerekmez.
+          Güncellenmiş <code>PATH</code>'in geçerli olması için ardından yeni bir terminal açın.
+        </p>
+
+        <h3 class="subsection-title">WinGet</h3>
+<pre class="terminal"><span class="prompt">PS&gt;</span> winget install Synchestra.SpecScore</pre>
+
+        <h3 class="subsection-title">Scoop</h3>
+<pre class="terminal"><span class="prompt">PS&gt;</span> scoop bucket add specscore https://github.com/specscore/scoop-bucket
+<span class="prompt">PS&gt;</span> scoop install specscore</pre>
+      </div>
+    </section>
+
+    <section class="section" id="manual" aria-labelledby="manual-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="manual-title" class="section-title">Manuel kurulum</h2>
+        <ol class="manual-steps">
+          <li>
+            <a class="xref" href="https://github.com/specscore/specscore-cli/releases">GitHub sürümler sayfasından</a>
+            platformunuz için uygun arşivi indirin. Arşivler <code>specscore_&lt;version&gt;_&lt;os&gt;_&lt;arch&gt;.&lt;ext&gt;</code> modelini izler.
+          </li>
+          <li>
+            Aynı sürümdeki <code>specscore_&lt;version&gt;_checksums.txt</code> dosyasına karşı
+            SHA-256 sağlama toplamını doğrulayın.
+          </li>
+          <li>
+            Arşivi açın ve <code>specscore</code> (veya Windows'ta <code>specscore.exe</code>)
+            dosyasını <code>PATH</code>'inizdeki bir dizine taşıyın.
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="source" aria-labelledby="source-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="source-title" class="section-title">Kaynaktan derleyin</h2>
+        <InstallFromSourceTr />
+      </div>
+    </section>
+
+    <section class="section" id="verify" aria-labelledby="verify-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="verify-title" class="section-title">Kurulumu doğrulayın</h2>
+<pre class="terminal"><span class="prompt">$</span> specscore version
+<span class="dim">specscore 0.1.0 (&lt;commit&gt;) &lt;date&gt;</span></pre>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooterTr />
+</BaseLayout>
+
+<style>
+  .hero { padding: var(--space-5) var(--space-3) var(--space-4); background: var(--cream); }
+  .hero__inner { max-width: var(--max-prose); margin: 0 auto; }
+  .hero__eyebrow { font-family: var(--font-code); font-size: var(--fs-small); text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-ink); margin-bottom: var(--space-2); }
+  .hero__headline { font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-2); }
+  .hero__sub { font-size: 1rem; color: var(--mid-ink); line-height: 1.55; }
+  .hero__sub code { font-size: 0.9em; background: var(--surface); border: 1px solid var(--hairline); padding: 0.1em 0.35em; border-radius: 2px; }
+  .section-title { font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-3); }
+  .subsection-title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; margin-top: var(--space-4); margin-bottom: var(--space-2); }
+  .method-desc { color: var(--mid-ink); line-height: 1.6; margin-top: var(--space-2); margin-bottom: var(--space-2); }
+  .method-desc code { font-size: 0.9em; background: var(--surface); border: 1px solid var(--hairline); padding: 0.1em 0.35em; border-radius: 2px; }
+  .options-table { width: 100%; border-collapse: collapse; margin: var(--space-3) 0; font-size: var(--fs-small); }
+  .options-table th { font-family: var(--font-display); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-ink); text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--hairline); }
+  .options-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--hairline); color: var(--mid-ink); line-height: 1.5; }
+  .options-table code { font-size: 0.9em; background: var(--surface); border: 1px solid var(--hairline); padding: 0.1em 0.3em; border-radius: 2px; }
+  .manual-steps { color: var(--mid-ink); line-height: 1.65; padding-left: 1.25rem; margin: 0; }
+  .manual-steps li { margin-bottom: var(--space-2); }
+  .manual-steps code { font-size: 0.9em; background: var(--surface); border: 1px solid var(--hairline); padding: 0.1em 0.35em; border-radius: 2px; }
+  .section .terminal { margin-bottom: var(--space-1); }
+</style>

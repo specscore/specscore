@@ -1,0 +1,188 @@
+---
+// German variant of Hierarchy.astro.
+// HTML structure + CSS classes match the English original exactly; only
+// the prose narration changes. The tree itself (directory names, ├──,
+// └──, │, slashes) stays verbatim — it's a literal render of a real
+// English-named feature tree.
+---
+
+<section class="hierarchy section" aria-labelledby="hierarchy-title">
+  <div class="section-inner">
+    <div class="hierarchy__grid">
+      <div class="hierarchy__col hierarchy__col--text">
+        <h2 id="hierarchy-title" class="hierarchy__title">
+          Spezifikationen sind hierarchisch. Dein Spezifikationsbaum auch.
+        </h2>
+        <p class="hierarchy__lead">
+          Eine flache Liste mit fünfzig Features verkommt zur Müllhalde.
+          SpecScore hält den Baum navigierbar: Eltern definieren den
+          Umfang, Kinder die Details, und die Verzeichnisstruktur
+          spiegelt die Produktarchitektur wider, über die dein Team ohnehin nachdenkt.
+        </p>
+        <p>
+          <strong>Offene Fragen steigen nach oben.</strong> Unbeantwortete
+          Fragen auf jeder Tiefe erscheinen im Index jedes übergeordneten
+          Elements. Du siehst direkt an der Spitze des Baums, was ein
+          Release blockiert, ohne graben zu müssen.
+        </p>
+        <p>
+          Die meisten Spezifikationswerkzeuge gehen davon aus, dass eine flache
+          Liste ausreicht. Und das tut sie auch – bis sie es nicht mehr tut.
+          SpecScore ist für den Moment gebaut, in dem die Frage „Wo gehört
+          dieses Feature hin?“ entscheidend wird.
+        </p>
+        <p class="hierarchy__cta">
+          <a
+            href="https://specscore.studio/app/github.com/specscore/specscore-cli/spec/features/cli?op=explore"
+            class="hierarchy__live"
+          >
+            Live in <code>specscore-cli</code> ansehen →
+          </a>
+        </p>
+      </div>
+
+      <figure
+        class="hierarchy__col hierarchy__col--tree"
+        aria-label="Eine gekürzte Ansicht des Feature-Baums der specscore-CLI: übergeordnete Features mit Sub-Features und einem Sub-Sub-Feature in spec/lint/."
+      >
+        <figcaption class="hierarchy__caption">
+          <span class="hierarchy__caption-label">AUS</span>
+          <code>specscore-cli/spec/features/cli/</code>
+        </figcaption>
+<pre class="hierarchy__tree"><code><span class="hx-root">spec/features/cli/</span>
+├── <span class="hx-dir">agent/</span>
+│   └── <span class="hx-dir">setup/</span>
+├── <span class="hx-dir">feature/</span>
+│   ├── <span class="hx-dir">change-status/</span>
+│   ├── <span class="hx-dir">deps/</span>
+│   ├── <span class="hx-dir">info/</span>
+│   ├── <span class="hx-dir">list/</span>
+│   ├── <span class="hx-dir">new/</span>
+│   ├── <span class="hx-dir">refs/</span>
+│   └── <span class="hx-dir">tree/</span>
+├── <span class="hx-dir">idea/</span>
+│   ├── <span class="hx-dir">change-status/</span>
+│   ├── <span class="hx-dir">new/</span>
+│   └── <span class="hx-dir">relocate/</span>
+├── <span class="hx-dir">spec/</span>
+│   └── <span class="hx-dir">lint/</span>
+│       ├── <span class="hx-dir">issue-rules/</span>     <span class="hx-annot">← Sub-Sub-Feature</span>
+│       └── <span class="hx-dir">plan-rules/</span>
+├── <span class="hx-dir">task/</span>
+│   ├── <span class="hx-dir">info/</span>
+│   ├── <span class="hx-dir">list/</span>
+│   └── <span class="hx-dir">new/</span>
+└── <span class="hx-more">… 10 weitere Features der obersten Ebene</span></code></pre>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hierarchy { background: var(--cream); }
+
+  .hierarchy__title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin-bottom: var(--space-3);
+    max-width: 22ch;
+  }
+
+  .hierarchy__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .hierarchy__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      gap: var(--space-5);
+    }
+  }
+  .hierarchy__col { min-width: 0; }
+
+  .hierarchy__lead {
+    font-size: 1.05rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+    max-width: 50ch;
+  }
+  .hierarchy__col--text p {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+    max-width: 50ch;
+  }
+  .hierarchy__col--text strong { color: var(--ink); }
+
+  .hierarchy__cta { margin-top: var(--space-3); }
+  .hierarchy__live {
+    color: var(--ink-blue);
+    font-family: var(--font-code);
+    font-size: 0.95rem;
+    border-bottom: 1px solid currentColor;
+  }
+  .hierarchy__live code {
+    font-family: inherit;
+    background: transparent;
+    padding: 0;
+  }
+
+  .hierarchy__col--tree {
+    margin: 0;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .hierarchy__caption {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.5rem 0.875rem;
+    border-bottom: 1px solid var(--hairline);
+    background: var(--cream-2);
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+  .hierarchy__caption-label {
+    color: var(--graphite);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .hierarchy__caption code {
+    color: var(--mid-ink);
+    font-family: inherit;
+    background: transparent;
+    padding: 0;
+  }
+
+  .hierarchy__tree {
+    margin: 0;
+    padding: var(--space-3);
+    background: var(--surface);
+    border: none;
+    font-size: 0.825rem;
+    line-height: 1.65;
+    color: var(--mid-ink);
+    overflow-x: auto;
+    font-family: var(--font-code);
+  }
+  .hx-root { color: var(--ink); font-weight: 700; }
+  .hx-dir  { color: var(--ink); }
+  .hx-annot {
+    color: var(--ink-blue);
+    font-style: italic;
+  }
+  .hx-more {
+    color: var(--pale-ink);
+    font-style: italic;
+  }
+
+  @media (max-width: 720px) {
+    .hierarchy__tree { font-size: 0.78rem; }
+  }
+</style>

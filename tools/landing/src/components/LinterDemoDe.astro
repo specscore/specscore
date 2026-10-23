@@ -1,0 +1,136 @@
+---
+// German variant of LinterDemo.astro — Check your spec in two passes.
+// Two-column: the deterministic linter and the non-deterministic AI review/score.
+// Terminal output stays English — it's literal CLI stdout.
+import LintExample from './LintExample.astro';
+import ScoreExample from './ScoreExample.astro';
+---
+
+<section class="passes section" aria-labelledby="passes-title">
+  <div class="section-inner">
+    <h2 id="passes-title" class="passes__title">Prüfe deine Spezifikation in zwei Durchgängen.</h2>
+    <p class="passes__intro">
+      Ein schneller, deterministischer Linter gefolgt von einem tieferen KI-Review –
+      ausgeführt auf der Spezifikation, die du gerade gesehen hast. Zwei Durchgänge, zwei Arten von
+      Gewissheit.
+    </p>
+
+    <div class="passes__grid">
+      {/* ── Pass 1 — the linter (shipped, real output) ── */}
+      <div class="pass">
+        <div class="pass__head">
+          <h3 class="pass__name">Linter ausführen.</h3>
+          <span class="pass__kind">deterministic</span>
+        </div>
+        <div
+          class="pass__terminal"
+          role="img"
+          aria-label="Terminalausgabe von specscore lint: R1 und R2 haben Akzeptanzkriterien (grüne Haken); R3 hat keine, ein Link zu einem Related Feature lässt sich nicht auflösen und der Pflichtabschnitt Open Questions fehlt (rote Markierungen). 3 Probleme, Exit 1."
+        >
+          <LintExample />
+        </div>
+        <p class="pass__caption">
+          Das gleiche Ergebnis bei jedem Lauf. Kostenlos, blitzschnell, läuft bei jedem Commit.
+        </p>
+      </div>
+
+      {/* ── Pass 2 — AI review/score (Approved Idea, labeled preview) ── */}
+      <div class="pass">
+        <div class="pass__head">
+          <h3 class="pass__name">Mit KI prüfen und bewerten.</h3>
+          <span class="pass__kind">non-deterministic</span>
+        </div>
+        <div
+          class="pass__terminal"
+          role="img"
+          aria-label="Ein KI-Review: Die Spezifikation erhält die Note B mit zwei konkreten Hinweisen – ein vager Auslöser in AC-2 und ein fehlender Fehlerpfad in AC-3."
+        >
+          <ScoreExample />
+        </div>
+        <p class="pass__caption">
+          Liest nach Sinn und Logik, genau wie ein menschlicher Reviewer.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .passes { background: var(--cream); }
+  .passes__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .passes__intro {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .passes__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .pass {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .pass__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .pass__name {
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .pass__kind {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+
+  .pass__terminal {
+    margin-bottom: var(--space-2);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .pass__terminal pre.terminal {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .pass__caption {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+  .pass__caption .xref code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* Two-column only: reserve a consistent caption height so both
+     terminals stretch to the same height. */
+  @media (min-width: 721px) {
+    .pass__caption { min-height: 2lh; }
+  }
+
+  @media (max-width: 720px) {
+    .passes__grid { grid-template-columns: 1fr; gap: var(--space-5); }
+  }
+</style>

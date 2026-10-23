@@ -1,0 +1,479 @@
+---
+// SpecStudio Skills — Traditional Chinese translation of the dedicated landing page.
+// Canonical campaign URL: specscore.md/zh-tw/ai/specstudio-skills/
+// Product names (SpecStudio Skills, SpecScore, Claude Code, GitHub) stay English.
+// Slash-command names stay English (they're literal command strings).
+// Terminal / code-block content stays English.
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooterZhTw from '../../../../components/SiteFooterZhTw.astro';
+import QsTabsScript from '../../../../components/QsTabsScript.astro';
+---
+
+<BaseLayout
+  lang="zh-TW"
+  title="SpecStudio Skills — 讓你的 AI 代理真正遵循的規格說明。"
+  description="免費的 Claude Code 外掛，將隨意的提示詞轉化為經過評分的結構化規格說明——代理在寫程式碼之前先讀取它們。基於開放的 SpecScore 協議。"
+  canonical="https://specscore.md/zh-tw/ai/specstudio-skills/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Section 1: Hero ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          讓你的 AI 代理<br />真正遵循的規格說明。
+        </h1>
+        <p class="hero__sub">
+          SpecStudio Skills 是一個免費的 Claude Code 外掛，將隨意的提示詞
+          轉化為經過評分的結構化規格說明。代理在寫任何程式碼之前先讀取它們。
+          基於開放的
+          <a class="xref" href="/zh-tw/">SpecScore</a> 協議。
+        </p>
+        <div class="hero__install" id="install">
+          <div class="qs-tabs" role="tablist" aria-label="安裝方式">
+            <button type="button" role="tab" id="qs-tab-claude" aria-controls="qs-panel-claude" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="claude">Claude Code</button>
+            <button type="button" role="tab" id="qs-tab-setup" aria-controls="qs-panel-setup" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="setup">其他 AI 代理</button>
+            <button type="button" role="tab" id="qs-tab-manual" aria-controls="qs-panel-manual" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="manual">手動</button>
+          </div>
+
+          <div id="qs-panel-claude" role="tabpanel" aria-labelledby="qs-tab-claude" class="qs-panel is-active" data-panel="claude">
+<pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
+<span class="prompt">$</span> /plugin install specstudio@specscore</pre>
+          </div>
+          <div id="qs-panel-setup" role="tabpanel" aria-labelledby="qs-tab-setup" class="qs-panel" data-panel="setup" hidden>
+<pre class="terminal"><span class="prompt">$</span> specscore agent setup &lt;代理名稱&gt;</pre>
+            <p class="qs-note">
+              為你的代理寫入正確的指令檔案 —
+              <code>claude</code>、<code>copilot</code>、<code>cursor</code>、<code>codex</code>、
+              <code>antigravity.google</code>、<code>pi.dev</code> 或 <code>opencode</code>。
+              在 SpecScore 管理的專案內執行。需要
+              <a class="xref" href="/zh-tw/cli/">SpecScore CLI</a>。
+            </p>
+          </div>
+          <div id="qs-panel-manual" role="tabpanel" aria-labelledby="qs-tab-manual" class="qs-panel" data-panel="manual" hidden>
+<pre class="terminal"><span class="prompt">$</span> git clone https://github.com/specscore/specstudio-skills
+<span class="prompt">$</span> cp -r specstudio-skills/commands /你的代理/commands/路徑
+<span class="prompt">$</span> cp -r specstudio-skills/skills /你的代理/skills/路徑</pre>
+            <p class="qs-note">
+              複製外掛儲存庫，將 <code>commands/</code> 和 <code>skills/</code>
+              目錄複製到你的代理讀取命令和技能檔案的位置。
+            </p>
+          </div>
+        </div>
+        <p class="hero__demo-link">
+          <a href="#demo" class="xref">觀看 60 秒示範 ↓</a>
+        </p>
+      </div>
+    </section>
+
+    {/* ── Section 2: Demo ── */}
+    <section class="section" id="demo" aria-labelledby="demo-title">
+      <div class="section-inner">
+        <h2 id="demo-title" class="section-title">
+          從想法到評分規格，只需 60 秒。
+        </h2>
+
+        <div class="demo-placeholder">
+          <div class="terminal-frame">
+            <div class="terminal-frame__head">
+              <span class="terminal-frame__title">Claude Code</span>
+              <span class="terminal-frame__hint">示範</span>
+            </div>
+<pre class="terminal terminal-frame__body"><span class="prompt">&gt;</span> /specstudio:ideate A password reset flow for our SaaS app.
+
+<span class="dim">Refining idea...</span>
+<span class="dim">Producing spec/ideas/password-reset.md</span>
+
+<span class="prompt">&gt;</span> /specstudio:specify spec/ideas/password-reset.md
+
+<span class="dim">Writing Feature spec...</span>
+<span class="dim">spec/features/password-reset/README.md</span>
+
+<span class="prompt">$</span> specscore lint spec/features/password-reset/
+<span class="mark-pass">PASS</span>  Feature: password-reset
+  <span class="mark-pass">PASS</span>  has title, status, and description
+  <span class="mark-pass">PASS</span>  requirements have acceptance criteria
+  <span class="mark-pass">PASS</span>  all AC IDs are unique
+  <span class="mark-pass">PASS</span>  no orphan cross-references
+
+<span class="mark-pass">Score: 92 / 100</span></pre>
+          </div>
+          <p class="demo-caption">
+            無剪輯。無拼接。純粹的 Claude Code → 安裝外掛 →
+            評分真實規格 → 代理精確執行你的意圖。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Section 3: The wedge ── */}
+    <section class="section" aria-labelledby="wedge-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="wedge-title" class="section-title">
+          為什麼你的代理一次又一次做錯事。
+        </h2>
+        <p class="prose-p">
+          隨意的提示詞有效——直到它們失效。代理只實現了功能的一半。
+          誤解了一個需求。憑空編造了一個不存在的 API。選了錯誤的庫。
+          你重新措辭提示詞。然後再來一次。到第三次時，你其實
+          已經在手動把規格敲進聊天視窗了。
+        </p>
+        <p class="prose-p">
+          問題不在代理。問題在於「幫我做個功能」不是規格——那是個願望。
+          代理是隨機的。願望天生就是隨機的。規格不是。
+        </p>
+        <p class="prose-p">
+          SpecStudio Skills 提供了一種撰寫規格的工作流程，代理可以真正
+          解析它：結構化的功能、需求、驗收標準——在代理看到規格之前
+          就完成了完整性評分。和隨意編碼一樣快，但結果的偏差大幅減小。
+        </p>
+      </div>
+    </section>
+
+    {/* ── Section 4: The pipeline ── */}
+    <section class="section pipeline-section" aria-labelledby="pipeline-title">
+      <div class="section-inner">
+        <h2 id="pipeline-title" class="section-title">
+          四個命令。一條管線。
+        </h2>
+        <p class="pipeline-intro">
+          安裝一次，然後按順序執行——從原始構想走向可執行的計畫。
+        </p>
+
+        <div class="pipeline-grid">
+          <div class="pipeline-card">
+            <div class="pipeline-card__head">
+              <span class="pipeline-card__cmd">/ideate</span>
+            </div>
+            <p class="pipeline-card__desc">
+              透過結構化的發散和收斂思維打磨原始構想。
+              生成一份可通過檢查的單頁預規格。
+            </p>
+          </div>
+
+          <div class="pipeline-card">
+            <div class="pipeline-card__head">
+              <span class="pipeline-card__cmd">/specify</span>
+            </div>
+            <p class="pipeline-card__desc">
+              將已核准的構想轉化為帶有需求、驗收標準
+              和 Given/When/Then 區塊的 SpecScore Feature。
+            </p>
+          </div>
+
+          <div class="pipeline-card">
+            <div class="pipeline-card__head">
+              <span class="pipeline-card__cmd">/plan</span>
+            </div>
+            <p class="pipeline-card__desc">
+              將功能分解為循序的任務列表。每個任務
+              關聯一個或多個驗收標準。
+            </p>
+          </div>
+
+          <div class="pipeline-card">
+            <div class="pipeline-card__head">
+              <span class="pipeline-card__cmd">/implement</span>
+            </div>
+            <p class="pipeline-card__desc">
+              執行計畫中的下一個任務。每個任務一個子代理，
+              提交時附帶驗收標準追蹤，staged diff 等你審核。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Section 5: What's in the box ── */}
+    <section class="section" aria-labelledby="box-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="box-title" class="section-title">
+          包含什麼。
+        </h2>
+
+        <h3 class="list-heading">能做的：</h3>
+        <ul class="feature-list feature-list--does">
+          <li>新增完整 SDD 週期的斜線命令：<code>/ideate</code>、<code>/specify</code>、<code>/plan</code>、<code>/implement</code>。</li>
+          <li>在代理看到規格之前，評估其完整性和模糊性。</li>
+          <li>以開放的 SpecScore 格式撰寫規格——沒有專有擴充。</li>
+        </ul>
+
+        <h3 class="list-heading">不做的：</h3>
+        <ul class="feature-list feature-list--doesnt">
+          <li>不替你執行代理。外掛是工作流程層；代理仍然是 Claude。</li>
+          <li>不向伺服器發送資料。規格和評分保留在本地。</li>
+          <li>不會鎖定你。如果你移除外掛，你的規格仍然是有效的 Markdown，仍可透過 <a class="xref" href="https://github.com/specscore/specscore">specscore</a> CLI 檢查。</li>
+        </ul>
+
+        <p class="sibling-callout">
+          在找無主張的 CLI 包裝？
+          <a class="xref" href="https://github.com/specscore/ai-plugin-specscore">ai-plugin-specscore</a> 是
+          輕量包裝。SpecStudio Skills 是在其之上的主張明確的工作流程。
+        </p>
+      </div>
+    </section>
+
+    {/* ── Section 6: Open underneath ── */}
+    <section class="section" aria-labelledby="open-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="open-title" class="section-title">
+          基於開放的 SpecScore 協議構建。
+        </h2>
+        <p class="prose-p">
+          SpecStudio Skills 以
+          <a class="xref" href="/zh-tw/">SpecScore</a> 格式撰寫
+          規格——這是一個開放標準。格式是人類可讀的 Markdown。Schema 已公開發布。
+          CLI 是開源的。沒有廠商鎖定。如果你有一天不再使用 SpecStudio，
+          你的規格會跟著你走。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  {/* ── Final CTA ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">試一試。</h2>
+      <div class="final-cta__install">
+        <div class="qs-tabs" role="tablist" aria-label="安裝方式">
+          <button type="button" role="tab" id="qs-tab-claude-b" aria-controls="qs-panel-claude-b" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="claude">Claude Code</button>
+          <button type="button" role="tab" id="qs-tab-setup-b" aria-controls="qs-panel-setup-b" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="setup">其他 AI 代理</button>
+          <button type="button" role="tab" id="qs-tab-manual-b" aria-controls="qs-panel-manual-b" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="manual">手動</button>
+        </div>
+
+        <div id="qs-panel-claude-b" role="tabpanel" aria-labelledby="qs-tab-claude-b" class="qs-panel is-active" data-panel="claude">
+<pre class="terminal"><span class="prompt">$</span> /plugin marketplace add specscore/ai-marketplace
+<span class="prompt">$</span> /plugin install specstudio@specscore</pre>
+        </div>
+        <div id="qs-panel-setup-b" role="tabpanel" aria-labelledby="qs-tab-setup-b" class="qs-panel" data-panel="setup" hidden>
+<pre class="terminal"><span class="prompt">$</span> specscore agent setup &lt;代理名稱&gt;</pre>
+          <p class="qs-note">
+            為你的代理寫入正確的指令檔案 —
+            <code>claude</code>、<code>copilot</code>、<code>cursor</code>、<code>codex</code>、
+            <code>antigravity.google</code>、<code>pi.dev</code> 或 <code>opencode</code>。
+            在 SpecScore 管理的專案內執行。需要
+            <a class="xref" href="/zh-tw/cli/">SpecScore CLI</a>。
+          </p>
+        </div>
+        <div id="qs-panel-manual-b" role="tabpanel" aria-labelledby="qs-tab-manual-b" class="qs-panel" data-panel="manual" hidden>
+<pre class="terminal"><span class="prompt">$</span> git clone https://github.com/specscore/specstudio-skills
+<span class="prompt">$</span> cp -r specstudio-skills/commands /你的代理/commands/路徑
+<span class="prompt">$</span> cp -r specstudio-skills/skills /你的代理/skills/路徑</pre>
+          <p class="qs-note">
+            複製外掛儲存庫，將 <code>commands/</code> 和 <code>skills/</code>
+            目錄複製到你的代理讀取命令和技能檔案的位置。
+          </p>
+        </div>
+      </div>
+      <p class="final-cta__note">
+        對公開和開源儲存庫免費。MIT 授權條款。
+      </p>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <SiteFooterZhTw />
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-7) var(--space-3) var(--space-6);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.55;
+  }
+  .hero__install {
+    margin-bottom: var(--space-3);
+  }
+  .hero__demo-link {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── Demo ── */
+  .demo-placeholder {
+    margin-top: var(--space-3);
+  }
+  .demo-caption {
+    margin-top: var(--space-2);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+
+  .terminal-frame {
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .terminal-frame__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.5rem 0.875rem;
+    border-bottom: 1px solid var(--hairline);
+    background: var(--cream-2);
+    font-family: var(--font-code);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .terminal-frame__title { color: var(--graphite); font-weight: 700; }
+  .terminal-frame__hint  { color: var(--mid-ink); }
+  .terminal-frame__body  { border: none !important; }
+
+  /* ── Wedge (prose sections) ── */
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+  .prose-p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ── Pipeline grid ── */
+  .pipeline-section {
+    background: var(--cream-2);
+  }
+  .pipeline-intro {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+  }
+  .pipeline-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+  }
+  .pipeline-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+  }
+  .pipeline-card__head {
+    margin-bottom: var(--space-2);
+  }
+  .pipeline-card__cmd {
+    font-family: var(--font-code);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .pipeline-card__desc {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 860px) {
+    .pipeline-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 520px) {
+    .pipeline-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── What's in the box ── */
+  .list-heading {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .list-heading:first-of-type {
+    margin-top: 0;
+  }
+  .feature-list {
+    margin: 0 0 var(--space-3) 0;
+    padding-left: 1.25rem;
+    color: var(--mid-ink);
+    line-height: 1.65;
+  }
+  .feature-list li {
+    margin-bottom: 0.5rem;
+  }
+  .feature-list li:last-child {
+    margin-bottom: 0;
+  }
+  .feature-list code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+  .sibling-callout {
+    margin-top: var(--space-4);
+    padding: var(--space-2) var(--space-3);
+    border-left: 3px solid var(--hairline);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__install {
+    display: inline-block;
+    text-align: left;
+    margin-bottom: var(--space-3);
+  }
+  .final-cta__note {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+  }
+</style>
+
+<QsTabsScript />

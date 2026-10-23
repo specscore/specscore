@@ -1,0 +1,135 @@
+---
+// Turkish variant of LinterDemo.astro — Check your spec in two passes.
+// Two-column: the deterministic linter and the non-deterministic AI review/score.
+// Terminal output stays English — it's literal CLI stdout.
+import LintExample from './LintExample.astro';
+import ScoreExample from './ScoreExample.astro';
+---
+
+<section class="passes section" aria-labelledby="passes-title">
+  <div class="section-inner">
+    <h2 id="passes-title" class="passes__title">Spesifikasyonunuzu iki adımda kontrol edin.</h2>
+    <p class="passes__intro">
+      Hızlı, deterministik bir linter ve ardından daha derin bir yapay zeka incelemesi —
+      az önce gördüğünüz spesifikasyon üzerinde çalıştırılır. İki adım, iki tür kesinlik.
+    </p>
+
+    <div class="passes__grid">
+      {/* ── Pass 1 — the linter (shipped, real output) ── */}
+      <div class="pass">
+        <div class="pass__head">
+          <h3 class="pass__name">Linter'ı çalıştırın.</h3>
+          <span class="pass__kind">deterministik</span>
+        </div>
+        <div
+          class="pass__terminal"
+          role="img"
+          aria-label="specscore lint terminal çıktısı: R1 ve R2 kabul kriterlerine sahiptir (yeşil onay işaretleri); R3'ün kriteri yoktur, Related Feature bağlantısı çözülemez ve zorunlu Open Questions bölümü eksiktir (kırmızı işaretler). 3 sorun, çıkış kodu 1."
+        >
+          <LintExample />
+        </div>
+        <p class="pass__caption">
+          Her çalıştırmada aynı sonuç. Ücretsiz, hızlı, her commit'te çalışır.
+        </p>
+      </div>
+
+      {/* ── Pass 2 — AI review/score (Approved Idea, labeled preview) ── */}
+      <div class="pass">
+        <div class="pass__head">
+          <h3 class="pass__name">Yapay zeka ile inceleyin ve puanlayın.</h3>
+          <span class="pass__kind">deterministik olmayan</span>
+        </div>
+        <div
+          class="pass__terminal"
+          role="img"
+          aria-label="Bir yapay zeka incelemesi: spesifikasyon iki eyleme geçirilebilir gözlemle B notu alır — AC-2'deki belirsiz bir tetikleyici ve AC-3'teki eksik bir hata yolu."
+        >
+          <ScoreExample />
+        </div>
+        <p class="pass__caption">
+          İnsan bir incelemeci gibi anlam arayarak okur.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .passes { background: var(--cream); }
+  .passes__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .passes__intro {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .passes__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .pass {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .pass__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .pass__name {
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .pass__kind {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+
+  .pass__terminal {
+    margin-bottom: var(--space-2);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .pass__terminal pre.terminal {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .pass__caption {
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+  .pass__caption .xref code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* Two-column only: reserve a consistent caption height so both
+     terminals stretch to the same height. */
+  @media (min-width: 721px) {
+    .pass__caption { min-height: 2lh; }
+  }
+
+  @media (max-width: 720px) {
+    .passes__grid { grid-template-columns: 1fr; gap: var(--space-5); }
+  }
+</style>

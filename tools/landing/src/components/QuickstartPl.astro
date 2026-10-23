@@ -1,0 +1,202 @@
+---
+// Polish variant of Quickstart.astro.
+// Install commands and CLI output stay English (literal command strings + stdout).
+---
+
+<section class="quickstart section" id="quickstart" aria-labelledby="quickstart-title">
+  <div class="section-inner">
+    <h2 id="quickstart-title" class="quickstart__title">
+      Wolisz CLI?
+    </h2>
+    <p class="quickstart__lede">
+      Nie korzystasz z agentów AI lub potrzebujesz walidacji specyfikacji
+      w potoku CI? Jest do tego CLI. Zainstalujesz je w 60 sekund
+      — bez zakładania konta, bez telemetrii, działa w dowolnym
+      katalogu ze specyfikacjami w Markdownie.
+    </p>
+
+    <div class="qs-tabs" role="tablist" aria-label="Polecenie instalacji dla Twojego systemu operacyjnego">
+      <button
+        type="button"
+        role="tab"
+        id="qs-tab-unix"
+        aria-controls="qs-panel-unix"
+        aria-selected="true"
+        tabindex="0"
+        class="qs-tab is-active"
+        data-tab="unix"
+      >
+        Linux / macOS
+      </button>
+      <button
+        type="button"
+        role="tab"
+        id="qs-tab-windows"
+        aria-controls="qs-panel-windows"
+        aria-selected="false"
+        tabindex="-1"
+        class="qs-tab"
+        data-tab="windows"
+      >
+        Windows
+      </button>
+    </div>
+
+    <div
+      id="qs-panel-unix"
+      role="tabpanel"
+      aria-labelledby="qs-tab-unix"
+      class="qs-panel is-active"
+      data-panel="unix"
+    >
+<pre class="terminal"><span class="prompt">$</span> curl -fsSL https://specscore.md/install/get-cli | sh</pre>
+    </div>
+
+    <div
+      id="qs-panel-windows"
+      role="tabpanel"
+      aria-labelledby="qs-tab-windows"
+      class="qs-panel"
+      data-panel="windows"
+      hidden
+    >
+<pre class="terminal"><span class="prompt">&gt;</span> irm https://specscore.md/install/get-cli.ps1 | iex</pre>
+    </div>
+
+    <p class="quickstart__step">
+      Uruchom linter na przykładowej specyfikacji dostarczonej z binarką:
+    </p>
+<pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint examples/checkout/apply-discount.md</pre>
+
+    <p class="quickstart__step">Zobacz wynik:</p>
+<pre class="terminal terminal--window">  examples/checkout/apply-discount.md
+    <span class="mark-pass">✓</span> R1  has acceptance criteria
+    <span class="mark-pass">✓</span> R2  has acceptance criteria
+    <span class="mark-fail">✗</span> R3  no acceptance criteria
+    <span class="mark-fail">✗</span> link     <span class="dim">"Related Feature: discount-tiers" not found</span>
+    <span class="mark-fail">✗</span> section  <span class="dim">"Open Questions" missing</span>
+
+  <span class="dim">3 problems   exit 1</span></pre>
+
+    <p class="quickstart__next">
+      Przeczytaj <a class="xref" href="/docs">pełną dokumentację</a>
+      <span aria-hidden="true">·</span>
+      <a class="xref" href="https://github.com/specscore/specscore">Współtwórz na GitHubie</a>
+    </p>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var tabs = document.querySelectorAll('.qs-tab');
+    var panels = document.querySelectorAll('.qs-panel');
+    if (!tabs.length) return;
+
+    function activate(name, focus) {
+      tabs.forEach(function (t) {
+        var on = t.getAttribute('data-tab') === name;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.setAttribute('tabindex', on ? '0' : '-1');
+        if (on && focus) t.focus();
+      });
+      panels.forEach(function (p) {
+        var on = p.getAttribute('data-panel') === name;
+        p.classList.toggle('is-active', on);
+        p.hidden = !on;
+      });
+    }
+
+    // Auto-detect Windows on page load.
+    var isWin = /Win/i.test(navigator.userAgent || '');
+    if (isWin) activate('windows', false);
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        activate(tab.getAttribute('data-tab'), false);
+      });
+      tab.addEventListener('keydown', function (ev) {
+        var key = ev.key;
+        if (key !== 'ArrowRight' && key !== 'ArrowLeft' &&
+            key !== 'Home' && key !== 'End') return;
+        ev.preventDefault();
+        var i = Array.prototype.indexOf.call(tabs, ev.currentTarget);
+        var next;
+        if (key === 'ArrowRight') next = (i + 1) % tabs.length;
+        else if (key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        else if (key === 'Home') next = 0;
+        else next = tabs.length - 1;
+        activate(tabs[next].getAttribute('data-tab'), true);
+      });
+    });
+  })();
+</script>
+
+<style>
+  .quickstart { background: var(--cream); }
+  .quickstart__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .quickstart__lede {
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    max-width: 58ch;
+    line-height: 1.6;
+  }
+  .quickstart__step {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-1);
+  }
+  .quickstart__next {
+    margin-top: var(--space-4);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+  }
+  .quickstart__next a {
+    color: var(--ink-blue);
+    text-decoration: underline;
+  }
+
+  /* --- Tabs --- */
+  .qs-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--hairline);
+    margin-bottom: 0;
+  }
+  .qs-tab {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    padding: 0.5rem 0.875rem;
+    margin: 0;
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    cursor: pointer;
+    transition: color 120ms ease, border-color 160ms ease;
+  }
+  .qs-tab:hover { color: var(--ink); }
+  .qs-tab:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: -2px;
+  }
+  .qs-tab.is-active {
+    color: var(--ink);
+    border-bottom-color: var(--validator-green);
+    font-weight: 600;
+  }
+
+  .qs-panel { display: none; }
+  .qs-panel.is-active { display: block; }
+  .qs-panel .terminal {
+    border-top: none;
+  }
+</style>

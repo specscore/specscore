@@ -1,0 +1,26 @@
+---
+// Italian variant of InstallFromSource.astro.
+// "Compila dal codice sorgente" — senza titolo né wrapper di sezione.
+---
+<pre class="terminal"><span class="prompt">$</span> go install github.com/specscore/specscore-cli/cmd/specscore@main</pre>
+<p class="method-desc">
+  Richiede <a class="xref" href="https://go.dev/">Go</a> 1.26 o successivo.
+  Questo installa l'ultima build di sviluppo da <code>main</code> —
+  potrebbe includere modifiche non ancora presenti in una release con tag.
+</p>
+<p class="method-desc">
+  Per bloccare una versione specifica, sostituisci <code>@main</code> con un tag come
+  <code>@v0.4.2</code>, oppure usa <code>@latest</code> per la release con tag più recente.
+</p>
+
+<style>
+  .terminal {
+    margin: 0 0 var(--space-3);
+  }
+  .method-desc {
+    font-size: var(--step--1);
+    color: var(--carbon);
+    line-height: var(--line-height-prose);
+    margin: 0 0 var(--space-2);
+  }
+</style>

@@ -1,0 +1,290 @@
+---
+// /tr/spec-driven-development/ — pillar page (Turkish).
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooterTr from '../../../components/SiteFooterTr.astro';
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: 'Yapay Zeka Ajanları İçin Spesifikasyon Odaklı Geliştirme',
+      description:
+        'Spesifikasyon odaklı geliştirme nedir, yapay zeka ajanları için neden önemlidir, iş akışı nasıl çalışır ve TDD ile salt prompt programlamaya göre nasıl karşılaştırılır.',
+      inLanguage: 'tr',
+      datePublished: '2026-05-29',
+      dateModified: '2026-05-29',
+      mainEntityOfPage: 'https://specscore.md/tr/spec-driven-development/',
+      image: 'https://specscore.md/hero-og.webp',
+      author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      publisher: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
+      about: {
+        '@type': 'DefinedTerm',
+        name: 'Spesifikasyon odaklı geliştirme',
+        description:
+          'Yazılı bir spesifikasyonun — gereksinimler ve kabul kriterleri — kodun inşa edildiği ve doğrulandığı doğruluk kaynağı olduğu bir yazılım geliştirme uygulaması.',
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Spesifikasyon odaklı geliştirme, test odaklı geliştirme (TDD) ile aynı şey midir?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Hayır. TDD uygulamayı kod düzeyinde başarısız olan testlerden yönlendirir. Spesifikasyon odaklı geliştirme bir seviye yukarıda çalışır: önce amaçlanan davranışı ve kabul kriterlerini yazılı bir spesifikasyonda sabitler. Birbirini tamamlarlar — bir spesifikasyonun kabul kriterleri genellikle TDD\'yi yönlendiren testlere dönüşür.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Spesifikasyon odaklı geliştirme sizi yavaşlatır mı?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Kod yazmadan önceki süreyi artırır ve yanlış olan şeyi yeniden inşa etmeye harcanan süreyi ortadan kaldırır. Tek seferlik scriptler için maliyet değmez. Ancak bir yapay zeka ajanının büyük ölçekte ürettiği veya bir ekibin sürdürmesi gereken herhangi bir şey için önce spesifikasyonu yazmak baştan sona genellikle daha hızlıdır.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Bir spesifikasyon ile PRD arasındaki fark nedir?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Bir PRD genellikle insanlara yönelik düz metindir. Spesifikasyon odaklı geliştirmedeki bir spesifikasyon yapılandırılmış ve test edilebilirdir — açık kabul kriterlerine sahip ayrık gereksinimler — böylece hem inceleyiciler hem de yapay zeka ajanları üzerinde kesinlikle hareket edebilir.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Yapay zeka kodlama ajanları bir spesifikasyonu nasıl kullanır?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Spesifikasyon makine tarafından okunabilir olduğunda ajan, tüm kod tabanını yüklemek yerine mevcut göreviyle ilgili gereksinimleri ve kabul kriterlerini almak için spesifikasyonu sorgular ve ardından çıktısını bu kriterlerle karşılaştırır — bu, makul görünen ancak hatalı koda karşı bir önlemdir.',
+          },
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  lang="tr"
+  title="Yapay Zeka Ajanları İçin Spesifikasyon Odaklı Geliştirme — Kapsamlı Kılavuz | SpecScore"
+  description="Spesifikasyon odaklı geliştirme, yapay zeka ajanlarının doğru olanı inşa etmesi için koddan önce test edilebilir bir spesifikasyon yazmak anlamına gelir. Nedir, nasıl çalışır ve TDD ile salt prompt kodlamaya kıyasla nasıldır."
+  canonical="https://specscore.md/tr/spec-driven-development/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
+  </Fragment>
+
+  <SiteHeader />
+
+  <main>
+    <!-- 1. Definition block + TL;DR -->
+    <section class="sdd-hero" aria-labelledby="sdd-title">
+      <div class="sdd-hero__inner">
+        <h1 id="sdd-title" class="sdd-hero__headline">Yapay Zeka Ajanları İçin Spesifikasyon Odaklı Geliştirme</h1>
+        <p class="sdd-hero__lede">
+          <strong>Spesifikasyon odaklı geliştirme (SDD), yazılı ve test edilebilir bir spesifikasyonun
+          — gereksinimler ve kabul kriterleri — kodun inşa edildiği ve doğrulandığı tek doğruluk
+          kaynağı (source of truth) olduğu bir uygulamadır.</strong> Doğrudan bir prompttan veya biletten
+          koda geçmek yerine, önce yazılımın ne yapması gerektiği konusunda anlaşırsınız ve ardından bu
+          spesifikasyona göre inşa edersiniz. Artık kodun büyük bir kısmını yapay zeka ajanları yazdığı için
+          spesifikasyon, onların doğru olanı inşa etmesini sağlayan şeydir.
+        </p>
+        <ul class="sdd-takeaways">
+          <li>Spesifikasyon doğruluk kaynağıdır; kod ondan türetilir ve ona karşı kontrol edilir.</li>
+          <li>Gereksinimlere açık kabul kriterleri eşlik eder, böylece «tamamlandı» ifadesi öznel değil test edilebilirdir.</li>
+          <li>Yapay zeka ajanları amacı koddan tahmin etmek yerine spesifikasyondan sorgular — daha az hatalı inşa.</li>
+          <li>Test odaklı geliştirmenin (TDD) alternatifi değil, tamamlayıcısıdır.</li>
+        </ul>
+        <p class="sdd-updated">Son güncelleme: Mayıs 2026</p>
+      </div>
+    </section>
+
+    <!-- 2. What is SDD -->
+    <section class="sdd-section" aria-labelledby="what-title">
+      <div class="sdd-section__inner">
+        <h2 id="what-title">Spesifikasyon odaklı geliştirme nedir?</h2>
+        <p>
+          Spesifikasyon odaklı geliştirme olağan çalışma sırasını tersine çevirir. Spesifikasyonu
+          sonradan yazılan bir dokümantasyon olarak ele almak — veya tamamen atlamak — yerine SDD,
+          spesifikasyonu birincil yapı taşı (artifact) yapar. Kod, testler ve incelemeler tamamen
+          ona atıfta bulunur.
+        </p>
+        <p>
+          Bu anlamda bir spesifikasyon düz bir metin yığını değildir. Yapılandırılmıştır: her biri
+          gereksinimin karşılanmış sayılması için neyin doğru olması gerektiğini test edilebilir
+          terimlerle belirten açık <strong>kabul kriterlerine</strong> sahip <strong>gereksinimler</strong>
+          kümesidir. Bir inceleyicinin, bir test paketinin ve bir yapay zeka ajanının aynı belgeyi
+          aynı şekilde yorumlamasını sağlayan şey bu yapıdır.
+        </p>
+        <p>
+          Spesifikasyon aynı zamanda <strong>yaşayan bir yapı taşıdır</strong>. Gereksinimler değiştiğinde
+          önce spesifikasyon değişir ve kod onu takip eder — böylece spesifikasyon asla kurgusal
+          bir metne dönüşmez.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. Why it matters now (AI spine) -->
+    <section class="sdd-section" aria-labelledby="why-title">
+      <div class="sdd-section__inner">
+        <h2 id="why-title">Neden şimdi önemli: Yapay zeka riskleri artırdı</h2>
+        <p>
+          Yapay zeka kodlama ajanları, bir insanın okuyabileceğinden çok daha hızlı kod üretir.
+          Bu durum darboğazı kaydırır. Zor olan kısım artık uygulamayı yazmak değildir —
+          <strong>üretilen kodun istediğiniz kod olmasını sağlayacak kadar amacı net bir şekilde
+          belirtmektir</strong>. Belirsiz bir prompt verilen bir ajan, makine hızında akla
+          yatkın ama tamamen yanlış bir şey üretecektir.
+        </p>
+        <p>
+          Spesifikasyon güvenlik bariyeridir. Amaçlanan davranış ve kabul kriterleri yazıldığında
+          ajanın inşa edebileceği net bir hedefi ve doğrulayabileceği bir kontrol listesi olur — ve
+          insan bir incelemecinin ortada henüz kod yokken onaylayabileceği somut bir şeyi olur. SDD,
+          ekiplerin yapay zeka hızının yapay zeka yeniden çalışmasına (rework) dönüşmesini önleme yoludur.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. How it works -->
+    <section class="sdd-section" aria-labelledby="how-title">
+      <div class="sdd-section__inner">
+        <h2 id="how-title">Spesifikasyon odaklı geliştirme nasıl çalışır</h2>
+        <p>İş akışı tek seferlik bir belge değil, bir döngüdür:</p>
+        <ol class="sdd-steps">
+          <li><strong>Amacı yakalayın.</strong> Bir çözüme bağlanmadan önce henüz olgunlaşmamış yönü — sorunu, hedefi, açık soruları — kaydedin.</li>
+          <li><strong>Davranışı belirtin.</strong> Üzerinde anlaşılan yönü, her biri açık ve test edilebilir kabul kriterlerine sahip gereksinimlere dönüştürün.</li>
+          <li><strong>Bir plana bölün.</strong> Spesifikasyonu sıralı görevlere bölün; her görev karşıladığı kabul kriterlerine atıfta bulunsun.</li>
+          <li><strong>Uygulayın.</strong> Görev görev — bir insan veya bir yapay zeka ajanı tarafından — spesifikasyona göre inşa edin.</li>
+          <li><strong>Kriterlere karşı doğrulayın.</strong> Sonucu bir önseziye göre değil, kabul kriterlerine göre kontrol edin.</li>
+          <li><strong>Spesifikasyonu canlı tutun.</strong> Gereksinimler değiştiğinde önce spesifikasyonu güncelleyin; kod onu takip etsin.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. Benefits -->
+    <section class="sdd-section" aria-labelledby="benefits-title">
+      <div class="sdd-section__inner">
+        <h2 id="benefits-title">Spesifikasyon odaklı geliştirmenin faydaları</h2>
+        <ul class="sdd-benefits">
+          <li>Anlaşmazlıklar uygulamanın sonrasında (pahalı) değil, spesifikasyon incelemesi sırasında (ucuz) yüzeye çıkar.</li>
+          <li>«Tamamlandı» nesneldir, çünkü kabul kriterleri test edilebilirdir.</li>
+          <li>Spesifikasyon herkes için ortak bağlamdır: ürün, mühendislik ve yapay zeka ajanları.</li>
+          <li>Değişiklikler izlenebilirdir — her görev karşıladığı kriterlere atıfta bulunur.</li>
+        </ul>
+        <h3>Yapay zeka ajanlarına özellikle nasıl yardımcı olur?</h3>
+        <ul class="sdd-benefits">
+          <li><strong>Makine tarafından okunabilir amaç:</strong> ajan gereksinimleri koddan çıkarmak yerine doğrudan okur.</li>
+          <li><strong>Yüklenecek daha az bağlam:</strong> ajan tüm repo yerine spesifikasyonun yalnızca ilgili kısmını sorgular.</li>
+          <li><strong>Doğrulanabilir çıktı:</strong> kabul kriterleri ajana geçti/kaldı şeklinde somut bir hedef verir.</li>
+          <li><strong>İzlenebilirlik:</strong> üretilen kod, kendisini motive eden gereksinime geri bağlanabilir.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. Comparison -->
+    <section class="sdd-section" aria-labelledby="vs-title">
+      <div class="sdd-section__inner">
+        <h2 id="vs-title">İlgili uygulamalarla karşılaştırma</h2>
+        <div class="sdd-table-wrap">
+          <table class="sdd-table">
+            <thead>
+              <tr><th>Uygulama</th><th>Doğruluk Kaynağı</th><th>SDD ile İlişkisi</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Test odaklı geliştirme (TDD)</td><td>Kod düzeyinde başarısız olan testler</td><td>Tamamlayıcı — kabul kriterleri testlere dönüşür.</td></tr>
+              <tr><td>Geleneksel PRD</td><td>İnsanlar için yazılmış düz metin</td><td>Daha az yapılandırılmış; doğrudan test edilebilir veya makine tarafından okunabilir değildir.</td></tr>
+              <tr><td>Salt prompt ("vibe coding")</td><td>Prompt ve modelin tahmini</td><td>Kalıcı ve incelenebilir bir hedefi yoktur — SDD'nin çözmek için var olduğu şey.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          SpecScore'un diğer spesifikasyon araçlarıyla ayrıntılı bir karşılaştırması için
+          <a href="/tr/vs/">karşılaştırma sayfalarına</a> bakın.
+        </p>
+      </div>
+    </section>
+
+    <!-- 7. Tradeoffs -->
+    <section class="sdd-section" aria-labelledby="limits-title">
+      <div class="sdd-section__inner">
+        <h2 id="limits-title">Ödünleşimler ve ne zaman kullanılmamalı</h2>
+        <p>
+          Spesifikasyon odaklı geliştirme bedava değildir. Herhangi bir kod çalıştırılmadan
+          önce düşünme ve yazma çabasını öne çeker; bu da tek seferlik bir script veya
+          atılabilir bir deney için yanlış bir tercihtir. Ve bir spesifikasyon yalnızca
+          güncel tutulursa yardımcı olur — terk edilmiş bir spesifikasyon yanıltıcı hale
+          gelir, hiç olmamasından daha kötüdür. SDD, iş planlanacak kadar büyük olduğunda,
+          sürdürüleceğinde veya büyük ölçekte inşa etmesi için bir yapay zeka ajanına
+          teslim edileceğinde karşılığını verir.
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. In practice (SpecScore) -->
+    <section class="sdd-section" aria-labelledby="practice-title">
+      <div class="sdd-section__inner">
+        <h2 id="practice-title">Pratikte yapay zeka ajanlarıyla SDD uygulamak</h2>
+        <p>
+          Yapay zeka ajanlarıyla SDD yapmak için iki şeye ihtiyacınız vardır: hem ekibinizin hem
+          de ajanlarınızın anlayacağı <strong>makine tarafından okunabilir bir spesifikasyon formatı</strong>
+          ve <strong>ajanların bu spesifikasyonları okuması, yazması ve doğrulaması için bir yol</strong>.
+        </p>
+        <p>
+          <strong>SpecScore</strong> tam olarak bunun bir uygulamasıdır. Özellikler, gereksinimler ve
+          kabul kriterleri için açık bir Markdown + YAML formatıdır — reponuzdaki düz dosyalar — ve
+          ajanlarınızın bunları sorgulamak, düzenlemek ve lint etmek için çağırdığı bir CLI ile
+          eşleştirilmiştir. Yapı makine tarafından okunabilir olduğu için bir ajan «sırada ne inşa
+          etmeliyim?» diye sorabilir, açık gereksinimleri ve kabul kriterlerini alabilir ve ardından
+          çalışmasını bunlarla karşılaştırabilir. Araçlardan bağımsızdır ve açık kaynaklıdır.
+        </p>
+        <p>
+          <a href="/tr/ai/">Kodlama ajanınız için Yapay Zeka Becerileri</a> ile başlayın veya
+          <a href="/tr/cli/">CLI'yı yükleyin</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. FAQ -->
+    <section class="sdd-section" aria-labelledby="faq-title">
+      <div class="sdd-section__inner">
+        <h2 id="faq-title">Sıkça sorulan sorular</h2>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Spesifikasyon odaklı geliştirme, test odaklı geliştirme (TDD) ile aynı şey midir?</p>
+          <p class="sdd-faq__a">Hayır. TDD uygulamayı kod düzeyinde başarısız olan testlerden yönlendirir. Spesifikasyon odaklı geliştirme bir seviye yukarıda çalışır: önce amaçlanan davranışı ve kabul kriterlerini yazılı bir spesifikasyonda sabitler. Birbirini tamamlarlar — bir spesifikasyonun kabul kriterleri genellikle TDD'yi yönlendiren testlere dönüşür.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Spesifikasyon odaklı geliştirme sizi yavaşlatır mı?</p>
+          <p class="sdd-faq__a">Kod yazmadan önceki süreyi artırır ve yanlış olan şeyi yeniden inşa etmeye harcanan süreyi ortadan kaldırır. Tek seferlik scriptler için maliyet değmez. Ancak bir yapay zeka ajanının büyük ölçekte ürettiği veya bir ekibin sürdürmesi gereken herhangi bir şey için önce spesifikasyonu yazmak baştan sona genellikle daha hızlıdır.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Bir spesifikasyon ile PRD arasındaki fark nedir?</p>
+          <p class="sdd-faq__a">Bir PRD genellikle insanlara yönelik düz metindir. Spesifikasyon odaklı geliştirmedeki bir spesifikasyon yapılandırılmış ve test edilebilirdir — açık kabul kriterlerine sahip ayrık gereksinimler — böylece hem inceleyiciler hem de yapay zeka ajanları üzerinde kesinlikle hareket edebilir.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Yapay zeka kodlama ajanları bir spesifikasyonu nasıl kullanır?</p>
+          <p class="sdd-faq__a">Spesifikasyon makine tarafından okunabilir olduğunda ajan, tüm kod tabanını yüklemek yerine mevcut göreviyle ilgili gereksinimleri ve kabul kriterlerini almak için spesifikasyonu sorgular ve ardından çıktısını bu kriterlerle karşılaştırır — bu, makul görünen ancak hatalı koda karşı bir önlemdir.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. CTA -->
+  <section class="sdd-cta" aria-labelledby="cta-title">
+    <div class="sdd-cta__inner">
+      <h2 id="cta-title">Yapay zeka ajanınızla spesifikasyonlara dayalı inşa etmeye başlayın</h2>
+      <p>SpecScore, ajanınıza açık bir spesifikasyon formatı ve onu sorgulayıp lint etmek için bir CLI sunar.</p>
+      <div class="sdd-cta__buttons">
+        <a href="/tr/ai/" class="btn btn--primary">Ajanınız için AI becerileri edinin</a>
+        <a href="/tr/cli/" class="btn btn--secondary">CLI'yı yükleyin</a>
+      </div>
+    </div>
+  </section>
+
+  <SiteFooterTr />
+</BaseLayout>

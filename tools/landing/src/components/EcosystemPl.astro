@@ -1,0 +1,116 @@
+---
+// Polish variant of Ecosystem.astro. Tool names stay English (product names).
+---
+
+<section class="ecosystem section" aria-labelledby="ecosystem-title">
+  <div class="section-inner">
+    <h2 id="ecosystem-title" class="ecosystem__title">Zbudowane na SpecScore.</h2>
+
+    <ul class="ecosystem__grid">
+      <li class="eco-card">
+        <h3 class="eco-card__title">DataTug</h3>
+        <p class="eco-card__body">
+          Eksploruj schematy baz danych, twórz i wykonuj zapytania oraz analizuj wyniki z DataTug. SpecScore kieruje jego wymaganiami i kryteriami akceptacji.
+        </p>
+        <a class="eco-card__link" href="https://datatug.app" target="_blank">
+          datatug.app <span aria-hidden="true">→</span>
+        </a>
+        <a class="eco-card__link" href="https://datatug.app/en/under-the-hood/tools-we-built/" target="_blank">
+          Narzędzia, które stworzyliśmy <span aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li class="eco-card">
+        <h3 class="eco-card__title">Codegrapher</h3>
+        <p class="eco-card__body">
+          Silnik grafu kodu do szybkiej eksploracji bazy kodu i dwukierunkowego łączenia specyfikacji z kodem.
+        </p>
+        <a class="eco-card__link" href="https://codegrapher.dev/" target="_blank">
+          codegrapher.dev <span aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li class="eco-card">
+        <h3 class="eco-card__title">DALgo</h3>
+        <p class="eco-card__body">
+          Warstwa dostępu do danych w Go, wyspecyfikowana za pomocą SpecScore.
+        </p>
+        <a class="eco-card__link" href="https://dal-go.github.io/" target="_blank">
+          dal-go.github.io <span aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li class="eco-card">
+        <h3 class="eco-card__title">inGitDB</h3>
+        <p class="eco-card__body">
+          Wersjonowana baza danych oparta na Gicie, wyspecyfikowana za pomocą SpecScore.
+        </p>
+        <a class="eco-card__link" href="https://ingitdb.com/" target="_blank">
+          ingitdb.com <span aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li class="eco-card">
+        <h3 class="eco-card__title">Rehearse</h3>
+        <p class="eco-card__body">
+          Warstwa dowodów akceptacji — uruchamia w praktyce kryteria akceptacji specyfikacji, z weryfikacjami wielokrotnego użytku i bez kodu łączącego.
+        </p>
+        <a class="eco-card__link" href="https://rehearse.ink" target="_blank">
+          rehearse.ink <span aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li class="eco-card">
+        <h3 class="eco-card__title">SpecScore Studio</h3>
+        <p class="eco-card__body">
+          Interfejs webowy do przeglądania i edytowania specyfikacji SpecScore.
+        </p>
+        <a class="eco-card__link" href="https://specscore.studio" target="_blank">
+          specscore.studio <span aria-hidden="true">→</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .ecosystem { background: var(--cream); }
+  .ecosystem__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-4);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .ecosystem__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+  .eco-card {
+    border-top: 1px solid var(--graphite);
+    padding-top: var(--space-2);
+    display: flex;
+    flex-direction: column;
+  }
+  .eco-card__title {
+    font-size: 1.05rem;
+    margin-bottom: var(--space-2);
+    font-weight: 700;
+  }
+  .eco-card__body {
+    color: var(--mid-ink);
+    line-height: 1.55;
+    margin-bottom: var(--space-2);
+  }
+  .eco-card__link {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--ink-blue);
+    text-decoration: underline;
+    align-self: flex-start;
+  }
+
+  @media (max-width: 720px) {
+    .ecosystem__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

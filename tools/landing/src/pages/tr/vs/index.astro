@@ -1,0 +1,385 @@
+---
+// /tr/vs/ — Comparison index page (Turkish).
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooterTr from '../../../components/SiteFooterTr.astro';
+import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
+---
+
+<BaseLayout
+  lang="tr"
+  title="SpecScore Karşılaştırmaları — SpecScore Nasıl Karşılaştırılır."
+  description="SpecScore ile diğer spesifikasyon odaklı geliştirme araçları arasında dürüst, ayrıntılı karşılaştırmalar. Özellik tabloları, mimari farklılıklar ve her birinin ne zaman kullanılacağı."
+  canonical="https://specscore.md/tr/vs/"
+>
+  <SiteHeader />
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          SpecScore nasıl karşılaştırılır.
+        </h1>
+        <p class="hero__sub">
+          Spesifikasyon odaklı geliştirme büyüyen bir alan. Bu
+          karşılaştırmalar tarafsız, yan yana ve her aracın nerede
+          daha güçlü olduğu konusunda dürüsttür.
+        </p>
+      </div>
+    </section>
+
+    <section class="section minis-section" aria-labelledby="comparisons-title">
+      <div class="section-inner">
+        <h2 id="comparisons-title" class="sr-only">Karşılaştırmalar</h2>
+
+        <p class="minis__lead">
+          <span class="minis__brand">SpecScore</span>
+          <span class="minis__vs">vs</span>
+        </p>
+
+        <div class="minis">
+          <a href="/tr/vs/plain-markdown/" class="mini">
+            <span class="mini__name">Plain Markdown</span>
+            <span class="mini__line">Varsayılan yaklaşım. SpecScore, Markdown'ınızın evrildiği yerdir.</span>
+          </a>
+          <a href="/tr/vs/openspec/" class="mini">
+            <span class="mini__name">OpenSpec</span>
+            <span class="mini__line">İyi bir başlangıç rampası. SpecScore ise güvenlik bariyerleridir.</span>
+          </a>
+          <a href="/tr/vs/spec-kit/" class="mini">
+            <span class="mini__name">Spec Kit</span>
+            <span class="mini__line">Spec Kit iş akışıdır. SpecScore ise ortaya çıkan yapıdır (artifact).</span>
+          </a>
+          <a href="/tr/vs/datarim/" class="mini">
+            <span class="mini__name">Datarim</span>
+            <span class="mini__line">Datarim hattı çalıştırır. SpecScore ise geride kalıcı olandır.</span>
+          </a>
+          <a href="/tr/vs/codespeak/" class="mini">
+            <span class="mini__name">CodeSpeak</span>
+            <span class="mini__line">CodeSpeak bir derleyiciye odaklanır. SpecScore bir formata odaklanır.</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Çapraz karşılaştırma tablosu ── */}
+    <section class="section table-section" aria-labelledby="matrix-title">
+      <div class="section-inner">
+        <h2 id="matrix-title" class="section-title">Bir bakışta SpecScore.</h2>
+        <p class="section-note">
+          En yakın araçlar arasında üst düzey bir genel bakış. Her birinin
+          gerçek güçlü yönleri var — dürüst ve ayrıntılı versiyon için
+          yukarıdaki bir karşılaştırmayı takip edin.
+        </p>
+
+        <div class="table-wrap">
+          <table class="matrix-table" aria-label="SpecScore vs plain Markdown, OpenSpec, Spec Kit, Datarim ve CodeSpeak">
+            <thead>
+              <tr>
+                <th scope="col">Yetenek</th>
+                <th scope="col" class="matrix-table__own">SpecScore</th>
+                <th scope="col"><a href="/tr/vs/plain-markdown/" class="matrix-table__link">Plain Markdown</a></th>
+                <th scope="col"><a href="/tr/vs/openspec/" class="matrix-table__link">OpenSpec</a></th>
+                <th scope="col"><a href="/tr/vs/spec-kit/" class="matrix-table__link">Spec Kit</a></th>
+                <th scope="col"><a href="/tr/vs/datarim/" class="matrix-table__link">Datarim</a></th>
+                <th scope="col"><a href="/tr/vs/codespeak/" class="matrix-table__link">CodeSpeak</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Birincil rol</td>
+                <td class="matrix-table__own">Linter destekli spesifikasyon formatı + CLI</td>
+                <td>Serbest metin belgeleri (varsayılan)</td>
+                <td>Spesifikasyon düzenleme çatısı</td>
+                <td>İş akışı / metodoloji</td>
+                <td>Claude Code için iş akışı paketi</td>
+                <td>LLM derleyicisi (spesifikasyon → kod)</td>
+              </tr>
+              <tr>
+                <td>Spesifikasyon formatı</td>
+                <td class="matrix-table__own">Markdown + YAML (yapılandırılmış)</td>
+                <td>Serbest Markdown</td>
+                <td>Markdown</td>
+                <td>Serbest Markdown</td>
+                <td>Markdown (iş akışı biçimli)</td>
+                <td>Yalın İngilizce</td>
+              </tr>
+              <tr>
+                <td>Kodunuz sizde kalır</td>
+                <td class="matrix-table__own"><span class="yes">Evet</span></td>
+                <td><span class="yes">Evet</span></td>
+                <td><span class="yes">Evet</span></td>
+                <td><span class="yes">Evet</span></td>
+                <td><span class="yes">Evet</span></td>
+                <td><span class="no">Kod üretilir</span></td>
+              </tr>
+              <tr>
+                <td>Açık kaynak / ücretsiz</td>
+                <td class="matrix-table__own"><span class="yes">Evet</span> (CC BY / MIT)</td>
+                <td><span class="yes">Ücretsiz</span></td>
+                <td><span class="yes">Evet</span> (MIT)</td>
+                <td><span class="yes">Evet</span> (MIT)</td>
+                <td><span class="yes">Evet</span> (MIT)</td>
+                <td><span class="no">Tescilli sistem</span></td>
+              </tr>
+              <tr>
+                <td>Spesifikasyon içeriği linting</td>
+                <td class="matrix-table__own"><span class="yes">Evet</span></td>
+                <td><span class="no">Hayır</span></td>
+                <td>Yalnızca yapı</td>
+                <td><span class="no">Hayır</span></td>
+                <td><span class="no">Hayır</span></td>
+                <td>Belgelenmemiş</td>
+              </tr>
+              <tr>
+                <td>Gereksinim / AC ID'leri</td>
+                <td class="matrix-table__own"><span class="yes">Evet</span></td>
+                <td><span class="no">Hayır</span></td>
+                <td><span class="no">Hayır</span></td>
+                <td><span class="no">Hayır</span></td>
+                <td><span class="no">Hayır</span></td>
+                <td><span class="no">Hayır</span></td>
+              </tr>
+              <tr>
+                <td>Yaşam döngüsü zorlaması</td>
+                <td class="matrix-table__own"><span class="yes">Evet</span></td>
+                <td><span class="no">Hayır</span></td>
+                <td><span class="no">Hayır</span></td>
+                <td><span class="no">Hayır</span></td>
+                <td><span class="no">Hayır</span></td>
+                <td><span class="no">Hayır</span></td>
+              </tr>
+              <tr>
+                <td>Koddan spesifikasyona izlenebilirlik</td>
+                <td class="matrix-table__own"><span class="yes">Evet</span></td>
+                <td><span class="no">Hayır</span></td>
+                <td><span class="no">Hayır</span></td>
+                <td><span class="no">Hayır</span></td>
+                <td><span class="no">Hayır</span></td>
+                <td>Yeniden üretim yoluyla</td>
+              </tr>
+              <tr>
+                <td>Çalışma zamanı bağımlılığı</td>
+                <td class="matrix-table__own">Yok (Go ikili dosyası)</td>
+                <td>Yok</td>
+                <td>Node.js</td>
+                <td>Python</td>
+                <td>Claude Code</td>
+                <td>Sağlayıcı derleyicisi</td>
+              </tr>
+              <tr>
+                <td>Herhangi bir ajanla veya ajansız çalışır</td>
+                <td class="matrix-table__own"><span class="yes">Evet</span></td>
+                <td>Her dosyayı okur</td>
+                <td>Birçok ajan</td>
+                <td>Birçok ajan</td>
+                <td>Claude Code</td>
+                <td>CodeSpeak üzerinden</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <ComparisonFeedback />
+  </main>
+
+  <SiteFooterTr />
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding: var(--space-4) var(--space-3) var(--space-2);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__headline {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-1);
+  }
+  .hero__sub {
+    font-size: 1rem;
+    color: var(--mid-ink);
+    line-height: 1.5;
+  }
+
+  /* Pull the mini-cards up tight under the hero */
+  .minis-section {
+    padding-top: var(--space-3);
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Screen-reader only ── */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ── Mini comparison cards ── */
+  .minis__lead {
+    text-align: center;
+    line-height: 1.05;
+    margin-bottom: var(--space-3);
+  }
+  .minis__brand {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .minis__vs {
+    display: block;
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+  }
+  .minis {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-2);
+  }
+  .mini {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-top: 2px solid var(--validator-green);
+    padding: var(--space-3);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+  }
+  .mini:hover {
+    border-color: var(--graphite);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
+  }
+  .mini:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+  }
+  .mini__name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .mini__line {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.45;
+  }
+
+  @media (max-width: 980px) {
+    .minis { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .minis { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ── Section title / note (matrix) ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .section-note {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-3);
+    max-width: 60ch;
+  }
+
+  /* ── Cross-comparison matrix ── */
+  .table-section { background: var(--cream-2); }
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+  .matrix-table th,
+  .matrix-table td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+  }
+  .matrix-table thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    border-bottom: 2px solid var(--graphite);
+    white-space: nowrap;
+  }
+  .matrix-table td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 160px;
+  }
+  .matrix-table td,
+  .matrix-table th {
+    min-width: 130px;
+  }
+  /* Highlight the SpecScore column */
+  .matrix-table__own {
+    background: var(--surface);
+    font-weight: 600;
+    color: var(--ink);
+    border-left: 2px solid var(--validator-green);
+    border-right: 2px solid var(--validator-green);
+  }
+  thead .matrix-table__own {
+    color: var(--validator-green);
+    border-bottom-color: var(--validator-green);
+  }
+  /* Column-header links to each comparison */
+  .matrix-table__link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--pale-ink);
+    transition: color 160ms ease, border-color 160ms ease;
+  }
+  .matrix-table__link:hover {
+    color: var(--validator-green);
+    border-bottom-color: var(--validator-green);
+  }
+  .matrix-table__link:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: 2px;
+  }
+  .matrix-table .yes {
+    color: var(--validator-green);
+    font-weight: 600;
+  }
+  .matrix-table .no {
+    color: var(--pale-ink);
+  }
+</style>

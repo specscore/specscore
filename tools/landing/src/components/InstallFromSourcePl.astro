@@ -1,0 +1,29 @@
+---
+// Polish variant of InstallFromSource.astro — "Build from source" content block.
+---
+<pre class="terminal"><span class="prompt">$</span> go install github.com/specscore/specscore-cli/cmd/specscore@main</pre>
+<p class="method-desc">
+  Wymaga <a class="xref" href="https://go.dev/">Go</a> w wersji 1.26 lub nowszej.
+  Polecenie to instaluje najnowszą wersję deweloperską z gałęzi <code>main</code> —
+  może zawierać zmiany, które nie znalazły się jeszcze w otagowanym wydaniu.
+</p>
+<p class="method-desc">
+  Aby przypiąć konkretną wersję, zamień <code>@main</code> na tag taki jak
+  <code>@v0.4.2</code> lub użyj <code>@latest</code> dla najnowszego oficjalnego wydania.
+</p>
+
+<style>
+  .method-desc {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+  .method-desc code {
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+</style>

@@ -1,0 +1,131 @@
+---
+// German variant of Hero.astro.
+// Structure / CSS classes match the English Hero exactly; only the prose changes.
+// Product names (SpecStudio, SpecScore, Claude Code, GitHub) stay English.
+import { Image } from 'astro:assets';
+import heroImage from '../assets/hero.webp';
+import HeroGitHubLink from './HeroGitHubLink.astro';
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__inner">
+    <div class="hero__copy">
+      <h1 id="hero-title" class="hero__headline">
+        Jede Unklarheit in deiner Spezifikation<br />ist ein Token, den dein Agent verbrennt.
+      </h1>
+      <p class="hero__stakes">
+        Erst eine Rückfrage mitten im Build. Dann ein Fix nach dem Release.
+        Dann der Kontext, den du immer wieder neu erklären musst.
+      </p>
+      <p class="hero__sub">
+        SpecScore ist ein offenes, lintbares Dateiformat für
+        Spezifikationen – wie JSON für Daten. Mit einer CLI, die deine
+        Agenten aufrufen, um sie abzufragen und zu bearbeiten – wie <code>jq</code> für JSON.
+      </p>
+      <HeroGitHubLink repo="specscore/specscore" label="Open-Source auf GitHub" />
+      <div class="hero__cta">
+        <a href="/de/ai/" class="btn btn--primary">KI-Skills für deinen Agenten</a>
+        <a href="/de/cli/" class="btn btn--secondary">CLI installieren</a>
+      </div>
+    </div>
+
+    <figure
+      class="hero__art"
+      aria-label="Eine SpecScore-Spezifikation auf cremefarbenem Zeichenpapier: zwei Anforderungen bestehen das Linting (grüne Haken), eine schlägt fehl (rote Markierung)."
+    >
+      <Image
+        src={heroImage}
+        widths={[700, 1050, 1400]}
+        sizes="(max-width: 860px) 88vw, 52vw"
+        alt=""
+        loading="eager"
+        decoding="async"
+      />
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-7);
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .hero__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 45fr 55fr;
+    gap: var(--space-6);
+    align-items: center;
+  }
+  .hero__copy {
+    animation: hero-copy-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 280ms;
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    max-width: 36ch;
+    line-height: 1.5;
+  }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .hero__art {
+    margin: 0;
+    animation: hero-art-in 700ms cubic-bezier(0.22, 0.61, 0.36, 1) both 100ms;
+  }
+  .hero__art img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @keyframes hero-copy-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes hero-art-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 860px) {
+    .hero {
+      padding: var(--space-5) var(--space-3) var(--space-6);
+    }
+    .hero__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    .hero__art {
+      order: 2;
+      max-width: 520px;
+    }
+    .hero__copy {
+      order: 1;
+    }
+  }
+</style>

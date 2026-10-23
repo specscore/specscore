@@ -1,0 +1,37 @@
+---
+// Traditional Chinese variant of HonestLimits.astro.
+// Honest-limits teaser. Links to the dedicated /zh-tw/validators/#limits page.
+---
+
+<section class="limits-teaser section section--flush-top" aria-labelledby="limits-teaser-title">
+  <div class="section-inner section-inner--prose">
+    <h2 id="limits-teaser-title" class="limits-teaser__title">
+      它捕捉不到的，我們也照實說。
+    </h2>
+    <p class="limits-teaser__body">
+      一個聲稱什麼都能查出來的程式碼檢查器是在說謊。SpecScore 是一個分層的系統 —
+      確定性的程式碼檢查器、AI 審查器，以及你自己的判斷 — 每一層都有真實的邊界。
+      我們把它們全都寫了下來：lint 能查到什麼、AI 能查到什麼，以及還有什麼只能靠你 —
+      因為目前還沒有工具能做到。
+    </p>
+    <p class="limits-teaser__cta">
+      <a class="xref" href="/zh-tw/validators/#limits">程式碼檢查器查不到的東西 →</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .limits-teaser { background: var(--cream); }
+  .limits-teaser__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .limits-teaser__body {
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+</style>

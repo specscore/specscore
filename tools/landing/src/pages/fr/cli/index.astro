@@ -1,0 +1,370 @@
+---
+// SpecScore CLI — page produit (FR).
+// Le linter open source pour les spécifications SpecScore.
+// Gratuit pour toujours, licence MIT.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooterFr from '../../../components/SiteFooterFr.astro';
+import LintExample from '../../../components/LintExample.astro';
+import HeroGitHubLink from '../../../components/HeroGitHubLink.astro';
+import QsTabsScript from '../../../components/QsTabsScript.astro';
+import InstallFromSourceFr from '../../../components/InstallFromSourceFr.astro';
+---
+
+<BaseLayout
+  lang="fr"
+  title="SpecScore CLI — Lintez vos spécifications comme vous lintez votre code."
+  description="Linter open source pour spécifications SpecScore. Validez vos features, exigences et critères d'acceptation depuis la ligne de commande ou votre pipeline de CI. Sans compte, sans télémétrie."
+  canonical="https://specscore.md/fr/cli/"
+>
+  <SiteHeader />
+
+  <main>
+    {/* ── Hero: copy left, terminal demo right ── */}
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <h1 id="hero-title" class="hero__headline">
+          Lintez vos spécifications<br />comme vous lintez votre code.
+        </h1>
+        <div class="hero__copy">
+          <p class="hero__sub">
+            Le CLI SpecScore valide vos features, exigences et critères d'acceptation
+            depuis la ligne de commande. Exécutez-le en local, connectez-le à votre CI
+            ou laissez votre agent d'IA l'appeler. Open source, sans compte, sans télémétrie.
+          </p>
+          <HeroGitHubLink repo="specscore/specscore-cli" label="Open source sur GitHub" />
+          <div class="hero__cta">
+            <a href="/fr/cli/install/" class="btn btn--primary">Installer</a>
+          </div>
+        </div>
+
+        <div
+          class="hero__art"
+          role="img"
+          aria-label="Sortie de terminal de specscore lint : R1 et R2 ont des critères d'acceptation (coches vertes) ; R3 n'en a aucun, un lien Related Feature ne résout pas et la section obligatoire Open Questions est manquante (marques rouges). 3 problèmes, exit 1."
+        >
+<LintExample />
+        </div>
+      </div>
+    </section>
+
+    {/* ── Installation rapide ── */}
+    <section class="section" id="install" aria-labelledby="install-title">
+      <div class="section-inner">
+        <h2 id="install-title" class="section-title">Installation en 60 secondes.</h2>
+
+        <div class="qs-tabs" role="tablist" aria-label="Commande d'installation pour votre système d'exploitation">
+          <button type="button" role="tab" id="qs-tab-unix" aria-controls="qs-panel-unix" aria-selected="true" tabindex="0" class="qs-tab is-active" data-tab="unix">Linux / macOS</button>
+          <button type="button" role="tab" id="qs-tab-win" aria-controls="qs-panel-win" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="win">Windows</button>
+          <button type="button" role="tab" id="qs-tab-brew" aria-controls="qs-panel-brew" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="brew">Homebrew</button>
+          <button type="button" role="tab" id="qs-tab-src" aria-controls="qs-panel-src" aria-selected="false" tabindex="-1" class="qs-tab" data-tab="src">From source</button>
+        </div>
+
+        <div id="qs-panel-unix" role="tabpanel" aria-labelledby="qs-tab-unix" class="qs-panel is-active" data-panel="unix">
+<pre class="terminal"><span class="prompt">$</span> curl -fsSL https://specscore.md/install/get-cli | sh</pre>
+        </div>
+        <div id="qs-panel-win" role="tabpanel" aria-labelledby="qs-tab-win" class="qs-panel" data-panel="win" hidden>
+<pre class="terminal"><span class="prompt">PS&gt;</span> powershell -c "irm https://specscore.md/install/get-cli.ps1 | iex"</pre>
+        </div>
+        <div id="qs-panel-brew" role="tabpanel" aria-labelledby="qs-tab-brew" class="qs-panel" data-panel="brew" hidden>
+<pre class="terminal"><span class="prompt">$</span> brew install specscore/tap/specscore</pre>
+        </div>
+        <div id="qs-panel-src" role="tabpanel" aria-labelledby="qs-tab-src" class="qs-panel" data-panel="src" hidden>
+          <InstallFromSourceFr />
+        </div>
+
+        <p class="qs-more">
+          <a class="xref" href="/fr/cli/install/">Toutes les méthodes d'installation →</a>
+        </p>
+      </div>
+    </section>
+
+    {/* ── Ce qui est inclus ── */}
+    <section class="section features-section" aria-labelledby="features-title">
+      <div class="section-inner">
+        <h2 id="features-title" class="section-title">Ce qui est inclus.</h2>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3 class="feature-card__title">Lint</h3>
+            <p class="feature-card__desc">
+              Valide la structure, les métadonnées, les références croisées et l'unicité des AC.
+              Rapporte pass/fail par exigence avec des suggestions de correction.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-card__title">Score</h3>
+            <p class="feature-card__desc">
+              Évalue la complétude de la spécification sur une échelle de 0 à 100. Détecte les acteurs
+              manquants, les déclencheurs, les états d'erreur, les modèles de sécurité et les limites de débit.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-card__title">Prêt pour la CI</h3>
+            <p class="feature-card__desc">
+              Code de sortie non nul en cas d'échec. Connectez <code>specscore lint</code>
+              à votre pipeline de CI aux côtés d'ESLint, Prettier et de votre suite de tests.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-card__title">Sans télémétrie</h3>
+            <p class="feature-card__desc">
+              Le CLI n'envoie aucune donnée. Vos spécifications et scores restent sur votre machine.
+              Sans compte, sans clé API, sans dépendance au cloud.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-card__title">Portable</h3>
+            <p class="feature-card__desc">
+              Un binaire unique. macOS, Linux, Windows. Aucune dépendance de runtime.
+              Fonctionne sur n'importe quel dossier de spécifications en Markdown.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-card__title">Open source</h3>
+            <p class="feature-card__desc">
+              Licence MIT. Le code source est disponible sur
+              <a class="xref" href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a>.
+              Gratuit pour toujours.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Utilisation avec des agents d'IA ── */}
+    <section class="section" aria-labelledby="agents-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="agents-title" class="section-title">Utilisez-le avec votre agent d'IA.</h2>
+        <p class="prose-p">
+          Le CLI est le moteur au cœur des deux plugins Claude Code. Si votre
+          agent écrit des spécifications, le CLI lui indique si elles sont correctes — avant que
+          l'agent n'écrive une seule ligne de code.
+        </p>
+        <div class="agent-links">
+          <a href="/fr/ai/specstudio-skills/" class="btn btn--secondary">SpecStudio Skills</a>
+          <a href="/fr/ai/cli-skills/" class="btn btn--tertiary">CLI Skills (wrapper léger)</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {/* ── CTA final ── */}
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">Des specs qui passent.</h2>
+      <div class="final-cta__buttons">
+        <a href="/fr/cli/install/" class="btn btn--primary">Installer le CLI</a>
+        <a href="/fr/ai/specstudio-skills/" class="btn btn--secondary">Skills IA pour votre agent</a>
+        <a
+          href="https://github.com/specscore/specscore-cli"
+          rel="noopener"
+          class="btn btn--tertiary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          Open source sur GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Footer ── */}
+  <SiteFooterFr />
+</BaseLayout>
+
+<style>
+  /* ── Hero: two-column on desktop (copy left, terminal right),
+        stacked on mobile. Mirrors the landing hero's rhythm. ── */
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-7);
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .hero__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 30fr 70fr;
+    gap: var(--space-3) var(--space-6);
+    align-items: center;
+  }
+  .hero__copy {
+    animation: hero-copy-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 280ms;
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__inner > .hero__headline {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    margin-bottom: var(--space-4);
+    line-height: 1.55;
+    max-width: 42ch;
+  }
+  .hero__cta {
+    display: flex;
+    gap: 0.75rem;
+  }
+  .hero__art {
+    animation: hero-art-in 700ms cubic-bezier(0.22, 0.61, 0.36, 1) both 100ms;
+    min-width: 0;
+  }
+
+  @keyframes hero-copy-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes hero-art-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Sections ── */
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .prose-p {
+    font-size: 1.05rem;
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-4);
+  }
+
+  /* ── Quickstart install tabs ── */
+  .qs-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--hairline);
+    margin-bottom: 0;
+  }
+  .qs-tab {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    padding: 0.5rem 0.9rem;
+    font-family: var(--font-code);
+    font-size: 0.825rem;
+    color: var(--mid-ink);
+    cursor: pointer;
+    transition: color 120ms ease, border-color 160ms ease;
+  }
+  .qs-tab:hover { color: var(--ink); }
+  .qs-tab:focus-visible {
+    outline: 2px solid var(--ink-blue);
+    outline-offset: -2px;
+  }
+  .qs-tab.is-active {
+    color: var(--ink);
+    border-bottom-color: var(--validator-green);
+    font-weight: 600;
+  }
+  .qs-panel {
+    border-left: 1px solid var(--hairline);
+    border-right: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .qs-panel pre.terminal {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+  }
+  .qs-more {
+    margin-top: var(--space-3);
+    font-size: var(--fs-small);
+  }
+
+  /* ── Features grid ── */
+  .features-section { background: var(--cream-2); }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-4);
+  }
+  .feature-card__title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+  }
+  .feature-card__desc {
+    color: var(--mid-ink);
+    font-size: 0.925rem;
+    line-height: 1.55;
+  }
+  .feature-card__desc code {
+    font-size: 0.85em;
+    background: var(--cream-2);
+    padding: 0.08em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── Agent links ── */
+  .agent-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    background: var(--surface);
+    border-top: 1px solid var(--hairline);
+    padding: var(--space-7) var(--space-3);
+    text-align: center;
+  }
+  .final-cta__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+  }
+  .final-cta__title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-4);
+  }
+  .final-cta__buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 860px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+    }
+    .hero__headline {
+      grid-column: 1;
+    }
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<QsTabsScript />
