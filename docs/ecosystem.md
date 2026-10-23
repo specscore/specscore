@@ -32,7 +32,7 @@ Defines storage-neutral application data models.
 - Independent from SpecScore, OpenVaultDB, GraphSpec, and any backend
 - Validated by SpecScore through linting, structural validation, and semantic checks
 - Read by OpenVaultDB today in one place: a database published to the OVDB Directory names the model it follows, and `ovdb publisher check` verifies that the recordsets it lists are the record types of that model
-- Intended for wider use by OpenVaultDB (schema validation, migration planning, backend mapping, GraphQL generation, DTQL typing metadata, DALGO metadata, and backend generators); none of that is implemented
+- Intended for wider use by OpenVaultDB (schema validation, migration planning, backend mapping, GraphQL generation, TugQL typing metadata, DALGO metadata, and backend generators); none of that is implemented
 
 [github.com/specscore/modelspec](https://github.com/specscore/modelspec) *(website modelspec.org planned)*
 
