@@ -20,6 +20,7 @@ Archived Ideas are indexed separately at [archived/README.md](archived/README.md
 | [configurable-ideas-path](configurable-ideas-path.md) | Specified | 2026-06-07 | alex | configurable-ideas-path |
 | [cross-repo-plan-composition](cross-repo-plan-composition.md) | Approved | 2026-06-07 | alexander.trakhimenok | — |
 | [decision-and-decisions-index](decision-and-decisions-index.md) | Specified | 2026-04-20 | alexander.trakhimenok@gmail.com | decision, decisions-index |
+| [domain-behavior-artifacts](domain-behavior-artifacts.md) | Specifying | 2026-10-27 | alexander.trakhimenok@gmail.com | domain-behavior, domain-behavior/command, domain-behavior/event, domain-behavior/policy |
 | [entity-and-property-definitions](entity-and-property-definitions.md) | Specifying | 2026-05-18 | alexander.trakhimenok | document-types-registry, entity, property |
 | [format-declaration-footer-and-frontmatter](format-declaration-footer-and-frontmatter.md) | Approved | 2026-06-02 | alex | — |
 | [graphspec](graphspec.md) | Specifying | 2026-07-08 | codex | graphspec, graphspec/command, graphspec/continuations, graphspec/entity, graphspec/event, graphspec/glossary, graphspec/module, graphspec/policy, graphspec/relationship, graphspec/reviews |

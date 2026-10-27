@@ -53,6 +53,7 @@ Core features of the SpecScore specification framework. This table is the canoni
 | [GraphSpec](graphspec/README.md) | Deprecated | Document | `https://specscore.md/feature-specification` | `spec/features/graphspec/` | — | GraphSpec is a bootstrap specification language for describing connected domain models. |
 | [ModelSpec Validation](modelspec-validation/README.md) | Draft | Document | `https://specscore.md/feature-specification` | `spec/features/modelspec-validation/` | — | SpecScore recognizes ModelSpec as a first-class independent specification and provides linting, structural validation, and semantic checking without owning ModelSpec semantics. |
 | [Meaning References](meaning-references/README.md) | Draft | — | https://specscore.md/feature-specification | — | — | Meaning references link SpecScore artifacts and source code to MeaningGraph concepts. |
+| [Domain Behavior](domain-behavior/README.md) | Draft | — | https://specscore.md/feature-specification | — | — | Domain behavior artifacts describe what happens to domain concepts — the commands people and systems request, the events that record what happened, and the cross-cutting rules that constrain both. |
 
 ## Feature Hierarchy
 

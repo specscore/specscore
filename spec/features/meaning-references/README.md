@@ -42,7 +42,7 @@ A meaning reference in a SpecScore artifact MUST use `meaning:///{concept}` for 
 
 #### REQ: reference-locations
 
-Meaning references MAY appear as Markdown links or bare URLs anywhere in the body of a Feature, Idea, Plan or Decision, including inside REQ and AC sections. A Feature MAY declare the concepts it is primarily about in an optional `**Meanings:**` header field as a comma-separated list of meaning references; when present it follows `**Source Ideas:**`.
+Meaning references MAY appear as Markdown links or bare URLs anywhere in the body of a Feature, Idea, Plan or Decision, including inside REQ and AC sections, and in the frontmatter fields of [domain behavior](../domain-behavior/README.md) artifacts that domain-behavior defines. A Feature MAY declare the concepts it is primarily about in an optional `**Meanings:**` header field as a comma-separated list of meaning references; when present it follows `**Source Ideas:**`.
 
 ### Pinning
 
@@ -113,6 +113,7 @@ A tool that lets a user add, change or remove a link in a graph view MUST expres
 | [Repo Config](../repo-config/README.md) | Adds the optional `meaninggraph.pins` block |
 | [Feature](../feature/README.md) | Adds the optional `**Meanings:**` header field |
 | [Publication Policy Config](../publication-policy-config/README.md) | Governs how write-back changes are staged, committed and pushed |
+| [Domain Behavior](../domain-behavior/README.md) | Command, event and policy artifacts reference concepts, properties and values through this feature |
 | [GraphSpec](../graphspec/README.md) | Deprecated by [decision 0015](../../decisions/0015-meaninggraph-supersedes-graphspec.md); its entities and relationships migrate to MeaningGraph concepts referenced through this feature |
 
 ## Acceptance Criteria
