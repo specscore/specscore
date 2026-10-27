@@ -27,23 +27,28 @@ kind: command
 id: share-identity
 name: ShareIdentity
 status: Draft
-summary: A guardian shares a household member's identity card with another contact.
+summary: Grant a scoped, optionally time-limited share of one contact's identity from a family card.
 subject: meaning:///identity-share
 actors:
-  - meaning:///contact
+  - meaning:///user
 inputs:
+  - name: card
+    meaning: meaning:///family-card
   - name: subject
     meaning: meaning:///contact
   - name: scope
     model: modelspec:///familycard.ShareScope
+  - name: consent
+    meaning: meaning:///consent
 transition:
   property: meaning:///identity-share-status
-  from: [requested]
   to: active
 possibleEvents:
   - identity-shared
 ---
 ```
+
+This is `sneat-co/backstage` `familycard/commands/share-identity` converted: the GraphSpec references `familycard.identity-share`, `core.user`, `familycard.family-card`, `contactius.contact` and `familycard.consent` become meaning concepts, and the command now states that it creates the share in state `active`.
 
 #### REQ: subject-and-actors
 
@@ -59,7 +64,7 @@ possibleEvents:
 
 #### REQ: command-transition
 
-`transition` is OPTIONAL and follows domain-behavior's transition rules. Its `property` MUST be a property of the command's `subject` concept (`of:`, own or inherited, names the subject or a concept the subject extends).
+`transition` is OPTIONAL and follows domain-behavior's transition rules. Its `property` MUST be a property of the command's `subject` concept: the property's `of` names the subject or a concept the subject extends. A command that creates its subject declares a transition without `from`.
 
 #### REQ: failure-cases-prose
 
@@ -83,7 +88,7 @@ Failure cases are written in a `## Failure Cases` body section. No frontmatter k
 
 **Requirements:** domain-behavior/command#req:subject-and-actors, domain-behavior/command#req:input-shape, domain-behavior/command#req:possible-events, domain-behavior/command#req:command-transition
 
-The example above lints clean. A missing `subject`, an input with both `meaning` and `model`, a `possibleEvents` entry naming no event, and a transition on a property of another concept each fail lint.
+The example above lints clean. A missing `subject`, an input with both `meaning` and `model`, a `possibleEvents` entry naming no event, and a transition on a property of another concept each fail lint; removing `transition` from a creating command is accepted (a transition is optional).
 
 ### AC: derived-triggers
 

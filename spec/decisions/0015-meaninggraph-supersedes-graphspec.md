@@ -1,11 +1,11 @@
 ---
 format: https://specscore.md/decision-specification
-status: In Review
+status: Approved
 ---
 
 # Decision: MeaningGraph Supersedes GraphSpec
 
-**Status:** In Review
+**Status:** Approved
 **Date:** 2026-10-27
 **Owner:** alexander.trakhimenok@gmail.com
 **Tags:** meaninggraph, graphspec, domain-behavior, references, linkage, deprecation
@@ -31,14 +31,17 @@ GraphSpec splits along one test: would someone reading the data, without the sys
 |---|---|
 | entity | MeaningGraph concept of kind `entity`; its `model:` becomes an `instances` binding to the same ModelSpec record type |
 | entity lifecycle states | a `value-set` concept and a property concept whose `values-of` names it; the allowed transitions are declared on the value set once MeaningGraph supports it |
-| relationship | a property concept with `of:` the source entity and `values-of:` the target, bound with role `reference` where a model field holds it; endpoint roles become the property concepts' own names; an association with its own lifecycle becomes an entity |
+| many-to-one relationship | a reference property concept with `of:` the source entity and `values-of:` the target, bound with role `reference` where a model field holds it |
+| many-to-many relationship | an association entity concept with one reference property per endpoint, each named by its endpoint role (`household-member` with `household-member-household` and `household-member-contact`); an association with its own lifecycle is the same, plus its lifecycle |
+| relationship `metadata` | a property of the association entity; an enum-typed value (`modelspec:///familius.enums.HouseholdRole`) becomes a value set mirroring the enum, bound with role `value` to the model field — MeaningGraph does not compare the two lists, so they are kept in step by review |
+| relationship `cardinality` | not represented; the DataModel's fields and keys carry the structure, and the description states the cardinality in words |
 | module | for concepts, packaging only — one `*.meaning.yaml` file per module, the file `id` not part of any address; for behavior, the owning Feature, with `dependsOn` replaced by the Feature's `## Dependencies` closure |
 | command, event, policy | `<id>.command.md`, `<id>.event.md`, `<id>.policy.md` in the owning Feature ([domain-behavior](../features/domain-behavior/README.md)), with every operand a meaning or DataModel reference |
 | who causes a transition | the command, or the event with a non-command source, that declares it |
 | Tier-1 `rules:` blocks | REQs of the owning Feature |
-| ModelSpec models | unchanged — MeaningGraph DataModels |
+| ModelSpec models (`modules/<module>/models/*.hcl`) | unchanged in content — MeaningGraph DataModels; moved to `models/<module>.modelspec.hcl` at the repository root (the `.modelspec.hcl` suffix CodeGrapher indexes) and listed in the `models` map of the module's `*.meaning.yaml` file |
 
-This decision supersedes decision 0008, which made GraphSpec SpecScore's component for domain vocabulary. The GraphSpec language-design decisions 0004, 0005, 0006, 0009, 0012 and 0013 are moved to `archived/` as Deprecated when GraphSpec is removed; the parts of 0012 (role-labelled participants) and 0013 (policy clause vocabulary, no expression language) that still apply are restated in the domain-behavior features, which are normative from then on. Decisions 0003, 0007, 0010, 0011 and 0014 stay in force: they govern ModelSpec structure and the reference URL grammar, both of which MeaningGraph keeps.
+This decision supersedes decision 0008, which made GraphSpec SpecScore's component for domain vocabulary. The GraphSpec language-design decisions 0004, 0005, 0006, 0009, 0012 and 0013 are moved to `archived/` as Deprecated when GraphSpec is removed; the parts of 0012 (role-labelled participants) and 0013 (policy clause vocabulary, no expression language) that still apply are restated in the domain-behavior features, which are normative from then on. Decisions 0003, 0010, 0011 and 0014 stay in force: they govern ModelSpec structure and the reference URL grammar, both of which MeaningGraph keeps. This decision amends decision 0007: its first resolution step, the GraphSpec graph root (`modules/<module>/models/`, from decision 0006), is replaced by the `models` maps of the repository's root `*.meaning.yaml` files; the configured-project and cross-repository steps and the no-implicit-network rule are unchanged.
 
 ## Rationale
 
@@ -69,9 +72,11 @@ The backstage graph and the `specscore graph` command still depend on it; deleti
 - GraphSpec's feature status becomes Deprecated; the language receives no changes other than its removal.
 - `sneat-co/backstage` `spec/graph/` is migrated to `*.meaning.yaml` files in that repository's root (MeaningGraph reads root-level files only) and to domain-behavior artifacts in the owning Features, then deleted.
 - `specscore-cli` retargets the command, event and policy handling of `pkg/graph` to domain-behavior artifacts and meaning references, and removes the entity, relationship and module handling and the `specscore graph` command once the migration lands, in a release whose notes name this decision; `modelspec-validation` keeps validating models.
-- `meaninggraph/core` is asked for allowed transitions on value sets and for inverse labels on reference properties; until transitions exist, transition checks verify only that the values exist.
+- Value sets exist only in `meaning/draft-2`, which no released MeaningGraph reader reads yet; a `meaninggraph/cli` release that reads it precedes lint and the backstage migration.
+- `meaninggraph/core` is asked for allowed transitions and initial values on value sets, inverse labels on reference properties and a deprecation marker for concepts; until transitions exist, transition checks verify only that the values exist.
 - The GraphSpec feature directory, its idea, its plans and the superseded decisions' references are removed or archived from this repository last.
-- Dependency direction and ownership checks survive for behavior, on Feature placement and Feature dependencies. Concepts within one meaning graph have no direction rule; between graphs, MeaningGraph pins govern.
+- Dependency direction and ownership checks survive for behavior, on Feature placement and Feature dependencies.
+- GraphSpec's dependency-direction checks on vocabulary — relationship endpoint ownership and cross-module model references — are lost: concepts within one meaning graph have no direction rule, and between graphs only MeaningGraph pins govern.
 
 ## Observed Consequences
 
@@ -79,7 +84,12 @@ None observed yet.
 
 ## Affected Features
 
-graphspec, meaning-references, domain-behavior, source-references, repo-config, modelspec-validation
+- graphspec
+- meaning-references
+- domain-behavior
+- source-references
+- repo-config
+- modelspec-validation
 
 ---
 *This document follows the https://specscore.md/decision-specification*

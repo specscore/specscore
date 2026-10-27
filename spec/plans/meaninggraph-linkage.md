@@ -12,7 +12,7 @@ status: Executing
 
 ## Summary
 
-Master plan for linking SpecScore specs to MeaningGraph meanings ([meaninggraph-linkage](../ideas/meaninggraph-linkage.md)), for keeping GraphSpec's behavior half as [domain behavior](../features/domain-behavior/README.md) artifacts ([domain-behavior-artifacts](../ideas/domain-behavior-artifacts.md)), and for removing GraphSpec, which MeaningGraph supersedes ([decision 0015](../decisions/0015-meaninggraph-supersedes-graphspec.md)). The work spans six repositories: `specscore/specscore` (format), `meaninggraph/core` and `meaninggraph/cli` (address grammar, value-set transitions, inverse labels), `specscore/specscore-cli` (lint), `code-grapher/codegrapher` (indexing, annotations, write-back), SpecScore Studio (write-back) and `sneat-co/backstage` (first consumer and GraphSpec migration).
+Master plan for linking SpecScore specs to MeaningGraph meanings ([meaninggraph-linkage](../ideas/meaninggraph-linkage.md)), for keeping GraphSpec's behavior half as [domain behavior](../features/domain-behavior/README.md) artifacts ([domain-behavior-artifacts](../ideas/domain-behavior-artifacts.md)), and for removing GraphSpec, which MeaningGraph supersedes ([decision 0015](../decisions/0015-meaninggraph-supersedes-graphspec.md)). The work spans seven repositories: `specscore/specscore` (format), `meaninggraph/core` and `meaninggraph/cli` (address grammar, a `meaning/draft-2` reader, value-set transitions, inverse labels, concept deprecation), `specscore/specscore-cli` (lint), `code-grapher/codegrapher` (indexing, annotations, write-back), SpecScore Studio (write-back) and `sneat-co/backstage` (first consumer and GraphSpec migration).
 
 ## Approach
 
@@ -38,19 +38,19 @@ Write the [meaning-references](../features/meaning-references/README.md) feature
 
 Write the [domain-behavior](../features/domain-behavior/README.md) umbrella and its [command](../features/domain-behavior/command/README.md), [event](../features/domain-behavior/event/README.md) and [policy](../features/domain-behavior/policy/README.md) features (done in this change). Pass the specify gate, then register Command, Event and Policy as Document kinds in the [document types registry](../features/document-types-registry/README.md) with their `spec/features/**/*.{kind}.md` consumer paths, and add co-located behavior files to the [feature](../features/feature/README.md) spec's directory layout.
 
-### Task 3: Same-repository meaning addresses (in meaninggraph/core and meaninggraph/cli)
+### Task 3: Same-repository meaning addresses and a draft-2 reader (in meaninggraph/core and meaninggraph/cli)
 
 **Depends-On:** 1
 **Status:** queued
 
-Add `meaning:///{concept}` (empty authority = current repository, per decision 0010's family rule) to `FORMAT.md` and both JSON schemas, the reference checker and the Go parser in `meaninggraph/cli`, with a release that SpecScore and CodeGrapher can depend on.
+Add `meaning:///{concept}` (empty authority = current repository, following decision 0010's family rule) to `FORMAT.md` and both JSON schemas, the reference checker and the Go parser in `meaninggraph/cli`, and release a `meaninggraph/cli` that reads `meaning/draft-2` — value sets, which the migrated lifecycles need, exist only there. SpecScore lint and CodeGrapher depend on that release.
 
 ### Task 4: Value-set transitions and inverse labels (in meaninggraph/core and meaninggraph/cli)
 
 **Depends-On:** 2
 **Status:** queued
 
-Take the `value-set-transitions-and-inverse-labels` idea in `meaninggraph/core` through its own review: allowed transitions declared on a value set, and labels for the inverse direction of a reference property. When accepted, specify them in `FORMAT.md` (a new draft format if needed), the schemas, the checker and the Go parser, and release.
+Take the `value-set-transitions-and-inverse-labels` idea in `meaninggraph/core` through its own review: allowed transitions and initial values declared on a value set, labels for the inverse direction of a reference property, and a deprecation marker for concepts. When accepted, specify them in `FORMAT.md` (a new draft format if needed), the schemas, the checker and the Go parser, and release.
 
 ### Task 5: Lint meaning references (in specscore-cli)
 
@@ -82,7 +82,7 @@ Turn add, change and remove of a link in the viewer into a minimal patch of the 
 
 ### Task 9: First consumer (in sneat-co/backstage)
 
-**Depends-On:** 5, 7
+**Depends-On:** 7, 10
 **Status:** queued
 
 Pin `meaninggraph/core` in backstage `specscore.yaml`, add `**Meanings:**` and inline references to the Features that own the migrated concepts, and run lint and CodeGrapher over the result.
@@ -92,7 +92,7 @@ Pin `meaninggraph/core` in backstage `specscore.yaml`, add `**Meanings:**` and i
 **Depends-On:** 5, 6
 **Status:** queued
 
-Convert `spec/graph/` per the decision 0015 mapping: entities, lifecycles and relationships into root-level `*.meaning.yaml` files (one per GraphSpec module) bound to the existing ModelSpec models; commands, events and policies into domain-behavior artifacts in the Features that own them, with module `dependsOn` re-expressed as those Features' `## Dependencies`; Tier-1 `rules:` into Feature REQs. Re-run the pilot failure probes (dangling event, unknown state, out-of-closure reference, unknown clause operand) against the result, then delete `spec/graph/` and retarget links to it. Keep `spec/graph/pilot-notes.md` and `family-pilot-notes.md` as research.
+Convert `spec/graph/` per the decision 0015 mapping: move each module's `models/*.hcl` to `models/<module>.modelspec.hcl` at the repository root; turn entities, lifecycles and relationships (many-to-many ones into association entities) into root-level `*.meaning.yaml` files, one per GraphSpec module, whose `models` maps list those files; commands, events and policies into domain-behavior artifacts in the Features that own them, with module `dependsOn` re-expressed as those Features' `## Dependencies`; Tier-1 `rules:` into Feature REQs. Re-create the pilot's intentional error probes against the new shapes (unknown event, unknown state value, unknown policy operand), then delete `spec/graph/` and retarget links to it. Keep `spec/graph/pilot-notes.md` and `family-pilot-notes.md` as research.
 
 ### Task 11: Remove GraphSpec vocabulary handling and `specscore graph` (in specscore-cli)
 
@@ -106,7 +106,7 @@ Delete the entity, relationship and module handling of `pkg/graph`, `internal/cl
 **Depends-On:** 11
 **Status:** queued
 
-Delete `spec/features/graphspec/`, archive the `graphspec` idea and the `v1-readiness` plan, move decisions 0004, 0005, 0006, 0009, 0012 and 0013 to `spec/decisions/archived/` as Deprecated, and remove GraphSpec from `README.md`, `ROADMAP.md` and `docs/`.
+Delete `spec/features/graphspec/`, archive the `graphspec` idea and the `v1-readiness` plan, move decisions 0004, 0005, 0006, 0009, 0012 and 0013 to `spec/decisions/archived/` as Deprecated (0007 stays, as amended by decision 0015), and remove GraphSpec from `README.md`, `ROADMAP.md` and `docs/`.
 
 ## Open Questions
 

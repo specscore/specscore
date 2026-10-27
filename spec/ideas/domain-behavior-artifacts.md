@@ -32,7 +32,7 @@ The test that decides where a thing goes: would someone reading the data, withou
 2. **They reference concepts and never define them.** Subjects, actors, participants, inputs and clause operands are `meaning://` references (or `modelspec://` for DataModel shapes), resolved through [meaning-references](../features/meaning-references/README.md). There is no `entity`, `relationship` or `module` kind.
 3. **Ownership is placement; dependency direction is Feature dependencies.** The owning Feature is the directory the file sits in. A behavior artifact may reference another Feature's behavior artifact only when that Feature is in the owner's `## Dependencies` closure — the rule GraphSpec enforced with module `dependsOn`, now on the dependency graph SpecScore already has.
 4. **Lifecycle states and allowed transitions are meaning; who causes a transition is behavior.** The states and the transitions allowed between them live in a MeaningGraph value set (allowed transitions are proposed for `meaninggraph/core` alongside this work). A command, or an event with a non-command source, declares the transition it causes; lint checks the transition is one the value set allows.
-5. **Keep what the pilots validated.** Command → event links authored once, on the command; events list only non-command sources; role-labelled participants; the policy clause vocabulary of decision 0013 with operands retyped to meanings; no expression language; the vocabulary grows only when a consumer needs more. Single-artifact rules are ordinary REQs in the owning Feature.
+5. **Keep what the pilots validated.** Command → event links authored once, on the command; events list only non-command sources; role-labelled participants; the policy clause vocabulary of decision 0013 with operands retyped to meanings; no expression language; the vocabulary grows only when a consumer needs more. Single-artifact rules are ordinary REQs in the owning Feature. What is not kept: GraphSpec's dependency-direction and ownership checks on *vocabulary* (relationship endpoints, cross-module model references). Within one meaning graph concepts have no direction rule; between graphs MeaningGraph pins govern.
 6. **Reuse the CLI implementation.** `specscore-cli` `pkg/graph` already parses and checks commands, events and policies; it is retargeted to the new placement and to meaning references instead of being deleted, and only its entity, relationship and module handling goes.
 
 ## Alternatives Considered
@@ -43,7 +43,7 @@ The test that decides where a thing goes: would someone reading the data, withou
 
 ## MVP Scope
 
-Backstage's Family Identity slice (`familius`, `familycard`, `contactius`): its commands, events and policies rewritten as co-located behavior artifacts referencing migrated meaning concepts, linting clean with the same failure probes the GraphSpec pilot used (dangling event, unknown state, out-of-closure reference, unknown clause operand).
+Backstage's Family Identity slice (`familius`, `familycard`, `contactius`): its commands, events and policies — `share-identity`, `grant-consent`, `guardian-consent-required` and the two revocation invariants among them — rewritten as co-located behavior artifacts referencing migrated meaning concepts, as they are, not simplified, linting clean, with GraphSpec's intentional error probes re-created against the new shapes (an unknown event, an unknown state value, an unknown policy operand).
 
 ## Not Doing (and Why)
 
@@ -51,12 +51,13 @@ Backstage's Family Identity slice (`familius`, `familycard`, `contactius`): its 
 - Entity, relationship or module kinds — concepts are MeaningGraph's, ownership is placement.
 - A runtime or code generator for commands and events — these are specifications; code links to them through source references.
 - Normative failure-case representation for commands — stays prose, as in GraphSpec.
+- Direction rules between concepts inside one meaning graph — MeaningGraph has none, and adding them would put module architecture into a data format.
 
 ## Key Assumptions to Validate
 
 | Tier | Assumption | How to validate |
 |------|------------|-----------------|
-| Must-be-true | Every backstage command, event and policy can be expressed with meaning operands without losing a check | Convert the Family Identity slice and rerun the pilot's failure probes |
+| Must-be-true | Every backstage command, event and policy can be expressed with meaning operands without losing a behavior check | Convert the Family Identity slice unchanged and re-create the pilot's error probes |
 | Must-be-true | Feature dependency closure is an adequate replacement for module `dependsOn` | Map backstage module dependencies onto the owning Features and diff the allowed references |
 | Should-be-true | Most of `pkg/graph` behavior handling survives retargeting | Count retained versus rewritten functions in the CLI change |
 | Might-be-true | Value-set transitions are useful to data consumers beyond SpecScore | Ask DataTug whether it would validate status histories against them |

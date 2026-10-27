@@ -24,7 +24,7 @@ Decisions are durable, lintable records of choices made between two or more opti
 | [0012](0012-role-labeled-endpoints-and-participants.md) | Role-Labeled Relationship Endpoints and Event Participants | Approved | 2026-07-08 | graphspec, relationships, events, roles, semantics | graphspec |
 | [0013](0013-rules-and-policies.md) | Rules and Policies — A Machine-Checkable Home for Domain Constraints | Approved | 2026-07-08 | graphspec, policy, rules, lifecycle, permissions, fragments | graphspec |
 | [0014](0014-records-kind-segment-and-removed-kind-segments.md) | Records Kind Segment, Collection And Recordset Segments Removed | Approved | 2026-10-09 | modelspec, references, namespaces, records, reserved-names | graphspec, modelspec-validation |
-| [0015](0015-meaninggraph-supersedes-graphspec.md) | MeaningGraph Supersedes GraphSpec | In Review | 2026-10-27 | meaninggraph, graphspec, domain-behavior, references, linkage, deprecation | — |
+| [0015](0015-meaninggraph-supersedes-graphspec.md) | MeaningGraph Supersedes GraphSpec | Approved | 2026-10-27 | meaninggraph, graphspec, domain-behavior, references, linkage, deprecation | graphspec, meaning-references, domain-behavior, source-references, repo-config, modelspec-validation |
 
 ## Open Questions
 

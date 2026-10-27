@@ -42,7 +42,7 @@ A meaning reference in a SpecScore artifact MUST use `meaning:///{concept}` for 
 
 #### REQ: reference-locations
 
-Meaning references MAY appear as Markdown links or bare URLs anywhere in the body of a Feature, Idea, Plan or Decision, including inside REQ and AC sections, and in the frontmatter fields of [domain behavior](../domain-behavior/README.md) artifacts that domain-behavior defines. A Feature MAY declare the concepts it is primarily about in an optional `**Meanings:**` header field as a comma-separated list of meaning references; when present it follows `**Source Ideas:**`.
+Meaning references MAY appear as Markdown links or bare URLs anywhere in the body of a Feature, Idea, Plan or Decision, including inside REQ and AC sections, and in the frontmatter fields of [domain behavior](../domain-behavior/README.md) artifacts that domain-behavior defines. A Feature MAY declare the concepts it is primarily about in an optional `**Meanings:**` header field as a comma-separated list of meaning references; when present it follows `**Source Ideas:**` and `**Supersedes:**` and precedes `**Grade:**`, which stays the last header line.
 
 ### Pinning
 
@@ -65,11 +65,15 @@ A reference MAY carry `?ref={commit}`. An inline pin that differs from the confi
 
 #### REQ: nonexistent-concept-is-error
 
-`specscore spec lint` MUST resolve every meaning reference with the MeaningGraph parser at its pin and report as an error a reference to a concept that does not exist, an unreadable pinned commit, or a graph that fails MeaningGraph's own check. A reference to a concept marked deprecated is a warning.
+`specscore spec lint` MUST resolve every meaning reference with the MeaningGraph parser at its pin and report as an error a reference to a concept that does not exist in the graph read at that pin, and a pinned commit or meaning file that cannot be read or parsed. Lint resolves the referenced graph; it does not apply MeaningGraph's own graph check to it. When the MeaningGraph format marks a concept deprecated, a reference to it is a warning.
 
 #### REQ: explicit-network
 
-Lint MUST NOT fetch a meaning repository unless a local checkout or cache is configured or a flag explicitly allows fetching; an unresolvable repository is reported as unresolved, not silently skipped.
+Lint MUST NOT fetch a meaning repository unless a local checkout or cache is configured or a flag explicitly allows fetching. A reference whose repository is not available is **unresolved**: an error by default, so CI without the repository fails rather than passing unchecked, and a warning only when lint is run with an explicit offline option. It is never silently skipped.
+
+#### REQ: frozen-artifacts
+
+In an Approved, Superseded, Deprecated or Rejected Decision, and in an archived Idea, whose bodies cannot be edited, a meaning reference that does not resolve is a warning, not an error.
 
 ### Code annotations
 
@@ -83,7 +87,7 @@ func ShowBooking(...) { ... }
 
 #### REQ: code-relations
 
-A source comment MAY link code to a concept with `meaninggraph:implements {reference}` or `meaninggraph:references {reference}`, in any comment syntax recognised by source-references. An omitted relation means `references`; an unknown relation is an error. Short concept ids without the `meaning:` scheme are accepted for same-repository concepts and expanded to `meaning:///{concept}` before commit.
+A source comment MAY link code to a concept with `meaninggraph:implements {reference}` or `meaninggraph:references {reference}`, in any comment syntax recognised by source-references. An omitted relation means `references`; an unknown relation is an error. Short concept ids without the `meaning:` scheme are accepted only in a repository that has its own root `*.meaning.yaml` files, for a concept of that repository, and are expanded to `meaning:///{concept}` before commit. In any other repository the full `meaning://{host}/{org}/{repo}/{concept}` form is required.
 
 #### REQ: accepted-not-inferred
 
@@ -134,13 +138,19 @@ A cross-repository reference resolves at the pin configured in `specscore.yaml`.
 
 **Requirements:** meaning-references#req:explicit-network
 
-With no local checkout or cache and no fetch flag, lint reports a cross-repository reference as unresolved and makes no network request.
+With no local checkout or cache and no fetch flag, lint reports a cross-repository reference as an unresolved error and makes no network request; with the offline option the same reference is a warning.
+
+### AC: frozen-artifacts-warn
+
+**Requirements:** meaning-references#req:frozen-artifacts
+
+A reference to a removed concept in an Approved Decision is reported as a warning; the same reference in a Draft Feature is an error.
 
 ### AC: typed-code-links
 
 **Requirements:** meaning-references#req:code-relations, meaning-references#req:accepted-not-inferred
 
-`meaninggraph:implements` and `meaninggraph:references` directives are recognised in Go, Python and TypeScript comments; an unknown relation fails; a short concept id is expanded before commit; a name-matched suggestion is never reported as an accepted link.
+`meaninggraph:implements` and `meaninggraph:references` directives are recognised in Go, Python and TypeScript comments; an unknown relation fails; a short concept id is expanded before commit in a repository with meaning files and fails in one without; a name-matched suggestion is never reported as an accepted link.
 
 ### AC: graph-shows-spec-meaning-code
 

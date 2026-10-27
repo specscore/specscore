@@ -45,11 +45,11 @@ transition:
 
 #### REQ: event-subject
 
-`subject` is REQUIRED and MUST be a meaning reference to an entity or value-set concept. `fact` is OPTIONAL and, when present, is a meaning reference to the entity concept that represents occurrences of this event as data (an entity that extends an event concept).
+`subject` is REQUIRED and MUST be a meaning reference to an entity or value-set concept. `fact` is OPTIONAL and, when present, is a meaning reference to an entity concept whose instances are occurrences of this event as data (for example the rows of an audit or event log).
 
 #### REQ: participants
 
-`participants` is OPTIONAL. Each item is either a meaning reference to an entity concept or a map `{ref, role}` whose `role` is one bare kebab-case token. A role is REQUIRED on every item whose `ref` appears more than once in the list; two items with the same `ref` and the same or no role are a validation error.
+`participants` is OPTIONAL. Each item is either a meaning reference to an entity concept or a map `{ref, role}` whose `role` is one bare kebab-case token. Two items with the same `ref` SHOULD carry distinct roles; lint warns on two items with the same `ref` and the same or no role, as decision 0012 did for GraphSpec participants.
 
 #### REQ: non-command-sources
 
@@ -84,7 +84,7 @@ An event with no `sources` that no command lists in `possibleEvents` is reported
 
 **Requirements:** domain-behavior/event#req:event-subject, domain-behavior/event#req:participants, domain-behavior/event#req:non-command-sources, domain-behavior/event#req:event-transition
 
-The example above lints clean. Two `contact` participants without roles, a `sources` entry `cron`, a `commands:` key, and a transition on an event with no `sources` each fail lint.
+The example above lints clean. A `sources` entry `cron`, a `commands:` key, and a transition on an event with no `sources` each fail lint; two `contact` participants without roles produce a warning.
 
 ### AC: payload-and-fact
 
