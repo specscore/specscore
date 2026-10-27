@@ -70,7 +70,7 @@ invariant:
 
 #### REQ: via-steps
 
-A `via` is one step from one instance to another along a reference property P (a property concept whose `values-of` names an entity or value set). Written as a meaning reference to P, it is **forward**: from an instance of P's `of` concept to the instance P's value names. Written as `{inverse: <reference to P>}`, it is **inverse**: from an instance of P's `values-of` concept to the instances of P's `of` concept whose P names it. A step is valid only when the instance it starts from is of the concept the direction requires, or of a concept that extends it.
+A `via` is one step from one instance to another along a reference property P (a property concept whose `values-of` names an entity or value set). Written as a meaning reference to P, it is **forward**: from an instance of P's `of` concept to the instance P's value names. Written as `{inverse: <reference to P>}`, it is **inverse**: from an instance of P's `values-of` concept to the instances of P's `of` concept whose P names it; a clause read through an inverse step holds when it holds for any instance reached. A step is valid only when the instance it starts from is of the concept the direction requires, or of a concept that extends it.
 
 #### REQ: clause-vocabulary
 
@@ -86,7 +86,7 @@ An unknown clause or operand key is a validation error. New clause forms are adm
 
 #### REQ: operands-resolve
 
-Every operand MUST resolve, and lint checks this and nothing more: `input` names an input of the applies command and starts at that input's concept; each `via` is valid per via-steps from the instance it starts at; `property` is a property or dimension concept whose `of` is the concept reached (or a concept that concept extends), and `value` is a value id of the value set its `values-of` names; for `actor-is`, the applies command declares `actors`, the step starts at one of them, and the concept reached is `property`'s `values-of` concept or extends it; `invariant.then.property` belongs to the applies concept.
+Every operand MUST resolve, and lint checks this and nothing more: `input` names an input of the applies command and starts at that input's concept; each `via` is valid per via-steps from the instance it starts at; `property` is a property or dimension concept whose `of` is the concept reached (or a concept that concept extends), and `value` is a value id of the value set its `values-of` names; for `actor-is`, the applies command declares `actors`, and the clause is accepted when, from at least one listed actor, the step is valid and the concept reached is `property`'s `values-of` concept or extends it; `invariant.then.property` belongs to the applies concept.
 
 #### REQ: no-expressions
 

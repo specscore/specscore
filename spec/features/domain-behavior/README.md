@@ -67,7 +67,7 @@ A behavior artifact MUST NOT define a domain concept or a structure: no `fields:
 
 #### REQ: references-resolve
 
-Every reference in a behavior artifact MUST resolve: meaning references per meaning-references; same-repository DataModel references through the `models` maps of the repository's root `*.meaning.yaml` files (module short name to model source path, as MeaningGraph bindings use them), and otherwise per decision 0007's configured-project and cross-repository steps ([decision 0015](../../decisions/0015-meaninggraph-supersedes-graphspec.md) replaces 0007's graph-root step); and behavior references to an existing artifact of the kind the field expects. A reference to a behavior artifact in another repository is a validation error in this version.
+Every reference in a behavior artifact MUST resolve: meaning references per meaning-references; same-repository DataModel references through the union of the `models` maps of the repository's root `*.meaning.yaml` files (module short name to model source path, as MeaningGraph bindings use them; one short name mapped to two different paths in two files is an error), and otherwise per decision 0007's configured-project step — searching that project's root meaning files' `models` maps the same way — and its cross-repository step ([decision 0015](../../decisions/0015-meaninggraph-supersedes-graphspec.md) replaces 0007's graph-root step). A model with no concepts of its own, such as a pure structural provider, is listed in the `models` map of a meaning file that uses it; and behavior references to an existing artifact of the kind the field expects. A reference to a behavior artifact in another repository is a validation error in this version.
 
 #### REQ: dependency-closure
 
@@ -94,11 +94,11 @@ transition:
 
 #### REQ: transition-shape
 
-A `transition` MUST carry `property`, a meaning reference to a property or dimension concept whose `values-of` (own or inherited) names a value set; `to`, one value id of that set; and optionally `from`, a non-empty list of value ids of that set or the single token `any`. A transition without `from` creates the instance: it is allowed only on a command or event whose `subject` is the property's `of` concept. Retired values are allowed with a warning.
+A `transition` MUST carry `property`, a meaning reference to a property or dimension concept whose `values-of` (own or inherited) names a value set; `to`, one value id of that set; and optionally `from`, a non-empty list of value ids of that set or the single token `any`. A transition without `from` creates the instance: it is allowed only on a command or event whose `subject` is the property's `of` concept or a concept that extends it. Retired values are allowed with a warning.
 
 #### REQ: transition-allowed
 
-When the value set declares allowed transitions, every `from` value to `to` pair MUST be one the value set allows, and a creating transition's `to` MUST be one of the value set's initial values when it declares them. When it declares neither, any pair of distinct values, and any creating `to`, is accepted and lint reports one notice per value set naming the artifacts that rely on it.
+When the value set declares allowed transitions, every `from` value to `to` pair MUST be one the value set allows, and a creating transition's `to` MUST be one of the value set's initial values when it declares them. A pair is accepted with a notice when the value set declares no transitions, and a creating `to` is accepted with a notice when it declares no initial values; lint reports one notice per value set naming the artifacts that rely on what it does not declare.
 
 ### Rules local to one Feature
 

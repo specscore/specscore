@@ -80,7 +80,7 @@ The backstage graph and the `specscore graph` command still depend on it; deleti
 
 ## Observed Consequences
 
-None observed yet.
+- 2026-10-27, review of the drafts: a module with models but no concepts (`calendarius`) has no meaning file of its own, since a meaning file needs at least one concept. Its models are listed in the `models` map of each meaning file that uses them, and the resolver reads the union of the maps, one path per short name ([domain-behavior](../features/domain-behavior/README.md#req-references-resolve)).
 
 ## Affected Features
 
