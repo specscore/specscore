@@ -50,7 +50,7 @@ Add `meaning:///{concept}` (empty authority = current repository, following deci
 **Depends-On:** 2
 **Status:** queued
 
-Take the `value-set-transitions-and-inverse-labels` idea in `meaninggraph/core` through its own review: allowed transitions and initial values declared on a value set, labels for the inverse direction of a reference property, and a deprecation marker for concepts. When accepted, specify them in `FORMAT.md` (a new draft format if needed), the schemas, the checker and the Go parser, and release.
+Take the `value-set-transitions-and-inverse-labels` idea in `meaninggraph/core` through its own review: allowed transitions and initial values declared on a value set, labels for the inverse direction of a reference property, and a deprecation marker for concepts. When accepted, specify them in `FORMAT.md` and the `meaning/draft-2` schema (decided 2026-10-27: draft-2, not a new draft-3, since no released reader or published graph uses draft-2 yet), the checker and the Go parser, and release them together with Task 3's draft-2 reader.
 
 ### Task 5: Lint meaning references (in specscore-cli)
 
