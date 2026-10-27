@@ -48,7 +48,7 @@ consumers do not exist yet; the layer above GraphSpec has never consumed it.
 entity/property Doc-Kinds beside ModelSpec, with no migration bridge and the
 legacy surface more expressive in spots); GraphSpec publicly framed as "a
 specification language" while deliberately welded to SpecScore
-([0008](../../../decisions/0008-graphspec-is-a-specscore-component.md) is the
+([0008](../../../decisions/archived/0008-graphspec-is-a-specscore-component.md) is the
 right call — the framing must be blunt about it); the `spec/features/` tree
 conflating the meta-model, product features, and an embedded language ("Feature:
 Feature" and "Feature: GraphSpec" as peers); the PolyModel→ModelSpec absorption
