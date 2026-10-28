@@ -38,19 +38,19 @@ Write the [meaning-references](../features/meaning-references/README.md) feature
 
 Write the [domain-behavior](../features/domain-behavior/README.md) umbrella and its [command](../features/domain-behavior/command/README.md), [event](../features/domain-behavior/event/README.md) and [policy](../features/domain-behavior/policy/README.md) features (done in this change). Pass the specify gate, then register Command, Event and Policy as Document kinds in the [document types registry](../features/document-types-registry/README.md) with their `spec/features/**/*.{kind}.md` consumer paths, and add co-located behavior files to the [feature](../features/feature/README.md) spec's directory layout.
 
-### Task 3: Same-repository meaning addresses and a draft-2 reader (in meaninggraph/core and meaninggraph/cli)
+### Task 3: One meaning-file format and a draft-2 reader (in meaninggraph/core and meaninggraph/cli)
 
 **Depends-On:** 1
-**Status:** queued
+**Status:** in_progress
 
-Add `meaning:///{concept}` (empty authority = current repository, following decision 0010's family rule) to `FORMAT.md` and both JSON schemas, the reference checker and the Go parser in `meaninggraph/cli`, and release a `meaninggraph/cli` that reads `meaning/draft-2` — value sets, which the migrated lifecycles need, exist only there. SpecScore lint and CodeGrapher depend on that release.
+The owner chose a clean cut on 2026-10-27: `meaning/draft-2` is the only format and `meaning/draft-1` is withdrawn (meaninggraph/core#15, decision 0004 there). That change adds `meaning:///{concept}` and, from Task 4's idea, `transitions`, `initial`, `inverse` and `deprecated`/`replaced-by` to `FORMAT.md`, the schema and the reference checker; rewrites every registered graph in draft 2 (one pull request per dataset repository, files moved to the repository root); updates `meaninggraph/registry` and the meaninggraph.io site; and ports `meaninggraph/cli` to draft 2 only. Done when those pull requests are merged, the CLI release that reads only draft 2 is tagged and the registry is repinned. CodeGrapher then moves to that CLI release.
 
-### Task 4: Value-set transitions and inverse labels (in meaninggraph/core and meaninggraph/cli)
+### Task 4: Value-set transitions, inverse labels and concept deprecation (in meaninggraph/core)
 
 **Depends-On:** 2
-**Status:** queued
+**Status:** in_progress
 
-Take the `value-set-transitions-and-inverse-labels` idea in `meaninggraph/core` through its own review: allowed transitions and initial values declared on a value set, labels for the inverse direction of a reference property, and a deprecation marker for concepts. When accepted, specify them in `FORMAT.md` and the `meaning/draft-2` schema (decided 2026-10-27: draft-2, not a new draft-3, since no released reader or published graph uses draft-2 yet), the checker and the Go parser, and release them together with Task 3's draft-2 reader.
+Specified together with Task 3 in meaninggraph/core#15 (idea `value-set-transitions-and-inverse-labels`, reviewed; decision 0004). Done when that pull request is merged; the readers ship with Task 3's CLI release.
 
 ### Task 5: Lint meaning references (in specscore-cli)
 

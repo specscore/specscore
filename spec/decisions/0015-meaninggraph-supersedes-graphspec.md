@@ -81,6 +81,7 @@ The backstage graph and the `specscore graph` command still depend on it; deleti
 ## Observed Consequences
 
 - 2026-10-27, review of the drafts: a module with models but no concepts (`calendarius`) has no meaning file of its own, since a meaning file needs at least one concept. Its models are listed in the `models` map of each meaning file that uses them, and the resolver reads the union of the maps, one path per short name ([domain-behavior](../features/domain-behavior/README.md#req-references-resolve)).
+- 2026-10-28: the owner chose a clean cut to one MeaningGraph format, `meaning/draft-2`; `meaning/draft-1` is withdrawn and every registered graph is rewritten (meaninggraph/core#15). The draft-2 reader this decision waits for is therefore the only MeaningGraph reader.
 
 ## Affected Features
 
