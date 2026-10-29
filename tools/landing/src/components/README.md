@@ -6,6 +6,7 @@ One Astro component per IA section, in render order, plus a header and a footer.
 |---|---|---|
 | `SiteHeader.astro` | — | Sticky header: clef wordmark + GitHub link. No theme toggle (landing is light-only). |
 | `Hero.astro` | 1 | Hero — headline, subhead, CTAs, score illustration. |
+| `FilmSection.astro` / `FilmSectionRu.astro` | 1b | Click-to-load product film directly under the hero. English and Russian only; other locales show no film. Structure and click-to-load markup live in `FilmEmbed.astro`; styles in `global.css`. |
 | `Problem.astro` | 2 | The Problem — only section in technical-but-warm voice. |
 | `WhatSpecScoreIs.astro` | 3 | Format definition + hierarchy SVG + example spec block. |
 | `LinterDemo.astro` | 4 | Terminal block. Green/red marks match the hero illustration. |
