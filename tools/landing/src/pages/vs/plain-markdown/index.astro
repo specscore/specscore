@@ -112,12 +112,12 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
               <tr>
                 <td>"Is this spec complete?"</td>
                 <td>A human reads it and decides</td>
-                <td><strong><code>specscore lint</code></strong> — automatic</td>
+                <td><strong><code>specscore spec lint</code></strong> — automatic</td>
               </tr>
               <tr>
                 <td>Ambiguity detection</td>
                 <td>None — vague verbs ship silently</td>
-                <td><strong>Vague verbs, missing ACs, dangling refs flagged</strong></td>
+                <td><strong>Structural gaps and broken refs flagged; vague wording flagged by the AI review</strong></td>
               </tr>
               <tr>
                 <td>Requirement / AC IDs</td>
@@ -142,7 +142,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
               <tr>
                 <td>CI quality gate</td>
                 <td>None</td>
-                <td><strong><code>specscore lint</code></strong> exits non-zero, like a linter</td>
+                <td><strong><code>specscore spec lint</code></strong> exits non-zero, like a linter</td>
               </tr>
               <tr>
                 <td>Learning curve</td>
@@ -171,13 +171,16 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
             <p class="diff-card__desc">
               With freeform specs, every agent interaction starts with interpretation —
               "login should work" is a coin flip between right and plausible-but-wrong.
-              SpecScore's <code>lint</code> flags the vague verb and the missing
-              acceptance criterion before an agent acts on it.
+              SpecScore's <code>spec lint</code> flags structural gaps and broken references, and its AI review flags the vague verb, before an agent acts on it.
             </p>
             <div class="diff-card__example">
-<pre class="terminal"><span class="prompt">$</span> specscore lint auth/login.md
-  <span class="mark-fail">✗</span> R1  <span class="dim">"should work" — unmeasurable</span>
-  <span class="mark-fail">✗</span> R1  no acceptance criteria</pre>
+<pre class="terminal"><span class="prompt">$</span> specscore spec lint
+
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> oq-section: <span class="dim">Open Questions section not found</span>
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> index-entries: <span class="dim">Child directory not listed in index: refunds</span>
+features/apply-discount/refunds:0 <span class="mark-fail">[error]</span> readme-exists: <span class="dim">README.md not found</span>
+
+3 violations found (3 errors)</pre>
             </div>
           </div>
 
@@ -223,7 +226,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
             <h3 class="diff-card__title">Quality is enforced in CI</h3>
             <p class="diff-card__desc">
               Freeform specs have no gate — a half-written one merges as easily as a
-              complete one. <code>specscore lint</code> exits non-zero on problems,
+              complete one. <code>specscore spec lint</code> exits non-zero on problems,
               the same way ESLint or <code>go vet</code> guards code.
             </p>
           </div>
@@ -266,7 +269,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
         <h2 id="bridge-title" class="section-title">Graduate the specs you already have.</h2>
         <p class="prose-p">
           You don't convert your backlog or change your tools. Pick your next feature,
-          write a SpecScore spec for it, and run <code>specscore lint</code> — see if it
+          write a SpecScore spec for it, and run <code>specscore spec lint</code> — see if it
           catches something your ticket missed. Add <code>specscore:</code> annotations
           when you implement it. Expand to the next sprint only if it helped.
         </p>

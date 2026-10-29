@@ -11,7 +11,7 @@ import ScoreExample from './ScoreExample.astro';
     <h2 id="passes-title" class="passes__title">Check your spec in two passes.</h2>
     <p class="passes__intro">
       A fast deterministic linter, then a deeper AI review — run against the
-      spec you just saw. Two passes, two kinds of certainty.
+      spec you just saw, with a few deliberate mistakes. Two passes, two kinds of certainty.
     </p>
 
     <div class="passes__grid">
@@ -24,7 +24,7 @@ import ScoreExample from './ScoreExample.astro';
         <div
           class="pass__terminal"
           role="img"
-          aria-label="Terminal output of specscore lint: R1 and R2 have acceptance criteria (green checks); R3 has none, a Related Feature link doesn't resolve, and the required Open Questions section is missing (red marks). 3 problems, exit 1."
+          aria-label="Terminal output of specscore spec lint: three errors. The Open Questions section is missing from the apply-discount feature, a child directory is not listed in the index, and it has no README.md. 3 violations found, exit code 1."
         >
           <LintExample />
         </div>

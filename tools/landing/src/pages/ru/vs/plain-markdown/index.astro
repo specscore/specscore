@@ -112,12 +112,12 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
               <tr>
                 <td>«Полна ли эта спецификация?»</td>
                 <td>Человек читает и решает</td>
-                <td><strong><code>specscore lint</code></strong> — автоматически</td>
+                <td><strong><code>specscore spec lint</code></strong> — автоматически</td>
               </tr>
               <tr>
                 <td>Выявление неоднозначности</td>
                 <td>Нет — расплывчатые глаголы проходят молча</td>
-                <td><strong>Расплывчатые глаголы, отсутствующие критерии приёмки, висячие ссылки помечаются</strong></td>
+                <td><strong>Структурные пробелы и битые ссылки помечаются; расплывчатые формулировки — проверкой ИИ</strong></td>
               </tr>
               <tr>
                 <td>ID требований / критериев приёмки</td>
@@ -142,7 +142,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
               <tr>
                 <td>Гейт качества в CI</td>
                 <td>Нет</td>
-                <td><strong><code>specscore lint</code></strong> завершается с ненулевым кодом, как линтер</td>
+                <td><strong><code>specscore spec lint</code></strong> завершается с ненулевым кодом, как линтер</td>
               </tr>
               <tr>
                 <td>Порог входа</td>
@@ -171,14 +171,16 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
             <p class="diff-card__desc">
               При свободных спецификациях каждое взаимодействие с агентом начинается с
               интерпретации — «логин должен работать» — это подброс монетки между «верно»
-              и «правдоподобно, но неверно». <code>lint</code> в SpecScore помечает
-              расплывчатый глагол и отсутствующий критерий приёмки до того, как агент
-              начнёт действовать.
+              и «правдоподобно, но неверно». <code>spec lint</code> в SpecScore помечает структурные пробелы и битые ссылки, а проверка ИИ — расплывчатый глагол, до того как агент начнёт действовать.
             </p>
             <div class="diff-card__example">
-<pre class="terminal"><span class="prompt">$</span> specscore lint auth/login.md
-  <span class="mark-fail">✗</span> R1  <span class="dim">"should work" — unmeasurable</span>
-  <span class="mark-fail">✗</span> R1  no acceptance criteria</pre>
+<pre class="terminal"><span class="prompt">$</span> specscore spec lint
+
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> oq-section: <span class="dim">Open Questions section not found</span>
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> index-entries: <span class="dim">Child directory not listed in index: refunds</span>
+features/apply-discount/refunds:0 <span class="mark-fail">[error]</span> readme-exists: <span class="dim">README.md not found</span>
+
+3 violations found (3 errors)</pre>
             </div>
           </div>
 
@@ -224,7 +226,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
             <h3 class="diff-card__title">Качество контролируется в CI</h3>
             <p class="diff-card__desc">
               У свободных спецификаций нет гейта — недописанная сливается так же легко,
-              как и полная. <code>specscore lint</code> завершается с ненулевым кодом при
+              как и полная. <code>specscore spec lint</code> завершается с ненулевым кодом при
               проблемах, так же как ESLint или <code>go vet</code> охраняют код.
             </p>
           </div>
@@ -268,7 +270,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
         <p class="prose-p">
           Вы не конвертируете свой бэклог и не меняете инструменты. Выберите следующую
           функцию, напишите для неё спецификацию SpecScore и запустите
-          <code>specscore lint</code> — посмотрите, поймает ли он то, что упустил ваш
+          <code>specscore spec lint</code> — посмотрите, поймает ли он то, что упустил ваш
           тикет. Добавьте аннотации <code>specscore:</code>, когда будете реализовывать.
           Расширяйтесь на следующий спринт только если это помогло.
         </p>

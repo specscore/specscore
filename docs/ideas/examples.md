@@ -76,7 +76,7 @@ TBD.
 
 > `# AI Dashboard Idea`
 
-The required format is `# Idea: <Name>` — the `Idea:` prefix is load-bearing because `specscore lint` uses it as the dispatch key to select the Idea rule set. Without it the linter cannot tell whether to apply Idea rules or Feature rules. This is rule `idea-title-format`.
+The required format is `# Idea: <Name>` — the `Idea:` prefix is load-bearing because `specscore spec lint` uses it as the dispatch key to select the Idea rule set. Without it the linter cannot tell whether to apply Idea rules or Feature rules. This is rule `idea-title-format`.
 
 > `**Status:** Specified`
 >

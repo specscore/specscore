@@ -10,7 +10,7 @@ import ScoreExample from './ScoreExample.astro';
     <h2 id="passes-title" class="passes__title">Проверьте спецификацию в два прохода.</h2>
     <p class="passes__intro">
       Сначала быстрый детерминированный линтер, затем более глубокая проверка
-      ИИ — на той же спецификации, что вы только что видели. Два прохода — два
+      ИИ — на той же спецификации, что вы только что видели, с несколькими намеренными ошибками. Два прохода — два
       вида уверенности.
     </p>
 
@@ -24,7 +24,7 @@ import ScoreExample from './ScoreExample.astro';
         <div
           class="pass__terminal"
           role="img"
-          aria-label="Вывод specscore lint: у R1 и R2 есть критерии приёмки (зелёные галочки); у R3 их нет, ссылка Related Feature не разрешается, отсутствует обязательная секция Open Questions (красные отметки). 3 проблемы, exit 1."
+          aria-label="Вывод specscore spec lint: три ошибки. В фиче apply-discount нет секции Open Questions, дочерняя директория не указана в индексе, а в ней нет README.md. 3 violations found, код выхода 1."
         >
           <LintExample />
         </div>

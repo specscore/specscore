@@ -129,7 +129,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
               <tr>
                 <td>Линтинг спецификаций</td>
                 <td>Не документировано</td>
-                <td><strong>Качество содержания</strong> — расплывчатые глаголы, отсутствующие критерии приёмки, висячие ссылки</td>
+                <td><strong>Структура и ссылки</strong> — обязательные секции, заголовки критериев приёмки, ссылки, расхождения индексов</td>
               </tr>
               <tr>
                 <td>Трассируемость кода к спецификациям</td>
@@ -192,14 +192,16 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
             <h3 class="diff-card__title">Неоднозначность ловится до того, как стоит дорого</h3>
             <p class="diff-card__desc">
               С LLM-компилятором неоднозначная спецификация превращается в неверный код во
-              время сборки. <code>lint</code> в SpecScore выявляет расплывчатые глаголы,
-              отсутствующие критерии приёмки и висячие ссылки <em>до</em> того, как агент
-              начнёт действовать.
+              время сборки. <code>spec lint</code> в SpecScore выявляет недостающие секции, неверно оформленные заголовки критериев приёмки и битые ссылки <em>до</em> того, как агент начнёт действовать; расплывчатые формулировки ловит проверка ИИ.
             </p>
             <div class="diff-card__example">
-<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-  <span class="mark-fail">✗</span> R3  no acceptance criteria
-  <span class="mark-fail">✗</span> verb  <span class="dim">"handle gracefully" — unmeasurable</span></pre>
+<pre class="terminal"><span class="prompt">$</span> specscore spec lint
+
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> oq-section: <span class="dim">Open Questions section not found</span>
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> index-entries: <span class="dim">Child directory not listed in index: refunds</span>
+features/apply-discount/refunds:0 <span class="mark-fail">[error]</span> readme-exists: <span class="dim">README.md not found</span>
+
+3 violations found (3 errors)</pre>
             </div>
           </div>
 
@@ -254,7 +256,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
             <ul class="when-card__list">
               <li>Вам нужны спецификации, которые переживут любой отдельный инструмент — переносимые по конструкции.</li>
               <li>Вы хотите сохранить свой код, на своём языке, с возможностью ревью и владения.</li>
-              <li>Вам нужен контроль качества спецификаций — линт ловит неоднозначность рано.</li>
+              <li>Вам нужен контроль качества спецификаций — линт рано находит структурные пробелы.</li>
               <li>Вам нужна детерминированная трассируемость кода к спецификациям.</li>
               <li>Вы не хотите вендора и обращения к LLM в пути сборки.</li>
             </ul>

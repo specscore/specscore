@@ -45,7 +45,7 @@
 
         <figure
           class="what-is__diagram"
-          aria-label="SpecScore hierarchy. A Feature contains Requirements (R1, R2, R3). Each Requirement contains Acceptance Criteria (AC). Scenarios sit beneath."
+          aria-label="SpecScore hierarchy. A Feature contains Requirements (REQ). Each Requirement is verified by Acceptance Criteria (AC), written as Given / When / Then."
         >
           <svg
             viewBox="0 0 760 320"
@@ -64,21 +64,21 @@
             <path d="M 380 64 V 88 H 620 V 110" class="wf-line" />
 
             <rect x="80"  y="110" width="120" height="40" rx="2" class="wf-node" />
-            <text x="140" y="135" text-anchor="middle" class="wf-label">R1</text>
+            <text x="140" y="135" text-anchor="middle" class="wf-label">REQ</text>
 
             <rect x="320" y="110" width="120" height="40" rx="2" class="wf-node" />
-            <text x="380" y="135" text-anchor="middle" class="wf-label">R2</text>
+            <text x="380" y="135" text-anchor="middle" class="wf-label">REQ</text>
 
             <rect x="560" y="110" width="120" height="40" rx="2" class="wf-node" />
-            <text x="620" y="135" text-anchor="middle" class="wf-label">R3</text>
+            <text x="620" y="135" text-anchor="middle" class="wf-label">REQ</text>
 
             <path d="M 140 150 V 178" class="wf-line" />
             <path d="M 380 150 V 178" class="wf-line" />
             <path d="M 620 150 V 178" class="wf-line" />
 
-            <text x="140" y="198" text-anchor="middle" class="wf-label-small">AC-1, AC-2</text>
-            <text x="380" y="198" text-anchor="middle" class="wf-label-small">AC-1, AC-2</text>
-            <text x="620" y="198" text-anchor="middle" class="wf-label-small">AC-1 … AC-3</text>
+            <text x="140" y="198" text-anchor="middle" class="wf-label-small">AC, AC</text>
+            <text x="380" y="198" text-anchor="middle" class="wf-label-small">AC</text>
+            <text x="620" y="198" text-anchor="middle" class="wf-label-small">AC, AC, AC</text>
 
             <path d="M 140 214 V 240 H 380 V 240" class="wf-line" />
             <path d="M 380 214 V 240" class="wf-line" />
@@ -89,7 +89,7 @@
             <text x="380" y="284" text-anchor="middle" class="wf-label">GIVEN / WHEN / THEN</text>
           </svg>
           <figcaption class="what-is__diagram-cap">
-            Feature → Requirements → Acceptance Criteria → Scenarios.
+            Feature → Requirements → Acceptance Criteria (Given / When / Then).
           </figcaption>
         </figure>
 
@@ -111,29 +111,41 @@
               <div class="what-is__example">
                 <div class="what-is__example-head">
                   <span class="what-is__example-label">EXAMPLE</span>
-                  <span class="what-is__example-path">ideas/apply-discount.md</span>
+                  <span class="what-is__example-path">spec/ideas/discount-codes.md</span>
                 </div>
-<pre class="what-is__example-code"><code><span class="sx-h1"># Idea: Discount codes at checkout</span>
+<pre class="what-is__example-code"><code><span class="sx-fm">---
+format: https://specscore.md/idea-specification
+status: Specified
+---</span>
 
-<span class="sx-bold">**Status:**</span> Approved
+<span class="sx-h1"># Idea: Discount codes at checkout</span>
+
+<span class="sx-bold">**Status:**</span> Specified
 <span class="sx-bold">**Date:**</span> 2026-05-19
 <span class="sx-bold">**Owner:**</span> cart-team
-<span class="sx-bold">**Promotes To:**</span> features/apply-discount
+<span class="sx-bold">**Promotes To:**</span> apply-discount
+<span class="sx-bold">**Supersedes:**</span> —
+<span class="sx-bold">**Related Ideas:**</span> —
 
 <span class="sx-h2">## Problem Statement</span>
 
-How might we let returning customers redeem a
-single promo code at checkout without breaking
-the existing cart math or the site-wide promotion
-engine?
+How might we let returning customers redeem a single promo
+code at checkout without breaking the existing cart math
+or the site-wide promotion engine?
+
+<span class="sx-h2">## Context</span>
+
+Support applies promo codes by hand today. Each manual
+discount skips the promotion engine.
 
 <span class="sx-h2">## Recommended Direction</span>
 
-A registered user can apply <span class="sx-bold">**one**</span> valid code per cart.
-Codes are time-bounded and replaceable. Stacking
-with site-wide promotions follows a deterministic
-tiebreak rule (higher discount wins; site-wide
-wins on tie).</code></pre>
+A registered user applies one valid code per cart. Codes
+are time-bounded and replaceable. Stacking with site-wide
+promotions follows a deterministic tiebreak: the higher
+discount wins, and the site-wide promotion wins on a tie.
+
+<span class="sx-fm">…</span></code></pre>
               </div>
             </div>
 
@@ -141,41 +153,64 @@ wins on tie).</code></pre>
               <div class="what-is__example">
                 <div class="what-is__example-head">
                   <span class="what-is__example-label">EXAMPLE</span>
-                  <span class="what-is__example-path">features/checkout/apply-discount.md</span>
+                  <span class="what-is__example-path">spec/features/apply-discount/README.md</span>
                 </div>
 <pre class="what-is__example-code"><code><span class="sx-fm">---
-status: approved
-owners: [cart-team]
+format: https://specscore.md/feature-specification
+status: Approved
 ---</span>
 
 <span class="sx-h1"># Feature: Apply Discount</span>
 
-A registered user can apply one valid discount code to their cart at checkout.
+<span class="sx-bold">**Status:**</span> Approved
+<span class="sx-bold">**Source Ideas:**</span> discount-codes
 
-<span class="sx-h2">## Requirements</span>
+<span class="sx-h2">## Summary</span>
 
-<span class="sx-h3">### R1 — Single-code limit</span>
+A registered user can apply one valid discount code to
+their cart at checkout.
 
-- <span class="sx-bold">**AC-1**</span> The cart accepts at most one discount code at a time.
-- <span class="sx-bold">**AC-2**</span> Applying a second code replaces the first, with a visible confirmation.
-- <span class="sx-bold">**AC-3**</span> Removing the code restores the original cart total.
+<span class="sx-h2">## Problem</span>
 
-<span class="sx-h3">### R2 — Code validity</span>
+Returning customers hold promo codes but cannot redeem
+them at checkout, so support applies discounts by hand.
 
-- <span class="sx-bold">**AC-1**</span> A code is valid only if <span class="sx-tick">`valid_from`</span> ≤ now ≤ <span class="sx-tick">`valid_until`</span>.
-- <span class="sx-bold">**AC-2**</span> Invalid codes show a specific error message.
+<span class="sx-h2">## Behavior</span>
 
-<span class="sx-h3">### R3 — Discount application</span>
+<span class="sx-h3">### Single code per cart</span>
 
-- <span class="sx-bold">**AC-1**</span> Percentage discounts apply to subtotal, not shipping.
-- <span class="sx-bold">**AC-2**</span> Discount totals round down to the nearest cent.
-- <span class="sx-bold">**AC-3**</span> Stacking with site-wide promotions follows the higher-of rule.
+<span class="sx-h3">#### REQ: one-code-per-cart</span>
 
-<span class="sx-h2">## Scenario: Apply a valid percent-off code</span>
+The cart MUST hold at most one discount code at a time.
+Applying a second code MUST replace the first.
 
-<span class="sx-bold">**GIVEN**</span> a cart with subtotal $50.00 and shipping $10.00
-<span class="sx-bold">**WHEN**</span> the user applies code <span class="sx-tick">`SAVE20`</span> (20% off)
-<span class="sx-bold">**THEN**</span> the cart shows subtotal $40.00, shipping $10.00, total $50.00</code></pre>
+<span class="sx-h3">### Code validity</span>
+
+<span class="sx-h3">#### REQ: code-time-window</span>
+
+The system MUST accept a code only while <span class="sx-tick">`valid_from`</span> &lt;=
+now &lt;= <span class="sx-tick">`valid_until`</span>.
+
+<span class="sx-h2">## Acceptance Criteria</span>
+
+<span class="sx-h3">### AC: second-code-replaces-first (verifies REQ:one-code-per-cart)</span>
+
+<span class="sx-bold">**Given**</span> a cart with code <span class="sx-tick">`SAVE20`</span> applied
+<span class="sx-bold">**When**</span> the user applies code <span class="sx-tick">`SAVE10`</span>
+<span class="sx-bold">**Then**</span> the cart shows only <span class="sx-tick">`SAVE10`</span> and a confirmation
+
+<span class="sx-h3">### AC: expired-code-rejected (verifies REQ:code-time-window)</span>
+
+<span class="sx-bold">**Given**</span> a code whose <span class="sx-tick">`valid_until`</span> is yesterday
+<span class="sx-bold">**When**</span> the user applies it
+<span class="sx-bold">**Then**</span> the total is unchanged and "This code has expired" shows
+
+<span class="sx-h2">## Open Questions</span>
+
+None at this time.
+
+<span class="sx-fm">---</span>
+<span class="sx-fm">*This document follows the https://specscore.md/feature-specification*</span></code></pre>
               </div>
             </div>
 
@@ -183,39 +218,58 @@ A registered user can apply one valid discount code to their cart at checkout.
               <div class="what-is__example">
                 <div class="what-is__example-head">
                   <span class="what-is__example-label">EXAMPLE</span>
-                  <span class="what-is__example-path">plans/apply-discount/README.md</span>
+                  <span class="what-is__example-path">>spec/plans/apply-discount/README.md<</span>
                 </div>
-<pre class="what-is__example-code"><code><span class="sx-h1"># Plan: Apply Discount</span>
+<pre class="what-is__example-code"><code><span class="sx-fm">---
+format: https://specscore.md/plan-specification
+status: Approved
+---</span>
+<span class="sx-h1"># Plan: Apply Discount</span>
 
-<span class="sx-bold">**Status:**</span> approved
-<span class="sx-bold">**Features:**</span>
-  - <span class="sx-tick">[apply-discount](../../features/apply-discount.md)</span>
-<span class="sx-bold">**Author:**</span> cart-team
-<span class="sx-bold">**Effort:**</span> M
-<span class="sx-bold">**Impact:**</span> high
+<span class="sx-bold">**Status:**</span> Approved
+<span class="sx-bold">**Source Feature:**</span> apply-discount
+<span class="sx-bold">**Date:**</span> 2026-05-26
+<span class="sx-bold">**Owner:**</span> cart-team
+<span class="sx-bold">**Supersedes:**</span> —
 
-<span class="sx-h2">## Context</span>
+<span class="sx-h2">## Summary</span>
 
-The <span class="sx-tick">apply-discount</span> Feature is Approved. This plan
-breaks it into ordered tasks; each task cites the
-acceptance criteria it satisfies.
+Implement the apply-discount feature: one code per cart,
+with a validity window.
+
+<span class="sx-h2">## Approach</span>
+
+Build the cart <span class="sx-tick">`code`</span> field first, then validate the time
+window on top of it.
 
 <span class="sx-h2">## Tasks</span>
 
-<span class="sx-h3">### T1 — Accept a `code` field on the cart</span>
-Cites: R1.AC-1, R1.AC-2, R1.AC-3
+<span class="sx-h3">### Task 1: Accept a discount code on the cart</span>
 
-<span class="sx-h3">### T2 — Validate code time-window</span>
-Cites: R2.AC-1, R2.AC-2
+<span class="sx-bold">**Id:**</span> task-1
+<span class="sx-bold">**Verifies:**</span> apply-discount#ac:second-code-replaces-first
+<span class="sx-bold">**Depends-On:**</span> —
+<span class="sx-bold">**Status:**</span> planning
 
-<span class="sx-h3">### T3 — Apply percentage to subtotal, round down</span>
-Cites: R3.AC-1, R3.AC-2
+Add a <span class="sx-tick">`code`</span> field to the cart and replace it when a
+second code is applied.
 
-<span class="sx-h3">### T4 — Higher-of tiebreak vs site-wide promo</span>
-Cites: R3.AC-3
+<span class="sx-h3">### Task 2: Reject codes outside their validity window</span>
 
-<span class="sx-h3">### T5 — Confirmation toast on apply / replace</span>
-Cites: R1.AC-2</code></pre>
+<span class="sx-bold">**Id:**</span> task-2
+<span class="sx-bold">**Verifies:**</span> apply-discount#ac:expired-code-rejected
+<span class="sx-bold">**Depends-On:**</span> 1
+<span class="sx-bold">**Status:**</span> planning
+
+Compare <span class="sx-tick">`valid_from`</span> and <span class="sx-tick">`valid_until`</span> with now before
+applying a code.
+
+<span class="sx-h2">## Open Questions</span>
+
+None at this time.
+
+<span class="sx-fm">---</span>
+<span class="sx-fm">*This document follows the https://specscore.md/plan-specification*</span></code></pre>
               </div>
             </div>
 

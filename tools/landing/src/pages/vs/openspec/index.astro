@@ -26,7 +26,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
         <p class="hero__sub">
           Both put specifications in Markdown, next to your code, readable by AI agents.
           They answer different questions: OpenSpec organizes specs and generates agent
-          commands. SpecScore lints spec content, enforces lifecycle, and traces code
+          commands. SpecScore lints spec structure and references, enforces lifecycle, and traces code
           back to requirements.
         </p>
       </div>
@@ -38,7 +38,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
         <h2 id="shared-title" class="section-title">What they share.</h2>
         <ul class="shared-list">
           <li>Specs live in your repo as Markdown files — version-controlled, PR-reviewable.</li>
-          <li>Both are open source under the MIT license.</li>
+          <li>Both are open source.</li>
           <li>Both use Given/When/Then acceptance criteria.</li>
           <li>Both support AI coding agents as first-class consumers of specs.</li>
         </ul>
@@ -107,7 +107,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
               <tr>
                 <td>Spec linting</td>
                 <td>File structure only</td>
-                <td><strong>Content quality</strong> — vague verbs, missing ACs, dangling refs</td>
+                <td><strong>Structure and references</strong> — required sections, AC headings, links, index drift</td>
               </tr>
               <tr>
                 <td>Requirement IDs</td>
@@ -142,7 +142,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
               <tr>
                 <td>CI integration</td>
                 <td>Basic (<code>openspec validate</code>)</td>
-                <td><strong><code>specscore lint</code></strong> with configurable severity, pre-commit hooks</td>
+                <td><strong><code>specscore spec lint</code></strong> with configurable severity, pre-commit hooks</td>
               </tr>
               <tr>
                 <td>Agent support</td>
@@ -167,7 +167,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
               <tr>
                 <td>License</td>
                 <td>MIT</td>
-                <td>MIT</td>
+                <td>CLI Apache-2.0 · format CC BY 4.0</td>
               </tr>
             </tbody>
           </table>
@@ -186,16 +186,16 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
             <p class="diff-card__desc">
               OpenSpec's <code>validate</code> checks file structure — does the file
               exist, does it have the right sections. SpecScore checks more, in two
-              layers: <code>lint</code> deterministically verifies content
-              relationships — every requirement has acceptance criteria,
-              cross-references resolve, status transitions are valid — and an AI
-              reviewer (<code>/review</code>, <code>/score</code>) catches what no
-              linter can: ambiguous criteria and vague verbs.
+              layers: <code>spec lint</code> deterministically verifies structure and references — required sections, heading shapes, cross-references and indexes resolve, statuses stay consistent — and an AI reviewer (<code>/review</code>, <code>/score</code>) catches what no linter can: ambiguous criteria and vague verbs.
             </p>
             <div class="diff-card__example">
-<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-  <span class="mark-fail">✗</span> R3  no acceptance criteria
-  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
+<pre class="terminal"><span class="prompt">$</span> specscore spec lint
+
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> oq-section: <span class="dim">Open Questions section not found</span>
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> index-entries: <span class="dim">Child directory not listed in index: refunds</span>
+features/apply-discount/refunds:0 <span class="mark-fail">[error]</span> readme-exists: <span class="dim">README.md not found</span>
+
+3 violations found (3 errors)</pre>
             </div>
           </div>
 
@@ -269,11 +269,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
           <div class="when-card when-card--primary">
             <h3 class="when-card__title">Use SpecScore when…</h3>
             <ul class="when-card__list">
-              <li>You need spec quality enforcement — lint catches ambiguity before agents waste tokens on it.</li>
+              <li>You need spec quality enforcement — lint catches structural gaps before agents waste tokens on them.</li>
               <li>You need code-to-spec traceability — "which code implements this requirement?" returns a deterministic answer.</li>
               <li>You're building a large system with many features, sub-features, and lifecycle transitions.</li>
               <li>You want zero runtime dependencies — one binary, no Node.js required.</li>
-              <li>You need spec quality gates in CI — <code>specscore lint</code> exits non-zero on failures, same as ESLint or <code>go vet</code>.</li>
+              <li>You need spec quality gates in CI — <code>specscore spec lint</code> exits non-zero on failures, same as ESLint or <code>go vet</code>.</li>
             </ul>
           </div>
         </div>

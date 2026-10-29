@@ -130,7 +130,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
               <tr>
                 <td>Spec linting</td>
                 <td>Not documented</td>
-                <td><strong>Content quality</strong> — vague verbs, missing ACs, dangling refs</td>
+                <td><strong>Structure and references</strong> — required sections, AC headings, links, index drift</td>
               </tr>
               <tr>
                 <td>Code-to-spec traceability</td>
@@ -193,13 +193,16 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
             <h3 class="diff-card__title">Ambiguity is caught before it costs</h3>
             <p class="diff-card__desc">
               With an LLM compiler, an ambiguous spec becomes wrong code at build time.
-              SpecScore's <code>lint</code> surfaces vague verbs, missing acceptance
-              criteria, and dangling references <em>before</em> an agent acts on them.
+              SpecScore's <code>spec lint</code> surfaces missing sections, malformed acceptance-criteria headings, and broken links <em>before</em> an agent acts on them; an AI review pass catches vague wording.
             </p>
             <div class="diff-card__example">
-<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-  <span class="mark-fail">✗</span> R3  no acceptance criteria
-  <span class="mark-fail">✗</span> verb  <span class="dim">"handle gracefully" — unmeasurable</span></pre>
+<pre class="terminal"><span class="prompt">$</span> specscore spec lint
+
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> oq-section: <span class="dim">Open Questions section not found</span>
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> index-entries: <span class="dim">Child directory not listed in index: refunds</span>
+features/apply-discount/refunds:0 <span class="mark-fail">[error]</span> readme-exists: <span class="dim">README.md not found</span>
+
+3 violations found (3 errors)</pre>
             </div>
           </div>
 
@@ -254,7 +257,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
             <ul class="when-card__list">
               <li>You want specs that outlive any single tool — portable by construction.</li>
               <li>You want to keep your code, in your language, reviewable and owned.</li>
-              <li>You need spec quality enforcement — lint catches ambiguity early.</li>
+              <li>You need spec quality enforcement — lint catches structural gaps early.</li>
               <li>You need deterministic code-to-spec traceability.</li>
               <li>You want no vendor and no LLM round-trip in your build path.</li>
             </ul>

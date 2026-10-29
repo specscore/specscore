@@ -38,7 +38,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
         <ul class="shared-list">
           <li>Одна и та же путеводная звезда — спецификации до кода, с ИИ-агентами как полноценными читателями.</li>
           <li>Спецификации живут в вашем репозитории как Markdown — с контролем версий и ревью через PR.</li>
-          <li>Оба с открытым исходным кодом под лицензией MIT.</li>
+          <li>Оба с открытым исходным кодом.</li>
           <li>Оба нацелены на Claude Code, Cursor, Copilot и других ИИ-агентов для кодинга.</li>
         </ul>
       </div>
@@ -113,7 +113,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
               <tr>
                 <td>Линтинг спецификаций</td>
                 <td>Нет</td>
-                <td><strong>Качество содержания</strong> — расплывчатые глаголы, отсутствующие критерии приёмки, висячие ссылки</td>
+                <td><strong>Структура и ссылки</strong> — обязательные секции, заголовки критериев приёмки, ссылки, расхождения индексов</td>
               </tr>
               <tr>
                 <td>ID требований / критериев приёмки</td>
@@ -133,7 +133,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
               <tr>
                 <td>Запрос спецификаций из CLI</td>
                 <td>Скаффолдинг (<code>specify</code>, <code>plan</code>, <code>tasks</code>)</td>
-                <td><strong>API запросов</strong> — <code>feature list / show / deps</code>, <code>lint</code>, <code>code refs</code></td>
+                <td><strong>API запросов</strong> — <code>feature list / show / deps</code>, <code>spec lint</code>, <code>code refs</code></td>
               </tr>
               <tr>
                 <td>Зависимость от среды выполнения</td>
@@ -143,7 +143,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
               <tr>
                 <td>Интеграция с CI</td>
                 <td>Запуск рабочего процесса</td>
-                <td><strong><code>specscore lint</code></strong> завершается с ненулевым кодом, pre-commit хуки</td>
+                <td><strong><code>specscore spec lint</code></strong> завершается с ненулевым кодом, pre-commit хуки</td>
               </tr>
               <tr>
                 <td>Взаимосвязь</td>
@@ -152,7 +152,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
               <tr>
                 <td>Лицензия</td>
                 <td>MIT</td>
-                <td>MIT</td>
+                <td>CLI — Apache-2.0 · формат — CC BY 4.0</td>
               </tr>
             </tbody>
           </table>
@@ -170,16 +170,18 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
             <h3 class="diff-card__title">Вывод можно линтовать</h3>
             <p class="diff-card__desc">
               Spec Kit производит свободный Markdown — хороший или плохой, он отправляется.
-              SpecScore проверяет результат в два слоя: <code>lint</code> детерминированно
-              проверяет, что у каждого требования есть критерии приёмки, перекрёстные ссылки
-              разрешаются, а переходы статусов корректны, — а проверка ИИ
+              SpecScore проверяет результат в два слоя: <code>spec lint</code> детерминированно проверяет обязательные секции, форму заголовков, перекрёстные ссылки и индексы, а также согласованность статусов, — а проверка ИИ
               (<code>/review</code>, <code>/score</code>) ловит неоднозначные критерии и
               расплывчатые глаголы.
             </p>
             <div class="diff-card__example">
-<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-  <span class="mark-fail">✗</span> R3  no acceptance criteria
-  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
+<pre class="terminal"><span class="prompt">$</span> specscore spec lint
+
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> oq-section: <span class="dim">Open Questions section not found</span>
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> index-entries: <span class="dim">Child directory not listed in index: refunds</span>
+features/apply-discount/refunds:0 <span class="mark-fail">[error]</span> readme-exists: <span class="dim">README.md not found</span>
+
+3 violations found (3 errors)</pre>
             </div>
           </div>
 

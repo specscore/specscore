@@ -21,7 +21,7 @@ import InstallFromSource from '../../components/InstallFromSource.astro';
   <main>
     {/* ── Hero: copy left, terminal demo right (mirrors the landing
             hero's two-column rhythm; distinguishes /cli/ from /
-            by swapping the spec-on-paper image for `specscore lint`
+            by swapping the spec-on-paper image for `specscore spec lint`
             output with the same green ✓ / red ✗ language). ── */}
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__inner">
@@ -43,7 +43,7 @@ import InstallFromSource from '../../components/InstallFromSource.astro';
         <div
           class="hero__art"
           role="img"
-          aria-label="Terminal output of specscore lint: R1 and R2 have acceptance criteria (green checks); R3 has none, a Related Feature link does not resolve, and the required Open Questions section is missing (red marks). 3 problems."
+          aria-label="Terminal output of specscore spec lint: three errors. The Open Questions section is missing from the apply-discount feature, a child directory is not listed in the index, and it has no README.md. 3 violations found."
         >
 <LintExample />
         </div>
@@ -106,7 +106,7 @@ import InstallFromSource from '../../components/InstallFromSource.astro';
           <div class="feature-card">
             <h3 class="feature-card__title">CI-ready</h3>
             <p class="feature-card__desc">
-              Non-zero exit on failure. Wire <code>specscore lint</code> into
+              Non-zero exit on failure. Wire <code>specscore spec lint</code> into
               your CI pipeline alongside ESLint, Prettier, and your test suite.
             </p>
           </div>
@@ -130,7 +130,7 @@ import InstallFromSource from '../../components/InstallFromSource.astro';
           <div class="feature-card">
             <h3 class="feature-card__title">Open source</h3>
             <p class="feature-card__desc">
-              MIT-licensed. The source is at
+              Apache-2.0 licensed. The source is at
               <a class="xref" href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a>.
               Free forever.
             </p>

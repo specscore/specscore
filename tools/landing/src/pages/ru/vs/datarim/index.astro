@@ -38,7 +38,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
         <h2 id="shared-title" class="section-title">Что у них общего.</h2>
         <ul class="shared-list">
           <li>Оба привносят структурированную методологию в разработку с помощью ИИ.</li>
-          <li>Оба с открытым исходным кодом под лицензией MIT.</li>
+          <li>Оба с открытым исходным кодом.</li>
           <li>Оба работают внутри Claude Code — Datarim как команды, SpecScore через SpecStudio Skills.</li>
           <li>Оба хранят своё состояние как Markdown в репозитории, с контролем версий.</li>
         </ul>
@@ -126,7 +126,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
               <tr>
                 <td>Линтинг спецификаций</td>
                 <td>Нет</td>
-                <td><strong>Качество содержания</strong> — расплывчатые глаголы, отсутствующие критерии приёмки, висячие ссылки</td>
+                <td><strong>Структура и ссылки</strong> — обязательные секции, заголовки критериев приёмки, ссылки, расхождения индексов</td>
               </tr>
               <tr>
                 <td>ID требований / критериев приёмки</td>
@@ -156,7 +156,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
               <tr>
                 <td>Лицензия</td>
                 <td>MIT</td>
-                <td>MIT / CC BY 4.0</td>
+                <td>CLI — Apache-2.0 · формат — CC BY 4.0</td>
               </tr>
             </tbody>
           </table>
@@ -183,14 +183,16 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
           <div class="diff-card">
             <h3 class="diff-card__title">Спецификации можно линтовать</h3>
             <p class="diff-card__desc">
-              Рабочий процесс направляет авторство, но не контролирует результат. <code>lint</code>
-              в SpecScore проверяет, что у каждого требования есть критерии приёмки, перекрёстные
-              ссылки разрешаются, а переходы статусов корректны.
+              Рабочий процесс направляет авторство, но не контролирует результат. <code>spec lint</code> в SpecScore проверяет обязательные секции, форму заголовков, перекрёстные ссылки и индексы, а также согласованность статусов.
             </p>
             <div class="diff-card__example">
-<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-  <span class="mark-fail">✗</span> R3  no acceptance criteria
-  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
+<pre class="terminal"><span class="prompt">$</span> specscore spec lint
+
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> oq-section: <span class="dim">Open Questions section not found</span>
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> index-entries: <span class="dim">Child directory not listed in index: refunds</span>
+features/apply-discount/refunds:0 <span class="mark-fail">[error]</span> readme-exists: <span class="dim">README.md not found</span>
+
+3 violations found (3 errors)</pre>
             </div>
           </div>
 

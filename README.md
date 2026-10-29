@@ -110,7 +110,7 @@ A SpecScore feature looks like this:
 | [GraphSpec](spec/features/graphspec/README.md) *(bootstrap in this repository)* | Specification language for connected domain models — modules, entities, relationships, commands, events; references ModelSpec for structure | Bootstrap (v0.2) |
 | [SpecStudio Skills](https://github.com/specscore/specstudio-skills) *(repo: `specstudio-skills`)* | Opinionated SDD workflow Claude Code plugin — the entry gate for cold users | Live (MIT, free) |
 | [SpecScore Studio](https://specscore.studio) | Hosted web UI for SpecScore — Stage 0 minimal viewer (view documents + spec graph, navigate) live 2026-05-20 | Stage 0 viewer |
-| [Rehearse](https://github.com/specscore/rehearse) | Markdown-native test framework for SpecScore specs | Sibling, MIT |
+| [Rehearse](https://github.com/specscore/rehearse) | Markdown-native test framework for SpecScore specs | Sibling, Apache-2.0 |
 
 See [docs/ecosystem.md](docs/ecosystem.md) for the full architecture.
 
