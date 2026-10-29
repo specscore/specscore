@@ -15,14 +15,6 @@ const locale =
   path.startsWith('/ko')    ? 'ko'    :
                               'en';
 
-// Encode current path for the issue body.
-const encodedPath = encodeURIComponent(path);
-const issueUrl =
-  `https://github.com/specscore/specscore/issues/new` +
-  `?labels=page-feedback` +
-  `&title=Page+feedback%3A+${encodedPath}` +
-  `&body=%2A%2APage%3A%2A%2A+${encodedPath}%0A%2A%2AWhat+to+improve%3A%2A%2A+`;
-
 type Copy = { text: string; link: string };
 const i18n: Record<string, Copy> = {
   en: {
@@ -65,9 +57,19 @@ const t = i18n[locale] ?? i18n.en;
 <div class="page-feedback">
   <p>
     {t.text}
-    {' '}<a href={issueUrl} rel="noopener">{t.link}</a>.
+    {' '}<button type="button" data-feedback-launcher aria-haspopup="dialog" hidden>{t.link}</button>
   </p>
 </div>
+<script is:inline id="site-feedback-widget" src="https://improveit.now/widget.js" data-space="ao58m" data-app="75251aa279608b533e93a785f5ae3aee" data-lang={locale === 'ru' ? 'ru' : 'en'} data-color="#0d63e9" data-launcher="hidden" defer></script>
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-feedback-launcher]');
+  const embed = document.getElementById('site-feedback-widget');
+  const widget = () => (window as Window & {ImproveIt?: {open: () => void}}).ImproveIt;
+  const ready = () => { if (button && typeof widget()?.open === 'function') button.hidden = false; };
+  embed?.addEventListener('load', ready, {once: true});
+  ready();
+  button?.addEventListener('click', () => widget()?.open());
+</script>
 
 <style>
   .page-feedback {
@@ -80,12 +82,12 @@ const t = i18n[locale] ?? i18n.en;
     color: var(--pale-ink);
     letter-spacing: 0.01em;
   }
-  .page-feedback a {
-    color: var(--ink-blue);
-    border-bottom: 1px solid currentColor;
+  .page-feedback button {
+    min-height: 44px; padding: 8px 14px; background: #0d63e9; color: #fff; border: 1px solid #084dbd; font: inherit; cursor: pointer;
+
     transition: color 120ms ease;
   }
-  .page-feedback a:hover {
-    color: var(--ink);
-  }
+  .page-feedback button[hidden] { display: none; }
+  .page-feedback button:hover { background: #084dbd; }
+  .page-feedback button:focus-visible { outline: 3px solid #084dbd; outline-offset: 3px; }
 </style>
