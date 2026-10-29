@@ -10,6 +10,17 @@ The format is portable by construction. Adopt SpecScore with any AI-coding tool,
 
 ---
 
+## Video
+
+<p>
+  <a href="https://youtu.be/dvYYsFzfDlk"><img src="assets/video/specscore-en-poster.webp" alt="Play the 1:38 film: SpecScore — specs that pass" width="640"></a><br>
+  ▶ <b><a href="https://youtu.be/dvYYsFzfDlk">Watch the SpecScore film (1:38)</a></b>
+</p>
+
+Русская версия: https://youtu.be/VBTWMyOfkLs
+
+---
+
 <!-- dev-approach:v1 -->
 ## Our approach to development
 
