@@ -1,0 +1,24 @@
+---
+// Product film, directly under the hero (English page).
+// Russian counterpart: FilmSectionRu.astro. Other locales do not show a film.
+import FilmEmbed from './FilmEmbed.astro';
+---
+
+<section class="section film" aria-labelledby="film-title">
+  <div class="film__inner">
+    <h2 id="film-title" class="film__title">See it in 1:38</h2>
+    <p class="film__lede">
+      Lint a spec before the agent writes code, then plan against it. Real
+      output of the <code>specscore</code> CLI on a demo repo.
+    </p>
+    <FilmEmbed
+      videoId="dvYYsFzfDlk"
+      poster="/film/specscore-specs-that-pass-en.webp"
+      duration="1:38"
+      lang="en"
+      title="SpecScore: specs that pass"
+      playLabel="Play the 1:38 film: SpecScore — specs that pass"
+      headingId="film-title"
+    />
+  </div>
+</section>
