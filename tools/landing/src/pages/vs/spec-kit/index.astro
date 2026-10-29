@@ -144,7 +144,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
               <tr>
                 <td>CI integration</td>
                 <td>Run the workflow</td>
-                <td><strong><code>specscore spec lint</code></strong> exits non-zero, pre-commit hooks</td>
+                <td><strong><code>specscore spec lint</code></strong> exits non-zero, usable from CI and git hooks</td>
               </tr>
               <tr>
                 <td>Relationship</td>
@@ -209,7 +209,7 @@ features/apply-discount/refunds:0 <span class="mark-fail">[error]</span> readme-
               In Spec Kit, a spec's stage is wherever you are in the workflow.
               In SpecScore, lifecycle is an enforced status field — Draft → Approved
               → Implementing → Stable → Deprecated — validated by lint and transitioned
-              by <code>specscore change-status</code> from git hooks or CI.
+              by <code>specscore feature change-status</code> from git hooks or CI.
             </p>
           </div>
 

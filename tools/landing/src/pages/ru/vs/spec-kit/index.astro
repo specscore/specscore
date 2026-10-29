@@ -143,7 +143,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
               <tr>
                 <td>Интеграция с CI</td>
                 <td>Запуск рабочего процесса</td>
-                <td><strong><code>specscore spec lint</code></strong> завершается с ненулевым кодом, pre-commit хуки</td>
+                <td><strong><code>specscore spec lint</code></strong> завершается с ненулевым кодом, подходит для CI и git-хуков</td>
               </tr>
               <tr>
                 <td>Взаимосвязь</td>
@@ -210,7 +210,7 @@ features/apply-discount/refunds:0 <span class="mark-fail">[error]</span> readme-
               В Spec Kit стадия спецификации — это то, где вы находитесь в рабочем процессе.
               В SpecScore жизненный цикл — это контролируемое поле статуса: Draft → Approved
               → Implementing → Stable → Deprecated — валидируется линтером и переключается
-              командой <code>specscore change-status</code> из git-хуков или CI.
+              командой <code>specscore feature change-status</code> из git-хуков или CI.
             </p>
           </div>
 

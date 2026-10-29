@@ -142,7 +142,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
               <tr>
                 <td>CI integration</td>
                 <td>Basic (<code>openspec validate</code>)</td>
-                <td><strong><code>specscore spec lint</code></strong> with configurable severity, pre-commit hooks</td>
+                <td><strong><code>specscore spec lint</code></strong> with configurable severity, usable from CI and git hooks</td>
               </tr>
               <tr>
                 <td>Agent support</td>
@@ -215,7 +215,7 @@ features/apply-discount/refunds:0 <span class="mark-fail">[error]</span> readme-
               (current), <code>changes/</code> (proposed), <code>archive/</code> (done).
               In SpecScore, lifecycle is an enforced status field — Draft → Under Review
               → Approved → Implementing → Stable → Deprecated — validated by lint,
-              transitioned by <code>specscore change-status</code> from git hooks or CI.
+              transitioned by <code>specscore feature change-status</code> from git hooks or CI.
             </p>
           </div>
 
