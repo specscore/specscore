@@ -102,11 +102,11 @@ One Astro component per IA section, plus a layout + a header + a footer + global
 
 These are flagged in `homepage-copy.md` § *Open questions for engineering*. They are content-layer concerns the page renders verbatim from the copy doc; fixing them requires editing this codebase too.
 
-1. **Example spec syntax.** The `R1 — Single-code limit` / `**AC-1**` / `## Scenario:` style in `WhatSpecScoreIs.astro` is the copywriter's best inference. Verify against the real SpecScore body format and update both the marketing copy doc and this component if reality differs.
+1. **Example spec syntax.** The idea / feature / plan tabs in `WhatSpecScoreIs.astro` (and `WhatSpecScoreIsRu.astro`) are rendered from files that lint clean under `specscore spec lint` (specscore 0.55.0); the idea tab shows an excerpt (through Recommended Direction) of the full idea file. All three follow `new/feature.md`, `new/idea.md` and `new/plan.md`. Re-check them against the templates whenever the format changes.
 2. **Install endpoint URLs.** `https://specscore.md/install.sh` and `https://specscore.md/install.ps1` are placeholders. Either stand them up at those URLs (and ensure `Content-Type: text/x-shellscript` per `_headers`) or repoint the install commands in `Quickstart.astro` at GitHub Releases.
 3. **Footer link targets.** Every footer link assumes destinations like `/docs`, `/docs/cli`, `/docs/format`, etc. Drop any that don't exist by ship.
-4. **Linter error format.** The `AC-3:18  ambiguous AC — …` style in `LinterDemo.astro` and `Quickstart.astro` is the copywriter's guess. If real `specscore lint` output formats errors differently, update both terminal blocks to match.
+4. **Linter output.** The terminal in `LintExample.astro` is real `specscore spec lint` output captured from specscore 0.55.0; the Quickstart blocks show real `specscore init` / `specscore spec lint` output. Re-capture them when lint rules or messages change. (`ScoreExample.astro` is an illustrative preview of the AI `/score` pass, not CLI output.)
 
 ## License
 
-Same as the parent SpecScore project — MIT.
+Same as the parent SpecScore project: specification text and documentation are CC BY 4.0; the reference CLI (`specscore/specscore-cli`) is Apache-2.0.

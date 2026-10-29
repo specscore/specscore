@@ -56,7 +56,7 @@ Inside the feature directory, you define requirements with acceptance criteria:
 - AC3: Passwords are never logged or returned in API responses
 ```
 
-Then you run `specscore lint` and it tells you what's missing, what's ambiguous, and what doesn't conform to the schema.
+Then you run `specscore spec lint` and it tells you what's missing and what doesn't conform to the schema.
 
 The developer (or agent) implementing this feature adds a source reference:
 

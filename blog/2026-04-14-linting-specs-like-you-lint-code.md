@@ -1,6 +1,6 @@
 ---
 title: Linting Specs Like You Lint Code
-description: How SpecScore's CLI catches ambiguity in your specifications the same way ESLint catches bugs in your JavaScript.
+description: How SpecScore's CLI catches structural problems in your specifications the same way ESLint catches bugs in your JavaScript.
 date: 2026-04-14
 ---
 
@@ -14,28 +14,28 @@ SpecScore brings the same discipline to specifications that ESLint brought to Ja
 
 ## What the Linter Catches
 
-The `specscore lint` command validates your specification files against the SpecScore schema:
+The `specscore spec lint` command validates your specification files against the SpecScore conventions:
 
 ```bash
-$ specscore lint ./spec
+$ specscore spec lint
 
-spec/features/auth/README.md
-  ✗ missing required field: status
-  ✗ acceptance criteria AC3 has no testable condition
+features/apply-discount/README.md:0 [error] oq-section: Open Questions section not found
+features/apply-discount/README.md:0 [error] index-entries: Child directory not listed in index: refunds
+features/apply-discount/refunds:0 [error] readme-exists: README.md not found
 
-spec/features/search/README.md
-  ✗ requirement R2 references undefined feature: indexing
-  ⚠ no source references found for this feature
-
-2 features, 3 errors, 1 warning
+3 violations found (3 errors)
 ```
+
+Exit code 0 means the tree is clean; 1 means violations were found.
 
 The linter checks for:
 
 - **Structural completeness** — required fields, proper hierarchy, valid metadata
 - **Referential integrity** — features, requirements, and acceptance criteria reference things that exist
-- **Testability** — acceptance criteria contain verifiable conditions, not vague statements
+- **Index consistency** — index tables list every artifact and match the files they point to
 - **Consistency** — naming conventions, status lifecycle, and format conformance
+
+Judging whether an acceptance criterion is vague is not a lint rule; that is what the AI review pass is for.
 
 ## Pluggable Rules
 
@@ -47,12 +47,12 @@ The SpecScore LSP (coming soon) brings linting into your editor. Write a spec, s
 
 ## In CI/CD
 
-Add `specscore lint` to your CI pipeline:
+Add `specscore spec lint` to your CI pipeline:
 
 ```yaml
 # .github/workflows/specs.yml
 - name: Lint specifications
-  run: specscore lint ./spec
+  run: specscore spec lint
 ```
 
 Specs that don't pass the linter don't get merged. The same gate you have for tests and code quality, applied to specifications.
@@ -63,7 +63,7 @@ Builds the latest dev version from `main` (may be ahead of the most recent relea
 
 ```bash
 go install github.com/specscore/specscore-cli/cmd/specscore@main
-specscore lint ./spec
+specscore spec lint
 ```
 
 [Read the specification format](/specifications) to understand what the linter validates.

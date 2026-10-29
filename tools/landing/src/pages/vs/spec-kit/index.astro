@@ -39,7 +39,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
         <ul class="shared-list">
           <li>The same north star — specifications before code, with AI agents as first-class readers.</li>
           <li>Specs live in your repo as Markdown — version-controlled, PR-reviewable.</li>
-          <li>Both are open source under the MIT license.</li>
+          <li>Both are open source.</li>
           <li>Both target Claude Code, Cursor, Copilot, and other AI coding agents.</li>
         </ul>
       </div>
@@ -114,7 +114,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
               <tr>
                 <td>Spec linting</td>
                 <td>None</td>
-                <td><strong>Content quality</strong> — vague verbs, missing ACs, dangling refs</td>
+                <td><strong>Structure and references</strong> — required sections, AC headings, links, index drift</td>
               </tr>
               <tr>
                 <td>Requirement / AC IDs</td>
@@ -134,7 +134,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
               <tr>
                 <td>Query specs from CLI</td>
                 <td>Scaffolding (<code>specify</code>, <code>plan</code>, <code>tasks</code>)</td>
-                <td><strong>Query API</strong> — <code>feature list / show / deps</code>, <code>lint</code>, <code>code refs</code></td>
+                <td><strong>Query API</strong> — <code>feature list / show / deps</code>, <code>spec lint</code>, <code>code refs</code></td>
               </tr>
               <tr>
                 <td>Runtime dependency</td>
@@ -144,7 +144,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
               <tr>
                 <td>CI integration</td>
                 <td>Run the workflow</td>
-                <td><strong><code>specscore lint</code></strong> exits non-zero, pre-commit hooks</td>
+                <td><strong><code>specscore spec lint</code></strong> exits non-zero, usable from CI and git hooks</td>
               </tr>
               <tr>
                 <td>Relationship</td>
@@ -153,7 +153,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
               <tr>
                 <td>License</td>
                 <td>MIT</td>
-                <td>MIT</td>
+                <td>CLI Apache-2.0 · format CC BY 4.0</td>
               </tr>
             </tbody>
           </table>
@@ -171,16 +171,16 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
             <h3 class="diff-card__title">The output is lintable</h3>
             <p class="diff-card__desc">
               Spec Kit produces freeform Markdown — good or bad, it ships.
-              SpecScore checks the result in two layers: <code>lint</code>
-              deterministically verifies every requirement has acceptance criteria,
-              cross-references resolve, and status transitions are valid — and an AI
-              reviewer (<code>/review</code>, <code>/score</code>) catches ambiguous
-              criteria and vague verbs.
+              SpecScore checks the result in two layers: <code>spec lint</code> deterministically verifies required sections, heading shapes, cross-references and indexes, and that statuses stay consistent — and an AI reviewer (<code>/review</code>, <code>/score</code>) catches ambiguous criteria and vague verbs.
             </p>
             <div class="diff-card__example">
-<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-  <span class="mark-fail">✗</span> R3  no acceptance criteria
-  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
+<pre class="terminal"><span class="prompt">$</span> specscore spec lint
+
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> oq-section: <span class="dim">Open Questions section not found</span>
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> index-entries: <span class="dim">Child directory not listed in index: refunds</span>
+features/apply-discount/refunds:0 <span class="mark-fail">[error]</span> readme-exists: <span class="dim">README.md not found</span>
+
+3 violations found (3 errors)</pre>
             </div>
           </div>
 
@@ -209,7 +209,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
               In Spec Kit, a spec's stage is wherever you are in the workflow.
               In SpecScore, lifecycle is an enforced status field — Draft → Approved
               → Implementing → Stable → Deprecated — validated by lint and transitioned
-              by <code>specscore change-status</code> from git hooks or CI.
+              by <code>specscore feature change-status</code> from git hooks or CI.
             </p>
           </div>
 

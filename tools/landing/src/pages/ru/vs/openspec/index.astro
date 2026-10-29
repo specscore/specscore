@@ -23,7 +23,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
           SpecScore vs OpenSpec
         </h1>
         <p class="hero__sub">
-          Оба инструмента хранят спецификации в Markdown рядом с вашим кодом — читаемые для ИИ-агентов. Они решают разные задачи: OpenSpec организует спецификации и генерирует команды для агентов. SpecScore проверяет содержание спецификаций, контролирует жизненный цикл и обеспечивает трассируемость кода к требованиям.
+          Оба инструмента хранят спецификации в Markdown рядом с вашим кодом — читаемые для ИИ-агентов. Они решают разные задачи: OpenSpec организует спецификации и генерирует команды для агентов. SpecScore проверяет структуру и ссылки спецификаций, контролирует жизненный цикл и обеспечивает трассируемость кода к требованиям.
         </p>
       </div>
     </section>
@@ -34,7 +34,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
         <h2 id="shared-title" class="section-title">Что у них общего.</h2>
         <ul class="shared-list">
           <li>Спецификации хранятся в репозитории как Markdown-файлы — с контролем версий и ревью через PR.</li>
-          <li>Оба проекта с открытым исходным кодом под лицензией MIT.</li>
+          <li>Оба проекта с открытым исходным кодом.</li>
           <li>Оба используют критерии приёмки в формате Given/When/Then.</li>
           <li>Оба поддерживают ИИ-агентов для разработки как полноценных потребителей спецификаций.</li>
         </ul>
@@ -92,7 +92,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
               <tr>
                 <td>Линтинг спецификаций</td>
                 <td>Только структура файлов</td>
-                <td><strong>Качество содержания</strong> — расплывчатые формулировки, отсутствующие критерии приёмки, висячие ссылки</td>
+                <td><strong>Структура и ссылки</strong> — обязательные секции, заголовки критериев приёмки, ссылки, расхождения индексов</td>
               </tr>
               <tr>
                 <td>Идентификаторы требований</td>
@@ -127,7 +127,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
               <tr>
                 <td>Интеграция с CI</td>
                 <td>Базовая (<code>openspec validate</code>)</td>
-                <td><strong><code>specscore lint</code></strong> с настраиваемой строгостью, pre-commit хуки</td>
+                <td><strong><code>specscore spec lint</code></strong> с настраиваемой строгостью, подходит для CI и git-хуков</td>
               </tr>
               <tr>
                 <td>Поддержка агентов</td>
@@ -152,7 +152,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
               <tr>
                 <td>Лицензия</td>
                 <td>MIT</td>
-                <td>MIT</td>
+                <td>CLI — Apache-2.0 · формат — CC BY 4.0</td>
               </tr>
             </tbody>
           </table>
@@ -169,12 +169,16 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
           <div class="diff-card">
             <h3 class="diff-card__title">Проверка идёт глубже структуры файлов</h3>
             <p class="diff-card__desc">
-              Команда <code>validate</code> в OpenSpec проверяет структуру файлов — существует ли файл, есть ли нужные секции. SpecScore проверяет больше, в два слоя: <code>lint</code> детерминированно проверяет связи в содержании — у каждого требования есть критерии приёмки, перекрёстные ссылки разрешаются, переходы статусов корректны, — а проверка ИИ (<code>/review</code>, <code>/score</code>) ловит то, что не под силу линтеру: неоднозначные критерии и расплывчатые формулировки.
+              Команда <code>validate</code> в OpenSpec проверяет структуру файлов — существует ли файл, есть ли нужные секции. SpecScore проверяет больше, в два слоя: <code>spec lint</code> детерминированно проверяет структуру и ссылки — обязательные секции, форму заголовков, перекрёстные ссылки и индексы, согласованность статусов, — а проверка ИИ (<code>/review</code>, <code>/score</code>) ловит то, что не под силу линтеру: неоднозначные критерии и расплывчатые формулировки.
             </p>
             <div class="diff-card__example">
-<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-  <span class="mark-fail">✗</span> R3  no acceptance criteria
-  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
+<pre class="terminal"><span class="prompt">$</span> specscore spec lint
+
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> oq-section: <span class="dim">Open Questions section not found</span>
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> index-entries: <span class="dim">Child directory not listed in index: refunds</span>
+features/apply-discount/refunds:0 <span class="mark-fail">[error]</span> readme-exists: <span class="dim">README.md not found</span>
+
+3 violations found (3 errors)</pre>
             </div>
           </div>
 
@@ -188,7 +192,7 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
           <div class="diff-card">
             <h3 class="diff-card__title">Жизненный цикл контролируется, а не подразумевается</h3>
             <p class="diff-card__desc">
-              В OpenSpec жизненный цикл спецификации определяется расположением файла: <code>specs/</code> (текущие), <code>changes/</code> (предложенные), <code>archive/</code> (завершённые). В SpecScore жизненный цикл — это контролируемое поле статуса: Draft → Under Review → Approved → Implementing → Stable → Deprecated — валидируется линтером, переключается командой <code>specscore change-status</code> из git-хуков или CI.
+              В OpenSpec жизненный цикл спецификации определяется расположением файла: <code>specs/</code> (текущие), <code>changes/</code> (предложенные), <code>archive/</code> (завершённые). В SpecScore жизненный цикл — это контролируемое поле статуса: Draft → Under Review → Approved → Implementing → Stable → Deprecated — валидируется линтером, переключается командой <code>specscore feature change-status</code> из git-хуков или CI.
             </p>
           </div>
 
@@ -234,11 +238,11 @@ import ComparisonFeedback from '../../../../components/ComparisonFeedback.astro'
           <div class="when-card when-card--primary">
             <h3 class="when-card__title">Используйте SpecScore, если...</h3>
             <ul class="when-card__list">
-              <li>Вам нужен контроль качества спецификаций — линтер ловит неоднозначности до того, как агенты потратят токены впустую.</li>
+              <li>Вам нужен контроль качества спецификаций — линтер находит структурные пробелы до того, как агенты потратят на них токены.</li>
               <li>Вам нужна трассируемость кода к спецификациям — «какой код реализует это требование?» даёт детерминированный ответ.</li>
               <li>Вы строите крупную систему с множеством функций, подфункций и переходов жизненного цикла.</li>
               <li>Вы хотите ноль зависимостей от среды выполнения — один бинарный файл, Node.js не требуется.</li>
-              <li>Вам нужны гейты качества спецификаций в CI — <code>specscore lint</code> завершается с ненулевым кодом при ошибках, как ESLint или <code>go vet</code>.</li>
+              <li>Вам нужны гейты качества спецификаций в CI — <code>specscore spec lint</code> завершается с ненулевым кодом при ошибках, как ESLint или <code>go vet</code>.</li>
             </ul>
           </div>
         </div>

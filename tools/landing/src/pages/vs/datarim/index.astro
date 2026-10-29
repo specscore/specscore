@@ -38,7 +38,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
         <h2 id="shared-title" class="section-title">What they share.</h2>
         <ul class="shared-list">
           <li>Both bring structured methodology to AI-assisted development.</li>
-          <li>Both are open source under the MIT license.</li>
+          <li>Both are open source.</li>
           <li>Both run inside Claude Code — Datarim as commands, SpecScore via SpecStudio Skills.</li>
           <li>Both keep their state as Markdown in the repo, version-controlled.</li>
         </ul>
@@ -125,7 +125,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
               <tr>
                 <td>Spec linting</td>
                 <td>None</td>
-                <td><strong>Content quality</strong> — vague verbs, missing ACs, dangling refs</td>
+                <td><strong>Structure and references</strong> — required sections, AC headings, links, index drift</td>
               </tr>
               <tr>
                 <td>Requirement / AC IDs</td>
@@ -155,7 +155,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
               <tr>
                 <td>License</td>
                 <td>MIT</td>
-                <td>MIT / CC BY 4.0</td>
+                <td>CLI Apache-2.0 · format CC BY 4.0</td>
               </tr>
             </tbody>
           </table>
@@ -182,14 +182,16 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
           <div class="diff-card">
             <h3 class="diff-card__title">Specs are lintable</h3>
             <p class="diff-card__desc">
-              A workflow guides authoring, but doesn't gate the result. SpecScore's
-              <code>lint</code> checks every requirement has acceptance criteria,
-              cross-references resolve, and status transitions are valid.
+              A workflow guides authoring, but doesn't gate the result. SpecScore's <code>spec lint</code> checks required sections, heading shapes, cross-references and indexes, and that statuses stay consistent.
             </p>
             <div class="diff-card__example">
-<pre class="terminal"><span class="prompt">$</span> specscore lint checkout/apply-discount.md
-  <span class="mark-fail">✗</span> R3  no acceptance criteria
-  <span class="mark-fail">✗</span> link  <span class="dim">"Related Feature: discount-tiers" not found</span></pre>
+<pre class="terminal"><span class="prompt">$</span> specscore spec lint
+
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> oq-section: <span class="dim">Open Questions section not found</span>
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> index-entries: <span class="dim">Child directory not listed in index: refunds</span>
+features/apply-discount/refunds:0 <span class="mark-fail">[error]</span> readme-exists: <span class="dim">README.md not found</span>
+
+3 violations found (3 errors)</pre>
             </div>
           </div>
 
