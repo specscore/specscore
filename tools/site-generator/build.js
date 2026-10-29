@@ -26,6 +26,8 @@ async function build() {
     join(OUTPUT, 'assets', 'style.css')
   );
 
+  await cp(join(__dirname, 'assets', 'feedback.js'), join(OUTPUT, 'assets', 'feedback.js'));
+
   // Adopter-facing badge served at https://specscore.md/badge.svg.
   // Referenced from README badges in projects that adopt SpecScore.
   await cp(
