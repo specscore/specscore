@@ -1,0 +1,54 @@
+---
+// Click-to-load product film (YouTube, privacy-enhanced domain).
+//
+// Before the click the page makes NO request to YouTube or Google for the
+// film: the poster is a local file with explicit width/height (no layout
+// shift) and the button carries the video id as a data attribute. On click,
+// film-embed.ts swaps the button for an iframe on youtube-nocookie.com.
+//
+// Per-locale wrappers (FilmSection.astro, FilmSectionRu.astro) hold the copy;
+// this component holds the structure and styles shared by all of them.
+interface Props {
+  videoId: string;
+  poster: string;
+  duration: string; // "1:38"
+  lang: string; // locale of the label text, e.g. "en", "ru"
+  title: string; // film title, also the iframe title
+  playLabel: string; // accessible label of the play button
+  headingId: string;
+}
+const { videoId, poster, duration, lang, title, playLabel, headingId } = Astro.props;
+const watchUrl = `https://youtu.be/${videoId}`;
+---
+
+<figure class="film__figure" data-film data-video-id={videoId} data-video-title={title}>
+  <button
+    type="button"
+    class="film__play"
+    lang={lang}
+    aria-label={playLabel}
+    aria-describedby={headingId}
+  >
+    <img
+      class="film__poster"
+      src={poster}
+      width="1280"
+      height="720"
+      alt=""
+      loading="lazy"
+      decoding="async"
+    />
+    <span class="film__button" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="28" height="28" focusable="false"><path d="M8 5v14l11-7z" fill="currentColor"></path></svg>
+    </span>
+    <span class="film__duration" aria-hidden="true">{duration}</span>
+  </button>
+  <noscript>
+    <a class="film__fallback" href={watchUrl} lang={lang}>{playLabel}</a>
+  </noscript>
+</figure>
+
+<script>
+  import { initFilms } from '../scripts/film-embed';
+  initFilms();
+</script>

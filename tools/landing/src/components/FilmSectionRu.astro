@@ -1,0 +1,25 @@
+---
+// Russian variant of FilmSection.astro: Russian film (ru id), Russian copy.
+// Structure / CSS classes match the English variant; styles live there.
+import FilmEmbed from './FilmEmbed.astro';
+---
+
+<section class="section film" aria-labelledby="film-title" lang="ru">
+  <div class="film__inner">
+    <h2 id="film-title" class="film__title">Посмотрите за 1:52</h2>
+    <p class="film__lede">
+      Проверьте спецификацию линтером до того, как агент напишет код, и
+      планируйте по ней. Реальный вывод CLI <code>specscore</code> на
+      демо-репозитории.
+    </p>
+    <FilmEmbed
+      videoId="VBTWMyOfkLs"
+      poster="/film/specscore-specs-that-pass-ru.webp"
+      duration="1:52"
+      lang="ru"
+      title="SpecScore: спецификации, которые проходят проверку"
+      playLabel="Смотреть фильм на русском, 1:52: SpecScore — спецификации, которые проходят проверку"
+      headingId="film-title"
+    />
+  </div>
+</section>

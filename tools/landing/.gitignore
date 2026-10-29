@@ -34,3 +34,7 @@ public/blog/*
 !public/blog/*.jpg
 !public/blog/*.png
 !public/blog/*.webp
+# film/ subdirectory — local posters for the click-to-load product films
+!public/film/
+public/film/*
+!public/film/*.webp
