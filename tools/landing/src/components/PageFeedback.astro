@@ -57,7 +57,7 @@ const t = i18n[locale] ?? i18n.en;
 <div class="page-feedback">
   <p>
     {t.text}
-    {' '}<button type="button" data-feedback-launcher aria-haspopup="dialog" hidden>{t.link}</button>
+    {' '}<button type="button" data-feedback-launcher aria-haspopup="dialog" hidden><svg class="feedback-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="18" fill="#d4ef83"/><path d="M18 46 46 18M20 18h26v26" fill="none" stroke="#202c2a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>{t.link}</button>
   </p>
 </div>
 <script is:inline id="site-feedback-widget" src="https://improveit.now/widget.js" data-space="ao58m" data-app="75251aa279608b533e93a785f5ae3aee" data-lang={locale === 'ru' ? 'ru' : 'en'} data-color="#0d63e9" data-launcher="hidden" defer></script>
@@ -82,12 +82,32 @@ const t = i18n[locale] ?? i18n.en;
     color: var(--pale-ink);
     letter-spacing: 0.01em;
   }
-  .page-feedback button {
-    min-height: 44px; padding: 8px 14px; background: #0d63e9; color: #fff; border: 1px solid #084dbd; font: inherit; cursor: pointer;
-
-    transition: color 120ms ease;
-  }
-  .page-feedback button[hidden] { display: none; }
-  .page-feedback button:hover { background: #084dbd; }
-  .page-feedback button:focus-visible { outline: 3px solid #084dbd; outline-offset: 3px; }
+/* ImproveIt launcher: local mark, quiet palette, and room for the footer at page end. */
+.page-feedback { min-height: calc(88px + env(safe-area-inset-bottom, 0px)); }
+.page-feedback button {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px) + var(--consent-banner-h, 0px));
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  max-width: calc(100vw - 32px - env(safe-area-inset-right, 0px));
+  padding: 8px 16px 8px 10px;
+  border: 1px solid #a9bd83;
+  border-radius: 999px;
+  background: #f3f8e7;
+  color: #202c2a;
+  box-shadow: 0 2px 8px #202c2a18;
+  font: 600 14px/1.35 system-ui, sans-serif;
+  transition: none;
+  text-align: left;
+  cursor: pointer;
+}
+.page-feedback .feedback-mark { display: block; width: 30px; height: 30px; flex: 0 0 30px; }
+.page-feedback button[hidden] { display: none; }
+.page-feedback button:hover { background: #e9f2d6; }
+.page-feedback button:focus-visible { outline: 3px solid #425b24; outline-offset: 3px; }
 </style>

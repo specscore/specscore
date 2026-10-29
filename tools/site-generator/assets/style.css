@@ -823,8 +823,31 @@ svg { max-width: 100%; height: auto; margin: 1rem 0; }
   }
 }
 
-.site-feedback { padding: 20px 24px; text-align: center; }
-.site-feedback button { min-height: 44px; max-width: 100%; padding: 10px 18px; border: 1px solid #084dbd; border-radius: 0; background: #0d63e9; color: #fff; font: 600 14px/1.4 system-ui, sans-serif; cursor: pointer; }
+/* ImproveIt launcher: local mark, quiet palette, and room for the footer at page end. */
+.site-feedback { min-height: calc(88px + env(safe-area-inset-bottom, 0px)); }
+.site-feedback button {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px) + var(--consent-banner-h, 0px));
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  max-width: calc(100vw - 32px - env(safe-area-inset-right, 0px));
+  padding: 8px 16px 8px 10px;
+  border: 1px solid #a9bd83;
+  border-radius: 999px;
+  background: #f3f8e7;
+  color: #202c2a;
+  box-shadow: 0 2px 8px #202c2a18;
+  font: 600 14px/1.35 system-ui, sans-serif;
+  transition: none;
+  text-align: left;
+  cursor: pointer;
+}
+.site-feedback .feedback-mark { display: block; width: 30px; height: 30px; flex: 0 0 30px; }
 .site-feedback button[hidden] { display: none; }
-.site-feedback button:hover { background: #084dbd; }
-.site-feedback button:focus-visible { outline: 3px solid #084dbd; outline-offset: 3px; }
+.site-feedback button:hover { background: #e9f2d6; }
+.site-feedback button:focus-visible { outline: 3px solid #425b24; outline-offset: 3px; }
