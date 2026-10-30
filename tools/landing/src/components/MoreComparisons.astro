@@ -1,0 +1,54 @@
+---
+// Cross-links among /vs/ pages. Locale comes from the URL, so the same
+// component works on every translated comparison.
+import { localeFromPath, routeFromPath, type LangCode } from '../lib/languages.ts';
+import { catalog, compareHref } from '../content/compare/catalog.ts';
+import { chrome } from '../content/compare/chrome.ts';
+
+const locale = localeFromPath(Astro.url.pathname) as LangCode;
+const route = routeFromPath(Astro.url.pathname);
+const slug = route.split('/').filter(Boolean)[1] ?? '';
+const ui = chrome[locale];
+const others = catalog.filter((entry) => entry.slug !== slug);
+---
+
+<section class="section" aria-labelledby="seealso-title">
+  <div class="section-inner section-inner--prose">
+    <h2 id="seealso-title" class="section-title">{ui.seeAlsoTitle}</h2>
+    <p class="prose-p">{ui.seeAlsoLead}</p>
+    <ul class="see-also">
+      {
+        others.map((entry) => (
+          <li>
+            <a href={compareHref(locale, entry.slug)} class="xref">{entry.name}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-2);
+  }
+  .see-also {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.1rem;
+  }
+  .see-also li {
+    font-size: var(--fs-small);
+  }
+</style>

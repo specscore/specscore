@@ -58,6 +58,22 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
             <span class="mini__name">CodeSpeak</span>
             <span class="mini__line">CodeSpeak bir derleyiciye odaklanır. SpecScore bir formata odaklanır.</span>
           </a>
+          <a href="/tr/vs/kiro/" class="mini">
+            <span class="mini__name">Kiro</span>
+            <span class="mini__line">Kiro spesifikasyonu IDE’sinde taslaklar. SpecScore, CI’ın lint edebildiği biçimdir.</span>
+          </a>
+          <a href="/tr/vs/tessl/" class="mini">
+            <span class="mini__name">Tessl</span>
+            <span class="mini__line">Tessl spesifikasyonu kaynak sayar. SpecScore, spesifikasyonu kodun yanında lint eder.</span>
+          </a>
+          <a href="/tr/vs/bmad-method/" class="mini">
+            <span class="mini__name">BMAD Method</span>
+            <span class="mini__line">BMAD çevik döngüyü çalıştırır. SpecScore, bir pull request’in denetleyebildiği artifakttır.</span>
+          </a>
+          <a href="/tr/vs/task-master-ai/" class="mini">
+            <span class="mini__name">Task Master AI</span>
+            <span class="mini__line">Task Master bir PRD’yi görevlere böler. SpecScore, bu görevlerin atıf yapabildiği spesifikasyondur.</span>
+          </a>
         </div>
       </div>
     </section>
@@ -73,7 +89,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
         </p>
 
         <div class="table-wrap">
-          <table class="matrix-table" aria-label="SpecScore vs plain Markdown, OpenSpec, Spec Kit, Datarim ve CodeSpeak">
+          <table class="matrix-table" aria-label="SpecScore vs plain Markdown, OpenSpec, Spec Kit, Datarim ve CodeSpeak, Kiro, Tessl, BMAD Method, Task Master AI">
             <thead>
               <tr>
                 <th scope="col">Yetenek</th>
@@ -83,6 +99,10 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <th scope="col"><a href="/tr/vs/spec-kit/" class="matrix-table__link">Spec Kit</a></th>
                 <th scope="col"><a href="/tr/vs/datarim/" class="matrix-table__link">Datarim</a></th>
                 <th scope="col"><a href="/tr/vs/codespeak/" class="matrix-table__link">CodeSpeak</a></th>
+                <th scope="col"><a href="/tr/vs/kiro/" class="matrix-table__link">Kiro</a></th>
+                <th scope="col"><a href="/tr/vs/tessl/" class="matrix-table__link">Tessl</a></th>
+                <th scope="col"><a href="/tr/vs/bmad-method/" class="matrix-table__link">BMAD Method</a></th>
+                <th scope="col"><a href="/tr/vs/task-master-ai/" class="matrix-table__link">Task Master AI</a></th>
               </tr>
             </thead>
             <tbody>
@@ -94,7 +114,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>İş akışı / metodoloji</td>
                 <td>Claude Code için iş akışı paketi</td>
                 <td>LLM derleyicisi (spesifikasyon → kod)</td>
-              </tr>
+                              <td>Spesifikasyon taslağı çıkaran ajan IDE</td>
+                <td>Beceri platformu + spec karosu</td>
+                <td>Çevik yapay zeka yöntemi</td>
+                <td>Ajanlar için görev listesi</td>
+</tr>
               <tr>
                 <td>Spesifikasyon formatı</td>
                 <td class="matrix-table__own">Markdown + YAML (yapılandırılmış)</td>
@@ -103,7 +127,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>Serbest Markdown</td>
                 <td>Markdown (iş akışı biçimli)</td>
                 <td>Yalın İngilizce</td>
-              </tr>
+                              <td>EARS requirements.md</td>
+                <td>.spec.md (karo)</td>
+                <td>PRD, mimari, hikayeler</td>
+                <td>Düz yazı PRD, sonra görevler</td>
+</tr>
               <tr>
                 <td>Kodunuz sizde kalır</td>
                 <td class="matrix-table__own"><span class="yes">Evet</span></td>
@@ -112,7 +140,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="yes">Evet</span></td>
                 <td><span class="yes">Evet</span></td>
                 <td><span class="no">Kod üretilir</span></td>
-              </tr>
+                              <td><span class="yes">Evet</span></td>
+                <td><span class="yes">Evet</span></td>
+                <td><span class="yes">Evet</span></td>
+                <td><span class="yes">Evet</span></td>
+</tr>
               <tr>
                 <td>Açık kaynak / ücretsiz</td>
                 <td class="matrix-table__own"><span class="yes">Evet</span> (CC BY / MIT)</td>
@@ -121,7 +153,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="yes">Evet</span> (MIT)</td>
                 <td><span class="yes">Evet</span> (MIT)</td>
                 <td><span class="no">Tescilli sistem</span></td>
-              </tr>
+                              <td>Tescilli IDE, ücretsiz katman</td>
+                <td>Karo MIT; platform bir ürün</td>
+                <td>Evet (MIT)</td>
+                <td>MIT + Commons Clause</td>
+</tr>
               <tr>
                 <td>Spesifikasyon içeriği linting</td>
                 <td class="matrix-table__own"><span class="yes">Evet</span></td>
@@ -130,7 +166,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">Hayır</span></td>
                 <td><span class="no">Hayır</span></td>
                 <td>Belgelenmemiş</td>
-              </tr>
+                              <td>Ürün içi analiz</td>
+                <td>Karodaki kabuk denetimleri</td>
+                <td>Akıştaki hazırlık kapısı</td>
+                <td><span class="no">Hayır</span></td>
+</tr>
               <tr>
                 <td>Gereksinim / AC ID'leri</td>
                 <td class="matrix-table__own"><span class="yes">Evet</span></td>
@@ -139,7 +179,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">Hayır</span></td>
                 <td><span class="no">Hayır</span></td>
                 <td><span class="no">Hayır</span></td>
-              </tr>
+                              <td>Belgelenmemiş</td>
+                <td>[@test] bağlantıları</td>
+                <td>Hikaye dosyaları</td>
+                <td>Sayısal görev kimlikleri</td>
+</tr>
               <tr>
                 <td>Yaşam döngüsü zorlaması</td>
                 <td class="matrix-table__own"><span class="yes">Evet</span></td>
@@ -148,7 +192,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">Hayır</span></td>
                 <td><span class="no">Hayır</span></td>
                 <td><span class="no">Hayır</span></td>
-              </tr>
+                              <td>Görev durumu</td>
+                <td>Karoda onay</td>
+                <td>Sprint / hikaye durumu</td>
+                <td>Görev durumu ve etiketler</td>
+</tr>
               <tr>
                 <td>Koddan spesifikasyona izlenebilirlik</td>
                 <td class="matrix-table__own"><span class="yes">Evet</span></td>
@@ -157,7 +205,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">Hayır</span></td>
                 <td><span class="no">Hayır</span></td>
                 <td>Yeniden üretim yoluyla</td>
-              </tr>
+                              <td>Görevler üzerinden</td>
+                <td>targets ve [@test]</td>
+                <td>Hikayeler bağlamı taşır</td>
+                <td>Görev bağımlılıkları</td>
+</tr>
               <tr>
                 <td>Çalışma zamanı bağımlılığı</td>
                 <td class="matrix-table__own">Yok (Go ikili dosyası)</td>
@@ -166,7 +218,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>Python</td>
                 <td>Claude Code</td>
                 <td>Sağlayıcı derleyicisi</td>
-              </tr>
+                              <td>Kiro uygulaması</td>
+                <td>Tessl CLI + bir ajan</td>
+                <td>Node.js ve Python</td>
+                <td>Node.js</td>
+</tr>
               <tr>
                 <td>Herhangi bir ajanla veya ajansız çalışır</td>
                 <td class="matrix-table__own"><span class="yes">Evet</span></td>
@@ -175,7 +231,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>Birçok ajan</td>
                 <td>Claude Code</td>
                 <td>CodeSpeak üzerinden</td>
-              </tr>
+                              <td>Kiro ajanları</td>
+                <td>Birçok ajan</td>
+                <td>Birçok kodlama ajanı</td>
+                <td>MCP üzerinden</td>
+</tr>
             </tbody>
           </table>
         </div>
@@ -255,7 +315,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
   }
   .minis {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-2);
   }
   .mini {

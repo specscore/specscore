@@ -58,6 +58,22 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
             <span class="mini__name">CodeSpeak</span>
             <span class="mini__line">CodeSpeak робить ставку на компілятор. SpecScore робить ставку на формат.</span>
           </a>
+          <a href="/uk/vs/kiro/" class="mini">
+            <span class="mini__name">Kiro</span>
+            <span class="mini__line">Kiro пише специфікацію у своїй IDE. SpecScore — формат, який CI може лінтити.</span>
+          </a>
+          <a href="/uk/vs/tessl/" class="mini">
+            <span class="mini__name">Tessl</span>
+            <span class="mini__line">Tessl обстоює специфікацію як джерело. SpecScore лінтить специфікацію поруч із кодом.</span>
+          </a>
+          <a href="/uk/vs/bmad-method/" class="mini">
+            <span class="mini__name">BMAD Method</span>
+            <span class="mini__line">BMAD веде гнучкий цикл. SpecScore — артефакт, який pull request може перевірити.</span>
+          </a>
+          <a href="/uk/vs/task-master-ai/" class="mini">
+            <span class="mini__name">Task Master AI</span>
+            <span class="mini__line">Task Master ділить PRD на завдання. SpecScore — специфікація, на яку ці завдання можуть посилатися.</span>
+          </a>
         </div>
       </div>
     </section>
@@ -73,7 +89,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
         </p>
 
         <div class="table-wrap">
-          <table class="matrix-table" aria-label="SpecScore проти Plain Markdown, OpenSpec, Spec Kit, Datarim та CodeSpeak">
+          <table class="matrix-table" aria-label="SpecScore проти Plain Markdown, OpenSpec, Spec Kit, Datarim та CodeSpeak, Kiro, Tessl, BMAD Method, Task Master AI">
             <thead>
               <tr>
                 <th scope="col">Можливість</th>
@@ -83,6 +99,10 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <th scope="col"><a href="/uk/vs/spec-kit/" class="matrix-table__link">Spec Kit</a></th>
                 <th scope="col"><a href="/uk/vs/datarim/" class="matrix-table__link">Datarim</a></th>
                 <th scope="col"><a href="/uk/vs/codespeak/" class="matrix-table__link">CodeSpeak</a></th>
+                <th scope="col"><a href="/uk/vs/kiro/" class="matrix-table__link">Kiro</a></th>
+                <th scope="col"><a href="/uk/vs/tessl/" class="matrix-table__link">Tessl</a></th>
+                <th scope="col"><a href="/uk/vs/bmad-method/" class="matrix-table__link">BMAD Method</a></th>
+                <th scope="col"><a href="/uk/vs/task-master-ai/" class="matrix-table__link">Task Master AI</a></th>
               </tr>
             </thead>
             <tbody>
@@ -94,7 +114,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>Робочий процес / методологія</td>
                 <td>Набір робочих процесів для Claude Code</td>
                 <td>LLM-компілятор (специфікація → код)</td>
-              </tr>
+                              <td>Агентна IDE, яка пише специфікації</td>
+                <td>Платформа навичок + tile специфікації</td>
+                <td>Гнучкий метод з ШІ</td>
+                <td>Список завдань для агентів</td>
+</tr>
               <tr>
                 <td>Формат специфікацій</td>
                 <td class="matrix-table__own">Markdown + YAML (структурований)</td>
@@ -103,7 +127,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>Довільний Markdown</td>
                 <td>Markdown (під форму робочого процесу)</td>
                 <td>Звичайна англійська</td>
-              </tr>
+                              <td>requirements.md в EARS</td>
+                <td>.spec.md (tile)</td>
+                <td>PRD, архітектура, історії</td>
+                <td>Проза PRD, потім завдання</td>
+</tr>
               <tr>
                 <td>Ви зберігаєте свій код</td>
                 <td class="matrix-table__own"><span class="yes">Так</span></td>
@@ -112,7 +140,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="yes">Так</span></td>
                 <td><span class="yes">Так</span></td>
                 <td><span class="no">Код генерується</span></td>
-              </tr>
+                              <td><span class="yes">Так</span></td>
+                <td><span class="yes">Так</span></td>
+                <td><span class="yes">Так</span></td>
+                <td><span class="yes">Так</span></td>
+</tr>
               <tr>
                 <td>Відкритий код / безкоштовно</td>
                 <td class="matrix-table__own"><span class="yes">Так</span> (CC BY / MIT)</td>
@@ -121,7 +153,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="yes">Так</span> (MIT)</td>
                 <td><span class="yes">Так</span> (MIT)</td>
                 <td><span class="no">Пропрієтарна система</span></td>
-              </tr>
+                              <td>Пропрієтарна IDE, безкоштовний рівень</td>
+                <td>Tile MIT; платформа — продукт</td>
+                <td>Так (MIT)</td>
+                <td>MIT + Commons Clause</td>
+</tr>
               <tr>
                 <td>Лінтинг вмісту специфікацій</td>
                 <td class="matrix-table__own"><span class="yes">Так</span></td>
@@ -130,7 +166,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">Ні</span></td>
                 <td><span class="no">Ні</span></td>
                 <td>Не задокументовано</td>
-              </tr>
+                              <td>Аналіз усередині продукту</td>
+                <td>Shell-перевірки в tile</td>
+                <td>Брама готовності в процесі</td>
+                <td><span class="no">Ні</span></td>
+</tr>
               <tr>
                 <td>Ідентифікатори вимог / критеріїв приймання</td>
                 <td class="matrix-table__own"><span class="yes">Так</span></td>
@@ -139,7 +179,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">Ні</span></td>
                 <td><span class="no">Ні</span></td>
                 <td><span class="no">Ні</span></td>
-              </tr>
+                              <td>Не задокументовано</td>
+                <td>Посилання [@test]</td>
+                <td>Файли історій</td>
+                <td>Числові id завдань</td>
+</tr>
               <tr>
                 <td>Примусовий життєвий цикл</td>
                 <td class="matrix-table__own"><span class="yes">Так</span></td>
@@ -148,7 +192,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">Ні</span></td>
                 <td><span class="no">Ні</span></td>
                 <td><span class="no">Ні</span></td>
-              </tr>
+                              <td>Статус завдання</td>
+                <td>Затвердження в tile</td>
+                <td>Статус спринту / історії</td>
+                <td>Статус і теги</td>
+</tr>
               <tr>
                 <td>Простежуваність коду до специфікацій</td>
                 <td class="matrix-table__own"><span class="yes">Так</span></td>
@@ -157,7 +205,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">Ні</span></td>
                 <td><span class="no">Ні</span></td>
                 <td>Через регенерацію</td>
-              </tr>
+                              <td>Через завдання</td>
+                <td>targets і [@test]</td>
+                <td>Історії несуть контекст</td>
+                <td>Залежності завдань</td>
+</tr>
               <tr>
                 <td>Залежність від середовища виконання</td>
                 <td class="matrix-table__own">Немає (Go-бінарник)</td>
@@ -166,7 +218,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>Python</td>
                 <td>Claude Code</td>
                 <td>Компілятор постачальника</td>
-              </tr>
+                              <td>Застосунок Kiro</td>
+                <td>CLI Tessl + агент</td>
+                <td>Node.js і Python</td>
+                <td>Node.js</td>
+</tr>
               <tr>
                 <td>Працює з будь-яким агентом або без нього</td>
                 <td class="matrix-table__own"><span class="yes">Так</span></td>
@@ -175,7 +231,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>Багато агентів</td>
                 <td>Claude Code</td>
                 <td>Через CodeSpeak</td>
-              </tr>
+                              <td>Агенти Kiro</td>
+                <td>Багато агентів</td>
+                <td>Багато агентів коду</td>
+                <td>Через MCP</td>
+</tr>
             </tbody>
           </table>
         </div>
@@ -255,7 +315,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
   }
   .minis {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-2);
   }
   .mini {

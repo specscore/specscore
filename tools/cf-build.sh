@@ -38,4 +38,18 @@ cp _headers _redirects public/
 echo "==> Removing local-dev README (excluded from CF Pages deploy)"
 rm -f public/README.md
 
+# Landing comparison pages ship a raw Markdown sibling. List the English
+# URLs in llms.txt so an agent that only reads the index can find them.
+if ! grep -q '/vs/kiro.md' public/llms.txt; then
+  cat >> public/llms.txt << 'EOF'
+
+## Comparisons
+
+- [SpecScore vs Kiro](https://specscore.md/vs/kiro.md): Kiro is AWS's agentic IDE that writes EARS requirements. SpecScore is an open spec format linted in CI.
+- [SpecScore vs Tessl](https://specscore.md/vs/tessl.md): Tessl is an agent-skills platform; its tile and 2025 essay treat the spec as source. SpecScore lints a portable format in CI.
+- [SpecScore vs the BMAD Method](https://specscore.md/vs/bmad-method.md): The BMAD Method is an agile AI-agent workflow. SpecScore is the spec format a CI job can lint.
+- [SpecScore vs Task Master AI](https://specscore.md/vs/task-master-ai.md): Task Master parses a PRD into tasks. SpecScore is the lintable spec those tasks can cite.
+EOF
+fi
+
 echo "==> Done. public/ ready for Cloudflare Pages deploy."

@@ -70,3 +70,172 @@
 /install/get-cli.ps1
   Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=300
+
+# Comparison pages: raw Markdown sibling for agents
+/vs/kiro/
+  Link: </vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/vs/tessl/
+  Link: </vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/vs/bmad-method/
+  Link: </vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/vs/task-master-ai/
+  Link: </vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/es/vs/kiro/
+  Link: </es/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/es/vs/tessl/
+  Link: </es/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/es/vs/bmad-method/
+  Link: </es/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/es/vs/task-master-ai/
+  Link: </es/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/de/vs/kiro/
+  Link: </de/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/de/vs/tessl/
+  Link: </de/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/de/vs/bmad-method/
+  Link: </de/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/de/vs/task-master-ai/
+  Link: </de/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/fr/vs/kiro/
+  Link: </fr/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/fr/vs/tessl/
+  Link: </fr/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/fr/vs/bmad-method/
+  Link: </fr/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/fr/vs/task-master-ai/
+  Link: </fr/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/it/vs/kiro/
+  Link: </it/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/it/vs/tessl/
+  Link: </it/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/it/vs/bmad-method/
+  Link: </it/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/it/vs/task-master-ai/
+  Link: </it/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/pl/vs/kiro/
+  Link: </pl/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/pl/vs/tessl/
+  Link: </pl/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/pl/vs/bmad-method/
+  Link: </pl/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/pl/vs/task-master-ai/
+  Link: </pl/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/vs/kiro/
+  Link: </pt-br/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/vs/tessl/
+  Link: </pt-br/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/vs/bmad-method/
+  Link: </pt-br/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/vs/task-master-ai/
+  Link: </pt-br/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/ru/vs/kiro/
+  Link: </ru/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/ru/vs/tessl/
+  Link: </ru/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/ru/vs/bmad-method/
+  Link: </ru/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/ru/vs/task-master-ai/
+  Link: </ru/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/tr/vs/kiro/
+  Link: </tr/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/tr/vs/tessl/
+  Link: </tr/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/tr/vs/bmad-method/
+  Link: </tr/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/tr/vs/task-master-ai/
+  Link: </tr/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/uk/vs/kiro/
+  Link: </uk/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/uk/vs/tessl/
+  Link: </uk/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/uk/vs/bmad-method/
+  Link: </uk/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/uk/vs/task-master-ai/
+  Link: </uk/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/ja/vs/kiro/
+  Link: </ja/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/ja/vs/tessl/
+  Link: </ja/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/ja/vs/bmad-method/
+  Link: </ja/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/ja/vs/task-master-ai/
+  Link: </ja/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/vs/kiro/
+  Link: </zh-cn/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/vs/tessl/
+  Link: </zh-cn/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/vs/bmad-method/
+  Link: </zh-cn/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/vs/task-master-ai/
+  Link: </zh-cn/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/vs/kiro/
+  Link: </zh-tw/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/vs/tessl/
+  Link: </zh-tw/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/vs/bmad-method/
+  Link: </zh-tw/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/vs/task-master-ai/
+  Link: </zh-tw/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/ko/vs/kiro/
+  Link: </ko/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/ko/vs/tessl/
+  Link: </ko/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/ko/vs/bmad-method/
+  Link: </ko/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/ko/vs/task-master-ai/
+  Link: </ko/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"

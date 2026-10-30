@@ -9,6 +9,7 @@ Astro source tree.
 | [`components/`](components/) | Section-level components — one `.astro` per IA section. |
 | [`scripts/`](scripts/) | Client-side TypeScript bundled by Astro (click-to-load film embed). |
 | [`styles/`](styles/) | Global CSS (color tokens, typography, reset, shared utilities). |
+| [`content/`](content/) | Typed page copy rendered by shared Astro components. Comparison articles live in [`content/compare/`](content/compare/). |
 | [`lib/`](lib/) | Shared locale list, hreflang alternates, sitemap URL helpers, and structured-data injection. |
 
 ## Open Questions

@@ -57,6 +57,22 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
             <span class="mini__name">CodeSpeak</span>
             <span class="mini__line">CodeSpeak은 컴파일러에 베팅하고, SpecScore는 포맷에 베팅합니다.</span>
           </a>
+          <a href="/ko/vs/kiro/" class="mini">
+            <span class="mini__name">Kiro</span>
+            <span class="mini__line">Kiro는 IDE 안에서 스펙을 초안합니다. SpecScore는 CI가 검사할 수 있는 형식입니다.</span>
+          </a>
+          <a href="/ko/vs/tessl/" class="mini">
+            <span class="mini__name">Tessl</span>
+            <span class="mini__line">Tessl은 스펙을 소스로 봅니다. SpecScore는 코드 옆의 스펙을 검사합니다.</span>
+          </a>
+          <a href="/ko/vs/bmad-method/" class="mini">
+            <span class="mini__name">BMAD Method</span>
+            <span class="mini__line">BMAD는 애자일 순환을 돌립니다. SpecScore는 풀 리퀘스트가 검사할 수 있는 산출물입니다.</span>
+          </a>
+          <a href="/ko/vs/task-master-ai/" class="mini">
+            <span class="mini__name">Task Master AI</span>
+            <span class="mini__line">Task Master는 PRD를 작업으로 나눕니다. SpecScore는 그 작업이 인용할 수 있는 스펙입니다.</span>
+          </a>
         </div>
       </div>
     </section>
@@ -72,7 +88,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
         </p>
 
         <div class="table-wrap">
-          <table class="matrix-table" aria-label="SpecScore vs Plain Markdown, OpenSpec, Spec Kit, Datarim, CodeSpeak">
+          <table class="matrix-table" aria-label="SpecScore vs Plain Markdown, OpenSpec, Spec Kit, Datarim, CodeSpeak, Kiro, Tessl, BMAD Method, Task Master AI">
             <thead>
               <tr>
                 <th scope="col">기능</th>
@@ -82,6 +98,10 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <th scope="col"><a href="/ko/vs/spec-kit/" class="matrix-table__link">Spec Kit</a></th>
                 <th scope="col"><a href="/ko/vs/datarim/" class="matrix-table__link">Datarim</a></th>
                 <th scope="col"><a href="/ko/vs/codespeak/" class="matrix-table__link">CodeSpeak</a></th>
+                <th scope="col"><a href="/ko/vs/kiro/" class="matrix-table__link">Kiro</a></th>
+                <th scope="col"><a href="/ko/vs/tessl/" class="matrix-table__link">Tessl</a></th>
+                <th scope="col"><a href="/ko/vs/bmad-method/" class="matrix-table__link">BMAD Method</a></th>
+                <th scope="col"><a href="/ko/vs/task-master-ai/" class="matrix-table__link">Task Master AI</a></th>
               </tr>
             </thead>
             <tbody>
@@ -93,7 +113,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>워크플로우 / 방법론</td>
                 <td>Claude Code 워크플로우 팩</td>
                 <td>LLM 컴파일러 (스펙 → 코드)</td>
-              </tr>
+                              <td>스펙을 초안하는 에이전트 IDE</td>
+                <td>스킬 플랫폼 + 스펙 타일</td>
+                <td>애자일 AI 방법</td>
+                <td>에이전트용 작업 목록</td>
+</tr>
               <tr>
                 <td>스펙 형식</td>
                 <td class="matrix-table__own">Markdown + YAML (구조화)</td>
@@ -102,7 +126,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>자유 형식 Markdown</td>
                 <td>Markdown (워크플로우 형태)</td>
                 <td>일반 영어</td>
-              </tr>
+                              <td>EARS requirements.md</td>
+                <td>.spec.md (타일)</td>
+                <td>PRD, 아키텍처, 스토리</td>
+                <td>산문 PRD, 그다음 작업</td>
+</tr>
               <tr>
                 <td>코드는 그대로 유지</td>
                 <td class="matrix-table__own"><span class="yes">예</span></td>
@@ -111,7 +139,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="yes">예</span></td>
                 <td><span class="yes">예</span></td>
                 <td><span class="no">코드가 생성됨</span></td>
-              </tr>
+                              <td><span class="yes">예</span></td>
+                <td><span class="yes">예</span></td>
+                <td><span class="yes">예</span></td>
+                <td><span class="yes">예</span></td>
+</tr>
               <tr>
                 <td>오픈 소스 / 무료</td>
                 <td class="matrix-table__own"><span class="yes">예</span> (CC BY / MIT)</td>
@@ -120,7 +152,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="yes">예</span> (MIT)</td>
                 <td><span class="yes">예</span> (MIT)</td>
                 <td><span class="no">독점 시스템</span></td>
-              </tr>
+                              <td>독점 IDE, 무료 등급</td>
+                <td>타일은 MIT, 플랫폼은 제품</td>
+                <td>예 (MIT)</td>
+                <td>MIT + Commons Clause</td>
+</tr>
               <tr>
                 <td>스펙 콘텐츠 linting</td>
                 <td class="matrix-table__own"><span class="yes">예</span></td>
@@ -129,7 +165,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">아니오</span></td>
                 <td><span class="no">아니오</span></td>
                 <td>문서화되지 않음</td>
-              </tr>
+                              <td>제품 안 분석</td>
+                <td>타일의 셸 검사</td>
+                <td>워크플로 준비 관문</td>
+                <td><span class="no">아니요</span></td>
+</tr>
               <tr>
                 <td>요구사항 / 인수 기준 ID</td>
                 <td class="matrix-table__own"><span class="yes">예</span></td>
@@ -138,7 +178,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">아니오</span></td>
                 <td><span class="no">아니오</span></td>
                 <td><span class="no">아니오</span></td>
-              </tr>
+                              <td>문서화되지 않음</td>
+                <td>[@test] 링크</td>
+                <td>스토리 파일</td>
+                <td>숫자 작업 id</td>
+</tr>
               <tr>
                 <td>강제 적용 라이프사이클</td>
                 <td class="matrix-table__own"><span class="yes">예</span></td>
@@ -147,7 +191,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">아니오</span></td>
                 <td><span class="no">아니오</span></td>
                 <td><span class="no">아니오</span></td>
-              </tr>
+                              <td>작업 상태</td>
+                <td>타일 안의 승인</td>
+                <td>스프린트 / 스토리 상태</td>
+                <td>상태와 태그</td>
+</tr>
               <tr>
                 <td>코드-스펙 추적성</td>
                 <td class="matrix-table__own"><span class="yes">예</span></td>
@@ -156,7 +204,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">아니오</span></td>
                 <td><span class="no">아니오</span></td>
                 <td>재생성을 통해</td>
-              </tr>
+                              <td>작업을 통해</td>
+                <td>targets 와 [@test]</td>
+                <td>스토리가 맥락을 담음</td>
+                <td>작업 의존성</td>
+</tr>
               <tr>
                 <td>런타임 의존성</td>
                 <td class="matrix-table__own">없음 (Go 바이너리)</td>
@@ -165,7 +217,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>Python</td>
                 <td>Claude Code</td>
                 <td>벤더 컴파일러</td>
-              </tr>
+                              <td>Kiro 앱</td>
+                <td>Tessl CLI + 에이전트</td>
+                <td>Node.js 와 Python</td>
+                <td>Node.js</td>
+</tr>
               <tr>
                 <td>모든 에이전트, 또는 에이전트 없이도 작동</td>
                 <td class="matrix-table__own"><span class="yes">예</span></td>
@@ -174,7 +230,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>다수의 에이전트</td>
                 <td>Claude Code</td>
                 <td>CodeSpeak을 통해</td>
-              </tr>
+                              <td>Kiro의 에이전트</td>
+                <td>여러 에이전트</td>
+                <td>여러 코딩 에이전트</td>
+                <td>MCP 경유</td>
+</tr>
             </tbody>
           </table>
         </div>
@@ -254,7 +314,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
   }
   .minis {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-2);
   }
   .mini {

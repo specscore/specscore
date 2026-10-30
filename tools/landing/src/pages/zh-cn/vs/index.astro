@@ -56,6 +56,22 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
             <span class="mini__name">CodeSpeak</span>
             <span class="mini__line">CodeSpeak 押注于编译器。SpecScore 押注于格式。</span>
           </a>
+          <a href="/zh-cn/vs/kiro/" class="mini">
+            <span class="mini__name">Kiro</span>
+            <span class="mini__line">Kiro 在 IDE 里起草规格。SpecScore 是 CI 可以检查的格式。</span>
+          </a>
+          <a href="/zh-cn/vs/tessl/" class="mini">
+            <span class="mini__name">Tessl</span>
+            <span class="mini__line">Tessl 主张规格即源头。SpecScore 检查放在代码旁边的规格。</span>
+          </a>
+          <a href="/zh-cn/vs/bmad-method/" class="mini">
+            <span class="mini__name">BMAD Method</span>
+            <span class="mini__line">BMAD 跑敏捷循环。SpecScore 是拉取请求可以检查的产物。</span>
+          </a>
+          <a href="/zh-cn/vs/task-master-ai/" class="mini">
+            <span class="mini__name">Task Master AI</span>
+            <span class="mini__line">Task Master 把 PRD 拆成任务。SpecScore 是这些任务可以引用的规格。</span>
+          </a>
         </div>
       </div>
     </section>
@@ -70,7 +86,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
         </p>
 
         <div class="table-wrap">
-          <table class="matrix-table" aria-label="SpecScore 与 Plain Markdown、OpenSpec、Spec Kit、Datarim 和 CodeSpeak 的对比">
+          <table class="matrix-table" aria-label="SpecScore 与 Plain Markdown、OpenSpec、Spec Kit、Datarim 和 CodeSpeak 的对比, Kiro, Tessl, BMAD Method, Task Master AI">
             <thead>
               <tr>
                 <th scope="col">能力</th>
@@ -80,6 +96,10 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <th scope="col"><a href="/zh-cn/vs/spec-kit/" class="matrix-table__link">Spec Kit</a></th>
                 <th scope="col"><a href="/zh-cn/vs/datarim/" class="matrix-table__link">Datarim</a></th>
                 <th scope="col"><a href="/zh-cn/vs/codespeak/" class="matrix-table__link">CodeSpeak</a></th>
+                <th scope="col"><a href="/zh-cn/vs/kiro/" class="matrix-table__link">Kiro</a></th>
+                <th scope="col"><a href="/zh-cn/vs/tessl/" class="matrix-table__link">Tessl</a></th>
+                <th scope="col"><a href="/zh-cn/vs/bmad-method/" class="matrix-table__link">BMAD Method</a></th>
+                <th scope="col"><a href="/zh-cn/vs/task-master-ai/" class="matrix-table__link">Task Master AI</a></th>
               </tr>
             </thead>
             <tbody>
@@ -91,7 +111,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>工作流 / 方法论</td>
                 <td>Claude Code 工作流套件</td>
                 <td>LLM 编译器（规范 → 代码）</td>
-              </tr>
+                              <td>起草规格的代理 IDE</td>
+                <td>技能平台 + 规格 tile</td>
+                <td>敏捷的 AI 方法</td>
+                <td>给代理用的任务列表</td>
+</tr>
               <tr>
                 <td>规范格式</td>
                 <td class="matrix-table__own">Markdown + YAML（结构化）</td>
@@ -100,7 +124,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>自由格式 Markdown</td>
                 <td>Markdown（工作流形态）</td>
                 <td>纯英文</td>
-              </tr>
+                              <td>EARS 的 requirements.md</td>
+                <td>.spec.md（tile）</td>
+                <td>PRD、架构、故事</td>
+                <td>散文 PRD，然后是任务</td>
+</tr>
               <tr>
                 <td>代码归你所有</td>
                 <td class="matrix-table__own"><span class="yes">支持</span></td>
@@ -109,7 +137,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="yes">支持</span></td>
                 <td><span class="yes">支持</span></td>
                 <td><span class="no">代码是生成的</span></td>
-              </tr>
+                              <td><span class="yes">是</span></td>
+                <td><span class="yes">是</span></td>
+                <td><span class="yes">是</span></td>
+                <td><span class="yes">是</span></td>
+</tr>
               <tr>
                 <td>开源 / 免费</td>
                 <td class="matrix-table__own"><span class="yes">支持</span>（CC BY / MIT）</td>
@@ -118,7 +150,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="yes">支持</span>（MIT）</td>
                 <td><span class="yes">支持</span>（MIT）</td>
                 <td><span class="no">专有系统</span></td>
-              </tr>
+                              <td>专有 IDE，有免费档</td>
+                <td>tile 为 MIT；平台是产品</td>
+                <td>是（MIT）</td>
+                <td>MIT + Commons Clause</td>
+</tr>
               <tr>
                 <td>规范内容 linting</td>
                 <td class="matrix-table__own"><span class="yes">支持</span></td>
@@ -127,7 +163,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">不支持</span></td>
                 <td><span class="no">不支持</span></td>
                 <td>无文档说明</td>
-              </tr>
+                              <td>产品内分析</td>
+                <td>tile 里的 shell 检查</td>
+                <td>流程中的就绪门</td>
+                <td><span class="no">否</span></td>
+</tr>
               <tr>
                 <td>需求 / 验收标准 ID</td>
                 <td class="matrix-table__own"><span class="yes">支持</span></td>
@@ -136,7 +176,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">不支持</span></td>
                 <td><span class="no">不支持</span></td>
                 <td><span class="no">不支持</span></td>
-              </tr>
+                              <td>文档未说明</td>
+                <td>[@test] 链接</td>
+                <td>故事文件</td>
+                <td>数字任务 id</td>
+</tr>
               <tr>
                 <td>强制执行的生命周期</td>
                 <td class="matrix-table__own"><span class="yes">支持</span></td>
@@ -145,7 +189,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">不支持</span></td>
                 <td><span class="no">不支持</span></td>
                 <td><span class="no">不支持</span></td>
-              </tr>
+                              <td>任务状态</td>
+                <td>tile 中的批准</td>
+                <td>迭代 / 故事状态</td>
+                <td>状态和标签</td>
+</tr>
               <tr>
                 <td>代码到规范的可追溯性</td>
                 <td class="matrix-table__own"><span class="yes">支持</span></td>
@@ -154,7 +202,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">不支持</span></td>
                 <td><span class="no">不支持</span></td>
                 <td>通过重新生成</td>
-              </tr>
+                              <td>经由任务</td>
+                <td>targets 与 [@test]</td>
+                <td>故事携带上下文</td>
+                <td>任务依赖</td>
+</tr>
               <tr>
                 <td>运行时依赖</td>
                 <td class="matrix-table__own">无（Go 二进制文件）</td>
@@ -163,7 +215,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>Python</td>
                 <td>Claude Code</td>
                 <td>厂商编译器</td>
-              </tr>
+                              <td>Kiro 应用</td>
+                <td>Tessl CLI + 代理</td>
+                <td>Node.js 与 Python</td>
+                <td>Node.js</td>
+</tr>
               <tr>
                 <td>适用于任意代理，或不用代理</td>
                 <td class="matrix-table__own"><span class="yes">支持</span></td>
@@ -172,7 +228,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>多种代理</td>
                 <td>Claude Code</td>
                 <td>通过 CodeSpeak</td>
-              </tr>
+                              <td>Kiro 的代理</td>
+                <td>多种代理</td>
+                <td>多种编码代理</td>
+                <td>通过 MCP</td>
+</tr>
             </tbody>
           </table>
         </div>
@@ -252,7 +312,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
   }
   .minis {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-2);
   }
   .mini {

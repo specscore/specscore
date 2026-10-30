@@ -16,6 +16,9 @@ One Astro component per IA section, in render order, plus a header and a footer.
 | `Ecosystem.astro` | 8 | Three quiet cards: Rehearse, SpecScore Studio, Synchestra (alphabetical). |
 | `FinalCta.astro` | 9 | "Specs that pass." headline + Star + Read the docs. |
 | `SiteFooter.astro` | — | Four-column footer. |
+| `CompareArticle.astro` | — | Shared structure for a `/vs/` article. Copy comes from `src/content/compare/`. |
+| `MoreComparisons.astro` | — | Cross-links to the other comparison pages. |
+| `Inlines.astro` | — | Renders a typed prose run (text, links, code). |
 
 Source of truth for **what each section should contain** lives in the marketing repo: [`branding/website/homepage-ia.md`](https://github.com/specscore/marketing/blob/main/branding/website/homepage-ia.md) (structure) and [`branding/website/homepage-copy.md`](https://github.com/specscore/marketing/blob/main/branding/website/homepage-copy.md) (literal text).
 

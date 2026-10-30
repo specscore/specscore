@@ -70,6 +70,7 @@ rm /tmp/hero-source.png
 tools/landing/
 ├── astro.config.mjs
 ├── package.json
+├── scripts/          emit-compare-md.ts — raw .md companions for /vs/ pages
 ├── tsconfig.json
 ├── README.md  ← you are here
 ├── public/

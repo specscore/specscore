@@ -56,6 +56,22 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
             <span class="mini__name">CodeSpeak</span>
             <span class="mini__line">CodeSpeak はコンパイラに賭けます。SpecScore はフォーマットに賭けます。</span>
           </a>
+          <a href="/ja/vs/kiro/" class="mini">
+            <span class="mini__name">Kiro</span>
+            <span class="mini__line">Kiro は IDE の中で仕様を起草します。SpecScore は CI が検査できる形式です。</span>
+          </a>
+          <a href="/ja/vs/tessl/" class="mini">
+            <span class="mini__name">Tessl</span>
+            <span class="mini__line">Tessl は仕様をソースとする立場です。SpecScore はコードのそばの仕様を検査します。</span>
+          </a>
+          <a href="/ja/vs/bmad-method/" class="mini">
+            <span class="mini__name">BMAD Method</span>
+            <span class="mini__line">BMAD はアジャイルの循環を回します。SpecScore はプルリクエストが検査できる成果物です。</span>
+          </a>
+          <a href="/ja/vs/task-master-ai/" class="mini">
+            <span class="mini__name">Task Master AI</span>
+            <span class="mini__line">Task Master は PRD をタスクに分けます。SpecScore はそれらのタスクが参照できる仕様です。</span>
+          </a>
         </div>
       </div>
     </section>
@@ -70,7 +86,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
         </p>
 
         <div class="table-wrap">
-          <table class="matrix-table" aria-label="SpecScore vs Plain Markdown、OpenSpec、Spec Kit、Datarim、CodeSpeak">
+          <table class="matrix-table" aria-label="SpecScore vs Plain Markdown、OpenSpec、Spec Kit、Datarim、CodeSpeak, Kiro, Tessl, BMAD Method, Task Master AI">
             <thead>
               <tr>
                 <th scope="col">機能</th>
@@ -80,6 +96,10 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <th scope="col"><a href="/ja/vs/spec-kit/" class="matrix-table__link">Spec Kit</a></th>
                 <th scope="col"><a href="/ja/vs/datarim/" class="matrix-table__link">Datarim</a></th>
                 <th scope="col"><a href="/ja/vs/codespeak/" class="matrix-table__link">CodeSpeak</a></th>
+                <th scope="col"><a href="/ja/vs/kiro/" class="matrix-table__link">Kiro</a></th>
+                <th scope="col"><a href="/ja/vs/tessl/" class="matrix-table__link">Tessl</a></th>
+                <th scope="col"><a href="/ja/vs/bmad-method/" class="matrix-table__link">BMAD Method</a></th>
+                <th scope="col"><a href="/ja/vs/task-master-ai/" class="matrix-table__link">Task Master AI</a></th>
               </tr>
             </thead>
             <tbody>
@@ -91,7 +111,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>ワークフロー / 方法論</td>
                 <td>Claude Code ワークフローパック</td>
                 <td>LLM コンパイラ（スペック → コード）</td>
-              </tr>
+                              <td>仕様を起草するエージェント IDE</td>
+                <td>スキル基盤 + 仕様タイル</td>
+                <td>アジャイルな AI 手法</td>
+                <td>エージェント向けタスク一覧</td>
+</tr>
               <tr>
                 <td>スペックフォーマット</td>
                 <td class="matrix-table__own">Markdown + YAML（構造化）</td>
@@ -100,7 +124,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>自由形式の Markdown</td>
                 <td>Markdown（ワークフロー形式）</td>
                 <td>平易な英語</td>
-              </tr>
+                              <td>EARS の requirements.md</td>
+                <td>.spec.md（タイル）</td>
+                <td>PRD、アーキテクチャ、ストーリー</td>
+                <td>散文の PRD、その後タスク</td>
+</tr>
               <tr>
                 <td>コードは自分のもの</td>
                 <td class="matrix-table__own"><span class="yes">あり</span></td>
@@ -109,7 +137,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="yes">あり</span></td>
                 <td><span class="yes">あり</span></td>
                 <td><span class="no">コードは生成される</span></td>
-              </tr>
+                              <td><span class="yes">はい</span></td>
+                <td><span class="yes">はい</span></td>
+                <td><span class="yes">はい</span></td>
+                <td><span class="yes">はい</span></td>
+</tr>
               <tr>
                 <td>オープンソース / 無料</td>
                 <td class="matrix-table__own"><span class="yes">あり</span>（CC BY / MIT）</td>
@@ -118,7 +150,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="yes">あり</span>（MIT）</td>
                 <td><span class="yes">あり</span>（MIT）</td>
                 <td><span class="no">プロプライエタリなシステム</span></td>
-              </tr>
+                              <td>独自 IDE、無料枠</td>
+                <td>タイルは MIT、基盤は製品</td>
+                <td>はい（MIT）</td>
+                <td>MIT + Commons Clause</td>
+</tr>
               <tr>
                 <td>スペックコンテンツの lint</td>
                 <td class="matrix-table__own"><span class="yes">あり</span></td>
@@ -127,7 +163,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">なし</span></td>
                 <td><span class="no">なし</span></td>
                 <td>ドキュメントなし</td>
-              </tr>
+                              <td>製品内の分析</td>
+                <td>タイル内のシェル検査</td>
+                <td>ワークフローの準備ゲート</td>
+                <td><span class="no">いいえ</span></td>
+</tr>
               <tr>
                 <td>要件 / AC ID</td>
                 <td class="matrix-table__own"><span class="yes">あり</span></td>
@@ -136,7 +176,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">なし</span></td>
                 <td><span class="no">なし</span></td>
                 <td><span class="no">なし</span></td>
-              </tr>
+                              <td>文書化されていない</td>
+                <td>[@test] リンク</td>
+                <td>ストーリーファイル</td>
+                <td>数値のタスク id</td>
+</tr>
               <tr>
                 <td>強制されるライフサイクル</td>
                 <td class="matrix-table__own"><span class="yes">あり</span></td>
@@ -145,7 +189,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">なし</span></td>
                 <td><span class="no">なし</span></td>
                 <td><span class="no">なし</span></td>
-              </tr>
+                              <td>タスク状態</td>
+                <td>タイル内の承認</td>
+                <td>スプリント / ストーリー状態</td>
+                <td>状態とタグ</td>
+</tr>
               <tr>
                 <td>コードからスペックへのトレーサビリティ</td>
                 <td class="matrix-table__own"><span class="yes">あり</span></td>
@@ -154,7 +202,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">なし</span></td>
                 <td><span class="no">なし</span></td>
                 <td>再生成を通じて</td>
-              </tr>
+                              <td>タスク経由</td>
+                <td>targets と [@test]</td>
+                <td>ストーリーが文脈を運ぶ</td>
+                <td>タスク依存</td>
+</tr>
               <tr>
                 <td>ランタイム依存</td>
                 <td class="matrix-table__own">なし（Go バイナリ）</td>
@@ -163,7 +215,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>Python</td>
                 <td>Claude Code</td>
                 <td>ベンダーのコンパイラ</td>
-              </tr>
+                              <td>Kiro アプリ</td>
+                <td>Tessl CLI + エージェント</td>
+                <td>Node.js と Python</td>
+                <td>Node.js</td>
+</tr>
               <tr>
                 <td>あらゆるエージェントで、またはエージェントなしで動作</td>
                 <td class="matrix-table__own"><span class="yes">あり</span></td>
@@ -172,7 +228,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>多くのエージェント</td>
                 <td>Claude Code</td>
                 <td>CodeSpeak を通じて</td>
-              </tr>
+                              <td>Kiro のエージェント</td>
+                <td>多くのエージェント</td>
+                <td>多くのコーディングエージェント</td>
+                <td>MCP 経由</td>
+</tr>
             </tbody>
           </table>
         </div>
@@ -252,7 +312,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
   }
   .minis {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-2);
   }
   .mini {
