@@ -15,6 +15,7 @@ One directory per locale. English is the source draft; other locales match it se
 | [`pt-br/`](pt-br/) | Brazilian Portuguese comparison articles. |
 | [`ru/`](ru/) | Russian comparison articles. |
 | [`tr/`](tr/) | Turkish comparison articles. |
+| [`uk/`](uk/) | Ukrainian comparison articles. |
 | [`zh-cn/`](zh-cn/) | Simplified Chinese comparison articles. |
 | [`zh-tw/`](zh-tw/) | Traditional Chinese comparison articles. |
 

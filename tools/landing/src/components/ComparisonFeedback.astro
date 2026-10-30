@@ -18,6 +18,12 @@ const locale =
   path.startsWith('/ja')    ? 'ja'    :
   path.startsWith('/zh-cn') ? 'zh-cn' :
   path.startsWith('/ko')    ? 'ko'    :
+  path.startsWith('/de')    ? 'de'    :
+  path.startsWith('/fr')    ? 'fr'    :
+  path.startsWith('/it')    ? 'it'    :
+  path.startsWith('/pl')    ? 'pl'    :
+  path.startsWith('/tr')    ? 'tr'    :
+  path.startsWith('/zh-tw') ? 'zh-tw' :
                               'en';
 
 // Build GitHub issue URLs.
@@ -84,6 +90,42 @@ const i18n: Record<string, Copy> = {
     correction: '수정 issue를 열어주세요',
     request: '요청해 주세요',
   },
+  de: {
+    index: 'Diese Vergleiche beruhen auf öffentlich zugänglicher Dokumentation und öffentlichem Quellcode. Wenn etwas falsch oder veraltet ist,',
+    specific: 'Dieser Vergleich beruht auf öffentlich zugänglicher Dokumentation und öffentlichem Quellcode. Etwas falsch oder veraltet?',
+    correction: 'öffnen Sie ein Korrektur-Issue',
+    request: 'fordern Sie einen an',
+  },
+  fr: {
+    index: 'Ces comparaisons reposent sur une documentation et un code source publics. Si quelque chose est faux ou périmé,',
+    specific: 'Cette comparaison repose sur une documentation et un code source publics. Quelque chose est faux ou périmé ?',
+    correction: 'ouvrez un ticket de correction',
+    request: 'demandez-en une',
+  },
+  it: {
+    index: 'Questi confronti si basano su documentazione e codice sorgente pubblici. Se qualcosa è sbagliato o superato,',
+    specific: 'Questo confronto si basa su documentazione e codice sorgente pubblici. Qualcosa è sbagliato o superato?',
+    correction: 'apri una issue di correzione',
+    request: 'richiedine uno',
+  },
+  pl: {
+    index: 'Te porównania opierają się na publicznie dostępnej dokumentacji i kodzie źródłowym. Jeśli coś jest błędne lub nieaktualne,',
+    specific: 'To porównanie opiera się na publicznie dostępnej dokumentacji i kodzie źródłowym. Coś jest błędne lub nieaktualne?',
+    correction: 'otwórz issue z poprawką',
+    request: 'poproś o nie',
+  },
+  tr: {
+    index: 'Bu karşılaştırmalar herkese açık belgelere ve kaynak koda dayanır. Bir şey yanlış veya eskiyse,',
+    specific: 'Bu karşılaştırma herkese açık belgelere ve kaynak koda dayanır. Bir şey yanlış veya eski mi?',
+    correction: 'düzeltme issue’su açın',
+    request: 'bir tane isteyin',
+  },
+  'zh-tw': {
+    index: '這些對比基於公開文件與原始碼。若有不準確或過時的資訊，請',
+    specific: '本對比基於公開文件與原始碼。發現不準確或過時的資訊？請',
+    correction: '提交勘誤 issue',
+    request: '提交請求',
+  },
 };
 
 const t = i18n[locale] ?? i18n.en;
@@ -99,6 +141,12 @@ const i18nRequest: Record<string, { index: string; specific: string }> = {
   ja:      { index: '他のツールとの比較を追加してほしい場合は、', specific: '他のツールとの比較をご希望ですか？' },
   'zh-cn': { index: '如果您希望我们添加与其他规范格式或工具的对比，请', specific: '希望我们将 SpecScore 与其他工具进行对比？请' },
   ko:      { index: '다른 도구와의 비교를 추가해 주길 원하시면', specific: 'SpecScore를 다른 도구와 비교해 주길 원하시나요?' },
+  de:      { index: 'Wenn wir einen Vergleich mit einem anderen Format oder Werkzeug hinzufügen sollen,', specific: 'Sollen wir SpecScore mit einem anderen Werkzeug vergleichen?' },
+  fr:      { index: 'Si vous voulez que nous ajoutions une comparaison avec un autre format ou outil,', specific: 'Voulez-vous que nous comparions SpecScore à un autre outil ?' },
+  it:      { index: 'Se vuoi che aggiungiamo un confronto con un altro formato o strumento,', specific: 'Vuoi che confrontiamo SpecScore con un altro strumento?' },
+  pl:      { index: 'Jeśli chcesz, żebyśmy dodali porównanie z innym formatem lub narzędziem,', specific: 'Chcesz, żebyśmy porównali SpecScore z innym narzędziem?' },
+  tr:      { index: 'Başka bir biçim veya araçla karşılaştırma eklememizi isterseniz,', specific: 'SpecScore’u başka bir araçla karşılaştırmamızı ister misiniz?' },
+  'zh-tw': { index: '如果您希望我們加入與其他規範格式或工具的對比，請', specific: '希望我們將 SpecScore 與其他工具對比？請' },
 };
 
 const reqSentence = page
@@ -110,6 +158,7 @@ const srHeading: Record<string, string> = {
   en: 'Feedback', es: 'Comentarios', 'pt-br': 'Feedback',
   ru: 'Обратная связь', uk: "Зворотний зв'язок", ja: 'フィードバック',
   'zh-cn': '反馈', ko: '피드백',
+  de: 'Rückmeldung', fr: 'Retour', it: 'Feedback', pl: 'Opinia', tr: 'Geri bildirim', 'zh-tw': '回饋',
 };
 ---
 

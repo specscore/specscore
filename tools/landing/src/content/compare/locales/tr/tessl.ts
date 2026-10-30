@@ -115,7 +115,7 @@ export const tessl: ComparePage = {
       them: [
         'Karo ',
         { a: 'MIT', href: `${tile}/blob/main/LICENSE`, kind: 'them' },
-        ' lisanslıdır. Platform bir üründür. Belgeler, platformun kaynağını açık kaynak olarak yayımlamaz.',
+        ' lisanslıdır. Platform bir üründür. Belgeler, platformun kaynak kodunu yayımlamaz.',
       ],
       us: [
         { a: 'CC BY 4.0', href: license, kind: 'us' },

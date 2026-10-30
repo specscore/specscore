@@ -114,7 +114,7 @@ export const tessl: ComparePage = {
       them: [
         '這個 tile 是 ',
         { a: 'MIT', href: `${tile}/blob/main/LICENSE`, kind: 'them' },
-        '。平台是一項產品。文件沒有把平台的原始碼以開源形式公開。',
+        '。平台是一項產品。文件沒有公布平台的原始碼。',
       ],
       us: [
         { a: 'CC BY 4.0', href: license, kind: 'us' },

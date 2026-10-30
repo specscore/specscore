@@ -115,7 +115,7 @@ export const tessl: ComparePage = {
       them: [
         'Das Tile ist ',
         { a: 'MIT', href: `${tile}/blob/main/LICENSE`, kind: 'them' },
-        '. Die Plattform ist ein Produkt. Die Dokumentation veröffentlicht den Quelltext der Plattform nicht als Open Source.',
+        '. Die Plattform ist ein Produkt. Die Dokumentation veröffentlicht den Quelltext der Plattform nicht.',
       ],
       us: [
         { a: 'CC BY 4.0', href: license, kind: 'us' },

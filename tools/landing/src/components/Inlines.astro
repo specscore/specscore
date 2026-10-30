@@ -1,0 +1,31 @@
+---
+import type { Block } from '../content/compare/types.ts';
+
+interface Props {
+  parts: Block;
+}
+
+const { parts } = Astro.props;
+---
+
+{
+  parts.map((part) => {
+    if (typeof part === 'string') return part;
+    if ('c' in part) return <code>{part.c}</code>;
+    if ('s' in part) return <strong>{part.s}</strong>;
+    if ('e' in part) return <em>{part.e}</em>;
+    const external = part.kind === 'us' || part.kind === 'them';
+    const rel =
+      part.kind === 'them' ? 'nofollow noopener' : part.kind === 'us' ? undefined : undefined;
+    return (
+      <a
+        href={part.href}
+        class="xref"
+        target={external ? '_blank' : undefined}
+        rel={rel}
+      >
+        {part.a}
+      </a>
+    );
+  })
+}

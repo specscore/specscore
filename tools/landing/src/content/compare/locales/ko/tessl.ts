@@ -115,7 +115,7 @@ export const tessl: ComparePage = {
       them: [
         '타일은 ',
         { a: 'MIT', href: `${tile}/blob/main/LICENSE`, kind: 'them' },
-        '입니다. 플랫폼은 제품입니다. 문서는 플랫폼의 소스를 오픈 소스로 공개하지 않습니다.',
+        '입니다. 플랫폼은 제품입니다. 문서는 플랫폼의 소스 코드를 공개하지 않습니다.',
       ],
       us: [
         { a: 'CC BY 4.0', href: license, kind: 'us' },

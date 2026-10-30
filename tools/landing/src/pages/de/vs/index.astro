@@ -58,6 +58,22 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
             <span class="mini__name">CodeSpeak</span>
             <span class="mini__line">CodeSpeak setzt auf einen Compiler. SpecScore setzt auf ein Format.</span>
           </a>
+          <a href="/de/vs/kiro/" class="mini">
+            <span class="mini__name">Kiro</span>
+            <span class="mini__line">Kiro entwirft die Spezifikation in der IDE. SpecScore ist das Format, das CI linten kann.</span>
+          </a>
+          <a href="/de/vs/tessl/" class="mini">
+            <span class="mini__name">Tessl</span>
+            <span class="mini__line">Tessl argumentiert für die Spezifikation als Quelle. SpecScore lintet die Spezifikation neben dem Code.</span>
+          </a>
+          <a href="/de/vs/bmad-method/" class="mini">
+            <span class="mini__name">BMAD Method</span>
+            <span class="mini__line">BMAD führt die agile Schleife. SpecScore ist das Artefakt, das ein Pull Request prüfen kann.</span>
+          </a>
+          <a href="/de/vs/task-master-ai/" class="mini">
+            <span class="mini__name">Task Master AI</span>
+            <span class="mini__line">Task Master zerlegt ein PRD in Aufgaben. SpecScore ist die Spezifikation, die diese Aufgaben zitieren können.</span>
+          </a>
         </div>
       </div>
     </section>
@@ -73,7 +89,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
         </p>
 
         <div class="table-wrap">
-          <table class="matrix-table" aria-label="SpecScore vs Plain Markdown, OpenSpec, Spec Kit, Datarim und CodeSpeak">
+          <table class="matrix-table" aria-label="SpecScore vs Plain Markdown, OpenSpec, Spec Kit, Datarim und CodeSpeak, Kiro, Tessl, BMAD Method, Task Master AI">
             <thead>
               <tr>
                 <th scope="col">Fähigkeit</th>
@@ -83,6 +99,10 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <th scope="col"><a href="/de/vs/spec-kit/" class="matrix-table__link">Spec Kit</a></th>
                 <th scope="col"><a href="/de/vs/datarim/" class="matrix-table__link">Datarim</a></th>
                 <th scope="col"><a href="/de/vs/codespeak/" class="matrix-table__link">CodeSpeak</a></th>
+                <th scope="col"><a href="/de/vs/kiro/" class="matrix-table__link">Kiro</a></th>
+                <th scope="col"><a href="/de/vs/tessl/" class="matrix-table__link">Tessl</a></th>
+                <th scope="col"><a href="/de/vs/bmad-method/" class="matrix-table__link">BMAD Method</a></th>
+                <th scope="col"><a href="/de/vs/task-master-ai/" class="matrix-table__link">Task Master AI</a></th>
               </tr>
             </thead>
             <tbody>
@@ -94,7 +114,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>Workflow / Methodik</td>
                 <td>Workflow-Pack für Claude Code</td>
                 <td>LLM-Compiler (Spezifikation → Code)</td>
-              </tr>
+                              <td>Agentische IDE, die Spezifikationen entwirft</td>
+                <td>Skill-Plattform + Spec-Tile</td>
+                <td>Agile KI-Methode</td>
+                <td>Aufgabenliste für Agenten</td>
+</tr>
               <tr>
                 <td>Spezifikationsformat</td>
                 <td class="matrix-table__own">Markdown + YAML (strukturiert)</td>
@@ -103,7 +127,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>Freies Markdown</td>
                 <td>Markdown (workflow-förmig)</td>
                 <td>Einfaches Englisch</td>
-              </tr>
+                              <td>EARS requirements.md</td>
+                <td>.spec.md (Tile)</td>
+                <td>PRD, Architektur, Stories</td>
+                <td>PRD-Prosa, dann Aufgaben</td>
+</tr>
               <tr>
                 <td>Du behältst deinen Code</td>
                 <td class="matrix-table__own"><span class="yes">Ja</span></td>
@@ -112,7 +140,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="yes">Ja</span></td>
                 <td><span class="yes">Ja</span></td>
                 <td><span class="no">Code wird generiert</span></td>
-              </tr>
+                              <td><span class="yes">Ja</span></td>
+                <td><span class="yes">Ja</span></td>
+                <td><span class="yes">Ja</span></td>
+                <td><span class="yes">Ja</span></td>
+</tr>
               <tr>
                 <td>Open Source / kostenlos</td>
                 <td class="matrix-table__own"><span class="yes">Ja</span> (CC BY / MIT)</td>
@@ -121,7 +153,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="yes">Ja</span> (MIT)</td>
                 <td><span class="yes">Ja</span> (MIT)</td>
                 <td><span class="no">Proprietäres System</span></td>
-              </tr>
+                              <td>Proprietäre IDE, kostenlose Stufe</td>
+                <td>Tile MIT; Plattform ist ein Produkt</td>
+                <td>Ja (MIT)</td>
+                <td>MIT + Commons Clause</td>
+</tr>
               <tr>
                 <td>Linting von Spezifikationsinhalten</td>
                 <td class="matrix-table__own"><span class="yes">Ja</span></td>
@@ -130,7 +166,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">Nein</span></td>
                 <td><span class="no">Nein</span></td>
                 <td>Nicht dokumentiert</td>
-              </tr>
+                              <td>Analyse im Produkt</td>
+                <td>Shell-Prüfungen im Tile</td>
+                <td>Bereitschafts-Gate im Workflow</td>
+                <td><span class="no">Nein</span></td>
+</tr>
               <tr>
                 <td>Anforderungs- / AC-IDs</td>
                 <td class="matrix-table__own"><span class="yes">Ja</span></td>
@@ -139,7 +179,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">Nein</span></td>
                 <td><span class="no">Nein</span></td>
                 <td><span class="no">Nein</span></td>
-              </tr>
+                              <td>Nicht dokumentiert</td>
+                <td>[@test]-Links</td>
+                <td>Story-Dateien</td>
+                <td>Numerische Aufgaben-IDs</td>
+</tr>
               <tr>
                 <td>Durchgesetzter Lebenszyklus</td>
                 <td class="matrix-table__own"><span class="yes">Ja</span></td>
@@ -148,7 +192,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">Nein</span></td>
                 <td><span class="no">Nein</span></td>
                 <td><span class="no">Nein</span></td>
-              </tr>
+                              <td>Aufgabenstatus</td>
+                <td>Freigabe im Tile</td>
+                <td>Sprint- / Story-Status</td>
+                <td>Aufgabenstatus und Tags</td>
+</tr>
               <tr>
                 <td>Code-zu-Spezifikation-Rückverfolgbarkeit</td>
                 <td class="matrix-table__own"><span class="yes">Ja</span></td>
@@ -157,7 +205,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td><span class="no">Nein</span></td>
                 <td><span class="no">Nein</span></td>
                 <td>Über Neugenerierung</td>
-              </tr>
+                              <td>Über Aufgaben</td>
+                <td>targets und [@test]</td>
+                <td>Stories tragen den Kontext</td>
+                <td>Aufgabenabhängigkeiten</td>
+</tr>
               <tr>
                 <td>Laufzeitabhängigkeit</td>
                 <td class="matrix-table__own">Keine (Go-Binärdatei)</td>
@@ -166,7 +218,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>Python</td>
                 <td>Claude Code</td>
                 <td>Hersteller-Compiler</td>
-              </tr>
+                              <td>Kiro-App</td>
+                <td>Tessl-CLI + ein Agent</td>
+                <td>Node.js und Python</td>
+                <td>Node.js</td>
+</tr>
               <tr>
                 <td>Funktioniert mit jedem Agenten oder keinem</td>
                 <td class="matrix-table__own"><span class="yes">Ja</span></td>
@@ -175,7 +231,11 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
                 <td>Viele Agenten</td>
                 <td>Claude Code</td>
                 <td>Über CodeSpeak</td>
-              </tr>
+                              <td>Kiros Agenten</td>
+                <td>Viele Agenten</td>
+                <td>Viele Coding-Agenten</td>
+                <td>Über MCP</td>
+</tr>
             </tbody>
           </table>
         </div>
@@ -255,7 +315,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
   }
   .minis {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-2);
   }
   .mini {
