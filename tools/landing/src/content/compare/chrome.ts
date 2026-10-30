@@ -20,6 +20,9 @@ export interface CompareChrome {
   skillsHref: string;
   seeAlsoTitle: string;
   seeAlsoLead: string;
+  roundupBefore: string;
+  roundupLink: string;
+  roundupAfter: string;
 }
 
 // Heading voice matches the existing Spec Kit comparison in each locale.
@@ -45,6 +48,9 @@ export const chrome: Record<LangCode, CompareChrome> = {
     skillsHref: '/ai/specstudio-skills/',
     seeAlsoTitle: 'Other comparisons.',
     seeAlsoLead: 'The same format, set next to other spec-driven tools:',
+    roundupBefore: 'All of them, on one page: ',
+    roundupLink: 'best spec-driven development tools in 2026',
+    roundupAfter: '.',
   },
   es: {
     lang: 'es',
@@ -66,6 +72,9 @@ export const chrome: Record<LangCode, CompareChrome> = {
     skillsHref: '/es/ai/specstudio-skills/',
     seeAlsoTitle: 'Otras comparaciones.',
     seeAlsoLead: 'El mismo formato, junto a otras herramientas de desarrollo guiado por especificaciones:',
+    roundupBefore: 'Todas juntas, en una página: ',
+    roundupLink: 'mejores herramientas de desarrollo basado en especificaciones en 2026',
+    roundupAfter: '.',
   },
   de: {
     lang: 'de',
@@ -87,6 +96,9 @@ export const chrome: Record<LangCode, CompareChrome> = {
     skillsHref: '/de/ai/specstudio-skills/',
     seeAlsoTitle: 'Weitere Vergleiche.',
     seeAlsoLead: 'Dasselbe Format, neben anderen Werkzeugen der spezifikationsgetriebenen Entwicklung:',
+    roundupBefore: 'Alle zusammen, auf einer Seite: ',
+    roundupLink: 'beste Werkzeuge für spezifikationsgetriebene Entwicklung 2026',
+    roundupAfter: '.',
   },
   fr: {
     lang: 'fr',
@@ -108,6 +120,9 @@ export const chrome: Record<LangCode, CompareChrome> = {
     skillsHref: '/fr/ai/specstudio-skills/',
     seeAlsoTitle: 'Autres comparaisons.',
     seeAlsoLead: 'Le même format, à côté d’autres outils de développement piloté par les spécifications :',
+    roundupBefore: 'Tous ensemble, sur une page : ',
+    roundupLink: 'meilleurs outils de développement piloté par les spécifications en 2026',
+    roundupAfter: '.',
   },
   it: {
     lang: 'it',
@@ -129,6 +144,9 @@ export const chrome: Record<LangCode, CompareChrome> = {
     skillsHref: '/it/ai/specstudio-skills/',
     seeAlsoTitle: 'Altri confronti.',
     seeAlsoLead: 'Lo stesso formato, accanto ad altri strumenti di sviluppo guidato dalle specifiche:',
+    roundupBefore: 'Tutti insieme, in una pagina: ',
+    roundupLink: 'migliori strumenti di sviluppo guidato dalle specifiche nel 2026',
+    roundupAfter: '.',
   },
   pl: {
     lang: 'pl',
@@ -150,6 +168,9 @@ export const chrome: Record<LangCode, CompareChrome> = {
     skillsHref: '/pl/ai/specstudio-skills/',
     seeAlsoTitle: 'Inne porównania.',
     seeAlsoLead: 'Ten sam format, obok innych narzędzi rozwoju sterowanego specyfikacją:',
+    roundupBefore: 'Wszystkie razem, na jednej stronie: ',
+    roundupLink: 'najlepsze narzędzia rozwoju sterowanego specyfikacją w 2026',
+    roundupAfter: '.',
   },
   'pt-br': {
     lang: 'pt-BR',
@@ -171,6 +192,9 @@ export const chrome: Record<LangCode, CompareChrome> = {
     skillsHref: '/pt-br/ai/specstudio-skills/',
     seeAlsoTitle: 'Outras comparações.',
     seeAlsoLead: 'O mesmo formato, ao lado de outras ferramentas de desenvolvimento guiado por especificação:',
+    roundupBefore: 'Todas juntas, em uma página: ',
+    roundupLink: 'melhores ferramentas de desenvolvimento guiado por especificação em 2026',
+    roundupAfter: '.',
   },
   ru: {
     lang: 'ru',
@@ -192,6 +216,9 @@ export const chrome: Record<LangCode, CompareChrome> = {
     skillsHref: '/ru/ai/specstudio-skills/',
     seeAlsoTitle: 'Другие сравнения.',
     seeAlsoLead: 'Тот же формат рядом с другими инструментами разработки по спецификациям:',
+    roundupBefore: 'Все вместе, на одной странице: ',
+    roundupLink: 'лучшие инструменты разработки по спецификациям в 2026 году',
+    roundupAfter: '.',
   },
   tr: {
     lang: 'tr',
@@ -213,6 +240,9 @@ export const chrome: Record<LangCode, CompareChrome> = {
     skillsHref: '/tr/ai/specstudio-skills/',
     seeAlsoTitle: 'Diğer karşılaştırmalar.',
     seeAlsoLead: 'Aynı biçim, spesifikasyon güdümlü diğer araçların yanında:',
+    roundupBefore: 'Hepsi tek sayfada: ',
+    roundupLink: '2026’nın en iyi spesifikasyon güdümlü geliştirme araçları',
+    roundupAfter: '.',
   },
   uk: {
     lang: 'uk',
@@ -234,6 +264,9 @@ export const chrome: Record<LangCode, CompareChrome> = {
     skillsHref: '/uk/ai/specstudio-skills/',
     seeAlsoTitle: 'Інші порівняння.',
     seeAlsoLead: 'Той самий формат поруч з іншими інструментами розробки за специфікаціями:',
+    roundupBefore: 'Усі разом, на одній сторінці: ',
+    roundupLink: 'найкращі інструменти розробки за специфікаціями у 2026 році',
+    roundupAfter: '.',
   },
   ja: {
     lang: 'ja',
@@ -255,6 +288,9 @@ export const chrome: Record<LangCode, CompareChrome> = {
     skillsHref: '/ja/ai/specstudio-skills/',
     seeAlsoTitle: '他の比較。',
     seeAlsoLead: '同じフォーマットを、他の仕様駆動のツールと並べます。',
+    roundupBefore: 'まとめて一ページに: ',
+    roundupLink: '2026年の仕様駆動開発ツール',
+    roundupAfter: '。',
   },
   'zh-cn': {
     lang: 'zh-CN',
@@ -276,6 +312,9 @@ export const chrome: Record<LangCode, CompareChrome> = {
     skillsHref: '/zh-cn/ai/specstudio-skills/',
     seeAlsoTitle: '其他对比。',
     seeAlsoLead: '同一套格式，与其他规格驱动开发工具并列：',
+    roundupBefore: '放在同一页：',
+    roundupLink: '2026 年最佳规范驱动开发工具',
+    roundupAfter: '。',
   },
   'zh-tw': {
     lang: 'zh-TW',
@@ -297,6 +336,9 @@ export const chrome: Record<LangCode, CompareChrome> = {
     skillsHref: '/zh-tw/ai/specstudio-skills/',
     seeAlsoTitle: '其他對比。',
     seeAlsoLead: '同一套格式，與其他規格驅動開發工具並列：',
+    roundupBefore: '放在同一頁：',
+    roundupLink: '2026 年最佳規範驅動開發工具',
+    roundupAfter: '。',
   },
   ko: {
     lang: 'ko',
@@ -318,5 +360,8 @@ export const chrome: Record<LangCode, CompareChrome> = {
     skillsHref: '/ko/ai/specstudio-skills/',
     seeAlsoTitle: '다른 비교.',
     seeAlsoLead: '같은 형식을, 다른 스펙 주도 개발 도구 옆에 둡니다.',
+    roundupBefore: '한 페이지에 모아서: ',
+    roundupLink: '2026년 최고의 스펙 주도 개발 도구',
+    roundupAfter: '.',
   },
 };

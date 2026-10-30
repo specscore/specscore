@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const ORIGIN = 'https://specscore.md';
 const HOME_URL = /^https:\/\/specscore\.md\/(?:(?:es|de|fr|it|pl|pt-br|ru|tr|uk|ja|zh-cn|zh-tw|ko)\/)?$/;
-const COMPARE_PATH = /\/vs\/(?:[^/]+\/)?$/;
+const COMPARE_PATH = /\/(?:vs\/(?:[^/]+\/)?|spec-driven-development\/tools\/)$/;
 
 export function stripTags(html) {
   return String(html)
