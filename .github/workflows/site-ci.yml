@@ -63,9 +63,25 @@ jobs:
         run: sh tools/cf-build.sh
       - name: Run site-generator tests
         run: pnpm --dir tools/site-generator test
+      - name: Run landing tests
+        run: pnpm --dir tools/landing test
       - name: Verify generated pages and Cloudflare rules
         run: |
           test -s public/index.html
+          test -s public/sitemap.xml
+          test -s public/robots.txt
+          grep -q 'Sitemap: https://specscore.md/sitemap.xml' public/robots.txt
+          grep -q 'https://specscore.md/' public/sitemap.xml
+          grep -q 'hreflang="x-default"' public/index.html
+          grep -q 'https://specscore.md/hero-og.jpg' public/index.html
+          test -s public/docs/index.html
+          test ! -e public/docs.html
+          test -s public/blog/index.html
+          test ! -e public/blog.html
+          grep -q 'rel="canonical" href="https://specscore.md/docs/"' public/docs/index.html
+          grep -q 'name="description"' public/feature-specification.html
+          grep -q 'application/ld+json' public/feature-specification.html
+          grep -q 'FAQPage' public/faq/index.html
           cmp _headers public/_headers
           cmp _redirects public/_redirects
           test ! -e public/README.md

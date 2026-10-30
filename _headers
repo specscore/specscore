@@ -4,9 +4,37 @@
 #
 # Syntax: https://developers.cloudflare.com/pages/configuration/headers/
 
-# Serve every .md file as text/markdown
+# Serve every .md file as text/markdown.
+# Canonical points crawlers at the HTML page so the raw Markdown twin
+# stays fetchable for agents and does not compete in search.
+# :splat is the path without the .md suffix (it may contain slashes).
 /*.md
   Content-Type: text/markdown; charset=utf-8
+  Link: <https://specscore.md/:splat>; rel="canonical"
+
+# /docs is a directory index. Detach the splat canonical (no slash) and
+# replace it with the trailing-slash HTML URL.
+/docs.md
+  ! Link
+  Link: <https://specscore.md/docs/>; rel="canonical"
+
+# Templates under /new/*.md are the resource themselves. They have no
+# HTML twin, so drop the canonical the splat rule would invent.
+/new/*
+  ! Link
+
+# Machine-readable site indexes. No single HTML page corresponds to them.
+# noindex keeps them out of search; the files stay publicly fetchable.
+/llms.txt
+  X-Robots-Tag: noindex
+
+/llms-full.txt
+  X-Robots-Tag: noindex
+
+# Directory README rendered by Astro from src/pages/README.md. It is an
+# internal note, not a public page.
+/README/
+  X-Robots-Tag: noindex
 
 # Per-page Link: rel="alternate" for content negotiation (HTML ↔ Markdown)
 /specifications

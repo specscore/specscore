@@ -7,25 +7,30 @@
 // pale-ink default, green underline on active) and is set apart from
 // the rest of the page by a full-width hairline rule on top.
 //
-// Semantics: <ul><li><a hreflang> so all 8 alternate-language URLs
-// are real DOM links (crawler-discoverable). The active locale is
-// passed in by the layout.
-import { langs, localeHref, type LangCode } from '../lib/languages';
+// Semantics: <ul><li><a hreflang> so alternate-language URLs are real
+// DOM links. hreflang is set only when that locale has this route;
+// otherwise the tab still switches language, but to that locale's home,
+// and does not claim the pages are translations of each other.
+import { langs, localeHref, routeFromPath, type LangCode } from '../lib/languages';
+import { localeHasRoute } from '../lib/alternates.mjs';
 
 interface Props {
   currentLocale: LangCode;
 }
 const { currentLocale } = Astro.props;
+const route = routeFromPath(Astro.url.pathname);
 ---
 
 <nav class="footer-langs" aria-label="Language">
   <div class="footer-langs__inner">
     <ul class="footer-langs__list">
-      {langs.map((l) => (
+      {langs.map((l) => {
+        const translated = localeHasRoute(l.code, route);
+        return (
         <li>
           <a
-            href={localeHref(l.code)}
-            hreflang={l.tag}
+            href={translated ? localeHref(l.code, route) : localeHref(l.code, '/')}
+            hreflang={translated ? l.tag : undefined}
             lang={l.tag}
             class:list={['footer-langs__tab', l.code === currentLocale && 'is-active']}
             aria-current={l.code === currentLocale ? 'page' : undefined}
@@ -33,7 +38,8 @@ const { currentLocale } = Astro.props;
             {l.label}
           </a>
         </li>
-      ))}
+        );
+      })}
     </ul>
   </div>
 </nav>

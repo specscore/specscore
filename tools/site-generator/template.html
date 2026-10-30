@@ -18,7 +18,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/style.css">
   <link rel="canonical" href="{{canonical}}">
+  {{hreflangLinks}}
+  {{descriptionMeta}}
+  {{socialMeta}}
   {{alternateLink}}
+  {{jsonLd}}
 </head>
 <body>
   <header class="site-header">
@@ -28,7 +32,7 @@
       </button>
       <a href="/" class="wordmark"><span class="wordmark-clef">𝄞</span> SpecScore.md</a>
       <nav class="header-right" aria-label="Primary">
-        <a href="/docs">Specification</a>
+        <a href="/docs/">Specification</a>
         <a href="/cli/">CLI</a>
         <a href="/ai/">AI Skills</a>
         <a href="/faq/">FAQ</a>
@@ -51,12 +55,12 @@
           <div class="docs-footer__col docs-footer__brand">
             <a href="/" class="wordmark"><span class="wordmark-clef">𝄞</span> SpecScore.md</a>
             <p class="docs-footer__tagline">An open standard for specifications, requirements, and acceptance criteria.</p>
-            <p class="docs-footer__copyright">&copy; 2026 SpecScore contributors. Specification and docs: CC BY 4.0. CLI: Apache-2.0.</p>
+            <p class="docs-footer__copyright">&copy; 2026 SpecScore contributors. Specification and docs: <a href="https://github.com/specscore/specscore/blob/main/LICENSE">CC BY 4.0</a>. CLI: <a href="https://github.com/specscore/specscore-cli/blob/main/LICENSE">Apache-2.0</a>.</p>
           </div>
           <div class="docs-footer__col">
             <h4 class="docs-footer__heading">Product</h4>
             <ul class="docs-footer__list">
-              <li><a href="/docs">Docs</a></li>
+              <li><a href="/docs/">Docs</a></li>
               <li><a href="/cli/">CLI</a></li>
               <li><a href="/cli/install/">Install</a></li>
             </ul>
