@@ -5,6 +5,7 @@
 // implementation in the "in practice" section + FAQ only.
 // Design: docs/superpowers/specs/2026-05-29-spec-driven-development-pillar-page-design.md
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { CONTENT_UPDATED, updatedSentence } from '../../../content/updated.ts';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooterRu from '../../../components/SiteFooterRu.astro';
 
@@ -12,13 +13,13 @@ const ld = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'Article',
+      '@type': 'TechArticle',
       headline: 'Разработка по спецификациям с помощью ИИ-агентов',
       description:
         'Что такое разработка по спецификациям, почему она важна для ИИ-агентов, как устроен воркфлоу и чем она отличается от TDD и программирования только по промптам.',
       inLanguage: 'ru',
       datePublished: '2026-05-29',
-      dateModified: '2026-05-29',
+      dateModified: '2026-10-30',
       mainEntityOfPage: 'https://specscore.md/ru/spec-driven-development/',
       image: 'https://specscore.md/hero-og.jpg',
       author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
@@ -69,6 +70,33 @@ const ld = {
               'Когда спецификация машиночитаема, агент запрашивает из неё требования и критерии приёмки, относящиеся к текущей задаче, вместо того чтобы загружать весь кодбейс, а затем сверяет свой результат с этими критериями — защита от правдоподобного, но неверного кода.',
           },
         },
+        {
+          '@type': 'Question',
+          name: "Что такое SpecScore?",
+          acceptedAnswer: { '@type': 'Answer', text: "SpecScore — открытый, линтуемый файловый формат для спецификаций на Markdown и YAML, с интерфейсом командной строки (CLI), который запрашивает, правит и линтует эти файлы. Формат лежит в публичном репозитории specscore/specscore (https://github.com/specscore/specscore)." },
+        },
+        {
+          '@type': 'Question',
+          name: "Под какой лицензией SpecScore?",
+          acceptedAnswer: { '@type': 'Answer', text: "Спецификация и документация в публичном репозитории specscore/specscore (https://github.com/specscore/specscore) — CC BY 4.0 (https://github.com/specscore/specscore/blob/main/LICENSE). Эталонный интерфейс командной строки (CLI) в specscore/specscore-cli (https://github.com/specscore/specscore-cli) — Apache-2.0 (https://github.com/specscore/specscore-cli/blob/main/LICENSE)." },
+        },
+        {
+          '@type': 'Question',
+          name: "Требует ли разработка на основе спецификаций одного поставщика ИИ?",
+          acceptedAnswer: { '@type': 'Answer', text: "Нет. Спецификации — это текстовые файлы в репозитории. CLI — локальная программа. AI Skills на этом сайте оборачивают эту CLI для агентов, которые умеют запускать skills. Формат не требует одного поставщика." },
+        },
+        {
+          '@type': 'Question',
+          name: "Как установить CLI?",
+          acceptedAnswer: { '@type': 'Answer', text: "Инструкция: /ru/cli/install/ (/ru/cli/install/). Можно начать с AI Skills (/ru/ai/). Программа CLI публикуется из specscore/specscore-cli (https://github.com/specscore/specscore-cli)." },
+        },
+      ],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'SpecScore.md', item: 'https://specscore.md/ru/' },
+        { '@type': 'ListItem', position: 2, name: "Разработка по спецификациям с помощью ИИ-агентов", item: 'https://specscore.md/ru/spec-driven-development/' },
       ],
     },
   ],
@@ -80,6 +108,7 @@ const ld = {
   title="Разработка по спецификациям с помощью ИИ-агентов — полное руководство | SpecScore"
   description="Разработка по спецификациям означает написание проверяемой спецификации до кода, чтобы ИИ-агенты строили то, что нужно. Что это такое, как работает и чем отличается от TDD и программирования только по промптам."
   canonical="https://specscore.md/ru/spec-driven-development/"
+  markdownHref="/ru/spec-driven-development.md"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
@@ -93,7 +122,7 @@ const ld = {
       <div class="sdd-hero__inner">
         <h1 id="sdd-title" class="sdd-hero__headline">Разработка по спецификациям с помощью ИИ-агентов</h1>
         <p class="sdd-hero__lede">
-          <strong>Разработка по спецификациям (SDD) — это практика, при которой написанная и проверяемая
+          SpecScore — открытый, линтуемый файловый формат для спецификаций, записанный в Markdown и YAML (YAML Ain't Markup Language), с интерфейсом командной строки (CLI), который их проверяет.           <strong>Разработка по спецификациям (SDD) — это практика, при которой написанная и проверяемая
           спецификация — требования и критерии приёмки — является источником истины, по которому
           код строится и относительно которого проверяется.</strong> Вместо того чтобы идти напрямую от
           промпта или тикета к коду, вы сначала договариваетесь о том, что должно делать ПО, а затем
@@ -106,7 +135,7 @@ const ld = {
           <li>ИИ-агенты запрашивают намерение из спецификации, а не угадывают его по коду — меньше неверных сборок.</li>
           <li>Она дополняет разработку через тесты, а не заменяет её.</li>
         </ul>
-        <p class="sdd-updated">Обновлено: май 2026 г.</p>
+        <p class="sdd-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence.ru}</time></p>
       </div>
     </section>
 
@@ -252,7 +281,7 @@ const ld = {
           редактировать и линтить их. Поскольку структура машиночитаема, агент может
           спросить «что мне строить дальше?» и получить в ответ открытые требования и их
           критерии приёмки, а затем сверить свою работу с ними. Он независим от
-          инструментов и open source.
+          инструментов и <a href="https://github.com/specscore/specscore">open source</a>.
         </p>
         <p>
           Начните с <a href="/ru/ai/">AI-скилов для вашего агента программирования</a> или
@@ -280,6 +309,25 @@ const ld = {
         <div class="sdd-faq__item">
           <p class="sdd-faq__q">Как ИИ-агенты для программирования используют спецификацию?</p>
           <p class="sdd-faq__a">Когда спецификация машиночитаема, агент запрашивает из неё требования и критерии приёмки, относящиеся к текущей задаче, вместо того чтобы загружать весь кодбейс, а затем сверяет свой результат с этими критериями — защита от правдоподобного, но неверного кода.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Что такое SpecScore?</p>
+          <p class="sdd-faq__a">SpecScore — открытый, линтуемый файловый формат для спецификаций на Markdown и YAML, с интерфейсом командной строки (CLI), который запрашивает, правит и линтует эти файлы. Формат лежит в публичном репозитории <a href="https://github.com/specscore/specscore">specscore/specscore</a>.</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Под какой лицензией SpecScore?</p>
+          <p class="sdd-faq__a">Спецификация и документация в публичном репозитории <a href="https://github.com/specscore/specscore">specscore/specscore</a> — <a href="https://github.com/specscore/specscore/blob/main/LICENSE">CC BY 4.0</a>. Эталонный интерфейс командной строки (CLI) в <a href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a> — <a href="https://github.com/specscore/specscore-cli/blob/main/LICENSE">Apache-2.0</a>.</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Требует ли разработка на основе спецификаций одного поставщика ИИ?</p>
+          <p class="sdd-faq__a">Нет. Спецификации — это текстовые файлы в репозитории. CLI — локальная программа. AI Skills на этом сайте оборачивают эту CLI для агентов, которые умеют запускать skills. Формат не требует одного поставщика.</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Как установить CLI?</p>
+          <p class="sdd-faq__a">Инструкция: <a href="/ru/cli/install/">/ru/cli/install/</a>. Можно начать с <a href="/ru/ai/">AI Skills</a>. Программа CLI публикуется из <a href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a>.</p>
         </div>
       </div>
     </section>

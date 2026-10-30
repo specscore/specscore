@@ -35,18 +35,48 @@ function elementByClass(html, tag, className) {
   return '';
 }
 
+function faqAnswer(html) {
+  const withoutMore = String(html).replace(/<a\b[^>]*\bfaq-teaser__more\b[^>]*>[\s\S]*?<\/a>/gi, ' ');
+  return stripTags(withoutMore);
+}
+
 function faqItems(html) {
   const items = [];
-  // The class must be on the opening tag. A leading non-FAQ h2 must not
-  // swallow the first real question by stretching to the next </h2>.
-  const re = /<h2\b[^>]*\bfaq-item__q\b[^>]*>([\s\S]*?)<\/h2>\s*<div\b[^>]*\bfaq-item__a\b[^>]*>([\s\S]*?)<\/div>/gi;
-  let match;
-  while ((match = re.exec(html))) {
-    const question = stripTags(match[1]);
-    const answer = stripTags(match[2]);
-    if (question && answer) items.push({ question, answer });
+  const patterns = [
+    // The class must be on the opening tag. A leading non-FAQ h2 must not
+    // swallow the first real question by stretching to the next </h2>.
+    /<h2\b[^>]*\bfaq-item__q\b[^>]*>([\s\S]*?)<\/h2>\s*<div\b[^>]*\bfaq-item__a\b[^>]*>([\s\S]*?)<\/div>/gi,
+    /<summary\b[^>]*\bfaq-teaser__q\b[^>]*>([\s\S]*?)<\/summary>\s*<div\b[^>]*\bfaq-teaser__a\b[^>]*>([\s\S]*?)<\/div>/gi,
+    /<p\b[^>]*\bsdd-faq__q\b[^>]*>([\s\S]*?)<\/p>\s*<p\b[^>]*\bsdd-faq__a\b[^>]*>([\s\S]*?)<\/p>/gi,
+  ];
+  for (const re of patterns) {
+    let match;
+    while ((match = re.exec(html))) {
+      const question = stripTags(match[1]);
+      const answer = faqAnswer(match[2]);
+      if (question && answer) items.push({ question, answer });
+    }
   }
   return items;
+}
+
+function githubSameAs(html) {
+  const urls = [];
+  if (html.includes('https://github.com/specscore/')) urls.push('https://github.com/specscore');
+  for (const url of [
+    'https://github.com/specscore/specscore',
+    'https://github.com/specscore/specscore-cli',
+    'https://github.com/specscore/specstudio-skills',
+  ]) {
+    if (html.includes(url)) urls.push(url);
+  }
+  return urls;
+}
+
+function contentDates(html) {
+  const match = html.match(/<time\b[^>]*\bdatetime="(\d{4}-\d{2}-\d{2})"/i);
+  if (!match) return {};
+  return { datePublished: match[1], dateModified: match[1] };
 }
 
 function canonicalUrl(html) {
@@ -102,6 +132,21 @@ export function injectHtml(html) {
   const isHome = HOME_URL.test(url);
   const graph = [];
 
+  const sameAs = githubSameAs(html);
+  if (isHome) {
+    const org = {
+      '@type': 'Organization',
+      '@id': `${ORIGIN}/#organization`,
+      name: 'SpecScore',
+      url: `${ORIGIN}/`,
+    };
+    if (html.includes('/favicon.svg')) {
+      org.logo = { '@type': 'ImageObject', url: `${ORIGIN}/favicon.svg` };
+    }
+    if (sameAs.length) org.sameAs = sameAs;
+    graph.push(org);
+  }
+
   if (isHome && heroSub) {
     const app = {
       '@type': 'SoftwareApplication',
@@ -110,11 +155,36 @@ export function injectHtml(html) {
       description: heroSub,
       url,
       inLanguage: lang,
+      author: { '@id': `${ORIGIN}/#organization` },
     };
-    if (html.includes('https://github.com/specscore/specscore')) {
-      app.sameAs = ['https://github.com/specscore/specscore'];
-    }
+    if (sameAs.length) app.sameAs = sameAs;
     graph.push(app);
+
+    if (html.includes('https://github.com/specscore/specscore')) {
+      const format = {
+        '@type': 'SoftwareSourceCode',
+        name: 'SpecScore',
+        description: heroSub,
+        url,
+        codeRepository: 'https://github.com/specscore/specscore',
+        license: 'https://github.com/specscore/specscore/blob/main/LICENSE',
+        author: { '@id': `${ORIGIN}/#organization` },
+      };
+      if (/\bMarkdown\b/.test(html)) format.programmingLanguage = 'Markdown';
+      graph.push(format);
+    }
+    if (html.includes('https://github.com/specscore/specscore-cli')) {
+      const cli = {
+        '@type': 'SoftwareSourceCode',
+        name: 'specscore CLI',
+        url: 'https://github.com/specscore/specscore-cli',
+        codeRepository: 'https://github.com/specscore/specscore-cli',
+        license: 'https://github.com/specscore/specscore-cli/blob/main/LICENSE',
+        author: { '@id': `${ORIGIN}/#organization` },
+      };
+      if (html.includes('Go CLI')) cli.programmingLanguage = 'Go';
+      graph.push(cli);
+    }
   }
 
   const questions = faqItems(html);
@@ -132,13 +202,17 @@ export function injectHtml(html) {
   }
 
   if (!isHome && COMPARE_PATH.test(path) && h1 && heroSub) {
+    const guide = path.includes('/spec-driven-development/');
     graph.push({
-      '@type': 'Article',
+      '@type': guide ? 'TechArticle' : 'Article',
       headline: h1,
       description: heroSub,
       inLanguage: lang,
       url,
       mainEntityOfPage: url,
+      author: { '@type': 'Organization', name: 'SpecScore', url: `${ORIGIN}/` },
+      publisher: { '@type': 'Organization', name: 'SpecScore', url: `${ORIGIN}/` },
+      ...contentDates(html),
     });
   }
 

@@ -5,6 +5,7 @@
 import { Image } from 'astro:assets';
 import heroImage from '../assets/hero.webp';
 import HeroGitHubLink from './HeroGitHubLink.astro';
+import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
 ---
 
 <section class="hero" aria-labelledby="hero-title">
@@ -13,14 +14,16 @@ import HeroGitHubLink from './HeroGitHubLink.astro';
       <h1 id="hero-title" class="hero__headline">
         規格說明中的每一處歧義，<br />都是你的 AI 代理燒掉的 token。
       </h1>
+      
+      
+      
+      <p class="hero__sub">
+        SpecScore 是一種用於規格說明的開放、可 lint 的檔案格式，用 Markdown 和 YAML（YAML Ain't Markup Language）寫成，就像 JSON（JavaScript Object Notation）之於資料，並配有命令列介面（CLI），供你的 AI 代理呼叫以查詢和編輯它們，就像 <code>jq</code> 之於 JSON。
+      </p>
+      <p class="page-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence['zh-tw']}</time></p>
       <p class="hero__stakes">
         然後是開發途中的一個澄清問題。然後是上線之後的一次修復。
         然後是你一遍遍重新解釋的上下文。
-      </p>
-      <p class="hero__sub">
-        SpecScore 是一種用於規格說明的開放、可 lint 的檔案格式——
-        就像 JSON 之於資料。並配有 CLI，供你的 AI 代理呼叫以查詢和
-        編輯它們——就像 <code>jq</code> 之於 JSON。
       </p>
       <HeroGitHubLink repo="specscore/specscore" label="在 GitHub 上開源" />
       <div class="hero__cta">

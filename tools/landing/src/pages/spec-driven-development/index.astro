@@ -5,6 +5,7 @@
 // implementation in the "in practice" section + FAQ only.
 // Design: docs/superpowers/specs/2026-05-29-spec-driven-development-pillar-page-design.md
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CONTENT_UPDATED, updatedSentence } from '../../content/updated.ts';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 
@@ -12,13 +13,13 @@ const ld = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'Article',
+      '@type': 'TechArticle',
       headline: 'Spec-Driven Development for AI Coding Agents',
       description:
         'What spec-driven development is, why it matters for AI coding agents, how the workflow works, and how it compares to TDD and prompt-only coding.',
       inLanguage: 'en',
       datePublished: '2026-05-29',
-      dateModified: '2026-05-29',
+      dateModified: '2026-10-30',
       mainEntityOfPage: 'https://specscore.md/spec-driven-development/',
       image: 'https://specscore.md/hero-og.jpg',
       author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
@@ -39,7 +40,7 @@ const ld = {
           acceptedAnswer: {
             '@type': 'Answer',
             text:
-              'No. TDD drives implementation from failing tests at the code level. SDD works one level up: it fixes the intended behavior and acceptance criteria in a written spec first. They are complementary — acceptance criteria in a spec often become the tests TDD then drives.',
+              'No. Test-driven development (TDD) drives implementation from failing tests at the code level. SDD works one level up: it fixes the intended behavior and acceptance criteria in a written spec first. They are complementary — acceptance criteria in a spec often become the tests TDD then drives.',
           },
         },
         {
@@ -69,6 +70,33 @@ const ld = {
               'When the spec is machine-readable, an agent queries it for the requirements and acceptance criteria relevant to its current task instead of loading the whole codebase, then checks its output against those criteria — a guardrail against plausible-but-wrong code.',
           },
         },
+        {
+          '@type': 'Question',
+          name: "What is SpecScore?",
+          acceptedAnswer: { '@type': 'Answer', text: "SpecScore is an open, lintable file format for specifications, written in Markdown and YAML, with a command-line interface (CLI) that queries, edits, and lints those files. The format is in the public repository specscore/specscore (https://github.com/specscore/specscore)." },
+        },
+        {
+          '@type': 'Question',
+          name: "What licence is SpecScore under?",
+          acceptedAnswer: { '@type': 'Answer', text: "The specification and the documentation in the public repository specscore/specscore (https://github.com/specscore/specscore) are CC BY 4.0 (https://github.com/specscore/specscore/blob/main/LICENSE). The reference command-line interface (CLI) in specscore/specscore-cli (https://github.com/specscore/specscore-cli) is Apache-2.0 (https://github.com/specscore/specscore-cli/blob/main/LICENSE)." },
+        },
+        {
+          '@type': 'Question',
+          name: "Does spec-driven development require one AI vendor?",
+          acceptedAnswer: { '@type': 'Answer', text: "No. Specifications are plain files in the repository. The CLI is a local binary. AI Skills on this site wrap that CLI for agents that can run skills. The format does not require one vendor." },
+        },
+        {
+          '@type': 'Question',
+          name: "How do I install the CLI?",
+          acceptedAnswer: { '@type': 'Answer', text: "Follow the install instructions at /cli/install/ (/cli/install/), or start from the AI Skills (/ai/). The CLI binary is published from specscore/specscore-cli (https://github.com/specscore/specscore-cli)." },
+        },
+      ],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'SpecScore.md', item: 'https://specscore.md/' },
+        { '@type': 'ListItem', position: 2, name: "Spec-Driven Development for AI Coding Agents", item: 'https://specscore.md/spec-driven-development/' },
       ],
     },
   ],
@@ -79,6 +107,7 @@ const ld = {
   title="Spec-Driven Development for AI Agents — A Complete Guide | SpecScore"
   description="Spec-driven development means writing a testable specification before code, so AI coding agents build the right thing. What it is, how it works, and how it compares to TDD and prompt-only coding."
   canonical="https://specscore.md/spec-driven-development/"
+  markdownHref="/spec-driven-development.md"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
@@ -92,6 +121,7 @@ const ld = {
       <div class="sdd-hero__inner">
         <h1 id="sdd-title" class="sdd-hero__headline">Spec-Driven Development for AI Coding Agents</h1>
         <p class="sdd-hero__lede">
+          SpecScore is an open, lintable file format for specifications, written in Markdown and YAML (YAML Ain't Markup Language), with a command-line interface (CLI) that checks them.
           <strong>Spec-driven development (SDD) is a practice where a written, testable
           specification — requirements and acceptance criteria — is the source of truth that
           code is built against and verified against.</strong> Instead of going straight from a
@@ -105,7 +135,7 @@ const ld = {
           <li>AI agents query the spec for intent instead of guessing from code — fewer wrong builds.</li>
           <li>It is complementary to test-driven development, not a replacement for it.</li>
         </ul>
-        <p class="sdd-updated">Last updated: May 2026</p>
+        <p class="sdd-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence.en}</time></p>
       </div>
     </section>
 
@@ -199,7 +229,7 @@ const ld = {
             </thead>
             <tbody>
               <tr><td>Test-driven development</td><td>Failing tests at the code level</td><td>Complementary — acceptance criteria become the tests.</td></tr>
-              <tr><td>Traditional PRD</td><td>Prose written for humans</td><td>Less structured; not directly testable or machine-readable.</td></tr>
+              <tr><td>Traditional product requirements document (PRD)</td><td>Prose written for humans</td><td>Less structured; not directly testable or machine-readable.</td></tr>
               <tr><td>Prompt-only ("vibe coding")</td><td>The prompt and the model's guess</td><td>No durable, reviewable target — what SDD exists to fix.</td></tr>
             </tbody>
           </table>
@@ -247,7 +277,7 @@ const ld = {
           in your repo — paired with a CLI your agents call to query, edit, and lint them. Because
           the structure is machine-readable, an agent can ask "what should I build next?" and get
           back the open requirements and their acceptance criteria, then check its work against
-          them. It is tool-agnostic and open source.
+          them. It is tool-agnostic and <a href="https://github.com/specscore/specscore">open source</a>.
         </p>
         <p>
           Get started with <a href="/ai/">AI Skills for your coding agent</a> or
@@ -262,7 +292,7 @@ const ld = {
         <h2 id="faq-title">Frequently asked questions</h2>
         <div class="sdd-faq__item">
           <p class="sdd-faq__q">Is spec-driven development the same as test-driven development?</p>
-          <p class="sdd-faq__a">No. TDD drives implementation from failing tests at the code level. SDD works one level up: it fixes the intended behavior and acceptance criteria in a written spec first. They are complementary — acceptance criteria in a spec often become the tests TDD then drives.</p>
+          <p class="sdd-faq__a">No. Test-driven development (TDD) drives implementation from failing tests at the code level. SDD works one level up: it fixes the intended behavior and acceptance criteria in a written spec first. They are complementary — acceptance criteria in a spec often become the tests TDD then drives.</p>
         </div>
         <div class="sdd-faq__item">
           <p class="sdd-faq__q">Does spec-driven development slow you down?</p>
@@ -275,6 +305,25 @@ const ld = {
         <div class="sdd-faq__item">
           <p class="sdd-faq__q">How do AI coding agents use a spec?</p>
           <p class="sdd-faq__a">When the spec is machine-readable, an agent queries it for the requirements and acceptance criteria relevant to its current task instead of loading the whole codebase, then checks its output against those criteria — a guardrail against plausible-but-wrong code.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">What is SpecScore?</p>
+          <p class="sdd-faq__a">SpecScore is an open, lintable file format for specifications, written in Markdown and YAML, with a command-line interface (CLI) that queries, edits, and lints those files. The format is in the public repository <a href="https://github.com/specscore/specscore">specscore/specscore</a>.</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">What licence is SpecScore under?</p>
+          <p class="sdd-faq__a">The specification and the documentation in the public repository <a href="https://github.com/specscore/specscore">specscore/specscore</a> are <a href="https://github.com/specscore/specscore/blob/main/LICENSE">CC BY 4.0</a>. The reference command-line interface (CLI) in <a href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a> is <a href="https://github.com/specscore/specscore-cli/blob/main/LICENSE">Apache-2.0</a>.</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Does spec-driven development require one AI vendor?</p>
+          <p class="sdd-faq__a">No. Specifications are plain files in the repository. The CLI is a local binary. AI Skills on this site wrap that CLI for agents that can run skills. The format does not require one vendor.</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">How do I install the CLI?</p>
+          <p class="sdd-faq__a">Follow the install instructions at <a href="/cli/install/">/cli/install/</a>, or start from the <a href="/ai/">AI Skills</a>. The CLI binary is published from <a href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a>.</p>
         </div>
       </div>
     </section>

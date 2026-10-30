@@ -4,6 +4,7 @@
 // the narrative spine. SpecScore appears as the named recommended
 // implementation in the "in practice" section + FAQ only.
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { CONTENT_UPDATED, updatedSentence } from '../../../content/updated.ts';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooterDe from '../../../components/SiteFooterDe.astro';
 
@@ -11,13 +12,13 @@ const ld = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'Article',
+      '@type': 'TechArticle',
       headline: 'Spezifikationsgetriebene Entwicklung für KI-Agenten',
       description:
         'Was spezifikationsgetriebene Entwicklung (SDD) ist, warum sie für KI-Agenten wichtig ist, wie der Workflow funktioniert und wie sie sich im Vergleich zu TDD und rein prompt-basierter Programmierung verhält.',
       inLanguage: 'de',
       datePublished: '2026-05-29',
-      dateModified: '2026-05-29',
+      dateModified: '2026-10-30',
       mainEntityOfPage: 'https://specscore.md/de/spec-driven-development/',
       image: 'https://specscore.md/hero-og.jpg',
       author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
@@ -68,6 +69,33 @@ const ld = {
               'Wenn die Spezifikation maschinenlesbar ist, fragt der Agent gezielt die für seine aktuelle Aufgabe relevanten Anforderungen und Akzeptanzkriterien ab, statt die gesamte Codebasis einzulesen. Anschließend prüft er sein Ergebnis gegen diese Kriterien – ein Schutzschild gegen plausiblen, aber falschen Code.',
           },
         },
+        {
+          '@type': 'Question',
+          name: "Was ist SpecScore?",
+          acceptedAnswer: { '@type': 'Answer', text: "SpecScore ist ein offenes, lintbares Dateiformat für Spezifikationen in Markdown und YAML, mit einer Befehlszeilenschnittstelle (CLI), die diese Dateien abfragt, bearbeitet und lintet. Das Format liegt im öffentlichen Repository specscore/specscore (https://github.com/specscore/specscore)." },
+        },
+        {
+          '@type': 'Question',
+          name: "Unter welcher Lizenz steht SpecScore?",
+          acceptedAnswer: { '@type': 'Answer', text: "Spezifikation und Dokumentation im öffentlichen Repository specscore/specscore (https://github.com/specscore/specscore) stehen unter CC BY 4.0 (https://github.com/specscore/specscore/blob/main/LICENSE). Die Referenz-Befehlszeilenschnittstelle (CLI) in specscore/specscore-cli (https://github.com/specscore/specscore-cli) steht unter Apache-2.0 (https://github.com/specscore/specscore-cli/blob/main/LICENSE)." },
+        },
+        {
+          '@type': 'Question',
+          name: "Verlangt spezifikationsgetriebene Entwicklung einen KI-Anbieter?",
+          acceptedAnswer: { '@type': 'Answer', text: "Nein. Spezifikationen sind Textdateien im Repository. Die CLI ist ein lokales Programm. Die AI Skills auf dieser Website kapseln diese CLI für Agenten, die Skills ausführen können. Das Format verlangt keinen einzelnen Anbieter." },
+        },
+        {
+          '@type': 'Question',
+          name: "Wie installiere ich die CLI?",
+          acceptedAnswer: { '@type': 'Answer', text: "Die Installationsanleitung steht unter /de/cli/install/ (/de/cli/install/), der Einstieg über die AI Skills (/de/ai/). Das CLI-Programm kommt aus specscore/specscore-cli (https://github.com/specscore/specscore-cli)." },
+        },
+      ],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'SpecScore.md', item: 'https://specscore.md/de/' },
+        { '@type': 'ListItem', position: 2, name: "Spezifikationsgetriebene Entwicklung für KI-Agenten", item: 'https://specscore.md/de/spec-driven-development/' },
       ],
     },
   ],
@@ -79,6 +107,7 @@ const ld = {
   title="Spezifikationsgetriebene Entwicklung für KI-Agenten — Vollständiger Leitfaden | SpecScore"
   description="Spezifikationsgetriebene Entwicklung (SDD) bedeutet, eine testbare Spezifikation vor dem Code zu schreiben, damit KI-Agenten das Richtige bauen. Was es ist, wie es funktioniert und wie es sich mit TDD vergleicht."
   canonical="https://specscore.md/de/spec-driven-development/"
+  markdownHref="/de/spec-driven-development.md"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
@@ -92,7 +121,7 @@ const ld = {
       <div class="sdd-hero__inner">
         <h1 id="sdd-title" class="sdd-hero__headline">Spezifikationsgetriebene Entwicklung für KI-Agenten</h1>
         <p class="sdd-hero__lede">
-          <strong>Spezifikationsgetriebene Entwicklung (Spec-Driven Development, SDD) ist eine Praxis, bei der eine
+          SpecScore ist ein offenes, lintbares Dateiformat für Spezifikationen, geschrieben in Markdown und YAML (YAML Ain't Markup Language), mit einer Befehlszeilenschnittstelle (CLI), die sie prüft.           <strong>Spezifikationsgetriebene Entwicklung (Spec-Driven Development, SDD) ist eine Praxis, bei der eine
           schriftliche, testbare Spezifikation – Anforderungen und Akzeptanzkriterien – die Quelle der Wahrheit ist,
           gegen die Code gebaut und verifiziert wird.</strong> Statt direkt von einem
           Prompt oder einem Ticket zum Code überzugehen, vereinbart man zuerst, was die Software tun soll, und baut
@@ -105,7 +134,7 @@ const ld = {
           <li>KI-Agenten fragen die Spezifikation nach der Absicht ab, statt sie aus dem Code zu erraten – weniger Fehlbauten.</li>
           <li>Es ergänzt testgetriebene Entwicklung (TDD), ersetzt sie aber nicht.</li>
         </ul>
-        <p class="sdd-updated">Zuletzt aktualisiert: Mai 2026</p>
+        <p class="sdd-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence.de}</time></p>
       </div>
     </section>
 
@@ -252,7 +281,7 @@ const ld = {
           kombiniert mit einer CLI, die deine Agenten aufrufen, um Spezifikationen abzufragen, zu
           bearbeiten und zu linten. Weil die Struktur maschinenlesbar ist, kann ein Agent fragen:
           „Woran sollte ich als Nächstes bauen?“, erhält die offenen Anforderungen mit ihren
-          Akzeptanzkriterien und prüft seine Arbeit dagegen ab. Es ist werkzeugagnostisch und Open Source.
+          Akzeptanzkriterien und prüft seine Arbeit dagegen ab. Es ist werkzeugagnostisch und <a href="https://github.com/specscore/specscore">Open Source</a>.
         </p>
         <p>
           Starte mit den <a href="/de/ai/">KI-Skills für deinen Coding-Agenten</a> oder
@@ -280,6 +309,25 @@ const ld = {
         <div class="sdd-faq__item">
           <p class="sdd-faq__q">Wie nutzen KI-Coding-Agenten eine Spezifikation?</p>
           <p class="sdd-faq__a">Wenn die Spezifikation maschinenlesbar ist, fragt der Agent gezielt die für seine aktuelle Aufgabe relevanten Anforderungen und Akzeptanzkriterien ab, statt die gesamte Codebasis einzulesen. Anschließend prüft er sein Ergebnis gegen diese Kriterien – ein Schutzschild gegen plausiblen, aber falschen Code.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Was ist SpecScore?</p>
+          <p class="sdd-faq__a">SpecScore ist ein offenes, lintbares Dateiformat für Spezifikationen in Markdown und YAML, mit einer Befehlszeilenschnittstelle (CLI), die diese Dateien abfragt, bearbeitet und lintet. Das Format liegt im öffentlichen Repository <a href="https://github.com/specscore/specscore">specscore/specscore</a>.</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Unter welcher Lizenz steht SpecScore?</p>
+          <p class="sdd-faq__a">Spezifikation und Dokumentation im öffentlichen Repository <a href="https://github.com/specscore/specscore">specscore/specscore</a> stehen unter <a href="https://github.com/specscore/specscore/blob/main/LICENSE">CC BY 4.0</a>. Die Referenz-Befehlszeilenschnittstelle (CLI) in <a href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a> steht unter <a href="https://github.com/specscore/specscore-cli/blob/main/LICENSE">Apache-2.0</a>.</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Verlangt spezifikationsgetriebene Entwicklung einen KI-Anbieter?</p>
+          <p class="sdd-faq__a">Nein. Spezifikationen sind Textdateien im Repository. Die CLI ist ein lokales Programm. Die AI Skills auf dieser Website kapseln diese CLI für Agenten, die Skills ausführen können. Das Format verlangt keinen einzelnen Anbieter.</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Wie installiere ich die CLI?</p>
+          <p class="sdd-faq__a">Die Installationsanleitung steht unter <a href="/de/cli/install/">/de/cli/install/</a>, der Einstieg über die <a href="/de/ai/">AI Skills</a>. Das CLI-Programm kommt aus <a href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a>.</p>
         </div>
       </div>
     </section>

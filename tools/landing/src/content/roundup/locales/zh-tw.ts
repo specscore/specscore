@@ -10,6 +10,7 @@ export const page: RoundupPage = {
     '這篇規範驅動開發工具對照，把 GitHub Spec Kit、OpenSpec 與 Kiro 放在一起，也寫到 Tessl、BMAD Method、Task Master AI、CodeSpeak、Datarim、純 Markdown，以及 SpecScore。',
   h1: '2026 年首選的規範驅動開發工具',
   hero: [
+    'SpecScore 是一種用於規格說明的開放、可 lint 的檔案格式，用 Markdown 和 YAML（YAML Ain\'t Markup Language）寫成。',
     t('規範驅動開發', href.sdd),
     '（SDD）指這樣一種實踐：寫下來的規範是可信依據，程式碼照它打造，也照它核對。規範驅動開發工具涵蓋格式、工作流程與產品，用來寫下這些規範、把它們留住，有時也拿來檢查。產品需求文件（PRD）是一段散文，在事情被拆成任務之前，先交代問題與範圍。',
     t('簡易需求語法', href.kiroSpecs, 'them'),

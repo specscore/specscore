@@ -5,6 +5,7 @@
 // implementation in the "in practice" section + FAQ only.
 // Design: docs/superpowers/specs/2026-05-29-spec-driven-development-pillar-page-design.md
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { CONTENT_UPDATED, updatedSentence } from '../../../content/updated.ts';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooterEs from '../../../components/SiteFooterEs.astro';
 
@@ -12,13 +13,13 @@ const ld = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'Article',
+      '@type': 'TechArticle',
       headline: 'Desarrollo basado en especificaciones para agentes de IA',
       description:
         'Qué es el desarrollo basado en especificaciones, por qué importa para los agentes de IA, cómo funciona el workflow y cómo se compara con TDD y la programación solo con prompts.',
       inLanguage: 'es',
       datePublished: '2026-05-29',
-      dateModified: '2026-05-29',
+      dateModified: '2026-10-30',
       mainEntityOfPage: 'https://specscore.md/es/spec-driven-development/',
       image: 'https://specscore.md/hero-og.jpg',
       author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
@@ -69,6 +70,33 @@ const ld = {
               'Cuando la especificación es legible por máquina, el agente la consulta para obtener los requisitos y criterios de aceptación relevantes para su tarea actual en lugar de cargar todo el codebase, y luego compara su resultado con esos criterios — una salvaguarda frente al código plausible pero incorrecto.',
           },
         },
+        {
+          '@type': 'Question',
+          name: "¿Qué es SpecScore?",
+          acceptedAnswer: { '@type': 'Answer', text: "SpecScore es un formato de archivo abierto y lintable para especificaciones, escrito en Markdown y YAML, con una interfaz de línea de comandos (CLI) que las consulta, edita y lintea. El formato está en el repositorio público specscore/specscore (https://github.com/specscore/specscore)." },
+        },
+        {
+          '@type': 'Question',
+          name: "¿Bajo qué licencia está SpecScore?",
+          acceptedAnswer: { '@type': 'Answer', text: "La especificación y la documentación del repositorio público specscore/specscore (https://github.com/specscore/specscore) son CC BY 4.0 (https://github.com/specscore/specscore/blob/main/LICENSE). La interfaz de línea de comandos (CLI) de referencia en specscore/specscore-cli (https://github.com/specscore/specscore-cli) es Apache-2.0 (https://github.com/specscore/specscore-cli/blob/main/LICENSE)." },
+        },
+        {
+          '@type': 'Question',
+          name: "¿El desarrollo basado en especificaciones exige un proveedor de IA?",
+          acceptedAnswer: { '@type': 'Answer', text: "No. Las especificaciones son archivos de texto en el repositorio. La CLI es un binario local. Las AI Skills de este sitio envuelven esa CLI para los agentes que pueden ejecutar skills. El formato no exige un proveedor." },
+        },
+        {
+          '@type': 'Question',
+          name: "¿Cómo instalo la CLI?",
+          acceptedAnswer: { '@type': 'Answer', text: "Sigue las instrucciones en /es/cli/install/ (/es/cli/install/) o empieza por las AI Skills (/es/ai/). El binario de la CLI se publica desde specscore/specscore-cli (https://github.com/specscore/specscore-cli)." },
+        },
+      ],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'SpecScore.md', item: 'https://specscore.md/es/' },
+        { '@type': 'ListItem', position: 2, name: "Desarrollo basado en especificaciones para agentes de IA", item: 'https://specscore.md/es/spec-driven-development/' },
       ],
     },
   ],
@@ -80,6 +108,7 @@ const ld = {
   title="Desarrollo basado en especificaciones para agentes de IA — Guía completa | SpecScore"
   description="El desarrollo basado en especificaciones significa escribir una especificación testeable antes que el código, para que los agentes de IA construyan lo correcto. Qué es, cómo funciona y cómo se compara con TDD y la programación solo con prompts."
   canonical="https://specscore.md/es/spec-driven-development/"
+  markdownHref="/es/spec-driven-development.md"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
@@ -93,7 +122,7 @@ const ld = {
       <div class="sdd-hero__inner">
         <h1 id="sdd-title" class="sdd-hero__headline">Desarrollo basado en especificaciones para agentes de IA</h1>
         <p class="sdd-hero__lede">
-          <strong>El desarrollo basado en especificaciones (SDD) es una práctica en la que una especificación
+          SpecScore es un formato de archivo abierto y lintable para especificaciones, escrito en Markdown y YAML (YAML Ain't Markup Language), con una interfaz de línea de comandos (CLI) que las comprueba.           <strong>El desarrollo basado en especificaciones (SDD) es una práctica en la que una especificación
           escrita y testeable — requisitos y criterios de aceptación — es la fuente de verdad contra
           la que se construye y se verifica el código.</strong> En lugar de ir directamente de un
           prompt o un ticket al código, primero acuerdas qué debe hacer el software y luego
@@ -106,7 +135,7 @@ const ld = {
           <li>Los agentes de IA consultan la especificación para conocer la intención en vez de adivinarla a partir del código — menos construcciones erróneas.</li>
           <li>Es complementario al desarrollo basado en tests, no un sustituto de él.</li>
         </ul>
-        <p class="sdd-updated">Última actualización: mayo de 2026</p>
+        <p class="sdd-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence.es}</time></p>
       </div>
     </section>
 
@@ -254,7 +283,7 @@ const ld = {
           editarlos y hacerles lint. Como la estructura es legible por máquina, un agente puede
           preguntar "¿qué debería construir a continuación?" y recibir los requisitos abiertos y sus
           criterios de aceptación, y luego contrastar su trabajo con ellos. Es agnóstico de
-          herramientas y open source.
+          herramientas y <a href="https://github.com/specscore/specscore">open source</a>.
         </p>
         <p>
           Empieza con los <a href="/es/ai/">Skills de IA para tu agente de programación</a> o
@@ -282,6 +311,25 @@ const ld = {
         <div class="sdd-faq__item">
           <p class="sdd-faq__q">¿Cómo usan una especificación los agentes de IA de programación?</p>
           <p class="sdd-faq__a">Cuando la especificación es legible por máquina, el agente la consulta para obtener los requisitos y criterios de aceptación relevantes para su tarea actual en lugar de cargar todo el codebase, y luego compara su resultado con esos criterios — una salvaguarda frente al código plausible pero incorrecto.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">¿Qué es SpecScore?</p>
+          <p class="sdd-faq__a">SpecScore es un formato de archivo abierto y lintable para especificaciones, escrito en Markdown y YAML, con una interfaz de línea de comandos (CLI) que las consulta, edita y lintea. El formato está en el repositorio público <a href="https://github.com/specscore/specscore">specscore/specscore</a>.</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">¿Bajo qué licencia está SpecScore?</p>
+          <p class="sdd-faq__a">La especificación y la documentación del repositorio público <a href="https://github.com/specscore/specscore">specscore/specscore</a> son <a href="https://github.com/specscore/specscore/blob/main/LICENSE">CC BY 4.0</a>. La interfaz de línea de comandos (CLI) de referencia en <a href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a> es <a href="https://github.com/specscore/specscore-cli/blob/main/LICENSE">Apache-2.0</a>.</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">¿El desarrollo basado en especificaciones exige un proveedor de IA?</p>
+          <p class="sdd-faq__a">No. Las especificaciones son archivos de texto en el repositorio. La CLI es un binario local. Las AI Skills de este sitio envuelven esa CLI para los agentes que pueden ejecutar skills. El formato no exige un proveedor.</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">¿Cómo instalo la CLI?</p>
+          <p class="sdd-faq__a">Sigue las instrucciones en <a href="/es/cli/install/">/es/cli/install/</a> o empieza por las <a href="/es/ai/">AI Skills</a>. El binario de la CLI se publica desde <a href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a>.</p>
         </div>
       </div>
     </section>

@@ -5,6 +5,7 @@
 import { Image } from 'astro:assets';
 import heroImage from '../assets/hero.webp';
 import HeroGitHubLink from './HeroGitHubLink.astro';
+import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
 ---
 
 <section class="hero" aria-labelledby="hero-title">
@@ -13,14 +14,16 @@ import HeroGitHubLink from './HeroGitHubLink.astro';
       <h1 id="hero-title" class="hero__headline">
         Every ambiguity in your spec<br />is a token your agent burns.
       </h1>
+      
+      
+      
+      <p class="hero__sub">
+        SpecScore is an open, lintable file format for specifications, written in Markdown and YAML (YAML Ain't Markup Language) — like JSON (JavaScript Object Notation) for data — with a command-line interface (CLI) your agents call to query and edit them, like <code>jq</code> for JSON.
+      </p>
+      <p class="page-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence.en}</time></p>
       <p class="hero__stakes">
         Then a clarifying question mid-build. Then a fix after it ships.
         Then the context you keep re-explaining.
-      </p>
-      <p class="hero__sub">
-        SpecScore is an open, lintable file format for specifications —
-        like JSON for data. With a CLI your agents call to query and
-        edit them — like <code>jq</code> for JSON.
       </p>
       <HeroGitHubLink repo="specscore/specscore" label="Open-source on GitHub" />
       <div class="hero__cta">

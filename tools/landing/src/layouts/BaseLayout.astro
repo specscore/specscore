@@ -13,6 +13,7 @@ interface Props {
   description?: string;
   canonical?: string;
   lang?: string;
+  markdownHref?: string;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   description = 'An open Markdown + YAML format for features, requirements, and acceptance criteria — with a linter.',
   canonical = 'https://specscore.md/',
   lang = 'en',
+  markdownHref,
 } = Astro.props;
 
 const currentLocale = localeFromPath(Astro.url.pathname);
@@ -42,6 +44,9 @@ const currentLocale = localeFromPath(Astro.url.pathname);
     <meta name="color-scheme" content="light only" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {markdownHref && (
+      <link rel="alternate" type="text/markdown" href={markdownHref} title="Markdown" />
+    )}
     {alternates.map((alt) => (
       <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
     ))}
