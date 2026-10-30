@@ -52,4 +52,4 @@ Role-specific guides for adopting SpecScore in your team.
 - [Ecosystem](/ecosystem) — SpecScore Studio, Rehearse, Synchestra
 - [Rehearse — in plain language](/rehearse) — the acceptance-evidence layer: what it does, how, and why
 - [Rehearse vs. Established Testing Frameworks](/rehearse-vs-testing-frameworks) — why not just use pytest or Cucumber?
-- [Blog](/blog) — articles on spec-driven development
+- [Blog](/blog/) — articles on spec-driven development

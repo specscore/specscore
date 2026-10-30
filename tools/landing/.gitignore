@@ -27,6 +27,7 @@ public/*
 !public/*.svg
 !public/*.jpg
 !public/*.png
+!public/*.txt
 !public/README.md
 # blog/ subdirectory — static image assets for blog posts
 !public/blog/
