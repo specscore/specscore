@@ -1,7 +1,7 @@
 ---
 // Cross-links among /vs/ pages. Locale comes from the URL, so the same
 // component works on every translated comparison.
-import { localeFromPath, routeFromPath, type LangCode } from '../lib/languages.ts';
+import { localeFromPath, localeHref, routeFromPath, type LangCode } from '../lib/languages.ts';
 import { catalog, compareHref } from '../content/compare/catalog.ts';
 import { chrome } from '../content/compare/chrome.ts';
 
@@ -25,6 +25,9 @@ const others = catalog.filter((entry) => entry.slug !== slug);
         ))
       }
     </ul>
+    <p class="prose-p">
+      {ui.roundupBefore}<a href={localeHref(locale, '/spec-driven-development/tools/')} class="xref">{ui.roundupLink}</a>{ui.roundupAfter}
+    </p>
   </div>
 </section>
 

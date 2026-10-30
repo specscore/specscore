@@ -78,6 +78,23 @@ describe('injectHtml', () => {
     );
   });
 
+  it('treats the spec-driven development tools roundup as an article', () => {
+    const html = `<!doctype html>
+<html lang="en"><head><link rel="canonical" href="https://specscore.md/spec-driven-development/tools/"></head><body>
+<a href="/" class="wordmark">SpecScore.md</a>
+<p class="hero__breadcrumb"><a href="/spec-driven-development/">Spec-driven development</a></p>
+<h1 class="hero__headline">Best spec-driven development tools in 2026</h1>
+<p class="hero__sub">Spec-driven development (SDD) is a practice.</p>
+</body></html>`;
+    const data = graph(html);
+    const article = data['@graph'].find((node) => node['@type'] === 'Article');
+    assert.equal(article.headline, 'Best spec-driven development tools in 2026');
+    assert.equal(article.url, 'https://specscore.md/spec-driven-development/tools/');
+    const names = data['@graph'].find((node) => node['@type'] === 'BreadcrumbList')
+      .itemListElement.map((item) => item.name);
+    assert.deepEqual(names, ['SpecScore.md', 'Spec-driven development', 'Best spec-driven development tools in 2026']);
+  });
+
   it('does not let a heading before the first question swallow it', () => {
     const html = `<!doctype html>
 <html lang="en"><head><link rel="canonical" href="https://specscore.md/faq/"></head><body>

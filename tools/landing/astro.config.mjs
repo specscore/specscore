@@ -10,17 +10,26 @@ import { injectStructuredData } from './src/lib/structured-data.mjs';
 const repoRoot = fileURLToPath(new URL('../..', import.meta.url));
 const root = dirname(fileURLToPath(import.meta.url));
 const emitScript = join(root, 'scripts/emit-compare-md.ts');
+const emitRoundupScript = join(root, 'scripts/emit-roundup-md.ts');
 
-function emitCompareMarkdown(outDir) {
+function emitMarkdown(script, outDir, label) {
   const dest = outDir instanceof URL ? fileURLToPath(outDir) : String(outDir);
   const result = spawnSync(
     process.execPath,
-    ['--experimental-strip-types', emitScript, dest],
+    ['--experimental-strip-types', script, dest],
     { cwd: root, stdio: 'inherit' },
   );
   if (result.status !== 0) {
-    throw new Error('compare markdown emit failed');
+    throw new Error(`${label} markdown emit failed`);
   }
+}
+
+function emitCompareMarkdown(outDir) {
+  emitMarkdown(emitScript, outDir, 'compare');
+}
+
+function emitRoundupMarkdown(outDir) {
+  emitMarkdown(emitRoundupScript, outDir, 'roundup');
 }
 
 function compareMarkdown() {
@@ -29,14 +38,17 @@ function compareMarkdown() {
     hooks: {
       'astro:build:done': ({ dir }) => {
         emitCompareMarkdown(dir);
+        emitRoundupMarkdown(dir);
       },
       'astro:server:setup': ({ server }) => {
         server.middlewares.use((req, res, next) => {
           const url = (req.url || '').split('?')[0];
-          if (!/^\/(?:[a-z-]+\/)?vs\/[a-z0-9-]+\.md$/.test(url)) return next();
+          const compare = /^\/(?:[a-z-]+\/)?vs\/[a-z0-9-]+\.md$/.test(url);
+          const roundup = /^\/(?:[a-z-]+\/)?spec-driven-development\/tools\.md$/.test(url);
+          if (!compare && !roundup) return next();
           const result = spawnSync(
             process.execPath,
-            ['--experimental-strip-types', emitScript, '--print', url],
+            ['--experimental-strip-types', compare ? emitScript : emitRoundupScript, '--print', url],
             { cwd: root, encoding: 'utf8' },
           );
           if (result.status !== 0 || !result.stdout) return next();

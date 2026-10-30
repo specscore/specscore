@@ -39,4 +39,15 @@ describe('_headers', () => {
   it('noindexes the internal pages README', () => {
     assert.match(block('/README/'), /X-Robots-Tag: noindex/);
   });
+
+  it('advertises the spec-driven development tools Markdown sibling', () => {
+    const prefixes = ['', '/es', '/de', '/fr', '/it', '/pl', '/pt-br', '/ru', '/tr', '/uk', '/ja', '/zh-cn', '/zh-tw', '/ko'];
+    for (const prefix of prefixes) {
+      const path = `${prefix}/spec-driven-development/tools/`;
+      assert.match(
+        block(path),
+        new RegExp(`Link: <${prefix}/spec-driven-development/tools\\.md>; rel="alternate"; type="text/markdown"`),
+      );
+    }
+  });
 });
