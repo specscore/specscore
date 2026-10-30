@@ -63,7 +63,7 @@ The header should advertise *what the site offers*, not be a residual list of "p
 
 The four nav items (left → right = general → specific → external):
 
-1. **Specification** *(singular, intentional)* — the canonical content (what SpecScore IS). Label promises a single confident thing ("the specification of SpecScore"); the destination is `/docs` (the welcoming hub with intro + role-based guides + links to the raw spec tree), not `/specifications` (the bare spec-tree index — kept available for power users via links from `/docs`). English-only URL for now.
+1. **Specification** *(singular, intentional)* — the canonical content (what SpecScore IS). Label promises a single confident thing ("the specification of SpecScore"); the destination is `/docs/` (the welcoming hub with intro + role-based guides + links to the raw spec tree), not `/specifications` (the bare spec-tree index — kept available for power users via links from `/docs/`). English-only URL for now.
 2. **CLI** — the primary tool. Links to `/cli/` (locale-routed).
 3. **AI Skills** — wrappers around the CLI for AI coding agents. Links to `/ai/` (locale-routed), the hub that lists all available Skills.
 4. **GitHub** — open-source verification signal.
@@ -72,7 +72,7 @@ Then the **language dropdown** sits at the far right with the smallest visual we
 
 Don't:
 - Use the plural "Specifications" in the nav label. The plural reads as "a catalog of documents to wade through"; the singular reads as "the spec." Locales with a singular/plural distinction (en, es, pt-br, ru, uk) all use the singular form. Locales whose nouns are mass-noun-ish (ja, zh-cn, ko) naturally don't carry the distinction.
-- Point the Specification nav link at `/specifications`. It's the bare spec-tree index — fine destination for power users via internal links, wrong destination for a cold visitor clicking the header label. The header label should land them somewhere that *welcomes* them; `/docs` does that.
+- Point the Specification nav link at `/specifications`. It's the bare spec-tree index — fine destination for power users via internal links, wrong destination for a cold visitor clicking the header label. The header label should land them somewhere that *welcomes* them; `/docs/` does that.
 - Hard-code the Hero/FinalCta CTAs at a *leaf* like `/ai/specstudio-skills/`. Point them at the hub (`/ai/`) so the page auto-scales when more Skills ship.
 - Mix product-area labels with marketing/category labels (e.g., adding "Pricing" or "Solutions"). The current four describe **technical surfaces** — keep that consistent.
 - Rename "AI Skills" to "AI Plugins" without re-reading § 11 below — the products on `/ai/` are literally named "Skills" (SpecStudio Skills, CLI Skills), and "Skills" matches Anthropic's official term ("Agent Skills") plus broad cross-ecosystem usage (Alexa Skills, Watson Skills). "Plugin" appears in prose/title for SEO, but the product term is "Skills."
@@ -139,7 +139,7 @@ This is *not* a blanket ban on line-length caps. Standalone prose with no full-w
 
 ### 14. Same-site links are root-relative, not absolute
 
-Links to pages on `specscore.md` (the Astro landing *and* the docs site both live there) must use **root-relative** hrefs — `href="/"`, `href="/docs"`, `href="/cli/"` — never `href="https://specscore.md/…"`. Absolute self-links break local development (clicking one jumps you from `localhost` to the live site) and force a needless redirect in production.
+Links to pages on `specscore.md` (the Astro landing *and* the docs site both live there) must use **root-relative** hrefs — `href="/"`, `href="/docs/"`, `href="/cli/"` — never `href="https://specscore.md/…"`. Absolute self-links break local development (clicking one jumps you from `localhost` to the live site) and force a needless redirect in production.
 
 Absolute URLs are correct only for:
 - **Genuinely cross-domain** targets — `specscore.studio`, GitHub, external sites.

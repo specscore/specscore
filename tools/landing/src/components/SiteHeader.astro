@@ -13,6 +13,7 @@
 // Dropdown is pure-CSS via :focus-within and :hover; the <ul><li><a>
 // list stays in the DOM for crawler discovery of alternate-language URLs.
 import { langs, localeFromPath, routeFromPath, localeHref } from '../lib/languages';
+import { localeHasRoute } from '../lib/alternates.mjs';
 
 const path = Astro.url.pathname;
 const locale = localeFromPath(path);
@@ -27,7 +28,7 @@ const currentLang = langs.find(l => l.code === locale)!;
 // that suits cold visitors. /specifications stays available for power
 // users via internal links from /docs. The docs site is currently
 // English-only, so this URL doesn't get a locale prefix.
-const specsHref = 'https://specscore.md/docs';
+const specsHref = '/docs/';
 
 // Localized nav labels. CLI is kept as the universal acronym across all
 // locales. Specification is singular per-locale (confident brand framing
@@ -79,11 +80,13 @@ const aiSkillsLabel: Record<string, string> = {
         </svg>
       </button>
       <ul class="lang-switcher__menu" role="menu" aria-label="Language">
-        {langs.map(({ code, label, tag }) => (
+        {langs.map(({ code, label, tag }) => {
+          const translated = localeHasRoute(code, route);
+          return (
           <li role="none">
             <a
-              href={localeHref(code, route)}
-              hreflang={tag}
+              href={translated ? localeHref(code, route) : localeHref(code, '/')}
+              hreflang={translated ? tag : undefined}
               lang={tag}
               role="menuitem"
               class:list={['lang-switcher__item', code === locale && 'is-active']}
@@ -92,7 +95,8 @@ const aiSkillsLabel: Record<string, string> = {
               {label}
             </a>
           </li>
-        ))}
+          );
+        })}
       </ul>
     </div>
   </div>
