@@ -38,8 +38,9 @@ cp _headers _redirects public/
 echo "==> Removing local-dev README (excluded from CF Pages deploy)"
 rm -f public/README.md
 
-# Landing comparison pages ship a raw Markdown sibling. List the English
-# URLs in llms.txt so an agent that only reads the index can find them.
+# Landing comparison pages ship a raw Markdown sibling. The Astro build writes
+# /llms.txt and /llms-full.txt, including those comparisons. This append is a
+# fallback when an older index is missing the Kiro page.
 if ! grep -q '/vs/kiro.md' public/llms.txt; then
   cat >> public/llms.txt << 'EOF'
 

@@ -18,6 +18,7 @@ import SiteFooterZhCn from './SiteFooterZhCn.astro';
 import SiteFooterZhTw from './SiteFooterZhTw.astro';
 import Inlines from './Inlines.astro';
 import { localeFromPath, localeHref, type LangCode } from '../lib/languages.ts';
+import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
 import { roundupMdHref, toolOrder } from '../content/roundup/facts.ts';
 import { pageFor } from '../content/roundup/pages.ts';
 import type { Block, Inline } from '../content/roundup/types.ts';
@@ -69,6 +70,7 @@ const guideHref = localeHref(locale, '/spec-driven-development/');
         <p class="hero__breadcrumb"><a href={guideHref} class="xref">{page.breadcrumb}</a></p>
         <h1 id="tools-title" class="hero__headline">{page.h1}</h1>
         <p class="hero__sub"><Inlines parts={localize(page.hero)} /></p>
+        <p class="page-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence[locale]}</time></p>
       </div>
     </section>
 

@@ -10,6 +10,7 @@ export const page: RoundupPage = {
     '스펙 주도 개발 도구 비교. GitHub Spec Kit, OpenSpec, Kiro와 함께 Tessl, BMAD Method, Task Master AI, CodeSpeak, Datarim, 일반 Markdown, SpecScore를 놓습니다.',
   h1: '2026년 최고의 스펙 주도 개발 도구',
   hero: [
+    'SpecScore는 명세를 위한 린트 가능한 오픈 파일 포맷으로, Markdown과 YAML(YAML Ain\'t Markup Language)로 작성됩니다. ',
     t('스펙 주도 개발', href.sdd),
     '(SDD)은 글로 쓴 명세를 정본으로 두고, 코드를 그에 맞춰 만들며 그에 맞춰 검사하는 방식입니다. 스펙 주도 개발 도구는 그 명세를 쓰고, 저장하고, 때로는 검사하는 데 쓰는 형식, 워크플로, 제품입니다. 제품 요구사항 문서(PRD)는 누군가 그것을 작업으로 나누기 전에, 문제와 범위를 산문으로 적은 글입니다. ',
     t('요구사항 구문에 대한 쉬운 접근', href.kiroSpecs, 'them'),

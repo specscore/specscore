@@ -5,6 +5,7 @@
 // implementation in the "in practice" section + FAQ only.
 // Design: docs/superpowers/specs/2026-05-29-spec-driven-development-pillar-page-design.md
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { CONTENT_UPDATED, updatedSentence } from '../../../content/updated.ts';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooterJa from '../../../components/SiteFooterJa.astro';
 
@@ -12,13 +13,13 @@ const ld = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'Article',
+      '@type': 'TechArticle',
       headline: 'AIコーディングエージェントのための仕様駆動開発',
       description:
         '仕様駆動開発とは何か、なぜAIコーディングエージェントにとって重要なのか、ワークフローはどう機能するのか、そしてTDDやプロンプトのみのコーディングとどう違うのかを解説します。',
       inLanguage: 'ja',
       datePublished: '2026-05-29',
-      dateModified: '2026-05-29',
+      dateModified: '2026-10-30',
       mainEntityOfPage: 'https://specscore.md/ja/spec-driven-development/',
       image: 'https://specscore.md/hero-og.jpg',
       author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
@@ -69,6 +70,33 @@ const ld = {
               '仕様が機械可読であるとき、エージェントはコードベース全体を読み込む代わりに、現在のタスクに関連する要件と受け入れ基準を仕様に問い合わせ、その後で自分の出力をそれらの基準に照らして確認します — もっともらしいが誤ったコードに対するガードレールです。',
           },
         },
+        {
+          '@type': 'Question',
+          name: "SpecScoreとは何ですか？",
+          acceptedAnswer: { '@type': 'Answer', text: "SpecScoreは、MarkdownとYAMLで書かれた、仕様のためのオープンでリント可能なファイル形式です。コマンドラインインタフェース（CLI）がそれらのファイルを照会、編集、lintします。形式は公開リポジトリ specscore/specscore (https://github.com/specscore/specscore) にあります。" },
+        },
+        {
+          '@type': 'Question',
+          name: "SpecScoreのライセンスは何ですか？",
+          acceptedAnswer: { '@type': 'Answer', text: "公開リポジトリ specscore/specscore (https://github.com/specscore/specscore) の仕様とドキュメントは CC BY 4.0 (https://github.com/specscore/specscore/blob/main/LICENSE) です。specscore/specscore-cli (https://github.com/specscore/specscore-cli) の参照用コマンドラインインタフェース（CLI）は Apache-2.0 (https://github.com/specscore/specscore-cli/blob/main/LICENSE) です。" },
+        },
+        {
+          '@type': 'Question',
+          name: "仕様駆動開発は一つのAIベンダーを必要としますか？",
+          acceptedAnswer: { '@type': 'Answer', text: "いいえ。仕様はリポジトリ内のテキストファイルです。CLIはローカルのプログラムです。このサイトのAI Skillsは、スキルを実行できるエージェントのためにそのCLIを包みます。形式自体は特定のベンダーを要求しません。" },
+        },
+        {
+          '@type': 'Question',
+          name: "CLIはどうインストールしますか？",
+          acceptedAnswer: { '@type': 'Answer', text: "/ja/cli/install/ (/ja/cli/install/) の手順に従うか、AI Skills (/ja/ai/) から始めてください。CLIのバイナリは specscore/specscore-cli (https://github.com/specscore/specscore-cli) から公開されています。" },
+        },
+      ],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'SpecScore.md', item: 'https://specscore.md/ja/' },
+        { '@type': 'ListItem', position: 2, name: "AIコーディングエージェントのための仕様駆動開発", item: 'https://specscore.md/ja/spec-driven-development/' },
       ],
     },
   ],
@@ -80,6 +108,7 @@ const ld = {
   title="AIエージェントのための仕様駆動開発 — 完全ガイド | SpecScore"
   description="仕様駆動開発とは、コードの前にテスト可能な仕様を書くことで、AIコーディングエージェントが正しいものを構築できるようにすることです。それが何か、どう機能するか、TDDやプロンプトのみのコーディングとどう違うかを解説します。"
   canonical="https://specscore.md/ja/spec-driven-development/"
+  markdownHref="/ja/spec-driven-development.md"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
@@ -93,7 +122,7 @@ const ld = {
       <div class="sdd-hero__inner">
         <h1 id="sdd-title" class="sdd-hero__headline">AIコーディングエージェントのための仕様駆動開発</h1>
         <p class="sdd-hero__lede">
-          <strong>仕様駆動開発（SDD）は、書かれたテスト可能な仕様 — 要件と受け入れ基準 — を、
+          SpecScoreは、仕様のためのオープンでリント可能なファイル形式で、MarkdownとYAML（YAML Ain't Markup Language）で書かれ、コマンドラインインタフェース（CLI）がそれらを検査します。          <strong>仕様駆動開発（SDD）は、書かれたテスト可能な仕様 — 要件と受け入れ基準 — を、
           コードを構築し検証するための信頼できる唯一の情報源とするプラクティスです。</strong>
           プロンプトやチケットから直接コードに進むのではなく、まずソフトウェアが何をすべきかに合意し、
           その仕様に従って構築します。いまやAIエージェントがコードの多くを書くようになり、
@@ -105,7 +134,7 @@ const ld = {
           <li>AIエージェントはコードから推測する代わりに仕様に意図を問い合わせます — 間違った構築が減ります。</li>
           <li>テスト駆動開発を補完するものであり、置き換えるものではありません。</li>
         </ul>
-        <p class="sdd-updated">最終更新：2026年5月</p>
+        <p class="sdd-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence.ja}</time></p>
       </div>
     </section>
 
@@ -247,7 +276,7 @@ const ld = {
           ファイル — であり、エージェントがそれらを問い合わせ・編集・lintするために呼び出すCLIと
           組み合わさっています。構造が機械可読なので、エージェントは「次に何を構築すべきか？」と
           尋ねて、未解決の要件とその受け入れ基準を受け取り、その後で自分の作業をそれらに照らして
-          確認できます。ツールに依存せず、オープンソースです。
+          確認できます。ツールに依存せず、<a href="https://github.com/specscore/specscore">オープンソースです</a>。
         </p>
         <p>
           <a href="/ja/ai/">コーディングエージェント向けのAIスキル</a>で始めるか、
@@ -275,6 +304,25 @@ const ld = {
         <div class="sdd-faq__item">
           <p class="sdd-faq__q">AIコーディングエージェントは仕様をどう使いますか？</p>
           <p class="sdd-faq__a">仕様が機械可読であるとき、エージェントはコードベース全体を読み込む代わりに、現在のタスクに関連する要件と受け入れ基準を仕様に問い合わせ、その後で自分の出力をそれらの基準に照らして確認します — もっともらしいが誤ったコードに対するガードレールです。</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">SpecScoreとは何ですか？</p>
+          <p class="sdd-faq__a">SpecScoreは、MarkdownとYAMLで書かれた、仕様のためのオープンでリント可能なファイル形式です。コマンドラインインタフェース（CLI）がそれらのファイルを照会、編集、lintします。形式は公開リポジトリ <a href="https://github.com/specscore/specscore">specscore/specscore</a> にあります。</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">SpecScoreのライセンスは何ですか？</p>
+          <p class="sdd-faq__a">公開リポジトリ <a href="https://github.com/specscore/specscore">specscore/specscore</a> の仕様とドキュメントは <a href="https://github.com/specscore/specscore/blob/main/LICENSE">CC BY 4.0</a> です。<a href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a> の参照用コマンドラインインタフェース（CLI）は <a href="https://github.com/specscore/specscore-cli/blob/main/LICENSE">Apache-2.0</a> です。</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">仕様駆動開発は一つのAIベンダーを必要としますか？</p>
+          <p class="sdd-faq__a">いいえ。仕様はリポジトリ内のテキストファイルです。CLIはローカルのプログラムです。このサイトのAI Skillsは、スキルを実行できるエージェントのためにそのCLIを包みます。形式自体は特定のベンダーを要求しません。</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">CLIはどうインストールしますか？</p>
+          <p class="sdd-faq__a"><a href="/ja/cli/install/">/ja/cli/install/</a> の手順に従うか、<a href="/ja/ai/">AI Skills</a> から始めてください。CLIのバイナリは <a href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a> から公開されています。</p>
         </div>
       </div>
     </section>

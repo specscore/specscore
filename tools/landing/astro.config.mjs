@@ -6,6 +6,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { collectDocsPageUrls, SITEMAP_LOCALES, withHreflang } from './src/lib/sitemap-pages.mjs';
 import { injectStructuredData } from './src/lib/structured-data.mjs';
+import { writeLlmsFiles } from './src/lib/llms.mjs';
 
 const repoRoot = fileURLToPath(new URL('../..', import.meta.url));
 const root = dirname(fileURLToPath(import.meta.url));
@@ -98,6 +99,14 @@ export default defineConfig({
       },
     },
     compareMarkdown(),
+    {
+      name: 'llms-txt',
+      hooks: {
+        'astro:build:done': async ({ dir }) => {
+          await writeLlmsFiles(dir, repoRoot);
+        },
+      },
+    },
   ],
   build: {
     // Inline tiny CSS — keeps the rendered HTML self-contained for the

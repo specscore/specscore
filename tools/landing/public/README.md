@@ -6,7 +6,7 @@ Static files copied as-is into `dist/` at build time. Astro does no processing o
 |---|---|
 | `hero-og.webp` | 1200px-wide source image. Meta tags do not reference it. |
 | `hero-og.jpg` | Open Graph and Twitter image. `og:image` is `https://specscore.md/hero-og.jpg`. |
-| `robots.txt` | Allows crawling and points at `https://specscore.md/sitemap.xml`. |
+| `robots.txt` | Allows search and AI crawlers, points at `llms.txt`, and lists `https://specscore.md/sitemap.xml`. |
 | `film/` | Local poster images (1280×720 WebP) for the click-to-load product films, one per locale shown (en, ru). The poster is local so no request goes to YouTube before the click. |
 | `favicon.svg` | Clef glyph on cream. |
 

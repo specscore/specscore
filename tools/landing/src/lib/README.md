@@ -9,6 +9,8 @@ Shared data and build helpers for the Astro landing. Imported by layouts and com
 | [`alternates.mjs`](alternates.mjs) | Build-time inventory of `src/pages` for the header, footer, and `<head>` alternates. |
 | [`sitemap-pages.mjs`](sitemap-pages.mjs) | Docs-generator URLs added to the sitemap, plus `x-default`. |
 | [`structured-data.mjs`](structured-data.mjs) | JSON-LD taken from the visible HTML of built pages. |
+| [`html-to-md.mjs`](html-to-md.mjs) | Turns a built page's `<main>` into Markdown for `/llms-full.txt`. |
+| [`llms.mjs`](llms.mjs) | Writes `/llms.txt`, `/llms-full.txt`, and raw Markdown companions at build time. |
 
 ## Open Questions
 

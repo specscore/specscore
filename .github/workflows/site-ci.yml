@@ -71,6 +71,15 @@ jobs:
           test -s public/sitemap.xml
           test -s public/robots.txt
           grep -q 'Sitemap: https://specscore.md/sitemap.xml' public/robots.txt
+          grep -q 'User-agent: GPTBot' public/robots.txt
+          grep -q 'https://specscore.md/llms.txt' public/robots.txt
+          test -s public/llms.txt
+          test -s public/llms-full.txt
+          grep -q '^# SpecScore' public/llms.txt
+          grep -q 'https://specscore.md/index.md' public/llms.txt
+          grep -q 'FAQPage' public/index.html
+          grep -q 'Organization' public/index.html
+          grep -q 'text/markdown' public/index.html
           grep -q 'https://specscore.md/' public/sitemap.xml
           grep -q 'hreflang="x-default"' public/index.html
           grep -q 'https://specscore.md/hero-og.jpg' public/index.html

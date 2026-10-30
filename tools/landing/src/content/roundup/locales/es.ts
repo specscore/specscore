@@ -11,6 +11,7 @@ export const page: RoundupPage = {
     'Comparación de herramientas de desarrollo basado en especificaciones: GitHub Spec Kit vs OpenSpec vs Kiro, más Tessl, BMAD Method, Task Master AI, CodeSpeak, Datarim, Markdown simple y SpecScore.',
   h1: 'Mejores herramientas de desarrollo basado en especificaciones en 2026',
   hero: [
+    'SpecScore es un formato de archivo abierto y lintable para especificaciones, escrito en Markdown y YAML (YAML Ain\'t Markup Language). ',
     t('El desarrollo basado en especificaciones', href.sdd),
     ' (SDD) es una práctica en la que una especificación escrita es la fuente de verdad contra la que se construye y se comprueba el código. Las herramientas de desarrollo basado en especificaciones son los formatos, los workflows y los productos que se usan para escribir, guardar y, a veces, comprobar esas especificaciones. Un documento de requisitos de producto (PRD) es prosa que expone el problema y el alcance antes de que alguien lo divida en tareas. El ',
     t('enfoque sencillo de la sintaxis de requisitos', href.kiroSpecs, 'them'),

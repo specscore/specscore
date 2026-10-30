@@ -1,5 +1,58 @@
 # https://specscore.md/robots.txt
+# Curated Markdown index for language models: https://specscore.md/llms.txt
+# Full Markdown corpus: https://specscore.md/llms-full.txt
+
 User-agent: *
+Allow: /
+
+# AI crawlers and answer engines. Explicit allow so a managed robots.txt
+# or a default bot fight does not hide the public site from them.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: cohere-ai
 Allow: /
 
 Sitemap: https://specscore.md/sitemap.xml

@@ -11,6 +11,7 @@ export const page: RoundupPage = {
     'Comparação de ferramentas de desenvolvimento guiado por especificação em 2026: GitHub Spec Kit, OpenSpec e Kiro, além de Tessl, BMAD Method, Task Master AI, CodeSpeak, Datarim, Markdown simples e SpecScore.',
   h1: 'Melhores ferramentas de desenvolvimento guiado por especificação em 2026',
   hero: [
+    'SpecScore é um formato de arquivo aberto e lintável para especificações, escrito em Markdown e YAML (YAML Ain\'t Markup Language). ',
     t('Desenvolvimento guiado por especificação', href.sdd),
     ' (SDD) é uma prática em que uma especificação escrita é a fonte de verdade com base na qual o código é construído e contra a qual ele é conferido. Ferramentas de desenvolvimento guiado por especificação são os formatos, fluxos de trabalho e produtos usados para escrever, guardar e às vezes conferir essas especificações. Um documento de requisitos do produto (PRD) é prosa que declara o problema e o escopo antes que alguém o divida em tarefas. ',
     t('Abordagem Fácil à Sintaxe de Requisitos', href.kiroSpecs, 'them'),

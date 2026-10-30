@@ -11,6 +11,7 @@ export const page: RoundupPage = {
     'Spesifikasyon güdümlü geliştirme araçları karşılaştırması: GitHub Spec Kit, OpenSpec ve Kiro; yanlarında Tessl, BMAD Method, Task Master AI, CodeSpeak, Datarim, düz Markdown ve SpecScore.',
   h1: '2026’nın en iyi spesifikasyon güdümlü geliştirme araçları',
   hero: [
+    'SpecScore, spesifikasyonlar için Markdown ve YAML (YAML Ain\'t Markup Language) ile yazılmış açık ve linter ile denetlenebilir bir dosya formatıdır. ',
     t('Spesifikasyon güdümlü geliştirme', href.sdd),
     ' (SDD), yazılmış bir spesifikasyonun, kodun ona göre yazıldığı ve ona göre denetlendiği doğruluk kaynağı olduğu bir pratiktir. Spesifikasyon güdümlü geliştirme araçları, bu spesifikasyonları yazmak, saklamak ve bazen denetlemek için kullanılan biçimler, iş akışları ve ürünlerdir. Bir ürün gereksinimleri belgesi (PRD), kimse onu görevlere bölmeden önce sorunu ve kapsamı anlatan düz yazıdır. ',
     t('Gereksinim Sözdizimine Kolay Yaklaşım', href.kiroSpecs, 'them'),

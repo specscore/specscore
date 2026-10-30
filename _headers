@@ -283,3 +283,401 @@
 
 /ko/spec-driven-development/tools/
   Link: </ko/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+# Homepage, guides, and install: raw Markdown siblings for agents
+
+/
+  Link: </index.md>; rel="alternate"; type="text/markdown"
+
+/index.md
+  ! Link
+  Link: <https://specscore.md/>; rel="canonical"
+
+/spec-driven-development/
+  Link: </spec-driven-development.md>; rel="alternate"; type="text/markdown"
+
+/spec-driven-development.md
+  ! Link
+  Link: <https://specscore.md/spec-driven-development/>; rel="canonical"
+
+/cli/install/
+  Link: </cli/install.md>; rel="alternate"; type="text/markdown"
+
+/cli/install.md
+  ! Link
+  Link: <https://specscore.md/cli/install/>; rel="canonical"
+
+/vs/
+  Link: </vs.md>; rel="alternate"; type="text/markdown"
+
+/vs.md
+  ! Link
+  Link: <https://specscore.md/vs/>; rel="canonical"
+
+/es/
+  Link: </es/index.md>; rel="alternate"; type="text/markdown"
+
+/es/index.md
+  ! Link
+  Link: <https://specscore.md/es/>; rel="canonical"
+
+/es/spec-driven-development/
+  Link: </es/spec-driven-development.md>; rel="alternate"; type="text/markdown"
+
+/es/spec-driven-development.md
+  ! Link
+  Link: <https://specscore.md/es/spec-driven-development/>; rel="canonical"
+
+/es/cli/install/
+  Link: </es/cli/install.md>; rel="alternate"; type="text/markdown"
+
+/es/cli/install.md
+  ! Link
+  Link: <https://specscore.md/es/cli/install/>; rel="canonical"
+
+/es/vs/
+  Link: </es/vs.md>; rel="alternate"; type="text/markdown"
+
+/es/vs.md
+  ! Link
+  Link: <https://specscore.md/es/vs/>; rel="canonical"
+
+/de/
+  Link: </de/index.md>; rel="alternate"; type="text/markdown"
+
+/de/index.md
+  ! Link
+  Link: <https://specscore.md/de/>; rel="canonical"
+
+/de/spec-driven-development/
+  Link: </de/spec-driven-development.md>; rel="alternate"; type="text/markdown"
+
+/de/spec-driven-development.md
+  ! Link
+  Link: <https://specscore.md/de/spec-driven-development/>; rel="canonical"
+
+/de/cli/install/
+  Link: </de/cli/install.md>; rel="alternate"; type="text/markdown"
+
+/de/cli/install.md
+  ! Link
+  Link: <https://specscore.md/de/cli/install/>; rel="canonical"
+
+/de/vs/
+  Link: </de/vs.md>; rel="alternate"; type="text/markdown"
+
+/de/vs.md
+  ! Link
+  Link: <https://specscore.md/de/vs/>; rel="canonical"
+
+/fr/
+  Link: </fr/index.md>; rel="alternate"; type="text/markdown"
+
+/fr/index.md
+  ! Link
+  Link: <https://specscore.md/fr/>; rel="canonical"
+
+/fr/spec-driven-development/
+  Link: </fr/spec-driven-development.md>; rel="alternate"; type="text/markdown"
+
+/fr/spec-driven-development.md
+  ! Link
+  Link: <https://specscore.md/fr/spec-driven-development/>; rel="canonical"
+
+/fr/cli/install/
+  Link: </fr/cli/install.md>; rel="alternate"; type="text/markdown"
+
+/fr/cli/install.md
+  ! Link
+  Link: <https://specscore.md/fr/cli/install/>; rel="canonical"
+
+/fr/vs/
+  Link: </fr/vs.md>; rel="alternate"; type="text/markdown"
+
+/fr/vs.md
+  ! Link
+  Link: <https://specscore.md/fr/vs/>; rel="canonical"
+
+/it/
+  Link: </it/index.md>; rel="alternate"; type="text/markdown"
+
+/it/index.md
+  ! Link
+  Link: <https://specscore.md/it/>; rel="canonical"
+
+/it/spec-driven-development/
+  Link: </it/spec-driven-development.md>; rel="alternate"; type="text/markdown"
+
+/it/spec-driven-development.md
+  ! Link
+  Link: <https://specscore.md/it/spec-driven-development/>; rel="canonical"
+
+/it/cli/install/
+  Link: </it/cli/install.md>; rel="alternate"; type="text/markdown"
+
+/it/cli/install.md
+  ! Link
+  Link: <https://specscore.md/it/cli/install/>; rel="canonical"
+
+/it/vs/
+  Link: </it/vs.md>; rel="alternate"; type="text/markdown"
+
+/it/vs.md
+  ! Link
+  Link: <https://specscore.md/it/vs/>; rel="canonical"
+
+/pl/
+  Link: </pl/index.md>; rel="alternate"; type="text/markdown"
+
+/pl/index.md
+  ! Link
+  Link: <https://specscore.md/pl/>; rel="canonical"
+
+/pl/spec-driven-development/
+  Link: </pl/spec-driven-development.md>; rel="alternate"; type="text/markdown"
+
+/pl/spec-driven-development.md
+  ! Link
+  Link: <https://specscore.md/pl/spec-driven-development/>; rel="canonical"
+
+/pl/cli/install/
+  Link: </pl/cli/install.md>; rel="alternate"; type="text/markdown"
+
+/pl/cli/install.md
+  ! Link
+  Link: <https://specscore.md/pl/cli/install/>; rel="canonical"
+
+/pl/vs/
+  Link: </pl/vs.md>; rel="alternate"; type="text/markdown"
+
+/pl/vs.md
+  ! Link
+  Link: <https://specscore.md/pl/vs/>; rel="canonical"
+
+/pt-br/
+  Link: </pt-br/index.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/index.md
+  ! Link
+  Link: <https://specscore.md/pt-br/>; rel="canonical"
+
+/pt-br/spec-driven-development/
+  Link: </pt-br/spec-driven-development.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/spec-driven-development.md
+  ! Link
+  Link: <https://specscore.md/pt-br/spec-driven-development/>; rel="canonical"
+
+/pt-br/cli/install/
+  Link: </pt-br/cli/install.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/cli/install.md
+  ! Link
+  Link: <https://specscore.md/pt-br/cli/install/>; rel="canonical"
+
+/pt-br/vs/
+  Link: </pt-br/vs.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/vs.md
+  ! Link
+  Link: <https://specscore.md/pt-br/vs/>; rel="canonical"
+
+/ru/
+  Link: </ru/index.md>; rel="alternate"; type="text/markdown"
+
+/ru/index.md
+  ! Link
+  Link: <https://specscore.md/ru/>; rel="canonical"
+
+/ru/spec-driven-development/
+  Link: </ru/spec-driven-development.md>; rel="alternate"; type="text/markdown"
+
+/ru/spec-driven-development.md
+  ! Link
+  Link: <https://specscore.md/ru/spec-driven-development/>; rel="canonical"
+
+/ru/cli/install/
+  Link: </ru/cli/install.md>; rel="alternate"; type="text/markdown"
+
+/ru/cli/install.md
+  ! Link
+  Link: <https://specscore.md/ru/cli/install/>; rel="canonical"
+
+/ru/vs/
+  Link: </ru/vs.md>; rel="alternate"; type="text/markdown"
+
+/ru/vs.md
+  ! Link
+  Link: <https://specscore.md/ru/vs/>; rel="canonical"
+
+/tr/
+  Link: </tr/index.md>; rel="alternate"; type="text/markdown"
+
+/tr/index.md
+  ! Link
+  Link: <https://specscore.md/tr/>; rel="canonical"
+
+/tr/spec-driven-development/
+  Link: </tr/spec-driven-development.md>; rel="alternate"; type="text/markdown"
+
+/tr/spec-driven-development.md
+  ! Link
+  Link: <https://specscore.md/tr/spec-driven-development/>; rel="canonical"
+
+/tr/cli/install/
+  Link: </tr/cli/install.md>; rel="alternate"; type="text/markdown"
+
+/tr/cli/install.md
+  ! Link
+  Link: <https://specscore.md/tr/cli/install/>; rel="canonical"
+
+/tr/vs/
+  Link: </tr/vs.md>; rel="alternate"; type="text/markdown"
+
+/tr/vs.md
+  ! Link
+  Link: <https://specscore.md/tr/vs/>; rel="canonical"
+
+/uk/
+  Link: </uk/index.md>; rel="alternate"; type="text/markdown"
+
+/uk/index.md
+  ! Link
+  Link: <https://specscore.md/uk/>; rel="canonical"
+
+/uk/spec-driven-development/
+  Link: </uk/spec-driven-development.md>; rel="alternate"; type="text/markdown"
+
+/uk/spec-driven-development.md
+  ! Link
+  Link: <https://specscore.md/uk/spec-driven-development/>; rel="canonical"
+
+/uk/cli/install/
+  Link: </uk/cli/install.md>; rel="alternate"; type="text/markdown"
+
+/uk/cli/install.md
+  ! Link
+  Link: <https://specscore.md/uk/cli/install/>; rel="canonical"
+
+/uk/vs/
+  Link: </uk/vs.md>; rel="alternate"; type="text/markdown"
+
+/uk/vs.md
+  ! Link
+  Link: <https://specscore.md/uk/vs/>; rel="canonical"
+
+/ja/
+  Link: </ja/index.md>; rel="alternate"; type="text/markdown"
+
+/ja/index.md
+  ! Link
+  Link: <https://specscore.md/ja/>; rel="canonical"
+
+/ja/spec-driven-development/
+  Link: </ja/spec-driven-development.md>; rel="alternate"; type="text/markdown"
+
+/ja/spec-driven-development.md
+  ! Link
+  Link: <https://specscore.md/ja/spec-driven-development/>; rel="canonical"
+
+/ja/cli/install/
+  Link: </ja/cli/install.md>; rel="alternate"; type="text/markdown"
+
+/ja/cli/install.md
+  ! Link
+  Link: <https://specscore.md/ja/cli/install/>; rel="canonical"
+
+/ja/vs/
+  Link: </ja/vs.md>; rel="alternate"; type="text/markdown"
+
+/ja/vs.md
+  ! Link
+  Link: <https://specscore.md/ja/vs/>; rel="canonical"
+
+/zh-cn/
+  Link: </zh-cn/index.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/index.md
+  ! Link
+  Link: <https://specscore.md/zh-cn/>; rel="canonical"
+
+/zh-cn/spec-driven-development/
+  Link: </zh-cn/spec-driven-development.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/spec-driven-development.md
+  ! Link
+  Link: <https://specscore.md/zh-cn/spec-driven-development/>; rel="canonical"
+
+/zh-cn/cli/install/
+  Link: </zh-cn/cli/install.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/cli/install.md
+  ! Link
+  Link: <https://specscore.md/zh-cn/cli/install/>; rel="canonical"
+
+/zh-cn/vs/
+  Link: </zh-cn/vs.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/vs.md
+  ! Link
+  Link: <https://specscore.md/zh-cn/vs/>; rel="canonical"
+
+/zh-tw/
+  Link: </zh-tw/index.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/index.md
+  ! Link
+  Link: <https://specscore.md/zh-tw/>; rel="canonical"
+
+/zh-tw/spec-driven-development/
+  Link: </zh-tw/spec-driven-development.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/spec-driven-development.md
+  ! Link
+  Link: <https://specscore.md/zh-tw/spec-driven-development/>; rel="canonical"
+
+/zh-tw/cli/install/
+  Link: </zh-tw/cli/install.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/cli/install.md
+  ! Link
+  Link: <https://specscore.md/zh-tw/cli/install/>; rel="canonical"
+
+/zh-tw/vs/
+  Link: </zh-tw/vs.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/vs.md
+  ! Link
+  Link: <https://specscore.md/zh-tw/vs/>; rel="canonical"
+
+/ko/
+  Link: </ko/index.md>; rel="alternate"; type="text/markdown"
+
+/ko/index.md
+  ! Link
+  Link: <https://specscore.md/ko/>; rel="canonical"
+
+/ko/spec-driven-development/
+  Link: </ko/spec-driven-development.md>; rel="alternate"; type="text/markdown"
+
+/ko/spec-driven-development.md
+  ! Link
+  Link: <https://specscore.md/ko/spec-driven-development/>; rel="canonical"
+
+/ko/cli/install/
+  Link: </ko/cli/install.md>; rel="alternate"; type="text/markdown"
+
+/ko/cli/install.md
+  ! Link
+  Link: <https://specscore.md/ko/cli/install/>; rel="canonical"
+
+/ko/vs/
+  Link: </ko/vs.md>; rel="alternate"; type="text/markdown"
+
+/ko/vs.md
+  ! Link
+  Link: <https://specscore.md/ko/vs/>; rel="canonical"
+
+/what-specscore-is.md
+  ! Link
+  Link: <https://specscore.md/#what-is-title>; rel="canonical"

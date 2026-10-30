@@ -5,6 +5,7 @@
 // implementation in the "in practice" section + FAQ only.
 // Design: docs/superpowers/specs/2026-05-29-spec-driven-development-pillar-page-design.md
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { CONTENT_UPDATED, updatedSentence } from '../../../content/updated.ts';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooterZhCn from '../../../components/SiteFooterZhCn.astro';
 
@@ -12,13 +13,13 @@ const ld = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'Article',
+      '@type': 'TechArticle',
       headline: '面向 AI 编码代理的规范驱动开发',
       description:
         '什么是规范驱动开发，为什么它对 AI 编码代理很重要，工作流如何运作，以及它与 TDD 和仅靠提示词的编码相比有何不同。',
       inLanguage: 'zh-CN',
       datePublished: '2026-05-29',
-      dateModified: '2026-05-29',
+      dateModified: '2026-10-30',
       mainEntityOfPage: 'https://specscore.md/zh-cn/spec-driven-development/',
       image: 'https://specscore.md/hero-og.jpg',
       author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
@@ -69,6 +70,33 @@ const ld = {
               '当规范可被机器读取时，代理会向它查询与当前任务相关的需求和验收标准，而不是加载整个代码库，然后对照这些标准检查自己的输出——这是对看似合理却错误的代码的一道防护。',
           },
         },
+        {
+          '@type': 'Question',
+          name: "SpecScore 是什么？",
+          acceptedAnswer: { '@type': 'Answer', text: "SpecScore 是一种用 Markdown 和 YAML 写成的、开放且可 lint 的规格文件格式，并带有查询、编辑和 lint 这些文件的命令行界面（CLI）。格式在公开仓库 specscore/specscore (https://github.com/specscore/specscore)。" },
+        },
+        {
+          '@type': 'Question',
+          name: "SpecScore 使用什么许可？",
+          acceptedAnswer: { '@type': 'Answer', text: "公开仓库 specscore/specscore (https://github.com/specscore/specscore) 中的规范与文档是 CC BY 4.0 (https://github.com/specscore/specscore/blob/main/LICENSE)。specscore/specscore-cli (https://github.com/specscore/specscore-cli) 中的参考命令行界面（CLI）是 Apache-2.0 (https://github.com/specscore/specscore-cli/blob/main/LICENSE)。" },
+        },
+        {
+          '@type': 'Question',
+          name: "规格驱动开发是否绑定一家 AI 供应商？",
+          acceptedAnswer: { '@type': 'Answer', text: "不绑定。规格是仓库里的纯文本文件。CLI 是本机程序。本站的 AI Skills 为能运行技能的代理包装这个 CLI。格式本身不要求单一供应商。" },
+        },
+        {
+          '@type': 'Question',
+          name: "如何安装 CLI？",
+          acceptedAnswer: { '@type': 'Answer', text: "按 /zh-cn/cli/install/ (/zh-cn/cli/install/) 安装，或从 AI Skills (/zh-cn/ai/) 开始。CLI 程序发布在 specscore/specscore-cli (https://github.com/specscore/specscore-cli)。" },
+        },
+      ],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'SpecScore.md', item: 'https://specscore.md/zh-cn/' },
+        { '@type': 'ListItem', position: 2, name: "面向 AI 编码代理的规范驱动开发", item: 'https://specscore.md/zh-cn/spec-driven-development/' },
       ],
     },
   ],
@@ -80,6 +108,7 @@ const ld = {
   title="面向 AI 代理的规范驱动开发 — 完整指南 | SpecScore"
   description="规范驱动开发意味着在写代码之前先写一份可测试的规范，让 AI 编码代理构建正确的东西。它是什么、如何运作，以及它与 TDD 和仅靠提示词的编码相比有何不同。"
   canonical="https://specscore.md/zh-cn/spec-driven-development/"
+  markdownHref="/zh-cn/spec-driven-development.md"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
@@ -93,7 +122,7 @@ const ld = {
       <div class="sdd-hero__inner">
         <h1 id="sdd-title" class="sdd-hero__headline">面向 AI 编码代理的规范驱动开发</h1>
         <p class="sdd-hero__lede">
-          <strong>规范驱动开发（SDD）是一种实践，其中一份书面、可测试的规范——需求与验收标准——
+          SpecScore 是一种用于规格说明的开放、可 lint 的文件格式，用 Markdown 和 YAML（YAML Ain't Markup Language）写成，并由命令行界面（CLI）检查这些文件。          <strong>规范驱动开发（SDD）是一种实践，其中一份书面、可测试的规范——需求与验收标准——
           是构建代码并据以验证代码的唯一可信来源。</strong> 与其直接从提示词或工单走向代码，
           你先就软件必须做什么达成一致，然后按照这份规范来构建。如今 AI 代理已经在编写大量代码，
           规范正是让它们持续构建正确东西的东西。
@@ -104,7 +133,7 @@ const ld = {
           <li>AI 代理向规范查询意图，而不是从代码中猜测——更少的错误构建。</li>
           <li>它与测试驱动开发互补，而非取而代之。</li>
         </ul>
-        <p class="sdd-updated">最后更新：2026年5月</p>
+        <p class="sdd-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence['zh-cn']}</time></p>
       </div>
     </section>
 
@@ -238,7 +267,7 @@ const ld = {
           <strong>SpecScore</strong> 正是这样的一种实现。它是一种面向特性、需求和验收标准的开放
           Markdown + YAML 格式——你仓库中的纯文件——并配有一个 CLI，供你的代理调用以查询、
           编辑和 lint 它们。由于结构是机器可读的，代理可以问“我接下来该构建什么？”，
-          得到未完成的需求及其验收标准，然后对照它们检查自己的工作。它与工具无关，且开源。
+          得到未完成的需求及其验收标准，然后对照它们检查自己的工作。它与工具无关，且<a href="https://github.com/specscore/specscore">开源</a>。
         </p>
         <p>
           从 <a href="/zh-cn/ai/">面向你的编码代理的 AI 技能</a>开始，或
@@ -266,6 +295,25 @@ const ld = {
         <div class="sdd-faq__item">
           <p class="sdd-faq__q">AI 编码代理如何使用规范？</p>
           <p class="sdd-faq__a">当规范可被机器读取时，代理会向它查询与当前任务相关的需求和验收标准，而不是加载整个代码库，然后对照这些标准检查自己的输出——这是对看似合理却错误的代码的一道防护。</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">SpecScore 是什么？</p>
+          <p class="sdd-faq__a">SpecScore 是一种用 Markdown 和 YAML 写成的、开放且可 lint 的规格文件格式，并带有查询、编辑和 lint 这些文件的命令行界面（CLI）。格式在公开仓库 <a href="https://github.com/specscore/specscore">specscore/specscore</a>。</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">SpecScore 使用什么许可？</p>
+          <p class="sdd-faq__a">公开仓库 <a href="https://github.com/specscore/specscore">specscore/specscore</a> 中的规范与文档是 <a href="https://github.com/specscore/specscore/blob/main/LICENSE">CC BY 4.0</a>。<a href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a> 中的参考命令行界面（CLI）是 <a href="https://github.com/specscore/specscore-cli/blob/main/LICENSE">Apache-2.0</a>。</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">规格驱动开发是否绑定一家 AI 供应商？</p>
+          <p class="sdd-faq__a">不绑定。规格是仓库里的纯文本文件。CLI 是本机程序。本站的 AI Skills 为能运行技能的代理包装这个 CLI。格式本身不要求单一供应商。</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">如何安装 CLI？</p>
+          <p class="sdd-faq__a">按 <a href="/zh-cn/cli/install/">/zh-cn/cli/install/</a> 安装，或从 <a href="/zh-cn/ai/">AI Skills</a> 开始。CLI 程序发布在 <a href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a>。</p>
         </div>
       </div>
     </section>

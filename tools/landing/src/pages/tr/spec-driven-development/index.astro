@@ -1,6 +1,7 @@
 ---
 // /tr/spec-driven-development/ — pillar page (Turkish).
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { CONTENT_UPDATED, updatedSentence } from '../../../content/updated.ts';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooterTr from '../../../components/SiteFooterTr.astro';
 
@@ -8,13 +9,13 @@ const ld = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'Article',
+      '@type': 'TechArticle',
       headline: 'Yapay Zeka Ajanları İçin Spesifikasyon Odaklı Geliştirme',
       description:
         'Spesifikasyon odaklı geliştirme nedir, yapay zeka ajanları için neden önemlidir, iş akışı nasıl çalışır ve TDD ile salt prompt programlamaya göre nasıl karşılaştırılır.',
       inLanguage: 'tr',
       datePublished: '2026-05-29',
-      dateModified: '2026-05-29',
+      dateModified: '2026-10-30',
       mainEntityOfPage: 'https://specscore.md/tr/spec-driven-development/',
       image: 'https://specscore.md/hero-og.jpg',
       author: { '@type': 'Organization', name: 'SpecScore', url: 'https://specscore.md/' },
@@ -65,6 +66,33 @@ const ld = {
               'Spesifikasyon makine tarafından okunabilir olduğunda ajan, tüm kod tabanını yüklemek yerine mevcut göreviyle ilgili gereksinimleri ve kabul kriterlerini almak için spesifikasyonu sorgular ve ardından çıktısını bu kriterlerle karşılaştırır — bu, makul görünen ancak hatalı koda karşı bir önlemdir.',
           },
         },
+        {
+          '@type': 'Question',
+          name: "SpecScore nedir?",
+          acceptedAnswer: { '@type': 'Answer', text: "SpecScore, Markdown ve YAML ile yazılmış, açık ve linter ile denetlenebilir bir spesifikasyon dosya formatıdır; bir komut satırı arayüzü (CLI) bu dosyaları sorgular, düzenler ve lint eder. Format herkese açık specscore/specscore (https://github.com/specscore/specscore) deposundadır." },
+        },
+        {
+          '@type': 'Question',
+          name: "SpecScore hangi lisansla yayımlanır?",
+          acceptedAnswer: { '@type': 'Answer', text: "Herkese açık specscore/specscore (https://github.com/specscore/specscore) deposundaki belirtim ve belgeler CC BY 4.0 (https://github.com/specscore/specscore/blob/main/LICENSE) lisanslıdır. specscore/specscore-cli (https://github.com/specscore/specscore-cli) deposundaki referans komut satırı arayüzü (CLI) Apache-2.0 (https://github.com/specscore/specscore-cli/blob/main/LICENSE) lisanslıdır." },
+        },
+        {
+          '@type': 'Question',
+          name: "Spesifikasyon güdümlü geliştirme tek bir yapay zekâ satıcısı ister mi?",
+          acceptedAnswer: { '@type': 'Answer', text: "Hayır. Spesifikasyonlar depodaki düz metin dosyalarıdır. CLI yerel bir programdır. Bu sitedeki AI Skills, skill çalıştırabilen ajanlar için o CLI'yi sarar. Format tek bir satıcı gerektirmez." },
+        },
+        {
+          '@type': 'Question',
+          name: "CLI'yi nasıl kurarım?",
+          acceptedAnswer: { '@type': 'Answer', text: "Kurulum: /tr/cli/install/ (/tr/cli/install/). AI Skills (/tr/ai/) ile de başlayabilirsiniz. CLI programı specscore/specscore-cli (https://github.com/specscore/specscore-cli) deposundan yayımlanır." },
+        },
+      ],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'SpecScore.md', item: 'https://specscore.md/tr/' },
+        { '@type': 'ListItem', position: 2, name: "Yapay Zeka Ajanları İçin Spesifikasyon Odaklı Geliştirme", item: 'https://specscore.md/tr/spec-driven-development/' },
       ],
     },
   ],
@@ -76,6 +104,7 @@ const ld = {
   title="Yapay Zeka Ajanları İçin Spesifikasyon Odaklı Geliştirme — Kapsamlı Kılavuz | SpecScore"
   description="Spesifikasyon odaklı geliştirme, yapay zeka ajanlarının doğru olanı inşa etmesi için koddan önce test edilebilir bir spesifikasyon yazmak anlamına gelir. Nedir, nasıl çalışır ve TDD ile salt prompt kodlamaya kıyasla nasıldır."
   canonical="https://specscore.md/tr/spec-driven-development/"
+  markdownHref="/tr/spec-driven-development.md"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
@@ -89,7 +118,7 @@ const ld = {
       <div class="sdd-hero__inner">
         <h1 id="sdd-title" class="sdd-hero__headline">Yapay Zeka Ajanları İçin Spesifikasyon Odaklı Geliştirme</h1>
         <p class="sdd-hero__lede">
-          <strong>Spesifikasyon odaklı geliştirme (SDD), yazılı ve test edilebilir bir spesifikasyonun
+          SpecScore, spesifikasyonlar için Markdown ve YAML (YAML Ain't Markup Language) ile yazılmış açık ve linter ile denetlenebilir bir dosya formatıdır; bir komut satırı arayüzü (CLI) bu dosyaları denetler.           <strong>Spesifikasyon odaklı geliştirme (SDD), yazılı ve test edilebilir bir spesifikasyonun
           — gereksinimler ve kabul kriterleri — kodun inşa edildiği ve doğrulandığı tek doğruluk
           kaynağı (source of truth) olduğu bir uygulamadır.</strong> Doğrudan bir prompttan veya biletten
           koda geçmek yerine, önce yazılımın ne yapması gerektiği konusunda anlaşırsınız ve ardından bu
@@ -102,7 +131,7 @@ const ld = {
           <li>Yapay zeka ajanları amacı koddan tahmin etmek yerine spesifikasyondan sorgular — daha az hatalı inşa.</li>
           <li>Test odaklı geliştirmenin (TDD) alternatifi değil, tamamlayıcısıdır.</li>
         </ul>
-        <p class="sdd-updated">Son güncelleme: Mayıs 2026</p>
+        <p class="sdd-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence.tr}</time></p>
       </div>
     </section>
 
@@ -248,7 +277,7 @@ const ld = {
           ajanlarınızın bunları sorgulamak, düzenlemek ve lint etmek için çağırdığı bir CLI ile
           eşleştirilmiştir. Yapı makine tarafından okunabilir olduğu için bir ajan «sırada ne inşa
           etmeliyim?» diye sorabilir, açık gereksinimleri ve kabul kriterlerini alabilir ve ardından
-          çalışmasını bunlarla karşılaştırabilir. Araçlardan bağımsızdır ve açık kaynaklıdır.
+          çalışmasını bunlarla karşılaştırabilir. Araçlardan bağımsızdır ve <a href="https://github.com/specscore/specscore">açık kaynaklıdır</a>.
         </p>
         <p>
           <a href="/tr/ai/">Kodlama ajanınız için Yapay Zeka Becerileri</a> ile başlayın veya
@@ -276,6 +305,25 @@ const ld = {
         <div class="sdd-faq__item">
           <p class="sdd-faq__q">Yapay zeka kodlama ajanları bir spesifikasyonu nasıl kullanır?</p>
           <p class="sdd-faq__a">Spesifikasyon makine tarafından okunabilir olduğunda ajan, tüm kod tabanını yüklemek yerine mevcut göreviyle ilgili gereksinimleri ve kabul kriterlerini almak için spesifikasyonu sorgular ve ardından çıktısını bu kriterlerle karşılaştırır — bu, makul görünen ancak hatalı koda karşı bir önlemdir.</p>
+        </div>
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">SpecScore nedir?</p>
+          <p class="sdd-faq__a">SpecScore, Markdown ve YAML ile yazılmış, açık ve linter ile denetlenebilir bir spesifikasyon dosya formatıdır; bir komut satırı arayüzü (CLI) bu dosyaları sorgular, düzenler ve lint eder. Format herkese açık <a href="https://github.com/specscore/specscore">specscore/specscore</a> deposundadır.</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">SpecScore hangi lisansla yayımlanır?</p>
+          <p class="sdd-faq__a">Herkese açık <a href="https://github.com/specscore/specscore">specscore/specscore</a> deposundaki belirtim ve belgeler <a href="https://github.com/specscore/specscore/blob/main/LICENSE">CC BY 4.0</a> lisanslıdır. <a href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a> deposundaki referans komut satırı arayüzü (CLI) <a href="https://github.com/specscore/specscore-cli/blob/main/LICENSE">Apache-2.0</a> lisanslıdır.</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">Spesifikasyon güdümlü geliştirme tek bir yapay zekâ satıcısı ister mi?</p>
+          <p class="sdd-faq__a">Hayır. Spesifikasyonlar depodaki düz metin dosyalarıdır. CLI yerel bir programdır. Bu sitedeki AI Skills, skill çalıştırabilen ajanlar için o CLI'yi sarar. Format tek bir satıcı gerektirmez.</p>
+        </div>
+
+        <div class="sdd-faq__item">
+          <p class="sdd-faq__q">CLI'yi nasıl kurarım?</p>
+          <p class="sdd-faq__a">Kurulum: <a href="/tr/cli/install/">/tr/cli/install/</a>. <a href="/tr/ai/">AI Skills</a> ile de başlayabilirsiniz. CLI programı <a href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a> deposundan yayımlanır.</p>
         </div>
       </div>
     </section>

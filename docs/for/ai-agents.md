@@ -16,7 +16,7 @@ Internal links inside the Markdown versions point to `.md` siblings, so Markdown
 Two site-level files help you load the SpecScore corpus in one fetch:
 
 - [`/llms.txt`](https://specscore.md/llms.txt) — curated index of the most important pages, following the [llmstxt.org](https://llmstxt.org/) convention. Small enough to fit in any context window.
-- [`/llms-full.txt`](https://specscore.md/llms-full.txt) — the concatenated source Markdown of every specification plus install and demo guides. Use this to bootstrap an agent's SpecScore knowledge in a single request.
+- [`/llms-full.txt`](https://specscore.md/llms-full.txt) — concatenated Markdown for the English homepage, the spec-driven development guide, comparisons, getting started, and every specification. Use this to bootstrap an agent's SpecScore knowledge in a single request.
 
 ## Discovery signals
 

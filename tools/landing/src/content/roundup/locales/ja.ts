@@ -10,6 +10,7 @@ export const page: RoundupPage = {
     '仕様駆動開発ツールの比較です。GitHub Spec Kit、OpenSpec、Kiroに、Tessl、BMAD Method、Task Master AI、CodeSpeak、Datarim、プレーンな Markdown、SpecScore を並べます。',
   h1: '2026年のおすすめ仕様駆動開発ツール',
   hero: [
+    'SpecScoreは、仕様のためのオープンでリント可能なファイル形式で、MarkdownとYAML（YAML Ain\'t Markup Language）で書かれています。',
     t('仕様駆動開発', href.sdd),
     '（SDD）とは、書かれた仕様を正本とし、コードをその仕様に沿って作り、その仕様に照らして確かめるやり方です。仕様駆動開発ツールとは、その仕様を書き、保存し、ときには検査するために使うフォーマット、ワークフロー、製品です。プロダクト要求文書（PRD）とは、誰かがそれをタスクに分ける前に、課題と範囲を散文で述べる文書です。',
     t('要件構文への平易なアプローチ', href.kiroSpecs, 'them'),
