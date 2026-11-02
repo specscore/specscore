@@ -164,6 +164,9 @@ export const kiro: ComparePage = {
       title: 'EARS와 Given/When/Then은 다른 질문에 답한다',
       body: [
         'Kiro가 문서화한 EARS는 시스템 동작을 한 문장으로 적은 것입니다. SpecScore 인수 기준은 요구사항 ID에 묶인 Given/When/Then 시나리오입니다. 산문 안에 EARS 한 줄을 쓰고, 린터가 검사하는 SpecScore 파일에는 시나리오를 남겨 둘 수 있습니다.',
+        ' 문장 패턴은 ',
+        { a: 'EARS 요구사항 구문', href: '/articles/ears-requirements/' },
+        '.',
       ],
     },
   ],

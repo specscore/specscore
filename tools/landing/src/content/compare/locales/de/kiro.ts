@@ -164,6 +164,9 @@ export const kiro: ComparePage = {
       title: 'EARS und Gegeben/Wenn/Dann beantworten verschiedene Fragen',
       body: [
         'EARS ist, so wie Kiro es dokumentiert, ein Satz zum Systemverhalten. Die Akzeptanzkriterien von SpecScore sind Gegeben/Wenn/Dann-Szenarien, gebunden an eine Anforderungs-ID. Sie können eine EARS-Zeile in der Prosa schreiben und das Szenario dennoch in der SpecScore-Datei behalten, die der Linter prüft.',
+        ' Die Satzmuster stehen in ',
+        { a: 'der EARS-Anforderungssyntax', href: '/articles/ears-requirements/' },
+        '.',
       ],
     },
   ],

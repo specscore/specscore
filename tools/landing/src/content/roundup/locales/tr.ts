@@ -219,6 +219,8 @@ export const page: RoundupPage = {
           t('Kiro lisansı', href.kiroLicense, 'them'),
           ', IDE ile CLI’nın AWS Content olarak, AWS Customer Agreement veya başka bir yazılı anlaşma ve AWS Intellectual Property License kapsamında lisanslandığını söyler. Kiro, bu üç dosyanın taslağını o ürüne yazdırmak isteyen birine uyar. Bkz. ',
           t('SpecScore vs Kiro', '/vs/kiro/'),
+          '. Cümle kalıpları şurada: ',
+          { a: 'EARS gereksinim sözdizimi', href: '/articles/ears-requirements/' },
           '.',
         ],
       ],

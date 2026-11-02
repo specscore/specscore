@@ -14,9 +14,10 @@ const { parts } = Astro.props;
     if ('c' in part) return <code>{part.c}</code>;
     if ('s' in part) return <strong>{part.s}</strong>;
     if ('e' in part) return <em>{part.e}</em>;
-    const external = part.kind === 'us' || part.kind === 'them';
+    const http = part.href.startsWith('http');
+    const external = part.kind === 'us' || part.kind === 'them' || http;
     const rel =
-      part.kind === 'them' ? 'nofollow noopener' : part.kind === 'us' ? undefined : undefined;
+      part.kind === 'them' ? 'nofollow noopener' : part.kind === 'us' ? undefined : http ? 'noopener' : undefined;
     return (
       <a
         href={part.href}

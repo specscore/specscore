@@ -162,6 +162,9 @@ export const kiro: ComparePage = {
       title: 'EARS i Given/When/Then odpowiadają na różne pytania',
       body: [
         'EARS, tak jak dokumentuje to Kiro, to jedno zdanie o zachowaniu systemu. Kryteria akceptacji SpecScore to scenariusze Given/When/Then powiązane z identyfikatorem wymagania. Linię EARS można zapisać w prozie i nadal trzymać scenariusz w pliku SpecScore, który sprawdza linter.',
+        ' Wzorce zdań są w ',
+        { a: 'składni wymagań EARS', href: '/articles/ears-requirements/' },
+        '.',
       ],
     },
   ],
