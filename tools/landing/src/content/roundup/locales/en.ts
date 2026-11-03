@@ -10,6 +10,7 @@ export const page: RoundupPage = {
     'Spec-driven development tools comparison: GitHub Spec Kit vs OpenSpec vs Kiro, plus Tessl, BMAD Method, Task Master AI, CodeSpeak, Datarim, plain Markdown, and SpecScore.',
   h1: 'Best spec-driven development tools in 2026',
   hero: [
+    'SpecScore is an open, lintable file format for specifications, written in Markdown and YAML (YAML Ain\'t Markup Language). ',
     t('Spec-driven development', href.sdd),
     ' (SDD) is a practice where a written specification is the source of truth that code is built against and checked against. Spec-driven development tools are the formats, workflows, and products used to write, store, and sometimes check those specifications. A product requirements document (PRD) is prose that states the problem and the scope before anyone splits it into tasks. ',
     t('Easy Approach to Requirements Syntax', href.kiroSpecs, 'them'),

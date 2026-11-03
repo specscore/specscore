@@ -31,12 +31,45 @@ describe('injectHtml', () => {
 </body></html>`;
     const data = graph(html);
     const app = data['@graph'].find((node) => node['@type'] === 'SoftwareApplication');
+    const org = data['@graph'].find((node) => node['@type'] === 'Organization');
+    const code = data['@graph'].find((node) => node['@type'] === 'SoftwareSourceCode');
+    assert.equal(org.name, 'SpecScore');
+    assert.equal(org.url, 'https://specscore.md/');
+    assert.equal(org.logo, undefined);
+    assert.deepEqual(org.sameAs, ['https://github.com/specscore', 'https://github.com/specscore/specscore']);
     assert.equal(app.name, 'SpecScore');
     assert.equal(app.description, 'SpecScore is an open, lintable file format for specifications — like jq for JSON.');
-    assert.deepEqual(app.sameAs, ['https://github.com/specscore/specscore']);
+    assert.deepEqual(app.sameAs, org.sameAs);
+    assert.equal(code.codeRepository, 'https://github.com/specscore/specscore');
+    assert.equal(code.license, 'https://github.com/specscore/specscore/blob/main/LICENSE');
     assert.ok(!data['@graph'].some((node) => node['@type'] === 'BreadcrumbList'));
     assert.equal(app.offers, undefined);
     assert.equal(app.aggregateRating, undefined);
+    JSON.parse(JSON.stringify(data));
+  });
+
+  it('adds a logo and the CLI repository only when the page links to them', () => {
+    const html = `<!doctype html>
+<html lang="en"><head>
+<link rel="canonical" href="https://specscore.md/">
+<link rel="icon" href="/favicon.svg">
+</head><body>
+<h1 class="hero__headline">SpecScore</h1>
+<p class="hero__sub">SpecScore is a Markdown format. Go CLI.</p>
+<a href="https://github.com/specscore/specscore">repo</a>
+<a href="https://github.com/specscore/specscore-cli">cli</a>
+<summary class="faq-teaser__q">What licence is SpecScore under?</summary>
+<div class="faq-teaser__a"><p>CC BY 4.0.</p><a class="faq-teaser__more" href="/faq/#licence">Full answer</a></div>
+</body></html>`;
+    const data = graph(html);
+    const org = data['@graph'].find((node) => node['@type'] === 'Organization');
+    assert.equal(org.logo.url, 'https://specscore.md/favicon.svg');
+    const codes = data['@graph'].filter((node) => node['@type'] === 'SoftwareSourceCode');
+    assert.equal(codes[0].programmingLanguage, 'Markdown');
+    assert.equal(codes[1].name, 'specscore CLI');
+    assert.equal(codes[1].programmingLanguage, 'Go');
+    const faq = data['@graph'].find((node) => node['@type'] === 'FAQPage');
+    assert.equal(faq.mainEntity[0].acceptedAnswer.text, 'CC BY 4.0.');
   });
 
   it('builds FAQPage answers from the visible questions', () => {
@@ -85,9 +118,12 @@ describe('injectHtml', () => {
 <p class="hero__breadcrumb"><a href="/spec-driven-development/">Spec-driven development</a></p>
 <h1 class="hero__headline">Best spec-driven development tools in 2026</h1>
 <p class="hero__sub">Spec-driven development (SDD) is a practice.</p>
+<time datetime="2026-10-30">30 October 2026</time>
 </body></html>`;
     const data = graph(html);
-    const article = data['@graph'].find((node) => node['@type'] === 'Article');
+    const article = data['@graph'].find((node) => node['@type'] === 'TechArticle');
+    assert.equal(article.datePublished, '2026-10-30');
+    assert.equal(article.dateModified, '2026-10-30');
     assert.equal(article.headline, 'Best spec-driven development tools in 2026');
     assert.equal(article.url, 'https://specscore.md/spec-driven-development/tools/');
     const names = data['@graph'].find((node) => node['@type'] === 'BreadcrumbList')

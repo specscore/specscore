@@ -11,6 +11,7 @@ export const page: RoundupPage = {
     'Werkzeuge für spezifikationsgetriebene Entwicklung im Vergleich: GitHub Spec Kit vs OpenSpec vs Kiro, dazu Tessl, BMAD Method, Task Master AI, CodeSpeak, Datarim, reines Markdown und SpecScore.',
   h1: 'Beste Werkzeuge für spezifikationsgetriebene Entwicklung 2026',
   hero: [
+    'SpecScore ist ein offenes, lintbares Dateiformat für Spezifikationen, geschrieben in Markdown und YAML (YAML Ain\'t Markup Language). ',
     t('Spezifikationsgetriebene Entwicklung', href.sdd),
     ' (SDD) ist eine Praxis, bei der eine schriftliche Spezifikation die Quelle der Wahrheit ist, gegen die Code gebaut und geprüft wird. Werkzeuge für spezifikationsgetriebene Entwicklung sind die Formate, Workflows und Produkte, mit denen diese Spezifikationen geschrieben, gespeichert und manchmal geprüft werden. Ein Produktanforderungsdokument (PRD) ist Fließtext, der das Problem und den Umfang nennt, bevor jemand ihn in Aufgaben aufteilt. ',
     t('Einfacher Ansatz zur Syntax von Anforderungen', href.kiroSpecs, 'them'),

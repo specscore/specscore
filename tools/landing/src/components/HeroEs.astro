@@ -5,6 +5,7 @@
 import { Image } from 'astro:assets';
 import heroImage from '../assets/hero.webp';
 import HeroGitHubLink from './HeroGitHubLink.astro';
+import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
 ---
 
 <section class="hero" aria-labelledby="hero-title">
@@ -13,14 +14,16 @@ import HeroGitHubLink from './HeroGitHubLink.astro';
       <h1 id="hero-title" class="hero__headline">
         Cada ambigüedad en tu especificación<br />es un token que tu agente quema.
       </h1>
+      
+      
+      
+      <p class="hero__sub">
+        SpecScore es un formato de archivo abierto y lintable para especificaciones, escrito en Markdown y YAML (YAML Ain't Markup Language) — como JSON (JavaScript Object Notation) para los datos — con una interfaz de línea de comandos (CLI) que tus agentes invocan para consultarlas y editarlas, como <code>jq</code> para JSON.
+      </p>
+      <p class="page-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence.es}</time></p>
       <p class="hero__stakes">
         Luego una pregunta a mitad del desarrollo. Luego una corrección
         tras el despliegue. Luego el contexto que explicas una y otra vez.
-      </p>
-      <p class="hero__sub">
-        SpecScore es un formato de archivo abierto y lintable para
-        especificaciones — como JSON para los datos. Con una CLI que tus
-        agentes invocan para consultarlas y editarlas — como <code>jq</code> para JSON.
       </p>
       <HeroGitHubLink repo="specscore/specscore" label="Código abierto en GitHub" />
       <div class="hero__cta">

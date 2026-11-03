@@ -11,6 +11,7 @@ export const page: RoundupPage = {
     'Comparaison d’outils de développement piloté par les spécifications : GitHub Spec Kit vs OpenSpec vs Kiro, plus Tessl, BMAD Method, Task Master AI, CodeSpeak, Datarim, le Markdown simple et SpecScore.',
   h1: 'Meilleurs outils de développement piloté par les spécifications en 2026',
   hero: [
+    'SpecScore est un format de fichier ouvert et vérifiable par un linter pour les spécifications, écrit en Markdown et YAML (YAML Ain\'t Markup Language). ',
     t('Le développement piloté par les spécifications', href.sdd),
     ' (SDD) est une pratique dans laquelle une spécification écrite est la source de vérité par rapport à laquelle le code est construit et vérifié. Les outils de développement piloté par les spécifications sont les formats, les workflows et les produits utilisés pour écrire, conserver et parfois vérifier ces spécifications. Un document d’exigences produit (PRD) est une prose qui énonce le problème et le périmètre avant que quiconque ne le découpe en tâches. L’',
     t('approche simple de la syntaxe des exigences', href.kiroSpecs, 'them'),

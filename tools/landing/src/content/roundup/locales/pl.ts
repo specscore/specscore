@@ -11,6 +11,7 @@ export const page: RoundupPage = {
     'Zestawienie narzędzi rozwoju sterowanego specyfikacją w 2026: GitHub Spec Kit, OpenSpec i Kiro, a także Tessl, BMAD Method, Task Master AI, CodeSpeak, Datarim, zwykły Markdown i SpecScore.',
   h1: 'Najlepsze narzędzia rozwoju sterowanego specyfikacją w 2026',
   hero: [
+    'SpecScore to otwarty, sprawdzany linterem format plików dla specyfikacji, zapisany w Markdown i YAML (YAML Ain\'t Markup Language). ',
     t('Rozwój sterowany specyfikacją', href.sdd),
     ' (SDD) to praktyka, w której spisana specyfikacja jest źródłem prawdy, według którego buduje się kod i względem którego się go sprawdza. Narzędzia rozwoju sterowanego specyfikacją to formaty, przepływy pracy i produkty używane do pisania, przechowywania i czasem sprawdzania tych specyfikacji. Dokument wymagań produktu (PRD) to proza, która określa problem i zakres, zanim ktokolwiek podzieli ją na zadania. ',
     t('Łatwe podejście do składni wymagań', href.kiroSpecs, 'them'),

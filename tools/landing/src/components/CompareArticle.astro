@@ -21,6 +21,7 @@ import ComparisonFeedback from './ComparisonFeedback.astro';
 import MoreComparisons from './MoreComparisons.astro';
 import Inlines from './Inlines.astro';
 import { localeFromPath, localeHref, type LangCode } from '../lib/languages.ts';
+import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
 import { chrome } from '../content/compare/chrome.ts';
 import { compareMdHref } from '../content/compare/catalog.ts';
 import { pages } from '../content/compare/pages.ts';
@@ -64,6 +65,7 @@ const mdHref = compareMdHref(locale, page.slug);
         <p class="hero__breadcrumb"><a href={localeHref(locale, '/vs/')} class="xref">{ui.breadcrumb}</a></p>
         <h1 id="hero-title" class="hero__headline">{page.h1}</h1>
         <p class="hero__sub"><Inlines parts={page.hero} /></p>
+        <p class="page-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence[locale]}</time></p>
       </div>
     </section>
 

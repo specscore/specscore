@@ -5,6 +5,7 @@
 import { Image } from 'astro:assets';
 import heroImage from '../assets/hero.webp';
 import HeroGitHubLink from './HeroGitHubLink.astro';
+import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
 ---
 
 <section class="hero" aria-labelledby="hero-title">
@@ -13,14 +14,16 @@ import HeroGitHubLink from './HeroGitHubLink.astro';
       <h1 id="hero-title" class="hero__headline">
         Spesifikasyonunuzdaki her belirsizlik<br />ajanınızın yaktığı bir tokendir.
       </h1>
+      
+      
+      
+      <p class="hero__sub">
+        SpecScore, spesifikasyonlar için açık ve linter ile denetlenebilir bir dosya formatıdır; Markdown ve YAML (YAML Ain't Markup Language) ile yazılır — veriler için JSON (JavaScript Object Notation) neyse öyle — ve ajanlarınızın bunları sorgulamak ve düzenlemek için çağırdığı bir komut satırı arayüzü (CLI) ile birlikte gelir, JSON için <code>jq</code> gibi.
+      </p>
+      <p class="page-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence.tr}</time></p>
       <p class="hero__stakes">
         Ardından geliştirme ortasında gelen bir soru. Dağıtım sonrasında
         gereken bir düzeltme. Ve sürekli yeniden açıklamak zorunda kaldığınız bağlam.
-      </p>
-      <p class="hero__sub">
-        SpecScore, spesifikasyonlar için açık ve linter ile denetlenebilir bir
-        dosya formatıdır — veriler için JSON neyse öyle. Ajanlarınızın bunları
-        sorgulamak ve düzenlemek için çağırdığı bir CLI ile birlikte — JSON için <code>jq</code> gibi.
       </p>
       <HeroGitHubLink repo="specscore/specscore" label="GitHub'da açık kaynak" />
       <div class="hero__cta">

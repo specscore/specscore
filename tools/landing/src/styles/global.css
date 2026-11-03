@@ -632,6 +632,12 @@ pre.terminal.terminal--window::after,
 
 
 .sdd-updated { margin-top: var(--space-3); font-family: var(--font-code); font-size: 0.8rem; color: var(--pale-ink); }
+.page-updated {
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  color: var(--pale-ink);
+  margin: 0 0 var(--space-3);
+}
 
 /* --- Product film (FilmEmbed.astro, FilmSection*.astro) --- */
   .film { background: var(--cream); }

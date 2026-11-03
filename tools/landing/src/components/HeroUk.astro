@@ -5,6 +5,7 @@
 import { Image } from 'astro:assets';
 import heroImage from '../assets/hero.webp';
 import HeroGitHubLink from './HeroGitHubLink.astro';
+import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
 ---
 
 <section class="hero" aria-labelledby="hero-title">
@@ -13,14 +14,16 @@ import HeroGitHubLink from './HeroGitHubLink.astro';
       <h1 id="hero-title" class="hero__headline">
         Кожна неоднозначність у специфікації<br />це токен, який спалює ваш агент.
       </h1>
+      
+      
+      
+      <p class="hero__sub">
+        SpecScore — відкритий, лінтовний файловий формат для специфікацій, записаний у Markdown і YAML (YAML Ain't Markup Language), як JSON (JavaScript Object Notation) для даних, з інтерфейсом командного рядка (CLI), через який ваші агенти запитують і редагують їх — як <code>jq</code> для JSON.
+      </p>
+      <p class="page-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence.uk}</time></p>
       <p class="hero__stakes">
         Потім уточнювальне питання посеред розробки. Потім виправлення
         після релізу. Потім контекст, який ви пояснюєте знову і знову.
-      </p>
-      <p class="hero__sub">
-        SpecScore — відкритий, лінтовний файловий формат для специфікацій,
-        як JSON для даних. Із CLI, через який ваші агенти запитують і
-        редагують їх — як <code>jq</code> для JSON.
       </p>
       <HeroGitHubLink repo="specscore/specscore" label="Відкритий код на GitHub" />
       <div class="hero__cta">

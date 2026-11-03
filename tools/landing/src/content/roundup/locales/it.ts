@@ -11,6 +11,7 @@ export const page: RoundupPage = {
     'Confronto di strumenti di sviluppo guidato dalle specifiche: GitHub Spec Kit vs OpenSpec vs Kiro, più Tessl, BMAD Method, Task Master AI, CodeSpeak, Datarim, Markdown semplice e SpecScore.',
   h1: 'Migliori strumenti di sviluppo guidato dalle specifiche nel 2026',
   hero: [
+    'SpecScore è un formato di file aperto e verificabile con un linter per le specifiche, scritto in Markdown e YAML (YAML Ain\'t Markup Language). ',
     t('Lo sviluppo guidato dalle specifiche', href.sdd),
     ' (SDD) è una pratica in cui una specifica scritta è la fonte di verità rispetto alla quale il codice viene costruito e verificato. Gli strumenti di sviluppo guidato dalle specifiche sono i formati, i workflow e i prodotti usati per scrivere, conservare e a volte controllare quelle specifiche. Un documento dei requisiti di prodotto (PRD) è prosa che espone il problema e l’ambito prima che qualcuno lo divida in attività. L’',
     t('approccio semplice alla sintassi dei requisiti', href.kiroSpecs, 'them'),
