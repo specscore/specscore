@@ -18,7 +18,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/style.css">
   <link rel="canonical" href="{{canonical}}">
+  {{hreflangLinks}}
+  {{descriptionMeta}}
+  {{socialMeta}}
   {{alternateLink}}
+  {{jsonLd}}
 </head>
 <body>
   <header class="site-header">
@@ -28,7 +32,7 @@
       </button>
       <a href="/" class="wordmark"><span class="wordmark-clef">𝄞</span> SpecScore.md</a>
       <nav class="header-right" aria-label="Primary">
-        <a href="/docs">Specification</a>
+        <a href="/docs/">Specification</a>
         <a href="/cli/">CLI</a>
         <a href="/ai/">AI Skills</a>
         <a href="/faq/">FAQ</a>
@@ -51,12 +55,12 @@
           <div class="docs-footer__col docs-footer__brand">
             <a href="/" class="wordmark"><span class="wordmark-clef">𝄞</span> SpecScore.md</a>
             <p class="docs-footer__tagline">An open standard for specifications, requirements, and acceptance criteria.</p>
-            <p class="docs-footer__copyright">&copy; 2026 SpecScore contributors. MIT license.</p>
+            <p class="docs-footer__copyright">&copy; 2026 SpecScore contributors. Specification and docs: <a href="https://github.com/specscore/specscore/blob/main/LICENSE">CC BY 4.0</a>. CLI: <a href="https://github.com/specscore/specscore-cli/blob/main/LICENSE">Apache-2.0</a>.</p>
           </div>
           <div class="docs-footer__col">
             <h4 class="docs-footer__heading">Product</h4>
             <ul class="docs-footer__list">
-              <li><a href="/docs">Docs</a></li>
+              <li><a href="/docs/">Docs</a></li>
               <li><a href="/cli/">CLI</a></li>
               <li><a href="/cli/install/">Install</a></li>
             </ul>
@@ -160,5 +164,8 @@
     })();
   </script>
   {{mermaidScript}}
+  <div class="site-feedback"><button type="button" data-feedback-launcher aria-haspopup="dialog" hidden><svg class="feedback-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="18" fill="#d4ef83"/><path d="M18 46 46 18M20 18h26v26" fill="none" stroke="#202c2a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>Suggest an improvement</button></div>
+  <script id="site-feedback-widget" src="https://improveit.now/widget.js" data-space="ao58m" data-app="75251aa279608b533e93a785f5ae3aee" data-lang="en" data-color="#0d63e9" data-launcher="hidden" defer></script>
+  <script src="/assets/feedback.js" defer></script>
 </body>
 </html>

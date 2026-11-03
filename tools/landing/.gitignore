@@ -27,6 +27,7 @@ public/*
 !public/*.svg
 !public/*.jpg
 !public/*.png
+!public/*.txt
 !public/README.md
 # blog/ subdirectory — static image assets for blog posts
 !public/blog/
@@ -34,3 +35,7 @@ public/blog/*
 !public/blog/*.jpg
 !public/blog/*.png
 !public/blog/*.webp
+# film/ subdirectory — local posters for the click-to-load product films
+!public/film/
+public/film/*
+!public/film/*.webp

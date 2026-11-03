@@ -55,7 +55,7 @@ Support tickets show a 12% weekly rate of "lost my work" complaints traced to tr
 
 ## Creating an Idea — Three Paths
 
-All three paths produce the same artifact. Validation does not care how it was authored — only that `specscore lint` passes.
+All three paths produce the same artifact. Validation does not care how it was authored — only that `specscore spec lint` passes.
 
 ### 1. Manual
 

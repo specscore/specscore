@@ -41,14 +41,11 @@ import ScoreExample from '../../../components/ScoreExample.astro';
         <div
           class="hero__art"
           role="img"
-          aria-label="Вывод терминала: specscore lint на спецификации checkout проходит все 24 требования — структура, ссылки и ID корректны, нет расхождения индексов и битых ссылок. 0 проблем, exit 0."
+          aria-label="Вывод терминала: specscore spec lint на дереве спецификаций без проблем. 0 violations found, код выхода 0."
         >
-<pre class="terminal terminal--window"><span class="prompt">$</span> specscore lint checkout/
-
-  <span class="mark-pass">✓</span> 24 requirements — structure, references, IDs valid
-  <span class="mark-pass">✓</span> no index drift · no broken links · no slug collisions
-
-  <span class="dim">0 problems   exit 0</span></pre>
+<pre class="terminal terminal--window"><span class="prompt">$</span> specscore spec lint
+0 violations found
+<span class="dim"># exit code 0</span></pre>
         </div>
       </div>
     </section>
@@ -90,7 +87,7 @@ import ScoreExample from '../../../components/ScoreExample.astro';
             <div
               class="checks-terminal"
               role="img"
-              aria-label="Вывод specscore lint: у R1 и R2 есть критерии приёмки; у R3 их нет, ссылка Related Feature не разрешается, отсутствует обязательная секция Open Questions. 3 проблемы, exit 1."
+              aria-label="Вывод specscore spec lint: три ошибки. В фиче apply-discount нет секции Open Questions, дочерняя директория не указана в индексе, а в ней нет README.md. 3 violations found, код выхода 1."
             >
               <LintExample />
             </div>

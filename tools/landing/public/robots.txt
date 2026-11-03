@@ -1,0 +1,5 @@
+# https://specscore.md/robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://specscore.md/sitemap.xml

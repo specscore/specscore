@@ -5,6 +5,7 @@ import { loadConfig } from './lib/load-config.js';
 import { rewriteLinks } from './lib/rewrite-links.js';
 import { renderMermaidBlocks } from './lib/render-mermaid.js';
 import { renderMarkdownToHtml, injectIntoTemplate } from './lib/render-page.js';
+import { descriptionFromMarkdown, htmlOutputRelative } from './lib/page-meta.js';
 import { writeLlmsFiles } from './lib/build-llms.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -25,6 +26,8 @@ async function build() {
     join(__dirname, 'assets', 'style.css'),
     join(OUTPUT, 'assets', 'style.css')
   );
+
+  await cp(join(__dirname, 'assets', 'feedback.js'), join(OUTPUT, 'assets', 'feedback.js'));
 
   // Adopter-facing badge served at https://specscore.md/badge.svg.
   // Referenced from README badges in projects that adopt SpecScore.
@@ -112,10 +115,12 @@ async function build() {
       sidebarGroups: config.sidebarGroups,
       eyebrow: page.navGroup || '',
       hasMermaid,
+      description: descriptionFromMarkdown(rawMarkdown),
     });
 
-    // 5. Write HTML file
-    const htmlFile = join(OUTPUT, `${page.slug}.html`);
+    // 5. Write HTML file. /docs is a directory index so the public URL keeps
+    // its trailing slash, matching the Astro pages.
+    const htmlFile = join(OUTPUT, htmlOutputRelative(page.slug));
     await mkdir(dirname(htmlFile), { recursive: true });
     await writeFile(htmlFile, htmlPage, 'utf-8');
 
@@ -125,7 +130,7 @@ async function build() {
     await mkdir(dirname(mdFile), { recursive: true });
     await writeFile(mdFile, mdContent, 'utf-8');
 
-    console.log(`  ${page.slug}.html + ${page.slug}.md`);
+    console.log(`  ${htmlOutputRelative(page.slug)} + ${page.slug}.md`);
   }
 
   // --- New-artefact template gallery (/new/) ---
@@ -182,7 +187,7 @@ ${listItems}
       eyebrow: '',
       showViewMarkdown: false,
     });
-    await writeFile(join(OUTPUT, 'new', 'index.html'), indexPage, 'utf-8');
+    await writeFile(join(OUTPUT, htmlOutputRelative('new')), indexPage, 'utf-8');
     console.log('  new/index.html (index)');
 
     // Machine-readable contracts are published verbatim and in sorted order so
@@ -226,9 +231,11 @@ ${listItems}
         slug: post.slug,
         sidebarGroups: config.sidebarGroups,
         eyebrow: 'Blog',
+        description: descriptionFromMarkdown(post.body),
+        datePublished: post.date,
       });
 
-      const postFile = join(OUTPUT, `${post.slug}.html`);
+      const postFile = join(OUTPUT, htmlOutputRelative(post.slug));
       await mkdir(dirname(postFile), { recursive: true });
       await writeFile(postFile, htmlPage, 'utf-8');
       console.log(`  ${post.slug}.html (blog)`);
@@ -253,8 +260,8 @@ ${listItems}
       eyebrow: '',
       showViewMarkdown: false,
     });
-    await writeFile(join(OUTPUT, 'blog.html'), blogIndexPage, 'utf-8');
-    console.log('  blog.html (index)');
+    await writeFile(join(OUTPUT, htmlOutputRelative('blog')), blogIndexPage, 'utf-8');
+    console.log('  blog/index.html (index)');
   }
 
   // --- llms.txt + llms-full.txt for AI agents ---

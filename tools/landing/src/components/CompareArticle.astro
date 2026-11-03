@@ -1,0 +1,488 @@
+---
+// Renders one /vs/ article. Copy lives in src/content/compare/; this file
+// is the shared structure and scoped styles of the existing comparisons.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import SiteFooterDe from './SiteFooterDe.astro';
+import SiteFooterEs from './SiteFooterEs.astro';
+import SiteFooterFr from './SiteFooterFr.astro';
+import SiteFooterIt from './SiteFooterIt.astro';
+import SiteFooterJa from './SiteFooterJa.astro';
+import SiteFooterKo from './SiteFooterKo.astro';
+import SiteFooterPl from './SiteFooterPl.astro';
+import SiteFooterPtBr from './SiteFooterPtBr.astro';
+import SiteFooterRu from './SiteFooterRu.astro';
+import SiteFooterTr from './SiteFooterTr.astro';
+import SiteFooterUk from './SiteFooterUk.astro';
+import SiteFooterZhCn from './SiteFooterZhCn.astro';
+import SiteFooterZhTw from './SiteFooterZhTw.astro';
+import ComparisonFeedback from './ComparisonFeedback.astro';
+import MoreComparisons from './MoreComparisons.astro';
+import Inlines from './Inlines.astro';
+import { localeFromPath, localeHref, type LangCode } from '../lib/languages.ts';
+import { chrome } from '../content/compare/chrome.ts';
+import { compareMdHref } from '../content/compare/catalog.ts';
+import { pages } from '../content/compare/pages.ts';
+
+const locale = localeFromPath(Astro.url.pathname) as LangCode;
+const ui = chrome[locale];
+const slug = Astro.url.pathname.split('/').filter(Boolean).pop() ?? '';
+const page = pages[slug]?.[locale];
+if (!page) {
+  throw new Error(`Missing comparison copy for ${locale} /vs/${slug}/`);
+}
+
+const footers = {
+  en: SiteFooter,
+  es: SiteFooterEs,
+  de: SiteFooterDe,
+  fr: SiteFooterFr,
+  it: SiteFooterIt,
+  pl: SiteFooterPl,
+  'pt-br': SiteFooterPtBr,
+  ru: SiteFooterRu,
+  tr: SiteFooterTr,
+  uk: SiteFooterUk,
+  ja: SiteFooterJa,
+  'zh-cn': SiteFooterZhCn,
+  'zh-tw': SiteFooterZhTw,
+  ko: SiteFooterKo,
+};
+const Footer = footers[locale];
+const canonical = `https://specscore.md${localeHref(locale, `/vs/${page.slug}/`)}`;
+const mdHref = compareMdHref(locale, page.slug);
+---
+
+<BaseLayout title={page.metaTitle} description={page.metaDescription} canonical={canonical} lang={ui.lang}>
+  <link slot="head" rel="alternate" type="text/markdown" href={mdHref} />
+  <SiteHeader />
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href={localeHref(locale, '/vs/')} class="xref">{ui.breadcrumb}</a></p>
+        <h1 id="hero-title" class="hero__headline">{page.h1}</h1>
+        <p class="hero__sub"><Inlines parts={page.hero} /></p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="shared-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="shared-title" class="section-title">{ui.sharedTitle}</h2>
+        <ul class="shared-list">
+          {page.shared.map((item) => (
+            <li><Inlines parts={item} /></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="credit-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="credit-title" class="section-title">{page.creditTitle}</h2>
+        <p class="section-note"><Inlines parts={page.creditNote} /></p>
+        {page.credits.map((card) => (
+          <div class="credit-card">
+            <h3 class="credit-card__title">{card.title}</h3>
+            <p class="credit-card__desc"><Inlines parts={card.body} /></p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">{ui.tableTitle}</h2>
+        <p class="section-note">{page.tableNote}</p>
+        <div class="table-wrap">
+          <table class="compare-table" aria-label={page.tableLabel}>
+            <thead>
+              <tr>
+                <th scope="col">{ui.colCapability}</th>
+                <th scope="col">{page.competitor}</th>
+                <th scope="col">{ui.colSpecScore}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {page.rows.map((row) => (
+                <tr>
+                  <td>{row.cap}</td>
+                  <td><Inlines parts={row.them} /></td>
+                  <td><Inlines parts={row.us} /></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="further-title">
+      <div class="section-inner">
+        <h2 id="further-title" class="section-title">{ui.furtherTitle}</h2>
+        <div class="diff-grid">
+          {page.diffs.map((card) => (
+            <div class="diff-card">
+              <h3 class="diff-card__title">{card.title}</h3>
+              <p class="diff-card__desc"><Inlines parts={card.body} /></p>
+              {card.terminal && (
+                <div class="diff-card__example">
+                  <pre class="terminal"><span class="prompt">$</span> specscore spec lint
+
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> oq-section: <span class="dim">Open Questions section not found</span>
+features/apply-discount/README.md:0 <span class="mark-fail">[error]</span> index-entries: <span class="dim">Child directory not listed in index: refunds</span>
+features/apply-discount/refunds:0 <span class="mark-fail">[error]</span> readme-exists: <span class="dim">README.md not found</span>
+
+3 violations found (3 errors)</pre>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="when-title">
+      <div class="section-inner">
+        <h2 id="when-title" class="section-title">{ui.whenTitle}</h2>
+        <div class="when-grid">
+          <div class="when-card">
+            <h3 class="when-card__title">{page.whenThemTitle}</h3>
+            <ul class="when-card__list">
+              {page.whenThem.map((item) => (
+                <li><Inlines parts={item} /></li>
+              ))}
+            </ul>
+          </div>
+          <div class="when-card when-card--primary">
+            <h3 class="when-card__title">{ui.whenUsTitle}</h3>
+            <ul class="when-card__list">
+              {page.whenUs.map((item) => (
+                <li><Inlines parts={item} /></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="bridge-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="bridge-title" class="section-title">{page.bridgeTitle}</h2>
+        {page.bridge.map((paragraph) => (
+          <p class="prose-p"><Inlines parts={paragraph} /></p>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sources-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="sources-title" class="section-title">{ui.sourcesTitle}</h2>
+        <p class="section-note">{ui.sourcesNote}</p>
+        <ul class="shared-list">
+          {page.sources.map((source) => (
+            <li>
+              <a href={source.href} class="xref" target="_blank" rel={source.href.includes('github.com/specscore/') ? undefined : 'nofollow noopener'}>{source.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <MoreComparisons />
+    <ComparisonFeedback page={page.slug} />
+  </main>
+
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">{ui.ctaTitle}</h2>
+      <div class="final-cta__buttons">
+        <a href={ui.installHref} class="btn btn--primary">{ui.ctaInstall}</a>
+        <a href={ui.skillsHref} class="btn btn--secondary">{ui.ctaSkills}</a>
+        <a href="https://github.com/specscore/specscore" target="_blank" class="btn btn--tertiary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          {ui.ctaGithub}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+    animation: fade-in 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both 180ms;
+  }
+  .hero__breadcrumb {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    margin-bottom: var(--space-2);
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+    max-width: 62ch;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+
+  .shared-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .shared-list li {
+    position: relative;
+    padding-left: 1.4rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+  }
+  .shared-list li::before {
+    content: '=';
+    position: absolute;
+    left: 0;
+    font-family: var(--font-code);
+    font-weight: 700;
+    color: var(--pale-ink);
+  }
+
+  .section-note {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-3);
+  }
+
+  .credit-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .credit-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .credit-card__desc {
+    color: var(--mid-ink);
+    line-height: 1.6;
+    font-size: var(--fs-body);
+  }
+  .credit-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  .table-section { background: var(--cream-2); }
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+  .compare-table th,
+  .compare-table td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+  }
+  .compare-table thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-ink);
+    border-bottom: 2px solid var(--graphite);
+    white-space: nowrap;
+  }
+  .compare-table td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 160px;
+  }
+  .compare-table td:nth-child(2),
+  .compare-table td:nth-child(3) {
+    min-width: 200px;
+  }
+  .compare-table td code {
+    font-size: 0.88em;
+    background: var(--surface);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .compare-table strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .diff-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-3);
+  }
+  .diff-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+  .diff-card__desc {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+  .diff-card__desc code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+  .diff-card__example { margin-top: var(--space-2); }
+  .diff-card__example .terminal {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 860px) {
+    .diff-grid { grid-template-columns: 1fr; }
+  }
+
+  .when-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  .when-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: var(--space-4);
+  }
+  .when-card--primary {
+    border-color: var(--validator-green);
+    border-width: 2px;
+  }
+  .when-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .when-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .when-card__list li {
+    position: relative;
+    padding-left: 1.2rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+    font-size: var(--fs-small);
+  }
+  .when-card__list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--pale-ink);
+    font-family: var(--font-code);
+  }
+  .when-card--primary .when-card__list li::before {
+    color: var(--validator-green);
+  }
+  .when-card__list code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 860px) {
+    .when-grid { grid-template-columns: 1fr; }
+  }
+
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-2);
+  }
+  .prose-p:last-child {
+    margin-bottom: 0;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .prose-p code {
+    font-size: 0.9em;
+    background: var(--cream-2);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner {
+    max-width: var(--max-content);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+</style>

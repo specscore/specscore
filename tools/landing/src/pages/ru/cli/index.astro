@@ -40,7 +40,7 @@ import InstallFromSourceRu from '../../../components/InstallFromSourceRu.astro';
         <div
           class="hero__art"
           role="img"
-          aria-label="Вывод specscore lint: у R1 и R2 есть критерии приёмки (зелёные галочки); у R3 их нет, ссылка Related Feature не разрешается, отсутствует обязательная секция Open Questions (красные отметки). 3 проблемы, exit 1."
+          aria-label="Вывод specscore spec lint: три ошибки. В фиче apply-discount нет секции Open Questions, дочерняя директория не указана в индексе, а в ней нет README.md. 3 violations found, код выхода 1."
         >
 <LintExample />
         </div>
@@ -103,7 +103,7 @@ import InstallFromSourceRu from '../../../components/InstallFromSourceRu.astro';
           <div class="feature-card">
             <h3 class="feature-card__title">Готов к CI</h3>
             <p class="feature-card__desc">
-              Ненулевой exit-код при ошибках. Встройте <code>specscore lint</code>
+              Ненулевой exit-код при ошибках. Встройте <code>specscore spec lint</code>
               в ваш CI-пайплайн рядом с ESLint, Prettier и тестами.
             </p>
           </div>
@@ -127,7 +127,7 @@ import InstallFromSourceRu from '../../../components/InstallFromSourceRu.astro';
           <div class="feature-card">
             <h3 class="feature-card__title">Открытый код</h3>
             <p class="feature-card__desc">
-              MIT-лицензия. Исходники на
+              Лицензия Apache-2.0. Исходники на
               <a class="xref" href="https://github.com/specscore/specscore-cli">specscore/specscore-cli</a>.
               Бесплатно навсегда.
             </p>

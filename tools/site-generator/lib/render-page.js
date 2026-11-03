@@ -1,4 +1,14 @@
 import MarkdownIt from 'markdown-it';
+import {
+  canonicalUrlForSlug,
+  clipMeta,
+  descriptionFromHtml,
+  descriptionMetaTag,
+  hreflangLinkTags,
+  jsonLdScript,
+  publicHrefForSlug,
+  socialMetaTags,
+} from './page-meta.js';
 
 const md = new MarkdownIt({
   html: true,
@@ -29,7 +39,7 @@ function buildSidebarHtml(sidebarGroups, currentSlug) {
           if (item.external) {
             return `<li><a href="${item.href}" target="_blank" rel="noopener noreferrer">${item.navLabel} &#8599;</a></li>`;
           }
-          const href = item.slug === 'index' ? '/' : `/${item.slug}`;
+          const href = publicHrefForSlug(item.slug);
           const active = item.slug === currentSlug ? ' class="active"' : '';
           return `<li><a href="${href}"${active}>${item.navLabel}</a></li>`;
         })
@@ -57,8 +67,6 @@ function buildSidebarHtml(sidebarGroups, currentSlug) {
  * @param {boolean} [opts.showViewMarkdown=true] - whether to show the "View as Markdown" link
  * @returns {string} complete HTML page
  */
-const CANONICAL_ORIGIN = 'https://specscore.md';
-
 // Pinned Mermaid version. Bump deliberately; major versions change the syntax
 // surface. See https://github.com/mermaid-js/mermaid/releases.
 const MERMAID_VERSION = '11.4.1';
@@ -96,10 +104,12 @@ const MERMAID_SCRIPT = `
     });
   </script>`;
 
-export function injectIntoTemplate(template, { title, content, slug, sidebarGroups, eyebrow, showViewMarkdown = true, hasMermaid = false }) {
+export function injectIntoTemplate(template, { title, content, slug, sidebarGroups, eyebrow, showViewMarkdown = true, hasMermaid = false, description = '', datePublished = '' }) {
   const sidebarHtml = buildSidebarHtml(sidebarGroups, slug);
   const mdUrl = slug === 'index' ? '/index.md' : `/${slug}.md`;
-  const canonicalUrl = slug === 'index' ? `${CANONICAL_ORIGIN}/` : `${CANONICAL_ORIGIN}/${slug}`;
+  const canonicalUrl = canonicalUrlForSlug(slug);
+  const fullDescription = description || descriptionFromHtml(content);
+  const metaDescription = clipMeta(fullDescription);
   const eyebrowHtml = eyebrow
     ? `<div class="page-eyebrow">${eyebrow}</div>`
     : '';
@@ -110,6 +120,7 @@ export function injectIntoTemplate(template, { title, content, slug, sidebarGrou
     ? `<link rel="alternate" type="text/markdown" href="${mdUrl}">`
     : '';
   const mermaidScriptHtml = hasMermaid ? MERMAID_SCRIPT : '';
+  const socialTitle = `${title} - SpecScore`;
 
   return template
     .replace(/\{\{title\}\}/g, title)
@@ -119,5 +130,16 @@ export function injectIntoTemplate(template, { title, content, slug, sidebarGrou
     .replace(/\{\{viewMarkdown\}\}/g, viewMarkdownHtml)
     .replace(/\{\{alternateLink\}\}/g, alternateLinkHtml)
     .replace(/\{\{canonical\}\}/g, canonicalUrl)
+    .replace(/\{\{hreflangLinks\}\}/g, hreflangLinkTags(canonicalUrl))
+    .replace(/\{\{descriptionMeta\}\}/g, descriptionMetaTag(metaDescription))
+    .replace(/\{\{socialMeta\}\}/g, socialMetaTags(socialTitle, metaDescription, canonicalUrl))
+    .replace(/\{\{jsonLd\}\}/g, jsonLdScript({
+      slug,
+      title,
+      content,
+      canonical: canonicalUrl,
+      description: fullDescription,
+      datePublished,
+    }))
     .replace(/\{\{mermaidScript\}\}/g, mermaidScriptHtml);
 }

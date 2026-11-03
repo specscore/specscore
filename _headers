@@ -4,9 +4,37 @@
 #
 # Syntax: https://developers.cloudflare.com/pages/configuration/headers/
 
-# Serve every .md file as text/markdown
+# Serve every .md file as text/markdown.
+# Canonical points crawlers at the HTML page so the raw Markdown twin
+# stays fetchable for agents and does not compete in search.
+# :splat is the path without the .md suffix (it may contain slashes).
 /*.md
   Content-Type: text/markdown; charset=utf-8
+  Link: <https://specscore.md/:splat>; rel="canonical"
+
+# /docs is a directory index. Detach the splat canonical (no slash) and
+# replace it with the trailing-slash HTML URL.
+/docs.md
+  ! Link
+  Link: <https://specscore.md/docs/>; rel="canonical"
+
+# Templates under /new/*.md are the resource themselves. They have no
+# HTML twin, so drop the canonical the splat rule would invent.
+/new/*
+  ! Link
+
+# Machine-readable site indexes. No single HTML page corresponds to them.
+# noindex keeps them out of search; the files stay publicly fetchable.
+/llms.txt
+  X-Robots-Tag: noindex
+
+/llms-full.txt
+  X-Robots-Tag: noindex
+
+# Directory README rendered by Astro from src/pages/README.md. It is an
+# internal note, not a public page.
+/README/
+  X-Robots-Tag: noindex
 
 # Per-page Link: rel="alternate" for content negotiation (HTML ↔ Markdown)
 /specifications
@@ -42,3 +70,303 @@
 /install/get-cli.ps1
   Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=300
+
+# Comparison pages: raw Markdown sibling for agents
+/vs/kiro/
+  Link: </vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/vs/tessl/
+  Link: </vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/vs/bmad-method/
+  Link: </vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/vs/task-master-ai/
+  Link: </vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/es/vs/kiro/
+  Link: </es/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/es/vs/tessl/
+  Link: </es/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/es/vs/bmad-method/
+  Link: </es/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/es/vs/task-master-ai/
+  Link: </es/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/de/vs/kiro/
+  Link: </de/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/de/vs/tessl/
+  Link: </de/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/de/vs/bmad-method/
+  Link: </de/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/de/vs/task-master-ai/
+  Link: </de/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/fr/vs/kiro/
+  Link: </fr/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/fr/vs/tessl/
+  Link: </fr/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/fr/vs/bmad-method/
+  Link: </fr/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/fr/vs/task-master-ai/
+  Link: </fr/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/it/vs/kiro/
+  Link: </it/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/it/vs/tessl/
+  Link: </it/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/it/vs/bmad-method/
+  Link: </it/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/it/vs/task-master-ai/
+  Link: </it/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/pl/vs/kiro/
+  Link: </pl/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/pl/vs/tessl/
+  Link: </pl/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/pl/vs/bmad-method/
+  Link: </pl/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/pl/vs/task-master-ai/
+  Link: </pl/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/vs/kiro/
+  Link: </pt-br/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/vs/tessl/
+  Link: </pt-br/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/vs/bmad-method/
+  Link: </pt-br/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/vs/task-master-ai/
+  Link: </pt-br/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/ru/vs/kiro/
+  Link: </ru/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/ru/vs/tessl/
+  Link: </ru/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/ru/vs/bmad-method/
+  Link: </ru/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/ru/vs/task-master-ai/
+  Link: </ru/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/tr/vs/kiro/
+  Link: </tr/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/tr/vs/tessl/
+  Link: </tr/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/tr/vs/bmad-method/
+  Link: </tr/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/tr/vs/task-master-ai/
+  Link: </tr/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/uk/vs/kiro/
+  Link: </uk/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/uk/vs/tessl/
+  Link: </uk/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/uk/vs/bmad-method/
+  Link: </uk/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/uk/vs/task-master-ai/
+  Link: </uk/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/ja/vs/kiro/
+  Link: </ja/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/ja/vs/tessl/
+  Link: </ja/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/ja/vs/bmad-method/
+  Link: </ja/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/ja/vs/task-master-ai/
+  Link: </ja/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/vs/kiro/
+  Link: </zh-cn/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/vs/tessl/
+  Link: </zh-cn/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/vs/bmad-method/
+  Link: </zh-cn/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/vs/task-master-ai/
+  Link: </zh-cn/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/vs/kiro/
+  Link: </zh-tw/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/vs/tessl/
+  Link: </zh-tw/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/vs/bmad-method/
+  Link: </zh-tw/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/vs/task-master-ai/
+  Link: </zh-tw/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+/ko/vs/kiro/
+  Link: </ko/vs/kiro.md>; rel="alternate"; type="text/markdown"
+
+/ko/vs/tessl/
+  Link: </ko/vs/tessl.md>; rel="alternate"; type="text/markdown"
+
+/ko/vs/bmad-method/
+  Link: </ko/vs/bmad-method.md>; rel="alternate"; type="text/markdown"
+
+/ko/vs/task-master-ai/
+  Link: </ko/vs/task-master-ai.md>; rel="alternate"; type="text/markdown"
+
+# Spec-driven development tools roundup: raw Markdown sibling for agents
+
+/spec-driven-development/tools/
+  Link: </spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+/es/spec-driven-development/tools/
+  Link: </es/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+/de/spec-driven-development/tools/
+  Link: </de/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+/fr/spec-driven-development/tools/
+  Link: </fr/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+/it/spec-driven-development/tools/
+  Link: </it/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+/pl/spec-driven-development/tools/
+  Link: </pl/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/spec-driven-development/tools/
+  Link: </pt-br/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+/ru/spec-driven-development/tools/
+  Link: </ru/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+/tr/spec-driven-development/tools/
+  Link: </tr/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+/uk/spec-driven-development/tools/
+  Link: </uk/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+/ja/spec-driven-development/tools/
+  Link: </ja/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/spec-driven-development/tools/
+  Link: </zh-cn/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/spec-driven-development/tools/
+  Link: </zh-tw/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+/ko/spec-driven-development/tools/
+  Link: </ko/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+
+# Articles: raw Markdown sibling for agents
+
+/articles/
+  Link: </articles.md>; rel="alternate"; type="text/markdown"
+
+/articles/acceptance-criteria/
+  Link: </articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/es/articles/
+  Link: </es/articles.md>; rel="alternate"; type="text/markdown"
+
+/es/articles/acceptance-criteria/
+  Link: </es/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/de/articles/
+  Link: </de/articles.md>; rel="alternate"; type="text/markdown"
+
+/de/articles/acceptance-criteria/
+  Link: </de/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/fr/articles/
+  Link: </fr/articles.md>; rel="alternate"; type="text/markdown"
+
+/fr/articles/acceptance-criteria/
+  Link: </fr/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/it/articles/
+  Link: </it/articles.md>; rel="alternate"; type="text/markdown"
+
+/it/articles/acceptance-criteria/
+  Link: </it/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/pl/articles/
+  Link: </pl/articles.md>; rel="alternate"; type="text/markdown"
+
+/pl/articles/acceptance-criteria/
+  Link: </pl/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/articles/
+  Link: </pt-br/articles.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/articles/acceptance-criteria/
+  Link: </pt-br/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/ru/articles/
+  Link: </ru/articles.md>; rel="alternate"; type="text/markdown"
+
+/ru/articles/acceptance-criteria/
+  Link: </ru/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/tr/articles/
+  Link: </tr/articles.md>; rel="alternate"; type="text/markdown"
+
+/tr/articles/acceptance-criteria/
+  Link: </tr/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/uk/articles/
+  Link: </uk/articles.md>; rel="alternate"; type="text/markdown"
+
+/uk/articles/acceptance-criteria/
+  Link: </uk/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/ja/articles/
+  Link: </ja/articles.md>; rel="alternate"; type="text/markdown"
+
+/ja/articles/acceptance-criteria/
+  Link: </ja/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/articles/
+  Link: </zh-cn/articles.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/articles/acceptance-criteria/
+  Link: </zh-cn/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/articles/
+  Link: </zh-tw/articles.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/articles/acceptance-criteria/
+  Link: </zh-tw/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/ko/articles/
+  Link: </ko/articles.md>; rel="alternate"; type="text/markdown"
+
+/ko/articles/acceptance-criteria/
+  Link: </ko/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"

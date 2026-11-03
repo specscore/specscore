@@ -1,0 +1,286 @@
+---
+// /spec-driven-development/tools/ — one renderer, copy per locale.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import SiteFooterDe from './SiteFooterDe.astro';
+import SiteFooterEs from './SiteFooterEs.astro';
+import SiteFooterFr from './SiteFooterFr.astro';
+import SiteFooterIt from './SiteFooterIt.astro';
+import SiteFooterJa from './SiteFooterJa.astro';
+import SiteFooterKo from './SiteFooterKo.astro';
+import SiteFooterPl from './SiteFooterPl.astro';
+import SiteFooterPtBr from './SiteFooterPtBr.astro';
+import SiteFooterRu from './SiteFooterRu.astro';
+import SiteFooterTr from './SiteFooterTr.astro';
+import SiteFooterUk from './SiteFooterUk.astro';
+import SiteFooterZhCn from './SiteFooterZhCn.astro';
+import SiteFooterZhTw from './SiteFooterZhTw.astro';
+import Inlines from './Inlines.astro';
+import { localeFromPath, localeHref, type LangCode } from '../lib/languages.ts';
+import { roundupMdHref, toolOrder } from '../content/roundup/facts.ts';
+import { pageFor } from '../content/roundup/pages.ts';
+import type { Block, Inline } from '../content/roundup/types.ts';
+
+const locale = localeFromPath(Astro.url.pathname) as LangCode;
+const page = pageFor(locale);
+
+function localizeHref(href: string): string {
+  if (href.startsWith('/') && !href.startsWith('//')) return localeHref(locale, href);
+  return href;
+}
+
+function localize(parts: Block): Block {
+  return parts.map((part: Inline) => {
+    if (typeof part === 'string' || 'c' in part || 's' in part || 'e' in part) return part;
+    return { ...part, href: localizeHref(part.href) };
+  });
+}
+
+const footers = {
+  en: SiteFooter,
+  es: SiteFooterEs,
+  de: SiteFooterDe,
+  fr: SiteFooterFr,
+  it: SiteFooterIt,
+  pl: SiteFooterPl,
+  'pt-br': SiteFooterPtBr,
+  ru: SiteFooterRu,
+  tr: SiteFooterTr,
+  uk: SiteFooterUk,
+  ja: SiteFooterJa,
+  'zh-cn': SiteFooterZhCn,
+  'zh-tw': SiteFooterZhTw,
+  ko: SiteFooterKo,
+};
+const Footer = footers[locale];
+const canonical = `https://specscore.md${localeHref(locale, '/spec-driven-development/tools/')}`;
+const mdHref = roundupMdHref(locale);
+const guideHref = localeHref(locale, '/spec-driven-development/');
+---
+
+<BaseLayout title={page.metaTitle} description={page.metaDescription} canonical={canonical} lang={page.lang}>
+  <link slot="head" rel="alternate" type="text/markdown" href={mdHref} />
+  <SiteHeader />
+
+  <main>
+    <section class="hero" aria-labelledby="tools-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href={guideHref} class="xref">{page.breadcrumb}</a></p>
+        <h1 id="tools-title" class="hero__headline">{page.h1}</h1>
+        <p class="hero__sub"><Inlines parts={localize(page.hero)} /></p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner section-inner--prose">
+        {page.lede.map((paragraph) => (
+          <p class="prose-p"><Inlines parts={localize(paragraph)} /></p>
+        ))}
+      </div>
+    </section>
+
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">{page.tableTitle}</h2>
+        <p class="section-note">{page.tableNote}</p>
+        <div class="table-wrap">
+          <table class="compare-table" aria-label={page.tableLabel}>
+            <thead>
+              <tr>
+                <th scope="col">{page.colTool}</th>
+                <th scope="col">{page.colWhat}</th>
+                <th scope="col">{page.colStorage}</th>
+                <th scope="col">{page.colValidation}</th>
+                <th scope="col">{page.colLicence}</th>
+                <th scope="col">{page.colSuits}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {toolOrder.map((id) => {
+                const tool = page.tools[id];
+                const vsHref = id === 'specscore' ? localeHref(locale, '/') : localeHref(locale, `/vs/${id}/`);
+                return (
+                  <tr>
+                    <th scope="row"><a href={vsHref} class="xref">{tool.name}</a></th>
+                    <td><Inlines parts={localize(tool.what)} /></td>
+                    <td><Inlines parts={localize(tool.storage)} /></td>
+                    <td><Inlines parts={localize(tool.validation)} /></td>
+                    <td><Inlines parts={localize(tool.licence)} /></td>
+                    <td><Inlines parts={localize(tool.suits)} /></td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    {toolOrder.map((id) => {
+      const tool = page.tools[id];
+      const vsHref = id === 'specscore' ? localeHref(locale, '/') : localeHref(locale, `/vs/${id}/`);
+      return (
+        <section class="section" id={id} aria-labelledby={`${id}-title`}>
+          <div class="section-inner section-inner--prose">
+            <h2 id={`${id}-title`} class="section-title"><a href={vsHref} class="xref">{tool.name}</a></h2>
+            {tool.paragraphs.map((paragraph) => (
+              <p class="prose-p"><Inlines parts={localize(paragraph)} /></p>
+            ))}
+          </div>
+        </section>
+      );
+    })}
+
+    <section class="section" aria-labelledby="choose-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="choose-title" class="section-title">{page.chooseTitle}</h2>
+        {page.choose.map((paragraph) => (
+          <p class="prose-p"><Inlines parts={localize(paragraph)} /></p>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sources-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="sources-title" class="section-title">{page.sourcesTitle}</h2>
+        <p class="section-note">{page.sourcesNote}</p>
+        <ul class="shared-list">
+          {page.sources.map((source) => (
+            <li>
+              <a href={source.href} class="xref" target="_blank" rel={source.href.includes('github.com/specscore/') ? undefined : 'nofollow noopener'}>{source.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">{page.ctaTitle}</h2>
+      <div class="final-cta__buttons">
+        <a href={localizeHref(page.installHref)} class="btn btn--primary">{page.ctaInstall}</a>
+        <a href={localizeHref(page.skillsHref)} class="btn btn--secondary">{page.ctaSkills}</a>
+        <a href="https://github.com/specscore/specscore" target="_blank" class="btn btn--tertiary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+          </svg>
+          {page.ctaGithub}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+  }
+  .hero__breadcrumb {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    margin-bottom: var(--space-2);
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+    text-wrap: balance;
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+  .section-note {
+    color: var(--mid-ink);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-3);
+    text-wrap: pretty;
+  }
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-2);
+    text-wrap: pretty;
+  }
+  .prose-p:last-child { margin-bottom: 0; }
+  .table-section { background: var(--cream-2); }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    min-width: 920px;
+  }
+  .compare-table th,
+  .compare-table td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+  }
+  .compare-table thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--mid-ink);
+    border-bottom: 2px solid var(--graphite);
+  }
+  .compare-table tbody th {
+    font-weight: 600;
+    min-width: 9rem;
+  }
+  .compare-table td { min-width: 12rem; }
+  .shared-list { list-style: none; margin: 0; padding: 0; }
+  .shared-list li {
+    position: relative;
+    padding-left: 1.4rem;
+    color: var(--mid-ink);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+  }
+  .shared-list li::before {
+    content: '=';
+    position: absolute;
+    left: 0;
+    font-family: var(--font-code);
+    font-weight: 700;
+    color: var(--pale-ink);
+  }
+  .final-cta {
+    background: var(--cream-2);
+    padding: var(--space-7) var(--space-3);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .final-cta__inner { max-width: var(--max-content); margin: 0 auto; text-align: center; }
+  .final-cta__title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .final-cta__buttons { display: inline-flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+</style>

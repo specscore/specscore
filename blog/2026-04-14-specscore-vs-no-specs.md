@@ -24,7 +24,7 @@ With multiple agents working on interconnected tasks, misinterpretation compound
 |---|---|
 | Agent guesses what "login should work" means | Agent reads structured acceptance criteria with pass/fail conditions |
 | Requirements live in Jira, Notion, Slack, and someone's head | Requirements live in the repo, version-controlled, next to the code |
-| "Is this done?" requires a human to check | `specscore lint` validates completeness and structure automatically |
+| "Is this done?" requires a human to check | `specscore spec lint` validates structure and references automatically |
 | Code has no link to what it implements | `specscore:feature/R1` annotations trace code to requirements |
 | New team member reads 40 tickets to understand a feature | New team member reads one feature spec with all context |
 
@@ -50,7 +50,7 @@ Builds the latest dev version from `main` (may be ahead of the most recent relea
 
 ```bash
 go install github.com/specscore/specscore-cli/cmd/specscore@main
-specscore lint ./spec
+specscore spec lint
 ```
 
 [Read the spec](/specifications) to understand the format. [Find your role](/for/developers) for a guided introduction.

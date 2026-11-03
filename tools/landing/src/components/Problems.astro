@@ -34,7 +34,7 @@
         <p class="problem-card__fix-label">The fix</p>
         <p class="problem-card__fix">
           One canonical spec, in the repo, versioned with the code.
-          <code>specscore lint</code> runs in CI on every push; git
+          <code>specscore spec lint</code> runs in CI on every push; git
           history is the audit trail. The spec, the thread, and the
           PR can't quietly disagree — they share the same file under
           review.
@@ -51,9 +51,10 @@
         <div class="problem-card__rule" aria-hidden="true"></div>
         <p class="problem-card__fix-label">The fix</p>
         <p class="problem-card__fix">
-          The linter catches ambiguous criteria before any code is
-          written. The verb fails lint because it has no concrete
-          object or condition. Fixing the warning forces you to write
+          Every criterion is written as Given / When / Then, so it must
+          name a precondition, an action and an observable outcome.
+          The AI review flags the ones that are still vague before any
+          code is written. Writing the <em>Then</em> forces you to say
           what <em>"handles"</em> actually means.
         </p>
       </li>
@@ -94,8 +95,9 @@
         <div class="problem-card__rule" aria-hidden="true"></div>
         <p class="problem-card__fix-label">The fix</p>
         <p class="problem-card__fix">
-          Lint the spec before the agent runs. <code>specscore lint</code>
-          rejects vague verbs and missing acceptance criteria up front, so
+          Lint the spec before the agent runs. <code>specscore spec lint</code>
+          catches missing sections, malformed acceptance-criteria headings
+          and broken links up front, so
           the agent implements a concrete brief once instead of guessing
           across retries. The cheapest agent run is the one you don't
           repeat.
@@ -135,11 +137,12 @@
         <p class="problem-card__fix-label">The fix</p>
         <p class="problem-card__fix">
           Source annotations. Comments like
-          <code>// specscore: features/checkout/apply-discount/R1.AC-2</code>
+          <code>// specscore:implements feature/apply-discount#req:one-code-per-cart</code>
           make the link machine-readable and survive every refactor.
           <code>specscore code deps</code> answers
           <em>"what spec does this file implement?"</em> in one call;
-          the linter flags references that point at deleted specs.
+          <code>specscore code deps --check</code> flags references that
+          point at deleted specs.
         </p>
       </li>
 
