@@ -62,7 +62,7 @@ export function composeLlmsFull(parts, specFull) {
   const header = [
     '# SpecScore — Full documentation',
     '',
-    '> Concatenated Markdown for AI agents. The first part is the English homepage, what SpecScore is, the spec-driven development guide, the tools roundup, the comparison pages, the documentation index (getting started), and the CLI install page. The second part is the specification corpus.',
+    '> Concatenated Markdown for AI agents. The first part is the English homepage, what SpecScore is, the spec-driven development guide, the tools roundup, the articles, the comparison pages, the documentation index (getting started), and the CLI install page. The second part is the specification corpus.',
     '',
   ].join('\n');
   const blocks = parts.map((part) => [
@@ -105,6 +105,51 @@ async function writeText(file, body) {
 
 const localeHomes = ['/', ...LOCALES.map((code) => `/${code}/`)];
 const localeRoutes = (path) => [path, ...LOCALES.map((code) => `/${code}${path}`)];
+
+function articleDescription(markdown, fallback) {
+  const body = String(markdown)
+    .replace(/^Updated [^\n]+\n+/m, '')
+    .replace(/^Last updated:[^\n]+\n+/m, '');
+  return oneLineDescription(body, fallback);
+}
+
+/**
+ * English article Markdown emitted into dist before this runs.
+ * The index is /articles.md. Each piece is /articles/<slug>.md.
+ * @param {string} dist
+ */
+export async function readEnglishArticles(dist) {
+  let indexRaw;
+  try {
+    indexRaw = await readFile(join(dist, 'articles.md'), 'utf8');
+  } catch {
+    return [];
+  }
+  const indexTitle = (indexRaw.match(/^#\s+(.+)$/m) || [])[1] || 'Articles';
+  const records = [{
+    title: indexTitle,
+    url: `${ORIGIN}/articles.md`,
+    description: articleDescription(indexRaw, 'SpecScore articles.'),
+    body: indexRaw,
+  }];
+  let names = [];
+  try {
+    names = (await readdir(join(dist, 'articles'))).filter((name) => name.endsWith('.md')).sort();
+  } catch {
+    names = [];
+  }
+  for (const name of names) {
+    const raw = await readFile(join(dist, 'articles', name), 'utf8');
+    const title = (raw.match(/^#\s+(.+)$/m) || [])[1] || name.replace(/\.md$/, '');
+    records.push({
+      title,
+      url: `${ORIGIN}/articles/${name}`,
+      description: articleDescription(raw, title),
+      body: raw,
+    });
+  }
+  return records;
+}
 
 /**
  * Write raw Markdown companions, llms.txt, and llms-full.txt into the Astro dist.
@@ -209,6 +254,11 @@ export async function writeLlmsFiles(dir, rootDir) {
   });
 
   const toolsDescription = oneLineDescription(toolsRaw, 'A comparison of spec-driven development tools.');
+  const articles = await readEnglishArticles(dist);
+  if (!articles.some((item) => item.url === `${ORIGIN}/articles/acceptance-criteria.md`)) {
+    throw new Error('llms: missing /articles/acceptance-criteria.md. Emit article Markdown before writing llms.txt.');
+  }
+  const articleEntries = articles.map(({ title, url, description }) => ({ title, url, description }));
   const llmsTxt = composeLlmsTxt(specIndex, [
     ['Start here', [
       {
@@ -242,6 +292,7 @@ export async function writeLlmsFiles(dir, rootDir) {
         description: 'How to install the specscore command-line interface on macOS, Linux, and Windows.',
       },
     ]],
+    ['Articles', articleEntries],
     ['Comparisons', [
       {
         title: 'How SpecScore compares',
@@ -257,6 +308,7 @@ export async function writeLlmsFiles(dir, rootDir) {
     { title: 'What SpecScore is', url: `${ORIGIN}/what-specscore-is.md`, body: whatBody },
     { title: 'Spec-driven development', url: `${ORIGIN}/spec-driven-development.md`, body: sdd.body },
     { title: 'Spec-driven development tools', url: `${ORIGIN}/spec-driven-development/tools.md`, body: toolsRaw },
+    ...articles.map(({ title, url, body }) => ({ title, url, body })),
     { title: 'How SpecScore compares', url: vsIndex.url, body: vsIndex.body },
     ...vsPages.map((page) => ({ title: page.name.replace(/\.md$/, ''), url: page.url, body: page.body })),
     { title: 'Documentation (getting started)', url: `${ORIGIN}/docs.md`, body: docsRaw },

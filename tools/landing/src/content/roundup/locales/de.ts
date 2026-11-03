@@ -468,6 +468,11 @@ export const page: RoundupPage = {
           '.',
         ],
         [
+          'Wie man die Kriterien so schreibt, dass ein Agent sie prüfen kann, steht in ',
+          { a: 'Akzeptanzkriterien schreiben', href: '/articles/acceptance-criteria/' },
+          '.',
+        ],
+        [
           'Im Repository dieser Website installiert ',
           t('dogfood.yml', href.dogfood, 'us'),
           ' dieses CLI und führt ',

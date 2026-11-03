@@ -486,6 +486,11 @@ export const page: RoundupPage = {
           '에 있습니다.',
         ],
         [
+          '에이전트가 검사할 수 있는 기준을 쓰는 방법은 ',
+          { a: '인수 기준 작성법', href: '/articles/acceptance-criteria/' },
+          '에 있습니다.',
+        ],
+        [
           '이 웹사이트 저장소에서 ',
           t('dogfood.yml', href.dogfood, 'us'),
           '은 그 CLI를 설치하고, 풀 리퀘스트와 main으로의 푸시에서 ',

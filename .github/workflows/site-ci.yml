@@ -77,6 +77,8 @@ jobs:
           test -s public/llms-full.txt
           grep -q '^# SpecScore' public/llms.txt
           grep -q 'https://specscore.md/index.md' public/llms.txt
+          grep -q 'https://specscore.md/articles/acceptance-criteria.md' public/llms.txt
+          grep -q 'https://specscore.md/articles/acceptance-criteria.md' public/llms-full.txt
           grep -q 'FAQPage' public/index.html
           grep -q 'Organization' public/index.html
           grep -q 'text/markdown' public/index.html
