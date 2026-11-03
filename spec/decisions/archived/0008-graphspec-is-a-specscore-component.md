@@ -1,17 +1,17 @@
 ---
 format: https://specscore.md/decision-specification
-status: Approved
+status: Superseded
 ---
 
 # Decision: GraphSpec Is A SpecScore Component, Not A Standalone Standard
 
-**Status:** Approved
+**Status:** Superseded
 **Date:** 2026-07-08
 **Owner:** alexander.trakhimenok@gmail.com
 **Tags:** graphspec, positioning, configuration, reuse, scope
 **Source Idea:** graphspec
 **Supersedes:** —
-**Superseded By:** —
+**Superseded By:** 0015-meaninggraph-supersedes-graphspec
 
 ## Context
 

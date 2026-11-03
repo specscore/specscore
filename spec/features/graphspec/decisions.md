@@ -8,7 +8,7 @@ record for the foundational decisions is the repository Decision artifacts:
 - [0005 — Identifier, Reference, and File-Naming Syntax](../../decisions/0005-graphspec-id-and-reference-syntax.md)
 - [0006 — Model-Source Location and Identity by Placement](../../decisions/0006-graphspec-model-source-location.md)
 - [0007 — ModelSpec Reference Resolution](../../decisions/0007-modelspec-reference-resolution.md)
-- [0008 — GraphSpec Is A SpecScore Component](../../decisions/0008-graphspec-is-a-specscore-component.md)
+- [0008 — GraphSpec Is A SpecScore Component](../../decisions/archived/0008-graphspec-is-a-specscore-component.md)
 - [0009 — Per-Module Graph Roots](../../decisions/0009-per-module-graph-roots.md)
 - [0010 — References Are URLs](../../decisions/0010-references-are-urls.md)
 - [0011 — Addressable Model Concepts and Kind Segments](../../decisions/0011-addressable-model-concepts.md)
@@ -31,7 +31,7 @@ external demand ever materializes). *Why:* every mechanism a standalone GraphSpe
 would need already exists in SpecScore, and there is no adopter without SpecScore —
 unlike ModelSpec, which has real non-SpecScore consumers and stays independent. The
 layering rule is unaffected: GraphSpec never depends on FeatureSpec semantically.
-([0008](../../decisions/0008-graphspec-is-a-specscore-component.md))
+([0008](../../decisions/archived/0008-graphspec-is-a-specscore-component.md))
 
 ### ModelSpec is the single structural language
 
@@ -215,7 +215,7 @@ tooling — no GraphSpec-specific configuration). GraphSpec module IDs are uniqu
 across the union; decision 0007's resolution step 1 searches the union; every root
 carries the uniform `modules/<id>/…` layout. *(0005's original v0.2 single-root
 stance was amended by [0009](../../decisions/0009-per-module-graph-roots.md) once
-[0008](../../decisions/0008-graphspec-is-a-specscore-component.md) licensed direct
+[0008](../../decisions/archived/0008-graphspec-is-a-specscore-component.md) licensed direct
 module-config reuse.)* Cross-repo distribution remains deferred: when it lands, it
 extends qualified IDs with the `@{host}/{org}/{repo}` suffix convention of the
 Stable `source-references` feature. *Why (unchanged):* honest scoping beats an

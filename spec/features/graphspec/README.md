@@ -1,19 +1,21 @@
 ---
 format: https://specscore.md/feature-specification
-status: Draft
+status: Deprecated
 ---
 
 # Feature: GraphSpec
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/github.com/specscore/specscore/spec/features/graphspec?op=explore) | [Edit](https://specscore.studio/app/github.com/specscore/specscore/spec/features/graphspec?op=edit) | [Ask question](https://specscore.studio/app/github.com/specscore/specscore/spec/features/graphspec?op=ask) | [Request change](https://specscore.studio/app/github.com/specscore/specscore/spec/features/graphspec?op=request-change) |
-**Status:** Draft
+**Status:** Deprecated
 **Source Ideas:** graphspec
 
 ## Summary
 
 GraphSpec is a bootstrap specification language for describing connected domain models.
 
-It is a **component of SpecScore**, not a standalone standard ([decision 0008](../../decisions/0008-graphspec-is-a-specscore-component.md)): it deliberately reuses SpecScore configuration (`specscore.yaml`), linkage (`source-references`), and artifact conventions, and is not intended for use outside SpecScore. GraphSpec owns the domain vocabulary that other specifications reference: modules, entities, relationships, commands, events, ownership, and lifecycle. Structure — properties, types, constraints, value objects, enums — is owned by [ModelSpec](https://github.com/specscore/modelspec), which *is* independent; GraphSpec references ModelSpec models instead of redefining them ([decision 0003](../../decisions/0003-one-structural-language.md)).
+> **Deprecated.** MeaningGraph supersedes GraphSpec as SpecScore's domain-vocabulary layer ([decision 0015](../../decisions/0015-meaninggraph-supersedes-graphspec.md)). Reference domain concepts with [meaning references](../meaning-references/README.md); commands, events and policies continue as [domain behavior](../domain-behavior/README.md) artifacts. GraphSpec receives no changes other than its removal, which follows the migration of its last consumer ([plan](../../plans/meaninggraph-linkage.md)).
+
+It is a **component of SpecScore**, not a standalone standard ([decision 0008](../../decisions/archived/0008-graphspec-is-a-specscore-component.md)): it deliberately reuses SpecScore configuration (`specscore.yaml`), linkage (`source-references`), and artifact conventions, and is not intended for use outside SpecScore. GraphSpec owns the domain vocabulary that other specifications reference: modules, entities, relationships, commands, events, ownership, and lifecycle. Structure — properties, types, constraints, value objects, enums — is owned by [ModelSpec](https://github.com/specscore/modelspec), which *is* independent; GraphSpec references ModelSpec models instead of redefining them ([decision 0003](../../decisions/0003-one-structural-language.md)).
 
 ## Contents
 
