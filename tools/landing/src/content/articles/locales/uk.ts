@@ -1,11 +1,335 @@
-import type { ArticleLocale } from '../types.ts';
-import { href } from '../facts.ts';
+import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy } from '../types.ts';
+import { acceptanceHref, earsHref } from '../facts.ts';
 
-const t = (a: string, url: string, kind?: 'us' | 'them') =>
+const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
 
-export const locale: ArticleLocale = {
-  article: {
+const ears: EarsArticleCopy = {
+    metaTitle: 'Синтаксис вимог EARS з поясненням і прикладами | SpecScore',
+    metaDescription:
+      'Нотація вимог EARS (Easy Approach to Requirements Syntax): шаблони речень, приклади, типові помилки, як Kiro використовує EARS і REQ SpecScore, який проходить лінтер.',
+    h1: 'Синтаксис вимог EARS з поясненням і прикладами',
+    updated: 'Оновлено: 2 листопада 2026',
+    breadcrumb: 'Статті',
+    hero: [
+      t('EARS', earsHref.mavin),
+      ' (Easy Approach to Requirements Syntax) — це нотація вимог: невеликий набір англійських шаблонів речення, його ж називають синтаксисом EARS. Шаблон тримає умову, тригер і відповідь системи у фіксованому порядку. Вимога — одне перевірюване зобов’язання, яке система мусить виконати. ',
+      t('Розробка за специфікаціями', earsHref.sdd),
+      ' (SDD, spec-driven development) — практика записати це зобов’язання в специфікацію до коду і вважати специфікацію джерелом правди. Документ вимог до продукту (PRD, product requirements document) — проза, яка називає проблему і межі до того, як роботу ріжуть на завдання. У ',
+      t('SpecScore', earsHref.home),
+      ' вимога (REQ) — іменоване правило всередині функції, а критерій приймання (AC, acceptance criterion) — необов’язкова абстрактна умова, яка вказує на одне або кілька таких правил. ',
+      t('Безперервна інтеграція', earsHref.validators),
+      ' (CI, continuous integration) — автоматична перевірка кожної запропонованої зміни. Перевірка — команда ',
+      t('інтерфейсу командного рядка', earsHref.cli),
+      ' (CLI, command-line interface): ',
+      { c: 'specscore spec lint' },
+      '. ',
+      t('Kiro', earsHref.kiro, 'them'),
+      ', агентне інтегроване середовище розробки (IDE, integrated development environment) від Amazon Web Services (AWS), пише один із цих шаблонів. Нотацію вперше опублікували Алістер Мевін і колеги з Rolls-Royce на конференції з інженерії вимог Institute of Electrical and Electronics Engineers (IEEE) у 2009 році.',
+    ],
+    originTitle: 'Звідки взявся EARS',
+    origin: [
+      [
+        'Алістер Мевін, Філіп Вілкінсон, Едріан Гарвуд і Марк Новак, тоді в Rolls-Royce PLC, опублікували «Easy Approach to Requirements Syntax (EARS)» на 17th IEEE International Requirements Engineering Conference у 2009 році. Ідентифікатор документа — ',
+        t('10.1109/RE.2009.9', earsHref.paper),
+        '. Правила склалися, коли вони витягали вимоги до керування двигуном із Certification Specification for Engines (CS-E), розділ CS-E 50, норми льотної придатності. Вихідний текст змішував вимоги, проєктні вказівки і нотатки.',
+      ],
+      [
+        'Стаття називає вісім проблем необмеженої природної мови: неоднозначність, розпливчастість, складність, пропуск, дублювання, багатослівність, недоречну реалізацію і неперевірюваність. Невеликий набір правил мав укласти кожну таку вимогу в один із п’яти шаблонів. Автори пишуть, що нотація пасує до високорівневих вимог зацікавлених сторін, і не стверджують, що вона покриває кожен рівень декомпозиції системи.',
+      ],
+      [
+        t('Власний посібник Мевіна', earsHref.mavin),
+        ' описує EARS як спосіб м’яко обмежити текстові вимоги. Частини лишаються в одному порядку, який він називає темпоральною логікою: будь-яка передумова, потім тригер, потім ім’я системи і відповідь. Його набір правил: нуль або багато передумов, нуль або один тригер, одне ім’я системи і одна або багато відповідей. Стаття 2009 року спеціалізує цю форму в п’ять шаблонів. Той самий посібник називає і складні вимоги, які поєднують ключові слова.',
+      ],
+      [
+        'У розборі випадку зі статті сирий фрагмент містив 36 вимог, а переписаний набір — 47. Середня довжина впала з 36,9 до 25,6 слова. Автори повідомляють, що в цьому розборі складність, пропуск, дублювання, недоречна реалізація і неперевірюваність були відсутні в переписаному наборі, а неоднозначність, розпливчастість і багатослівність зменшилися, але не зникли. Вони також перелічують межі: маленька вибірка, лише високорівневі вимоги безпеки і судження під час класифікації розпливчастості. Ці числа — зі статті, для одного документа.',
+      ],
+    ],
+    patternsTitle: 'Шаблони речень EARS',
+    patternsIntro: [
+      [
+        'Ключові слова — зі статті 2009 року і з посібника Мевіна. Стаття також дозволяє ',
+        { e: 'During' },
+        ' замість ',
+        { e: 'While' },
+        ' для стану, з тим самим змістом, коли так читається ясніше. Приклади ілюструють шаблони. Це не цитати зі статті. Kiro пише подієвий шаблон великими літерами; вихідна нотація починає ключове слово з великої. Приклади лишаються англійською, бо синтаксис EARS англійський.',
+      ],
+    ],
+    patternName: {
+      ubiquitous: 'Повсюдне',
+      event: 'Подієве',
+      state: 'Станове',
+      unwanted: 'Небажана поведінка',
+      optional: 'Необов’язкова функція',
+      complex: 'Складне',
+    },
+    patternBody: {
+      ubiquitous: [
+        'Завжди активне. Ключового слова EARS немає, бо немає ні передумови, ні тригера. Власний приклад статті 2009 року — система керування, яка має не допускати перевищення обертів двигуна.',
+      ],
+      event: [
+        'Відповідь потрібна, коли тригер виявлено на межі системи, і лише тоді. Ключове слово — ',
+        { e: 'When' },
+        '.',
+      ],
+      state: [
+        'Відповідь потрібна, доки система лишається в названому стані. Ключове слово — ',
+        { e: 'While' },
+        '.',
+      ],
+      unwanted: [
+        'Відповідь обробляє відмову, збурення, відхилення або іншу небажану поведінку. Ключові слова — ',
+        { e: 'If' },
+        ' і ',
+        { e: 'then' },
+        '. Стаття дала цьому шаблону власні слова, щоб такі вимоги лишалися видимими. Автори зауважують, що бажане і небажане іноді залежить від точки зору.',
+      ],
+      optional: [
+        'Відповідь діє, лише якщо продукт містить названу функцію. Ключове слово — ',
+        { e: 'Where' },
+        '.',
+      ],
+      complex: [
+        'Більше одного ключового слова. Посібник Мевіна зберігає той самий порядок: ',
+        { e: 'While' },
+        ' для передумови, потім ',
+        { e: 'When' },
+        ' для тригера, потім відповідь системи. Стаття 2009 року також поєднує ',
+        { e: 'While' },
+        ' з ',
+        { e: 'If / then' },
+        ' для небажаної поведінки в стані. Ілюстрація такого поєднання: While the shopper is signed out, if the shopper submits the checkout form, then the checkout system shall refuse the order.',
+      ],
+    },
+    exampleLabel: 'Приклад',
+    mistakesTitle: 'Типові помилки',
+    mistakes: [
+      {
+        title: 'Кілька зобов’язань в одному реченні',
+        body: [
+          'Стаття вважає складене речення проблемою складності і ділить його. ',
+          t('Специфікація вимоги SpecScore', earsHref.requirement),
+          ' каже те саме своїми словами: кожен ',
+          { c: 'REQ' },
+          ' мусить виражати рівно одне перевірюване зобов’язання.',
+        ],
+      },
+      {
+        title: 'Ховати небажану поведінку в When',
+        body: [
+          { e: 'When' },
+          ' — для очікуваного тригера. ',
+          { e: 'If / then' },
+          ' — для поведінки, якої краще б не зустріти. Одне слово на обидва випадки робить небажаний випадок схожим на звичайний. Це проблема пропуску, яку називає стаття.',
+        ],
+      },
+      {
+        title: 'Писати реалізацію',
+        body: [
+          '«The checkout system shall store the flag in Redis» називає проєктне рішення. Стаття називає це недоречною реалізацією. Відповідь має казати, чого система мусить досягти, а не який компонент це робить.',
+        ],
+      },
+      {
+        title: 'Немає імені системи',
+        body: [
+          '«When the form is submitted, shall show an error» не має підмета. Набір правил Мевіна вимагає одне ім’я системи.',
+        ],
+      },
+      {
+        title: 'Тригер після відповіді',
+        body: [
+          '«The checkout system shall show an error when the form is submitted» ставить тригер у кінець. Опублікований порядок: передумова, потім тригер, потім відповідь.',
+        ],
+      },
+      {
+        title: 'Приймати один рядок Kiro за весь EARS',
+        body: [
+          'Сторінка специфікацій функцій Kiro публікує один шаблон, ',
+          { c: 'WHEN … THE SYSTEM SHALL …' },
+          '. Повсюдне, ',
+          { e: 'While' },
+          ', ',
+          { e: 'If / then' },
+          ', ',
+          { e: 'Where' },
+          ' і складні поєднання входять у нотацію статті і посібника Мевіна. На цій сторінці Kiro їх немає.',
+        ],
+      },
+    ],
+    kiroTitle: 'Як Kiro використовує EARS',
+    kiro: [
+      [
+        t('Сторінка специфікацій функцій Kiro', earsHref.kiroFeature, 'them'),
+        ', позначена як оновлена 4 серпня 2026 року і прочитана 2 листопада 2026 року, каже, що файл ',
+        { c: 'requirements.md' },
+        ' використовує EARS. Надрукований шаблон — ',
+        { c: 'WHEN [condition/event]' },
+        ', потім ',
+        { c: 'THE SYSTEM SHALL [expected behavior]' },
+        '. Приклад сторінки: WHEN a user submits a form with invalid data, THE SYSTEM SHALL display validation errors next to the relevant fields.',
+      ],
+      [
+        t('Сторінка «спочатку вимоги»', earsHref.kiroRequirements, 'them'),
+        ' каже, що згенерований ',
+        { c: 'requirements.md' },
+        ' містить користувацькі історії з критеріями приймання і поведінку системи в тій самій формі WHEN … THE SYSTEM SHALL …. Приклад реєстрації — три речення: правильні дані реєстрації створюють обліковий запис, уже наявна пошта показує «Email already registered», а хибний формат пошти показує помилку перевірки.',
+      ],
+      [
+        'До проєкту Analyze Requirements шукає логічні неузгодженості, неоднозначність, конфліктні обмеження і прогалини. Сторінка каже, що це обирають у параметрах чату або в меню Continue редактора після генерації вимог. ',
+        { c: 'design.md' },
+        ' і ',
+        { c: 'tasks.md' },
+        ' стоять поруч із вимогами. Quick Spec проводить вимоги, проєкт і завдання без зупинки на затвердження між ними.',
+      ],
+      [
+        'Цей розбір — крок усередині Kiro. Сторінка не описує його як лінтер формату, який додають у власний CI. Як інші інструменти перевіряють специфікацію, написано в ',
+        t('огляді інструментів', earsHref.tools),
+        '. Порівняння двох продуктів — ',
+        t('SpecScore vs Kiro', earsHref.kiroVs),
+        '.',
+      ],
+    ],
+    mapTitle: 'Та сама вимога в SpecScore',
+    map: [
+      [
+        'SpecScore не перевіряє, що речення збігається з шаблоном EARS. ',
+        { c: 'specscore spec lint' },
+        ' із репозиторію ',
+        t('specscore-cli', earsHref.cliRepo, 'us'),
+        ' перевіряє структуру. Текст довідки називає файли README, розділи Open Questions, рівні заголовків, посилання на функції, внутрішні посилання і рядки індексу. Речення EARS може бути прозою під заголовком ',
+        { c: 'REQ' },
+        '. Лінтер не оцінює англійську.',
+      ],
+      [
+        t('Специфікація вимоги', earsHref.requirement),
+        ' вміщує кожну вимогу під тематичний заголовок усередині ',
+        { c: '## Behavior' },
+        ', на один рівень нижче, зазвичай ',
+        { c: '#### REQ: slug' },
+        '. Slug — малі літери, цифри і дефіси. Ідентифікатор — ',
+        { c: '{feature-path}#req:{slug}' },
+        '. Специфікація каже, що вимогу слід писати ключовими словами RFC 2119 (Request for Comments 2119): MUST, MUST NOT, SHOULD, SHOULD NOT і MAY. У відповідності нижче EARS-ове ',
+        { e: 'shall' },
+        ' записано як MUST.',
+      ],
+      [
+        t('Критерій приймання', earsHref.acceptance),
+        ' необов’язковий. Коли він є, це ',
+        { c: '### AC: slug' },
+        ' усередині ',
+        { c: '## Acceptance Criteria' },
+        ', а наступний рядок — ',
+        { c: '**Requirements:**' },
+        ' із цими ідентифікаторами. Специфікація критеріїв приймання каже, що AC формулює абстрактну умову і не мусить містити кроки Given/When/Then, конкретні входи або деталь реалізації. Конкретний хід — ',
+        t('сценарій', earsHref.scenario),
+        ' у каталозі ',
+        { c: '_tests/' },
+        ' функції. ',
+        t('Специфікація функції', earsHref.feature),
+        ' також вимагає статус, стислий опис, проблему, поведінку, критерії приймання, відкриті питання і нижній колонтитул відповідності.',
+      ],
+      [
+        'Файли нижче — функція оформлення замовлення. ',
+        { c: 'show-field-error' },
+        ' — подієвий приклад. ',
+        { c: 'reject-invalid-email' },
+        ' — приклад небажаної поведінки. 2 листопада 2026 року ',
+        { c: 'specscore spec lint' },
+        ' повідомив 0 порушень для цього дерева на specscore 0.55.1, останньому випуску, опублікованому 30 жовтня 2026 року, і на specscore 0.39.1, версії, закріпленій у ',
+        t('dogfood.yml', earsHref.dogfood, 'us'),
+        '. ',
+        t('Репозиторій формату', earsHref.formatRepo, 'us'),
+        ' — місце цього потоку.',
+      ],
+    ],
+    featureCaption: 'spec/features/checkout/README.md',
+    indexCaption: 'spec/features/README.md — комірка опису збігається з реченням стислого опису функції. Правило лінтера feature-index-row-sync відхилило коротший опис.',
+    specReadmeCaption: 'spec/README.md — видалення розділу Open Questions дало oq-section: Open Questions section not found.',
+    configCaption: 'specscore.yaml — project.host, project.org і project.repo — значення, з якими звіряється рядок studio-toolbar. Без них лінтер повідомив studio-toolbar: studio toolbar requires project host/org/repo.',
+    mapAfter: [
+      [
+        'Ще дві помилки спливли, поки цей приклад доводили до проходження, і обидві виправлено у файлах вище. Функція без ',
+        { c: '**Source Ideas:**' },
+        ' не пройшла ',
+        { c: 'feature-source-ideas-required' },
+        '; ',
+        { c: '—' },
+        ' — порожнє значення. Індексу функцій також потрібне поле frontmatter ',
+        { c: 'format: https://specscore.md/features-index-specification' },
+        '.',
+      ],
+      [
+        'Успіх лінтера означає, що файли відповідають цим структурним правилам. Він не означає, що речення — добрий EARS, і не означає, що продукт оформлення замовлення існує. Given/When/Then для цієї поведінки був би файлом сценарію в ',
+        { c: 'spec/features/checkout/_tests/' },
+        ', а не ще одним абзацом усередині AC.',
+      ],
+    ],
+    faqTitle: 'Питання',
+    faqs: [
+      {
+        q: 'Що означає EARS?',
+        a: [
+          'Easy Approach to Requirements Syntax. Це набір шаблонів речення для вимог, опублікований Алістером Мевіном, Філіпом Вілкінсоном, Едріаном Гарвудом і Марком Новаком із Rolls-Royce на 17th IEEE International Requirements Engineering Conference у 2009 році й описаний на сайті Мевіна.',
+        ],
+      },
+      {
+        q: 'Нотація Kiro — це весь EARS?',
+        a: [
+          'Сторінка специфікацій функцій Kiro задає один шаблон: WHEN … THE SYSTEM SHALL …. Стаття 2009 року і посібник Мевіна також визначають повсюдні вимоги, стан While, If/then для небажаної поведінки, Where для необов’язкової функції і складні поєднання цих ключових слів.',
+        ],
+      },
+      {
+        q: 'Чи перевіряє SpecScore синтаксис EARS?',
+        a: [
+          'Ні. ',
+          { c: 'specscore spec lint' },
+          ' перевіряє структуру файлів SpecScore. Речення EARS може бути прозою ',
+          { c: 'REQ' },
+          '. Лінтер не оцінює англійську.',
+        ],
+      },
+      {
+        q: 'Куди класти приклади Given/When/Then?',
+        a: [
+          'У сценарій у каталозі ',
+          { c: '_tests/' },
+          ' функції. Критерій приймання лишається абстрактною умовою і за специфікацією критеріїв приймання не мусить містити кроки Given/When/Then.',
+        ],
+      },
+    ],
+    sourcesTitle: 'Джерела',
+    sourcesNote: 'Прочитано 2 листопада 2026 року, крім сторінок, які друкують власну дату оновлення. Сторінка специфікацій функцій Kiro вказує оновлення 4 серпня 2026 року.',
+    sourceLabel: {
+      paper: 'Mavin, Wilkinson, Harwood і Novak — Easy Approach to Requirements Syntax (EARS), 17th IEEE International Requirements Engineering Conference, 2009, DOI 10.1109/RE.2009.9',
+      mavin: 'Алістер Мевін — посібник EARS',
+      kiroFeature: 'Документація Kiro — специфікації функцій і EARS (сторінку оновлено 4 серпня 2026)',
+      kiroRequirements: 'Документація Kiro — потік «спочатку вимоги»',
+      requirement: 'specscore/specscore — специфікація вимоги',
+      acceptance: 'specscore/specscore — специфікація критеріїв приймання',
+      scenario: 'specscore/specscore — специфікація сценарію',
+      feature: 'specscore/specscore — специфікація функції',
+      dogfood: 'specscore/specscore — потік CI dogfood',
+      cli: 'specscore/specscore-cli',
+      formatRepo: 'specscore/specscore',
+    },
+    relatedTitle: 'Пов’язане',
+    related: [
+      { href: earsHref.acceptanceArticle, label: "Як писати критерії приймання, які перевірить ШІ-агент" },
+      { href: earsHref.kiroVs, label: 'SpecScore vs Kiro' },
+      { href: earsHref.tools, label: 'Інструменти розробки за специфікаціями' },
+      { href: earsHref.sdd, label: 'Розробка за специфікаціями' },
+      { href: earsHref.requirement, label: 'Специфікація вимоги' },
+      { href: earsHref.acceptance, label: 'Специфікація критеріїв приймання' },
+      { href: earsHref.feature, label: 'Специфікація функції' },
+      { href: earsHref.validators, label: 'Валідатори і CI' },
+    ],
+    ctaTitle: 'Покладіть вимогу у файл, який CI може відхилити.',
+    ctaInstall: 'Встановити CLI',
+    ctaSkills: 'Отримати AI-скіли для агента',
+    ctaGithub: 'Відкритий код на GitHub',
+  };
+
+const acceptance: AcceptanceArticleCopy = {
     metaTitle: 'Як писати критерії приймання, які перевірить ШІ-агент',
     metaDescription:
       'Приклади критеріїв приймання і як писати критерії приймання у Given/When/Then. Перевірювані критерії приймання для ШІ-агентів програмування, з перевіркою в CI.',
@@ -13,17 +337,17 @@ export const locale: ArticleLocale = {
     updated: 'Оновлено 3 листопада 2026.',
     breadcrumb: 'Статті',
     hero: [
-      t('Критерії приймання', href.acceptance),
+      t('Критерії приймання', acceptanceHref.acceptance),
       ' (AC, acceptance criteria) — це умови, які мають бути істинними, перш ніж зміна вважається готовою. Given/When/Then — це форма кроків у ',
-      t('Gherkin', href.gherkin, 'them'),
+      t('Gherkin', acceptanceHref.gherkin, 'them'),
       ', мові, якою ',
-      t('Cucumber', href.bdd, 'them'),
+      t('Cucumber', acceptanceHref.bdd, 'them'),
       ' послуговується для розробки, керованої поведінкою (BDD, behaviour-driven development): Given — початковий стан, When — стається одна дія, Then — настає спостережуваний результат. Документ вимог до продукту (PRD, product requirements document) — це проза, яка називає проблему й задуманий продукт. ',
-      t('Розробка за специфікаціями', href.sdd),
+      t('Розробка за специфікаціями', acceptanceHref.sdd),
       ' (SDD, spec-driven development) трактує структуровану специфікацію, а не саму лише цю прозу, як джерело, щодо якого перевіряють реалізацію. ',
-      t('EARS', href.ears, 'them'),
+      t('EARS', acceptanceHref.ears, 'them'),
       ' (Easy Approach to Requirements Syntax) — це спосіб так обмежити речення вимоги, щоб його клаузи стояли у фіксованому порядку. Безперервна інтеграція (CI, continuous integration) — це автоматична перевірка кожної запропонованої зміни; цей сайт описує дві перевірки SpecScore на ',
-      t('сторінці валідаторів', href.validators),
+      t('сторінці валідаторів', acceptanceHref.validators),
       '. Ця сторінка показує, як писати перевірювані критерії приймання, які може перевірити агент для написання коду на основі штучного інтелекту (ШІ, artificial intelligence), з прикладами критеріїв приймання, і що насправді перевіряє інтерфейс командного рядка (CLI, command-line interface) SpecScore.',
     ],
     whatTitle: 'Що таке критерії приймання',
@@ -33,11 +357,11 @@ export const locale: ArticleLocale = {
       ],
       [
         'Вимога — це правило. У ',
-        t('специфікації вимог', href.requirementRepo, 'us'),
+        t('специфікації вимог', acceptanceHref.requirementRepo, 'us'),
         ' SpecScore вимога — це заголовок ',
         { c: '#### REQ:' },
         ' усередині функції: одне зобов’язання, зі своїм ідентифікатором. Критерій приймання збирає пов’язані вимоги в одну умову. Сценарій — це один конкретний випадок, який показує, що умова виконується. ',
-        t('Специфікація критеріїв приймання', href.acceptance),
+        t('Специфікація критеріїв приймання', acceptanceHref.acceptance),
         ' каже так: критерії відповідають на питання «що має бути істинним?», а сценарії — на питання «як ми це доведемо?».',
       ],
       [
@@ -88,7 +412,7 @@ export const locale: ArticleLocale = {
         'Дві форми покривають більшість прикладів критеріїв приймання, які команди справді зберігають. Given/When/Then — це сценарій. Контрольний список — це перелік результатів. Беріть сценарій, коли важливий порядок стану, дії і результату. Беріть контрольний список, коли перелічуєте незалежні результати однієї дії.',
       ],
       [
-        t('Довідник Gherkin', href.gherkin, 'them'),
+        t('Довідник Gherkin', acceptanceHref.gherkin, 'them'),
         ' від Cucumber дає крокам ключові слова Given, When, Then, And і But. Довідник використовує англійську; Gherkin має і переклади цих слів. Текст після ключового слова зіставляється з кодом, який називається step definition, коли Cucumber виконує файл. SpecScore не використовує цей шар step definition. Приклад нижче — Gherkin, щоб форма була знайомою. Це не файл SpecScore.',
       ],
     ],
@@ -104,8 +428,13 @@ export const locale: ArticleLocale = {
     ],
     earsTitle: 'Як це стосується вимог EARS',
     ears: [
+    [
+      "Шаблони речень описано в ",
+      t("Синтаксис вимог EARS з поясненням і прикладами", acceptanceHref.earsArticle),
+      ".",
+    ],
       [
-        t('Посібник Alistair Mavin', href.ears, 'them'),
+        t('Посібник Alistair Mavin', acceptanceHref.ears, 'them'),
         ' визначає EARS (Easy Approach to Requirements Syntax) як механізм, що м’яко обмежує текстові вимоги. Клаузи лишаються в одному порядку. Посібник дає загальну форму: While <optional pre-condition>, when <optional trigger>, the <system name> shall <system response>. Вимога має нуль або більше передумов, нуль або один тригер, одне ім’я системи і одну або більше відповідей системи.',
       ],
       [
@@ -150,15 +479,15 @@ export const locale: ArticleLocale = {
     specscore: [
       [
         'SpecScore публікує формат у репозиторії ',
-        t('specscore/specscore', href.formatRepo, 'us'),
+        t('specscore/specscore', acceptanceHref.formatRepo, 'us'),
         ', а CLI — у ',
-        t('specscore/specscore-cli', href.cliRepo, 'us'),
+        t('specscore/specscore-cli', acceptanceHref.cliRepo, 'us'),
         '. Ці два документи описують критерії приймання не зовсім в одній і тій самій формі. Обидва актуальні. Цей розділ каже, який документ якій формі відповідає, а потім — що саме відхиляє ',
         { c: 'specscore spec lint' },
         '.',
       ],
       [
-        t('Специфікація критеріїв приймання', href.acceptance),
+        t('Специфікація критеріїв приймання', acceptanceHref.acceptance),
         ' (README функції за цим URL) кладе критерії просто в README функції. Кожна функція має розділ ',
         { c: '## Acceptance Criteria' },
         '. Кожен критерій — це заголовок ',
@@ -173,7 +502,7 @@ export const locale: ArticleLocale = {
         'Конкретний доказ — файл сценарію в каталозі ',
         { c: '_tests/' },
         ' цієї функції. ',
-        t('Специфікація сценаріїв', href.scenarioRepo, 'us'),
+        t('Специфікація сценаріїв', acceptanceHref.scenarioRepo, 'us'),
         ' вимагає заголовок ',
         { c: '# Scenario:' },
         ', розділ ',
@@ -200,9 +529,9 @@ export const locale: ArticleLocale = {
         'CLI також читає тонкі файли критеріїв, по одному на критерій, за шляхом ',
         { c: '_acs/<slug>.ac.md' },
         '. ',
-        t('Приклад входу', href.example),
+        t('Приклад входу', acceptanceHref.example),
         ' і ',
-        t('посібник Rehearse', href.rehearse),
+        t('посібник Rehearse', acceptanceHref.rehearse),
         ' описують цю форму: ',
         { c: '# AC: <slug>' },
         ', необов’язкові ',
@@ -223,7 +552,7 @@ export const locale: ArticleLocale = {
       ],
       [
         'CI в цьому репозиторії — це ',
-        t('воркфлоу dogfood', href.dogfood, 'us'),
+        t('воркфлоу dogfood', acceptanceHref.dogfood, 'us'),
         '. Він встановлює CLI v0.39.1 і запускає ',
         { c: 'specscore spec lint' },
         ' для pull request і для push до main. На 3 листопада 2026 року перевірено: цей реліз і гілка за замовчуванням CLI обидва містять правила нижче. Лінтер перевіряє структуру. Він не оцінює англійський текст.',
@@ -294,7 +623,7 @@ export const locale: ArticleLocale = {
       ],
       [
         'Якщо потрібен список питань, щоб витягти критерій із розпливчастого запиту, візьміть ',
-        t('Як ставити добрі питання', href.questions),
+        t('Як ставити добрі питання', acceptanceHref.questions),
         '. Розбір входу показує один тонкий критерій, ',
         { c: 'session-hardened' },
         ', на своєму місці серед інших артефактів.',
@@ -330,7 +659,7 @@ export const locale: ArticleLocale = {
         q: 'Чи оцінює specscore spec lint розпливчасті формулювання?',
         a: [
           'Ні. У CLI v0.39.1, релізі, який встановлює CI цього репозиторію, ac-heading-format перевіряє заголовок ### AC:. Він не оцінює слова на кшталт «graceful» або «fast» і не попереджає, якщо критерій містить Given/When/Then. Формулювання — це робота з текстом. ',
-          t('Сторінка валідаторів', href.validators),
+          t('Сторінка валідаторів', acceptanceHref.validators),
           ' відокремлює цей детермінований lint від ручної перевірки ШІ.',
         ],
       },
@@ -348,6 +677,7 @@ export const locale: ArticleLocale = {
       gherkin: 'Cucumber — довідник Gherkin',
       bdd: 'Cucumber — розробка, керована поведінкою',
       ears: 'Alistair Mavin — EARS',
+      earsArticle: "Синтаксис вимог EARS з поясненням і прикладами",
       acceptance: 'SpecScore — специфікація критеріїв приймання',
       acceptanceRepo: 'specscore/specscore — функція критеріїв приймання',
       scenarioRepo: 'specscore/specscore — функція сценарію',
@@ -364,35 +694,52 @@ export const locale: ArticleLocale = {
     },
     relatedTitle: 'Пов’язане',
     related: [
-      { href: href.sdd, label: 'Розробка за специфікаціями' },
-      { href: href.tools, label: 'Інструменти розробки за специфікаціями' },
-      { href: href.acceptance, label: 'Специфікація критеріїв приймання' },
-      { href: href.questions, label: 'Як ставити добрі питання' },
-      { href: href.example, label: 'Функція входу на прикладі' },
-      { href: href.rehearse, label: 'Rehearse' },
-      { href: href.validators, label: 'Що перевіряє SpecScore' },
-      { href: href.cli, label: 'CLI' },
+      { href: acceptanceHref.earsArticle, label: "Синтаксис вимог EARS з поясненням і прикладами" },
+      { href: acceptanceHref.sdd, label: 'Розробка за специфікаціями' },
+      { href: acceptanceHref.tools, label: 'Інструменти розробки за специфікаціями' },
+      { href: acceptanceHref.acceptance, label: 'Специфікація критеріїв приймання' },
+      { href: acceptanceHref.questions, label: 'Як ставити добрі питання' },
+      { href: acceptanceHref.example, label: 'Функція входу на прикладі' },
+      { href: acceptanceHref.rehearse, label: 'Rehearse' },
+      { href: acceptanceHref.validators, label: 'Що перевіряє SpecScore' },
+      { href: acceptanceHref.cli, label: 'CLI' },
     ],
     ctaTitle: 'Перевірте специфікацію, яка у вас є.',
     ctaInstall: 'Встановити CLI',
     ctaSkills: 'Навички ШІ',
     ctaGithub: 'Формат на GitHub',
-  },
+  };
+
+export const locale: ArticleLocale = {
+  ears,
+  acceptance,
   index: {
-    metaTitle: 'Як писати критерії приймання та інші статті SpecScore',
-    metaDescription:
-      'Статті SpecScore про те, як писати критерії приймання, про Given/When/Then і про перевірювані критерії приймання для ШІ-агентів програмування.',
+    metaTitle: 'Статті | SpecScore',
+    metaDescription: "Статті про нотацію вимог і розробку за специфікаціями, зокрема синтаксис вимог EARS і запис вимоги в SpecScore. Статті SpecScore про те, як писати критерії приймання, про Given/When/Then і про перевірювані критерії приймання для ШІ-агентів програмування.",
     h1: 'Статті',
     hero: [
-      'Статті SpecScore пояснюють специфікацію простою мовою. ',
-      t('Критерії приймання', href.acceptance),
+'Статті тут пояснюють нотацію вимог або практику розробки за специфікаціями (SDD, spec-driven development), а потім показують ту саму ідею як вимогу SpecScore (REQ), яку ',
+      { c: 'specscore spec lint' },
+      ' може перевірити в безперервній інтеграції (CI, continuous integration).',
+      ' ',
+'Статті SpecScore пояснюють специфікацію простою мовою. ',
+      t('Критерії приймання', acceptanceHref.acceptance),
       ' (AC, acceptance criteria) — це умови, які мають бути істинними, перш ніж зміна вважається готовою. ',
-      t('Розробка за специфікаціями', href.sdd),
+      t('Розробка за специфікаціями', acceptanceHref.sdd),
       ' (SDD, spec-driven development) трактує структуровану специфікацію як джерело, щодо якого перевіряють реалізацію.',
     ],
     listLabel: 'Опубліковано',
-    articleTitle: 'Як писати критерії приймання, які перевірить ШІ-агент',
-    articleSummary:
-      'Приклади критеріїв приймання у формі Given/When/Then і контрольного списку, що робить критерій перевірюваним і що specscore spec lint перевіряє в безперервній інтеграції (CI).',
+    articles: [
+      {
+        href: '/articles/acceptance-criteria/',
+        title: 'Як писати критерії приймання, які перевірить ШІ-агент',
+        summary: 'Приклади критеріїв приймання у формі Given/When/Then і контрольного списку, що робить критерій перевірюваним і що specscore spec lint перевіряє в безперервній інтеграції (CI).',
+      },
+      {
+        href: '/articles/ears-requirements/',
+        title: 'Синтаксис вимог EARS з поясненням і прикладами',
+        summary: 'Що таке EARS (Easy Approach to Requirements Syntax), шаблони речень, як Kiro використовує нотацію EARS і вимога SpecScore, яка проходить лінтер.',
+      },
+    ],
   },
 };

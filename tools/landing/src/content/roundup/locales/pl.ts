@@ -200,6 +200,8 @@ export const page: RoundupPage = {
           t('Licencja Kiro', href.kiroLicense, 'them'),
           ', odczytana 30 października 2026, mówi, że IDE i CLI są licencjonowane jako treść AWS (AWS Content) na mocy umowy klienta AWS (AWS Customer Agreement) lub innej pisemnej umowy oraz AWS Intellectual Property License. Kiro pasuje komuś, kto chce, żeby ten produkt szkicował te trzy pliki. Zobacz ',
           t('SpecScore vs Kiro', '/vs/kiro/'),
+          '. Wzorce zdań są w ',
+          { a: 'składni wymagań EARS', href: '/articles/ears-requirements/' },
           '.',
         ],
       ],

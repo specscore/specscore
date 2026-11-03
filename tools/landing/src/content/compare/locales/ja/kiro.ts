@@ -164,6 +164,9 @@ export const kiro: ComparePage = {
       title: 'EARS と Given/When/Then は別の問いに答える',
       body: [
         'Kiro が文書化している EARS は、システムの振る舞いを一文にしたものです。SpecScore の受け入れ基準は、要件 ID に結び付いた Given/When/Then のシナリオです。散文の中に EARS の一文を書き、リンターが検査する SpecScore のファイルにはシナリオを残す、という併用ができます。',
+        ' 文型は',
+        { a: 'EARS要件構文', href: '/articles/ears-requirements/' },
+        '.',
       ],
     },
   ],

@@ -163,6 +163,9 @@ export const kiro: ComparePage = {
       title: 'EARS et Étant donné/Quand/Alors répondent à des questions différentes',
       body: [
         'EARS, tel que Kiro le documente, est une phrase de comportement du système. Les critères d’acceptation SpecScore sont des scénarios Étant donné/Quand/Alors liés à un identifiant d’exigence. Vous pouvez écrire une ligne EARS dans la prose et garder quand même le scénario dans le fichier SpecScore que le linter vérifie.',
+        ' Les patrons de phrase sont dans ',
+        { a: 'la syntaxe des exigences EARS', href: '/articles/ears-requirements/' },
+        '.',
       ],
     },
   ],

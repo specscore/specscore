@@ -17,7 +17,7 @@ import SiteFooterZhCn from './SiteFooterZhCn.astro';
 import SiteFooterZhTw from './SiteFooterZhTw.astro';
 import Inlines from './Inlines.astro';
 import { langs, localeFromPath, localeHref, type LangCode } from '../lib/languages.ts';
-import { articleHref, articlesIndexMdHref, localizedPrefixes } from '../content/articles/facts.ts';
+import { articlesIndexMdHref, localizedPrefixes } from '../content/articles/facts.ts';
 import { indexCopy } from '../content/articles/pages.ts';
 import type { Block, Inline } from '../content/articles/types.ts';
 
@@ -74,10 +74,12 @@ const canonical = `https://specscore.md${localeHref(locale, '/articles/')}`;
     <section class="section" aria-labelledby="list-title">
       <div class="section-inner section-inner--prose">
         <h2 id="list-title" class="section-title">{page.listLabel}</h2>
-        <article class="article-card">
-          <h3 class="article-card__title"><a href={articleHref(locale)} class="xref">{page.articleTitle}</a></h3>
-          <p class="article-card__summary">{page.articleSummary}</p>
-        </article>
+        {page.articles.map((article) => (
+          <article class="article-card">
+            <h3 class="article-card__title"><a href={localeHref(locale, article.href)} class="xref">{article.title}</a></h3>
+            <p class="article-card__summary">{article.summary}</p>
+          </article>
+        ))}
       </div>
     </section>
   </main>
@@ -109,6 +111,11 @@ const canonical = `https://specscore.md${localeHref(locale, '/articles/')}`;
   .section-title {
     font-size: var(--fs-h2);
     margin-bottom: var(--space-3);
+  }
+  .article-card + .article-card {
+    margin-top: var(--space-4);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--hairline);
   }
   .article-card__title {
     font-size: 1.25rem;

@@ -163,6 +163,9 @@ export const kiro: ComparePage = {
       title: 'EARS e Dato/Quando/Allora rispondono a domande diverse',
       body: [
         'EARS, come lo documenta Kiro, è una frase di comportamento del sistema. I criteri di accettazione di SpecScore sono scenari Dato/Quando/Allora legati a un id di requisito. Puoi scrivere una riga EARS nella prosa e tenere comunque lo scenario nel file SpecScore che il linter controlla.',
+        ' I modelli di frase sono in ',
+        { a: 'la sintassi dei requisiti EARS', href: '/articles/ears-requirements/' },
+        '.',
       ],
     },
   ],

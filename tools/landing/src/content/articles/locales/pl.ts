@@ -1,11 +1,335 @@
-import type { ArticleLocale } from '../types.ts';
-import { href } from '../facts.ts';
+import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy } from '../types.ts';
+import { acceptanceHref, earsHref } from '../facts.ts';
 
-const t = (a: string, url: string, kind?: 'us' | 'them') =>
+const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
 
-export const locale: ArticleLocale = {
-  article: {
+const ears: EarsArticleCopy = {
+    metaTitle: 'Składnia wymagań EARS wyjaśniona, z przykładami | SpecScore',
+    metaDescription:
+      'Notacja wymagań EARS (Easy Approach to Requirements Syntax): wzorce zdań, przykłady, typowe błędy, jak Kiro używa EARS i REQ SpecScore, który przechodzi linter.',
+    h1: 'Składnia wymagań EARS wyjaśniona, z przykładami',
+    updated: 'Ostatnia aktualizacja: 2 listopada 2026',
+    breadcrumb: 'Artykuły',
+    hero: [
+      t('EARS', earsHref.mavin),
+      ' (Easy Approach to Requirements Syntax) to notacja wymagań: mały zestaw angielskich wzorców zdań, nazywany też składnią EARS, który trzyma warunek, wyzwalacz i odpowiedź systemu w stałej kolejności. Wymaganie to jeden sprawdzalny obowiązek, który system musi spełnić. ',
+      t('Rozwój sterowany specyfikacją', earsHref.sdd),
+      ' (SDD, spec-driven development) to praktyka zapisania tego obowiązku w specyfikacji przed kodem i traktowania specyfikacji jako źródła prawdy. Dokument wymagań produktu (PRD, product requirements document) to proza, która nazywa problem i zakres, zanim praca zostanie podzielona na zadania. W ',
+      t('SpecScore', earsHref.home),
+      ' wymaganie (REQ) to nazwana reguła wewnątrz funkcji, a kryterium akceptacji (AC, acceptance criterion) to opcjonalny abstrakcyjny warunek wskazujący jedną lub więcej takich reguł. ',
+      t('Ciągła integracja', earsHref.validators),
+      ' (CI, continuous integration) to automatyczne sprawdzenie przy każdej proponowanej zmianie. Sprawdzenie jest poleceniem ',
+      t('interfejsu wiersza poleceń', earsHref.cli),
+      ' (CLI, command-line interface): ',
+      { c: 'specscore spec lint' },
+      '. ',
+      t('Kiro', earsHref.kiro, 'them'),
+      ', agentowe zintegrowane środowisko programistyczne (IDE, integrated development environment) od Amazon Web Services (AWS), zapisuje jeden z tych wzorców. Notację po raz pierwszy opublikowali Alistair Mavin i współpracownicy z Rolls-Royce na konferencji inżynierii wymagań Institute of Electrical and Electronics Engineers (IEEE) w 2009 roku.',
+    ],
+    originTitle: 'Skąd wzięło się EARS',
+    origin: [
+      [
+        'Alistair Mavin, Philip Wilkinson, Adrian Harwood i Mark Novak, wtedy w Rolls-Royce PLC, opublikowali „Easy Approach to Requirements Syntax (EARS)” na 17th IEEE International Requirements Engineering Conference w 2009 roku. Identyfikator dokumentu to ',
+        t('10.1109/RE.2009.9', earsHref.paper),
+        '. Reguły powstały przy wyciąganiu wymagań sterowania silnikiem z Certification Specification for Engines (CS-E), sekcja CS-E 50, przepisu zdatności do lotu. Ten tekst mieszał wymagania, wskazówki projektowe i notatki.',
+      ],
+      [
+        'Artykuł nazywa osiem problemów nieograniczonego języka naturalnego: niejednoznaczność, ogólnikowość, złożoność, pominięcie, powtórzenie, rozwlekłość, nieodpowiednią implementację i niemożność testowania. Mały zestaw reguł miał pozwolić każdemu takiemu wymaganiu użyć jednego z pięciu szablonów. Autorzy piszą, że notacja pasuje do wysokopoziomowych wymagań interesariuszy i nie twierdzą, że obejmuje każdy poziom dekompozycji systemu.',
+      ],
+      [
+        t('Własny przewodnik Mavina', earsHref.mavin),
+        ' opisuje EARS jako sposób łagodnego ograniczenia wymagań tekstowych. Klauzule zostają w jednej kolejności, którą nazywa logiką temporalną: dowolny warunek wstępny, potem wyzwalacz, potem nazwa systemu i odpowiedź. Jego zestaw reguł to zero lub wiele warunków wstępnych, zero lub jeden wyzwalacz, jedna nazwa systemu i jedna lub wiele odpowiedzi. Artykuł z 2009 roku specjalizuje ten kształt w pięć szablonów. Ten sam przewodnik nazywa też wymagania złożone, które łączą słowa kluczowe.',
+      ],
+      [
+        'W studium przypadku artykułu surowy wyciąg miał 36 wymagań, a zestaw przepisany 47. Średnia długość spadła z 36,9 do 25,6 słowa. Autorzy podają, że w tym studium złożoność, pominięcie, powtórzenie, nieodpowiednia implementacja i niemożność testowania zniknęły ze zbioru przepisanego, a niejednoznaczność, ogólnikowość i rozwlekłość zmalały, ale nie zniknęły. Wymieniają też ograniczenia: mała próba, tylko wysokopoziomowe wymagania bezpieczeństwa i osąd przy klasyfikacji ogólnikowości. Te liczby są z artykułu, dla tego jednego dokumentu.',
+      ],
+    ],
+    patternsTitle: 'Wzorce zdań EARS',
+    patternsIntro: [
+      [
+        'Słowa kluczowe są z artykułu z 2009 roku i z przewodnika Mavina. Artykuł dopuszcza też ',
+        { e: 'During' },
+        ' zamiast ',
+        { e: 'While' },
+        ' dla stanu, z tym samym znaczeniem, gdy tak czyta się jaśniej. Zdania przykładowe ilustrują szablony. To nie cytaty z artykułu. Kiro zapisuje wzorzec zdarzeniowy wielkimi literami; notacja pierwotna używa wielkiej litery na początku. Przykłady zostają po angielsku, bo składnia EARS jest angielska.',
+      ],
+    ],
+    patternName: {
+      ubiquitous: 'Wszechobecne',
+      event: 'Zdarzeniowe',
+      state: 'Stanowe',
+      unwanted: 'Zachowanie niepożądane',
+      optional: 'Funkcja opcjonalna',
+      complex: 'Złożone',
+    },
+    patternBody: {
+      ubiquitous: [
+        'Zawsze aktywne. Nie ma słowa kluczowego EARS, bo nie ma warunku wstępnego ani wyzwalacza. Własna ilustracja artykułu z 2009 roku to układ sterowania, który ma zapobiec nadobrotom silnika.',
+      ],
+      event: [
+        'Odpowiedź jest wymagana, gdy na granicy systemu wykryto wyzwalacz, i tylko wtedy. Słowo kluczowe to ',
+        { e: 'When' },
+        '.',
+      ],
+      state: [
+        'Odpowiedź jest wymagana tak długo, jak system pozostaje w nazwanym stanie. Słowo kluczowe to ',
+        { e: 'While' },
+        '.',
+      ],
+      unwanted: [
+        'Odpowiedź obsługuje awarię, zakłócenie, odchylenie albo inne zachowanie niepożądane. Słowa kluczowe to ',
+        { e: 'If' },
+        ' i ',
+        { e: 'then' },
+        '. Artykuł dał temu wzorcowi własne słowa kluczowe, żeby te wymagania zostały widoczne. Autorzy zauważają, że pożądane i niepożądane bywa kwestią punktu widzenia.',
+      ],
+      optional: [
+        'Odpowiedź obowiązuje tylko wtedy, gdy produkt zawiera nazwaną funkcję. Słowo kluczowe to ',
+        { e: 'Where' },
+        '.',
+      ],
+      complex: [
+        'Więcej niż jedno słowo kluczowe. Przewodnik Mavina trzyma tę samą kolejność klauzul: ',
+        { e: 'While' },
+        ' dla warunku wstępnego, potem ',
+        { e: 'When' },
+        ' dla wyzwalacza, potem odpowiedź systemu. Artykuł z 2009 roku łączy też ',
+        { e: 'While' },
+        ' z ',
+        { e: 'If / then' },
+        ' dla zachowania niepożądanego w stanie. Ilustracja tej kombinacji: While the shopper is signed out, if the shopper submits the checkout form, then the checkout system shall refuse the order.',
+      ],
+    },
+    exampleLabel: 'Przykład',
+    mistakesTitle: 'Typowe błędy',
+    mistakes: [
+      {
+        title: 'Kilka obowiązków w jednym zdaniu',
+        body: [
+          'Artykuł traktuje zdanie złożone jako problem złożoności i je dzieli. ',
+          t('Specyfikacja wymagania SpecScore', earsHref.requirement),
+          ' mówi to samo własnymi słowami: każde ',
+          { c: 'REQ' },
+          ' musi wyrażać dokładnie jeden sprawdzalny obowiązek.',
+        ],
+      },
+      {
+        title: 'Ukrywanie zachowania niepożądanego w When',
+        body: [
+          { e: 'When' },
+          ' jest dla oczekiwanego wyzwalacza. ',
+          { e: 'If / then' },
+          ' jest dla zachowania, którego wolałoby się nie spotkać. Jedno słowo kluczowe dla obu sprawia, że przypadek niepożądany wygląda jak normalny. To problem pominięcia, który artykuł nazywa.',
+        ],
+      },
+      {
+        title: 'Pisanie implementacji',
+        body: [
+          '„The checkout system shall store the flag in Redis” nazywa projekt. Artykuł nazywa to nieodpowiednią implementacją. Odpowiedź ma mówić, co system ma osiągnąć, a nie który komponent to robi.',
+        ],
+      },
+      {
+        title: 'Brak nazwy systemu',
+        body: [
+          '„When the form is submitted, shall show an error” nie ma podmiotu. Zestaw reguł Mavina wymaga jednej nazwy systemu.',
+        ],
+      },
+      {
+        title: 'Wyzwalacz po odpowiedzi',
+        body: [
+          '„The checkout system shall show an error when the form is submitted” stawia wyzwalacz na końcu. Opublikowana kolejność to warunek wstępny, potem wyzwalacz, potem odpowiedź.',
+        ],
+      },
+      {
+        title: 'Branie jednej linii Kiro za całe EARS',
+        body: [
+          'Strona specyfikacji funkcji Kiro publikuje jeden wzorzec, ',
+          { c: 'WHEN … THE SYSTEM SHALL …' },
+          '. Wszechobecne, ',
+          { e: 'While' },
+          ', ',
+          { e: 'If / then' },
+          ', ',
+          { e: 'Where' },
+          ' i kombinacje złożone są częścią notacji w artykule i w przewodniku Mavina. Nie ma ich na tej stronie Kiro.',
+        ],
+      },
+    ],
+    kiroTitle: 'Jak Kiro używa EARS',
+    kiro: [
+      [
+        t('Strona specyfikacji funkcji Kiro', earsHref.kiroFeature, 'them'),
+        ', oznaczona jako zaktualizowana 4 sierpnia 2026 i czytana 2 listopada 2026, mówi, że plik ',
+        { c: 'requirements.md' },
+        ' używa EARS. Wydrukowany wzorzec to ',
+        { c: 'WHEN [condition/event]' },
+        ' i potem ',
+        { c: 'THE SYSTEM SHALL [expected behavior]' },
+        '. Przykład strony: WHEN a user submits a form with invalid data, THE SYSTEM SHALL display validation errors next to the relevant fields.',
+      ],
+      [
+        t('Strona wymagań na początku', earsHref.kiroRequirements, 'them'),
+        ' mówi, że wygenerowany ',
+        { c: 'requirements.md' },
+        ' zawiera historyjki użytkownika z kryteriami akceptacji i zachowania systemu w tej samej formie WHEN … THE SYSTEM SHALL …. Przykład rejestracji to trzy zdania: poprawne dane rejestracji tworzą konto, istniejący adres e-mail pokazuje „Email already registered”, a niepoprawny format e-mail pokazuje błąd walidacji.',
+      ],
+      [
+        'Przed projektem Analyze Requirements szuka niespójności logicznych, niejednoznaczności, sprzecznych ograniczeń i luk. Strona mówi, że wybiera się to z opcji czatu albo menu Continue w edytorze po wygenerowaniu wymagań. ',
+        { c: 'design.md' },
+        ' i ',
+        { c: 'tasks.md' },
+        ' stoją obok wymagań. Quick Spec uruchamia wymagania, projekt i zadania bez przystanku zatwierdzenia między nimi.',
+      ],
+      [
+        'Ta analiza jest krokiem wewnątrz Kiro. Strona nie opisuje jej jako lintera formatu, który dodaje się do własnego CI. Jak inne narzędzia sprawdzają specyfikację, jest w ',
+        t('przewodniku narzędzi', earsHref.tools),
+        '. Porównanie obu produktów to ',
+        t('SpecScore vs Kiro', earsHref.kiroVs),
+        '.',
+      ],
+    ],
+    mapTitle: 'To samo wymaganie w SpecScore',
+    map: [
+      [
+        'SpecScore nie sprawdza, czy zdanie pasuje do szablonu EARS. ',
+        { c: 'specscore spec lint' },
+        ' z repozytorium ',
+        t('specscore-cli', earsHref.cliRepo, 'us'),
+        ' sprawdza strukturę. Tekst pomocy wymienia pliki README, sekcje Open Questions, poziomy nagłówków, odwołania do funkcji, linki wewnętrzne i wpisy indeksu. Zdanie EARS może być prozą pod nagłówkiem ',
+        { c: 'REQ' },
+        '. Linter nie ocenia angielszczyzny.',
+      ],
+      [
+        t('Specyfikacja wymagania', earsHref.requirement),
+        ' umieszcza każde wymaganie pod nagłówkiem tematu wewnątrz ',
+        { c: '## Behavior' },
+        ', o jeden poziom niżej, zwykle ',
+        { c: '#### REQ: slug' },
+        '. Slug używa małych liter, cyfr i myślników. Identyfikator to ',
+        { c: '{feature-path}#req:{slug}' },
+        '. Specyfikacja mówi, że wymaganie powinno używać słów kluczowych RFC 2119 (Request for Comments 2119): MUST, MUST NOT, SHOULD, SHOULD NOT i MAY. W odwzorowaniu poniżej EARS-owe ',
+        { e: 'shall' },
+        ' jest zapisane jako MUST.',
+      ],
+      [
+        t('Kryterium akceptacji', earsHref.acceptance),
+        ' jest opcjonalne. Gdy jest użyte, to ',
+        { c: '### AC: slug' },
+        ' wewnątrz ',
+        { c: '## Acceptance Criteria' },
+        ', a następna linia to ',
+        { c: '**Requirements:**' },
+        ' z tymi identyfikatorami. Specyfikacja kryteriów akceptacji mówi, że AC stwierdza warunek abstrakcyjny i nie może zawierać kroków Given/When/Then, konkretnych danych wejściowych ani szczegółu implementacji. Konkretny przebieg to ',
+        t('scenariusz', earsHref.scenario),
+        ' w katalogu ',
+        { c: '_tests/' },
+        ' funkcji. ',
+        t('Specyfikacja funkcji', earsHref.feature),
+        ' wymaga też statusu, podsumowania, problemu, zachowania, kryteriów akceptacji, pytań otwartych i stopki zgodności.',
+      ],
+      [
+        'Pliki poniżej to funkcja kasy. ',
+        { c: 'show-field-error' },
+        ' to przykład zdarzeniowy. ',
+        { c: 'reject-invalid-email' },
+        ' to przykład zachowania niepożądanego. 2 listopada 2026 ',
+        { c: 'specscore spec lint' },
+        ' zgłosił 0 naruszeń dla tego drzewa przy specscore 0.55.1, najnowszym wydaniu opublikowanym 30 października 2026, i przy specscore 0.39.1, wersji przypiętej w ',
+        t('dogfood.yml', earsHref.dogfood, 'us'),
+        '. ',
+        t('Repozytorium formatu', earsHref.formatRepo, 'us'),
+        ' jest miejscem tego przepływu.',
+      ],
+    ],
+    featureCaption: 'spec/features/checkout/README.md',
+    indexCaption: 'spec/features/README.md — komórka opisu to zdanie podsumowania funkcji. Reguła lintera feature-index-row-sync odrzuciła krótszy opis.',
+    specReadmeCaption: 'spec/README.md — usunięcie sekcji Open Questions dało oq-section: Open Questions section not found.',
+    configCaption: 'specscore.yaml — project.host, project.org i project.repo są wartościami, z którymi porównywana jest linia studio-toolbar. Bez nich linter zgłosił studio-toolbar: studio toolbar requires project host/org/repo.',
+    mapAfter: [
+      [
+        'Dwa dalsze błędy pojawiły się, zanim ten przykład przeszedł, i oba są poprawione w plikach powyżej. Funkcja bez ',
+        { c: '**Source Ideas:**' },
+        ' nie przeszła ',
+        { c: 'feature-source-ideas-required' },
+        '; ',
+        { c: '—' },
+        ' jest wartością pustą. Indeks funkcji potrzebował też pola frontmatter ',
+        { c: 'format: https://specscore.md/features-index-specification' },
+        '.',
+      ],
+      [
+        'Zaliczenie lintera znaczy, że pliki spełniają te reguły strukturalne. Nie znaczy, że zdania są dobrym EARS, ani że produkt kasy istnieje. Given/When/Then dla tego zachowania byłby plikiem scenariusza w ',
+        { c: 'spec/features/checkout/_tests/' },
+        ', a nie kolejnym akapitem wewnątrz AC.',
+      ],
+    ],
+    faqTitle: 'Pytania',
+    faqs: [
+      {
+        q: 'Co znaczy EARS?',
+        a: [
+          'Easy Approach to Requirements Syntax. To zestaw wzorców zdań dla wymagań, opublikowany przez Alistaira Mavina, Philipa Wilkinsona, Adriana Harwooda i Marka Novaka z Rolls-Royce na 17th IEEE International Requirements Engineering Conference w 2009 roku i opisany na stronie Mavina.',
+        ],
+      },
+      {
+        q: 'Czy notacja Kiro to całe EARS?',
+        a: [
+          'Strona specyfikacji funkcji Kiro określa jeden wzorzec: WHEN … THE SYSTEM SHALL …. Artykuł z 2009 roku i przewodnik Mavina definiują też wymagania wszechobecne, stanowe While, If/then dla zachowania niepożądanego, Where dla funkcji opcjonalnej i złożone kombinacje tych słów kluczowych.',
+        ],
+      },
+      {
+        q: 'Czy SpecScore sprawdza składnię EARS?',
+        a: [
+          'Nie. ',
+          { c: 'specscore spec lint' },
+          ' sprawdza strukturę plików SpecScore. Zdanie EARS może być prozą ',
+          { c: 'REQ' },
+          '. Linter nie ocenia angielszczyzny.',
+        ],
+      },
+      {
+        q: 'Gdzie trafiają przykłady Given/When/Then?',
+        a: [
+          'Do scenariusza w katalogu ',
+          { c: '_tests/' },
+          ' funkcji. Kryterium akceptacji zostaje warunkiem abstrakcyjnym i według specyfikacji kryteriów akceptacji nie może zawierać kroków Given/When/Then.',
+        ],
+      },
+    ],
+    sourcesTitle: 'Źródła',
+    sourcesNote: 'Czytane 2 listopada 2026, poza miejscami, gdzie strona drukuje własną datę aktualizacji. Strona specyfikacji funkcji Kiro podaje aktualizację 4 sierpnia 2026.',
+    sourceLabel: {
+      paper: 'Mavin, Wilkinson, Harwood i Novak — Easy Approach to Requirements Syntax (EARS), 17th IEEE International Requirements Engineering Conference, 2009, DOI 10.1109/RE.2009.9',
+      mavin: 'Alistair Mavin — przewodnik EARS',
+      kiroFeature: 'Dokumentacja Kiro — specyfikacje funkcji i EARS (strona zaktualizowana 4 sierpnia 2026)',
+      kiroRequirements: 'Dokumentacja Kiro — przepływ wymagań na początku',
+      requirement: 'specscore/specscore — specyfikacja wymagania',
+      acceptance: 'specscore/specscore — specyfikacja kryteriów akceptacji',
+      scenario: 'specscore/specscore — specyfikacja scenariusza',
+      feature: 'specscore/specscore — specyfikacja funkcji',
+      dogfood: 'specscore/specscore — przepływ CI dogfood',
+      cli: 'specscore/specscore-cli',
+      formatRepo: 'specscore/specscore',
+    },
+    relatedTitle: 'Powiązane',
+    related: [
+      { href: earsHref.acceptanceArticle, label: "Jak pisać kryteria akceptacji, które agent AI może zweryfikować" },
+      { href: earsHref.kiroVs, label: 'SpecScore vs Kiro' },
+      { href: earsHref.tools, label: 'Narzędzia rozwoju sterowanego specyfikacją' },
+      { href: earsHref.sdd, label: 'Rozwój sterowany specyfikacją' },
+      { href: earsHref.requirement, label: 'Specyfikacja wymagania' },
+      { href: earsHref.acceptance, label: 'Specyfikacja kryteriów akceptacji' },
+      { href: earsHref.feature, label: 'Specyfikacja funkcji' },
+      { href: earsHref.validators, label: 'Walidatory i CI' },
+    ],
+    ctaTitle: 'Włóż wymaganie do pliku, który CI może odrzucić.',
+    ctaInstall: 'Zainstaluj CLI',
+    ctaSkills: 'Weź skille AI dla agenta',
+    ctaGithub: 'Otwarte źródła na GitHubie',
+  };
+
+const acceptance: AcceptanceArticleCopy = {
     metaTitle: 'Jak pisać kryteria akceptacji, które agent AI może zweryfikować',
     metaDescription:
       'Przykłady kryteriów akceptacji i jak pisać kryteria akceptacji w Given/When/Then. Sprawdzalne kryteria akceptacji dla agentów kodujących z AI, sprawdzane w CI.',
@@ -13,17 +337,17 @@ export const locale: ArticleLocale = {
     updated: 'Zaktualizowano 3 listopada 2026.',
     breadcrumb: 'Artykuły',
     hero: [
-      t('Kryteria akceptacji', href.acceptance),
+      t('Kryteria akceptacji', acceptanceHref.acceptance),
       ' (AC, acceptance criteria) to warunki, które muszą być prawdziwe, zanim zmiana liczy się jako ukończona. Given/When/Then to kształt kroków w ',
-      t('Gherkin', href.gherkin, 'them'),
+      t('Gherkin', acceptanceHref.gherkin, 'them'),
       ', języku, którego ',
-      t('Cucumber', href.bdd, 'them'),
+      t('Cucumber', acceptanceHref.bdd, 'them'),
       ' używa do rozwoju sterowanego zachowaniem (BDD, behaviour-driven development): Given stan początkowy, When zachodzi jedna akcja, Then następuje obserwowalny wynik. Dokument wymagań produktu (PRD, product requirements document) to prozaiczny opis, który nazywa problem i zamierzony produkt. ',
-      t('Rozwój sterowany specyfikacją', href.sdd),
+      t('Rozwój sterowany specyfikacją', acceptanceHref.sdd),
       ' (SDD, spec-driven development) traktuje ustrukturyzowaną specyfikację, a nie samą tę prozę, jako źródło, względem którego sprawdza się implementację. ',
-      t('EARS', href.ears, 'them'),
+      t('EARS', acceptanceHref.ears, 'them'),
       ' (Easy Approach to Requirements Syntax) to sposób łagodnego ograniczenia zdania wymagania tak, aby jego klauzule pozostawały w ustalonej kolejności. Ciągła integracja (CI, continuous integration) to automatyczne sprawdzenie każdej proponowanej zmiany; ta witryna opisuje dwa sprawdzenia SpecScore na ',
-      t('stronie walidatorów', href.validators),
+      t('stronie walidatorów', acceptanceHref.validators),
       '. Ta strona pokazuje, jak pisać sprawdzalne kryteria akceptacji, które agent sztucznej inteligencji (AI, artificial intelligence) może zweryfikować, z przykładami kryteriów akceptacji, oraz co naprawdę sprawdza interfejs wiersza poleceń (CLI, command-line interface) SpecScore.',
     ],
     whatTitle: 'Czym są kryteria akceptacji',
@@ -33,11 +357,11 @@ export const locale: ArticleLocale = {
       ],
       [
         'Wymaganie jest regułą. W ',
-        t('specyfikacji wymagań', href.requirementRepo, 'us'),
+        t('specyfikacji wymagań', acceptanceHref.requirementRepo, 'us'),
         ' SpecScore wymaganie to nagłówek ',
         { c: '#### REQ:' },
         ' wewnątrz funkcjonalności: jedno zobowiązanie, z własnym identyfikatorem. Kryterium akceptacji grupuje powiązane wymagania w jeden warunek. Scenariusz to jeden konkretny przypadek, który pokazuje, że warunek zachodzi. ',
-        t('Specyfikacja kryteriów akceptacji', href.acceptance),
+        t('Specyfikacja kryteriów akceptacji', acceptanceHref.acceptance),
         ' ujmuje to tak: kryteria odpowiadają „co musi być prawdą?”, a scenariusze odpowiadają „jak to udowodnić?”.',
       ],
       [
@@ -88,7 +412,7 @@ export const locale: ArticleLocale = {
         'Dwa kształty obejmują większość przykładów kryteriów akceptacji, które zespoły naprawdę zachowują. Given/When/Then to scenariusz. Lista kontrolna to lista wyników. Użyj scenariusza, gdy liczy się kolejność stanu, akcji i wyniku. Użyj listy kontrolnej, gdy wymieniasz niezależne wyniki jednej akcji.',
       ],
       [
-        t('Dokumentacja Gherkin', href.gherkin, 'them'),
+        t('Dokumentacja Gherkin', acceptanceHref.gherkin, 'them'),
         ' Cucumber nadaje krokom słowa kluczowe Given, When, Then, And i But. Ta dokumentacja używa angielskiego; Gherkin ma też tłumaczenia tych słów kluczowych. Słowa po słowie kluczowym są dopasowywane do kodu, nazywanego step definition, gdy Cucumber uruchamia plik. SpecScore nie używa tej warstwy definicji kroków. Przykład poniżej jest w Gherkin, żeby kształt był znajomy. To nie jest plik SpecScore.',
       ],
     ],
@@ -104,8 +428,13 @@ export const locale: ArticleLocale = {
     ],
     earsTitle: 'Jak to się ma do wymagań EARS',
     ears: [
+    [
+      "Wzorce zdań są opisane w ",
+      t("Składnia wymagań EARS wyjaśniona, z przykładami", acceptanceHref.earsArticle),
+      ".",
+    ],
       [
-        t('Przewodnik Alistaira Mavina', href.ears, 'them'),
+        t('Przewodnik Alistaira Mavina', acceptanceHref.ears, 'them'),
         ' definiuje EARS (Easy Approach to Requirements Syntax) jako mechanizm łagodnego ograniczania wymagań tekstowych. Klauzule zostają w jednej kolejności. Przewodnik podaje ogólny kształt: While <optional pre-condition>, when <optional trigger>, the <system name> shall <system response>. Wymaganie ma zero lub więcej warunków wstępnych, zero albo jeden wyzwalacz, jedną nazwę systemu i jedną lub więcej odpowiedzi systemu.',
       ],
       [
@@ -150,15 +479,15 @@ export const locale: ArticleLocale = {
     specscore: [
       [
         'SpecScore publikuje format w repozytorium ',
-        t('specscore/specscore', href.formatRepo, 'us'),
+        t('specscore/specscore', acceptanceHref.formatRepo, 'us'),
         ', a CLI w ',
-        t('specscore/specscore-cli', href.cliRepo, 'us'),
+        t('specscore/specscore-cli', acceptanceHref.cliRepo, 'us'),
         '. Te dwa dokumenty nie opisują kryteriów akceptacji w dokładnie tym samym kształcie. Oba są aktualne. Ta sekcja mówi, który jest który, a potem, co naprawdę odrzuca ',
         { c: 'specscore spec lint' },
         '.',
       ],
       [
-        t('Specyfikacja kryteriów akceptacji', href.acceptance),
+        t('Specyfikacja kryteriów akceptacji', acceptanceHref.acceptance),
         ' — README funkcjonalności udostępniany pod tym adresem — umieszcza kryteria w treści README funkcjonalności. Każda funkcjonalność ma sekcję ',
         { c: '## Acceptance Criteria' },
         '. Każde kryterium to nagłówek ',
@@ -173,7 +502,7 @@ export const locale: ArticleLocale = {
         'Konkretnym dowodem jest plik scenariusza w katalogu ',
         { c: '_tests/' },
         ' funkcjonalności. ',
-        t('Specyfikacja scenariuszy', href.scenarioRepo, 'us'),
+        t('Specyfikacja scenariuszy', acceptanceHref.scenarioRepo, 'us'),
         ' wymaga tytułu ',
         { c: '# Scenario:' },
         ', sekcji ',
@@ -200,9 +529,9 @@ export const locale: ArticleLocale = {
         'CLI czyta też cienkie pliki kryteriów, po jednym na kryterium, w ',
         { c: '_acs/<slug>.ac.md' },
         '. ',
-        t('Przykład logowania', href.example),
+        t('Przykład logowania', acceptanceHref.example),
         ' i ',
-        t('przewodnik Rehearse', href.rehearse),
+        t('przewodnik Rehearse', acceptanceHref.rehearse),
         ' dokumentują ten kształt: ',
         { c: '# AC: <slug>' },
         ', opcjonalne ',
@@ -223,7 +552,7 @@ export const locale: ArticleLocale = {
       ],
       [
         'CI w tym repozytorium to ',
-        t('workflow dogfood', href.dogfood, 'us'),
+        t('workflow dogfood', acceptanceHref.dogfood, 'us'),
         '. Instaluje CLI v0.39.1 i uruchamia ',
         { c: 'specscore spec lint' },
         ' przy pull requestach i przy pushach na main. Sprawdzone 3 listopada 2026, to wydanie i domyślna gałąź CLI zawierają poniższe reguły. Linter sprawdza strukturę. Nie ocenia angielskiego.',
@@ -294,7 +623,7 @@ export const locale: ArticleLocale = {
       ],
       [
         'Jeśli chcesz listę pytań, żeby wydobyć kryterium z ogólnikowej prośby, użyj ',
-        t('Zadawanie dobrych pytań', href.questions),
+        t('Zadawanie dobrych pytań', acceptanceHref.questions),
         '. Przewodnik logowania pokazuje jedno cienkie kryterium, ',
         { c: 'session-hardened' },
         ', na miejscu wśród pozostałych artefaktów.',
@@ -330,7 +659,7 @@ export const locale: ArticleLocale = {
         q: 'Czy specscore spec lint ocenia ogólnikowe sformułowania?',
         a: [
           'Nie. W CLI v0.39.1, wydaniu, które instaluje CI tego repozytorium, ac-heading-format sprawdza nagłówek ### AC:. Nie punktuje słów takich jak „graceful” ani „fast” i nie ostrzega, gdy kryterium zawiera Given/When/Then. Sformułowanie to zadanie pisarskie. ',
-          t('Strona walidatorów', href.validators),
+          t('Strona walidatorów', acceptanceHref.validators),
           ' oddziela ten deterministyczny lint od ręcznego przeglądu z AI.',
         ],
       },
@@ -348,6 +677,7 @@ export const locale: ArticleLocale = {
       gherkin: 'Cucumber — dokumentacja Gherkin',
       bdd: 'Cucumber — rozwój sterowany zachowaniem',
       ears: 'Alistair Mavin — EARS',
+      earsArticle: "Składnia wymagań EARS wyjaśniona, z przykładami",
       acceptance: 'SpecScore — specyfikacja kryteriów akceptacji',
       acceptanceRepo: 'specscore/specscore — funkcjonalność kryteriów akceptacji',
       scenarioRepo: 'specscore/specscore — funkcjonalność scenariuszy',
@@ -364,35 +694,52 @@ export const locale: ArticleLocale = {
     },
     relatedTitle: 'Powiązane',
     related: [
-      { href: href.sdd, label: 'Rozwój sterowany specyfikacją' },
-      { href: href.tools, label: 'Narzędzia rozwoju sterowanego specyfikacją' },
-      { href: href.acceptance, label: 'Specyfikacja kryteriów akceptacji' },
-      { href: href.questions, label: 'Zadawanie dobrych pytań' },
-      { href: href.example, label: 'Funkcjonalność logowania, na przykładzie' },
-      { href: href.rehearse, label: 'Rehearse' },
-      { href: href.validators, label: 'Co waliduje SpecScore' },
-      { href: href.cli, label: 'CLI' },
+      { href: acceptanceHref.earsArticle, label: "Składnia wymagań EARS wyjaśniona, z przykładami" },
+      { href: acceptanceHref.sdd, label: 'Rozwój sterowany specyfikacją' },
+      { href: acceptanceHref.tools, label: 'Narzędzia rozwoju sterowanego specyfikacją' },
+      { href: acceptanceHref.acceptance, label: 'Specyfikacja kryteriów akceptacji' },
+      { href: acceptanceHref.questions, label: 'Zadawanie dobrych pytań' },
+      { href: acceptanceHref.example, label: 'Funkcjonalność logowania, na przykładzie' },
+      { href: acceptanceHref.rehearse, label: 'Rehearse' },
+      { href: acceptanceHref.validators, label: 'Co waliduje SpecScore' },
+      { href: acceptanceHref.cli, label: 'CLI' },
     ],
     ctaTitle: 'Zlintuj specyfikację, którą masz.',
     ctaInstall: 'Zainstaluj CLI',
     ctaSkills: 'Skille AI',
     ctaGithub: 'Format na GitHubie',
-  },
+  };
+
+export const locale: ArticleLocale = {
+  ears,
+  acceptance,
   index: {
-    metaTitle: 'Jak pisać kryteria akceptacji i inne artykuły SpecScore',
-    metaDescription:
-      'Artykuły SpecScore o tym, jak pisać kryteria akceptacji, o Given/When/Then i o sprawdzalnych kryteriach akceptacji dla agentów kodujących z AI.',
+    metaTitle: 'Artykuły | SpecScore',
+    metaDescription: "Artykuły o notacji wymagań i rozwoju sterowanym specyfikacją, w tym składnia wymagań EARS i zapis wymagania w SpecScore. Artykuły SpecScore o tym, jak pisać kryteria akceptacji, o Given/When/Then i o sprawdzalnych kryteriach akceptacji dla agentów kodujących z AI.",
     h1: 'Artykuły',
     hero: [
-      'Artykuły SpecScore wyjaśniają specyfikację prostym językiem. ',
-      t('Kryteria akceptacji', href.acceptance),
+'Artykuły tutaj wyjaśniają notację wymagań albo praktykę rozwoju sterowanego specyfikacją (SDD, spec-driven development), a potem pokazują ten sam pomysł jako wymaganie SpecScore (REQ), które ',
+      { c: 'specscore spec lint' },
+      ' może sprawdzić w ciągłej integracji (CI, continuous integration).',
+      ' ',
+'Artykuły SpecScore wyjaśniają specyfikację prostym językiem. ',
+      t('Kryteria akceptacji', acceptanceHref.acceptance),
       ' (AC, acceptance criteria) to warunki, które muszą być prawdziwe, zanim zmiana liczy się jako ukończona. ',
-      t('Rozwój sterowany specyfikacją', href.sdd),
+      t('Rozwój sterowany specyfikacją', acceptanceHref.sdd),
       ' (SDD, spec-driven development) traktuje ustrukturyzowaną specyfikację jako źródło, względem którego sprawdza się implementację.',
     ],
     listLabel: 'Opublikowane',
-    articleTitle: 'Jak pisać kryteria akceptacji, które agent AI może zweryfikować',
-    articleSummary:
-      'Przykłady kryteriów akceptacji w Given/When/Then i jako lista kontrolna, co sprawia, że kryterium jest sprawdzalne, oraz co specscore spec lint sprawdza w ciągłej integracji (CI).',
+    articles: [
+      {
+        href: '/articles/acceptance-criteria/',
+        title: 'Jak pisać kryteria akceptacji, które agent AI może zweryfikować',
+        summary: 'Przykłady kryteriów akceptacji w Given/When/Then i jako lista kontrolna, co sprawia, że kryterium jest sprawdzalne, oraz co specscore spec lint sprawdza w ciągłej integracji (CI).',
+      },
+      {
+        href: '/articles/ears-requirements/',
+        title: 'Składnia wymagań EARS wyjaśniona, z przykładami',
+        summary: 'Czym jest EARS (Easy Approach to Requirements Syntax), wzorce zdań, jak Kiro używa notacji EARS i wymaganie SpecScore, które przechodzi linter.',
+      },
+    ],
   },
 };

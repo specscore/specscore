@@ -200,6 +200,8 @@ export const page: RoundupPage = {
           t('Ліцензія Kiro', href.kiroLicense, 'them'),
           ', прочитана 30 жовтня 2026 року, каже, що IDE і CLI ліцензовано як матеріали AWS (AWS Content) за клієнтською угодою AWS (AWS Customer Agreement) або іншою письмовою угодою, а також AWS Intellectual Property License. Kiro пасує тому, хто хоче, щоб цей продукт накидав три файли. Див. ',
           t('SpecScore vs Kiro', '/vs/kiro/'),
+          '. Шаблони речень розібрано в ',
+          { a: 'синтаксисі вимог EARS', href: '/articles/ears-requirements/' },
           '.',
         ],
       ],

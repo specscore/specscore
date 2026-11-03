@@ -1,23 +1,25 @@
 # Article locales
 
-One file per locale for `/articles/` and `/articles/acceptance-criteria/`. English is the source of the facts. Other locales translate the prose and keep the format samples in English, because the specification's keywords are English.
+One TypeScript module per locale for `/articles/`, `/articles/acceptance-criteria/`, and `/articles/ears-requirements/`. English is the source of the facts. Other locales translate the prose and keep the format samples in English, because the specification's keywords are English.
 
 | File | Locale |
 |---|---|
 | `en.ts` | English |
-| `de.ts` | German |
 | `es.ts` | Spanish |
+| `de.ts` | German |
 | `fr.ts` | French |
 | `it.ts` | Italian |
-| `ja.ts` | Japanese |
-| `ko.ts` | Korean |
 | `pl.ts` | Polish |
 | `pt-br.ts` | Brazilian Portuguese |
 | `ru.ts` | Russian |
 | `tr.ts` | Turkish |
 | `uk.ts` | Ukrainian |
+| `ja.ts` | Japanese |
 | `zh-cn.ts` | Simplified Chinese |
 | `zh-tw.ts` | Traditional Chinese |
+| `ko.ts` | Korean |
+
+EARS keywords, example sentences, and the linted SpecScore samples stay in English.
 
 ## Outstanding Questions
 

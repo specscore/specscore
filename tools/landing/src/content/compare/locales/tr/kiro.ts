@@ -164,6 +164,9 @@ export const kiro: ComparePage = {
       title: 'EARS ile Given/When/Then farklı sorulara yanıt verir',
       body: [
         'Kiro’nun belgelediği haliyle EARS, sistem davranışının tek cümlesidir. SpecScore kabul kriterleri, bir gereksinim kimliğine bağlı Given/When/Then senaryolarıdır. Düz yazıda bir EARS satırı yazılıp senaryo, linter’ın denetlediği SpecScore dosyasında tutulabilir.',
+        ' Cümle kalıpları şurada: ',
+        { a: 'EARS gereksinim sözdizimi', href: '/articles/ears-requirements/' },
+        '.',
       ],
     },
   ],

@@ -163,6 +163,9 @@ export const kiro: ComparePage = {
       title: 'EARS 與給定／當／那麼問的不是同一件事',
       body: [
         '依 Kiro 文件的寫法，EARS 就是一句系統行為。SpecScore 的驗收標準，是綁在需求識別碼上的給定／當／那麼情境。你可以在散文裡寫一行 EARS，同時把情境留在檢查器會檢查的那份 SpecScore 檔案裡。',
+        ' 句式見',
+        { a: 'EARS 需求語法', href: '/articles/ears-requirements/' },
+        '.',
       ],
     },
   ],

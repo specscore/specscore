@@ -163,6 +163,9 @@ export const kiro: ComparePage = {
       title: 'EARS 和给定/当/那么问的不是同一件事',
       body: [
         '按 Kiro 文档的写法，EARS 是一句系统行为。SpecScore 的验收标准是挂在需求标识上的给定/当/那么场景。你可以在散文里写一行 EARS，同时把场景留在检查器会检查的那份 SpecScore 文件里。',
+        ' 句式见',
+        { a: 'EARS 需求语法', href: '/articles/ears-requirements/' },
+        '.',
       ],
     },
   ],

@@ -97,6 +97,27 @@ describe('injectHtml', () => {
 
   it('treats an articles page as an article and reads its FAQ', () => {
     const html = `<!doctype html>
+<html lang="en"><head><link rel="canonical" href="https://specscore.md/articles/ears-requirements/"></head><body>
+<a href="/" class="wordmark">SpecScore.md</a>
+<p class="hero__breadcrumb"><a href="/articles/">Articles</a></p>
+<h1 class="hero__headline">EARS requirements syntax explained, with examples</h1>
+<p class="hero__sub">EARS (Easy Approach to Requirements Syntax) is a requirements notation.</p>
+<h2 class="faq-item__q">What does EARS stand for?</h2>
+<div class="faq-item__a"><p>Easy Approach to Requirements Syntax.</p></div>
+</body></html>`;
+    const data = graph(html);
+    const article = data['@graph'].find((node) => node['@type'] === 'Article');
+    assert.equal(article.headline, 'EARS requirements syntax explained, with examples');
+    assert.equal(article.url, 'https://specscore.md/articles/ears-requirements/');
+    const faq = data['@graph'].find((node) => node['@type'] === 'FAQPage');
+    assert.equal(faq.mainEntity[0].name, 'What does EARS stand for?');
+    const names = data['@graph'].find((node) => node['@type'] === 'BreadcrumbList')
+      .itemListElement.map((item) => item.name);
+    assert.deepEqual(names, ['SpecScore.md', 'Articles', 'EARS requirements syntax explained, with examples']);
+  });
+
+  it('treats the acceptance criteria article as an article and reads its FAQ', () => {
+    const html = `<!doctype html>
 <html lang="en"><head><link rel="canonical" href="https://specscore.md/articles/acceptance-criteria/"></head><body>
 <a href="/" class="wordmark">SpecScore.md</a>
 <p class="hero__breadcrumb"><a href="/articles/">Articles</a></p>

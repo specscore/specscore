@@ -214,6 +214,8 @@ export const page: RoundupPage = {
           t('Kiro 授權', href.kiroLicense, 'them'),
           ' 讀於 2026年10月30日。它寫明：IDE 與 CLI 以 AWS 內容（AWS Content）授權，依據是 AWS 客戶協議（AWS Customer Agreement）或其他書面協議，再加上 AWS 智慧財產授權（AWS Intellectual Property License）。若你要的是由這項產品起草那三份檔案，Kiro 就對得上。見 ',
           t('SpecScore 對照 Kiro', '/vs/kiro/'),
+          '。句式見',
+          { a: 'EARS 需求語法', href: '/articles/ears-requirements/' },
           '。',
         ],
       ],

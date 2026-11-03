@@ -22,6 +22,7 @@ The SpecScore format — how to write specs that lint clean.
 Craft guidance for turning requirements into clean specs.
 
 - [Asking Good Questions for Good Specs](/asking-good-questions) — how to question a fuzzy request into complete, unambiguous, verifiable acceptance criteria
+- [EARS requirements syntax](/articles/ears-requirements/) — the Easy Approach to Requirements Syntax sentence patterns, and a SpecScore requirement that passes the linter
 - [Explained by example: a login feature](/example-login) — one feature through the whole model, from Idea to Rehearse proof
 
 ## Getting started
