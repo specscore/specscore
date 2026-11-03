@@ -176,7 +176,7 @@ The proposal is **non-normative until accepted**. When the team agrees, the chan
 
 ## 5. The criteria are thin ACs
 
-What must actually be *true* about login is captured as thin [Acceptance Criteria](/acceptance-criteria-specification) — one small file each, intent only, no test machinery. They live in the feature's `_acs/` directory as `<slug>.ac.md`:
+What must actually be *true* about login is captured as thin [Acceptance Criteria](/acceptance-criteria-specification) — one small file each, intent only, no test machinery. [How to write acceptance criteria](/articles/acceptance-criteria/) covers what makes a criterion verifiable. They live in the feature's `_acs/` directory as `<slug>.ac.md`:
 
 `spec/features/auth/login/_acs/session-hardened.ac.md`
 

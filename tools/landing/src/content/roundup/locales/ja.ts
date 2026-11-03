@@ -489,6 +489,11 @@ export const page: RoundupPage = {
           ' にあります。',
         ],
         [
+          'エージェントが検査できる基準の書き方は、',
+          { a: '受け入れ基準の書き方', href: '/articles/acceptance-criteria/' },
+          'にあります。',
+        ],
+        [
           'このウェブサイトのリポジトリでは、',
           t('dogfood.yml', href.dogfood, 'us'),
           ' がその CLI を導入し、プルリクエストと main へのプッシュで ',

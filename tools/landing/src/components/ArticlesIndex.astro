@@ -17,12 +17,28 @@ import SiteFooterZhCn from './SiteFooterZhCn.astro';
 import SiteFooterZhTw from './SiteFooterZhTw.astro';
 import Inlines from './Inlines.astro';
 import { langs, localeFromPath, localeHref, type LangCode } from '../lib/languages.ts';
-import { articleHref, articlesIndexMdHref } from '../content/articles/facts.ts';
+import { articlesIndexMdHref, localizedPrefixes } from '../content/articles/facts.ts';
 import { indexCopy } from '../content/articles/pages.ts';
+import type { Block, Inline } from '../content/articles/types.ts';
 
 const locale = localeFromPath(Astro.url.pathname) as LangCode;
 const page = indexCopy(locale);
 const lang = langs.find((item) => item.code === locale)?.tag ?? 'en';
+
+function isLanding(href: string): boolean {
+  return localizedPrefixes.some((prefix) => href === prefix || href.startsWith(prefix));
+}
+
+function localize(parts: Block): Block {
+  return parts.map((part: Inline) => {
+    if (typeof part === 'string' || 'c' in part || 's' in part || 'e' in part) return part;
+    const href = part.href.startsWith('/') && !part.href.startsWith('//') && isLanding(part.href)
+      ? localeHref(locale, part.href)
+      : part.href;
+    return { ...part, href };
+  });
+}
+
 const footers = {
   en: SiteFooter,
   es: SiteFooterEs,
@@ -51,17 +67,19 @@ const canonical = `https://specscore.md${localeHref(locale, '/articles/')}`;
     <section class="hero" aria-labelledby="articles-title">
       <div class="hero__inner">
         <h1 id="articles-title" class="hero__headline">{page.h1}</h1>
-        <p class="hero__sub"><Inlines parts={page.hero} /></p>
+        <p class="hero__sub"><Inlines parts={localize(page.hero)} /></p>
       </div>
     </section>
 
     <section class="section" aria-labelledby="list-title">
       <div class="section-inner section-inner--prose">
         <h2 id="list-title" class="section-title">{page.listLabel}</h2>
-        <article class="article-card">
-          <h3 class="article-card__title"><a href={articleHref(locale)} class="xref">{page.articleTitle}</a></h3>
-          <p class="article-card__summary">{page.articleSummary}</p>
-        </article>
+        {page.articles.map((article) => (
+          <article class="article-card">
+            <h3 class="article-card__title"><a href={localeHref(locale, article.href)} class="xref">{article.title}</a></h3>
+            <p class="article-card__summary">{article.summary}</p>
+          </article>
+        ))}
       </div>
     </section>
   </main>
@@ -93,6 +111,11 @@ const canonical = `https://specscore.md${localeHref(locale, '/articles/')}`;
   .section-title {
     font-size: var(--fs-h2);
     margin-bottom: var(--space-3);
+  }
+  .article-card + .article-card {
+    margin-top: var(--space-4);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--hairline);
   }
   .article-card__title {
     font-size: 1.25rem;

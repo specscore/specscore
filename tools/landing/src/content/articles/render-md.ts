@@ -1,11 +1,35 @@
 import type { LangCode } from '../../lib/languages.ts';
 import { localeHref } from '../../lib/languages.ts';
-import { featureReadme, featuresIndex, repoConfig, specReadme } from './facts.ts';
-import { patternsFor, sourcesFor } from './pages.ts';
-import type { ArticleCopy, Block, IndexCopy, Inline } from './types.ts';
+import {
+  checklistExample,
+  featureReadme,
+  featuresIndex,
+  gwtExample,
+  inlineAc,
+  localizedPrefixes,
+  rehearseExample,
+  repoConfig,
+  scenarioExample,
+  specReadme,
+  thinAc,
+} from './facts.ts';
+import { acceptanceSourcesFor, earsSourcesFor, patternsFor } from './pages.ts';
+import type { AcceptanceArticleCopy, Block, EarsArticleCopy, IndexCopy, Inline } from './types.ts';
+
+function isLanding(href: string): boolean {
+  return localizedPrefixes.some((prefix) => href === prefix || href.startsWith(prefix));
+}
 
 function abs(href: string, locale: LangCode): string {
-  if (href.startsWith('/') && !href.startsWith('//')) return `https://specscore.md${localeHref(locale, href)}`;
+  if (href.startsWith('/') && !href.startsWith('//')) {
+    const path = isLanding(href) ? localeHref(locale, href) : href;
+    return `https://specscore.md${path}`;
+  }
+  return href;
+}
+
+function linked(href: string, locale: LangCode): string {
+  if (href.startsWith('/') && !href.startsWith('//')) return abs(href, locale);
   return href;
 }
 
@@ -21,11 +45,13 @@ function block(parts: Block, locale: LangCode): string {
   return parts.map((part) => inlineToMd(part, locale)).join('').replace(/[ \t]+\n/g, '\n').replace(/[ \t]{2,}/g, ' ').trim();
 }
 
-function fence(text: string): string {
-  return ['```markdown', text.replace(/\n$/, ''), '```'].join('\n');
+function fence(lang: string, text: string): string {
+  const body = text.replace(/\n$/, '');
+  const tick = body.includes('```') ? '~~~~' : '```';
+  return [tick + lang, body, tick].join('\n');
 }
 
-export function renderArticleMarkdown(copy: ArticleCopy, locale: LangCode, canonical: string): string {
+export function renderEarsMarkdown(copy: EarsArticleCopy, locale: LangCode, canonical: string): string {
   const lines: string[] = [
     `# ${copy.h1}`,
     '',
@@ -68,32 +94,109 @@ export function renderArticleMarkdown(copy: ArticleCopy, locale: LangCode, canon
   lines.push(
     `### ${copy.featureCaption}`,
     '',
-    fence(featureReadme),
+    fence('markdown', featureReadme),
     '',
     `### ${copy.indexCaption}`,
     '',
-    fence(featuresIndex),
+    fence('markdown', featuresIndex),
     '',
     `### ${copy.specReadmeCaption}`,
     '',
-    fence(specReadme),
+    fence('markdown', specReadme),
     '',
     `### ${copy.configCaption}`,
     '',
-    '```yaml',
-    repoConfig.replace(/\n$/, ''),
-    '```',
+    fence('yaml', repoConfig),
     '',
   );
   for (const paragraph of copy.mapAfter) lines.push(block(paragraph, locale), '');
 
   lines.push(`## ${copy.faqTitle}`, '');
-  for (const faq of copy.faqs) {
-    lines.push(`### ${faq.q}`, '', block(faq.a, locale), '');
-  }
+  for (const faq of copy.faqs) lines.push(`### ${faq.q}`, '', block(faq.a, locale), '');
 
   lines.push(`## ${copy.sourcesTitle}`, '', copy.sourcesNote, '');
-  for (const source of sourcesFor(copy)) lines.push(`- [${source.label}](${source.href})`);
+  for (const source of earsSourcesFor(copy)) lines.push(`- [${source.label}](${linked(source.href, locale)})`);
+  lines.push('', `## ${copy.relatedTitle}`, '');
+  for (const link of copy.related) lines.push(`- [${link.label}](${abs(link.href, locale)})`);
+  lines.push('');
+  return lines.join('\n');
+}
+
+export function renderAcceptanceMarkdown(copy: AcceptanceArticleCopy, locale: LangCode, canonical: string): string {
+  const lines: string[] = [
+    `# ${copy.h1}`,
+    '',
+    `Canonical: ${canonical}`,
+    '',
+    copy.updated,
+    '',
+    block(copy.hero, locale),
+    '',
+    `## ${copy.whatTitle}`,
+    '',
+  ];
+  for (const paragraph of copy.what) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.verifiableTitle}`, '');
+  for (const paragraph of copy.verifiable) lines.push(block(paragraph, locale), '');
+  for (const check of copy.checks) {
+    lines.push(`### ${check.title}`, '', block(check.body, locale), '');
+  }
+
+  lines.push(`## ${copy.formatsTitle}`, '');
+  for (const paragraph of copy.formatsIntro) lines.push(block(paragraph, locale), '');
+  lines.push(`### ${copy.gwtCaption}`, '', fence('gherkin', gwtExample), '');
+  lines.push(`### ${copy.checklistCaption}`, '', fence('markdown', checklistExample), '');
+  for (const paragraph of copy.formatsAfter) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.earsTitle}`, '');
+  for (const paragraph of copy.ears) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.examplesTitle}`, '');
+  for (const pair of copy.pairs) {
+    lines.push(
+      `### ${pair.title}`,
+      '',
+      `**${copy.badLabel}**`,
+      '',
+      fence('text', pair.bad),
+      '',
+      `**${copy.goodLabel}**`,
+      '',
+      fence('text', pair.good),
+      '',
+      block(pair.why, locale),
+      '',
+    );
+  }
+
+  lines.push(`## ${copy.specscoreTitle}`, '');
+  for (const paragraph of copy.specscore) lines.push(block(paragraph, locale), '');
+  lines.push(
+    `### ${copy.inlineCaption}`,
+    '',
+    fence('markdown', inlineAc),
+    '',
+    `### ${copy.thinCaption}`,
+    '',
+    fence('markdown', thinAc),
+    '',
+    `### ${copy.scenarioCaption}`,
+    '',
+    fence('markdown', scenarioExample),
+    '',
+    `### ${copy.rehearseCaption}`,
+    '',
+    fence('markdown', rehearseExample),
+    '',
+  );
+  for (const paragraph of copy.specscoreAfter) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.faqTitle}`, '');
+  for (const faq of copy.faqs) lines.push(`### ${faq.q}`, '', block(faq.a, locale), '');
+
+  lines.push(`## ${copy.sourcesTitle}`, '', copy.sourcesNote, '');
+  for (const source of acceptanceSourcesFor(copy)) lines.push(`- [${source.label}](${linked(source.href, locale)})`);
   lines.push('', `## ${copy.relatedTitle}`, '');
   for (const link of copy.related) lines.push(`- [${link.label}](${abs(link.href, locale)})`);
   lines.push('');
@@ -101,8 +204,7 @@ export function renderArticleMarkdown(copy: ArticleCopy, locale: LangCode, canon
 }
 
 export function renderIndexMarkdown(copy: IndexCopy, locale: LangCode, canonical: string): string {
-  const articleHref = abs('/articles/ears-requirements/', locale);
-  return [
+  const lines = [
     `# ${copy.h1}`,
     '',
     `Canonical: ${canonical}`,
@@ -111,9 +213,9 @@ export function renderIndexMarkdown(copy: IndexCopy, locale: LangCode, canonical
     '',
     `## ${copy.listLabel}`,
     '',
-    `- [${copy.articleTitle}](${articleHref})`,
-    '',
-    copy.articleSummary,
-    '',
-  ].join('\n');
+  ];
+  for (const article of copy.articles) {
+    lines.push(`- [${article.title}](${abs(article.href, locale)})`, '', article.summary, '');
+  }
+  return lines.join('\n');
 }

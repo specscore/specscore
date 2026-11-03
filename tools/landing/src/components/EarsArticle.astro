@@ -1,0 +1,323 @@
+---
+// /articles/ears-requirements/ — one renderer, copy per locale.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import SiteFooterDe from './SiteFooterDe.astro';
+import SiteFooterEs from './SiteFooterEs.astro';
+import SiteFooterFr from './SiteFooterFr.astro';
+import SiteFooterIt from './SiteFooterIt.astro';
+import SiteFooterJa from './SiteFooterJa.astro';
+import SiteFooterKo from './SiteFooterKo.astro';
+import SiteFooterPl from './SiteFooterPl.astro';
+import SiteFooterPtBr from './SiteFooterPtBr.astro';
+import SiteFooterRu from './SiteFooterRu.astro';
+import SiteFooterTr from './SiteFooterTr.astro';
+import SiteFooterUk from './SiteFooterUk.astro';
+import SiteFooterZhCn from './SiteFooterZhCn.astro';
+import SiteFooterZhTw from './SiteFooterZhTw.astro';
+import Inlines from './Inlines.astro';
+import { langs, localeFromPath, localeHref, type LangCode } from '../lib/languages.ts';
+import { articlesIndexHref, earsArticleMdHref, featureReadme, featuresIndex, localizedPrefixes, repoConfig, specReadme } from '../content/articles/facts.ts';
+import { earsCopy, earsSourcesFor, patternsFor } from '../content/articles/pages.ts';
+import type { Block, Inline } from '../content/articles/types.ts';
+
+const locale = localeFromPath(Astro.url.pathname) as LangCode;
+const page = earsCopy(locale);
+const lang = langs.find((item) => item.code === locale)?.tag ?? 'en';
+
+function isLanding(href: string): boolean {
+  return localizedPrefixes.some((prefix) => href === prefix || href.startsWith(prefix));
+}
+
+function localizeHref(href: string): string {
+  if (href.startsWith('/') && !href.startsWith('//') && isLanding(href)) return localeHref(locale, href);
+  return href;
+}
+
+function localize(parts: Block): Block {
+  return parts.map((part: Inline) => {
+    if (typeof part === 'string' || 'c' in part || 's' in part || 'e' in part) return part;
+    return { ...part, href: localizeHref(part.href) };
+  });
+}
+
+const footers = {
+  en: SiteFooter,
+  es: SiteFooterEs,
+  de: SiteFooterDe,
+  fr: SiteFooterFr,
+  it: SiteFooterIt,
+  pl: SiteFooterPl,
+  'pt-br': SiteFooterPtBr,
+  ru: SiteFooterRu,
+  tr: SiteFooterTr,
+  uk: SiteFooterUk,
+  ja: SiteFooterJa,
+  'zh-cn': SiteFooterZhCn,
+  'zh-tw': SiteFooterZhTw,
+  ko: SiteFooterKo,
+};
+const Footer = footers[locale];
+const canonical = `https://specscore.md${localeHref(locale, '/articles/ears-requirements/')}`;
+const mdHref = earsArticleMdHref(locale);
+const samples = [
+  { caption: page.featureCaption, text: featureReadme, lang: 'markdown' },
+  { caption: page.indexCaption, text: featuresIndex, lang: 'markdown' },
+  { caption: page.specReadmeCaption, text: specReadme, lang: 'markdown' },
+  { caption: page.configCaption, text: repoConfig, lang: 'yaml' },
+];
+---
+
+<BaseLayout title={page.metaTitle} description={page.metaDescription} canonical={canonical} lang={lang}>
+  <link slot="head" rel="alternate" type="text/markdown" href={mdHref} />
+  <SiteHeader />
+
+  <main>
+    <section class="hero" aria-labelledby="article-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href={articlesIndexHref(locale)} class="xref">{page.breadcrumb}</a></p>
+        <h1 id="article-title" class="hero__headline">{page.h1}</h1>
+        <p class="hero__sub"><Inlines parts={localize(page.hero)} /></p>
+        <p class="article-updated">{page.updated}</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="origin-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="origin-title" class="section-title">{page.originTitle}</h2>
+        {page.origin.map((paragraph) => (
+          <p class="prose-p"><Inlines parts={localize(paragraph)} /></p>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="patterns-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="patterns-title" class="section-title">{page.patternsTitle}</h2>
+        {page.patternsIntro.map((paragraph) => (
+          <p class="prose-p"><Inlines parts={localize(paragraph)} /></p>
+        ))}
+        {patternsFor(page).map((pattern) => (
+          <article class="pattern" id={pattern.id}>
+            <h3 class="pattern__name">{pattern.name}</h3>
+            <p class="pattern__form"><code>{pattern.form}</code></p>
+            <p class="prose-p"><Inlines parts={localize(pattern.body)} /></p>
+            <p class="pattern__example"><span class="pattern__label">{page.exampleLabel}</span> {pattern.example}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="mistakes-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="mistakes-title" class="section-title">{page.mistakesTitle}</h2>
+        {page.mistakes.map((mistake) => (
+          <div class="mistake">
+            <h3 class="mistake__title">{mistake.title}</h3>
+            <p class="prose-p"><Inlines parts={localize(mistake.body)} /></p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="kiro-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="kiro-title" class="section-title">{page.kiroTitle}</h2>
+        {page.kiro.map((paragraph) => (
+          <p class="prose-p"><Inlines parts={localize(paragraph)} /></p>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="map-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="map-title" class="section-title">{page.mapTitle}</h2>
+        {page.map.map((paragraph) => (
+          <p class="prose-p"><Inlines parts={localize(paragraph)} /></p>
+        ))}
+        {samples.map((sample) => (
+          <figure class="sample">
+            <figcaption class="sample__caption">{sample.caption}</figcaption>
+            <pre class="sample__pre"><code>{sample.text}</code></pre>
+          </figure>
+        ))}
+        {page.mapAfter.map((paragraph) => (
+          <p class="prose-p"><Inlines parts={localize(paragraph)} /></p>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="faq-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="faq-title" class="section-title">{page.faqTitle}</h2>
+        {page.faqs.map((faq) => (
+          <div class="faq-item">
+            <h2 class="faq-item__q">{faq.q}</h2>
+            <div class="faq-item__a"><p><Inlines parts={localize(faq.a)} /></p></div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sources-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="sources-title" class="section-title">{page.sourcesTitle}</h2>
+        <p class="section-note">{page.sourcesNote}</p>
+        <ul class="source-list">
+          {earsSourcesFor(page).map((source) => (
+            <li>
+              <a
+                href={source.href}
+                class="xref"
+                target="_blank"
+                rel={source.href.includes('github.com/specscore/') ? undefined : source.href.includes('kiro.dev') ? 'nofollow noopener' : 'noopener'}
+              >{source.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="related-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="related-title" class="section-title">{page.relatedTitle}</h2>
+        <ul class="source-list">
+          {page.related.map((link) => (
+            <li><a href={localizeHref(link.href)} class="xref">{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">{page.ctaTitle}</h2>
+      <div class="final-cta__buttons">
+        <a href={localeHref(locale, '/cli/install/')} class="btn btn--primary">{page.ctaInstall}</a>
+        <a href={localeHref(locale, '/ai/')} class="btn btn--secondary">{page.ctaSkills}</a>
+        <a href="https://github.com/specscore/specscore" target="_blank" class="btn btn--tertiary">{page.ctaGithub}</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+  }
+  .hero__breadcrumb {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    margin-bottom: var(--space-2);
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+    text-wrap: balance;
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+  .article-updated {
+    margin-top: var(--space-3);
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+  }
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+    text-wrap: balance;
+  }
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+  .prose-p:last-child { margin-bottom: 0; }
+  .pattern, .mistake, .faq-item {
+    margin-top: var(--space-4);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--hairline);
+  }
+  .pattern__name, .mistake__title {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-2);
+  }
+  .pattern__form {
+    font-family: var(--font-code);
+    font-size: 0.95rem;
+    margin-bottom: var(--space-2);
+    line-height: 1.5;
+  }
+  .pattern__example {
+    color: var(--ink);
+    line-height: 1.6;
+    margin-top: var(--space-2);
+  }
+  .pattern__label {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    margin-right: 0.5rem;
+  }
+  .sample { margin: var(--space-4) 0; }
+  .sample__caption {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+    line-height: 1.5;
+  }
+  .sample__pre {
+    overflow-x: auto;
+    background: var(--cream);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    padding: var(--space-3);
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .faq-item__q {
+    font-size: 1.15rem;
+    margin-bottom: var(--space-2);
+  }
+  .faq-item__a {
+    color: var(--mid-ink);
+    line-height: 1.65;
+  }
+  .section-note {
+    color: var(--pale-ink);
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    margin-bottom: var(--space-3);
+  }
+  .source-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .source-list li {
+    margin-bottom: var(--space-2);
+    line-height: 1.5;
+  }
+</style>

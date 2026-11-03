@@ -1,11 +1,10 @@
-import type { ArticleLocale, Block } from '../types.ts';
-import { href } from '../facts.ts';
+import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy } from '../types.ts';
+import { acceptanceHref, earsHref } from '../facts.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
 
-export const locale: ArticleLocale = {
-  article: {
+const ears: EarsArticleCopy = {
     metaTitle: 'EARS gereksinim sözdizimi örneklerle açıklandı | SpecScore',
     metaDescription:
       'EARS gereksinim notasyonu (Easy Approach to Requirements Syntax): cümle kalıpları, örnekler, sık hatalar, Kiro’nun EARS kullanımı ve linter’dan geçen bir SpecScore REQ.',
@@ -13,33 +12,33 @@ export const locale: ArticleLocale = {
     updated: 'Son güncelleme: 2 Kasım 2026',
     breadcrumb: 'Makaleler',
     hero: [
-      t('EARS', href.mavin),
+      t('EARS', earsHref.mavin),
       ' (Easy Approach to Requirements Syntax) bir gereksinim notasyonudur: koşulu, tetikleyiciyi ve sistem yanıtını sabit bir sırada tutan küçük bir İngilizce cümle kalıbı kümesi. Buna EARS sözdizimi de denir. Gereksinim, bir sistemin karşılaması gereken tek bir sınanabilir yükümlülüktür. ',
-      t('Spesifikasyon odaklı geliştirme', href.sdd),
+      t('Spesifikasyon odaklı geliştirme', earsHref.sdd),
       ' (SDD, spec-driven development), bu yükümlülüğü koddan önce bir spesifikasyona yazmak ve spesifikasyonu doğruluk kaynağı saymaktır. Ürün gereksinimleri belgesi (PRD, product requirements document), iş görevlere bölünmeden önce sorunu ve kapsamı anlatan düzyazıdır. ',
-      t('SpecScore', href.home),
+      t('SpecScore', earsHref.home),
       ' içinde bir gereksinim (REQ), bir özelliğin içindeki adlandırılmış kuraldır; bir kabul ölçütü (AC, acceptance criterion) ise bu kurallardan birine ya da birkaçına işaret eden isteğe bağlı soyut bir koşuldur. ',
-      t('Sürekli entegrasyon', href.validators),
+      t('Sürekli entegrasyon', earsHref.validators),
       ' (CI, continuous integration), önerilen her değişiklikte otomatik bir denetimdir. Denetim, ',
-      t('komut satırı arayüzü', href.cli),
+      t('komut satırı arayüzü', earsHref.cli),
       ' (CLI, command-line interface) komutudur: ',
       { c: 'specscore spec lint' },
       '. ',
-      t('Kiro', href.kiro, 'them'),
+      t('Kiro', earsHref.kiro, 'them'),
       ', Amazon Web Services (AWS) kaynaklı ajanlı bir tümleşik geliştirme ortamı (IDE, integrated development environment), bu kalıplardan birini yazar. Notasyonu ilk kez Alistair Mavin ve Rolls-Royce’taki çalışma arkadaşları, 2009’da Institute of Electrical and Electronics Engineers (IEEE) gereksinim mühendisliği konferansında yayımladı.',
     ],
     originTitle: 'EARS nereden geldi',
     origin: [
       [
         'O sırada Rolls-Royce PLC’de olan Alistair Mavin, Philip Wilkinson, Adrian Harwood ve Mark Novak, 2009’da 17th IEEE International Requirements Engineering Conference’ta “Easy Approach to Requirements Syntax (EARS)”ı yayımladı. Belge tanımlayıcısı ',
-        t('10.1109/RE.2009.9', href.paper),
+        t('10.1109/RE.2009.9', earsHref.paper),
         '. Kuralları, bir uçuşa elverişlilik düzenlemesi olan Certification Specification for Engines (CS-E) bölüm CS-E 50’den motor kontrol gereksinimlerini çıkarırken kurdular. Kaynak metin gereksinimleri, tasarım rehberini ve notları karıştırıyordu.',
       ],
       [
         'Makale, kısıtlanmamış doğal dilin sekiz sorununu adlandırır: belirsizlik, muğlaklık, karmaşıklık, eksiklik, yineleme, sözcük bolluğu, uygunsuz gerçekleştirim ve sınanamazlık. Küçük bir kural kümesi, her böyle gereksinimin beş kalıptan birini kullanmasını sağlamalıydı. Yazarlar notasyonun üst düzey paydaş gereksinimlerine uyduğunu söyler ve bir sistemin her ayrıştırma düzeyini kapsadığını ileri sürmez.',
       ],
       [
-        t('Mavin’in kendi rehberi', href.mavin),
+        t('Mavin’in kendi rehberi', earsHref.mavin),
         ' EARS’ı metin gereksinimlerini yumuşakça kısıtlamanın bir yolu olarak anlatır. Yan tümceler tek sırada durur; buna zamansal mantık der: herhangi bir önkoşul, sonra tetikleyici, sonra sistem adı ve yanıt. Kural kümesi sıfır ya da çok önkoşul, sıfır ya da bir tetikleyici, bir sistem adı ve bir ya da çok yanıttır. 2009 makalesi bu biçimi beş kalıba özelleştirir. Aynı rehber, anahtar sözcükleri birleştiren karmaşık gereksinimleri de adlandırır.',
       ],
       [
@@ -109,7 +108,7 @@ export const locale: ArticleLocale = {
         title: 'Bir cümlede birkaç yükümlülük',
         body: [
           'Makale bileşik cümleyi karmaşıklık sorunu sayar ve böler. ',
-          t('SpecScore gereksinim spesifikasyonu', href.requirement),
+          t('SpecScore gereksinim spesifikasyonu', earsHref.requirement),
           ' aynı şeyi kendi terimleriyle söyler: her ',
           { c: 'REQ' },
           ' tam olarak bir sınanabilir yükümlülük ifade etmelidir.',
@@ -160,7 +159,7 @@ export const locale: ArticleLocale = {
     kiroTitle: 'Kiro EARS’ı nasıl kullanır',
     kiro: [
       [
-        t('Kiro’nun özellik spesifikasyonları sayfası', href.kiroFeature, 'them'),
+        t('Kiro’nun özellik spesifikasyonları sayfası', earsHref.kiroFeature, 'them'),
         ', 4 Ağustos 2026’da güncellendiği işaretli ve 2 Kasım 2026’da okundu, ',
         { c: 'requirements.md' },
         ' dosyasının EARS kullandığını söyler. Basılan kalıp ',
@@ -170,7 +169,7 @@ export const locale: ArticleLocale = {
         '. Sayfanın örneği: WHEN a user submits a form with invalid data, THE SYSTEM SHALL display validation errors next to the relevant fields.',
       ],
       [
-        t('Önce gereksinimler sayfası', href.kiroRequirements, 'them'),
+        t('Önce gereksinimler sayfası', earsHref.kiroRequirements, 'them'),
         ', üretilen bir ',
         { c: 'requirements.md' },
         ' dosyasının kullanıcı hikâyelerini, kabul ölçütlerini ve sistem davranışlarını aynı WHEN … THE SYSTEM SHALL … biçiminde içerdiğini söyler. Kayıt örneği üç cümledir: geçerli kayıt verisi bir hesap oluşturur, zaten var olan e-posta “Email already registered” gösterir, geçersiz e-posta biçimi bir doğrulama hatası gösterir.',
@@ -184,9 +183,9 @@ export const locale: ArticleLocale = {
       ],
       [
         'Bu çözümleme Kiro’nun içindeki bir adımdır. Sayfa bunu kendi CI’nıza ekleyeceğiniz bir biçim linter’ı olarak anlatmaz. Diğer araçların bir spesifikasyonu nasıl denetlediği ',
-        t('araç rehberinde', href.tools),
+        t('araç rehberinde', earsHref.tools),
         '. İki ürünün karşılaştırması ',
-        t('SpecScore vs Kiro', href.kiroVs),
+        t('SpecScore vs Kiro', earsHref.kiroVs),
         '.',
       ],
     ],
@@ -194,7 +193,7 @@ export const locale: ArticleLocale = {
     map: [
       [
         'SpecScore, bir cümlenin bir EARS kalıbına uyup uymadığını denetlemez. ',
-        t('specscore-cli', href.cliRepo, 'us'),
+        t('specscore-cli', earsHref.cliRepo, 'us'),
         ' deposundaki ',
         { c: 'specscore spec lint' },
         ' yapıyı denetler. Yardım metni README dosyalarını, Open Questions bölümlerini, başlık düzeylerini, özellik göndermelerini, iç bağlantıları ve dizin girdilerini sayar. Bir EARS cümlesi bir ',
@@ -202,7 +201,7 @@ export const locale: ArticleLocale = {
         ' başlığının altındaki düzyazı olabilir. Linter İngilizceyi notlamaz.',
       ],
       [
-        t('Gereksinim spesifikasyonu', href.requirement),
+        t('Gereksinim spesifikasyonu', earsHref.requirement),
         ' her gereksinimi ',
         { c: '## Behavior' },
         ' içindeki bir konu başlığının altına, bir düzey aşağıya koyar; tipik olarak ',
@@ -215,7 +214,7 @@ export const locale: ArticleLocale = {
       ],
       [
         'Bir ',
-        t('kabul ölçütü', href.acceptance),
+        t('kabul ölçütü', earsHref.acceptance),
         ' isteğe bağlıdır. Kullanıldığında ',
         { c: '## Acceptance Criteria' },
         ' içinde ',
@@ -225,9 +224,9 @@ export const locale: ArticleLocale = {
         ' satırıdır. Kabul ölçütleri spesifikasyonu, AC’nin soyut bir koşul bildirdiğini ve Given/When/Then adımları, somut girdiler ya da gerçekleştirim ayrıntısı içermemesi gerektiğini söyler. Somut bir akış, özelliğin ',
         { c: '_tests/' },
         ' dizinindeki bir ',
-        t('senaryodur', href.scenario),
+        t('senaryodur', earsHref.scenario),
         '. ',
-        t('Özellik spesifikasyonu', href.feature),
+        t('Özellik spesifikasyonu', earsHref.feature),
         ' ayrıca bir durum, bir özet, bir sorun, davranış, kabul ölçütleri, açık sorular ve bir uyum alt bilgisi ister.',
       ],
       [
@@ -238,9 +237,9 @@ export const locale: ArticleLocale = {
         ' istenmeyen davranış örneğidir. 2 Kasım 2026’da ',
         { c: 'specscore spec lint' },
         ', bu ağaç için 30 Ekim 2026’da yayımlanan son sürüm specscore 0.55.1 ile ve ',
-        t('dogfood.yml', href.dogfood, 'us'),
+        t('dogfood.yml', earsHref.dogfood, 'us'),
         ' içinde sabitlenen specscore 0.39.1 ile 0 ihlal bildirdi. ',
-        t('Biçim deposu', href.formatRepo, 'us'),
+        t('Biçim deposu', earsHref.formatRepo, 'us'),
         ' bu akışın yeridir.',
       ],
     ],
@@ -316,32 +315,432 @@ export const locale: ArticleLocale = {
     },
     relatedTitle: 'İlgili',
     related: [
-      { href: href.kiroVs, label: 'SpecScore vs Kiro' },
-      { href: href.tools, label: 'Spesifikasyon odaklı geliştirme araçları' },
-      { href: href.sdd, label: 'Spesifikasyon odaklı geliştirme' },
-      { href: href.requirement, label: 'Gereksinim spesifikasyonu' },
-      { href: href.acceptance, label: 'Kabul ölçütleri spesifikasyonu' },
-      { href: href.feature, label: 'Özellik spesifikasyonu' },
-      { href: href.validators, label: 'Doğrulayıcılar ve CI' },
+      { href: earsHref.acceptanceArticle, label: "Bir yapay zeka ajanının doğrulayabileceği kabul kriterleri nasıl yazılır" },
+      { href: earsHref.kiroVs, label: 'SpecScore vs Kiro' },
+      { href: earsHref.tools, label: 'Spesifikasyon odaklı geliştirme araçları' },
+      { href: earsHref.sdd, label: 'Spesifikasyon odaklı geliştirme' },
+      { href: earsHref.requirement, label: 'Gereksinim spesifikasyonu' },
+      { href: earsHref.acceptance, label: 'Kabul ölçütleri spesifikasyonu' },
+      { href: earsHref.feature, label: 'Özellik spesifikasyonu' },
+      { href: earsHref.validators, label: 'Doğrulayıcılar ve CI' },
     ],
     ctaTitle: 'Gereksinimi, CI’ın reddedebileceği bir dosyaya koyun.',
     ctaInstall: 'CLI’ı kurun',
     ctaSkills: 'Ajanınız için yapay zekâ skilleri',
     ctaGithub: 'GitHub’da açık kaynak',
-  },
+  };
+
+const acceptance: AcceptanceArticleCopy = {
+    metaTitle: 'Bir yapay zeka ajanının doğrulayabileceği kabul kriterleri nasıl yazılır',
+    metaDescription:
+      'Kabul kriteri örnekleri ve kabul kriterlerinin Given/When/Then biçiminde nasıl yazılacağı. Yapay zeka kodlama ajanları için test edilebilir kabul kriterleri, CI’da denetlenir.',
+    h1: 'Bir yapay zeka ajanının doğrulayabileceği kabul kriterleri nasıl yazılır',
+    updated: '3 Kasım 2026 tarihinde güncellendi.',
+    breadcrumb: 'Makaleler',
+    hero: [
+      t('Kabul kriterleri', acceptanceHref.acceptance),
+      ' (AC, acceptance criteria), bir değişikliğin tamamlanmış sayılması için doğru olması gereken koşullardır. Given/When/Then, ',
+      t('Gherkin', acceptanceHref.gherkin, 'them'),
+      ' içindeki adım biçimidir; ',
+      t('Cucumber', acceptanceHref.bdd, 'them'),
+      ' bu dili davranış güdümlü geliştirme (BDD, behaviour-driven development) için kullanır: Given bir başlangıç durumu, When tek bir eylem gerçekleşir, Then gözlemlenebilir bir sonuç gelir. Ürün gereksinimleri belgesi (PRD, product requirements document), sorunu ve amaçlanan ürünü adlandıran düz yazıdır. ',
+      t('Spesifikasyon odaklı geliştirme', acceptanceHref.sdd),
+      ' (SDD, spec-driven development), yapılandırılmış bir spesifikasyonu, tek başına o düz yazıyı değil, uygulamanın kendisine göre denetlendiği kaynak olarak ele alır. ',
+      t('EARS', acceptanceHref.ears, 'them'),
+      ' (Easy Approach to Requirements Syntax), bir gereksinim tümcesini, yan tümceleri sabit bir sırada kalacak biçimde sınırlama yoludur. Sürekli entegrasyon (CI, continuous integration), önerilen her değişiklikte çalışan otomatik bir denetimdir; bu site SpecScore’un iki denetimini ',
+      t('doğrulayıcılar sayfasında', acceptanceHref.validators),
+      ' anlatır. Bu sayfa, yapay zeka (AI, artificial intelligence) kodlama ajanının doğrulayabileceği test edilebilir kabul kriterlerinin nasıl yazılacağını, kabul kriteri örnekleriyle birlikte gösterir ve SpecScore komut satırı arayüzünün (CLI, command-line interface) gerçekte neyi denetlediğini anlatır.',
+    ],
+    whatTitle: 'Kabul kriterleri nedir',
+    what: [
+      [
+        'Bir kabul kriteri «ne doğru olmalıdır?» sorusunu yanıtlar. Bir inceleyenin, bir testin veya bir ajanın kabul ya da ret edebileceği koşulu adlandırır. Çağrılacak işlevi ve düzenlenecek dosyayı adlandırmaz. Bu seçimler uygulamaya aittir.',
+      ],
+      [
+        'Gereksinim kuraldır. SpecScore ',
+        t('gereksinim spesifikasyonunda', acceptanceHref.requirementRepo, 'us'),
+        ' bir gereksinim, bir özelliğin içindeki ',
+        { c: '#### REQ:' },
+        ' başlığıdır: kendi tanımlayıcısı olan tek bir yükümlülük. Bir kabul kriteri, ilgili gereksinimleri tek bir koşulda toplar. Senaryo, koşulun tuttuğunu gösteren tek bir somut durumdur. ',
+        t('Kabul kriterleri spesifikasyonu', acceptanceHref.acceptance),
+        ' bunu şöyle söyler: kriterler «ne doğru olmalıdır?» sorusunu, senaryolar «bunu nasıl kanıtlarız?» sorusunu yanıtlar.',
+      ],
+      [
+        'Bir PRD aynı niyeti paragraflar halinde taşıyabilir. Paragraflar bir kişiye yardım eder. Ajan yine de hangi tümcenin geçti/kaldı sınaması olduğunu tahmin etmek zorundadır. Kriteri kendi tümcesi olarak yazmak bu tahmini ortadan kaldırır.',
+      ],
+    ],
+    verifiableTitle: 'Kabul kriterlerini test edilebilir kılan nedir',
+    verifiable: [
+      [
+        'Bir yapay zeka kodlama ajanı bir kritere ancak sonraki bir okur kanıta işaret edip geçti ya da kaldı diyebildiğinde uyabilir. Bunu beş alışkanlık mümkün kılar. Hiçbiri bir tümce şablonu değildir. Bunlar, Given/When/Then ve bir kontrol listesi dahil, her şablona uygulanabilecek denetimlerdir.',
+      ],
+    ],
+    checks: [
+      {
+        title: 'Gözlemlenebilir',
+        body: [
+          'Sonuç, dışarıdan birinin görebildiği bir şeydir: sayfadaki bir ileti, saklanmış ya da saklanmamış bir kayıt, bir yönlendirme, reddedilen bir form. «Sistem alışveriş yapanı anlar» gözlemlenebilir değildir. «Sayfa, e-posta alanının yanında Enter a valid email address gösterir» gözlemlenebilirdir.',
+        ],
+      },
+      {
+        title: 'Belirli',
+        body: [
+          'Eyleyeni, girdiyi ve sonucu adlandırın. «Kötü girdi ele alınır» hangi girdiyi ve hangi ele almayı söylemez. «Alışveriş yapan, not-an-email adresini gönderir» söyler. Belirli olmak, her üretim değerini yapıştırmak demek değildir. Bir okurun bir fikstür uydurup ne olması gerektiğini bilebilmesi demektir.',
+        ],
+      },
+      {
+        title: 'Tek davranış',
+        body: [
+          'Bir kriter, bir davranış. «Alışveriş yapan oturum açabilir, bir parolayı sıfırlayabilir ve bir kilitleme iletisi görebilir» tek tümcede üç kriterdir. Birincisini uygulayıp üçüncüsünü atlayan bir ajan, tümcenin bittiğini yine de ileri sürebilir. Bunları ayırın.',
+        ],
+      },
+      {
+        title: 'Geçer ya da kalır',
+        body: [
+          'Test edilebilir bir kabul kriterinin iki sonucu vardır. «Form hızlı hissettirmeli» bir eğimdir, bir sonuç değildir. Bir sınır gerekiyorsa sınırı yazın: «ödeme sayfası, sunucuya başka bir istek olmadan hatayı gösterir». Başarısızlığın nasıl göründüğünü söyleyemiyorsanız tümce henüz bir kriter değildir.',
+        ],
+      },
+      {
+        title: 'Belirsiz sözcük yok',
+        body: [
+          'Sonucu gizleyen sözcükleri çıkarın: zarif, sezgisel, sağlam, kullanıcı dostu, kesintisiz, hızlı, «-meli» ve uygun. Her birini kabul edeceğiniz kanıtla değiştirin. «Hataları zarifçe ele almak», «alanın yanında Enter a valid email address göstermek ve siparişi vermemek» olur.',
+        ],
+      },
+    ],
+    formatsTitle: 'Given/When/Then ve kontrol listesi',
+    formatsIntro: [
+      [
+        'İki biçim, ekiplerin gerçekten sakladığı kabul kriteri örneklerinin çoğunu karşılar. Given/When/Then bir senaryodur. Kontrol listesi bir sonuç listesidir. Durum, eylem ve sonucun sırası önemliyse senaryoyu kullanın. Tek bir eylemin birbirinden bağımsız sonuçlarını sıralıyorsanız kontrol listesini kullanın.',
+      ],
+      [
+        'Cucumber’in ',
+        t('Gherkin başvurusu', acceptanceHref.gherkin, 'them'),
+        ' adımlara Given, When, Then, And ve But anahtar sözcüklerini verir. Başvuru İngilizce kullanır; Gherkin’in bu sözcüklerin çevirileri de vardır. Anahtar sözcükten sonraki metin, Cucumber dosyayı çalıştırdığında step definition denen kodla eşleştirilir. SpecScore bu step definition katmanını kullanmaz. Aşağıdaki örnek, biçim tanıdık olsun diye gösterilen Gherkin’dir. Bir SpecScore dosyası değildir.',
+      ],
+    ],
+    gwtCaption: 'Given/When/Then',
+    checklistCaption: 'Kontrol listesi',
+    formatsAfter: [
+      [
+        'Tek bir When bırakın. İkinci bir eylem, ikinci bir senaryodur. And aynı anahtar sözcüğü sürdürür: bir Given daha ya da bir Then daha. İkinci bir davranışı gizlice sokmak için And kullanmayın.',
+      ],
+      [
+        'Kontrol listesi, anahtar sözcükler olmadan aynı sözleşmedir. Her satır yine tek bir gözlemlenebilir sonuçtur. Yukarıdaki kontrol listesi, senaryonun Then’idir; denetimler olarak yazılmıştır.',
+      ],
+    ],
+    earsTitle: 'Bunun EARS gereksinimleriyle ilişkisi',
+    ears: [
+    [
+      "Cümle kalıpları şurada anlatılır: ",
+      t("EARS gereksinim sözdizimi örneklerle açıklandı", acceptanceHref.earsArticle),
+      ".",
+    ],
+      [
+        t('Alistair Mavin rehberi', acceptanceHref.ears, 'them'),
+        ', EARS’ı (Easy Approach to Requirements Syntax) metin gereksinimlerini nazikçe sınırlayan bir mekanizma olarak tanımlar. Yan tümceler tek bir sırada kalır. Rehber genel biçimi verir: While <optional pre-condition>, when <optional trigger>, the <system name> shall <system response>. Bir gereksinimin sıfır veya daha fazla önkoşulu, sıfır veya bir tetikleyicisi, bir sistem adı ve bir veya daha fazla sistem yanıtı vardır.',
+      ],
+      [
+        'Bu tümce yükümlülüktür: sistemin karşılaması gereken kural. Kabul kriteri, yükümlülüğün yerine gelmiş sayılması için doğru olması gereken koşuldur. Bir Given/When/Then senaryosu, bu koşulun tek bir somut durumudur. Gereksinimi bir EARS tümcesiyle yazıp kriteri örnek girdilerden arınmış tutabilirsiniz.',
+      ],
+      [
+        'Bir SpecScore özelliğinde gereksinim, ',
+        { c: '#### REQ:' },
+        ' başlığı altında EARS biçiminde bir tümce olabilir. Kriter soyut koşul olarak kalır. Örneği senaryo taşır. EARS bu ikisinin yerine geçmez. Yalnızca gereksinim tümcesini sınırlar.',
+      ],
+    ],
+    examplesTitle: 'Kabul kriteri örnekleri: belirsiz ve test edilebilir',
+    badLabel: 'Belirsiz',
+    goodLabel: 'Test edilebilir',
+    pairs: [
+      {
+        title: 'Kanıtı adlandırmak',
+        bad: 'The checkout form should handle bad input gracefully and feel fast.',
+        good: 'When the shopper submits the email "not-an-email", the checkout page shows "Enter a valid email address" beside that field and does not place the order.',
+        why: [
+          'Belirsiz satır iki talebi (hatalar, hız) gizler ve kanıt vermez. Test edilebilir satırın bir eylemi ve bir kişinin ya da bir ajanın denetleyebileceği iki sonucu vardır. Örnekler İngilizce kalır, çünkü biçimin anahtar sözcükleri İngilizcedir.',
+        ],
+      },
+      {
+        title: 'Tek davranış',
+        bad: 'Users can sign in, reset a password, and see an error if the account is locked.',
+        good: 'When a visitor submits a known email and the matching password, the app sets a session cookie and redirects to /dashboard.',
+        why: [
+          'Oturum açma, sıfırlama ve kilitleme üç davranıştır. Test edilebilir satır oturum açmayı tutar. Sıfırlama ve kilitleme, kendi girdileri ve sonuçlarıyla ayrı birer kriter alır.',
+        ],
+      },
+      {
+        title: 'Sonuç, işlev adı değil',
+        bad: 'The handler returns 400 from validateEmail().',
+        good: 'When the shopper submits an email that is not a valid address, the checkout page shows "Enter a valid email address" and does not place the order.',
+        why: [
+          'Bir işlev adı ve bir durum kodu, kriteri bugünün koduna bağlar. Denetim başka bir işleve taşınsa da sonuç geçerliliğini korur. Durum kodu söz verdiğiniz davranış olduğunda durum kodunu tutun ve onu gözlemlenebilir sonuç olarak söyleyin.',
+        ],
+      },
+    ],
+    specscoreTitle: 'SpecScore bunları nasıl saklar ve CI neyi denetler',
+    specscore: [
+      [
+        'SpecScore biçimi ',
+        t('specscore/specscore', acceptanceHref.formatRepo, 'us'),
+        ' deposunda, CLI’ı ise ',
+        t('specscore/specscore-cli', acceptanceHref.cliRepo, 'us'),
+        ' deposunda yayımlar. Bu iki belge kabul kriterlerini tam olarak aynı biçimde anlatmaz. İkisi de günceldir. Bu bölüm önce hangisinin hangisi olduğunu, sonra ',
+        { c: 'specscore spec lint' },
+        ' komutunun gerçekte neyi reddettiğini söyler.',
+      ],
+      [
+        t('Kabul kriterleri spesifikasyonu', acceptanceHref.acceptance),
+        ' — o URL’de sunulan özellik README dosyası — kriterleri özellik README dosyasının içine koyar. Her özelliğin bir ',
+        { c: '## Acceptance Criteria' },
+        ' bölümü vardır. Her kriter bir ',
+        { c: '### AC: {slug}' },
+        ' başlığıdır. Slug küçük harflidir ve tireyle ayrılır. Sonraki satır ',
+        { c: '**Requirements:**' },
+        ' olur ve kriterin topladığı gereksinimleri ',
+        { c: '{feature-id}#req:{slug}' },
+        ' biçiminde listeler. Ardından düz yazı gelir: bileşik koşul. Spesifikasyon bu düz yazının soyut kalmasını söyler. Given/When/Then adımları, örnek girdiler ve uygulama ayrıntısı içermemelidir. Henüz kriter yoksa bölüm «Not defined yet.» diye okunur ve Open Questions bölümü «Acceptance criteria not yet defined for this feature.» der. Kriterler isteğe bağlı gruplamadır: spesifikasyon, iki veya daha fazla gereksinimi toplayınca bir kriter eklenmesini, tek bir gereksinimi yalnızca yineleyecekse atlanmasını söyler.',
+      ],
+      [
+        'Somut kanıt, özelliğin ',
+        { c: '_tests/' },
+        ' dizinindeki bir senaryo dosyasıdır. ',
+        t('Senaryo spesifikasyonu', acceptanceHref.scenarioRepo, 'us'),
+        ' bir ',
+        { c: '# Scenario:' },
+        ' başlığı, bir ',
+        { c: '## Steps' },
+        ' bölümü, büyük harfli ',
+        { c: 'GIVEN' },
+        ', ',
+        { c: 'WHEN' },
+        ', ',
+        { c: 'THEN' },
+        ' ve ',
+        { c: 'AND' },
+        ' ve tam olarak bir WHEN ister. İsteğe bağlı ',
+        { c: '**Validates:**' },
+        ' satırı senaryoyu ',
+        { c: '{feature-path}#ac:{slug}' },
+        ' ile ya da bir gereksinimle bağlar. Bir ',
+        { c: '## Rehearse' },
+        ' bölümü, shebang ile başlayan yürütülebilir bir betiği ',
+        { c: 'rehearse' },
+        ' bloğunda tutabilir.',
+      ],
+      [
+        'CLI ayrıca, kriter başına bir tane olmak üzere, ',
+        { c: '_acs/<slug>.ac.md' },
+        ' yolundaki ince kriter dosyalarını okur. ',
+        t('Oturum açma örneği', acceptanceHref.example),
+        ' ve ',
+        t('Rehearse rehberi', acceptanceHref.rehearse),
+        ' bu biçimi belgeler: ',
+        { c: '# AC: <slug>' },
+        ', isteğe bağlı ',
+        { c: '**Status:**' },
+        ', ',
+        { c: '**Verifies:**' },
+        ' ve ',
+        { c: '**Applies-to:**' },
+        ' ve koşul ',
+        { c: '## Statement' },
+        ' altında. ',
+        { c: 'specscore rehearse acs <feature-dir>' },
+        ' bu dosyalardan bir özet tablo basar. ',
+        { c: 'specscore rehearse acs --write' },
+        ' özellik README dosyasındaki Acceptance Criteria bölümünü bu tabloyla ve bölümün üretildiğini, elle düzenlenmemesi gerektiğini söyleyen bir yorumla değiştirir. ',
+        { c: '# AC:' },
+        ' başlığı olmayan bir dosya, bu komutun hatasıdır.',
+      ],
+      [
+        'Bu depodaki CI ',
+        t('dogfood iş akışı', acceptanceHref.dogfood, 'us'),
+        'dır. CLI v0.39.1 sürümünü kurar ve ',
+        { c: 'specscore spec lint' },
+        ' komutunu pull request’lerde ve main’e yapılan push’larda çalıştırır. 3 Kasım 2026 tarihinde kontrol edildi: bu sürüm ve CLI’ın varsayılan dalı aşağıdaki kuralları içerir. Linter yapıyı denetler. İngilizceyi notlamaz.',
+      ],
+      [
+        { c: 'ac-heading-format' },
+        ' kuralı bir hatadır. Bir özellik README dosyasında (başlığı ',
+        { c: '# Feature:' },
+        ' olan bir dosyada) kabul kriteri başlığı gibi görünen bir satır, iki noktadan sonra bir boşluk ve kebab-case bir kimlikle tam olarak ',
+        { c: '### AC: <id>' },
+        ' olmalıdır. ',
+        { c: '### AC: <id> (verifies ...)' },
+        ' biçimindeki bir başlık da kabul edilir. ',
+        { c: '--fix' },
+        ' yalnızca boşlukları onarır. Büyük harf ya da alt çizgi içeren bir kimlik bildirilir ve kişiye bırakılır. Kural ',
+        { c: '**Requirements:**' },
+        ' satırını zorunlu tutmaz, «Not defined yet.» yer tutucusunu zorunlu tutmaz ve düz yazı Given, When ya da Then içerdiğinde uyarı vermez. Spesifikasyonun bu uyarı için kendi senaryosu, bu CLI’da bir lint kuralı değildir.',
+      ],
+      [
+        'Bir kaynak özelliği adlandıran bir planda linter, o özelliğin Acceptance Criteria bölümündeki ',
+        { c: '### AC:' },
+        ' başlıklarını okur. ',
+        { c: 'P-002' },
+        ' kuralı, bir görev ',
+        { c: '**Verifies:**' },
+        ' değerinin bu başlıklardan biri için ',
+        { c: '<feature-slug>#ac:<ac-slug>' },
+        ' olmadığını bildirir. ',
+        { c: 'P-001' },
+        ' kuralı, hiçbir görevin kapsamadığı ve ',
+        { c: '## Deferred AC Coverage' },
+        ' altında listelenmemiş bir başlığı bildirir. Bu iki kural ',
+        { c: '_acs/*.ac.md' },
+        ' dosyalarını açmaz. ',
+        { c: 'rehearse acs --write' },
+        ' özet tablosunda ',
+        { c: '### AC:' },
+        ' başlığı yoktur, bu yüzden plan kuralları ince dosyaları görmez.',
+      ],
+      [
+        'Aynı lint komutu senaryo adımı anahtar sözcüklerini denetlemez. ',
+        { c: 'specscore rehearse' },
+        ' senaryo dosyalarını çalıştırır: Rehearse rehberi, çitli bir komutun üzerinde ',
+        { c: '## Given' },
+        ' ya da ',
+        { c: '## When' },
+        ' gibi bir başlık ve yeniden kullanılabilir bir denetimi çağırmak için ',
+        { c: '**Use:**' },
+        ' kullanır. Bir Given ve birkaç When dalı olan bir dosya ayrı durumlar olarak çalışır. ',
+        { c: 'specscore rehearse new <feature-slug>#ac:<ac-slug>' },
+        ' özellik README dosyasını okur ve o kriterdeki Given/When/Then satırlarını ',
+        { c: 'spec/features/<feature-slug>/_tests/<ac-slug>.md' },
+        ' içine çıkarır. Bunların hiçbiri dogfood iş akışında çalışmaz. İş akışı ',
+        { c: 'specscore spec lint' },
+        ' çalıştırır.',
+      ],
+    ],
+    inlineCaption: 'Satır içi kriter, kabul kriterleri spesifikasyonundan',
+    thinCaption: 'İnce kriter dosyası, rehearse acs komutunun okuduğu biçim',
+    scenarioCaption: 'Senaryo dosyası, senaryo spesifikasyonundan',
+    rehearseCaption: 'Rehearse senaryosu, Rehearse rehberindeki biçim',
+    specscoreAfter: [
+      [
+        'Dört örnek bu biçimlerin resmidir. Tam bir özellik ağacı değildirler ve bu sayfa onların tek başlarına ',
+        { c: 'specscore spec lint' },
+        ' geçtiğini iddia etmez. Bu komut temiz sonuç versin diye bir özellik README dosyasının diğer zorunlu bölümleri de gerekir.',
+      ],
+      [
+        'Belirsiz bir istekten kriteri çıkarmak için bir soru listesi istiyorsanız ',
+        t('İyi sorular sormak', acceptanceHref.questions),
+        ' sayfasını kullanın. Oturum açma anlatımı, diğer artefaktların arasında yerinde duran bir ince kriteri, ',
+        { c: 'session-hardened' },
+        ', gösterir.',
+      ],
+    ],
+    faqTitle: 'Sık sorulan sorular',
+    faqs: [
+      {
+        q: 'Kabul kriterleri nedir?',
+        a: [
+          'Kabul kriterleri (AC), bir değişikliğin tamamlanmış sayılması için doğru olması gereken koşullardır. SpecScore kabul kriterleri spesifikasyonunda soyutturlar: neyin doğru olması gerektiğini söylerler ve somut adımları bir senaryoya bırakırlar.',
+        ],
+      },
+      {
+        q: 'Given/When/Then nedir?',
+        a: [
+          'Given/When/Then, Gherkin’deki adım biçimidir: Given bir başlangıç durumu, When tek bir eylem gerçekleşir, Then gözlemlenebilir bir sonuç gelir. Cucumber anahtar sözcükleri Gherkin başvurusunda belgeler. SpecScore senaryo spesifikasyonu, senaryo dosyası başına tam olarak bir WHEN ile büyük harfli GIVEN, WHEN, THEN ve AND anahtar sözcüklerini kullanır.',
+        ],
+      },
+      {
+        q: 'Bir yapay zeka kodlama ajanı için kabul kriterleri nasıl yazılır?',
+        a: [
+          'Eyleyen, girdi ve sonuçla, belirsiz sözcük olmadan tek bir gözlemlenebilir davranış yazın. Örnek veriyi soyut kritere değil, bir senaryoya koyun. Ajan o zaman kritere göre uygulayabilir ve senaryoyu denetleyebilir.',
+        ],
+      },
+      {
+        q: 'Kabul kriterleri test durumlarıyla aynı şey midir?',
+        a: [
+          'Hayır. Bir kriter koşulu belirtir. Bir test durumu, ya da bir SpecScore senaryosu, koşulun tuttuğunu ya da tutmadığını gösteren, somut girdilerle tek bir çalıştırmadır. Birkaç senaryo bir kriteri destekleyebilir.',
+        ],
+      },
+      {
+        q: 'specscore spec lint belirsiz ifadeyi yargılar mı?',
+        a: [
+          'Hayır. Bu depodaki CI’ın kurduğu sürüm olan CLI v0.39.1 içinde ac-heading-format, ### AC: başlığını denetler. «graceful» ya da «fast» gibi sözcüklere puan vermez ve bir kriter Given/When/Then içerdiğinde uyarı vermez. İfade bir yazma işidir. ',
+          t('Doğrulayıcılar sayfası', acceptanceHref.validators),
+          ' bu deterministik lint’i elle yapılan yapay zeka incelemesinden ayırır.',
+        ],
+      },
+      {
+        q: 'Given/When/Then adımları SpecScore’da nereye konur?',
+        a: [
+          'Kabul kriterine değil, bir senaryoya. Kabul kriterleri spesifikasyonu, kriterin içinde Given/When/Then adımlarını yasaklar. Senaryo spesifikasyonu onları _tests/ altında, ## Steps bölümüne koyar. Rehearse, ilgili bir biçimi çalıştırır: _tests/ altında başlıklar ve çitli komutlar; Rehearse rehberinde belgelenmiştir. Linter adım anahtar sözcüklerini zorlamaz.',
+        ],
+      },
+    ],
+    sourcesTitle: 'Kaynaklar',
+    sourcesNote:
+      '3 Kasım 2026 tarihinde okundu. Üçüncü taraf sayfalar yalnızca yayımladıkları tanımlar için alıntılanır.',
+    sourceLabel: {
+      gherkin: 'Cucumber — Gherkin başvurusu',
+      bdd: 'Cucumber — davranış güdümlü geliştirme',
+      ears: 'Alistair Mavin — EARS',
+      earsArticle: "EARS gereksinim sözdizimi örneklerle açıklandı",
+      acceptance: 'SpecScore — kabul kriterleri spesifikasyonu',
+      acceptanceRepo: 'specscore/specscore — kabul kriterleri özelliği',
+      scenarioRepo: 'specscore/specscore — senaryo özelliği',
+      requirementRepo: 'specscore/specscore — gereksinim özelliği',
+      feature: 'SpecScore — özellik spesifikasyonu',
+      rehearse: 'SpecScore — Rehearse',
+      example: 'SpecScore — oturum açma örneği',
+      questions: 'SpecScore — İyi sorular sormak',
+      cli: 'specscore/specscore-cli',
+      formatRepo: 'specscore/specscore',
+      dogfood: 'Dogfood iş akışı (CLI v0.39.1)',
+      acHeading: 'specscore-cli — ac-heading-format',
+      planRules: 'specscore-cli — plan kuralları P-001 ve P-002',
+    },
+    relatedTitle: 'İlgili',
+    related: [
+      { href: acceptanceHref.earsArticle, label: "EARS gereksinim sözdizimi örneklerle açıklandı" },
+      { href: acceptanceHref.sdd, label: 'Spesifikasyon odaklı geliştirme' },
+      { href: acceptanceHref.tools, label: 'Spesifikasyon güdümlü geliştirme araçları' },
+      { href: acceptanceHref.acceptance, label: 'Kabul kriterleri spesifikasyonu' },
+      { href: acceptanceHref.questions, label: 'İyi sorular sormak' },
+      { href: acceptanceHref.example, label: 'Örnekle bir oturum açma özelliği' },
+      { href: acceptanceHref.rehearse, label: 'Rehearse' },
+      { href: acceptanceHref.validators, label: 'SpecScore neyi doğrular' },
+      { href: acceptanceHref.cli, label: 'CLI' },
+    ],
+    ctaTitle: 'Elinizdeki spesifikasyonu denetleyin.',
+    ctaInstall: 'CLI’ı kurun',
+    ctaSkills: 'Yapay zeka becerileri',
+    ctaGithub: 'Biçim GitHub’da',
+  };
+
+export const locale: ArticleLocale = {
+  ears,
+  acceptance,
   index: {
     metaTitle: 'Makaleler | SpecScore',
-    metaDescription:
-      'Gereksinim notasyonu ve spesifikasyon odaklı geliştirme üzerine makaleler; EARS gereksinim sözdizimi ve SpecScore’a yazımı dahil.',
+    metaDescription: "Gereksinim notasyonu ve spesifikasyon odaklı geliştirme üzerine makaleler; EARS gereksinim sözdizimi ve SpecScore’a yazımı dahil. Kabul kriterlerinin nasıl yazılacağı, Given/When/Then ve yapay zeka kodlama ajanları için test edilebilir kabul kriterleri üzerine SpecScore makaleleri.",
     h1: 'Makaleler',
     hero: [
-      'Buradaki makaleler bir gereksinim notasyonunu ya da spesifikasyon odaklı geliştirme (SDD, spec-driven development) pratiğini açıklar, sonra aynı fikri ',
+'Buradaki makaleler bir gereksinim notasyonunu ya da spesifikasyon odaklı geliştirme (SDD, spec-driven development) pratiğini açıklar, sonra aynı fikri ',
       { c: 'specscore spec lint' },
       ' komutunun sürekli entegrasyonda (CI, continuous integration) denetleyebildiği bir SpecScore gereksinimi (REQ) olarak gösterir.',
+      ' ',
+'SpecScore makaleleri spesifikasyonu yalın bir dille açıklar. ',
+      t('Kabul kriterleri', acceptanceHref.acceptance),
+      ' (AC, acceptance criteria), bir değişikliğin tamamlanmış sayılması için doğru olması gereken koşullardır. ',
+      t('Spesifikasyon odaklı geliştirme', acceptanceHref.sdd),
+      ' (SDD, spec-driven development), yapılandırılmış bir spesifikasyonu uygulamanın kendisine göre denetlendiği kaynak olarak ele alır.',
     ],
     listLabel: 'Yayımlananlar',
-    articleTitle: 'EARS gereksinim sözdizimi örneklerle açıklandı',
-    articleSummary:
-      'EARS (Easy Approach to Requirements Syntax) nedir, cümle kalıpları, Kiro’nun EARS notasyonunu nasıl kullandığı ve linter’dan geçen bir SpecScore gereksinimi.',
+    articles: [
+      {
+        href: '/articles/acceptance-criteria/',
+        title: 'Bir yapay zeka ajanının doğrulayabileceği kabul kriterleri nasıl yazılır',
+        summary: 'Given/When/Then ve kontrol listesi biçiminde kabul kriteri örnekleri, bir kriteri test edilebilir kılan şey ve specscore spec lint komutunun sürekli entegrasyonda (CI) neyi denetlediği.',
+      },
+      {
+        href: '/articles/ears-requirements/',
+        title: 'EARS gereksinim sözdizimi örneklerle açıklandı',
+        summary: 'EARS (Easy Approach to Requirements Syntax) nedir, cümle kalıpları, Kiro’nun EARS notasyonunu nasıl kullandığı ve linter’dan geçen bir SpecScore gereksinimi.',
+      },
+    ],
   },
 };

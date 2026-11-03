@@ -1,18 +1,30 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { langs, localeHref, type LangCode } from '../src/lib/languages.ts';
-import { articleMdHref, articlesIndexMdHref } from '../src/content/articles/facts.ts';
-import { articleCopy, indexCopy } from '../src/content/articles/pages.ts';
-import { renderArticleMarkdown, renderIndexMarkdown } from '../src/content/articles/render-md.ts';
+import {
+  acceptanceArticleMdHref,
+  acceptanceSlug,
+  articlesIndexMdHref,
+  earsArticleMdHref,
+  earsSlug,
+} from '../src/content/articles/facts.ts';
+import { acceptanceCopy, earsCopy, indexCopy } from '../src/content/articles/pages.ts';
+import { renderAcceptanceMarkdown, renderEarsMarkdown, renderIndexMarkdown } from '../src/content/articles/render-md.ts';
 
 function markdownFor(locale: LangCode, slug: string | undefined): string | undefined {
   if (slug === undefined) {
     const canonical = `https://specscore.md${localeHref(locale, '/articles/')}`;
     return renderIndexMarkdown(indexCopy(locale), locale, canonical);
   }
-  if (slug !== 'ears-requirements') return undefined;
-  const canonical = `https://specscore.md${localeHref(locale, '/articles/ears-requirements/')}`;
-  return renderArticleMarkdown(articleCopy(locale), locale, canonical);
+  if (slug === earsSlug) {
+    const canonical = `https://specscore.md${localeHref(locale, '/articles/ears-requirements/')}`;
+    return renderEarsMarkdown(earsCopy(locale), locale, canonical);
+  }
+  if (slug === acceptanceSlug) {
+    const canonical = `https://specscore.md${localeHref(locale, '/articles/acceptance-criteria/')}`;
+    return renderAcceptanceMarkdown(acceptanceCopy(locale), locale, canonical);
+  }
+  return undefined;
 }
 
 const printUrl = process.argv[2] === '--print' ? process.argv[3] : undefined;
@@ -40,7 +52,8 @@ if (printUrl) {
   for (const lang of langs) {
     const files: [string, string | undefined][] = [
       [articlesIndexMdHref(lang.code), undefined],
-      [articleMdHref(lang.code), 'ears-requirements'],
+      [acceptanceArticleMdHref(lang.code), acceptanceSlug],
+      [earsArticleMdHref(lang.code), earsSlug],
     ];
     for (const [relHref, slug] of files) {
       const body = markdownFor(lang.code, slug);

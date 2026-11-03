@@ -481,6 +481,11 @@ export const page: RoundupPage = {
           '。',
         ],
         [
+          '怎樣寫出代理能夠核對的標準，見',
+          { a: '如何撰寫驗收標準', href: '/articles/acceptance-criteria/' },
+          '。',
+        ],
+        [
           '在這個網站的儲存庫裡，',
           t('dogfood.yml', href.dogfood, 'us'),
           ' 會裝上那支 CLI，並在拉取請求上、以及推向 main 時執行 ',

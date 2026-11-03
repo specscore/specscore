@@ -466,6 +466,11 @@ export const page: RoundupPage = {
           '.',
         ],
         [
+          'Jak pisać kryteria, żeby agent mógł je sprawdzić, opisuje ',
+          { a: 'jak pisać kryteria akceptacji', href: '/articles/acceptance-criteria/' },
+          '.',
+        ],
+        [
           'W repozytorium tej strony ',
           t('dogfood.yml', href.dogfood, 'us'),
           ' instaluje to CLI i uruchamia ',

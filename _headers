@@ -284,10 +284,14 @@
 /ko/spec-driven-development/tools/
   Link: </ko/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
 
+
 # Articles: raw Markdown sibling for agents
 
 /articles/
   Link: </articles.md>; rel="alternate"; type="text/markdown"
+
+/articles/acceptance-criteria/
+  Link: </articles/acceptance-criteria.md>
 
 /articles/ears-requirements/
   Link: </articles/ears-requirements.md>; rel="alternate"; type="text/markdown"
@@ -295,11 +299,17 @@
 /es/articles/
   Link: </es/articles.md>; rel="alternate"; type="text/markdown"
 
+/es/articles/acceptance-criteria/
+  Link: </es/articles/acceptance-criteria.md>
+
 /es/articles/ears-requirements/
   Link: </es/articles/ears-requirements.md>; rel="alternate"; type="text/markdown"
 
 /de/articles/
   Link: </de/articles.md>; rel="alternate"; type="text/markdown"
+
+/de/articles/acceptance-criteria/
+  Link: </de/articles/acceptance-criteria.md>
 
 /de/articles/ears-requirements/
   Link: </de/articles/ears-requirements.md>; rel="alternate"; type="text/markdown"
@@ -307,11 +317,17 @@
 /fr/articles/
   Link: </fr/articles.md>; rel="alternate"; type="text/markdown"
 
+/fr/articles/acceptance-criteria/
+  Link: </fr/articles/acceptance-criteria.md>
+
 /fr/articles/ears-requirements/
   Link: </fr/articles/ears-requirements.md>; rel="alternate"; type="text/markdown"
 
 /it/articles/
   Link: </it/articles.md>; rel="alternate"; type="text/markdown"
+
+/it/articles/acceptance-criteria/
+  Link: </it/articles/acceptance-criteria.md>
 
 /it/articles/ears-requirements/
   Link: </it/articles/ears-requirements.md>; rel="alternate"; type="text/markdown"
@@ -319,11 +335,17 @@
 /pl/articles/
   Link: </pl/articles.md>; rel="alternate"; type="text/markdown"
 
+/pl/articles/acceptance-criteria/
+  Link: </pl/articles/acceptance-criteria.md>
+
 /pl/articles/ears-requirements/
   Link: </pl/articles/ears-requirements.md>; rel="alternate"; type="text/markdown"
 
 /pt-br/articles/
   Link: </pt-br/articles.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/articles/acceptance-criteria/
+  Link: </pt-br/articles/acceptance-criteria.md>
 
 /pt-br/articles/ears-requirements/
   Link: </pt-br/articles/ears-requirements.md>; rel="alternate"; type="text/markdown"
@@ -331,11 +353,17 @@
 /ru/articles/
   Link: </ru/articles.md>; rel="alternate"; type="text/markdown"
 
+/ru/articles/acceptance-criteria/
+  Link: </ru/articles/acceptance-criteria.md>
+
 /ru/articles/ears-requirements/
   Link: </ru/articles/ears-requirements.md>; rel="alternate"; type="text/markdown"
 
 /tr/articles/
   Link: </tr/articles.md>; rel="alternate"; type="text/markdown"
+
+/tr/articles/acceptance-criteria/
+  Link: </tr/articles/acceptance-criteria.md>
 
 /tr/articles/ears-requirements/
   Link: </tr/articles/ears-requirements.md>; rel="alternate"; type="text/markdown"
@@ -343,11 +371,17 @@
 /uk/articles/
   Link: </uk/articles.md>; rel="alternate"; type="text/markdown"
 
+/uk/articles/acceptance-criteria/
+  Link: </uk/articles/acceptance-criteria.md>
+
 /uk/articles/ears-requirements/
   Link: </uk/articles/ears-requirements.md>; rel="alternate"; type="text/markdown"
 
 /ja/articles/
   Link: </ja/articles.md>; rel="alternate"; type="text/markdown"
+
+/ja/articles/acceptance-criteria/
+  Link: </ja/articles/acceptance-criteria.md>
 
 /ja/articles/ears-requirements/
   Link: </ja/articles/ears-requirements.md>; rel="alternate"; type="text/markdown"
@@ -355,17 +389,26 @@
 /zh-cn/articles/
   Link: </zh-cn/articles.md>; rel="alternate"; type="text/markdown"
 
+/zh-cn/articles/acceptance-criteria/
+  Link: </zh-cn/articles/acceptance-criteria.md>
+
 /zh-cn/articles/ears-requirements/
   Link: </zh-cn/articles/ears-requirements.md>; rel="alternate"; type="text/markdown"
 
 /zh-tw/articles/
   Link: </zh-tw/articles.md>; rel="alternate"; type="text/markdown"
 
+/zh-tw/articles/acceptance-criteria/
+  Link: </zh-tw/articles/acceptance-criteria.md>
+
 /zh-tw/articles/ears-requirements/
   Link: </zh-tw/articles/ears-requirements.md>; rel="alternate"; type="text/markdown"
 
 /ko/articles/
   Link: </ko/articles.md>; rel="alternate"; type="text/markdown"
+
+/ko/articles/acceptance-criteria/
+  Link: </ko/articles/acceptance-criteria.md>
 
 /ko/articles/ears-requirements/
   Link: </ko/articles/ears-requirements.md>; rel="alternate"; type="text/markdown"

@@ -1,6 +1,6 @@
 # Article locales
 
-One TypeScript module per locale. Each exports `locale`, the EARS article and the articles index in that language.
+One TypeScript module per locale for `/articles/`, `/articles/acceptance-criteria/`, and `/articles/ears-requirements/`. English is the source of the facts. Other locales translate the prose and keep the format samples in English, because the specification's keywords are English.
 
 | File | Locale |
 |---|---|
@@ -19,7 +19,7 @@ One TypeScript module per locale. Each exports `locale`, the EARS article and th
 | `zh-tw.ts` | Traditional Chinese |
 | `ko.ts` | Korean |
 
-EARS keywords, example sentences, and the linted SpecScore sample stay in English. The syntax is English.
+EARS keywords, example sentences, and the linted SpecScore samples stay in English.
 
 ## Outstanding Questions
 

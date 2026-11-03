@@ -1,6 +1,12 @@
 import type { LangCode } from '../../lib/languages.ts';
-import { href, patternExample, patternForm, patternOrder } from './facts.ts';
-import type { ArticleCopy, ArticleLocale, IndexCopy, PatternId } from './types.ts';
+import { acceptanceHref, earsHref, patternExample, patternForm, patternOrder } from './facts.ts';
+import type {
+  AcceptanceArticleCopy,
+  ArticleLocale,
+  EarsArticleCopy,
+  IndexCopy,
+  PatternId,
+} from './types.ts';
 
 import { locale as en } from './locales/en.ts';
 import { locale as es } from './locales/es.ts';
@@ -40,8 +46,12 @@ export function articleLocale(code: LangCode): ArticleLocale {
   return found;
 }
 
-export function articleCopy(code: LangCode): ArticleCopy {
-  return articleLocale(code).article;
+export function earsCopy(code: LangCode): EarsArticleCopy {
+  return articleLocale(code).ears;
+}
+
+export function acceptanceCopy(code: LangCode): AcceptanceArticleCopy {
+  return articleLocale(code).acceptance;
 }
 
 export function indexCopy(code: LangCode): IndexCopy {
@@ -53,10 +63,10 @@ export interface PatternView {
   name: string;
   form: string;
   example: string;
-  body: ArticleCopy['patternBody'][PatternId];
+  body: EarsArticleCopy['patternBody'][PatternId];
 }
 
-export function patternsFor(copy: ArticleCopy): PatternView[] {
+export function patternsFor(copy: EarsArticleCopy): PatternView[] {
   return patternOrder.map((id) => ({
     id,
     name: copy.patternName[id],
@@ -66,19 +76,42 @@ export function patternsFor(copy: ArticleCopy): PatternView[] {
   }));
 }
 
-export function sourcesFor(copy: ArticleCopy): { href: string; label: string }[] {
+export function earsSourcesFor(copy: EarsArticleCopy): { href: string; label: string }[] {
   const label = copy.sourceLabel;
   return [
-    { href: href.paper, label: label.paper },
-    { href: href.mavin, label: label.mavin },
-    { href: href.kiroFeature, label: label.kiroFeature },
-    { href: href.kiroRequirements, label: label.kiroRequirements },
-    { href: href.requirementRepo, label: label.requirement },
-    { href: href.acceptanceRepo, label: label.acceptance },
-    { href: href.scenarioRepo, label: label.scenario },
-    { href: href.featureRepo, label: label.feature },
-    { href: href.dogfood, label: label.dogfood },
-    { href: href.cliRepo, label: label.cli },
-    { href: href.formatRepo, label: label.formatRepo },
+    { href: earsHref.paper, label: label.paper },
+    { href: earsHref.mavin, label: label.mavin },
+    { href: earsHref.kiroFeature, label: label.kiroFeature },
+    { href: earsHref.kiroRequirements, label: label.kiroRequirements },
+    { href: earsHref.requirementRepo, label: label.requirement },
+    { href: earsHref.acceptanceRepo, label: label.acceptance },
+    { href: earsHref.scenarioRepo, label: label.scenario },
+    { href: earsHref.featureRepo, label: label.feature },
+    { href: earsHref.dogfood, label: label.dogfood },
+    { href: earsHref.cliRepo, label: label.cli },
+    { href: earsHref.formatRepo, label: label.formatRepo },
+  ];
+}
+
+export function acceptanceSourcesFor(copy: AcceptanceArticleCopy): { href: string; label: string }[] {
+  const label = copy.sourceLabel;
+  return [
+    { href: acceptanceHref.gherkin, label: label.gherkin },
+    { href: acceptanceHref.bdd, label: label.bdd },
+    { href: acceptanceHref.ears, label: label.ears },
+    { href: acceptanceHref.earsArticle, label: label.earsArticle },
+    { href: acceptanceHref.acceptance, label: label.acceptance },
+    { href: acceptanceHref.acceptanceRepo, label: label.acceptanceRepo },
+    { href: acceptanceHref.scenarioRepo, label: label.scenarioRepo },
+    { href: acceptanceHref.requirementRepo, label: label.requirementRepo },
+    { href: acceptanceHref.feature, label: label.feature },
+    { href: acceptanceHref.rehearse, label: label.rehearse },
+    { href: acceptanceHref.example, label: label.example },
+    { href: acceptanceHref.questions, label: label.questions },
+    { href: acceptanceHref.cliRepo, label: label.cli },
+    { href: acceptanceHref.formatRepo, label: label.formatRepo },
+    { href: acceptanceHref.dogfood, label: label.dogfood },
+    { href: acceptanceHref.acHeading, label: label.acHeading },
+    { href: acceptanceHref.planRules, label: label.planRules },
   ];
 }
