@@ -11,6 +11,7 @@ const repoRoot = fileURLToPath(new URL('../..', import.meta.url));
 const root = dirname(fileURLToPath(import.meta.url));
 const emitScript = join(root, 'scripts/emit-compare-md.ts');
 const emitRoundupScript = join(root, 'scripts/emit-roundup-md.ts');
+const emitArticlesScript = join(root, 'scripts/emit-articles-md.ts');
 
 function emitMarkdown(script, outDir, label) {
   const dest = outDir instanceof URL ? fileURLToPath(outDir) : String(outDir);
@@ -32,6 +33,10 @@ function emitRoundupMarkdown(outDir) {
   emitMarkdown(emitRoundupScript, outDir, 'roundup');
 }
 
+function emitArticlesMarkdown(outDir) {
+  emitMarkdown(emitArticlesScript, outDir, 'articles');
+}
+
 function compareMarkdown() {
   return {
     name: 'compare-markdown',
@@ -39,16 +44,19 @@ function compareMarkdown() {
       'astro:build:done': ({ dir }) => {
         emitCompareMarkdown(dir);
         emitRoundupMarkdown(dir);
+        emitArticlesMarkdown(dir);
       },
       'astro:server:setup': ({ server }) => {
         server.middlewares.use((req, res, next) => {
           const url = (req.url || '').split('?')[0];
           const compare = /^\/(?:[a-z-]+\/)?vs\/[a-z0-9-]+\.md$/.test(url);
           const roundup = /^\/(?:[a-z-]+\/)?spec-driven-development\/tools\.md$/.test(url);
-          if (!compare && !roundup) return next();
+          const article = /^\/(?:[a-z-]+\/)?articles(?:\/[a-z0-9-]+)?\.md$/.test(url);
+          if (!compare && !roundup && !article) return next();
+          const script = compare ? emitScript : roundup ? emitRoundupScript : emitArticlesScript;
           const result = spawnSync(
             process.execPath,
-            ['--experimental-strip-types', compare ? emitScript : emitRoundupScript, '--print', url],
+            ['--experimental-strip-types', script, '--print', url],
             { cwd: root, encoding: 'utf8' },
           );
           if (result.status !== 0 || !result.stdout) return next();

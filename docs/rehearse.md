@@ -110,7 +110,7 @@ The things that must be true — "session hardened," "redirected to dashboard" �
 After any successful sign-in, the session cookie is HttpOnly and Secure.
 ~~~
 
-Run `specscore rehearse acs spec/features/auth/login` and it generates the feature's `## Acceptance Criteria` summary table from the `_acs/` files — every criterion's intent readable in one glance (a person skims it; an agent reads it in one shot, no per-file lookups), while each `.ac.md` stays the single source of truth.
+Run `specscore rehearse acs spec/features/auth/login` and it generates the feature's `## Acceptance Criteria` summary table from the `_acs/` files — every criterion's intent readable in one glance (a person skims it; an agent reads it in one shot, no per-file lookups), while each `.ac.md` stays the single source of truth. [How to write acceptance criteria](/articles/acceptance-criteria/) is the writing guide for the sentence itself.
 
 > One login page, three methods, success and failure — and the shared verification is written once, the branches read like behaviour, the criteria are one glance away, and every line runs for real. That's Rehearse.
 

@@ -464,6 +464,11 @@ export const page: RoundupPage = {
           '.',
         ],
         [
+          'Як писати критерії, щоб агент міг їх перевірити, — у статті ',
+          { a: 'як писати критерії приймання', href: '/articles/acceptance-criteria/' },
+          '.',
+        ],
+        [
           'У репозиторії цього сайту ',
           t('dogfood.yml', href.dogfood, 'us'),
           ' встановлює цей CLI і запускає ',

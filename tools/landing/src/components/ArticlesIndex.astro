@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import SiteFooterDe from './SiteFooterDe.astro';
+import SiteFooterEs from './SiteFooterEs.astro';
+import SiteFooterFr from './SiteFooterFr.astro';
+import SiteFooterIt from './SiteFooterIt.astro';
+import SiteFooterJa from './SiteFooterJa.astro';
+import SiteFooterKo from './SiteFooterKo.astro';
+import SiteFooterPl from './SiteFooterPl.astro';
+import SiteFooterPtBr from './SiteFooterPtBr.astro';
+import SiteFooterRu from './SiteFooterRu.astro';
+import SiteFooterTr from './SiteFooterTr.astro';
+import SiteFooterUk from './SiteFooterUk.astro';
+import SiteFooterZhCn from './SiteFooterZhCn.astro';
+import SiteFooterZhTw from './SiteFooterZhTw.astro';
+import Inlines from './Inlines.astro';
+import { langs, localeFromPath, localeHref, type LangCode } from '../lib/languages.ts';
+import { articleHref, articlesIndexMdHref, localizedPrefixes } from '../content/articles/facts.ts';
+import { indexCopy } from '../content/articles/pages.ts';
+import type { Block, Inline } from '../content/articles/types.ts';
+
+const locale = localeFromPath(Astro.url.pathname) as LangCode;
+const page = indexCopy(locale);
+const lang = langs.find((item) => item.code === locale)?.tag ?? 'en';
+
+function isLanding(href: string): boolean {
+  return localizedPrefixes.some((prefix) => href === prefix || href.startsWith(prefix));
+}
+
+function localize(parts: Block): Block {
+  return parts.map((part: Inline) => {
+    if (typeof part === 'string' || 'c' in part || 's' in part || 'e' in part) return part;
+    const href = part.href.startsWith('/') && !part.href.startsWith('//') && isLanding(part.href)
+      ? localeHref(locale, part.href)
+      : part.href;
+    return { ...part, href };
+  });
+}
+
+const footers = {
+  en: SiteFooter,
+  es: SiteFooterEs,
+  de: SiteFooterDe,
+  fr: SiteFooterFr,
+  it: SiteFooterIt,
+  pl: SiteFooterPl,
+  'pt-br': SiteFooterPtBr,
+  ru: SiteFooterRu,
+  tr: SiteFooterTr,
+  uk: SiteFooterUk,
+  ja: SiteFooterJa,
+  'zh-cn': SiteFooterZhCn,
+  'zh-tw': SiteFooterZhTw,
+  ko: SiteFooterKo,
+};
+const Footer = footers[locale];
+const canonical = `https://specscore.md${localeHref(locale, '/articles/')}`;
+---
+
+<BaseLayout title={page.metaTitle} description={page.metaDescription} canonical={canonical} lang={lang}>
+  <link slot="head" rel="alternate" type="text/markdown" href={articlesIndexMdHref(locale)} />
+  <SiteHeader />
+
+  <main>
+    <section class="hero" aria-labelledby="articles-title">
+      <div class="hero__inner">
+        <h1 id="articles-title" class="hero__headline">{page.h1}</h1>
+        <p class="hero__sub"><Inlines parts={localize(page.hero)} /></p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="list-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="list-title" class="section-title">{page.listLabel}</h2>
+        <article class="article-card">
+          <h3 class="article-card__title"><a href={articleHref(locale)} class="xref">{page.articleTitle}</a></h3>
+          <p class="article-card__summary">{page.articleSummary}</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+  .section-title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-3);
+  }
+  .article-card__title {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-2);
+  }
+  .article-card__summary {
+    color: var(--mid-ink);
+    line-height: 1.6;
+  }
+</style>
