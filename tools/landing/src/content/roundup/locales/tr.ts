@@ -491,6 +491,11 @@ export const page: RoundupPage = {
           ' deposundadır.',
         ],
         [
+          'Bir ajanın denetleyebileceği kriterleri nasıl yazacağınız ',
+          { a: 'kabul kriterleri nasıl yazılır', href: '/articles/acceptance-criteria/' },
+          ' sayfasında.',
+        ],
+        [
           'Bu web sitesinin deposunda ',
           t('dogfood.yml', href.dogfood, 'us'),
           ' bu CLI’ı kurar ve pull request’lerde ve main’e yapılan push’larda ',

@@ -2,7 +2,7 @@
 
 A specification is only as good as the questions that produced it. The hard part of writing a [Feature](/feature-specification) isn't the Given/When/Then syntax — it's knowing what to ask so the criteria end up **complete, unambiguous, and verifiable**. Every question you skip becomes an assumption someone else silently codes, and every vague answer becomes a bug you find later.
 
-This guide is for anyone turning a fuzzy request into a spec — business analysts, product owners, architects, and AI agents alike. It complements the [Idea workflow](/ideas/workflow) (where questions begin) and the [Acceptance Criteria](/acceptance-criteria-specification) format (where good answers land).
+This guide is for anyone turning a fuzzy request into a spec — business analysts, product owners, architects, and AI agents alike. It complements the [Idea workflow](/ideas/workflow) (where questions begin) and the [Acceptance Criteria](/acceptance-criteria-specification) format (where good answers land). For how to write a criterion an agent can verify, see [How to write acceptance criteria](/articles/acceptance-criteria/).
 
 ## Why questions come first
 

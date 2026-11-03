@@ -283,3 +283,90 @@
 
 /ko/spec-driven-development/tools/
   Link: </ko/spec-driven-development/tools.md>; rel="alternate"; type="text/markdown"
+
+
+# Articles: raw Markdown sibling for agents
+
+/articles/
+  Link: </articles.md>; rel="alternate"; type="text/markdown"
+
+/articles/acceptance-criteria/
+  Link: </articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/es/articles/
+  Link: </es/articles.md>; rel="alternate"; type="text/markdown"
+
+/es/articles/acceptance-criteria/
+  Link: </es/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/de/articles/
+  Link: </de/articles.md>; rel="alternate"; type="text/markdown"
+
+/de/articles/acceptance-criteria/
+  Link: </de/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/fr/articles/
+  Link: </fr/articles.md>; rel="alternate"; type="text/markdown"
+
+/fr/articles/acceptance-criteria/
+  Link: </fr/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/it/articles/
+  Link: </it/articles.md>; rel="alternate"; type="text/markdown"
+
+/it/articles/acceptance-criteria/
+  Link: </it/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/pl/articles/
+  Link: </pl/articles.md>; rel="alternate"; type="text/markdown"
+
+/pl/articles/acceptance-criteria/
+  Link: </pl/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/articles/
+  Link: </pt-br/articles.md>; rel="alternate"; type="text/markdown"
+
+/pt-br/articles/acceptance-criteria/
+  Link: </pt-br/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/ru/articles/
+  Link: </ru/articles.md>; rel="alternate"; type="text/markdown"
+
+/ru/articles/acceptance-criteria/
+  Link: </ru/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/tr/articles/
+  Link: </tr/articles.md>; rel="alternate"; type="text/markdown"
+
+/tr/articles/acceptance-criteria/
+  Link: </tr/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/uk/articles/
+  Link: </uk/articles.md>; rel="alternate"; type="text/markdown"
+
+/uk/articles/acceptance-criteria/
+  Link: </uk/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/ja/articles/
+  Link: </ja/articles.md>; rel="alternate"; type="text/markdown"
+
+/ja/articles/acceptance-criteria/
+  Link: </ja/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/articles/
+  Link: </zh-cn/articles.md>; rel="alternate"; type="text/markdown"
+
+/zh-cn/articles/acceptance-criteria/
+  Link: </zh-cn/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/articles/
+  Link: </zh-tw/articles.md>; rel="alternate"; type="text/markdown"
+
+/zh-tw/articles/acceptance-criteria/
+  Link: </zh-tw/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"
+
+/ko/articles/
+  Link: </ko/articles.md>; rel="alternate"; type="text/markdown"
+
+/ko/articles/acceptance-criteria/
+  Link: </ko/articles/acceptance-criteria.md>; rel="alternate"; type="text/markdown"

@@ -478,6 +478,11 @@ export const page: RoundupPage = {
           '。',
         ],
         [
+          '怎样写出代理能够核验的标准，见',
+          { a: '如何编写验收标准', href: '/articles/acceptance-criteria/' },
+          '。',
+        ],
+        [
           '在本网站的仓库里，',
           t('dogfood.yml', href.dogfood, 'us'),
           ' 会安装那支 CLI，并在拉取请求上、以及向 main 的推送上运行 ',

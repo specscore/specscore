@@ -95,6 +95,27 @@ describe('injectHtml', () => {
     assert.deepEqual(names, ['SpecScore.md', 'Spec-driven development', 'Best spec-driven development tools in 2026']);
   });
 
+  it('treats an articles page as an article and reads its FAQ', () => {
+    const html = `<!doctype html>
+<html lang="en"><head><link rel="canonical" href="https://specscore.md/articles/acceptance-criteria/"></head><body>
+<a href="/" class="wordmark">SpecScore.md</a>
+<p class="hero__breadcrumb"><a href="/articles/">Articles</a></p>
+<h1 class="hero__headline">How to write acceptance criteria AI agents can verify</h1>
+<p class="hero__sub">Acceptance criteria (AC) are the conditions that must be true before a change counts as done.</p>
+<h2 class="faq-item__q">What are acceptance criteria?</h2>
+<div class="faq-item__a"><p>Acceptance criteria (AC) are the conditions that must be true before a change counts as done.</p></div>
+</body></html>`;
+    const data = graph(html);
+    const article = data['@graph'].find((node) => node['@type'] === 'Article');
+    assert.equal(article.headline, 'How to write acceptance criteria AI agents can verify');
+    assert.equal(article.url, 'https://specscore.md/articles/acceptance-criteria/');
+    const faq = data['@graph'].find((node) => node['@type'] === 'FAQPage');
+    assert.equal(faq.mainEntity[0].name, 'What are acceptance criteria?');
+    const names = data['@graph'].find((node) => node['@type'] === 'BreadcrumbList')
+      .itemListElement.map((item) => item.name);
+    assert.deepEqual(names, ['SpecScore.md', 'Articles', 'How to write acceptance criteria AI agents can verify']);
+  });
+
   it('does not let a heading before the first question swallow it', () => {
     const html = `<!doctype html>
 <html lang="en"><head><link rel="canonical" href="https://specscore.md/faq/"></head><body>

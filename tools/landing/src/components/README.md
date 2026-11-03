@@ -17,6 +17,8 @@ One Astro component per IA section, in render order, plus a header and a footer.
 | `FinalCta.astro` | 9 | "Specs that pass." headline + Star + Read the docs. |
 | `SiteFooter.astro` | — | Four-column footer. |
 | `CompareArticle.astro` | — | Shared structure for a `/vs/` article. Copy comes from `src/content/compare/`. |
+| `ArticlePage.astro` | — | Shared structure for `/articles/acceptance-criteria/`. Copy comes from `src/content/articles/`. |
+| `ArticlesIndex.astro` | — | Index of `/articles/`. |
 | `MoreComparisons.astro` | — | Cross-links to the other comparison pages. |
 | `Inlines.astro` | — | Renders a typed prose run (text, links, code). |
 
