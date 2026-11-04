@@ -495,6 +495,11 @@ export const page: RoundupPage = {
           'にあります。',
         ],
         [
+          'その linter を継続的インテグレーションで実行する手順は',
+          { a: 'CI で仕様を lint する', href: '/articles/lint-specs-in-ci/' },
+          'にあります。',
+        ],
+        [
           'このウェブサイトのリポジトリでは、',
           t('dogfood.yml', href.dogfood, 'us'),
           ' がその CLI を導入し、プルリクエストと main へのプッシュで ',

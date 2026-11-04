@@ -1,10 +1,11 @@
 import type { LangCode } from '../../lib/languages.ts';
-import { acceptanceHref, earsHref, patternExample, patternForm, patternOrder } from './facts.ts';
+import { acceptanceHref, earsHref, lintHref, patternExample, patternForm, patternOrder } from './facts.ts';
 import type {
   AcceptanceArticleCopy,
   ArticleLocale,
   EarsArticleCopy,
   IndexCopy,
+  LintArticleCopy,
   PatternId,
 } from './types.ts';
 
@@ -58,6 +59,10 @@ export function indexCopy(code: LangCode): IndexCopy {
   return articleLocale(code).index;
 }
 
+export function lintCopy(code: LangCode): LintArticleCopy {
+  return articleLocale(code).lint;
+}
+
 export interface PatternView {
   id: PatternId;
   name: string;
@@ -90,6 +95,34 @@ export function earsSourcesFor(copy: EarsArticleCopy): { href: string; label: st
     { href: earsHref.dogfood, label: label.dogfood },
     { href: earsHref.cliRepo, label: label.cli },
     { href: earsHref.formatRepo, label: label.formatRepo },
+  ];
+}
+
+export function lintSourcesFor(copy: LintArticleCopy): { href: string; label: string }[] {
+  const label = copy.sourceLabel;
+  return [
+    { href: lintHref.cliRepo, label: label.cli },
+    { href: lintHref.cliLicense, label: label.cliLicense },
+    { href: lintHref.formatRepo, label: label.formatRepo },
+    { href: lintHref.lintRules, label: label.lintRules },
+    { href: lintHref.dogfood, label: label.dogfood },
+    { href: lintHref.installScript, label: label.installScript },
+    { href: lintHref.readmeExists, label: label.readmeExists },
+    { href: lintHref.oqSection, label: label.oqSection },
+    { href: lintHref.indexEntries, label: label.indexEntries },
+    { href: lintHref.acHeading, label: label.acHeading },
+    { href: lintHref.planRules, label: label.planRules },
+    { href: lintHref.validators, label: label.validators },
+    { href: lintHref.acceptanceArticle, label: label.acceptanceArticle },
+    { href: lintHref.earsArticle, label: label.earsArticle },
+    { href: lintHref.specKitDocs, label: label.specKitDocs },
+    { href: lintHref.specKitSdd, label: label.specKitSdd },
+    { href: lintHref.openSpecCli, label: label.openSpecCli },
+    { href: lintHref.openSpecRepo, label: label.openSpecRepo },
+    { href: lintHref.kiroSpecs, label: label.kiroSpecs },
+    { href: lintHref.bmadRepo, label: label.bmadRepo },
+    { href: lintHref.tmRepo, label: label.tmRepo },
+    { href: lintHref.tools, label: label.tools },
   ];
 }
 

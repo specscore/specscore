@@ -1,5 +1,6 @@
 import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy } from '../types.ts';
-import { acceptanceHref, earsHref } from '../facts.ts';
+import { acceptanceHref, earsHref, lintHref } from '../facts.ts';
+import { lint, indexCard, relatedLabel } from './lint/zh-tw.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -314,6 +315,7 @@ const ears: EarsArticleCopy = {
     },
     relatedTitle: '相關',
     related: [
+      { href: lintHref.article, label: relatedLabel },
       { href: earsHref.acceptanceArticle, label: "寫出 AI 代理驗得過的驗收標準" },
       { href: earsHref.kiroVs, label: 'SpecScore vs Kiro' },
       { href: earsHref.tools, label: '規範驅動開發工具' },
@@ -695,6 +697,7 @@ const acceptance: AcceptanceArticleCopy = {
     },
     relatedTitle: '相關',
     related: [
+      { href: lintHref.article, label: relatedLabel },
       { href: acceptanceHref.earsArticle, label: "EARS 需求語法詳解與範例" },
       { href: acceptanceHref.sdd, label: '規範驅動開發' },
       { href: acceptanceHref.tools, label: '規範驅動開發工具' },
@@ -714,6 +717,7 @@ const acceptance: AcceptanceArticleCopy = {
 export const locale: ArticleLocale = {
   ears,
   acceptance,
+  lint,
   index: {
     metaTitle: '文章 | SpecScore',
     metaDescription: "關於需求記法與規範驅動開發的文章，包括 EARS 需求語法，以及如何寫成 SpecScore 需求。 SpecScore 的文章：如何寫驗收標準、Given/When/Then，以及給 AI 程式開發代理用的可驗證驗收標準。",
@@ -731,6 +735,7 @@ export const locale: ArticleLocale = {
     ],
     listLabel: '已發布',
     articles: [
+      indexCard,
       {
         href: '/articles/acceptance-criteria/',
         title: '寫出 AI 代理驗得過的驗收標準',

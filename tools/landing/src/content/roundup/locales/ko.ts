@@ -493,6 +493,11 @@ export const page: RoundupPage = {
           '에 있습니다.',
         ],
         [
+          '그 린터를 지속적 통합에서 실행하는 방법은 ',
+          { a: 'CI에서 명세 린트하기', href: '/articles/lint-specs-in-ci/' },
+          '에 있습니다.',
+        ],
+        [
           '이 웹사이트 저장소에서 ',
           t('dogfood.yml', href.dogfood, 'us'),
           '은 그 CLI를 설치하고, 풀 리퀘스트와 main으로의 푸시에서 ',

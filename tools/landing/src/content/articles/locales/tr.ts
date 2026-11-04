@@ -1,5 +1,6 @@
 import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy } from '../types.ts';
-import { acceptanceHref, earsHref } from '../facts.ts';
+import { acceptanceHref, earsHref, lintHref } from '../facts.ts';
+import { lint, indexCard, relatedLabel } from './lint/tr.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -315,6 +316,7 @@ const ears: EarsArticleCopy = {
     },
     relatedTitle: 'İlgili',
     related: [
+      { href: lintHref.article, label: relatedLabel },
       { href: earsHref.acceptanceArticle, label: "Bir yapay zeka ajanının doğrulayabileceği kabul kriterleri nasıl yazılır" },
       { href: earsHref.kiroVs, label: 'SpecScore vs Kiro' },
       { href: earsHref.tools, label: 'Spesifikasyon odaklı geliştirme araçları' },
@@ -695,6 +697,7 @@ const acceptance: AcceptanceArticleCopy = {
     },
     relatedTitle: 'İlgili',
     related: [
+      { href: lintHref.article, label: relatedLabel },
       { href: acceptanceHref.earsArticle, label: "EARS gereksinim sözdizimi örneklerle açıklandı" },
       { href: acceptanceHref.sdd, label: 'Spesifikasyon odaklı geliştirme' },
       { href: acceptanceHref.tools, label: 'Spesifikasyon güdümlü geliştirme araçları' },
@@ -714,6 +717,7 @@ const acceptance: AcceptanceArticleCopy = {
 export const locale: ArticleLocale = {
   ears,
   acceptance,
+  lint,
   index: {
     metaTitle: 'Makaleler | SpecScore',
     metaDescription: "Gereksinim notasyonu ve spesifikasyon odaklı geliştirme üzerine makaleler; EARS gereksinim sözdizimi ve SpecScore’a yazımı dahil. Kabul kriterlerinin nasıl yazılacağı, Given/When/Then ve yapay zeka kodlama ajanları için test edilebilir kabul kriterleri üzerine SpecScore makaleleri.",
@@ -731,6 +735,7 @@ export const locale: ArticleLocale = {
     ],
     listLabel: 'Yayımlananlar',
     articles: [
+      indexCard,
       {
         href: '/articles/acceptance-criteria/',
         title: 'Bir yapay zeka ajanının doğrulayabileceği kabul kriterleri nasıl yazılır',

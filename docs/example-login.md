@@ -72,7 +72,7 @@ The point: **ideas can be companions in different lifecycle states.** `auth-sign
 
 ## 2. It promotes into a nested Features tree
 
-Once approved, the idea is promoted into a [Feature](/feature-specification). The enforceable rules inside that feature are [requirements](/requirement-specification). If you are writing those rules in the EARS sentence patterns, [EARS requirements syntax](/articles/ears-requirements/) shows each pattern and a SpecScore file that passes `specscore spec lint`. A Feature isn't a single file — it's a **directory with a `README.md`**, and features **nest**: sub-features are sub-directories, each with their own `README.md`. The login feature has an email/password sub-feature and an OAuth sub-feature, and OAuth itself nests one level deeper into Google and Facebook:
+Once approved, the idea is promoted into a [Feature](/feature-specification). The enforceable rules inside that feature are [requirements](/requirement-specification). If you are writing those rules in the EARS sentence patterns, [EARS requirements syntax](/articles/ears-requirements/) shows each pattern and a SpecScore file that passes `specscore spec lint`. [Lint specs in CI](/articles/lint-specs-in-ci/) shows that command in a GitHub Actions job. A Feature isn't a single file — it's a **directory with a `README.md`**, and features **nest**: sub-features are sub-directories, each with their own `README.md`. The login feature has an email/password sub-feature and an OAuth sub-feature, and OAuth itself nests one level deeper into Google and Facebook:
 
 ```
 spec/features/auth/login/

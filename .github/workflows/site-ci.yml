@@ -79,6 +79,9 @@ jobs:
           grep -q 'https://specscore.md/index.md' public/llms.txt
           grep -q 'https://specscore.md/articles/acceptance-criteria.md' public/llms.txt
           grep -q 'https://specscore.md/articles/acceptance-criteria.md' public/llms-full.txt
+          grep -q 'https://specscore.md/articles/lint-specs-in-ci.md' public/llms.txt
+          grep -q 'https://specscore.md/articles/lint-specs-in-ci/' public/sitemap.xml
+          test -s public/articles/lint-specs-in-ci/index.html
           grep -q 'FAQPage' public/index.html
           grep -q 'Organization' public/index.html
           grep -q 'text/markdown' public/index.html
