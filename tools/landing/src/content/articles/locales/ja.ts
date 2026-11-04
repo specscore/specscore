@@ -1,5 +1,6 @@
 import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy } from '../types.ts';
-import { acceptanceHref, earsHref } from '../facts.ts';
+import { acceptanceHref, earsHref, lintHref } from '../facts.ts';
+import { lint, indexCard, relatedLabel } from './lint/ja.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -314,6 +315,7 @@ const ears: EarsArticleCopy = {
     },
     relatedTitle: '関連',
     related: [
+      { href: lintHref.article, label: relatedLabel },
       { href: earsHref.acceptanceArticle, label: "AIエージェントが検証できる受け入れ基準の書き方" },
       { href: earsHref.kiroVs, label: 'SpecScore vs Kiro' },
       { href: earsHref.tools, label: '仕様駆動開発のツール' },
@@ -695,6 +697,7 @@ const acceptance: AcceptanceArticleCopy = {
     },
     relatedTitle: '関連',
     related: [
+      { href: lintHref.article, label: relatedLabel },
       { href: acceptanceHref.earsArticle, label: "EARS要件構文を例で説明する" },
       { href: acceptanceHref.sdd, label: '仕様駆動開発' },
       { href: acceptanceHref.tools, label: '仕様駆動開発ツール' },
@@ -714,6 +717,7 @@ const acceptance: AcceptanceArticleCopy = {
 export const locale: ArticleLocale = {
   ears,
   acceptance,
+  lint,
   index: {
     metaTitle: '記事 | SpecScore',
     metaDescription: "要件記法と仕様駆動開発の記事。EARS要件構文と、要件をSpecScoreへ書く方法を含む。 受け入れ基準の書き方、Given/When/Then、AIコーディングエージェント向けの検証できる受け入れ基準についての SpecScore の記事です。",
@@ -731,6 +735,7 @@ export const locale: ArticleLocale = {
     ],
     listLabel: '公開済み',
     articles: [
+      indexCard,
       {
         href: '/articles/acceptance-criteria/',
         title: 'AIエージェントが検証できる受け入れ基準の書き方',

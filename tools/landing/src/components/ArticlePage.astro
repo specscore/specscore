@@ -1,8 +1,11 @@
 ---
 import AcceptanceArticle from './AcceptanceArticle.astro';
 import EarsArticle from './EarsArticle.astro';
+import LintArticle from './LintArticle.astro';
 
-const ears = Astro.url.pathname.includes('/articles/ears-requirements');
+const path = Astro.url.pathname;
+const lint = path.includes('/articles/lint-specs-in-ci');
+const ears = path.includes('/articles/ears-requirements');
 ---
 
-{ears ? <EarsArticle /> : <AcceptanceArticle />}
+{lint ? <LintArticle /> : ears ? <EarsArticle /> : <AcceptanceArticle />}

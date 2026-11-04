@@ -135,6 +135,62 @@ export interface AcceptanceArticleCopy {
   ctaGithub: string;
 }
 
+export interface LintArticleCopy {
+  metaTitle: string;
+  metaDescription: string;
+  h1: string;
+  updated: string;
+  breadcrumb: string;
+  hero: Block;
+  whatTitle: string;
+  what: Block[];
+  checksTitle: string;
+  checksIntro: Block[];
+  checks: NamedBlock[];
+  ciTitle: string;
+  ci: Block[];
+  workflowCaption: string;
+  outputCaption: string;
+  cleanCaption: string;
+  ciAfter: Block[];
+  compareTitle: string;
+  compare: Block[];
+  faqTitle: string;
+  faqs: { q: string; a: Block }[];
+  sourcesTitle: string;
+  sourcesNote: string;
+  sourceLabel: {
+    cli: string;
+    cliLicense: string;
+    formatRepo: string;
+    lintRules: string;
+    dogfood: string;
+    installScript: string;
+    acHeading: string;
+    planRules: string;
+    oqSection: string;
+    readmeExists: string;
+    indexEntries: string;
+    validators: string;
+    acceptanceArticle: string;
+    earsArticle: string;
+    specKitDocs: string;
+    specKitSdd: string;
+    openSpecCli: string;
+    openSpecRepo: string;
+    kiroSpecs: string;
+    bmadRepo: string;
+    tmRepo: string;
+    tools: string;
+  };
+  relatedTitle: string;
+  related: { href: string; label: string }[];
+  ctaTitle: string;
+  ctaInstall: string;
+  ctaSkills: string;
+  ctaGithub: string;
+}
+
 export interface IndexArticle {
   href: string;
   title: string;
@@ -153,5 +209,6 @@ export interface IndexCopy {
 export interface ArticleLocale {
   ears: EarsArticleCopy;
   acceptance: AcceptanceArticleCopy;
+  lint: LintArticleCopy;
   index: IndexCopy;
 }

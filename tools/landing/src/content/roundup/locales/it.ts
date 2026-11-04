@@ -475,6 +475,11 @@ export const page: RoundupPage = {
           '.',
         ],
         [
+          'Come eseguire quel linter nell’integrazione continua è spiegato in ',
+          { a: 'fare il lint delle specifiche in CI', href: '/articles/lint-specs-in-ci/' },
+          '.',
+        ],
+        [
           'Nel repository di questo sito web, ',
           t('dogfood.yml', href.dogfood, 'us'),
           ' installa quella CLI ed esegue ',

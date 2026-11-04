@@ -487,6 +487,11 @@ export const page: RoundupPage = {
           '。',
         ],
         [
+          '如何在持續整合裡執行這個 linter，見',
+          { a: '在 CI 中 lint 規格', href: '/articles/lint-specs-in-ci/' },
+          '。',
+        ],
+        [
           '在這個網站的儲存庫裡，',
           t('dogfood.yml', href.dogfood, 'us'),
           ' 會裝上那支 CLI，並在拉取請求上、以及推向 main 時執行 ',

@@ -41,13 +41,26 @@ describe('_headers', () => {
   });
 
   it('advertises the spec-driven development tools Markdown sibling', () => {
-    const prefixes = ['', '/es', '/de', '/fr', '/it', '/pl', '/pt-br', '/ru', '/tr', '/uk', '/ja', '/zh-cn', '/zh-tw', '/ko'];
-    for (const prefix of prefixes) {
-      const path = `${prefix}/spec-driven-development/tools/`;
-      assert.match(
-        block(path),
-        new RegExp(`Link: <${prefix}/spec-driven-development/tools\\.md>; rel="alternate"; type="text/markdown"`),
-      );
-    }
+    assert.match(
+      block('/spec-driven-development/tools/'),
+      /Link: <\/spec-driven-development\/tools\.md>; rel="alternate"; type="text\/markdown"/,
+    );
+    assert.match(
+      block('/:locale/spec-driven-development/tools/'),
+      /Link: <\/:locale\/spec-driven-development\/tools\.md>; rel="alternate"; type="text\/markdown"/,
+    );
+  });
+
+  it('stays within the Workers static-assets limit of 100 header rules', () => {
+    const rules = headers.split('\n').filter((line) => line.startsWith('/'));
+    assert.ok(rules.length <= 100, `${rules.length} header rules`);
+    assert.match(
+      block('/articles/:slug/'),
+      /Link: <\/articles\/:slug\.md>; rel="alternate"; type="text\/markdown"/,
+    );
+    assert.match(
+      block('/:locale/articles/:slug/'),
+      /Link: <\/:locale\/articles\/:slug\.md>; rel="alternate"; type="text\/markdown"/,
+    );
   });
 });

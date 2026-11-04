@@ -12,9 +12,12 @@ import {
   scenarioExample,
   specReadme,
   thinAc,
+  dogfoodLintSteps,
+  lintCleanOutput,
+  lintFailureOutput,
 } from './facts.ts';
-import { acceptanceSourcesFor, earsSourcesFor, patternsFor } from './pages.ts';
-import type { AcceptanceArticleCopy, Block, EarsArticleCopy, IndexCopy, Inline } from './types.ts';
+import { acceptanceSourcesFor, earsSourcesFor, lintSourcesFor, patternsFor } from './pages.ts';
+import type { AcceptanceArticleCopy, Block, EarsArticleCopy, IndexCopy, Inline, LintArticleCopy } from './types.ts';
 
 function isLanding(href: string): boolean {
   return localizedPrefixes.some((prefix) => href === prefix || href.startsWith(prefix));
@@ -197,6 +200,48 @@ export function renderAcceptanceMarkdown(copy: AcceptanceArticleCopy, locale: La
 
   lines.push(`## ${copy.sourcesTitle}`, '', copy.sourcesNote, '');
   for (const source of acceptanceSourcesFor(copy)) lines.push(`- [${source.label}](${linked(source.href, locale)})`);
+  lines.push('', `## ${copy.relatedTitle}`, '');
+  for (const link of copy.related) lines.push(`- [${link.label}](${abs(link.href, locale)})`);
+  lines.push('');
+  return lines.join('\n');
+}
+
+export function renderLintMarkdown(copy: LintArticleCopy, locale: LangCode, canonical: string): string {
+  const lines: string[] = [
+    `# ${copy.h1}`,
+    '',
+    `Canonical: ${canonical}`,
+    '',
+    copy.updated,
+    '',
+    block(copy.hero, locale),
+    '',
+    `## ${copy.whatTitle}`,
+    '',
+  ];
+  for (const paragraph of copy.what) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.checksTitle}`, '');
+  for (const paragraph of copy.checksIntro) lines.push(block(paragraph, locale), '');
+  for (const check of copy.checks) {
+    lines.push(`### ${check.title}`, '', block(check.body, locale), '');
+  }
+
+  lines.push(`## ${copy.ciTitle}`, '');
+  for (const paragraph of copy.ci) lines.push(block(paragraph, locale), '');
+  lines.push(`### ${copy.workflowCaption}`, '', fence('yaml', dogfoodLintSteps), '');
+  lines.push(`### ${copy.outputCaption}`, '', fence('text', lintFailureOutput), '');
+  lines.push(`### ${copy.cleanCaption}`, '', fence('text', lintCleanOutput), '');
+  for (const paragraph of copy.ciAfter) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.compareTitle}`, '');
+  for (const paragraph of copy.compare) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.faqTitle}`, '');
+  for (const faq of copy.faqs) lines.push(`### ${faq.q}`, '', block(faq.a, locale), '');
+
+  lines.push(`## ${copy.sourcesTitle}`, '', copy.sourcesNote, '');
+  for (const source of lintSourcesFor(copy)) lines.push(`- [${source.label}](${linked(source.href, locale)})`);
   lines.push('', `## ${copy.relatedTitle}`, '');
   for (const link of copy.related) lines.push(`- [${link.label}](${abs(link.href, locale)})`);
   lines.push('');

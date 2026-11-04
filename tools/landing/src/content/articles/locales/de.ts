@@ -1,5 +1,6 @@
 import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy } from '../types.ts';
-import { acceptanceHref, earsHref } from '../facts.ts';
+import { acceptanceHref, earsHref, lintHref } from '../facts.ts';
+import { lint, indexCard, relatedLabel } from './lint/de.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -317,6 +318,7 @@ const ears: EarsArticleCopy = {
     },
     relatedTitle: 'Verwandt',
     related: [
+      { href: lintHref.article, label: relatedLabel },
       { href: earsHref.acceptanceArticle, label: "Akzeptanzkriterien schreiben, die ein KI-Agent prüfen kann" },
       { href: earsHref.kiroVs, label: 'SpecScore vs Kiro' },
       { href: earsHref.tools, label: 'Werkzeuge für spezifikationsgetriebene Entwicklung' },
@@ -698,6 +700,7 @@ const acceptance: AcceptanceArticleCopy = {
     },
     relatedTitle: 'Verwandt',
     related: [
+      { href: lintHref.article, label: relatedLabel },
       { href: acceptanceHref.earsArticle, label: "EARS-Anforderungssyntax erklärt, mit Beispielen" },
       { href: acceptanceHref.sdd, label: 'Spezifikationsgetriebene Entwicklung' },
       { href: acceptanceHref.tools, label: 'Werkzeuge für spezifikationsgetriebene Entwicklung' },
@@ -717,6 +720,7 @@ const acceptance: AcceptanceArticleCopy = {
 export const locale: ArticleLocale = {
   ears,
   acceptance,
+  lint,
   index: {
     metaTitle: 'Artikel | SpecScore',
     metaDescription: "Artikel zu Anforderungsnotation und spezifikationsgetriebener Entwicklung, einschließlich der EARS-Anforderungssyntax und der Abbildung auf SpecScore. SpecScore-Artikel darüber, wie man Akzeptanzkriterien schreibt, über Given/When/Then und über prüfbare Akzeptanzkriterien für KI-Coding-Agenten.",
@@ -734,6 +738,7 @@ export const locale: ArticleLocale = {
     ],
     listLabel: 'Veröffentlicht',
     articles: [
+      indexCard,
       {
         href: '/articles/acceptance-criteria/',
         title: 'Akzeptanzkriterien schreiben, die ein KI-Agent prüfen kann',

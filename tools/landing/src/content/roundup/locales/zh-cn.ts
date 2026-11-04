@@ -486,6 +486,11 @@ export const page: RoundupPage = {
           '。',
         ],
         [
+          '如何在持续集成里运行这个 linter，见',
+          { a: '在 CI 中 lint 规格', href: '/articles/lint-specs-in-ci/' },
+          '。',
+        ],
+        [
           '在本网站的仓库里，',
           t('dogfood.yml', href.dogfood, 'us'),
           ' 会安装那支 CLI，并在拉取请求上、以及向 main 的推送上运行 ',

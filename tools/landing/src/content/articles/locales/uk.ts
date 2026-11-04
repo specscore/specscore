@@ -1,5 +1,6 @@
 import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy } from '../types.ts';
-import { acceptanceHref, earsHref } from '../facts.ts';
+import { acceptanceHref, earsHref, lintHref } from '../facts.ts';
+import { lint, indexCard, relatedLabel } from './lint/uk.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -314,6 +315,7 @@ const ears: EarsArticleCopy = {
     },
     relatedTitle: 'Пов’язане',
     related: [
+      { href: lintHref.article, label: relatedLabel },
       { href: earsHref.acceptanceArticle, label: "Як писати критерії приймання, які перевірить ШІ-агент" },
       { href: earsHref.kiroVs, label: 'SpecScore vs Kiro' },
       { href: earsHref.tools, label: 'Інструменти розробки за специфікаціями' },
@@ -694,6 +696,7 @@ const acceptance: AcceptanceArticleCopy = {
     },
     relatedTitle: 'Пов’язане',
     related: [
+      { href: lintHref.article, label: relatedLabel },
       { href: acceptanceHref.earsArticle, label: "Синтаксис вимог EARS з поясненням і прикладами" },
       { href: acceptanceHref.sdd, label: 'Розробка за специфікаціями' },
       { href: acceptanceHref.tools, label: 'Інструменти розробки за специфікаціями' },
@@ -713,6 +716,7 @@ const acceptance: AcceptanceArticleCopy = {
 export const locale: ArticleLocale = {
   ears,
   acceptance,
+  lint,
   index: {
     metaTitle: 'Статті | SpecScore',
     metaDescription: "Статті про нотацію вимог і розробку за специфікаціями, зокрема синтаксис вимог EARS і запис вимоги в SpecScore. Статті SpecScore про те, як писати критерії приймання, про Given/When/Then і про перевірювані критерії приймання для ШІ-агентів програмування.",
@@ -730,6 +734,7 @@ export const locale: ArticleLocale = {
     ],
     listLabel: 'Опубліковано',
     articles: [
+      indexCard,
       {
         href: '/articles/acceptance-criteria/',
         title: 'Як писати критерії приймання, які перевірить ШІ-агент',

@@ -4,6 +4,7 @@ import type { PatternId } from './types.ts';
 
 export const earsSlug = 'ears-requirements';
 export const acceptanceSlug = 'acceptance-criteria';
+export const lintSlug = 'lint-specs-in-ci';
 
 export const earsHref = {
   sdd: '/spec-driven-development/',
@@ -289,4 +290,97 @@ export function acceptanceArticleHref(locale: LangCode): string {
 /** `/articles/acceptance-criteria/` → `/articles/acceptance-criteria.md`. */
 export function acceptanceArticleMdHref(locale: LangCode): string {
   return acceptanceArticleHref(locale).replace(/\/$/, '.md');
+}
+
+export const lintHref = {
+  sdd: '/spec-driven-development/',
+  tools: '/spec-driven-development/tools/',
+  articles: '/articles/',
+  article: '/articles/lint-specs-in-ci/',
+  earsArticle: '/articles/ears-requirements/',
+  acceptanceArticle: '/articles/acceptance-criteria/',
+  home: '/',
+  validators: '/validators/',
+  cli: '/cli/',
+  cliInstall: '/cli/install/',
+  ai: '/ai/',
+  acceptance: '/acceptance-criteria-specification',
+  feature: '/feature-specification',
+  formatRepo: 'https://github.com/specscore/specscore',
+  cliRepo: 'https://github.com/specscore/specscore-cli',
+  cliLicense: 'https://github.com/specscore/specscore-cli/blob/main/LICENSE',
+  lintRules: 'https://github.com/specscore/specscore-cli/blob/v0.55.1/docs/lint-rules.md',
+  dogfood: 'https://github.com/specscore/specscore/blob/main/.github/workflows/dogfood.yml',
+  installScript: 'https://github.com/specscore/specscore-cli/blob/v0.55.1/scripts/install.sh',
+  acHeading: 'https://github.com/specscore/specscore-cli/blob/v0.55.1/pkg/lint/ac_heading.go',
+  planRules: 'https://github.com/specscore/specscore-cli/blob/v0.55.1/pkg/lint/plan_rules.go',
+  oqSection: 'https://github.com/specscore/specscore-cli/blob/v0.55.1/pkg/lint/oq_section.go',
+  readmeExists: 'https://github.com/specscore/specscore-cli/blob/v0.55.1/pkg/lint/readme_exists.go',
+  indexEntries: 'https://github.com/specscore/specscore-cli/blob/v0.55.1/pkg/lint/index_entries.go',
+  specOutput: 'https://github.com/specscore/specscore-cli/blob/v0.55.1/internal/cli/spec.go',
+  specKitDocs: 'https://github.github.io/spec-kit/',
+  specKitSdd: 'https://github.github.io/spec-kit/reference/agentic-sdd.html',
+  openSpecCli: 'https://openspec.dev/docs/cli',
+  openSpecRepo: 'https://github.com/Fission-AI/OpenSpec',
+  kiroSpecs: 'https://kiro.dev/docs/specs/feature-specs/',
+  bmadRepo: 'https://github.com/bmad-code-org/BMAD-METHOD',
+  tmRepo: 'https://github.com/eyaltoledano/claude-task-master',
+} as const;
+
+/**
+ * Install and lint steps from `.github/workflows/dogfood.yml`.
+ * The workflow file also sets permissions and a concurrency group, and
+ * comments on why the version pin is not `latest`. Those lines are omitted
+ * here. The commands are the ones that file runs.
+ */
+export const dogfoodLintSteps = `name: Dogfood lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Install specscore CLI (pinned)
+        env:
+          SPECSCORE_VERSION: v0.39.1
+        run: |
+          curl -fsSL https://specscore.md/install/get-cli | \\
+            SPECSCORE_INSTALL_DIR="$HOME/.local/bin" sh
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          specscore --version
+      - name: Lint spec tree
+        run: specscore spec lint
+`;
+
+/**
+ * Text report captured from specscore 0.55.0 (v0.55.0 of specscore-cli)
+ * on a feature whose Open Questions section was removed and whose index
+ * omitted an empty child directory. The line shape is the formatter in
+ * internal/cli/spec.go: file:line [severity] rule: message, then
+ * "N violations found (N errors)". The same summary shape is in v0.39.1.
+ * The process exit code is not a line of this report.
+ */
+export const lintFailureOutput = `features/apply-discount/README.md:0 [error] oq-section: Open Questions section not found
+features/apply-discount/README.md:0 [error] index-entries: Child directory not listed in index: refunds
+features/apply-discount/refunds:0 [error] readme-exists: README.md not found
+
+3 violations found (3 errors)
+`;
+
+/** Clean text report. The command prints this and exits 0. */
+export const lintCleanOutput = `0 violations found
+`;
+
+export function lintArticleHref(locale: LangCode): string {
+  return localeHref(locale, '/articles/lint-specs-in-ci/');
+}
+
+/** `/articles/lint-specs-in-ci/` → `/articles/lint-specs-in-ci.md`. */
+export function lintArticleMdHref(locale: LangCode): string {
+  return lintArticleHref(locale).replace(/\/$/, '.md');
 }

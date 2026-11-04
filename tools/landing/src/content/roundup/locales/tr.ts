@@ -499,6 +499,11 @@ export const page: RoundupPage = {
           ' sayfasında.',
         ],
         [
+          'Bu linteri sürekli entegrasyonda çalıştırmak ',
+          { a: 'spesifikasyonları CI’da lintlemek', href: '/articles/lint-specs-in-ci/' },
+          ' sayfasındadır.',
+        ],
+        [
           'Bu web sitesinin deposunda ',
           t('dogfood.yml', href.dogfood, 'us'),
           ' bu CLI’ı kurar ve pull request’lerde ve main’e yapılan push’larda ',
