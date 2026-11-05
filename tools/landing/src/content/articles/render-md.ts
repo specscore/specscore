@@ -15,9 +15,11 @@ import {
   dogfoodLintSteps,
   lintCleanOutput,
   lintFailureOutput,
+  planReadme,
+  taskReadme,
 } from './facts.ts';
-import { acceptanceSourcesFor, earsSourcesFor, lintSourcesFor, patternsFor } from './pages.ts';
-import type { AcceptanceArticleCopy, Block, EarsArticleCopy, IndexCopy, Inline, LintArticleCopy } from './types.ts';
+import { acceptanceSourcesFor, earsSourcesFor, lintSourcesFor, patternsFor, templateSourcesFor } from './pages.ts';
+import type { AcceptanceArticleCopy, Block, EarsArticleCopy, IndexCopy, Inline, LintArticleCopy, TemplateArticleCopy } from './types.ts';
 
 function isLanding(href: string): boolean {
   return localizedPrefixes.some((prefix) => href === prefix || href.startsWith(prefix));
@@ -242,6 +244,58 @@ export function renderLintMarkdown(copy: LintArticleCopy, locale: LangCode, cano
 
   lines.push(`## ${copy.sourcesTitle}`, '', copy.sourcesNote, '');
   for (const source of lintSourcesFor(copy)) lines.push(`- [${source.label}](${linked(source.href, locale)})`);
+  lines.push('', `## ${copy.relatedTitle}`, '');
+  for (const link of copy.related) lines.push(`- [${link.label}](${abs(link.href, locale)})`);
+  lines.push('');
+  return lines.join('\n');
+}
+
+export function renderTemplateMarkdown(copy: TemplateArticleCopy, locale: LangCode, canonical: string): string {
+  const lines: string[] = [
+    `# ${copy.h1}`,
+    '',
+    `Canonical: ${canonical}`,
+    '',
+    copy.updated,
+    '',
+    block(copy.hero, locale),
+    '',
+    `## ${copy.whatTitle}`,
+    '',
+  ];
+  for (const paragraph of copy.what) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.featureTitle}`, '');
+  for (const paragraph of copy.feature) lines.push(block(paragraph, locale), '');
+  lines.push(`### ${copy.featureCaption}`, '', fence('markdown', featureReadme), '');
+  lines.push(`### ${copy.indexCaption}`, '', fence('markdown', featuresIndex), '');
+  lines.push(`### ${copy.specCaption}`, '', fence('markdown', specReadme), '');
+  lines.push(`### ${copy.configCaption}`, '', fence('yaml', repoConfig), '');
+  for (const paragraph of copy.featureAfter) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.traceTitle}`, '');
+  for (const paragraph of copy.traceIntro) lines.push(block(paragraph, locale), '');
+  for (const item of copy.trace) lines.push(`### ${item.title}`, '', block(item.body, locale), '');
+  lines.push(`### ${copy.scenarioCaption}`, '', fence('markdown', scenarioExample), '');
+  for (const paragraph of copy.traceAfter) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.planTitle}`, '');
+  for (const paragraph of copy.plan) lines.push(block(paragraph, locale), '');
+  lines.push(`### ${copy.planCaption}`, '', fence('markdown', planReadme), '');
+  lines.push(`### ${copy.taskCaption}`, '', fence('markdown', taskReadme), '');
+  for (const paragraph of copy.planAfter) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.ciTitle}`, '');
+  for (const paragraph of copy.ci) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.claudeTitle}`, '');
+  for (const paragraph of copy.claude) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.faqTitle}`, '');
+  for (const faq of copy.faqs) lines.push(`### ${faq.q}`, '', block(faq.a, locale), '');
+
+  lines.push(`## ${copy.sourcesTitle}`, '', copy.sourcesNote, '');
+  for (const source of templateSourcesFor(copy)) lines.push(`- [${source.label}](${linked(source.href, locale)})`);
   lines.push('', `## ${copy.relatedTitle}`, '');
   for (const link of copy.related) lines.push(`- [${link.label}](${abs(link.href, locale)})`);
   lines.push('');

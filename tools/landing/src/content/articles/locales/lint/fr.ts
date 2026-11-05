@@ -1,5 +1,6 @@
 import type { Block, LintArticleCopy } from '../../types.ts';
-import { lintHref } from '../../facts.ts';
+import { lintHref, templateHref } from '../../facts.ts';
+import { relatedLabel as templateLabel } from '../template/fr.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -360,6 +361,7 @@ export const lint: LintArticleCopy = {
   },
   relatedTitle: 'En lien',
   related: [
+    { href: templateHref.article, label: templateLabel },
     { href: lintHref.acceptanceArticle, label: "Comment écrire des critères d'acceptation qu'un agent d'IA peut vérifier" },
     { href: lintHref.earsArticle, label: 'Syntaxe des exigences EARS expliquée, avec exemples' },
     { href: lintHref.validators, label: 'Ce que SpecScore valide' },

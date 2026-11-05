@@ -5,6 +5,7 @@ import type { PatternId } from './types.ts';
 export const earsSlug = 'ears-requirements';
 export const acceptanceSlug = 'acceptance-criteria';
 export const lintSlug = 'lint-specs-in-ci';
+export const templateSlug = 'feature-spec-template';
 
 export const earsHref = {
   sdd: '/spec-driven-development/',
@@ -375,6 +376,135 @@ features/apply-discount/refunds:0 [error] readme-exists: README.md not found
 /** Clean text report. The command prints this and exits 0. */
 export const lintCleanOutput = `0 violations found
 `;
+
+/**
+ * Plan document filled for the checkout feature.
+ * The section order, header fields, and `**Verifies:**` lines follow the
+ * plan specification's published template. `format:` and `status:` follow
+ * the artifact-frontmatter convention. This file was not part of the
+ * 2 November 2026 lint run described on `featureReadme`.
+ */
+export const planReadme = `---
+format: https://specscore.md/plan-specification
+status: Draft
+---
+
+# Plan: Show checkout validation errors
+
+**Status:** Draft
+**Source Feature:** checkout
+**Date:** 2026-11-05
+**Owner:** @example
+**Supersedes:** —
+
+## Summary
+
+This plan decomposes the checkout feature into the work that shows a field error and rejects an email that is not a valid address.
+
+## Approach
+
+Both tasks verify the same acceptance criterion, which bundles the two requirements. Nothing is deferred, so this plan has no Deferred AC Coverage section.
+
+## Tasks
+
+### Task 1: Show a validation error beside the invalid field
+
+**Verifies:** checkout#ac:invalid-submission
+
+When the shopper submits the checkout form with invalid data, show a validation error next to the invalid field.
+
+### Task 2: Reject an email that is not a valid address
+
+**Verifies:** checkout#ac:invalid-submission
+
+If the submitted email is not a valid address, reject the form.
+
+## Open Questions
+
+None at this time.
+
+---
+*This document follows the https://specscore.md/plan-specification*
+`;
+
+/**
+ * Task document for the first plan task.
+ * Title and the Status, Depends on, and Model fields follow the task
+ * specification's published example. `format:` and `status:` follow the
+ * artifact-frontmatter convention. Not part of the 2 November 2026 lint run.
+ */
+export const taskReadme = `---
+format: https://specscore.md/task-specification
+status: queued
+---
+
+# Task: Show a validation error beside the invalid field
+
+**Status:** queued
+**Depends on:** none
+**Model:** medium
+
+## Acceptance Criteria
+
+- Submitting the checkout form with invalid data shows a validation error next to the invalid field.
+
+## Open Questions
+
+None at this time.
+
+---
+*This document follows the https://specscore.md/task-specification*
+`;
+
+export const templateHref = {
+  sdd: '/spec-driven-development/',
+  tools: '/spec-driven-development/tools/',
+  articles: '/articles/',
+  article: '/articles/feature-spec-template/',
+  earsArticle: '/articles/ears-requirements/',
+  acceptanceArticle: '/articles/acceptance-criteria/',
+  lintArticle: '/articles/lint-specs-in-ci/',
+  home: '/',
+  validators: '/validators/',
+  cli: '/cli/',
+  cliInstall: '/cli/install/',
+  ai: '/ai/',
+  cliSkills: '/ai/cli-skills/',
+  specStudio: '/ai/specstudio-skills/',
+  feature: '/feature-specification',
+  acceptance: '/acceptance-criteria-specification',
+  plan: '/plan-specification',
+  task: '/task-specification',
+  rehearse: '/rehearse',
+  featureRepo: 'https://github.com/specscore/specscore/blob/main/spec/features/feature/README.md',
+  requirementRepo: 'https://github.com/specscore/specscore/blob/main/spec/features/requirement/README.md',
+  acceptanceRepo: 'https://github.com/specscore/specscore/blob/main/spec/features/acceptance-criteria/README.md',
+  scenarioRepo: 'https://github.com/specscore/specscore/blob/main/spec/features/scenario/README.md',
+  planRepo: 'https://github.com/specscore/specscore/blob/main/spec/features/plan/README.md',
+  taskRepo: 'https://github.com/specscore/specscore/blob/main/spec/features/task/README.md',
+  frontmatterRepo: 'https://github.com/specscore/specscore/blob/main/spec/features/artifact-frontmatter-convention/README.md',
+  formatRepo: 'https://github.com/specscore/specscore',
+  formatLicense: 'https://github.com/specscore/specscore/blob/main/LICENSE',
+  cliRepo: 'https://github.com/specscore/specscore-cli',
+  cliLicense: 'https://github.com/specscore/specscore-cli/blob/main/LICENSE',
+  pluginRepo: 'https://github.com/specscore/ai-plugin-specscore',
+  dogfood: 'https://github.com/specscore/specscore/blob/main/.github/workflows/dogfood.yml',
+  acHeading: 'https://github.com/specscore/specscore-cli/blob/v0.55.1/pkg/lint/ac_heading.go',
+  planRules: 'https://github.com/specscore/specscore-cli/blob/v0.55.1/pkg/lint/plan_rules.go',
+  specKitDocs: 'https://github.github.io/spec-kit/',
+  openSpecCli: 'https://openspec.dev/docs/cli',
+  openSpecRepo: 'https://github.com/Fission-AI/OpenSpec',
+  tmRepo: 'https://github.com/eyaltoledano/claude-task-master',
+} as const;
+
+export function templateArticleHref(locale: LangCode): string {
+  return localeHref(locale, '/articles/feature-spec-template/');
+}
+
+/** `/articles/feature-spec-template/` → `/articles/feature-spec-template.md`. */
+export function templateArticleMdHref(locale: LangCode): string {
+  return templateArticleHref(locale).replace(/\/$/, '.md');
+}
 
 export function lintArticleHref(locale: LangCode): string {
   return localeHref(locale, '/articles/lint-specs-in-ci/');

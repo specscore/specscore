@@ -1,5 +1,5 @@
 import type { LangCode } from '../../lib/languages.ts';
-import { acceptanceHref, earsHref, lintHref, patternExample, patternForm, patternOrder } from './facts.ts';
+import { acceptanceHref, earsHref, lintHref, patternExample, patternForm, patternOrder, templateHref } from './facts.ts';
 import type {
   AcceptanceArticleCopy,
   ArticleLocale,
@@ -7,6 +7,7 @@ import type {
   IndexCopy,
   LintArticleCopy,
   PatternId,
+  TemplateArticleCopy,
 } from './types.ts';
 
 import { locale as en } from './locales/en.ts';
@@ -61,6 +62,10 @@ export function indexCopy(code: LangCode): IndexCopy {
 
 export function lintCopy(code: LangCode): LintArticleCopy {
   return articleLocale(code).lint;
+}
+
+export function templateCopy(code: LangCode): TemplateArticleCopy {
+  return articleLocale(code).template;
 }
 
 export interface PatternView {
@@ -123,6 +128,43 @@ export function lintSourcesFor(copy: LintArticleCopy): { href: string; label: st
     { href: lintHref.bmadRepo, label: label.bmadRepo },
     { href: lintHref.tmRepo, label: label.tmRepo },
     { href: lintHref.tools, label: label.tools },
+  ];
+}
+
+export function templateSourcesFor(copy: TemplateArticleCopy): { href: string; label: string }[] {
+  const label = copy.sourceLabel;
+  return [
+    { href: templateHref.feature, label: label.feature },
+    { href: templateHref.featureRepo, label: label.featureRepo },
+    { href: templateHref.requirementRepo, label: label.requirement },
+    { href: templateHref.acceptance, label: label.acceptance },
+    { href: templateHref.acceptanceRepo, label: label.acceptanceRepo },
+    { href: templateHref.scenarioRepo, label: label.scenario },
+    { href: templateHref.plan, label: label.plan },
+    { href: templateHref.planRepo, label: label.planRepo },
+    { href: templateHref.task, label: label.task },
+    { href: templateHref.taskRepo, label: label.taskRepo },
+    { href: templateHref.frontmatterRepo, label: label.frontmatter },
+    { href: templateHref.formatRepo, label: label.formatRepo },
+    { href: templateHref.formatLicense, label: label.formatLicense },
+    { href: templateHref.cliRepo, label: label.cli },
+    { href: templateHref.cliLicense, label: label.cliLicense },
+    { href: templateHref.dogfood, label: label.dogfood },
+    { href: templateHref.acHeading, label: label.acHeading },
+    { href: templateHref.planRules, label: label.planRules },
+    { href: templateHref.lintArticle, label: label.lintArticle },
+    { href: templateHref.acceptanceArticle, label: label.acceptanceArticle },
+    { href: templateHref.earsArticle, label: label.earsArticle },
+    { href: templateHref.cliSkills, label: label.cliSkills },
+    { href: templateHref.specStudio, label: label.specStudio },
+    { href: templateHref.pluginRepo, label: label.pluginRepo },
+    { href: templateHref.validators, label: label.validators },
+    { href: templateHref.rehearse, label: label.rehearse },
+    { href: templateHref.openSpecCli, label: label.openSpecCli },
+    { href: templateHref.openSpecRepo, label: label.openSpecRepo },
+    { href: templateHref.tmRepo, label: label.tmRepo },
+    { href: templateHref.specKitDocs, label: label.specKitDocs },
+    { href: templateHref.tools, label: label.tools },
   ];
 }
 

@@ -1,5 +1,6 @@
 import type { Block, LintArticleCopy } from '../../types.ts';
-import { lintHref } from '../../facts.ts';
+import { lintHref, templateHref } from '../../facts.ts';
+import { relatedLabel as templateLabel } from '../template/tr.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -358,6 +359,7 @@ export const lint: LintArticleCopy = {
   },
   relatedTitle: 'İlgili',
   related: [
+    { href: templateHref.article, label: templateLabel },
     { href: lintHref.acceptanceArticle, label: 'Bir yapay zeka ajanının doğrulayabileceği kabul kriterleri nasıl yazılır' },
     { href: lintHref.earsArticle, label: 'EARS gereksinim sözdizimi örneklerle açıklandı' },
     { href: lintHref.validators, label: 'SpecScore neyi doğrular' },

@@ -493,6 +493,11 @@ export const page: RoundupPage = {
           '에 있습니다.',
         ],
         [
+          '요구사항, 인수 기준, 계획, 태스크를 담은 Markdown 기능 명세 템플릿은 ',
+          { a: 'Markdown PRD 템플릿', href: '/articles/feature-spec-template/' },
+          '에 있습니다.',
+        ],
+        [
           '그 린터를 지속적 통합에서 실행하는 방법은 ',
           { a: 'CI에서 명세 린트하기', href: '/articles/lint-specs-in-ci/' },
           '에 있습니다.',

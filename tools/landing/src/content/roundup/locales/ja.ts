@@ -495,6 +495,11 @@ export const page: RoundupPage = {
           'にあります。',
         ],
         [
+          '要件、受け入れ基準、プラン、タスクを含む Markdown の機能仕様テンプレートは',
+          { a: 'Markdown の PRD テンプレート', href: '/articles/feature-spec-template/' },
+          'にあります。',
+        ],
+        [
           'その linter を継続的インテグレーションで実行する手順は',
           { a: 'CI で仕様を lint する', href: '/articles/lint-specs-in-ci/' },
           'にあります。',

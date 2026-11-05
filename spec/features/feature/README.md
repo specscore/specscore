@@ -153,6 +153,8 @@ Not defined yet.
 *This document follows the https://specscore.md/feature-specification*
 ```
 
+A filled walkthrough of this template — requirements, acceptance criteria, a scenario, a plan, and tasks, plus `specscore spec lint` — is [PRD template in Markdown](https://specscore.md/articles/feature-spec-template/).
+
 #### REQ: title-format
 
 Every feature README title MUST use the `# Feature: {Title}` format. The `Feature:` prefix is required.
