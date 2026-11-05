@@ -1,6 +1,7 @@
 import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy } from '../types.ts';
-import { acceptanceHref, earsHref, lintHref } from '../facts.ts';
+import { acceptanceHref, earsHref, lintHref, templateHref } from '../facts.ts';
 import { lint, indexCard, relatedLabel } from './lint/es.ts';
+import { template, indexCard as templateCard, relatedLabel as templateLabel } from './template/es.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -320,6 +321,7 @@ const ears: EarsArticleCopy = {
     },
     relatedTitle: 'Relacionado',
     related: [
+      { href: templateHref.article, label: templateLabel },
       { href: lintHref.article, label: relatedLabel },
       { href: earsHref.acceptanceArticle, label: "Cómo escribir criterios de aceptación que un agente de IA pueda verificar" },
       { href: earsHref.kiroVs, label: 'SpecScore vs Kiro' },
@@ -704,6 +706,7 @@ const acceptance: AcceptanceArticleCopy = {
     },
     relatedTitle: 'Relacionado',
     related: [
+      { href: templateHref.article, label: templateLabel },
       { href: lintHref.article, label: relatedLabel },
       { href: acceptanceHref.earsArticle, label: "Sintaxis de requisitos EARS explicada, con ejemplos" },
       { href: acceptanceHref.sdd, label: 'Desarrollo basado en especificaciones' },
@@ -725,6 +728,7 @@ export const locale: ArticleLocale = {
   ears,
   acceptance,
   lint,
+  template,
   index: {
     metaTitle: 'Artículos | SpecScore',
     metaDescription: "Artículos sobre notación de requisitos y desarrollo basado en especificaciones, incluida la sintaxis de requisitos EARS y cómo un requisito se escribe en SpecScore. Artículos de SpecScore sobre cómo escribir criterios de aceptación, Given/When/Then y criterios comprobables para agentes de programación con IA.",
@@ -742,6 +746,7 @@ export const locale: ArticleLocale = {
     ],
     listLabel: 'Publicados',
     articles: [
+      templateCard,
       indexCard,
       {
         href: '/articles/acceptance-criteria/',

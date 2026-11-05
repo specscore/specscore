@@ -472,6 +472,11 @@ export const page: RoundupPage = {
           '.',
         ],
         [
+          'Szablon specyfikacji funkcji w Markdown — wymagania, kryteria akceptacji, plan i zadania — jest w ',
+          { a: 'szablonie PRD w Markdown', href: '/articles/feature-spec-template/' },
+          '.',
+        ],
+        [
           'Jak uruchomić ten linter w ciągłej integracji, opisuje ',
           { a: 'lintowanie specyfikacji w CI', href: '/articles/lint-specs-in-ci/' },
           '.',

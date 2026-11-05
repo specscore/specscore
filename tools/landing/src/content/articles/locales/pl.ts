@@ -1,6 +1,7 @@
 import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy } from '../types.ts';
-import { acceptanceHref, earsHref, lintHref } from '../facts.ts';
+import { acceptanceHref, earsHref, lintHref, templateHref } from '../facts.ts';
 import { lint, indexCard, relatedLabel } from './lint/pl.ts';
+import { template, indexCard as templateCard, relatedLabel as templateLabel } from './template/pl.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -315,6 +316,7 @@ const ears: EarsArticleCopy = {
     },
     relatedTitle: 'Powiązane',
     related: [
+      { href: templateHref.article, label: templateLabel },
       { href: lintHref.article, label: relatedLabel },
       { href: earsHref.acceptanceArticle, label: "Jak pisać kryteria akceptacji, które agent AI może zweryfikować" },
       { href: earsHref.kiroVs, label: 'SpecScore vs Kiro' },
@@ -696,6 +698,7 @@ const acceptance: AcceptanceArticleCopy = {
     },
     relatedTitle: 'Powiązane',
     related: [
+      { href: templateHref.article, label: templateLabel },
       { href: lintHref.article, label: relatedLabel },
       { href: acceptanceHref.earsArticle, label: "Składnia wymagań EARS wyjaśniona, z przykładami" },
       { href: acceptanceHref.sdd, label: 'Rozwój sterowany specyfikacją' },
@@ -717,6 +720,7 @@ export const locale: ArticleLocale = {
   ears,
   acceptance,
   lint,
+  template,
   index: {
     metaTitle: 'Artykuły | SpecScore',
     metaDescription: "Artykuły o notacji wymagań i rozwoju sterowanym specyfikacją, w tym składnia wymagań EARS i zapis wymagania w SpecScore. Artykuły SpecScore o tym, jak pisać kryteria akceptacji, o Given/When/Then i o sprawdzalnych kryteriach akceptacji dla agentów kodujących z AI.",
@@ -734,6 +738,7 @@ export const locale: ArticleLocale = {
     ],
     listLabel: 'Opublikowane',
     articles: [
+      templateCard,
       indexCard,
       {
         href: '/articles/acceptance-criteria/',

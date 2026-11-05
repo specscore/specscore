@@ -475,6 +475,11 @@ export const page: RoundupPage = {
           '.',
         ],
         [
+          'Eine Markdown-Vorlage für eine Feature-Spezifikation — Anforderungen, Akzeptanzkriterien, ein Plan und Aufgaben — steht in ',
+          { a: 'PRD-Vorlage in Markdown', href: '/articles/feature-spec-template/' },
+          '.',
+        ],
+        [
           'Wie man diesen Linter in der kontinuierlichen Integration ausführt, steht in ',
           { a: 'Spezifikationen in CI linten', href: '/articles/lint-specs-in-ci/' },
           '.',

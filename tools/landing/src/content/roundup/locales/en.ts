@@ -471,6 +471,11 @@ export const page: RoundupPage = {
           '.',
         ],
         [
+          'A Markdown feature spec template — requirements, acceptance criteria, a plan, and tasks — is in ',
+          { a: 'PRD template in Markdown', href: '/articles/feature-spec-template/' },
+          '.',
+        ],
+        [
           'In this website’s repository, ',
           t('dogfood.yml', href.dogfood, 'us'),
           ' installs that CLI and runs ',

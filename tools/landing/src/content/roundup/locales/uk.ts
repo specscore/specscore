@@ -472,6 +472,11 @@ export const page: RoundupPage = {
           '.',
         ],
         [
+          'Шаблон специфікації функції в Markdown — вимоги, критерії приймання, план і завдання — у статті ',
+          { a: 'шаблон PRD у Markdown', href: '/articles/feature-spec-template/' },
+          '.',
+        ],
+        [
           'Як запускати цей лінтер у безперервній інтеграції, описано в статті ',
           { a: 'лінтинг специфікацій у CI', href: '/articles/lint-specs-in-ci/' },
           '.',

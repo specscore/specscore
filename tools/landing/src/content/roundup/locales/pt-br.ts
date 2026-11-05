@@ -474,6 +474,11 @@ export const page: RoundupPage = {
           '.',
         ],
         [
+          'Um modelo de especificação de funcionalidade em Markdown — requisitos, critérios de aceitação, um plano e tarefas — está em ',
+          { a: 'modelo de PRD em Markdown', href: '/articles/feature-spec-template/' },
+          '.',
+        ],
+        [
           'Como executar esse linter na integração contínua está em ',
           { a: 'como lintar especificações na CI', href: '/articles/lint-specs-in-ci/' },
           '.',

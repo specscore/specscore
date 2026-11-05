@@ -9,9 +9,11 @@ import {
   earsSlug,
   lintArticleMdHref,
   lintSlug,
+  templateArticleMdHref,
+  templateSlug,
 } from '../src/content/articles/facts.ts';
-import { acceptanceCopy, earsCopy, indexCopy, lintCopy } from '../src/content/articles/pages.ts';
-import { renderAcceptanceMarkdown, renderEarsMarkdown, renderIndexMarkdown, renderLintMarkdown } from '../src/content/articles/render-md.ts';
+import { acceptanceCopy, earsCopy, indexCopy, lintCopy, templateCopy } from '../src/content/articles/pages.ts';
+import { renderAcceptanceMarkdown, renderEarsMarkdown, renderIndexMarkdown, renderLintMarkdown, renderTemplateMarkdown } from '../src/content/articles/render-md.ts';
 
 function markdownFor(locale: LangCode, slug: string | undefined): string | undefined {
   if (slug === undefined) {
@@ -29,6 +31,10 @@ function markdownFor(locale: LangCode, slug: string | undefined): string | undef
   if (slug === lintSlug) {
     const canonical = `https://specscore.md${localeHref(locale, '/articles/lint-specs-in-ci/')}`;
     return renderLintMarkdown(lintCopy(locale), locale, canonical);
+  }
+  if (slug === templateSlug) {
+    const canonical = `https://specscore.md${localeHref(locale, '/articles/feature-spec-template/')}`;
+    return renderTemplateMarkdown(templateCopy(locale), locale, canonical);
   }
   return undefined;
 }
@@ -61,6 +67,7 @@ if (printUrl) {
       [acceptanceArticleMdHref(lang.code), acceptanceSlug],
       [earsArticleMdHref(lang.code), earsSlug],
       [lintArticleMdHref(lang.code), lintSlug],
+      [templateArticleMdHref(lang.code), templateSlug],
     ];
     for (const [relHref, slug] of files) {
       const body = markdownFor(lang.code, slug);

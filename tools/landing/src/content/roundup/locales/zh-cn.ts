@@ -486,6 +486,11 @@ export const page: RoundupPage = {
           '。',
         ],
         [
+          '含需求、验收标准、计划和任务的 Markdown 功能规格模板见',
+          { a: 'Markdown PRD 模板', href: '/articles/feature-spec-template/' },
+          '。',
+        ],
+        [
           '如何在持续集成里运行这个 linter，见',
           { a: '在 CI 中 lint 规格', href: '/articles/lint-specs-in-ci/' },
           '。',

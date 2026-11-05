@@ -499,6 +499,11 @@ export const page: RoundupPage = {
           ' sayfasında.',
         ],
         [
+          'Gereksinimler, kabul kriterleri, bir plan ve görevler içeren Markdown özellik spesifikasyonu şablonu ',
+          { a: 'Markdown PRD şablonu', href: '/articles/feature-spec-template/' },
+          ' sayfasındadır.',
+        ],
+        [
           'Bu linteri sürekli entegrasyonda çalıştırmak ',
           { a: 'spesifikasyonları CI’da lintlemek', href: '/articles/lint-specs-in-ci/' },
           ' sayfasındadır.',

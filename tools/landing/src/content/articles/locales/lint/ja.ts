@@ -1,5 +1,6 @@
 import type { Block, LintArticleCopy } from '../../types.ts';
-import { lintHref } from '../../facts.ts';
+import { lintHref, templateHref } from '../../facts.ts';
+import { relatedLabel as templateLabel } from '../template/ja.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -358,6 +359,7 @@ export const lint: LintArticleCopy = {
   },
   relatedTitle: '関連',
   related: [
+    { href: templateHref.article, label: templateLabel },
     { href: lintHref.acceptanceArticle, label: 'AIエージェントが検証できる受け入れ基準の書き方' },
     { href: lintHref.earsArticle, label: 'EARS要件構文を例で説明する' },
     { href: lintHref.validators, label: 'SpecScore が検証するもの' },

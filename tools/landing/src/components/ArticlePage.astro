@@ -2,10 +2,12 @@
 import AcceptanceArticle from './AcceptanceArticle.astro';
 import EarsArticle from './EarsArticle.astro';
 import LintArticle from './LintArticle.astro';
+import TemplateArticle from './TemplateArticle.astro';
 
 const path = Astro.url.pathname;
+const template = path.includes('/articles/feature-spec-template');
 const lint = path.includes('/articles/lint-specs-in-ci');
 const ears = path.includes('/articles/ears-requirements');
 ---
 
-{lint ? <LintArticle /> : ears ? <EarsArticle /> : <AcceptanceArticle />}
+{template ? <TemplateArticle /> : lint ? <LintArticle /> : ears ? <EarsArticle /> : <AcceptanceArticle />}

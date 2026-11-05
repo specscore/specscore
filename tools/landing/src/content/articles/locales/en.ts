@@ -1,5 +1,6 @@
 import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy, LintArticleCopy } from '../types.ts';
-import { acceptanceHref, earsHref, lintHref } from '../facts.ts';
+import { acceptanceHref, earsHref, lintHref, templateHref } from '../facts.ts';
+import { indexCard as templateCard, relatedLabel as templateLabel, template } from './template/en.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -317,6 +318,7 @@ const ears: EarsArticleCopy = {
     },
     relatedTitle: 'Related',
     related: [
+      { href: templateHref.article, label: templateLabel },
       { href: lintHref.article, label: 'Lint specs in CI with a spec linter' },
       { href: earsHref.acceptanceArticle, label: "How to write acceptance criteria AI agents can verify" },
       { href: earsHref.kiroVs, label: 'SpecScore vs Kiro' },
@@ -699,6 +701,7 @@ const acceptance: AcceptanceArticleCopy = {
     },
     relatedTitle: 'Related',
     related: [
+      { href: templateHref.article, label: templateLabel },
       { href: lintHref.article, label: 'Lint specs in CI with a spec linter' },
       { href: acceptanceHref.earsArticle, label: "EARS requirements syntax explained, with examples" },
       { href: acceptanceHref.sdd, label: 'Spec-driven development' },
@@ -1071,6 +1074,7 @@ const lint: LintArticleCopy = {
   },
   relatedTitle: 'Related',
   related: [
+    { href: templateHref.article, label: templateLabel },
     { href: lintHref.acceptanceArticle, label: 'How to write acceptance criteria AI agents can verify' },
     { href: lintHref.earsArticle, label: 'EARS requirements syntax explained, with examples' },
     { href: lintHref.validators, label: 'What SpecScore validates' },
@@ -1091,10 +1095,11 @@ export const locale: ArticleLocale = {
   ears,
   acceptance,
   lint,
+  template,
   index: {
     metaTitle: 'Articles | SpecScore',
     metaDescription:
-      'SpecScore articles on EARS requirements syntax, how to write acceptance criteria, and how to lint specs in CI with the specscore spec linter.',
+      'SpecScore articles: a PRD template in Markdown, EARS requirements syntax, how to write acceptance criteria, and how to lint specs in CI.',
     h1: 'Articles',
     hero: [
 'Articles here explain a requirements notation or a spec-driven development (SDD) practice, then show the same idea as a SpecScore requirement (REQ) that ',
@@ -1109,6 +1114,7 @@ export const locale: ArticleLocale = {
     ],
     listLabel: 'Published',
     articles: [
+      templateCard,
       {
         href: '/articles/lint-specs-in-ci/',
         title: 'Lint specs in CI with a spec linter',

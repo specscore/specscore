@@ -191,6 +191,83 @@ export interface LintArticleCopy {
   ctaGithub: string;
 }
 
+export interface TemplateArticleCopy {
+  metaTitle: string;
+  metaDescription: string;
+  h1: string;
+  updated: string;
+  breadcrumb: string;
+  hero: Block;
+  whatTitle: string;
+  what: Block[];
+  featureTitle: string;
+  feature: Block[];
+  featureCaption: string;
+  indexCaption: string;
+  specCaption: string;
+  configCaption: string;
+  featureAfter: Block[];
+  traceTitle: string;
+  traceIntro: Block[];
+  trace: NamedBlock[];
+  scenarioCaption: string;
+  traceAfter: Block[];
+  planTitle: string;
+  plan: Block[];
+  planCaption: string;
+  taskCaption: string;
+  planAfter: Block[];
+  ciTitle: string;
+  ci: Block[];
+  claudeTitle: string;
+  claude: Block[];
+  faqTitle: string;
+  faqs: { q: string; a: Block }[];
+  sourcesTitle: string;
+  sourcesNote: string;
+  sourceLabel: {
+    feature: string;
+    featureRepo: string;
+    requirement: string;
+    requirementRepo: string;
+    acceptance: string;
+    acceptanceRepo: string;
+    scenario: string;
+    scenarioRepo: string;
+    plan: string;
+    planRepo: string;
+    task: string;
+    taskRepo: string;
+    frontmatter: string;
+    formatRepo: string;
+    formatLicense: string;
+    cli: string;
+    cliLicense: string;
+    dogfood: string;
+    planRules: string;
+    acHeading: string;
+    lintArticle: string;
+    acceptanceArticle: string;
+    earsArticle: string;
+    cliSkills: string;
+    specStudio: string;
+    pluginRepo: string;
+    validators: string;
+    rehearse: string;
+    openSpecCli: string;
+    openSpecRepo: string;
+    tmRepo: string;
+    specKitDocs: string;
+    tools: string;
+  };
+  relatedTitle: string;
+  related: { href: string; label: string }[];
+  ctaTitle: string;
+  ctaInstall: string;
+  ctaSkills: string;
+  ctaGithub: string;
+}
+
 export interface IndexArticle {
   href: string;
   title: string;
@@ -210,5 +287,6 @@ export interface ArticleLocale {
   ears: EarsArticleCopy;
   acceptance: AcceptanceArticleCopy;
   lint: LintArticleCopy;
+  template: TemplateArticleCopy;
   index: IndexCopy;
 }
