@@ -480,6 +480,13 @@ export const page: RoundupPage = {
           '.',
         ],
         [
+          'Le développement piloté par les spécifications avec Claude Code et Cursor — le fichier de fonctionnalité, le fichier d’instructions de l’agent et ',
+          { c: 'specscore spec lint' },
+          ' dans la boucle sont décrits dans ',
+          { a: 'développement piloté par les spécifications avec Claude Code et Cursor', href: '/articles/claude-code-specs/' },
+          '.',
+        ],
+        [
           'Comment lancer ce linter en intégration continue est expliqué dans ',
           { a: 'linter des spécifications en CI', href: '/articles/lint-specs-in-ci/' },
           '.',

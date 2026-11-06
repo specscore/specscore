@@ -1,6 +1,6 @@
 # Article locales
 
-One TypeScript module per locale for `/articles/`, `/articles/acceptance-criteria/`, `/articles/ears-requirements/`, `/articles/lint-specs-in-ci/`, and `/articles/feature-spec-template/`. English is the source of the facts. Other locales translate the prose and keep the format samples in English, because the specification's keywords are English. Lint translations are in [`lint/`](lint/). Feature-spec-template translations are in [`template/`](template/).
+One TypeScript module per locale for `/articles/`, `/articles/acceptance-criteria/`, `/articles/ears-requirements/`, `/articles/lint-specs-in-ci/`, `/articles/feature-spec-template/`, and `/articles/claude-code-specs/`. English is the source of the facts. Other locales translate the prose and keep the format samples in English, because the specification's keywords are English. Lint translations are in [`lint/`](lint/). Feature-spec-template translations are in [`template/`](template/). Claude Code and Cursor translations are in [`agents/`](agents/).
 
 | File | Locale |
 |---|---|
@@ -20,6 +20,7 @@ One TypeScript module per locale for `/articles/`, `/articles/acceptance-criteri
 | `ko.ts` | Korean |
 | [`lint/`](lint/) | Translations of `/articles/lint-specs-in-ci/`. English stays in `en.ts`. |
 | [`template/`](template/) | Translations of `/articles/feature-spec-template/`, including English. |
+| [`agents/`](agents/) | Translations of `/articles/claude-code-specs/`, including English. |
 
 EARS keywords, example sentences, and the linted SpecScore samples stay in English.
 

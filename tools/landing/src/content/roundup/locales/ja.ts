@@ -500,6 +500,13 @@ export const page: RoundupPage = {
           'にあります。',
         ],
         [
+          'Claude Code と Cursor での仕様駆動開発。機能ファイル、エージェント向け指示ファイル、そしてループの中の ',
+          { c: 'specscore spec lint' },
+          ' については ',
+          { a: 'Claude Code と Cursor での仕様駆動開発', href: '/articles/claude-code-specs/' },
+          '。',
+        ],
+        [
           'その linter を継続的インテグレーションで実行する手順は',
           { a: 'CI で仕様を lint する', href: '/articles/lint-specs-in-ci/' },
           'にあります。',

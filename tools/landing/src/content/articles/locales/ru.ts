@@ -2,6 +2,7 @@ import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy } fro
 import { acceptanceHref, earsHref, lintHref, templateHref } from '../facts.ts';
 import { lint, indexCard, relatedLabel } from './lint/ru.ts';
 import { template, indexCard as templateCard, relatedLabel as templateLabel } from './template/ru.ts';
+import { agents, indexCard as agentsCard } from './agents/ru.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -721,6 +722,7 @@ export const locale: ArticleLocale = {
   acceptance,
   lint,
   template,
+  agents,
   index: {
     metaTitle: 'Статьи | SpecScore',
     metaDescription: "Статьи о нотации требований и разработке по спецификациям, включая синтаксис требований EARS и запись требования в SpecScore. Статьи SpecScore о том, как писать критерии приёмки, о Given/When/Then и о проверяемых критериях приёмки для ИИ-агентов программирования.",
@@ -738,6 +740,7 @@ export const locale: ArticleLocale = {
     ],
     listLabel: 'Опубликовано',
     articles: [
+      agentsCard,
       templateCard,
       indexCard,
       {

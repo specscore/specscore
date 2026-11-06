@@ -6,6 +6,7 @@ export const earsSlug = 'ears-requirements';
 export const acceptanceSlug = 'acceptance-criteria';
 export const lintSlug = 'lint-specs-in-ci';
 export const templateSlug = 'feature-spec-template';
+export const agentsSlug = 'claude-code-specs';
 
 export const earsHref = {
   sdd: '/spec-driven-development/',
@@ -513,4 +514,73 @@ export function lintArticleHref(locale: LangCode): string {
 /** `/articles/lint-specs-in-ci/` → `/articles/lint-specs-in-ci.md`. */
 export function lintArticleMdHref(locale: LangCode): string {
   return lintArticleHref(locale).replace(/\/$/, '.md');
+}
+
+/**
+ * Invocation from the agent-setup feature: a comma-separated list is the
+ * same as separate arguments. This line writes the Claude Code and Cursor
+ * files named in that feature's contract table.
+ */
+export const agentSetupCommand = `specscore agent setup claude,cursor
+`;
+
+/**
+ * Paths the agent-setup contract assigns to caller ids `claude` and `cursor`.
+ * Not a transcript of a run. Skill directories are omitted when `--no-skills`
+ * is passed. An existing file is left in place unless `--force` is passed.
+ */
+export const agentSetupPaths = `CLAUDE.md
+.claude/skills/
+.cursor/rules/specscore.mdc
+.cursor/skills/
+`;
+
+export const agentsHref = {
+  sdd: '/spec-driven-development/',
+  tools: '/spec-driven-development/tools/',
+  articles: '/articles/',
+  article: '/articles/claude-code-specs/',
+  templateArticle: '/articles/feature-spec-template/',
+  lintArticle: '/articles/lint-specs-in-ci/',
+  earsArticle: '/articles/ears-requirements/',
+  acceptanceArticle: '/articles/acceptance-criteria/',
+  home: '/',
+  validators: '/validators/',
+  cli: '/cli/',
+  cliInstall: '/cli/install/',
+  ai: '/ai/',
+  cliSkills: '/ai/cli-skills/',
+  specStudio: '/ai/specstudio-skills/',
+  feature: '/feature-specification',
+  acceptance: '/acceptance-criteria-specification',
+  requirement: '/requirement-specification',
+  formatRepo: 'https://github.com/specscore/specscore',
+  formatLicense: 'https://github.com/specscore/specscore/blob/main/LICENSE',
+  cliRepo: 'https://github.com/specscore/specscore-cli',
+  cliLicense: 'https://github.com/specscore/specscore-cli/blob/main/LICENSE',
+  cliReadme: 'https://github.com/specscore/specscore-cli/blob/main/README.md',
+  agentSetup: 'https://github.com/specscore/specscore-cli/blob/main/spec/features/cli/agent/setup/README.md',
+  dogfood: 'https://github.com/specscore/specscore/blob/main/.github/workflows/dogfood.yml',
+  pluginRepo: 'https://github.com/specscore/ai-plugin-specscore',
+  pluginLicense: 'https://github.com/specscore/ai-plugin-specscore/blob/main/LICENSE',
+  pluginSkills: 'https://github.com/specscore/ai-plugin-specscore/blob/main/skills/README.md',
+  pluginReadme: 'https://github.com/specscore/ai-plugin-specscore/blob/main/README.md',
+  studioRepo: 'https://github.com/specscore/specstudio-skills',
+  studioLicense: 'https://github.com/specscore/specstudio-skills/blob/main/LICENSE',
+  studioReadme: 'https://github.com/specscore/specstudio-skills/blob/main/README.md',
+  claudeOverview: 'https://code.claude.com/docs/en/overview',
+  cursorRules: 'https://cursor.com/docs/rules',
+  openSpecCli: 'https://openspec.dev/docs/cli',
+  openSpecRepo: 'https://github.com/Fission-AI/OpenSpec',
+  tmRepo: 'https://github.com/eyaltoledano/claude-task-master',
+  specKitDocs: 'https://github.github.io/spec-kit/',
+} as const;
+
+export function agentsArticleHref(locale: LangCode): string {
+  return localeHref(locale, '/articles/claude-code-specs/');
+}
+
+/** `/articles/claude-code-specs/` → `/articles/claude-code-specs.md`. */
+export function agentsArticleMdHref(locale: LangCode): string {
+  return agentsArticleHref(locale).replace(/\/$/, '.md');
 }

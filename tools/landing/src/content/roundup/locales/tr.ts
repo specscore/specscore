@@ -504,6 +504,13 @@ export const page: RoundupPage = {
           ' sayfasındadır.',
         ],
         [
+          'Claude Code ve Cursor ile spesifikasyon odaklı geliştirme — özellik dosyası, ajan yönerge dosyası ve ',
+          { c: 'specscore spec lint' },
+          ' döngüde şurada anlatılır: ',
+          { a: 'Claude Code ve Cursor ile spesifikasyon odaklı geliştirme', href: '/articles/claude-code-specs/' },
+          '.',
+        ],
+        [
           'Bu linteri sürekli entegrasyonda çalıştırmak ',
           { a: 'spesifikasyonları CI’da lintlemek', href: '/articles/lint-specs-in-ci/' },
           ' sayfasındadır.',

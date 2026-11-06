@@ -1,6 +1,7 @@
 import type { Block, LintArticleCopy } from '../../types.ts';
 import { lintHref, templateHref } from '../../facts.ts';
 import { relatedLabel as templateLabel } from '../template/uk.ts';
+import { relatedLabel as agentsLabel } from '../agents/uk.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -360,6 +361,7 @@ export const lint: LintArticleCopy = {
   },
   relatedTitle: 'Пов’язане',
   related: [
+    { href: '/articles/claude-code-specs/', label: agentsLabel },
     { href: templateHref.article, label: templateLabel },
     { href: lintHref.acceptanceArticle, label: 'Як писати критерії приймання, які перевірить ШІ-агент' },
     { href: lintHref.earsArticle, label: 'Синтаксис вимог EARS з поясненням і прикладами' },

@@ -10,6 +10,7 @@ Astro file-based routes. One file per route.
 | `articles/ears-requirements/index.astro` | `/articles/ears-requirements/` | EARS requirements syntax. |
 | `articles/lint-specs-in-ci/index.astro` | `/articles/lint-specs-in-ci/` | How to lint specifications in CI. |
 | `articles/feature-spec-template/index.astro` | `/articles/feature-spec-template/` | A PRD and feature spec template in Markdown for AI coding. |
+| `articles/claude-code-specs/index.astro` | `/articles/claude-code-specs/` | Spec-driven development with Claude Code and Cursor. |
 
 Locale copies of those routes live in the locale directories (`es/`, `de/`, and the rest). Product pages, comparisons, and the spec-driven development guide are Astro routes in this tree as well.
 

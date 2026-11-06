@@ -15,11 +15,13 @@ import {
   dogfoodLintSteps,
   lintCleanOutput,
   lintFailureOutput,
+  agentSetupCommand,
+  agentSetupPaths,
   planReadme,
   taskReadme,
 } from './facts.ts';
-import { acceptanceSourcesFor, earsSourcesFor, lintSourcesFor, patternsFor, templateSourcesFor } from './pages.ts';
-import type { AcceptanceArticleCopy, Block, EarsArticleCopy, IndexCopy, Inline, LintArticleCopy, TemplateArticleCopy } from './types.ts';
+import { acceptanceSourcesFor, agentsSourcesFor, earsSourcesFor, lintSourcesFor, patternsFor, templateSourcesFor } from './pages.ts';
+import type { AcceptanceArticleCopy, AgentsArticleCopy, Block, EarsArticleCopy, IndexCopy, Inline, LintArticleCopy, TemplateArticleCopy } from './types.ts';
 
 function isLanding(href: string): boolean {
   return localizedPrefixes.some((prefix) => href === prefix || href.startsWith(prefix));
@@ -296,6 +298,48 @@ export function renderTemplateMarkdown(copy: TemplateArticleCopy, locale: LangCo
 
   lines.push(`## ${copy.sourcesTitle}`, '', copy.sourcesNote, '');
   for (const source of templateSourcesFor(copy)) lines.push(`- [${source.label}](${linked(source.href, locale)})`);
+  lines.push('', `## ${copy.relatedTitle}`, '');
+  for (const link of copy.related) lines.push(`- [${link.label}](${abs(link.href, locale)})`);
+  lines.push('');
+  return lines.join('\n');
+}
+
+export function renderAgentsMarkdown(copy: AgentsArticleCopy, locale: LangCode, canonical: string): string {
+  const lines: string[] = [
+    `# ${copy.h1}`,
+    '',
+    `Canonical: ${canonical}`,
+    '',
+    copy.updated,
+    '',
+    block(copy.hero, locale),
+    '',
+    `## ${copy.splitTitle}`,
+    '',
+  ];
+  for (const paragraph of copy.split) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.setupTitle}`, '');
+  for (const paragraph of copy.setup) lines.push(block(paragraph, locale), '');
+  lines.push(`### ${copy.commandCaption}`, '', fence('text', agentSetupCommand), '');
+  lines.push(`### ${copy.pathsCaption}`, '', fence('text', agentSetupPaths), '');
+  for (const paragraph of copy.setupAfter) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.loopTitle}`, '');
+  for (const paragraph of copy.loopIntro) lines.push(block(paragraph, locale), '');
+  for (const step of copy.steps) lines.push(`### ${step.title}`, '', block(step.body, locale), '');
+
+  lines.push(`## ${copy.skillsTitle}`, '');
+  for (const paragraph of copy.skills) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.ciTitle}`, '');
+  for (const paragraph of copy.ci) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.faqTitle}`, '');
+  for (const faq of copy.faqs) lines.push(`### ${faq.q}`, '', block(faq.a, locale), '');
+
+  lines.push(`## ${copy.sourcesTitle}`, '', copy.sourcesNote, '');
+  for (const source of agentsSourcesFor(copy)) lines.push(`- [${source.label}](${linked(source.href, locale)})`);
   lines.push('', `## ${copy.relatedTitle}`, '');
   for (const link of copy.related) lines.push(`- [${link.label}](${abs(link.href, locale)})`);
   lines.push('');

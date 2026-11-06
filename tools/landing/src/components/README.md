@@ -18,6 +18,7 @@ One Astro component per IA section, in render order, plus a header and a footer.
 | `SiteFooter.astro` | — | Four-column footer. |
 | `CompareArticle.astro` | — | Shared structure for a `/vs/` article. Copy comes from `src/content/compare/`. |
 | `ArticlePage.astro` | — | Chooses the article renderer from the URL. |
+| `AgentsArticle.astro` | — | `/articles/claude-code-specs/`. Copy comes from `src/content/articles/`. |
 | `AcceptanceArticle.astro` | — | `/articles/acceptance-criteria/`. Copy comes from `src/content/articles/`. |
 | `EarsArticle.astro` | — | `/articles/ears-requirements/`. Copy comes from `src/content/articles/`. |
 | `ArticlesIndex.astro` | — | Index of `/articles/`. |

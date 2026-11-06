@@ -2,6 +2,7 @@ import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy } fro
 import { acceptanceHref, earsHref, lintHref, templateHref } from '../facts.ts';
 import { lint, indexCard, relatedLabel } from './lint/tr.ts';
 import { template, indexCard as templateCard, relatedLabel as templateLabel } from './template/tr.ts';
+import { agents, indexCard as agentsCard } from './agents/tr.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -722,6 +723,7 @@ export const locale: ArticleLocale = {
   acceptance,
   lint,
   template,
+  agents,
   index: {
     metaTitle: 'Makaleler | SpecScore',
     metaDescription: "Gereksinim notasyonu ve spesifikasyon odaklı geliştirme üzerine makaleler; EARS gereksinim sözdizimi ve SpecScore’a yazımı dahil. Kabul kriterlerinin nasıl yazılacağı, Given/When/Then ve yapay zeka kodlama ajanları için test edilebilir kabul kriterleri üzerine SpecScore makaleleri.",
@@ -739,6 +741,7 @@ export const locale: ArticleLocale = {
     ],
     listLabel: 'Yayımlananlar',
     articles: [
+      agentsCard,
       templateCard,
       indexCard,
       {

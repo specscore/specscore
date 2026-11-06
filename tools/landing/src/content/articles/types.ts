@@ -268,6 +268,68 @@ export interface TemplateArticleCopy {
   ctaGithub: string;
 }
 
+export interface AgentsArticleCopy {
+  metaTitle: string;
+  metaDescription: string;
+  h1: string;
+  updated: string;
+  breadcrumb: string;
+  hero: Block;
+  splitTitle: string;
+  split: Block[];
+  setupTitle: string;
+  setup: Block[];
+  commandCaption: string;
+  pathsCaption: string;
+  setupAfter: Block[];
+  loopTitle: string;
+  loopIntro: Block[];
+  steps: NamedBlock[];
+  skillsTitle: string;
+  skills: Block[];
+  ciTitle: string;
+  ci: Block[];
+  faqTitle: string;
+  faqs: { q: string; a: Block }[];
+  sourcesTitle: string;
+  sourcesNote: string;
+  sourceLabel: {
+    claudeOverview: string;
+    cursorRules: string;
+    agentSetup: string;
+    cliReadme: string;
+    cli: string;
+    cliLicense: string;
+    formatRepo: string;
+    formatLicense: string;
+    dogfood: string;
+    pluginRepo: string;
+    pluginLicense: string;
+    pluginSkills: string;
+    pluginReadme: string;
+    studioRepo: string;
+    studioLicense: string;
+    studioReadme: string;
+    cliSkills: string;
+    specStudio: string;
+    templateArticle: string;
+    lintArticle: string;
+    feature: string;
+    acceptance: string;
+    openSpecCli: string;
+    openSpecRepo: string;
+    tmRepo: string;
+    specKitDocs: string;
+    tools: string;
+  };
+  relatedTitle: string;
+  related: { href: string; label: string }[];
+  ctaTitle: string;
+  ctaInstall: string;
+  ctaSkills: string;
+  ctaGithub: string;
+}
+
 export interface IndexArticle {
   href: string;
   title: string;
@@ -288,5 +350,6 @@ export interface ArticleLocale {
   acceptance: AcceptanceArticleCopy;
   lint: LintArticleCopy;
   template: TemplateArticleCopy;
+  agents: AgentsArticleCopy;
   index: IndexCopy;
 }

@@ -1,5 +1,6 @@
 import type { Block, TemplateArticleCopy } from '../../types.ts';
 import { templateHref } from '../../facts.ts';
+import { relatedLabel as agentsLabel } from '../agents/es.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -551,6 +552,7 @@ export const template: TemplateArticleCopy = {
   },
   relatedTitle: 'Relacionado',
   related: [
+    { href: '/articles/claude-code-specs/', label: agentsLabel },
     { href: templateHref.feature, label: 'Especificación de funcionalidad' },
     { href: templateHref.acceptance, label: 'Especificación de criterios de aceptación' },
     { href: templateHref.plan, label: 'Especificación de plan' },

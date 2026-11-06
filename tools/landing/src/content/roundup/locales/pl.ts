@@ -477,6 +477,13 @@ export const page: RoundupPage = {
           '.',
         ],
         [
+          'Rozwój sterowany specyfikacją z Claude Code i Cursorem — plik funkcji, plik instrukcji agenta i ',
+          { c: 'specscore spec lint' },
+          ' w pętli opisuje ',
+          { a: 'rozwój sterowany specyfikacją z Claude Code i Cursorem', href: '/articles/claude-code-specs/' },
+          '.',
+        ],
+        [
           'Jak uruchomić ten linter w ciągłej integracji, opisuje ',
           { a: 'lintowanie specyfikacji w CI', href: '/articles/lint-specs-in-ci/' },
           '.',
