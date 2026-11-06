@@ -477,6 +477,13 @@ export const page: RoundupPage = {
           '.',
         ],
         [
+          'Розробка за специфікаціями з Claude Code і Cursor — файл функції, файл інструкцій агента і ',
+          { c: 'specscore spec lint' },
+          ' у циклі описані у статті ',
+          { a: 'розробка за специфікаціями з Claude Code і Cursor', href: '/articles/claude-code-specs/' },
+          '.',
+        ],
+        [
           'Як запускати цей лінтер у безперервній інтеграції, описано в статті ',
           { a: 'лінтинг специфікацій у CI', href: '/articles/lint-specs-in-ci/' },
           '.',

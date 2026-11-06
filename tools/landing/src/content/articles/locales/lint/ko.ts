@@ -1,6 +1,7 @@
 import type { Block, LintArticleCopy } from '../../types.ts';
 import { lintHref, templateHref } from '../../facts.ts';
 import { relatedLabel as templateLabel } from '../template/ko.ts';
+import { relatedLabel as agentsLabel } from '../agents/ko.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -359,6 +360,7 @@ export const lint: LintArticleCopy = {
   },
   relatedTitle: '관련',
   related: [
+    { href: '/articles/claude-code-specs/', label: agentsLabel },
     { href: templateHref.article, label: templateLabel },
     { href: lintHref.acceptanceArticle, label: 'AI 에이전트가 검증할 수 있는 인수 기준을 쓰는 법' },
     { href: lintHref.earsArticle, label: 'EARS 요구사항 구문을 예와 함께 설명' },

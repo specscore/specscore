@@ -491,6 +491,13 @@ export const page: RoundupPage = {
           '。',
         ],
         [
+          '用 Claude Code 和 Cursor 做规范驱动开发：功能文件、代理指令文件，以及循环中的 ',
+          { c: 'specscore spec lint' },
+          '，见 ',
+          { a: '用 Claude Code 和 Cursor 做规范驱动开发', href: '/articles/claude-code-specs/' },
+          '。',
+        ],
+        [
           '如何在持续集成里运行这个 linter，见',
           { a: '在 CI 中 lint 规格', href: '/articles/lint-specs-in-ci/' },
           '。',

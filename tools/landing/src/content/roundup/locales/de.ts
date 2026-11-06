@@ -480,6 +480,13 @@ export const page: RoundupPage = {
           '.',
         ],
         [
+          'Spec-driven Development mit Claude Code und Cursor — die Feature-Datei, die Anweisungsdatei des Agenten und ',
+          { c: 'specscore spec lint' },
+          ' in der Schleife stehen in ',
+          { a: 'Spec-driven Development mit Claude Code und Cursor', href: '/articles/claude-code-specs/' },
+          '.',
+        ],
+        [
           'Wie man diesen Linter in der kontinuierlichen Integration ausführt, steht in ',
           { a: 'Spezifikationen in CI linten', href: '/articles/lint-specs-in-ci/' },
           '.',

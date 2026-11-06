@@ -7,13 +7,15 @@ import {
   articlesIndexMdHref,
   earsArticleMdHref,
   earsSlug,
+  agentsArticleMdHref,
+  agentsSlug,
   lintArticleMdHref,
   lintSlug,
   templateArticleMdHref,
   templateSlug,
 } from '../src/content/articles/facts.ts';
-import { acceptanceCopy, earsCopy, indexCopy, lintCopy, templateCopy } from '../src/content/articles/pages.ts';
-import { renderAcceptanceMarkdown, renderEarsMarkdown, renderIndexMarkdown, renderLintMarkdown, renderTemplateMarkdown } from '../src/content/articles/render-md.ts';
+import { acceptanceCopy, agentsCopy, earsCopy, indexCopy, lintCopy, templateCopy } from '../src/content/articles/pages.ts';
+import { renderAcceptanceMarkdown, renderAgentsMarkdown, renderEarsMarkdown, renderIndexMarkdown, renderLintMarkdown, renderTemplateMarkdown } from '../src/content/articles/render-md.ts';
 
 function markdownFor(locale: LangCode, slug: string | undefined): string | undefined {
   if (slug === undefined) {
@@ -35,6 +37,10 @@ function markdownFor(locale: LangCode, slug: string | undefined): string | undef
   if (slug === templateSlug) {
     const canonical = `https://specscore.md${localeHref(locale, '/articles/feature-spec-template/')}`;
     return renderTemplateMarkdown(templateCopy(locale), locale, canonical);
+  }
+  if (slug === agentsSlug) {
+    const canonical = `https://specscore.md${localeHref(locale, '/articles/claude-code-specs/')}`;
+    return renderAgentsMarkdown(agentsCopy(locale), locale, canonical);
   }
   return undefined;
 }
@@ -68,6 +74,7 @@ if (printUrl) {
       [earsArticleMdHref(lang.code), earsSlug],
       [lintArticleMdHref(lang.code), lintSlug],
       [templateArticleMdHref(lang.code), templateSlug],
+      [agentsArticleMdHref(lang.code), agentsSlug],
     ];
     for (const [relHref, slug] of files) {
       const body = markdownFor(lang.code, slug);

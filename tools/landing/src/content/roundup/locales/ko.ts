@@ -498,6 +498,13 @@ export const page: RoundupPage = {
           '에 있습니다.',
         ],
         [
+          'Claude Code와 Cursor로 하는 명세 주도 개발. 기능 파일, 에이전트 지시 파일, 그리고 루프 안의 ',
+          { c: 'specscore spec lint' },
+          '에 대해서는 ',
+          { a: 'Claude Code와 Cursor로 하는 명세 주도 개발', href: '/articles/claude-code-specs/' },
+          '.',
+        ],
+        [
           '그 린터를 지속적 통합에서 실행하는 방법은 ',
           { a: 'CI에서 명세 린트하기', href: '/articles/lint-specs-in-ci/' },
           '에 있습니다.',

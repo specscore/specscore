@@ -1,6 +1,7 @@
 import type { Block, LintArticleCopy } from '../../types.ts';
 import { lintHref, templateHref } from '../../facts.ts';
 import { relatedLabel as templateLabel } from '../template/zh-tw.ts';
+import { relatedLabel as agentsLabel } from '../agents/zh-tw.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -359,6 +360,7 @@ export const lint: LintArticleCopy = {
   },
   relatedTitle: '相關',
   related: [
+    { href: '/articles/claude-code-specs/', label: agentsLabel },
     { href: templateHref.article, label: templateLabel },
     { href: lintHref.acceptanceArticle, label: '寫出 AI 代理驗得過的驗收標準' },
     { href: lintHref.earsArticle, label: 'EARS 需求語法詳解與範例' },

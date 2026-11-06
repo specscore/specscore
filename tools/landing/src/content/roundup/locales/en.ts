@@ -476,6 +476,13 @@ export const page: RoundupPage = {
           '.',
         ],
         [
+          'Claude Code spec-driven development and Cursor specs — the feature file, the agent instruction file, and ',
+          { c: 'specscore spec lint' },
+          ' in the loop — are in ',
+          { a: 'spec-driven development with Claude Code and Cursor', href: '/articles/claude-code-specs/' },
+          '.',
+        ],
+        [
           'In this website’s repository, ',
           t('dogfood.yml', href.dogfood, 'us'),
           ' installs that CLI and runs ',

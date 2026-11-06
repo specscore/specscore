@@ -1,7 +1,8 @@
 import type { LangCode } from '../../lib/languages.ts';
-import { acceptanceHref, earsHref, lintHref, patternExample, patternForm, patternOrder, templateHref } from './facts.ts';
+import { acceptanceHref, agentsHref, earsHref, lintHref, patternExample, patternForm, patternOrder, templateHref } from './facts.ts';
 import type {
   AcceptanceArticleCopy,
+  AgentsArticleCopy,
   ArticleLocale,
   EarsArticleCopy,
   IndexCopy,
@@ -66,6 +67,10 @@ export function lintCopy(code: LangCode): LintArticleCopy {
 
 export function templateCopy(code: LangCode): TemplateArticleCopy {
   return articleLocale(code).template;
+}
+
+export function agentsCopy(code: LangCode): AgentsArticleCopy {
+  return articleLocale(code).agents;
 }
 
 export interface PatternView {
@@ -165,6 +170,39 @@ export function templateSourcesFor(copy: TemplateArticleCopy): { href: string; l
     { href: templateHref.tmRepo, label: label.tmRepo },
     { href: templateHref.specKitDocs, label: label.specKitDocs },
     { href: templateHref.tools, label: label.tools },
+  ];
+}
+
+export function agentsSourcesFor(copy: AgentsArticleCopy): { href: string; label: string }[] {
+  const label = copy.sourceLabel;
+  return [
+    { href: agentsHref.claudeOverview, label: label.claudeOverview },
+    { href: agentsHref.cursorRules, label: label.cursorRules },
+    { href: agentsHref.agentSetup, label: label.agentSetup },
+    { href: agentsHref.cliReadme, label: label.cliReadme },
+    { href: agentsHref.cliRepo, label: label.cli },
+    { href: agentsHref.cliLicense, label: label.cliLicense },
+    { href: agentsHref.formatRepo, label: label.formatRepo },
+    { href: agentsHref.formatLicense, label: label.formatLicense },
+    { href: agentsHref.dogfood, label: label.dogfood },
+    { href: agentsHref.pluginRepo, label: label.pluginRepo },
+    { href: agentsHref.pluginLicense, label: label.pluginLicense },
+    { href: agentsHref.pluginSkills, label: label.pluginSkills },
+    { href: agentsHref.pluginReadme, label: label.pluginReadme },
+    { href: agentsHref.studioRepo, label: label.studioRepo },
+    { href: agentsHref.studioLicense, label: label.studioLicense },
+    { href: agentsHref.studioReadme, label: label.studioReadme },
+    { href: agentsHref.cliSkills, label: label.cliSkills },
+    { href: agentsHref.specStudio, label: label.specStudio },
+    { href: agentsHref.templateArticle, label: label.templateArticle },
+    { href: agentsHref.lintArticle, label: label.lintArticle },
+    { href: agentsHref.feature, label: label.feature },
+    { href: agentsHref.acceptance, label: label.acceptance },
+    { href: agentsHref.openSpecCli, label: label.openSpecCli },
+    { href: agentsHref.openSpecRepo, label: label.openSpecRepo },
+    { href: agentsHref.tmRepo, label: label.tmRepo },
+    { href: agentsHref.specKitDocs, label: label.specKitDocs },
+    { href: agentsHref.tools, label: label.tools },
   ];
 }
 

@@ -1,6 +1,7 @@
 import type { Block, LintArticleCopy } from '../../types.ts';
 import { lintHref, templateHref } from '../../facts.ts';
 import { relatedLabel as templateLabel } from '../template/pt-br.ts';
+import { relatedLabel as agentsLabel } from '../agents/pt-br.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -361,6 +362,7 @@ export const lint: LintArticleCopy = {
   },
   relatedTitle: 'Relacionados',
   related: [
+    { href: '/articles/claude-code-specs/', label: agentsLabel },
     { href: templateHref.article, label: templateLabel },
     { href: lintHref.acceptanceArticle, label: 'Como escrever critérios de aceitação que um agente de IA possa verificar' },
     { href: lintHref.earsArticle, label: 'Sintaxe de requisitos EARS explicada, com exemplos' },

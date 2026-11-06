@@ -492,6 +492,13 @@ export const page: RoundupPage = {
           '。',
         ],
         [
+          '用 Claude Code 和 Cursor 做規範驅動開發：功能檔案、代理指令檔，以及迴圈中的 ',
+          { c: 'specscore spec lint' },
+          '，見 ',
+          { a: '用 Claude Code 和 Cursor 做規範驅動開發', href: '/articles/claude-code-specs/' },
+          '。',
+        ],
+        [
           '如何在持續整合裡執行這個 linter，見',
           { a: '在 CI 中 lint 規格', href: '/articles/lint-specs-in-ci/' },
           '。',

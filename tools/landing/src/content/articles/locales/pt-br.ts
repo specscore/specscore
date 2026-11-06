@@ -2,6 +2,7 @@ import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy } fro
 import { acceptanceHref, earsHref, lintHref, templateHref } from '../facts.ts';
 import { lint, indexCard, relatedLabel } from './lint/pt-br.ts';
 import { template, indexCard as templateCard, relatedLabel as templateLabel } from './template/pt-br.ts';
+import { agents, indexCard as agentsCard } from './agents/pt-br.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -730,6 +731,7 @@ export const locale: ArticleLocale = {
   acceptance,
   lint,
   template,
+  agents,
   index: {
     metaTitle: 'Artigos | SpecScore',
     metaDescription: "Artigos sobre notação de requisitos e desenvolvimento guiado por especificação, incluindo a sintaxe de requisitos EARS e o registro em SpecScore. Artigos do SpecScore sobre como escrever critérios de aceitação, Given/When/Then e critérios de aceitação testáveis para agentes de código com IA.",
@@ -747,6 +749,7 @@ export const locale: ArticleLocale = {
     ],
     listLabel: 'Publicados',
     articles: [
+      agentsCard,
       templateCard,
       indexCard,
       {

@@ -2,6 +2,7 @@ import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy } fro
 import { acceptanceHref, earsHref, lintHref, templateHref } from '../facts.ts';
 import { lint, indexCard, relatedLabel } from './lint/ja.ts';
 import { template, indexCard as templateCard, relatedLabel as templateLabel } from './template/ja.ts';
+import { agents, indexCard as agentsCard } from './agents/ja.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -722,6 +723,7 @@ export const locale: ArticleLocale = {
   acceptance,
   lint,
   template,
+  agents,
   index: {
     metaTitle: '記事 | SpecScore',
     metaDescription: "要件記法と仕様駆動開発の記事。EARS要件構文と、要件をSpecScoreへ書く方法を含む。 受け入れ基準の書き方、Given/When/Then、AIコーディングエージェント向けの検証できる受け入れ基準についての SpecScore の記事です。",
@@ -739,6 +741,7 @@ export const locale: ArticleLocale = {
     ],
     listLabel: '公開済み',
     articles: [
+      agentsCard,
       templateCard,
       indexCard,
       {

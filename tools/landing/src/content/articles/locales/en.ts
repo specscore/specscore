@@ -1,6 +1,7 @@
 import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy, LintArticleCopy } from '../types.ts';
 import { acceptanceHref, earsHref, lintHref, templateHref } from '../facts.ts';
 import { indexCard as templateCard, relatedLabel as templateLabel, template } from './template/en.ts';
+import { agents, indexCard as agentsCard, relatedLabel as agentsLabel } from './agents/en.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -1074,6 +1075,7 @@ const lint: LintArticleCopy = {
   },
   relatedTitle: 'Related',
   related: [
+    { href: '/articles/claude-code-specs/', label: agentsLabel },
     { href: templateHref.article, label: templateLabel },
     { href: lintHref.acceptanceArticle, label: 'How to write acceptance criteria AI agents can verify' },
     { href: lintHref.earsArticle, label: 'EARS requirements syntax explained, with examples' },
@@ -1096,10 +1098,11 @@ export const locale: ArticleLocale = {
   acceptance,
   lint,
   template,
+  agents,
   index: {
     metaTitle: 'Articles | SpecScore',
     metaDescription:
-      'SpecScore articles: a PRD template in Markdown, EARS requirements syntax, how to write acceptance criteria, and how to lint specs in CI.',
+      'SpecScore articles: Claude Code spec-driven development and Cursor specs, a PRD template in Markdown, EARS requirements syntax, how to write acceptance criteria, and how to lint specs in CI.',
     h1: 'Articles',
     hero: [
 'Articles here explain a requirements notation or a spec-driven development (SDD) practice, then show the same idea as a SpecScore requirement (REQ) that ',
@@ -1114,6 +1117,7 @@ export const locale: ArticleLocale = {
     ],
     listLabel: 'Published',
     articles: [
+      agentsCard,
       templateCard,
       {
         href: '/articles/lint-specs-in-ci/',
