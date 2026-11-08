@@ -639,7 +639,11 @@ pre.terminal.terminal--window::after,
   margin: 0 0 var(--space-3);
 }
 
-/* --- Product film (FilmEmbed.astro, in the hero of Hero.astro / HeroRu.astro) --- */
+/* --- Hero right column on en/ru: smaller illustration above the product film (FilmEmbed.astro) --- */
+  .hero__illustration {
+    width: 46%;
+    margin: 0 auto var(--space-3);
+  }
   .hero__film-caption {
     margin-top: var(--space-2);
     font-size: var(--fs-small);

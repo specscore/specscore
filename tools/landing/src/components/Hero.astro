@@ -2,6 +2,8 @@
 // Section 1 — Hero.
 // Per hero-scene.md: two-column desktop layout, copy left (~45%), score right (~55%).
 // Animation: a quiet settle (~1.7s total), not a theatrical reveal.
+import { Image } from 'astro:assets';
+import heroImage from '../assets/hero.webp';
 import FilmEmbed from './FilmEmbed.astro';
 import HeroGitHubLink from './HeroGitHubLink.astro';
 import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
@@ -31,7 +33,20 @@ import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
       </div>
     </div>
 
-    <div class="hero__art hero__film">
+    <div class="hero__art">
+      <figure
+        class="hero__illustration"
+        aria-label="A SpecScore specification on cream drafting paper: two requirements pass lint (green checks), one fails (red mark)."
+      >
+        <Image
+          src={heroImage}
+          widths={[350, 700, 1050]}
+          sizes="(max-width: 860px) 60vw, 24vw"
+          alt=""
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
       <FilmEmbed
         videoId="dvYYsFzfDlk"
         poster="/film/specscore-specs-that-pass-en.webp"
