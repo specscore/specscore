@@ -2,8 +2,7 @@
 // Section 1 — Hero.
 // Per hero-scene.md: two-column desktop layout, copy left (~45%), score right (~55%).
 // Animation: a quiet settle (~1.7s total), not a theatrical reveal.
-import { Image } from 'astro:assets';
-import heroImage from '../assets/hero.webp';
+import FilmEmbed from './FilmEmbed.astro';
 import HeroGitHubLink from './HeroGitHubLink.astro';
 import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
 ---
@@ -32,19 +31,22 @@ import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
       </div>
     </div>
 
-    <figure
-      class="hero__art"
-      aria-label="A SpecScore specification on cream drafting paper: two requirements pass lint (green checks), one fails (red mark)."
-    >
-      <Image
-        src={heroImage}
-        widths={[700, 1050, 1400]}
-        sizes="(max-width: 860px) 88vw, 52vw"
-        alt=""
-        loading="eager"
-        decoding="async"
+    <div class="hero__art hero__film">
+      <FilmEmbed
+        videoId="dvYYsFzfDlk"
+        poster="/film/specscore-specs-that-pass-en.webp"
+        duration="1:38"
+        lang="en"
+        title="SpecScore: specs that pass"
+        playLabel="Play the 1:38 film: SpecScore — specs that pass"
+        headingId="hero-title"
+        eager
       />
-    </figure>
+      <p class="hero__film-caption">
+        See it in 1:38: lint a spec before the agent writes code, then plan
+        against it. Real <code>specscore</code> CLI output on a demo repo.
+      </p>
+    </div>
   </div>
 </section>
 
