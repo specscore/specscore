@@ -41,7 +41,7 @@ import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
         <Image
           src={heroImage}
           widths={[350, 700, 1050]}
-          sizes="(max-width: 860px) 60vw, 24vw"
+          sizes="(max-width: 860px) 46vw, 24vw"
           alt=""
           loading="eager"
           decoding="async"
@@ -54,10 +54,10 @@ import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
         lang="ru"
         title="SpecScore: спецификации, которые проходят проверку"
         playLabel="Смотреть фильм (1:52): SpecScore — спецификации, которые проходят проверку"
-        headingId="hero-title"
+        headingId="hero-film-caption"
         eager
       />
-      <p class="hero__film-caption">
+      <p id="hero-film-caption" class="hero__film-caption">
         Посмотрите за 1:52: проверьте спецификацию линтером до того, как агент
         напишет код, и планируйте по ней. Реальный вывод CLI
         <code>specscore</code> на демо-репозитории.

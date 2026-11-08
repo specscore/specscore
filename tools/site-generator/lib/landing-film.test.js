@@ -1,5 +1,5 @@
-// The landing (tools/landing, Astro) shows a click-to-load product film under the
-// hero on the English and Russian home pages. These tests check the built pages in
+// The landing (tools/landing, Astro) shows a click-to-load product film in the
+// hero's right column on the English and Russian home pages. These tests check the built pages in
 // public/ (run `sh tools/cf-build.sh` first; CI does) and the click behaviour.
 import test from 'node:test';
 import assert from 'node:assert/strict';

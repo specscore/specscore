@@ -15,7 +15,7 @@ interface Props {
   lang: string; // locale of the label text, e.g. "en", "ru"
   title: string; // film title, also the iframe title
   playLabel: string; // accessible label of the play button
-  headingId: string;
+  headingId: string; // id of the text that describes the film (the hero caption)
   eager?: boolean; // above the fold: load the poster eagerly
 }
 const { videoId, poster, duration, lang, title, playLabel, headingId, eager = false } = Astro.props;
