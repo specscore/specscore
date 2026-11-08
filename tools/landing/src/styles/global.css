@@ -639,19 +639,18 @@ pre.terminal.terminal--window::after,
   margin: 0 0 var(--space-3);
 }
 
-/* --- Product film (FilmEmbed.astro, FilmSection*.astro) --- */
-  .film { background: var(--cream); }
-  .film__inner { max-width: 960px; margin: 0 auto; }
-  .film__title {
-    font-size: var(--fs-h2);
-    margin-bottom: var(--space-1);
+/* --- Hero right column on en/ru: smaller illustration above the product film (FilmEmbed.astro) --- */
+  .hero__illustration {
+    width: 46%;
+    margin: 0 auto var(--space-3);
   }
-  .film__lede {
+  .hero__film-caption {
+    margin-top: var(--space-2);
+    font-size: var(--fs-small);
     color: var(--mid-ink);
-    margin-bottom: var(--space-3);
     text-wrap: pretty;
   }
-  .film__lede code { font-size: 0.95em; }
+  .hero__film-caption code { font-size: 0.95em; }
   .film__figure {
     margin: 0;
     position: relative;

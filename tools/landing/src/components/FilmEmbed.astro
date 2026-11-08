@@ -6,8 +6,8 @@
 // shift) and the button carries the video id as a data attribute. On click,
 // film-embed.ts swaps the button for an iframe on youtube-nocookie.com.
 //
-// Per-locale wrappers (FilmSection.astro, FilmSectionRu.astro) hold the copy;
-// this component holds the structure and styles shared by all of them.
+// Rendered in the hero's right column (Hero.astro, HeroRu.astro), which hold
+// the copy; this component holds the structure. Styles live in global.css.
 interface Props {
   videoId: string;
   poster: string;
@@ -15,9 +15,10 @@ interface Props {
   lang: string; // locale of the label text, e.g. "en", "ru"
   title: string; // film title, also the iframe title
   playLabel: string; // accessible label of the play button
-  headingId: string;
+  headingId: string; // id of the text that describes the film (the hero caption)
+  eager?: boolean; // above the fold: load the poster eagerly
 }
-const { videoId, poster, duration, lang, title, playLabel, headingId } = Astro.props;
+const { videoId, poster, duration, lang, title, playLabel, headingId, eager = false } = Astro.props;
 const watchUrl = `https://youtu.be/${videoId}`;
 ---
 
@@ -35,7 +36,7 @@ const watchUrl = `https://youtu.be/${videoId}`;
       width="1280"
       height="720"
       alt=""
-      loading="lazy"
+      loading={eager ? 'eager' : 'lazy'}
       decoding="async"
     />
     <span class="film__button" aria-hidden="true">

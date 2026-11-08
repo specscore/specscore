@@ -4,6 +4,7 @@
 // Animation: a quiet settle (~1.7s total), not a theatrical reveal.
 import { Image } from 'astro:assets';
 import heroImage from '../assets/hero.webp';
+import FilmEmbed from './FilmEmbed.astro';
 import HeroGitHubLink from './HeroGitHubLink.astro';
 import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
 ---
@@ -32,19 +33,35 @@ import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
       </div>
     </div>
 
-    <figure
-      class="hero__art"
-      aria-label="A SpecScore specification on cream drafting paper: two requirements pass lint (green checks), one fails (red mark)."
-    >
-      <Image
-        src={heroImage}
-        widths={[700, 1050, 1400]}
-        sizes="(max-width: 860px) 88vw, 52vw"
-        alt=""
-        loading="eager"
-        decoding="async"
+    <div class="hero__art">
+      <figure
+        class="hero__illustration"
+        aria-label="A SpecScore specification on cream drafting paper: two requirements pass lint (green checks), one fails (red mark)."
+      >
+        <Image
+          src={heroImage}
+          widths={[350, 700, 1050]}
+          sizes="(max-width: 860px) 46vw, 24vw"
+          alt=""
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
+      <FilmEmbed
+        videoId="dvYYsFzfDlk"
+        poster="/film/specscore-specs-that-pass-en.webp"
+        duration="1:38"
+        lang="en"
+        title="SpecScore: specs that pass"
+        playLabel="Play the 1:38 film: SpecScore — specs that pass"
+        headingId="hero-film-caption"
+        eager
       />
-    </figure>
+      <p id="hero-film-caption" class="hero__film-caption">
+        See it in 1:38: lint a spec before the agent writes code, then plan
+        against it. Real <code>specscore</code> CLI output on a demo repo.
+      </p>
+    </div>
   </div>
 </section>
 

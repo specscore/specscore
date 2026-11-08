@@ -4,6 +4,7 @@
 // Product names (SpecStudio, SpecScore, Claude Code, GitHub) stay English.
 import { Image } from 'astro:assets';
 import heroImage from '../assets/hero.webp';
+import FilmEmbed from './FilmEmbed.astro';
 import HeroGitHubLink from './HeroGitHubLink.astro';
 import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
 ---
@@ -32,19 +33,36 @@ import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
       </div>
     </div>
 
-    <figure
-      class="hero__art"
-      aria-label="Спецификация SpecScore на бумаге кремового цвета: два требования проходят линтер (зелёные галочки), одно не проходит (красная отметка)."
-    >
-      <Image
-        src={heroImage}
-        widths={[700, 1050, 1400]}
-        sizes="(max-width: 860px) 88vw, 52vw"
-        alt=""
-        loading="eager"
-        decoding="async"
+    <div class="hero__art">
+      <figure
+        class="hero__illustration"
+        aria-label="Спецификация SpecScore на бумаге кремового цвета: два требования проходят линтер (зелёные галочки), одно не проходит (красная отметка)."
+      >
+        <Image
+          src={heroImage}
+          widths={[350, 700, 1050]}
+          sizes="(max-width: 860px) 46vw, 24vw"
+          alt=""
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
+      <FilmEmbed
+        videoId="VBTWMyOfkLs"
+        poster="/film/specscore-specs-that-pass-ru.webp"
+        duration="1:52"
+        lang="ru"
+        title="SpecScore: спецификации, которые проходят проверку"
+        playLabel="Смотреть фильм (1:52): SpecScore — спецификации, которые проходят проверку"
+        headingId="hero-film-caption"
+        eager
       />
-    </figure>
+      <p id="hero-film-caption" class="hero__film-caption">
+        Посмотрите за 1:52: проверьте спецификацию линтером до того, как агент
+        напишет код, и планируйте по ней. Реальный вывод CLI
+        <code>specscore</code> на демо-репозитории.
+      </p>
+    </div>
   </div>
 </section>
 
