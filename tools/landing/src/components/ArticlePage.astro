@@ -3,13 +3,15 @@ import AcceptanceArticle from './AcceptanceArticle.astro';
 import AgentsArticle from './AgentsArticle.astro';
 import EarsArticle from './EarsArticle.astro';
 import LintArticle from './LintArticle.astro';
+import ManageArticle from './ManageArticle.astro';
 import TemplateArticle from './TemplateArticle.astro';
 
 const path = Astro.url.pathname;
+const manage = path.includes('/articles/spec-management');
 const agents = path.includes('/articles/claude-code-specs');
 const template = path.includes('/articles/feature-spec-template');
 const lint = path.includes('/articles/lint-specs-in-ci');
 const ears = path.includes('/articles/ears-requirements');
 ---
 
-{agents ? <AgentsArticle /> : template ? <TemplateArticle /> : lint ? <LintArticle /> : ears ? <EarsArticle /> : <AcceptanceArticle />}
+{manage ? <ManageArticle /> : agents ? <AgentsArticle /> : template ? <TemplateArticle /> : lint ? <LintArticle /> : ears ? <EarsArticle /> : <AcceptanceArticle />}

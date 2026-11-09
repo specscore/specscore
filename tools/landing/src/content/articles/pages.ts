@@ -1,5 +1,5 @@
 import type { LangCode } from '../../lib/languages.ts';
-import { acceptanceHref, agentsHref, earsHref, lintHref, patternExample, patternForm, patternOrder, templateHref } from './facts.ts';
+import { acceptanceHref, agentsHref, earsHref, lintHref, manageHref, patternExample, patternForm, patternOrder, templateHref } from './facts.ts';
 import type {
   AcceptanceArticleCopy,
   AgentsArticleCopy,
@@ -7,6 +7,7 @@ import type {
   EarsArticleCopy,
   IndexCopy,
   LintArticleCopy,
+  ManageArticleCopy,
   PatternId,
   TemplateArticleCopy,
 } from './types.ts';
@@ -71,6 +72,10 @@ export function templateCopy(code: LangCode): TemplateArticleCopy {
 
 export function agentsCopy(code: LangCode): AgentsArticleCopy {
   return articleLocale(code).agents;
+}
+
+export function manageCopy(code: LangCode): ManageArticleCopy {
+  return articleLocale(code).manage;
 }
 
 export interface PatternView {
@@ -203,6 +208,35 @@ export function agentsSourcesFor(copy: AgentsArticleCopy): { href: string; label
     { href: agentsHref.tmRepo, label: label.tmRepo },
     { href: agentsHref.specKitDocs, label: label.specKitDocs },
     { href: agentsHref.tools, label: label.tools },
+  ];
+}
+
+export function manageSourcesFor(copy: ManageArticleCopy): { href: string; label: string }[] {
+  const label = copy.sourceLabel;
+  return [
+    { href: manageHref.specTree, label: label.specTree },
+    { href: manageHref.featureStatus, label: label.featureStatus },
+    { href: manageHref.planSnapshots, label: label.planSnapshots },
+    { href: manageHref.formatRepo, label: label.formatRepo },
+    { href: manageHref.formatLicense, label: label.formatLicense },
+    { href: manageHref.cliRepo, label: label.cli },
+    { href: manageHref.cliLicense, label: label.cliLicense },
+    { href: manageHref.specGo39, label: label.specGo39 },
+    { href: manageHref.specGo55, label: label.specGo55 },
+    { href: manageHref.lintRules39, label: label.lintRules39 },
+    { href: manageHref.lintRules55, label: label.lintRules55 },
+    { href: manageHref.dogfood, label: label.dogfood },
+    { href: manageHref.validators, label: label.validators },
+    { href: manageHref.lintArticle, label: label.lintArticle },
+    { href: manageHref.earsArticle, label: label.earsArticle },
+    { href: manageHref.acceptanceArticle, label: label.acceptanceArticle },
+    { href: manageHref.templateArticle, label: label.templateArticle },
+    { href: manageHref.feature, label: label.feature },
+    { href: manageHref.plan, label: label.plan },
+    { href: manageHref.specKitSdd, label: label.specKitSdd },
+    { href: manageHref.openSpecCli, label: label.openSpecCli },
+    { href: manageHref.openSpecRepo, label: label.openSpecRepo },
+    { href: manageHref.tools, label: label.tools },
   ];
 }
 

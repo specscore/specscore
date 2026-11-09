@@ -2,6 +2,7 @@ import type { AcceptanceArticleCopy, ArticleLocale, Block, EarsArticleCopy, Lint
 import { acceptanceHref, earsHref, lintHref, templateHref } from '../facts.ts';
 import { indexCard as templateCard, relatedLabel as templateLabel, template } from './template/en.ts';
 import { agents, indexCard as agentsCard, relatedLabel as agentsLabel } from './agents/en.ts';
+import { indexCard as manageCard, manage, relatedLabel as manageLabel } from './manage/en.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -1074,7 +1075,8 @@ const lint: LintArticleCopy = {
     tools: 'Spec-driven development tools',
   },
   relatedTitle: 'Related',
-  related: [
+    related: [
+    { href: '/articles/spec-management/', label: manageLabel },
     { href: '/articles/claude-code-specs/', label: agentsLabel },
     { href: templateHref.article, label: templateLabel },
     { href: lintHref.acceptanceArticle, label: 'How to write acceptance criteria AI agents can verify' },
@@ -1099,10 +1101,11 @@ export const locale: ArticleLocale = {
   lint,
   template,
   agents,
+  manage,
   index: {
     metaTitle: 'Articles | SpecScore',
     metaDescription:
-      'SpecScore articles: Claude Code spec-driven development and Cursor specs, a PRD template in Markdown, EARS requirements syntax, how to write acceptance criteria, and how to lint specs in CI.',
+      'SpecScore articles: spec management for specifications stored as Markdown, Claude Code spec-driven development and Cursor specs, a PRD template in Markdown, EARS requirements syntax, how to write acceptance criteria, and how to lint specs in CI.',
     h1: 'Articles',
     hero: [
 'Articles here explain a requirements notation or a spec-driven development (SDD) practice, then show the same idea as a SpecScore requirement (REQ) that ',
@@ -1117,6 +1120,7 @@ export const locale: ArticleLocale = {
     ],
     listLabel: 'Published',
     articles: [
+      manageCard,
       agentsCard,
       templateCard,
       {

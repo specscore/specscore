@@ -20,8 +20,8 @@ import {
   planReadme,
   taskReadme,
 } from './facts.ts';
-import { acceptanceSourcesFor, agentsSourcesFor, earsSourcesFor, lintSourcesFor, patternsFor, templateSourcesFor } from './pages.ts';
-import type { AcceptanceArticleCopy, AgentsArticleCopy, Block, EarsArticleCopy, IndexCopy, Inline, LintArticleCopy, TemplateArticleCopy } from './types.ts';
+import { acceptanceSourcesFor, agentsSourcesFor, earsSourcesFor, lintSourcesFor, manageSourcesFor, patternsFor, templateSourcesFor } from './pages.ts';
+import type { AcceptanceArticleCopy, AgentsArticleCopy, Block, EarsArticleCopy, IndexCopy, Inline, LintArticleCopy, ManageArticleCopy, TemplateArticleCopy } from './types.ts';
 
 function isLanding(href: string): boolean {
   return localizedPrefixes.some((prefix) => href === prefix || href.startsWith(prefix));
@@ -340,6 +340,46 @@ export function renderAgentsMarkdown(copy: AgentsArticleCopy, locale: LangCode, 
 
   lines.push(`## ${copy.sourcesTitle}`, '', copy.sourcesNote, '');
   for (const source of agentsSourcesFor(copy)) lines.push(`- [${source.label}](${linked(source.href, locale)})`);
+  lines.push('', `## ${copy.relatedTitle}`, '');
+  for (const link of copy.related) lines.push(`- [${link.label}](${abs(link.href, locale)})`);
+  lines.push('');
+  return lines.join('\n');
+}
+
+export function renderManageMarkdown(copy: ManageArticleCopy, locale: LangCode, canonical: string): string {
+  const lines: string[] = [
+    `# ${copy.h1}`,
+    '',
+    `Canonical: ${canonical}`,
+    '',
+    copy.updated,
+    '',
+    block(copy.hero, locale),
+    '',
+    `## ${copy.storeTitle}`,
+    '',
+  ];
+  for (const paragraph of copy.store) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.versionTitle}`, '');
+  for (const paragraph of copy.version) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.reviewTitle}`, '');
+  for (const paragraph of copy.review) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.currentTitle}`, '');
+  for (const paragraph of copy.current) lines.push(block(paragraph, locale), '');
+  lines.push(`### ${copy.workflowCaption}`, '', fence('yaml', dogfoodLintSteps), '');
+  for (const paragraph of copy.currentAfter) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.compareTitle}`, '');
+  for (const paragraph of copy.compare) lines.push(block(paragraph, locale), '');
+
+  lines.push(`## ${copy.faqTitle}`, '');
+  for (const faq of copy.faqs) lines.push(`### ${faq.q}`, '', block(faq.a, locale), '');
+
+  lines.push(`## ${copy.sourcesTitle}`, '', copy.sourcesNote, '');
+  for (const source of manageSourcesFor(copy)) lines.push(`- [${source.label}](${linked(source.href, locale)})`);
   lines.push('', `## ${copy.relatedTitle}`, '');
   for (const link of copy.related) lines.push(`- [${link.label}](${abs(link.href, locale)})`);
   lines.push('');

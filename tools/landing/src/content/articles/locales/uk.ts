@@ -3,6 +3,7 @@ import { acceptanceHref, earsHref, lintHref, templateHref } from '../facts.ts';
 import { lint, indexCard, relatedLabel } from './lint/uk.ts';
 import { template, indexCard as templateCard, relatedLabel as templateLabel } from './template/uk.ts';
 import { agents, indexCard as agentsCard } from './agents/uk.ts';
+import { indexCard as manageCard, manage } from './manage/uk.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -723,6 +724,7 @@ export const locale: ArticleLocale = {
   lint,
   template,
   agents,
+  manage,
   index: {
     metaTitle: 'Статті | SpecScore',
     metaDescription: "Статті про нотацію вимог і розробку за специфікаціями, зокрема синтаксис вимог EARS і запис вимоги в SpecScore. Статті SpecScore про те, як писати критерії приймання, про Given/When/Then і про перевірювані критерії приймання для ШІ-агентів програмування.",
