@@ -22,6 +22,9 @@ const content = ru ? {
   chooseTitle: 'Как выбрать',
   choose: 'Нужен проверяемый формат и линтер для CI — попробуйте SpecScore. Нужен пошаговый процесс для агента — сравните Spec Kit и OpenSpec. Хотите создавать требования, дизайн и задачи в IDE — изучите Kiro. Для планирования с агентами посмотрите BMAD; для управления навыками — Tessl; для задач из PRD — Task Master AI. Для короткого документа может хватить обычного Markdown.',
   faqTitle: 'Частые вопросы',
+  finalTitle: 'Почему стоит выбрать SpecScore вместо OpenSpec',
+  final: 'OpenSpec помогает согласовать отдельное изменение с ИИ-агентом. Выбирайте SpecScore, если спецификация должна оставаться проверяемым артефактом проекта: CLI находит ошибки в структуре, ссылках и статусах, а аннотации помогают найти код, связанный с требованием. Запускайте эту проверку в CI, чтобы ошибки обнаруживались до слияния изменений. Если процесс OpenSpec уже подходит вашей команде, его можно сохранить и добавить проверки SpecScore к существующим спецификациям.',
+  finalCta: 'Установить SpecScore CLI',
   faqs: [
     { q: 'Есть ли бесплатная альтернатива OpenSpec?', a: 'Да. Исходный код GitHub Spec Kit, BMAD Method и SpecScore доступен публично. Обычный Markdown также не требует отдельного продукта. Условия использования каждого инструмента приведены в таблице выше.' },
     { q: 'OpenSpec vs Spec Kit: в чём разница?', a: 'OpenSpec организует изменения в папках с предложением, спецификациями и задачами и проверяет их структуру. GitHub Spec Kit проводит агента через этапы Specify, Plan, Tasks и Implement, оставляя Markdown-артефакты в каталоге функции.' },
@@ -33,7 +36,7 @@ const content = ru ? {
   home: 'что такое SpecScore',
   baseline: { format: 'Markdown: proposal.md, specs/, design.md, tasks.md', agent: 'Команды для разных ИИ-ассистентов', license: 'Да: MIT', where: 'openspec/changes/ в репозитории' },
   sections: [
-    { slug: 'specscore', name: 'SpecScore', what: 'Открытый формат Markdown с YAML-полями и CLI, который проверяет структуру, ссылки и статусы спецификаций.', diff: 'Вместо папки изменения и команд агента в центре внимания — сам формат спецификации и его проверка в CI.', best: 'Командам, которым нужен файл спецификации, способный пройти или не пройти проверку CI.', format: 'Markdown + YAML', agent: 'CLI для любого агента; навыки для Claude Code', license: 'Да: формат CC BY 4.0', licenseUrl: href.formatLicense, extraLicense: href.cliLicense, where: 'Дерево spec/ в репозитории' },
+    { slug: 'specscore', name: 'SpecScore', what: 'Открытый формат Markdown с YAML-полями и CLI, который проверяет структуру, ссылки и статусы спецификаций.', diff: 'OpenSpec проверяет структуру своих изменений и спецификаций. SpecScore проверяет обязательные разделы, ссылки и статусы жизненного цикла; аннотации связывают требования с кодом.', best: 'Выбирайте SpecScore, если ошибки в структуре, ссылках или статусах должны останавливать CI и вам нужно находить код, связанный с требованием.', format: 'Markdown + YAML', agent: 'CLI для любого агента; навыки для Claude Code', license: 'Да: формат CC BY 4.0', licenseUrl: href.formatLicense, extraLicense: href.cliLicense, where: 'Дерево spec/ в репозитории' },
     { slug: 'spec-kit', name: 'GitHub Spec Kit', what: 'Набор команд и шаблонов, который проводит агента через спецификацию, план и задачи.', diff: 'Задаёт этапы работы агента; OpenSpec организует отдельные папки изменений и их проверку.', best: 'Командам, которым нужен общий пошаговый процесс для агента.', format: 'spec.md, plan.md, tasks.md', agent: 'Команды для кодирующего агента', license: 'Да: MIT', licenseUrl: href.specKitLicense, where: 'Каталог функции в specs/' },
     { slug: 'kiro', name: 'Kiro', what: 'Среда разработки AWS с IDE, CLI и веб-приложением, которая создаёт требования, дизайн и задачи.', diff: 'Работа происходит в продукте Kiro; OpenSpec — фреймворк с файлами и командами для разных агентов.', best: 'Тем, кто хочет составлять три документа внутри среды разработки.', format: 'requirements.md (EARS), design.md, tasks.md', agent: 'Встроенный агент Kiro', license: 'Нет: условия AWS для IDE и CLI', licenseUrl: href.kiroLicense, where: 'Файлы спецификации проекта' },
     { slug: 'bmad-method', name: 'BMAD Method', what: 'Гибкий метод разработки с ИИ-агентами, который создаёт брифы, спецификации и архитектуру.', diff: 'Охватывает цикл планирования и роли агентов, а не только папки изменений.', best: 'Командам, которым нужен метод работы с агентами разного масштаба.', format: 'Брифы, спецификации, архитектура', agent: 'Навыки и роли агентов BMAD', license: 'Да: MIT', licenseUrl: href.bmadLicense, where: 'Артефакты проекта' },
@@ -54,6 +57,9 @@ const content = ru ? {
   chooseTitle: 'How to choose',
   choose: 'For a lintable specification format in CI, try SpecScore. For a staged agent workflow, compare Spec Kit with OpenSpec. For drafting requirements, design and tasks in an IDE, look at Kiro. BMAD covers a wider agent method; Tessl manages skills; Task Master turns a PRD into tasks. A small note may need only plain Markdown.',
   faqTitle: 'Frequently asked questions',
+  finalTitle: 'Why choose SpecScore over OpenSpec',
+  final: 'OpenSpec helps you agree on an individual change with an AI agent. Choose SpecScore when the specification must remain a checkable project artifact: its CLI catches broken structure, references and lifecycle status, while source annotations help you find code linked to a requirement. Run those checks in CI so errors surface before a change is merged. If OpenSpec’s workflow already suits your team, you can keep it and add SpecScore checks to the specs you have.',
+  finalCta: 'Install the SpecScore CLI',
   faqs: [
     { q: 'Is there a free OpenSpec alternative?', a: 'Yes. GitHub Spec Kit, BMAD Method and SpecScore have public source repositories. Plain Markdown needs no separate product. The table above links to each tool’s terms.' },
     { q: 'OpenSpec vs Spec Kit: what is the difference?', a: 'OpenSpec organizes changes into folders with a proposal, specs and tasks, and validates their structure. GitHub Spec Kit leads an agent through Specify, Plan, Tasks and Implement, producing Markdown artifacts in a feature directory.' },
@@ -65,7 +71,7 @@ const content = ru ? {
   home: 'what SpecScore is',
   baseline: { format: 'Markdown: proposal.md, specs/, design.md, tasks.md', agent: 'Commands for multiple AI assistants', license: 'Yes: MIT', where: 'openspec/changes/ in the repository' },
   sections: [
-    { slug: 'specscore', name: 'SpecScore', what: 'An open Markdown and YAML specification format with a CLI that checks structure, references and lifecycle status.', diff: 'It centers the specification artifact and its CI checks rather than change folders and agent commands.', best: 'Teams that need a specification file to pass or fail a CI check.', format: 'Markdown + YAML', agent: 'CLI usable by any agent; Claude Code skills', license: 'Yes: format CC BY 4.0', licenseUrl: href.formatLicense, extraLicense: href.cliLicense, where: 'spec/ tree in the repository' },
+    { slug: 'specscore', name: 'SpecScore', what: 'An open Markdown and YAML specification format with a CLI that checks structure, references and lifecycle status.', diff: 'OpenSpec validates the structure of its changes and specs. SpecScore checks required sections, references and lifecycle status; source annotations link requirements to code.', best: 'Choose SpecScore when broken structure, links or statuses should fail CI and you need to find code linked to a requirement.', format: 'Markdown + YAML', agent: 'CLI usable by any agent; Claude Code skills', license: 'Yes: format CC BY 4.0', licenseUrl: href.formatLicense, extraLicense: href.cliLicense, where: 'spec/ tree in the repository' },
     { slug: 'spec-kit', name: 'GitHub Spec Kit', what: 'A toolkit of commands and templates that guides an agent through a spec, plan and tasks.', diff: 'It defines agent workflow stages; OpenSpec organizes and validates individual change folders.', best: 'Teams that want a shared staged process for an agent.', format: 'spec.md, plan.md, tasks.md', agent: 'Commands for coding agents', license: 'Yes: MIT', licenseUrl: href.specKitLicense, where: 'Feature directory under specs/' },
     { slug: 'kiro', name: 'Kiro', what: 'An AWS development environment with an IDE, CLI and web app that drafts requirements, design and tasks.', diff: 'The work happens in Kiro’s product; OpenSpec is a file and command framework for multiple agents.', best: 'People who want to draft those three files in a development environment.', format: 'requirements.md (EARS), design.md, tasks.md', agent: 'Built-in Kiro agent', license: 'No: AWS terms for IDE and CLI', licenseUrl: href.kiroLicense, where: 'Project specification files' },
     { slug: 'bmad-method', name: 'BMAD Method', what: 'An agile method for AI-driven development that produces briefs, specifications and architecture.', diff: 'It covers planning stages and agent roles beyond a single change folder.', best: 'Teams wanting an agent method sized to the change.', format: 'Briefs, specs, architecture', agent: 'BMAD agent skills and roles', license: 'Yes: MIT', licenseUrl: href.bmadLicense, where: 'Project artifacts' },
@@ -145,6 +151,12 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
       <h2 id="faq-title" class="section-title">{content.faqTitle}</h2>
       {content.faqs.map((faq) => <div class="faq-item"><h2 class="faq-item__q">{faq.q}</h2><div class="faq-item__a"><p>{faq.a}</p></div></div>)}
     </div></section>
+
+    <section class="section recommendation" aria-labelledby="recommendation-title"><div class="section-inner section-inner--prose">
+      <h2 id="recommendation-title" class="section-title">{content.finalTitle}</h2>
+      <p class="prose-p">{content.final}</p>
+      <p class="prose-p"><a href={`${prefix}/cli/install/`} class="xref">{content.finalCta}</a>.</p>
+    </div></section>
   </main>
   <Footer />
 </BaseLayout>
@@ -164,4 +176,5 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
   .faq-item { border-top: 1px solid var(--hairline); padding: var(--space-2) 0; }
   .faq-item__q { font-size: 1.125rem; margin-bottom: var(--space-1); }
   .faq-item__a { color: var(--mid-ink); line-height: 1.65; }
+  .recommendation { background: var(--cream-2); }
 </style>
