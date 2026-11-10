@@ -105,13 +105,17 @@ async function build() {
     const { markdown: mermaidRendered, hasMermaid } = renderMermaidBlocks(htmlMarkdown);
 
     // 3. Render markdown to HTML
-    const htmlContent = renderMarkdownToHtml(mermaidRendered);
+    const renderedContent = renderMarkdownToHtml(mermaidRendered);
+    const htmlContent = page.slug.endsWith('about/tech-stack')
+      ? `<nav aria-label="Breadcrumb"><a href="/${page.locale === 'en' ? '' : `${page.locale}/`}">SpecScore</a> / ${page.title}</nav>\n${renderedContent}`
+      : renderedContent;
 
     // 4. Inject into template (Mermaid script loaded only on pages with diagrams)
     const htmlPage = injectIntoTemplate(template, {
       title: page.title,
       content: htmlContent,
       slug: page.slug,
+      locale: page.locale || 'en',
       sidebarGroups: config.sidebarGroups,
       eyebrow: page.navGroup || '',
       hasMermaid,

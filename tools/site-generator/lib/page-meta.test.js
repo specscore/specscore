@@ -31,6 +31,13 @@ describe('canonical URLs', () => {
     assert.equal(publicHrefForSlug('docs'), '/docs/');
     assert.equal(publicHrefForSlug('blog'), '/blog/');
   });
+
+  it('writes every localized tech stack route as a directory index', () => {
+    for (const slug of ['about/tech-stack', 'ru/about/tech-stack', 'pt-br/about/tech-stack']) {
+      assert.equal(htmlOutputRelative(slug), `${slug}/index.html`);
+      assert.equal(canonicalUrlForSlug(slug), `https://specscore.md/${slug}/`);
+    }
+  });
 });
 
 describe('descriptionFromMarkdown', () => {
@@ -86,6 +93,25 @@ describe('head tags', () => {
     assert.match(tags, /hreflang="en"/);
     assert.match(tags, /hreflang="x-default"/);
     assert.equal((tags.match(/feature-specification/g) || []).length, 2);
+  });
+
+  it('advertises all translated tech stack pages', () => {
+    const tags = hreflangLinkTags('https://specscore.md/about/tech-stack/', 'about/tech-stack');
+    assert.match(tags, /hreflang="ru" href="https:\/\/specscore\.md\/ru\/about\/tech-stack\/"/);
+    assert.match(tags, /hreflang="pt-BR"/);
+    assert.equal((tags.match(/rel="alternate"/g) || []).length, 15);
+  });
+
+  it('marks the localized tech stack page as AboutPage', () => {
+    const script = jsonLdScript({
+      slug: 'ru/about/tech-stack',
+      title: 'Технологии SpecScore',
+      content: '<h1>Технологии SpecScore</h1>',
+      canonical: 'https://specscore.md/ru/about/tech-stack/',
+    });
+    assert.match(script, /"@type":"AboutPage"/);
+    assert.match(script, /"inLanguage":"ru"/);
+    assert.match(script, /"item":"https:\/\/specscore\.md\/ru\/"/);
   });
 
   it('builds TechArticle JSON-LD from the visible heading and description', () => {
