@@ -25,6 +25,7 @@ import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
 import { chrome } from '../content/compare/chrome.ts';
 import { compareMdHref } from '../content/compare/catalog.ts';
 import { pages } from '../content/compare/pages.ts';
+import { alternativeSlugs, type AlternativeSlug } from '../content/alternatives.ts';
 
 const locale = localeFromPath(Astro.url.pathname) as LangCode;
 const ui = chrome[locale];
@@ -65,6 +66,7 @@ const mdHref = compareMdHref(locale, page.slug);
         <p class="hero__breadcrumb"><a href={localeHref(locale, '/vs/')} class="xref">{ui.breadcrumb}</a></p>
         <h1 id="hero-title" class="hero__headline">{page.h1}</h1>
         <p class="hero__sub"><Inlines parts={page.hero} /></p>
+        {(locale === 'en' || locale === 'ru') && alternativeSlugs.includes(slug as AlternativeSlug) && <p class="hero__sub"><a href={localeHref(locale, `/alternatives/${slug}/`)} class="xref">{locale === 'ru' ? `Аналоги ${page.competitor} в 2026 году` : `${page.competitor} alternatives in 2026`}</a></p>}
         <p class="page-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence[locale]}</time></p>
       </div>
     </section>

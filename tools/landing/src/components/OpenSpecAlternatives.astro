@@ -85,7 +85,7 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
 
 <BaseLayout title={content.title} description={content.description} canonical={`https://specscore.md${url}`} lang={ru ? 'ru' : 'en'}>
   <SiteHeader />
-  <main>
+  <main class="alternatives-page">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__inner">
         <p class="hero__breadcrumb"><a href={`${prefix}/vs/`} class="xref">{ru ? 'Сравнения' : 'Comparisons'}</a></p>
@@ -107,7 +107,7 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
           <h2 id={`${item.slug}-title`} class="section-title">{item.name}</h2>
           <p class="prose-p"><strong>{content.labels[0]}:</strong> {item.what}</p>
           <p class="prose-p"><strong>{content.labels[1]}:</strong> {item.diff}</p>
-          <p class="prose-p"><strong>{content.labels[2]}:</strong> {item.best} <a href={vs(item.slug === 'specscore' ? 'openspec' : item.slug)} class="xref">{ru ? 'Подробное сравнение' : 'Detailed comparison'}</a>.</p>
+          <p class="prose-p"><strong>{content.labels[2]}:</strong> {item.best} <a href={vs(item.slug === 'specscore' ? 'openspec' : item.slug)} class="xref">{ru ? 'Подробное сравнение' : 'Detailed comparison'}</a>{item.slug !== 'specscore' && item.slug !== 'plain-markdown' && <> · <a href={`${prefix}/alternatives/${item.slug}/`} class="xref">{ru ? `Аналоги ${item.name}` : `${item.name} alternatives`}</a></>}.</p>
         </div>
       </section>
     ))}
@@ -160,21 +160,3 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
   </main>
   <Footer />
 </BaseLayout>
-
-<style>
-  .hero { padding: var(--space-6) var(--space-3) var(--space-5); background: var(--cream); }
-  .hero__inner { max-width: var(--max-prose); margin: 0 auto; }
-  .hero__breadcrumb { font-family: var(--font-code); font-size: var(--fs-small); color: var(--pale-ink); margin-bottom: var(--space-2); }
-  .hero__headline { font-size: var(--fs-hero); line-height: 1.04; letter-spacing: -0.02em; margin-bottom: var(--space-3); text-wrap: balance; }
-  .hero__sub { font-size: 1.125rem; color: var(--mid-ink); line-height: 1.65; }
-  .section-title { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: var(--space-2); }
-  .prose-p { line-height: 1.7; color: var(--mid-ink); margin-bottom: var(--space-2); }
-  .table-wrap { overflow-x: auto; }
-  .compare-table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
-  .compare-table th, .compare-table td { padding: var(--space-2); border-bottom: 1px solid var(--hairline); text-align: left; vertical-align: top; min-width: 9rem; }
-  .compare-table thead th { font-family: var(--font-code); font-weight: 600; }
-  .faq-item { border-top: 1px solid var(--hairline); padding: var(--space-2) 0; }
-  .faq-item__q { font-size: 1.125rem; margin-bottom: var(--space-1); }
-  .faq-item__a { color: var(--mid-ink); line-height: 1.65; }
-  .recommendation { background: var(--cream-2); }
-</style>

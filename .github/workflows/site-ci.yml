@@ -91,6 +91,19 @@ jobs:
           grep -q '"@type":"Article"' public/ru/alternatives/openspec/index.html
           test ! -e public/alternatives/README/index.html
           test ! -e public/ru/alternatives/README/index.html
+          for slug in spec-kit kiro tessl bmad-method task-master-ai datarim codespeak; do
+            for prefix in '' 'ru/'; do
+              test -s "public/${prefix}alternatives/${slug}/index.html"
+              grep -q "https://specscore.md/${prefix}alternatives/${slug}/" public/sitemap.xml
+              grep -q "https://specscore.md/${prefix}alternatives/${slug}.md" public/llms.txt
+              grep -q 'FAQPage' "public/${prefix}alternatives/${slug}/index.html"
+              grep -q '"@type":"Article"' "public/${prefix}alternatives/${slug}/index.html"
+              grep -q '"@type":"BreadcrumbList"' "public/${prefix}alternatives/${slug}/index.html"
+              test ! -e "public/${prefix}alternatives/${slug}/README/index.html"
+            done
+            grep -q "https://specscore.md/ru/alternatives/${slug}/" "public/alternatives/${slug}/index.html"
+            grep -q "https://specscore.md/alternatives/${slug}/" "public/ru/alternatives/${slug}/index.html"
+          done
           test -s public/articles/lint-specs-in-ci/index.html
           grep -q 'FAQPage' public/index.html
           grep -q 'Organization' public/index.html
