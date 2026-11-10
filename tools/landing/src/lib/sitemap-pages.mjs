@@ -22,7 +22,7 @@ const DIRECTORY_INDEX_SLUGS = new Set(['docs', 'blog', 'new']);
 const PREFIXES = Object.keys(SITEMAP_LOCALES).filter((code) => code !== 'en').sort((a, b) => b.length - a.length);
 
 export function urlForDocsSlug(slug) {
-  if (DIRECTORY_INDEX_SLUGS.has(slug)) return `https://specscore.md/${slug}/`;
+  if (DIRECTORY_INDEX_SLUGS.has(slug) || slug.endsWith('about/tech-stack')) return `https://specscore.md/${slug}/`;
   return `https://specscore.md/${slug}`;
 }
 
