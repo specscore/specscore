@@ -26,9 +26,11 @@
 # Machine-readable site indexes. No single HTML page corresponds to them.
 # noindex keeps them out of search; the files stay publicly fetchable.
 /llms.txt
+  Content-Type: text/plain; charset=utf-8
   X-Robots-Tag: noindex
 
 /llms-full.txt
+  Content-Type: text/plain; charset=utf-8
   X-Robots-Tag: noindex
 
 # Directory README rendered by Astro from src/pages/README.md. It is an
