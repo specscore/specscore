@@ -122,13 +122,11 @@ export default defineConfig({
       hooks: {
         'astro:build:done': async ({ dir }) => {
           const out = fileURLToPath(dir);
-          for (const route of [
-            'alternatives/README',
-            'alternatives/openspec/README',
-            'ru/alternatives/README',
-            'ru/alternatives/openspec/README',
-          ]) {
-            await rm(join(out, route), { recursive: true, force: true });
+          for (const locale of ['', 'ru/']) {
+            await rm(join(out, `${locale}alternatives/README`), { recursive: true, force: true });
+            for (const slug of ['openspec', 'spec-kit', 'kiro', 'tessl', 'bmad-method', 'task-master-ai', 'datarim', 'codespeak']) {
+              await rm(join(out, `${locale}alternatives/${slug}/README`), { recursive: true, force: true });
+            }
           }
         },
       },

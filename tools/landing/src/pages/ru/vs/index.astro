@@ -4,6 +4,9 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooterRu from '../../../components/SiteFooterRu.astro';
 import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
+import { alternativeSlugs } from '../../../content/alternatives.ts';
+import { pageFor } from '../../../content/roundup/pages.ts';
+const tools = pageFor('ru').tools;
 ---
 
 <BaseLayout
@@ -30,6 +33,7 @@ import ComparisonFeedback from '../../../components/ComparisonFeedback.astro';
           собирает те же инструменты на одной странице.
         </p>
         <p class="hero__sub"><a href="/ru/alternatives/openspec/" class="xref">Аналоги OpenSpec в 2026 году</a> — семь вариантов по формату, интеграции с агентами и лицензии.</p>
+        <p class="hero__sub">Другие статьи об аналогах: {alternativeSlugs.map((slug, index) => <>{index > 0 && ', '}<a href={`/ru/alternatives/${slug}/`} class="xref">{tools[slug].name}</a></>)}.</p>
       </div>
     </section>
 
