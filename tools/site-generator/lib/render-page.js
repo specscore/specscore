@@ -104,7 +104,7 @@ const MERMAID_SCRIPT = `
     });
   </script>`;
 
-export function injectIntoTemplate(template, { title, content, slug, sidebarGroups, eyebrow, showViewMarkdown = true, hasMermaid = false, description = '', datePublished = '' }) {
+export function injectIntoTemplate(template, { title, content, slug, sidebarGroups, eyebrow, showViewMarkdown = true, hasMermaid = false, description = '', datePublished = '', locale = 'en' }) {
   const sidebarHtml = buildSidebarHtml(sidebarGroups, slug);
   const mdUrl = slug === 'index' ? '/index.md' : `/${slug}.md`;
   const canonicalUrl = canonicalUrlForSlug(slug);
@@ -124,13 +124,14 @@ export function injectIntoTemplate(template, { title, content, slug, sidebarGrou
 
   return template
     .replace(/\{\{title\}\}/g, title)
+    .replace(/\{\{lang\}\}/g, locale)
     .replace(/\{\{sidebar\}\}/g, sidebarHtml)
     .replace(/\{\{eyebrow\}\}/g, eyebrowHtml)
     .replace(/\{\{content\}\}/g, content)
     .replace(/\{\{viewMarkdown\}\}/g, viewMarkdownHtml)
     .replace(/\{\{alternateLink\}\}/g, alternateLinkHtml)
     .replace(/\{\{canonical\}\}/g, canonicalUrl)
-    .replace(/\{\{hreflangLinks\}\}/g, hreflangLinkTags(canonicalUrl))
+    .replace(/\{\{hreflangLinks\}\}/g, hreflangLinkTags(canonicalUrl, slug))
     .replace(/\{\{descriptionMeta\}\}/g, descriptionMetaTag(metaDescription))
     .replace(/\{\{socialMeta\}\}/g, socialMetaTags(socialTitle, metaDescription, canonicalUrl))
     .replace(/\{\{jsonLd\}\}/g, jsonLdScript({

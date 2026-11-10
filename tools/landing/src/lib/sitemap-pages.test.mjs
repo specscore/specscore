@@ -7,6 +7,7 @@ describe('docs sitemap URLs', () => {
     assert.equal(urlForDocsSlug('docs'), 'https://specscore.md/docs/');
     assert.equal(urlForDocsSlug('blog'), 'https://specscore.md/blog/');
     assert.equal(urlForDocsSlug('feature-specification'), 'https://specscore.md/feature-specification');
+    assert.equal(urlForDocsSlug('ru/about/tech-stack'), 'https://specscore.md/ru/about/tech-stack/');
   });
 
   it('includes HTML pages and blog posts, not the overwritten home', () => {

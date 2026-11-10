@@ -3,6 +3,9 @@ const ORIGIN = 'https://specscore.md';
 // Slugs served as directory indexes (`slug/index.html`). Cloudflare's
 // default html_handling then keeps the trailing slash, matching Astro pages.
 export const DIRECTORY_INDEX_SLUGS = new Set(['docs', 'blog', 'new']);
+const isDirectoryIndexSlug = (slug) => DIRECTORY_INDEX_SLUGS.has(slug) || /^(?:[a-z-]+\/)?about\/tech-stack$/.test(slug);
+const TECH_STACK_LOCALES = ['en', 'es', 'de', 'fr', 'it', 'pl', 'pt-br', 'ru', 'tr', 'uk', 'ja', 'zh-cn', 'zh-tw', 'ko'];
+const techStackSlug = (locale) => locale === 'en' ? 'about/tech-stack' : `${locale}/about/tech-stack`;
 
 const OG_IMAGE = 'https://specscore.md/hero-og.jpg';
 const OG_WIDTH = '1200';
@@ -26,7 +29,7 @@ export function escapeHtmlAttr(value) {
  */
 export function canonicalUrlForSlug(slug) {
   if (slug === 'index') return `${ORIGIN}/`;
-  if (DIRECTORY_INDEX_SLUGS.has(slug)) return `${ORIGIN}/${slug}/`;
+  if (isDirectoryIndexSlug(slug)) return `${ORIGIN}/${slug}/`;
   return `${ORIGIN}/${slug}`;
 }
 
@@ -36,7 +39,7 @@ export function canonicalUrlForSlug(slug) {
  */
 export function publicHrefForSlug(slug) {
   if (slug === 'index') return '/';
-  if (DIRECTORY_INDEX_SLUGS.has(slug)) return `/${slug}/`;
+  if (isDirectoryIndexSlug(slug)) return `/${slug}/`;
   return `/${slug}`;
 }
 
@@ -46,7 +49,7 @@ export function publicHrefForSlug(slug) {
  */
 export function htmlOutputRelative(slug) {
   if (slug === 'index') return 'index.html';
-  if (DIRECTORY_INDEX_SLUGS.has(slug)) return `${slug}/index.html`;
+  if (isDirectoryIndexSlug(slug)) return `${slug}/index.html`;
   return `${slug}.html`;
 }
 
@@ -156,7 +159,13 @@ function h1Text(html) {
  * @param {string} canonical
  * @returns {string}
  */
-export function hreflangLinkTags(canonical) {
+export function hreflangLinkTags(canonical, slug = '') {
+  if (slug.endsWith('about/tech-stack')) {
+    return [
+      ...TECH_STACK_LOCALES.map((locale) => `<link rel="alternate" hreflang="${locale === 'pt-br' ? 'pt-BR' : locale === 'zh-cn' ? 'zh-CN' : locale === 'zh-tw' ? 'zh-TW' : locale}" href="${ORIGIN}/${techStackSlug(locale)}/">`),
+      `<link rel="alternate" hreflang="x-default" href="${ORIGIN}/about/tech-stack/">`,
+    ].join('\n  ');
+  }
   const href = escapeHtmlAttr(canonical);
   return [
     `<link rel="alternate" hreflang="en" href="${href}">`,
@@ -179,18 +188,19 @@ export function jsonLdScript(opts) {
   const headline = h1Text(opts.content) || opts.title;
   if (!headline) return '';
   const description = opts.description || descriptionFromHtml(opts.content);
-  const kind = opts.slug === 'blog'
+  const kind = opts.slug.endsWith('about/tech-stack') ? 'AboutPage' : opts.slug === 'blog'
     ? 'Blog'
     : opts.slug.startsWith('blog/')
       ? 'Article'
       : 'TechArticle';
+  const locale = opts.slug.endsWith('about/tech-stack') ? (opts.slug.split('/')[0] === 'about' ? 'en' : opts.slug.split('/')[0]) : 'en';
   const page = {
     '@type': kind,
-    inLanguage: 'en',
+    inLanguage: locale,
     url: opts.canonical,
     mainEntityOfPage: opts.canonical,
   };
-  if (kind === 'Blog') page.name = headline;
+  if (kind === 'Blog' || kind === 'AboutPage') page.name = headline;
   else page.headline = headline;
   if (description) page.description = description;
   if (opts.datePublished && /^\d{4}-\d{2}-\d{2}$/.test(opts.datePublished)) {
@@ -205,7 +215,7 @@ export function jsonLdScript(opts) {
           '@type': 'ListItem',
           position: 1,
           name: 'SpecScore.md',
-          item: `${ORIGIN}/`,
+          item: locale === 'en' ? `${ORIGIN}/` : `${ORIGIN}/${locale}/`,
         },
         {
           '@type': 'ListItem',

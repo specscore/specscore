@@ -53,4 +53,28 @@ if ! grep -q '/vs/kiro.md' public/llms.txt; then
 EOF
 fi
 
+# The docs generator owns these localized pages. Astro writes the final
+# llms.txt, so include their HTML URLs after merging the two builds.
+if ! grep -q 'https://specscore.md/about/tech-stack/' public/llms.txt; then
+  cat >> public/llms.txt << 'EOF'
+
+## About SpecScore
+
+- [Tech stack](https://specscore.md/about/tech-stack/): Website generator, open format, and CLI
+- [Español](https://specscore.md/es/about/tech-stack/)
+- [Deutsch](https://specscore.md/de/about/tech-stack/)
+- [Français](https://specscore.md/fr/about/tech-stack/)
+- [Italiano](https://specscore.md/it/about/tech-stack/)
+- [Polski](https://specscore.md/pl/about/tech-stack/)
+- [Português](https://specscore.md/pt-br/about/tech-stack/)
+- [Русский](https://specscore.md/ru/about/tech-stack/)
+- [Türkçe](https://specscore.md/tr/about/tech-stack/)
+- [Українська](https://specscore.md/uk/about/tech-stack/)
+- [日本語](https://specscore.md/ja/about/tech-stack/)
+- [简体中文](https://specscore.md/zh-cn/about/tech-stack/)
+- [繁體中文](https://specscore.md/zh-tw/about/tech-stack/)
+- [한국어](https://specscore.md/ko/about/tech-stack/)
+EOF
+fi
+
 echo "==> Done. public/ ready for Cloudflare Pages deploy."
