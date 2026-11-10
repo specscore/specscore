@@ -12,6 +12,8 @@ Source for `/articles/`. Each locale module holds the acceptance-criteria articl
 
 `tools/landing/scripts/emit-articles-md.ts` writes `/{locale}/articles.md`, `/{locale}/articles/acceptance-criteria.md`, `/{locale}/articles/ears-requirements.md`, `/{locale}/articles/lint-specs-in-ci.md`, `/{locale}/articles/feature-spec-template.md`, and `/{locale}/articles/claude-code-specs.md` into the Astro build output. The HTML `<head>` points at that file with `rel="alternate" type="text/markdown"`. The root `_headers` file adds the matching Cloudflare `Link` header.
 
+`delivery.ts` and [`locales/delivery/`](locales/delivery/) own the weekly delivery article and its homepage introduction in all 14 locales. `DeliveryArticle.astro` renders it; the shared emitter produces its Markdown companion and includes it in the localized article indexes.
+
 ## Outstanding Questions
 
 None at this time.

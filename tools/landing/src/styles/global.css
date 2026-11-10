@@ -755,3 +755,82 @@ pre.terminal.terminal--window::after,
 .alternatives-page .faq-item__q { font-size: 1.125rem; margin-bottom: var(--space-1); }
 .alternatives-page .faq-item__a { color: var(--mid-ink); line-height: 1.65; }
 .alternatives-page .recommendation { background: var(--cream-2); }
+
+/* Weekly delivery: an editorial continuation near the homepage's end. */
+.delivery-promo h2 {
+  font-size: var(--fs-h2);
+  line-height: 1.2;
+  margin-bottom: var(--space-3);
+  text-wrap: balance;
+}
+.delivery-promo p {
+  color: var(--mid-ink);
+  line-height: 1.65;
+  margin-bottom: var(--space-3);
+}
+.delivery-promo__links {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--space-4);
+  row-gap: var(--space-3);
+  line-height: 1.6;
+}
+.delivery-article__hero {
+  background: var(--cream);
+  padding: var(--space-5) var(--space-3);
+}
+.delivery-article__hero .hero__breadcrumb {
+  margin-bottom: var(--space-3);
+}
+.delivery-article__title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin-bottom: var(--space-4);
+}
+.delivery-article__intro {
+  color: var(--mid-ink);
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+.delivery-article__body {
+  padding: var(--space-5) var(--space-3);
+}
+.delivery-article__body section + section {
+  margin-top: var(--space-5);
+}
+.delivery-article__body h2 {
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  line-height: 1.3;
+  text-wrap: balance;
+  margin-bottom: var(--space-3);
+}
+.delivery-article__body p {
+  color: var(--mid-ink);
+  line-height: 1.75;
+  margin-bottom: var(--space-3);
+}
+.delivery-article__worksheet {
+  padding-left: 1.5rem;
+  line-height: 1.7;
+}
+.delivery-article__worksheet li + li {
+  margin-top: var(--space-2);
+}
+.delivery-article__mentor {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--hairline);
+}
+.delivery-article__body .delivery-article__disclosure {
+  font-size: var(--fs-small);
+}
+
+/* Match the English linter panel's shrink/wrap behavior in every locale. */
+.passes__grid > .pass { min-width: 0; }
+.passes__grid .pass__head { flex-wrap: wrap; }
+/* Long requirement identifiers must wrap inside translated problem examples. */
+.problems .problem-card { overflow-wrap: anywhere; }
+/* Keep longer localized workflow tabs scrollable within their own row. */
+.aiskills .ais-tabs { overflow-x: auto; }

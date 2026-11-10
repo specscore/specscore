@@ -1,0 +1,16 @@
+---
+import { localeFromPath, localeHref } from '../lib/languages.ts';
+import { committedMeHref, deliveryCopy, deliveryRoute } from '../content/articles/delivery.ts';
+const locale = localeFromPath(Astro.url.pathname);
+const copy = deliveryCopy(locale);
+---
+<section class="section delivery-promo" aria-labelledby="delivery-promo-title">
+  <div class="section-inner section-inner--prose">
+    <h2 id="delivery-promo-title">{copy.promoTitle}</h2>
+    <p>{copy.promoBody}</p>
+    <div class="delivery-promo__links">
+      <a class="xref" href={localeHref(locale, deliveryRoute)}>{copy.readArticle} →</a>
+      <a class="xref" href={committedMeHref(locale, 'homepage_direct')} target="_blank">{copy.explore} →</a>
+    </div>
+  </div>
+</section>
