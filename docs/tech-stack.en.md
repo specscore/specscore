@@ -4,7 +4,7 @@ A tech stack is the set of tools used to build and run a product. SpecScore is a
 
 ## This website
 
-A small Node.js generator renders the documentation as HTML and publishes a byte-stable Markdown twin for each page. Astro builds the homepage and its localized landing pages. Cloudflare Workers static assets serves the assembled site. The custom generator keeps raw Markdown directly available to agents and command-line tools.
+A small Node.js generator renders the documentation as HTML and publishes a byte-stable Markdown twin for each page. Astro builds the homepage and its localized landing pages. Cloudflare Workers static assets serve the assembled site. The custom generator keeps raw Markdown directly available to agents and command-line tools.
 
 ## The product
 
