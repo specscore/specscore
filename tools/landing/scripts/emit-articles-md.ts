@@ -1,3 +1,4 @@
+import { deliveryMarkdown, deliveryRoute, deliverySlug } from '../src/content/articles/delivery.ts';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { langs, localeHref, type LangCode } from '../src/lib/languages.ts';
@@ -18,6 +19,7 @@ import { acceptanceCopy, agentsCopy, earsCopy, indexCopy, lintCopy, templateCopy
 import { renderAcceptanceMarkdown, renderAgentsMarkdown, renderEarsMarkdown, renderIndexMarkdown, renderLintMarkdown, renderTemplateMarkdown } from '../src/content/articles/render-md.ts';
 
 function markdownFor(locale: LangCode, slug: string | undefined): string | undefined {
+  if (slug === deliverySlug) return deliveryMarkdown(locale);
   if (slug === undefined) {
     const canonical = `https://specscore.md${localeHref(locale, '/articles/')}`;
     return renderIndexMarkdown(indexCopy(locale), locale, canonical);
@@ -70,6 +72,7 @@ if (printUrl) {
   for (const lang of langs) {
     const files: [string, string | undefined][] = [
       [articlesIndexMdHref(lang.code), undefined],
+      [localeHref(lang.code, deliveryRoute.replace(/\/$/, '.md')), deliverySlug],
       [acceptanceArticleMdHref(lang.code), acceptanceSlug],
       [earsArticleMdHref(lang.code), earsSlug],
       [lintArticleMdHref(lang.code), lintSlug],

@@ -21,6 +21,8 @@ One Astro component per IA section, in render order, plus a header and a footer.
 | `AgentsArticle.astro` | — | `/articles/claude-code-specs/`. Copy comes from `src/content/articles/`. |
 | `AcceptanceArticle.astro` | — | `/articles/acceptance-criteria/`. Copy comes from `src/content/articles/`. |
 | `EarsArticle.astro` | — | `/articles/ears-requirements/`. Copy comes from `src/content/articles/`. |
+| `DeliveryArticle.astro` | — | Localized weekly delivery article, worksheet, and CommittedMe introduction. |
+| `DeliveryPromo.astro` | — | Quiet homepage entry to the localized delivery article. |
 | `ArticlesIndex.astro` | — | Index of `/articles/`. |
 | `MoreComparisons.astro` | — | Cross-links to the other comparison pages. |
 | `Inlines.astro` | — | Renders a typed prose run (text, links, code). |
