@@ -166,6 +166,8 @@ export async function writeLlmsFiles(dir, rootDir) {
     ...localeRoutes('/spec-driven-development/'),
     ...localeRoutes('/cli/install/'),
     ...localeRoutes('/vs/'),
+    '/alternatives/openspec/',
+    '/ru/alternatives/openspec/',
   ];
 
   for (const route of routes) {
@@ -211,6 +213,8 @@ export async function writeLlmsFiles(dir, rootDir) {
   const sdd = await bodyOf('/spec-driven-development/');
   const install = await bodyOf('/cli/install/');
   const vsIndex = await bodyOf('/vs/');
+  const alternatives = await bodyOf('/alternatives/openspec/');
+  const alternativesRu = await bodyOf('/ru/alternatives/openspec/');
   const toolsFile = join(dist, 'spec-driven-development', 'tools.md');
   const toolsRaw = await readFile(toolsFile, 'utf8');
   const vsDir = join(dist, 'vs');
@@ -293,6 +297,15 @@ export async function writeLlmsFiles(dir, rootDir) {
       },
     ]],
     ['Articles', articleEntries],
+    ['Alternatives', [{
+      title: 'OpenSpec alternatives in 2026',
+      url: alternatives.url,
+      description: 'Compare SpecScore, Spec Kit, Kiro, BMAD, Tessl, Task Master AI and plain Markdown as OpenSpec alternatives.',
+    }, {
+      title: 'Аналоги OpenSpec в 2026 году',
+      url: alternativesRu.url,
+      description: 'Сравнение SpecScore, Spec Kit, Kiro, BMAD, Tessl, Task Master AI и Markdown как аналогов OpenSpec.',
+    }]],
     ['Comparisons', [
       {
         title: 'How SpecScore compares',
@@ -309,6 +322,8 @@ export async function writeLlmsFiles(dir, rootDir) {
     { title: 'Spec-driven development', url: `${ORIGIN}/spec-driven-development.md`, body: sdd.body },
     { title: 'Spec-driven development tools', url: `${ORIGIN}/spec-driven-development/tools.md`, body: toolsRaw },
     ...articles.map(({ title, url, body }) => ({ title, url, body })),
+    { title: 'OpenSpec alternatives in 2026', url: alternatives.url, body: alternatives.body },
+    { title: 'Аналоги OpenSpec в 2026 году', url: alternativesRu.url, body: alternativesRu.body },
     { title: 'How SpecScore compares', url: vsIndex.url, body: vsIndex.body },
     ...vsPages.map((page) => ({ title: page.name.replace(/\.md$/, ''), url: page.url, body: page.body })),
     { title: 'Documentation (getting started)', url: `${ORIGIN}/docs.md`, body: docsRaw },

@@ -81,6 +81,16 @@ jobs:
           grep -q 'https://specscore.md/articles/acceptance-criteria.md' public/llms-full.txt
           grep -q 'https://specscore.md/articles/lint-specs-in-ci.md' public/llms.txt
           grep -q 'https://specscore.md/articles/lint-specs-in-ci/' public/sitemap.xml
+          test -s public/alternatives/openspec/index.html
+          test -s public/ru/alternatives/openspec/index.html
+          grep -q 'https://specscore.md/alternatives/openspec/' public/sitemap.xml
+          grep -q 'https://specscore.md/ru/alternatives/openspec/' public/sitemap.xml
+          grep -q 'https://specscore.md/alternatives/openspec.md' public/llms.txt
+          grep -q 'https://specscore.md/ru/alternatives/openspec.md' public/llms.txt
+          grep -q 'FAQPage' public/alternatives/openspec/index.html
+          grep -q '"@type":"Article"' public/ru/alternatives/openspec/index.html
+          test ! -e public/alternatives/README/index.html
+          test ! -e public/ru/alternatives/README/index.html
           test -s public/articles/lint-specs-in-ci/index.html
           grep -q 'FAQPage' public/index.html
           grep -q 'Organization' public/index.html

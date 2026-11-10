@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import SiteFooterRu from './SiteFooterRu.astro';
+import { href } from '../content/roundup/facts.ts';
+
+const ru = Astro.url.pathname.startsWith('/ru/');
+const prefix = ru ? '/ru' : '';
+const url = `${prefix}/alternatives/openspec/`;
+const vs = (slug: string) => `${prefix}/vs/${slug}/`;
+const content = ru ? {
+  title: 'Аналоги OpenSpec в 2026: SpecScore, Spec Kit, Kiro и другие',
+  description: 'Что такое OpenSpec и какие есть аналоги: сравнение SpecScore, Spec Kit, Kiro, BMAD, Tessl, Task Master AI и обычного Markdown по формату, агентам и лицензии.',
+  h1: 'Аналоги OpenSpec в 2026 году',
+  intro: 'OpenSpec — это фреймворк разработки по спецификациям для ИИ-ассистентов, которые пишут код. Разработка по спецификациям означает, что команда сначала записывает требования и ожидаемое поведение, а затем по ним создаёт и проверяет код. Если вы ищете аналоги OpenSpec или хотите понять, что такое OpenSpec, начните с этого различия: одни инструменты задают процесс агенту, другие проверяют сами файлы спецификаций.',
+  whyTitle: 'Зачем искать альтернативы OpenSpec',
+  why: 'OpenSpec хранит изменения в отдельных папках и даёт агенту команды для работы с ними. Другой инструмент может лучше подойти, если вам нужны проверяемый формат для CI, рабочий процесс внутри IDE, разбиение PRD на задачи или просто Markdown без дополнительного инструмента. Выбор зависит от того, какой результат вы хотите сохранять в репозитории.',
+  tableTitle: 'Сравнение альтернатив OpenSpec',
+  cols: ['Инструмент', 'Формат', 'Интеграция с ИИ-агентом', 'Открытый код и лицензия', 'Где лежат спецификации'],
+  labels: ['Что это', 'Отличие от OpenSpec', 'Кому подходит'],
+  chooseTitle: 'Как выбрать',
+  choose: 'Нужен проверяемый формат и линтер для CI — попробуйте SpecScore. Нужен пошаговый процесс для агента — сравните Spec Kit и OpenSpec. Хотите создавать требования, дизайн и задачи в IDE — изучите Kiro. Для планирования с агентами посмотрите BMAD; для управления навыками — Tessl; для задач из PRD — Task Master AI. Для короткого документа может хватить обычного Markdown.',
+  faqTitle: 'Частые вопросы',
+  faqs: [
+    { q: 'Есть ли бесплатная альтернатива OpenSpec?', a: 'Да. Исходный код GitHub Spec Kit, BMAD Method и SpecScore доступен публично. Обычный Markdown также не требует отдельного продукта. Условия использования каждого инструмента приведены в таблице выше.' },
+    { q: 'OpenSpec vs Spec Kit: в чём разница?', a: 'OpenSpec организует изменения в папках с предложением, спецификациями и задачами и проверяет их структуру. GitHub Spec Kit проводит агента через этапы Specify, Plan, Tasks и Implement, оставляя Markdown-артефакты в каталоге функции.' },
+    { q: 'Что такое OpenSpec?', a: 'OpenSpec — фреймворк разработки по спецификациям для ИИ-ассистентов. Он хранит предложения и изменения спецификаций в репозитории и даёт команды для работы с ними.' },
+  ],
+  related: 'Подробнее: ',
+  tools: 'все инструменты разработки по спецификациям',
+  compare: 'SpecScore vs OpenSpec',
+  home: 'что такое SpecScore',
+  baseline: { format: 'Markdown: proposal.md, specs/, design.md, tasks.md', agent: 'Команды для разных ИИ-ассистентов', license: 'Да: MIT', where: 'openspec/changes/ в репозитории' },
+  sections: [
+    { slug: 'specscore', name: 'SpecScore', what: 'Открытый формат Markdown с YAML-полями и CLI, который проверяет структуру, ссылки и статусы спецификаций.', diff: 'Вместо папки изменения и команд агента в центре внимания — сам формат спецификации и его проверка в CI.', best: 'Командам, которым нужен файл спецификации, способный пройти или не пройти проверку CI.', format: 'Markdown + YAML', agent: 'CLI для любого агента; навыки для Claude Code', license: 'Да: формат CC BY 4.0', licenseUrl: href.formatLicense, extraLicense: href.cliLicense, where: 'Дерево spec/ в репозитории' },
+    { slug: 'spec-kit', name: 'GitHub Spec Kit', what: 'Набор команд и шаблонов, который проводит агента через спецификацию, план и задачи.', diff: 'Задаёт этапы работы агента; OpenSpec организует отдельные папки изменений и их проверку.', best: 'Командам, которым нужен общий пошаговый процесс для агента.', format: 'spec.md, plan.md, tasks.md', agent: 'Команды для кодирующего агента', license: 'Да: MIT', licenseUrl: href.specKitLicense, where: 'Каталог функции в specs/' },
+    { slug: 'kiro', name: 'Kiro', what: 'Среда разработки AWS с IDE, CLI и веб-приложением, которая создаёт требования, дизайн и задачи.', diff: 'Работа происходит в продукте Kiro; OpenSpec — фреймворк с файлами и командами для разных агентов.', best: 'Тем, кто хочет составлять три документа внутри среды разработки.', format: 'requirements.md (EARS), design.md, tasks.md', agent: 'Встроенный агент Kiro', license: 'Нет: условия AWS для IDE и CLI', licenseUrl: href.kiroLicense, where: 'Файлы спецификации проекта' },
+    { slug: 'bmad-method', name: 'BMAD Method', what: 'Гибкий метод разработки с ИИ-агентами, который создаёт брифы, спецификации и архитектуру.', diff: 'Охватывает цикл планирования и роли агентов, а не только папки изменений.', best: 'Командам, которым нужен метод работы с агентами разного масштаба.', format: 'Брифы, спецификации, архитектура', agent: 'Навыки и роли агентов BMAD', license: 'Да: MIT', licenseUrl: href.bmadLicense, where: 'Артефакты проекта' },
+    { slug: 'tessl', name: 'Tessl', what: 'Платформа для навыков агентов; отдельный tile задаёт работу по спецификациям.', diff: 'Управляет навыками и правилами агента. Tile создаёт .spec.md, тогда как OpenSpec организует изменения.', best: 'Командам, которые унифицируют навыки агентов или используют tile «сначала спецификация».', format: '.spec.md с YAML в tile', agent: 'Навыки и tile для агента', license: 'Платформа: нет публичного репозитория; tile: MIT', licenseUrl: href.tesslTileLicense, where: 'Навыки в репозитории; specs/ для tile' },
+    { slug: 'task-master-ai', name: 'Task Master AI', what: 'Инструмент, который разбирает PRD и создаёт список задач для кодирующих агентов.', diff: 'Считает PRD входом для генерации задач; OpenSpec хранит предложения и изменения спецификаций.', best: 'Командам с готовым PRD, который нужно разделить на задачи.', format: 'PRD и сгенерированные задачи', agent: 'Задачи для кодирующих агентов', license: 'Исходный код доступен: MIT с Commons Clause', licenseUrl: href.tmLicense, where: '.taskmaster/docs/prd.txt и файлы задач' },
+    { slug: 'plain-markdown', name: 'Обычный Markdown', what: 'Файл .md, который команда пишет и проверяет вручную.', diff: 'Нет заданной структуры, команд агента или встроенной проверки.', best: 'Небольшим задачам, где достаточно чтения и ревью текста.', format: 'Произвольный .md', agent: 'Агент читает файл по вашей инструкции', license: 'Не применимо: условия задаёт ваш репозиторий', where: 'Любой каталог репозитория' },
+  ],
+} : {
+  title: 'OpenSpec Alternatives in 2026: SpecScore, Spec Kit, Kiro and more',
+  description: 'What OpenSpec is and how alternatives compare: SpecScore, Spec Kit, Kiro, BMAD, Tessl, Task Master AI and plain Markdown by format, agent integration and licence.',
+  h1: 'OpenSpec alternatives in 2026',
+  intro: 'OpenSpec is a spec-driven development framework for AI coding assistants. Spec-driven development means writing down what software should do before coding, then using that specification to guide and check the implementation. OpenSpec organizes proposed changes; these alternatives emphasize different parts of that work.',
+  whyTitle: 'Why look for an OpenSpec alternative',
+  why: 'OpenSpec keeps each proposed change in a folder and provides commands for agents. A different tool may suit you if you need a specification format checked in CI, an IDE workflow, tasks generated from a PRD, or only a Markdown file. The useful question is what you need to keep and verify in your repository.',
+  tableTitle: 'OpenSpec alternatives at a glance',
+  cols: ['Tool', 'Format', 'AI-agent integration', 'Open source and licence', 'Where specs live'],
+  labels: ['What it is', 'How it differs from OpenSpec', 'Best for'],
+  chooseTitle: 'How to choose',
+  choose: 'For a lintable specification format in CI, try SpecScore. For a staged agent workflow, compare Spec Kit with OpenSpec. For drafting requirements, design and tasks in an IDE, look at Kiro. BMAD covers a wider agent method; Tessl manages skills; Task Master turns a PRD into tasks. A small note may need only plain Markdown.',
+  faqTitle: 'Frequently asked questions',
+  faqs: [
+    { q: 'Is there a free OpenSpec alternative?', a: 'Yes. GitHub Spec Kit, BMAD Method and SpecScore have public source repositories. Plain Markdown needs no separate product. The table above links to each tool’s terms.' },
+    { q: 'OpenSpec vs Spec Kit: what is the difference?', a: 'OpenSpec organizes changes into folders with a proposal, specs and tasks, and validates their structure. GitHub Spec Kit leads an agent through Specify, Plan, Tasks and Implement, producing Markdown artifacts in a feature directory.' },
+    { q: 'What is OpenSpec?', a: 'OpenSpec is a spec-driven development framework for AI coding assistants. It keeps proposals and spec changes in a repository and provides commands for working through them.' },
+  ],
+  related: 'Read more: ',
+  tools: 'spec-driven development tools',
+  compare: 'SpecScore vs OpenSpec',
+  home: 'what SpecScore is',
+  baseline: { format: 'Markdown: proposal.md, specs/, design.md, tasks.md', agent: 'Commands for multiple AI assistants', license: 'Yes: MIT', where: 'openspec/changes/ in the repository' },
+  sections: [
+    { slug: 'specscore', name: 'SpecScore', what: 'An open Markdown and YAML specification format with a CLI that checks structure, references and lifecycle status.', diff: 'It centers the specification artifact and its CI checks rather than change folders and agent commands.', best: 'Teams that need a specification file to pass or fail a CI check.', format: 'Markdown + YAML', agent: 'CLI usable by any agent; Claude Code skills', license: 'Yes: format CC BY 4.0', licenseUrl: href.formatLicense, extraLicense: href.cliLicense, where: 'spec/ tree in the repository' },
+    { slug: 'spec-kit', name: 'GitHub Spec Kit', what: 'A toolkit of commands and templates that guides an agent through a spec, plan and tasks.', diff: 'It defines agent workflow stages; OpenSpec organizes and validates individual change folders.', best: 'Teams that want a shared staged process for an agent.', format: 'spec.md, plan.md, tasks.md', agent: 'Commands for coding agents', license: 'Yes: MIT', licenseUrl: href.specKitLicense, where: 'Feature directory under specs/' },
+    { slug: 'kiro', name: 'Kiro', what: 'An AWS development environment with an IDE, CLI and web app that drafts requirements, design and tasks.', diff: 'The work happens in Kiro’s product; OpenSpec is a file and command framework for multiple agents.', best: 'People who want to draft those three files in a development environment.', format: 'requirements.md (EARS), design.md, tasks.md', agent: 'Built-in Kiro agent', license: 'No: AWS terms for IDE and CLI', licenseUrl: href.kiroLicense, where: 'Project specification files' },
+    { slug: 'bmad-method', name: 'BMAD Method', what: 'An agile method for AI-driven development that produces briefs, specifications and architecture.', diff: 'It covers planning stages and agent roles beyond a single change folder.', best: 'Teams wanting an agent method sized to the change.', format: 'Briefs, specs, architecture', agent: 'BMAD agent skills and roles', license: 'Yes: MIT', licenseUrl: href.bmadLicense, where: 'Project artifacts' },
+    { slug: 'tessl', name: 'Tessl', what: 'A platform for agent skills with a separate spec-driven development tile.', diff: 'It manages skills and agent rules; the tile writes .spec.md files while OpenSpec organizes changes.', best: 'Teams standardizing agent skills or using the tile’s spec-before-code rules.', format: '.spec.md with YAML in the tile', agent: 'Agent skills and tile', license: 'Platform: no public repo; tile: MIT', licenseUrl: href.tesslTileLicense, where: 'Skills in repo; tile specs under specs/' },
+    { slug: 'task-master-ai', name: 'Task Master AI', what: 'A tool that parses a PRD into a task list for AI coding agents.', diff: 'It treats the PRD as input to task generation; OpenSpec keeps proposals and spec deltas.', best: 'Teams with a PRD that needs splitting into tasks.', format: 'PRD and generated tasks', agent: 'Tasks for coding agents', license: 'Source available: MIT with Commons Clause', licenseUrl: href.tmLicense, where: '.taskmaster/docs/prd.txt and task files' },
+    { slug: 'plain-markdown', name: 'Plain Markdown', what: 'An ordinary .md file written and reviewed by the team.', diff: 'It has no prescribed structure, agent commands or built-in validation.', best: 'Small notes where reading and reviewing prose is enough.', format: 'Any .md file', agent: 'Agent reads the file when instructed', license: 'N/A: terms come from your repository', where: 'Any repository directory' },
+  ],
+};
+const Footer = ru ? SiteFooterRu : SiteFooter;
+---
+
+<BaseLayout title={content.title} description={content.description} canonical={`https://specscore.md${url}`} lang={ru ? 'ru' : 'en'}>
+  <SiteHeader />
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href={`${prefix}/vs/`} class="xref">{ru ? 'Сравнения' : 'Comparisons'}</a></p>
+        <h1 id="hero-title" class="hero__headline">{content.h1}</h1>
+        <p class="hero__sub">{content.intro}</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="why-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="why-title" class="section-title">{content.whyTitle}</h2>
+        <p class="prose-p">{content.why}</p>
+      </div>
+    </section>
+
+    {content.sections.map((item) => (
+      <section class="section" id={item.slug} aria-labelledby={`${item.slug}-title`}>
+        <div class="section-inner section-inner--prose">
+          <h2 id={`${item.slug}-title`} class="section-title">{item.name}</h2>
+          <p class="prose-p"><strong>{content.labels[0]}:</strong> {item.what}</p>
+          <p class="prose-p"><strong>{content.labels[1]}:</strong> {item.diff}</p>
+          <p class="prose-p"><strong>{content.labels[2]}:</strong> {item.best} <a href={vs(item.slug === 'specscore' ? 'openspec' : item.slug)} class="xref">{ru ? 'Подробное сравнение' : 'Detailed comparison'}</a>.</p>
+        </div>
+      </section>
+    ))}
+
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">{content.tableTitle}</h2>
+        <div class="table-wrap">
+          <table class="compare-table">
+            <thead><tr>{content.cols.map((col) => <th scope="col">{col}</th>)}</tr></thead>
+            <tbody>
+              <tr>
+                <th scope="row"><a href={vs('openspec')} class="xref">OpenSpec</a></th>
+                <td>{content.baseline.format}</td>
+                <td>{content.baseline.agent}</td>
+                <td><a href={href.openSpecLicense} rel="nofollow noopener" target="_blank">{content.baseline.license}</a></td>
+                <td>{content.baseline.where}</td>
+              </tr>
+              {content.sections.map((item) => (
+                <tr>
+                  <th scope="row"><a href={vs(item.slug === 'specscore' ? 'openspec' : item.slug)} class="xref">{item.name}</a></th>
+                  <td>{item.format}</td>
+                  <td>{item.agent}</td>
+                  <td>{'licenseUrl' in item ? <a href={item.licenseUrl} rel="nofollow noopener" target="_blank">{item.license}</a> : item.license}{'extraLicense' in item && <> · <a href={item.extraLicense} target="_blank">CLI: Apache-2.0</a></>}</td>
+                  <td>{item.where}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="choose-title"><div class="section-inner section-inner--prose">
+      <h2 id="choose-title" class="section-title">{content.chooseTitle}</h2>
+      <p class="prose-p">{content.choose}</p>
+      <p class="prose-p">{content.related}<a href={vs('openspec')} class="xref">{content.compare}</a>, <a href={`${prefix}/spec-driven-development/tools/`} class="xref">{content.tools}</a>, <a href={`${prefix}/#what-is-title`} class="xref">{content.home}</a>.</p>
+    </div></section>
+
+    <section class="section" aria-labelledby="faq-title"><div class="section-inner section-inner--prose">
+      <h2 id="faq-title" class="section-title">{content.faqTitle}</h2>
+      {content.faqs.map((faq) => <div class="faq-item"><h2 class="faq-item__q">{faq.q}</h2><div class="faq-item__a"><p>{faq.a}</p></div></div>)}
+    </div></section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .hero { padding: var(--space-6) var(--space-3) var(--space-5); background: var(--cream); }
+  .hero__inner { max-width: var(--max-prose); margin: 0 auto; }
+  .hero__breadcrumb { font-family: var(--font-code); font-size: var(--fs-small); color: var(--pale-ink); margin-bottom: var(--space-2); }
+  .hero__headline { font-size: var(--fs-hero); line-height: 1.04; letter-spacing: -0.02em; margin-bottom: var(--space-3); text-wrap: balance; }
+  .hero__sub { font-size: 1.125rem; color: var(--mid-ink); line-height: 1.65; }
+  .section-title { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: var(--space-2); }
+  .prose-p { line-height: 1.7; color: var(--mid-ink); margin-bottom: var(--space-2); }
+  .table-wrap { overflow-x: auto; }
+  .compare-table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
+  .compare-table th, .compare-table td { padding: var(--space-2); border-bottom: 1px solid var(--hairline); text-align: left; vertical-align: top; min-width: 9rem; }
+  .compare-table thead th { font-family: var(--font-code); font-weight: 600; }
+  .faq-item { border-top: 1px solid var(--hairline); padding: var(--space-2) 0; }
+  .faq-item__q { font-size: 1.125rem; margin-bottom: var(--space-1); }
+  .faq-item__a { color: var(--mid-ink); line-height: 1.65; }
+</style>
