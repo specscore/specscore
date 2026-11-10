@@ -70,4 +70,16 @@ describe('alternates', () => {
     assert.deepEqual(links.map((link) => link.hreflang), ['ru', 'x-default']);
     assert.equal(links[0].href, links[1].href);
   });
+
+  it('pairs the English and Russian OpenSpec alternatives routes only', () => {
+    const pages = inventoryFromFiles([
+      '../pages/alternatives/openspec/index.astro',
+      '../pages/ru/alternatives/openspec/index.astro',
+    ]);
+    assert.deepEqual(
+      alternatesForPath(pages, '/alternatives/openspec/').map((link) => link.hreflang),
+      ['en', 'ru', 'x-default'],
+    );
+    assert.equal(localeHasRoute(pages, 'es', '/alternatives/openspec/'), false);
+  });
 });

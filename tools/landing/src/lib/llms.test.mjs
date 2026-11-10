@@ -31,6 +31,8 @@ describe('llms.txt', () => {
     assert.equal(companionUrl('/es/'), '/es/index.md');
     assert.equal(companionUrl('/spec-driven-development/'), '/spec-driven-development.md');
     assert.equal(companionUrl('/cli/install/'), '/cli/install.md');
+    assert.equal(companionUrl('/alternatives/openspec/'), '/alternatives/openspec.md');
+    assert.equal(companionUrl('/ru/alternatives/openspec/'), '/ru/alternatives/openspec.md');
   });
 
   it('concatenates key pages ahead of the specification corpus', () => {
