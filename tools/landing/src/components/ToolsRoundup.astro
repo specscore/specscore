@@ -70,7 +70,7 @@ const guideHref = localeHref(locale, '/spec-driven-development/');
         <p class="hero__breadcrumb"><a href={guideHref} class="xref">{page.breadcrumb}</a></p>
         <h1 id="tools-title" class="hero__headline">{page.h1}</h1>
         <p class="hero__sub"><Inlines parts={localize(page.hero)} /></p>
-        {(locale === 'en' || locale === 'ru') && <p class="hero__sub"><a href={localeHref(locale, '/alternatives/openspec/')} class="xref">{locale === 'ru' ? 'Аналоги OpenSpec в 2026 году' : 'OpenSpec alternatives in 2026'}</a></p>}
+        {(locale === 'en' || locale === 'ru') && <p class="hero__sub">{locale === 'ru' ? 'Статьи об аналогах: ' : 'Alternatives guides: '}{['openspec', 'spec-kit', 'kiro', 'tessl', 'bmad-method', 'task-master-ai', 'datarim', 'codespeak'].map((id, index) => <>{index > 0 && ', '}<a href={localeHref(locale, `/alternatives/${id}/`)} class="xref">{page.tools[id].name}</a></>)}.</p>}
         <p class="page-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence[locale]}</time></p>
       </div>
     </section>

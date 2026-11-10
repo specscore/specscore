@@ -738,3 +738,20 @@ pre.terminal.terminal--window::after,
     .film__button { transition: none; }
     .film__play:hover .film__button { transform: none; }
   }
+
+/* Shared editorial layout for English and Russian alternatives articles. */
+.alternatives-page .hero { padding: var(--space-6) var(--space-3) var(--space-5); background: var(--cream); }
+.alternatives-page .hero__inner { max-width: var(--max-prose); margin: 0 auto; }
+.alternatives-page .hero__breadcrumb { font-family: var(--font-code); font-size: var(--fs-small); color: var(--pale-ink); margin-bottom: var(--space-2); }
+.alternatives-page .hero__headline { font-size: var(--fs-hero); line-height: 1.04; letter-spacing: -0.02em; margin-bottom: var(--space-3); text-wrap: balance; }
+.alternatives-page .hero__sub { font-size: 1.125rem; color: var(--mid-ink); line-height: 1.65; }
+.alternatives-page .section-title { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: var(--space-2); }
+.alternatives-page .prose-p { line-height: 1.7; color: var(--mid-ink); margin-bottom: var(--space-2); }
+.alternatives-page .table-wrap { overflow-x: auto; }
+.alternatives-page .compare-table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
+.alternatives-page .compare-table th, .alternatives-page .compare-table td { padding: var(--space-2); border-bottom: 1px solid var(--hairline); text-align: left; vertical-align: top; min-width: 9rem; }
+.alternatives-page .compare-table thead th { font-family: var(--font-code); font-weight: 600; }
+.alternatives-page .faq-item { border-top: 1px solid var(--hairline); padding: var(--space-2) 0; }
+.alternatives-page .faq-item__q { font-size: 1.125rem; margin-bottom: var(--space-1); }
+.alternatives-page .faq-item__a { color: var(--mid-ink); line-height: 1.65; }
+.alternatives-page .recommendation { background: var(--cream-2); }

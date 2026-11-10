@@ -103,6 +103,25 @@ describe('injectHtml', () => {
     assert.deepEqual(nodes.find((node) => node['@type'] === 'BreadcrumbList').itemListElement.map((item) => item.name), ['SpecScore.md', 'Сравнения', 'Аналоги OpenSpec в 2026 году']);
   });
 
+  it('gives each competitor alternatives page Article, FAQ and breadcrumbs', () => {
+    for (const slug of ['spec-kit', 'kiro', 'tessl', 'bmad-method', 'task-master-ai', 'datarim', 'codespeak']) {
+      for (const prefix of ['', '/ru']) {
+        const url = `https://specscore.md${prefix}/alternatives/${slug}/`;
+        const html = `<!doctype html><html lang="${prefix ? 'ru' : 'en'}"><head><link rel="canonical" href="${url}"></head><body>
+<a href="${prefix}/" class="wordmark">SpecScore.md</a>
+<p class="hero__breadcrumb"><a href="${prefix}/vs/">Comparisons</a></p>
+<h1 class="hero__headline">${slug} alternatives in 2026</h1>
+<p class="hero__sub">A guide to choosing a specification tool.</p>
+<h2 class="faq-item__q">What is ${slug}?</h2><div class="faq-item__a"><p>A development tool.</p></div>
+</body></html>`;
+        const nodes = graph(html)['@graph'];
+        assert.equal(nodes.find((node) => node['@type'] === 'Article').url, url);
+        assert.equal(nodes.find((node) => node['@type'] === 'FAQPage').mainEntity[0].name, `What is ${slug}?`);
+        assert.equal(nodes.find((node) => node['@type'] === 'BreadcrumbList').itemListElement.length, 3);
+      }
+    }
+  });
+
   it('uses the visible comparison heading, lede, and breadcrumb link', () => {
     const html = `<!doctype html>
 <html lang="es"><head><link rel="canonical" href="https://specscore.md/es/vs/spec-kit/"></head><body>

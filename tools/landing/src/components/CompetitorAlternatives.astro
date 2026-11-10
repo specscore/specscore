@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import SiteFooterRu from './SiteFooterRu.astro';
+import Inlines from './Inlines.astro';
+import { angles, alternativeSlugs, listedAlternatives, type AlternativeSlug } from '../content/alternatives.ts';
+import { pageFor } from '../content/roundup/pages.ts';
+import { href, type ToolId } from '../content/roundup/facts.ts';
+import type { Block } from '../content/roundup/types.ts';
+
+const ru = Astro.url.pathname.startsWith('/ru/');
+const locale = ru ? 'ru' : 'en';
+const prefix = ru ? '/ru' : '';
+const slug = Astro.url.pathname.split('/').filter(Boolean).pop() as AlternativeSlug;
+if (!alternativeSlugs.includes(slug)) throw new Error(`Unknown alternatives page: ${slug}`);
+const angle = angles[slug][locale];
+const page = pageFor(locale);
+const target = page.tools[slug];
+const alternatives = listedAlternatives(slug);
+const url = `${prefix}/alternatives/${slug}/`;
+const vs = (id: string) => `${prefix}/vs/${id}/`;
+const alternativeHref = (id: string) => `${prefix}/alternatives/${id}/`;
+const title = ru
+  ? `Аналоги ${target.name} в 2026: SpecScore, OpenSpec и другие`
+  : `${target.name} Alternatives in 2026: SpecScore, OpenSpec and more`;
+const examples = ['specscore', ...alternatives.filter((id) => id !== 'specscore').slice(0, 2)]
+  .map((id) => page.tools[id].name).join(', ');
+const description = ru
+  ? `Альтернативы ${target.name}: что это за инструмент и как ${examples} отличаются по формату, работе с агентами и проверкам.`
+  : `What ${target.name} is and how ${examples} compare by spec format, agent workflow and validation.`;
+const headline = ru ? `Аналоги ${target.name} в 2026 году` : `${target.name} alternatives in 2026`;
+
+const source: Record<AlternativeSlug, string> = {
+  'spec-kit': href.specKitRepo,
+  kiro: href.kiroSpecs,
+  tessl: href.tesslDocs,
+  'bmad-method': href.bmadRepo,
+  'task-master-ai': href.tmRepo,
+  datarim: href.datarimRepo,
+  codespeak: href.codespeak,
+};
+
+const agent: Record<ToolId, { en: string; ru: string }> = {
+  'spec-kit': { en: 'Commands for coding agents', ru: 'Команды для кодирующих агентов' },
+  openspec: { en: 'Commands for multiple AI assistants', ru: 'Команды для разных ИИ-ассистентов' },
+  kiro: { en: 'Built-in Kiro agent', ru: 'Встроенный агент Kiro' },
+  tessl: { en: 'Agent skills and spec tile', ru: 'Навыки агентов и tile спецификаций' },
+  'bmad-method': { en: 'Agent skills and roles', ru: 'Навыки и роли агентов' },
+  'task-master-ai': { en: 'Generated tasks for agents', ru: 'Задачи для агентов' },
+  codespeak: { en: 'Intent from agent chats', ru: 'Намерение из чатов агента' },
+  datarim: { en: 'Staged commands for coding agents', ru: 'Поэтапные команды для агентов' },
+  'plain-markdown': { en: 'Agent reads it when instructed', ru: 'Агент читает файл по инструкции' },
+  specscore: { en: 'CLI usable by any agent; Claude Code skills', ru: 'CLI для любого агента; навыки Claude Code' },
+};
+
+const approach: Record<ToolId, { en: string; ru: string }> = {
+  'spec-kit': { en: 'leads coding agents through feature specification, planning and tasks', ru: 'ведёт агента через спецификацию функции, план и задачи' },
+  openspec: { en: 'organizes proposed changes in folders and validates their structure', ru: 'хранит изменения в отдельных папках и проверяет их структуру' },
+  kiro: { en: 'drafts EARS requirements, design and tasks inside its development environment', ru: 'создаёт требования EARS, дизайн и задачи внутри своей среды разработки' },
+  tessl: { en: 'manages agent skills; its separate tile writes .spec.md files and includes validation scripts', ru: 'управляет навыками агентов; отдельный tile создаёт .spec.md и содержит скрипты проверки' },
+  'bmad-method': { en: 'organizes planning artifacts and agent roles across a wider agile method', ru: 'организует артефакты планирования и роли агентов в более широком гибком методе' },
+  'task-master-ai': { en: 'parses a PRD into generated tasks for coding agents', ru: 'превращает PRD в задачи для кодирующих агентов' },
+  codespeak: { en: 'captures intent from agent chats as requirements mapped to code inside its product', ru: 'извлекает намерение из чатов в требования, связанные с кодом внутри продукта' },
+  datarim: { en: 'runs staged agent commands, keeps a PRD and backlog, and checks implementation when asked', ru: 'выполняет поэтапные команды агента, ведёт PRD и бэклог, а по запросу сверяет реализацию' },
+  'plain-markdown': { en: 'leaves the file structure and checks to the team', ru: 'оставляет структуру файла и проверки на усмотрение команды' },
+  specscore: { en: 'defines a Markdown and YAML spec format with CLI checks for structure, references and status', ru: 'задаёт формат Markdown и YAML с CLI-проверкой структуры, ссылок и статусов' },
+};
+
+function localize(parts: Block): Block {
+  return parts.map((part) => {
+    if (typeof part === 'string' || 'c' in part || 's' in part || 'e' in part) return part;
+    return { ...part, href: part.href.startsWith('/') && !part.href.startsWith('//') ? `${prefix}${part.href}` : part.href };
+  });
+}
+
+const alternativeNames = alternatives.map((id) => page.tools[id].name).join(', ');
+const definition = angle.intro.split(/(?<=\.)\s/)[0];
+const faqs = ru ? [
+  { q: `Что такое ${target.name}?`, a: definition },
+  { q: `Какие есть аналоги ${target.name}?`, a: `${alternativeNames} решают разные части работы со спецификациями. Таблица выше показывает формат, работу с агентами и лицензию каждого варианта.` },
+  { q: `${target.name} или SpecScore: что выбрать?`, a: angle.specscore },
+] : [
+  { q: `What is ${target.name}?`, a: definition },
+  { q: `What are the alternatives to ${target.name}?`, a: `${alternativeNames} cover different parts of spec-driven development. The table above compares format, agent integration and licence.` },
+  { q: `${target.name} vs SpecScore: which should I choose?`, a: angle.specscore },
+];
+const Footer = ru ? SiteFooterRu : SiteFooter;
+---
+
+<BaseLayout title={title} description={description} canonical={`https://specscore.md${url}`} lang={locale}>
+  <SiteHeader />
+  <main class="alternatives-page">
+    <section class="hero" aria-labelledby="hero-title"><div class="hero__inner">
+      <p class="hero__breadcrumb"><a href={`${prefix}/vs/`} class="xref">{ru ? 'Сравнения' : 'Comparisons'}</a></p>
+      <h1 id="hero-title" class="hero__headline">{headline}</h1>
+      <p class="hero__sub">{angle.intro}</p>
+    </div></section>
+
+    <section class="section"><div class="section-inner section-inner--prose">
+      <h2 class="section-title">{ru ? `Зачем искать альтернативы ${target.name}` : `Why look for a ${target.name} alternative`}</h2>
+      <p class="prose-p">{angle.why}</p>
+      <p class="prose-p">{ru ? 'Факты о продукте и лицензии: ' : 'Product and licence facts: '}<a href={source[slug]} class="xref" target="_blank" rel="nofollow noopener">{ru ? 'официальный источник' : 'official source'}</a>.</p>
+    </div></section>
+
+    {alternatives.map((id) => {
+      const tool = page.tools[id];
+      return <section class="section" id={id} aria-labelledby={`${id}-title`}><div class="section-inner section-inner--prose">
+        <h2 id={`${id}-title`} class="section-title">{tool.name}</h2>
+        <p class="prose-p"><strong>{ru ? 'Что это: ' : 'What it is: '}</strong><Inlines parts={localize(tool.what)} /></p>
+        <p class="prose-p"><strong>{ru ? `Отличие от ${target.name}: ` : `How it differs from ${target.name}: `}</strong>{angle.mechanism}. {ru ? 'Для сравнения, ' : 'By comparison, '}{tool.name} {approach[id][locale]}.</p>
+        <p class="prose-p"><strong>{ru ? 'Кому подходит: ' : 'Best for: '}</strong><Inlines parts={localize(tool.suits)} />. {id !== 'plain-markdown' && id !== 'specscore' && <a href={alternativeHref(id)} class="xref">{ru ? `Другие аналоги ${tool.name}` : `More ${tool.name} alternatives`}</a>} <a href={vs(id === 'specscore' ? slug : id)} class="xref">{ru ? 'Подробное сравнение' : 'Detailed comparison'}</a>.</p>
+      </div></section>;
+    })}
+
+    <section class="section table-section"><div class="section-inner">
+      <h2 class="section-title">{ru ? `Сравнение альтернатив ${target.name}` : `${target.name} alternatives at a glance`}</h2>
+      <div class="table-wrap"><table class="compare-table" aria-label={ru ? `Сравнение аналогов ${target.name}` : `${target.name} alternatives comparison`}>
+        <thead><tr><th scope="col">{ru ? 'Инструмент' : 'Tool'}</th><th scope="col">{ru ? 'Формат и расположение' : 'Format and location'}</th><th scope="col">{ru ? 'Работа с ИИ-агентом' : 'AI-agent integration'}</th><th scope="col">{ru ? 'Проверка спецификации' : 'Spec validation'}</th><th scope="col">{ru ? 'Исходный код и лицензия' : 'Source and licence'}</th></tr></thead>
+        <tbody>{[slug, ...alternatives].map((id) => <tr>
+          <th scope="row"><a href={vs(id === 'specscore' ? slug : id)} class="xref">{page.tools[id].name}</a></th>
+          <td><Inlines parts={localize(page.tools[id].storage)} /></td>
+          <td>{agent[id][locale]}</td>
+          <td><Inlines parts={localize(page.tools[id].validation)} /></td>
+          <td><Inlines parts={localize(page.tools[id].licence)} /></td>
+        </tr>)}</tbody>
+      </table></div>
+    </div></section>
+
+    <section class="section"><div class="section-inner section-inner--prose">
+      <h2 class="section-title">{ru ? 'Как выбрать' : 'How to choose'}</h2>
+      <p class="prose-p">{angle.choose}</p>
+      <p class="prose-p">{ru ? 'Подробнее: ' : 'Read more: '}<a href={vs(slug)} class="xref">SpecScore vs {target.name}</a>, <a href={`${prefix}/spec-driven-development/tools/`} class="xref">{ru ? 'все инструменты разработки по спецификациям' : 'spec-driven development tools'}</a>, <a href={`${prefix}/#what-is-title`} class="xref">{ru ? 'что такое SpecScore' : 'what SpecScore is'}</a>.</p>
+    </div></section>
+
+    <section class="section"><div class="section-inner section-inner--prose">
+      <h2 class="section-title">{ru ? 'Частые вопросы' : 'Frequently asked questions'}</h2>
+      {faqs.map((faq) => <div class="faq-item"><h2 class="faq-item__q">{faq.q}</h2><div class="faq-item__a"><p>{faq.a}</p></div></div>)}
+    </div></section>
+
+    <section class="section recommendation"><div class="section-inner section-inner--prose">
+      <h2 class="section-title">{ru ? `Почему выбрать SpecScore вместо ${target.name}` : `Why choose SpecScore over ${target.name}`}</h2>
+      <p class="prose-p">{angle.specscore}</p>
+      <p class="prose-p"><a href={`${prefix}/cli/install/`} class="xref">{ru ? 'Установить SpecScore CLI' : 'Install the SpecScore CLI'}</a>.</p>
+    </div></section>
+  </main>
+  <Footer />
+</BaseLayout>
