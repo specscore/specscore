@@ -1,4 +1,4 @@
-import { copyFile } from 'node:fs/promises';
+import { copyFile, rm } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -112,6 +112,22 @@ export default defineConfig({
       hooks: {
         'astro:build:done': async ({ dir }) => {
           await writeLlmsFiles(dir, repoRoot);
+        },
+      },
+    },
+    {
+      // Route directories keep README.md files per repo policy. Astro treats
+      // Markdown in src/pages as pages, so remove their generated HTML routes.
+      name: 'exclude-route-readmes',
+      hooks: {
+        'astro:build:done': async ({ dir }) => {
+          const out = fileURLToPath(dir);
+          for (const locale of ['', 'ru/']) {
+            await rm(join(out, `${locale}alternatives/README`), { recursive: true, force: true });
+            for (const slug of ['openspec', 'spec-kit', 'kiro', 'tessl', 'bmad-method', 'task-master-ai', 'datarim', 'codespeak']) {
+              await rm(join(out, `${locale}alternatives/${slug}/README`), { recursive: true, force: true });
+            }
+          }
         },
       },
     },

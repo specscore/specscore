@@ -70,4 +70,18 @@ describe('alternates', () => {
     assert.deepEqual(links.map((link) => link.hreflang), ['ru', 'x-default']);
     assert.equal(links[0].href, links[1].href);
   });
+
+  it('pairs every English and Russian alternatives route only', () => {
+    for (const slug of ['openspec', 'spec-kit', 'kiro', 'tessl', 'bmad-method', 'task-master-ai', 'datarim', 'codespeak']) {
+      const pages = inventoryFromFiles([
+        `../pages/alternatives/${slug}/index.astro`,
+        `../pages/ru/alternatives/${slug}/index.astro`,
+      ]);
+      assert.deepEqual(
+        alternatesForPath(pages, `/alternatives/${slug}/`).map((link) => link.hreflang),
+        ['en', 'ru', 'x-default'],
+      );
+      assert.equal(localeHasRoute(pages, 'es', `/alternatives/${slug}/`), false);
+    }
+  });
 });

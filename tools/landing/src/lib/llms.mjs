@@ -6,6 +6,7 @@ import { firstBlock, htmlToMarkdown, sectionMarkdown } from './html-to-md.mjs';
 
 const ORIGIN = 'https://specscore.md';
 const LOCALES = ['es', 'de', 'fr', 'it', 'pl', 'pt-br', 'ru', 'tr', 'uk', 'ja', 'zh-cn', 'zh-tw', 'ko'];
+const ALTERNATIVE_SLUGS = ['openspec', 'spec-kit', 'kiro', 'tessl', 'bmad-method', 'task-master-ai', 'datarim', 'codespeak'];
 
 const SUMMARY = [
   '> SpecScore is an open, lintable Markdown and YAML file format for specifications — features, requirements, and acceptance criteria — plus a command-line interface (CLI) that AI agents call to query, edit, and lint those files.',
@@ -166,6 +167,7 @@ export async function writeLlmsFiles(dir, rootDir) {
     ...localeRoutes('/spec-driven-development/'),
     ...localeRoutes('/cli/install/'),
     ...localeRoutes('/vs/'),
+    ...ALTERNATIVE_SLUGS.flatMap((slug) => [`/alternatives/${slug}/`, `/ru/alternatives/${slug}/`]),
   ];
 
   for (const route of routes) {
@@ -211,6 +213,13 @@ export async function writeLlmsFiles(dir, rootDir) {
   const sdd = await bodyOf('/spec-driven-development/');
   const install = await bodyOf('/cli/install/');
   const vsIndex = await bodyOf('/vs/');
+  const alternatives = await Promise.all(ALTERNATIVE_SLUGS.flatMap((slug) => [
+    bodyOf(`/alternatives/${slug}/`), bodyOf(`/ru/alternatives/${slug}/`),
+  ]));
+  const alternativeEntries = alternatives.map((item) => {
+    const title = (item.body.match(/^#\s+(.+)$/m) || [])[1] || item.url;
+    return { title, url: item.url, description: oneLineDescription(item.body, title) };
+  });
   const toolsFile = join(dist, 'spec-driven-development', 'tools.md');
   const toolsRaw = await readFile(toolsFile, 'utf8');
   const vsDir = join(dist, 'vs');
@@ -293,6 +302,7 @@ export async function writeLlmsFiles(dir, rootDir) {
       },
     ]],
     ['Articles', articleEntries],
+    ['Alternatives', alternativeEntries],
     ['Comparisons', [
       {
         title: 'How SpecScore compares',
@@ -309,6 +319,7 @@ export async function writeLlmsFiles(dir, rootDir) {
     { title: 'Spec-driven development', url: `${ORIGIN}/spec-driven-development.md`, body: sdd.body },
     { title: 'Spec-driven development tools', url: `${ORIGIN}/spec-driven-development/tools.md`, body: toolsRaw },
     ...articles.map(({ title, url, body }) => ({ title, url, body })),
+    ...alternatives.map((item) => ({ title: (item.body.match(/^#\s+(.+)$/m) || [])[1] || item.url, url: item.url, body: item.body })),
     { title: 'How SpecScore compares', url: vsIndex.url, body: vsIndex.body },
     ...vsPages.map((page) => ({ title: page.name.replace(/\.md$/, ''), url: page.url, body: page.body })),
     { title: 'Documentation (getting started)', url: `${ORIGIN}/docs.md`, body: docsRaw },

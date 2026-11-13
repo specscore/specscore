@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import SiteFooterDe from './SiteFooterDe.astro';
+import SiteFooterEs from './SiteFooterEs.astro';
+import SiteFooterFr from './SiteFooterFr.astro';
+import SiteFooterIt from './SiteFooterIt.astro';
+import SiteFooterJa from './SiteFooterJa.astro';
+import SiteFooterKo from './SiteFooterKo.astro';
+import SiteFooterPl from './SiteFooterPl.astro';
+import SiteFooterPtBr from './SiteFooterPtBr.astro';
+import SiteFooterRu from './SiteFooterRu.astro';
+import SiteFooterTr from './SiteFooterTr.astro';
+import SiteFooterUk from './SiteFooterUk.astro';
+import SiteFooterZhCn from './SiteFooterZhCn.astro';
+import SiteFooterZhTw from './SiteFooterZhTw.astro';
+import { langs, localeFromPath, localeHref } from '../lib/languages.ts';
+import { committedMeHref, deliveryCopy, deliveryRoute } from '../content/articles/delivery.ts';
+const locale = localeFromPath(Astro.url.pathname);
+const page = deliveryCopy(locale);
+const lang = langs.find((item) => item.code === locale)!.tag;
+const footers = {
+  en: SiteFooter,
+  es: SiteFooterEs,
+  de: SiteFooterDe,
+  fr: SiteFooterFr,
+  it: SiteFooterIt,
+  pl: SiteFooterPl,
+  'pt-br': SiteFooterPtBr,
+  ru: SiteFooterRu,
+  tr: SiteFooterTr,
+  uk: SiteFooterUk,
+  ja: SiteFooterJa,
+  'zh-cn': SiteFooterZhCn,
+  'zh-tw': SiteFooterZhTw,
+  ko: SiteFooterKo,
+};
+const Footer = footers[locale];
+
+const canonical = `https://specscore.md${localeHref(locale, deliveryRoute)}`;
+const markdownHref = localeHref(locale, deliveryRoute.replace(/\/$/, '.md'));
+---
+<BaseLayout title={`${page.title} — SpecScore`} description={page.description} canonical={canonical} lang={lang} markdownHref={markdownHref} ogType="article">
+  <SiteHeader />
+  <main class="delivery-article">
+    <article>
+      <header class="delivery-article__hero">
+        <div class="section-inner section-inner--prose">
+          <p class="hero__breadcrumb"><a class="xref" href={localeHref(locale, '/articles/')}>{page.breadcrumb}</a></p>
+          <h1 class="hero__headline delivery-article__title">{page.title}</h1>
+          <p class="hero__sub delivery-article__intro">{page.intro}</p>
+        </div>
+      </header>
+      <div class="section-inner section-inner--prose delivery-article__body">
+        {page.sections.map((section, index) => (
+          <section aria-labelledby={`delivery-section-${index}`}>
+            <h2 id={`delivery-section-${index}`}>{section.title}</h2>
+            {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          </section>
+        ))}
+        <section aria-labelledby="delivery-review">
+          <h2 id="delivery-review">{page.reviewTitle}</h2>
+          <ul class="delivery-article__worksheet">{page.reviewLines.map((line) => <li>{line}</li>)}</ul>
+        </section>
+        <section aria-labelledby="delivery-accountability">
+          <h2 id="delivery-accountability">{page.ctaTitle}</h2>
+          <p>{page.ctaBody}</p>
+          <p><a class="xref" href={committedMeHref(locale, 'article_footer')} target="_blank">{page.explore} →</a></p>
+          <aside class="delivery-article__mentor">
+            <p>{page.mentorBody}</p>
+            <p><a class="xref" href={committedMeHref(locale, 'article_mentor')} target="_blank">{page.mentorLink} →</a></p>
+          </aside>
+          <p class="delivery-article__disclosure">{page.disclosure}</p>
+        </section>
+        <section aria-labelledby="delivery-related">
+          <h2 id="delivery-related">{page.relatedTitle}</h2>
+          <p><a class="xref" href={localeHref(locale, '/articles/acceptance-criteria/')}>{page.relatedLink} →</a></p>
+        </section>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

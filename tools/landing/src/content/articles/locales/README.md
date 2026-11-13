@@ -25,6 +25,8 @@ One TypeScript module per locale for `/articles/`, `/articles/acceptance-criteri
 
 EARS keywords, example sentences, and the linted SpecScore samples stay in English.
 
+[`delivery/`](delivery/) contains complete weekly delivery translations, including English, plus the homepage copy and optional mentor invitation.
+
 ## Outstanding Questions
 
 None at this time.

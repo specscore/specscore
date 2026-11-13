@@ -1,11 +1,13 @@
 ---
 // /vs/ — Comparison index page.
 // Lists tools that compete or coexist with SpecScore.
-// Currently only OpenSpec; more entries can be added here.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
+import { alternativeSlugs } from '../../content/alternatives.ts';
+import { pageFor } from '../../content/roundup/pages.ts';
+const tools = pageFor('en').tools;
 ---
 
 <BaseLayout
@@ -30,6 +32,8 @@ import ComparisonFeedback from '../../components/ComparisonFeedback.astro';
           <a href="/spec-driven-development/tools/" class="xref">Best spec-driven development tools in 2026</a>
           puts the same tools on one page.
         </p>
+        <p class="hero__sub"><a href="/alternatives/openspec/" class="xref">OpenSpec alternatives in 2026</a> compares seven options by format, agent integration and licence.</p>
+        <p class="hero__sub">More alternatives guides: {alternativeSlugs.map((slug, index) => <>{index > 0 && ', '}<a href={`/alternatives/${slug}/`} class="xref">{tools[slug].name}</a></>)}.</p>
       </div>
     </section>
 

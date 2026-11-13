@@ -1,3 +1,4 @@
+import { deliveryCopy, deliveryRoute } from './delivery.ts';
 import type { LangCode } from '../../lib/languages.ts';
 import { acceptanceHref, agentsHref, earsHref, lintHref, manageHref, patternExample, patternForm, patternOrder, templateHref } from './facts.ts';
 import type {
@@ -59,7 +60,9 @@ export function acceptanceCopy(code: LangCode): AcceptanceArticleCopy {
 }
 
 export function indexCopy(code: LangCode): IndexCopy {
-  return articleLocale(code).index;
+  const page = articleLocale(code).index;
+  const delivery = deliveryCopy(code);
+  return { ...page, articles: [...page.articles, { href: deliveryRoute, title: delivery.title, summary: delivery.description }] };
 }
 
 export function lintCopy(code: LangCode): LintArticleCopy {
