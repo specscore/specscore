@@ -7,6 +7,7 @@ export const acceptanceSlug = 'acceptance-criteria';
 export const lintSlug = 'lint-specs-in-ci';
 export const templateSlug = 'feature-spec-template';
 export const agentsSlug = 'claude-code-specs';
+export const manageSlug = 'spec-management';
 
 export const earsHref = {
   sdd: '/spec-driven-development/',
@@ -583,4 +584,47 @@ export function agentsArticleHref(locale: LangCode): string {
 /** `/articles/claude-code-specs/` → `/articles/claude-code-specs.md`. */
 export function agentsArticleMdHref(locale: LangCode): string {
   return agentsArticleHref(locale).replace(/\/$/, '.md');
+}
+
+export const manageHref = {
+  sdd: '/spec-driven-development/',
+  tools: '/spec-driven-development/tools/',
+  articles: '/articles/',
+  article: '/articles/spec-management/',
+  lintArticle: '/articles/lint-specs-in-ci/',
+  earsArticle: '/articles/ears-requirements/',
+  acceptanceArticle: '/articles/acceptance-criteria/',
+  templateArticle: '/articles/feature-spec-template/',
+  home: '/',
+  validators: '/validators/',
+  cli: '/cli/',
+  cliInstall: '/cli/install/',
+  ai: '/ai/',
+  feature: '/feature-specification',
+  plan: '/plan-specification',
+  acceptance: '/acceptance-criteria-specification',
+  formatRepo: 'https://github.com/specscore/specscore',
+  formatLicense: 'https://github.com/specscore/specscore/blob/main/LICENSE',
+  cliRepo: 'https://github.com/specscore/specscore-cli',
+  cliLicense: 'https://github.com/specscore/specscore-cli/blob/main/LICENSE',
+  specTree: 'https://github.com/specscore/specscore/blob/main/spec/README.md',
+  featureStatus: 'https://github.com/specscore/specscore/blob/main/spec/features/feature/README.md',
+  planSnapshots: 'https://github.com/specscore/specscore/blob/main/spec/features/plan/README.md',
+  specGo39: 'https://github.com/specscore/specscore-cli/blob/v0.39.1/internal/cli/spec.go',
+  specGo55: 'https://github.com/specscore/specscore-cli/blob/v0.55.1/internal/cli/spec.go',
+  lintRules39: 'https://github.com/specscore/specscore-cli/blob/v0.39.1/docs/lint-rules.md',
+  lintRules55: 'https://github.com/specscore/specscore-cli/blob/v0.55.1/docs/lint-rules.md',
+  dogfood: 'https://github.com/specscore/specscore/blob/main/.github/workflows/dogfood.yml',
+  specKitSdd: 'https://github.github.io/spec-kit/reference/agentic-sdd.html',
+  openSpecCli: 'https://openspec.dev/docs/cli',
+  openSpecRepo: 'https://github.com/Fission-AI/OpenSpec',
+} as const;
+
+export function manageArticleHref(locale: LangCode): string {
+  return localeHref(locale, '/articles/spec-management/');
+}
+
+/** `/articles/spec-management/` → `/articles/spec-management.md`. */
+export function manageArticleMdHref(locale: LangCode): string {
+  return manageArticleHref(locale).replace(/\/$/, '.md');
 }

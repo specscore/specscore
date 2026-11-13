@@ -12,11 +12,13 @@ import {
   agentsSlug,
   lintArticleMdHref,
   lintSlug,
+  manageArticleMdHref,
+  manageSlug,
   templateArticleMdHref,
   templateSlug,
 } from '../src/content/articles/facts.ts';
-import { acceptanceCopy, agentsCopy, earsCopy, indexCopy, lintCopy, templateCopy } from '../src/content/articles/pages.ts';
-import { renderAcceptanceMarkdown, renderAgentsMarkdown, renderEarsMarkdown, renderIndexMarkdown, renderLintMarkdown, renderTemplateMarkdown } from '../src/content/articles/render-md.ts';
+import { acceptanceCopy, agentsCopy, earsCopy, indexCopy, lintCopy, manageCopy, templateCopy } from '../src/content/articles/pages.ts';
+import { renderAcceptanceMarkdown, renderAgentsMarkdown, renderEarsMarkdown, renderIndexMarkdown, renderLintMarkdown, renderManageMarkdown, renderTemplateMarkdown } from '../src/content/articles/render-md.ts';
 
 function markdownFor(locale: LangCode, slug: string | undefined): string | undefined {
   if (slug === deliverySlug) return deliveryMarkdown(locale);
@@ -43,6 +45,10 @@ function markdownFor(locale: LangCode, slug: string | undefined): string | undef
   if (slug === agentsSlug) {
     const canonical = `https://specscore.md${localeHref(locale, '/articles/claude-code-specs/')}`;
     return renderAgentsMarkdown(agentsCopy(locale), locale, canonical);
+  }
+  if (slug === manageSlug) {
+    const canonical = `https://specscore.md${localeHref(locale, '/articles/spec-management/')}`;
+    return renderManageMarkdown(manageCopy(locale), locale, canonical);
   }
   return undefined;
 }
@@ -78,6 +84,7 @@ if (printUrl) {
       [lintArticleMdHref(lang.code), lintSlug],
       [templateArticleMdHref(lang.code), templateSlug],
       [agentsArticleMdHref(lang.code), agentsSlug],
+      [manageArticleMdHref(lang.code), manageSlug],
     ];
     for (const [relHref, slug] of files) {
       const body = markdownFor(lang.code, slug);

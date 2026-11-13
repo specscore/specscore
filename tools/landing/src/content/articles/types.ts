@@ -330,6 +330,62 @@ export interface AgentsArticleCopy {
   ctaGithub: string;
 }
 
+export interface ManageArticleCopy {
+  metaTitle: string;
+  metaDescription: string;
+  h1: string;
+  updated: string;
+  breadcrumb: string;
+  hero: Block;
+  storeTitle: string;
+  store: Block[];
+  versionTitle: string;
+  version: Block[];
+  reviewTitle: string;
+  review: Block[];
+  currentTitle: string;
+  current: Block[];
+  workflowCaption: string;
+  currentAfter: Block[];
+  compareTitle: string;
+  compare: Block[];
+  faqTitle: string;
+  faqs: { q: string; a: Block }[];
+  sourcesTitle: string;
+  sourcesNote: string;
+  sourceLabel: {
+    specTree: string;
+    featureStatus: string;
+    planSnapshots: string;
+    formatRepo: string;
+    formatLicense: string;
+    cli: string;
+    cliLicense: string;
+    specGo39: string;
+    specGo55: string;
+    lintRules39: string;
+    lintRules55: string;
+    dogfood: string;
+    validators: string;
+    lintArticle: string;
+    earsArticle: string;
+    acceptanceArticle: string;
+    templateArticle: string;
+    feature: string;
+    plan: string;
+    specKitSdd: string;
+    openSpecCli: string;
+    openSpecRepo: string;
+    tools: string;
+  };
+  relatedTitle: string;
+  related: { href: string; label: string }[];
+  ctaTitle: string;
+  ctaInstall: string;
+  ctaSkills: string;
+  ctaGithub: string;
+}
+
 export interface IndexArticle {
   href: string;
   title: string;
@@ -351,5 +407,6 @@ export interface ArticleLocale {
   lint: LintArticleCopy;
   template: TemplateArticleCopy;
   agents: AgentsArticleCopy;
+  manage: ManageArticleCopy;
   index: IndexCopy;
 }

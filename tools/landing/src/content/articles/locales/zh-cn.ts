@@ -3,6 +3,7 @@ import { acceptanceHref, earsHref, lintHref, templateHref } from '../facts.ts';
 import { lint, indexCard, relatedLabel } from './lint/zh-cn.ts';
 import { template, indexCard as templateCard, relatedLabel as templateLabel } from './template/zh-cn.ts';
 import { agents, indexCard as agentsCard } from './agents/zh-cn.ts';
+import { indexCard as manageCard, manage } from './manage/zh-cn.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -724,6 +725,7 @@ export const locale: ArticleLocale = {
   lint,
   template,
   agents,
+  manage,
   index: {
     metaTitle: '文章 | SpecScore',
     metaDescription: "关于需求记法与规范驱动开发的文章，包括 EARS 需求语法，以及如何写成 SpecScore 需求。 SpecScore 的文章：如何写验收标准、Given/When/Then，以及面向 AI 编程代理的可验证验收标准。",

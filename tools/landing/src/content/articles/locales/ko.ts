@@ -3,6 +3,7 @@ import { acceptanceHref, earsHref, lintHref, templateHref } from '../facts.ts';
 import { lint, indexCard, relatedLabel } from './lint/ko.ts';
 import { template, indexCard as templateCard, relatedLabel as templateLabel } from './template/ko.ts';
 import { agents, indexCard as agentsCard } from './agents/ko.ts';
+import { indexCard as manageCard, manage } from './manage/ko.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -724,6 +725,7 @@ export const locale: ArticleLocale = {
   lint,
   template,
   agents,
+  manage,
   index: {
     metaTitle: '글 | SpecScore',
     metaDescription: "요구사항 표기법과 명세 주도 개발에 관한 글. EARS 요구사항 구문과 SpecScore로 적는 방법을 포함합니다. 인수 기준을 쓰는 법, Given/When/Then, AI 코딩 에이전트를 위한 검증 가능한 인수 기준에 대한 SpecScore 글입니다.",

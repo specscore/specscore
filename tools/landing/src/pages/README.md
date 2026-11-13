@@ -11,6 +11,7 @@ Astro file-based routes. One file per route.
 | `articles/lint-specs-in-ci/index.astro` | `/articles/lint-specs-in-ci/` | How to lint specifications in CI. |
 | `articles/feature-spec-template/index.astro` | `/articles/feature-spec-template/` | A PRD and feature spec template in Markdown for AI coding. |
 | `articles/claude-code-specs/index.astro` | `/articles/claude-code-specs/` | Spec-driven development with Claude Code and Cursor. |
+| `articles/spec-management/index.astro` | `/articles/spec-management/` | Spec management: store, version, and review specifications as Markdown in git, and lint them in CI. |
 | `alternatives/openspec/index.astro` | `/alternatives/openspec/` | English OpenSpec alternatives article; Russian counterpart under `ru/`. |
 | `alternatives/{spec-kit,kiro,tessl,bmad-method,task-master-ai,datarim,codespeak}/index.astro` | `/alternatives/<slug>/` | Seven competitor alternatives articles in English, with Russian counterparts under `ru/`. |
 

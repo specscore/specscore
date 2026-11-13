@@ -3,6 +3,7 @@ import { acceptanceHref, earsHref, lintHref, templateHref } from '../facts.ts';
 import { lint, indexCard, relatedLabel } from './lint/pl.ts';
 import { template, indexCard as templateCard, relatedLabel as templateLabel } from './template/pl.ts';
 import { agents, indexCard as agentsCard } from './agents/pl.ts';
+import { indexCard as manageCard, manage } from './manage/pl.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -723,6 +724,7 @@ export const locale: ArticleLocale = {
   lint,
   template,
   agents,
+  manage,
   index: {
     metaTitle: 'Artykuły | SpecScore',
     metaDescription: "Artykuły o notacji wymagań i rozwoju sterowanym specyfikacją, w tym składnia wymagań EARS i zapis wymagania w SpecScore. Artykuły SpecScore o tym, jak pisać kryteria akceptacji, o Given/When/Then i o sprawdzalnych kryteriach akceptacji dla agentów kodujących z AI.",

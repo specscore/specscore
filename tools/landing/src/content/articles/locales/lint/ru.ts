@@ -2,6 +2,7 @@ import type { Block, LintArticleCopy } from '../../types.ts';
 import { lintHref, templateHref } from '../../facts.ts';
 import { relatedLabel as templateLabel } from '../template/ru.ts';
 import { relatedLabel as agentsLabel } from '../agents/ru.ts';
+import { relatedLabel as manageLabel } from '../manage/ru.ts';
 
 const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
@@ -361,6 +362,7 @@ export const lint: LintArticleCopy = {
   },
   relatedTitle: 'Связанное',
   related: [
+    { href: '/articles/spec-management/', label: manageLabel },
     { href: '/articles/claude-code-specs/', label: agentsLabel },
     { href: templateHref.article, label: templateLabel },
     { href: lintHref.acceptanceArticle, label: 'Как писать критерии приёмки, которые проверит ИИ-агент' },
