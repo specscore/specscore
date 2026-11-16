@@ -5,6 +5,7 @@ Astro file-based routes. One file per route.
 | File | Route | Purpose |
 |---|---|---|
 | `index.astro` | `/` | The SpecScore homepage. Imports all section components in IA order and renders them inside `BaseLayout`. |
+| `what-is-specscore/index.astro` | `/what-is-specscore/` | English explainer: what SpecScore is and what a spec score means (`WhatIsSpecScorePage.astro`). |
 | `articles/index.astro` | `/articles/` | Index of informational articles. |
 | `articles/acceptance-criteria/index.astro` | `/articles/acceptance-criteria/` | How to write acceptance criteria an AI agent can verify. |
 | `articles/ears-requirements/index.astro` | `/articles/ears-requirements/` | EARS requirements syntax. |

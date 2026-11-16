@@ -168,6 +168,7 @@ export async function writeLlmsFiles(dir, rootDir) {
     ...localeRoutes('/cli/install/'),
     ...localeRoutes('/vs/'),
     ...ALTERNATIVE_SLUGS.flatMap((slug) => [`/alternatives/${slug}/`, `/ru/alternatives/${slug}/`]),
+    '/what-is-specscore/',
   ];
 
   for (const route of routes) {
@@ -213,6 +214,7 @@ export async function writeLlmsFiles(dir, rootDir) {
   const sdd = await bodyOf('/spec-driven-development/');
   const install = await bodyOf('/cli/install/');
   const vsIndex = await bodyOf('/vs/');
+  const explainer = await bodyOf('/what-is-specscore/');
   const alternatives = await Promise.all(ALTERNATIVE_SLUGS.flatMap((slug) => [
     bodyOf(`/alternatives/${slug}/`), bodyOf(`/ru/alternatives/${slug}/`),
   ]));
@@ -281,6 +283,11 @@ export async function writeLlmsFiles(dir, rootDir) {
         description: oneLineDescription(whatIs, 'What the SpecScore format contains.'),
       },
       {
+        title: 'What is SpecScore? What a spec score means',
+        url: `${ORIGIN}/what-is-specscore.md`,
+        description: oneLineDescription(explainer.body, 'What SpecScore is and what a spec score means.'),
+      },
+      {
         title: 'Spec-driven development',
         url: `${ORIGIN}/spec-driven-development.md`,
         description: oneLineDescription(sdd.body, 'What spec-driven development is and how SpecScore implements it.'),
@@ -316,6 +323,7 @@ export async function writeLlmsFiles(dir, rootDir) {
   const fullParts = [
     { title: 'Home', url: `${ORIGIN}/index.md`, body: home.body },
     { title: 'What SpecScore is', url: `${ORIGIN}/what-specscore-is.md`, body: whatBody },
+    { title: 'What is SpecScore? What a spec score means', url: `${ORIGIN}/what-is-specscore.md`, body: explainer.body },
     { title: 'Spec-driven development', url: `${ORIGIN}/spec-driven-development.md`, body: sdd.body },
     { title: 'Spec-driven development tools', url: `${ORIGIN}/spec-driven-development/tools.md`, body: toolsRaw },
     ...articles.map(({ title, url, body }) => ({ title, url, body })),
