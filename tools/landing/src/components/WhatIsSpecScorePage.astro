@@ -1,0 +1,101 @@
+---
+// /what-is-specscore/ — English explainer for "what is spec score" searches.
+// Structured data (Article, FAQPage, BreadcrumbList) is derived from this HTML
+// by src/lib/structured-data.mjs; the raw Markdown twin by src/lib/llms.mjs.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import { href } from '../content/roundup/facts.ts';
+
+const url = '/what-is-specscore/';
+const published = '2026-11-16';
+const faqs = [
+  {
+    q: 'What is SpecScore?',
+    a: 'SpecScore is an open file format for software specifications, written in Markdown and YAML and kept in your git repository. Its command-line tool lints the specs, locally and in continuous integration (CI), so broken structure fails the build.',
+  },
+  {
+    q: 'What does "spec score" mean?',
+    a: 'In SpecScore, "score" has two meanings. Like a musical score, a spec tree lays out the parts of a product so a team or an AI agent can read them at once. It is also a check: the linter passes or fails a spec, and the optional /score skill grades an artifact from A to F.',
+  },
+  {
+    q: 'Is a spec score a number?',
+    a: 'Not by default. specscore spec lint reports pass or fail with the problems it found. The /score skill in SpecStudio Skills returns a letter grade from A to F, produced by the reviewers configured in specscore.yaml; Approved means the grade meets a threshold, B by default.',
+  },
+  {
+    q: 'What is a spec score outside SpecScore?',
+    a: 'People also use "spec score" for a rating of a product\'s technical specifications, such as a phone\'s. That is a different idea: SpecScore checks software specifications that describe what to build.',
+  },
+  {
+    q: 'Is SpecScore free?',
+    a: 'Yes. The format and documentation are published under CC BY 4.0 in the specscore/specscore repository, and the CLI is Apache-2.0 in specscore/specscore-cli.',
+  },
+];
+---
+
+<BaseLayout
+  title="What is SpecScore? What a spec score means"
+  description="What is SpecScore? An open Markdown + YAML format for software specifications, linted in CI. What a spec score means, and how specs are checked."
+  canonical={`https://specscore.md${url}`}
+  lang="en"
+  ogType="article"
+>
+  <SiteHeader />
+  <main class="what-is-specscore-page">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href="/faq/" class="xref">FAQ</a></p>
+        <h1 id="hero-title" class="hero__headline">What is SpecScore? What a spec score means</h1>
+        <p class="hero__sub">SpecScore is an open file format for software specifications that a linter checks in CI. A specification (spec) is a written description of what software must do. SDD (spec-driven development) means writing that spec before the code and checking the code against it. CI (continuous integration) is the automated build that runs on every change. Markdown is plain text with light formatting, and YAML is a plain-text format for structured fields.</p>
+        <p class="prose-p">Published <time datetime={published}>16 November 2026</time></p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="define-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="define-title" class="section-title">SpecScore in one paragraph</h2>
+        <p class="prose-p">SpecScore defines how to write features, requirements, acceptance criteria and plans as Markdown files with YAML fields, stored in a <code>spec/</code> folder of your repository. A requirement (REQ) is one behavior the software must have. An acceptance criterion (AC) is a check, written as Given / When / Then, that shows a requirement is met. A PRD (product requirements document) can be broken into these pieces. The <a href="/cli/" class="xref">specscore CLI</a> reads the tree, so people and AI coding agents work from the same files. Read <a href="/spec-driven-development/" class="xref">spec-driven development</a> for the method, and <a href="/#what-is-title" class="xref">the homepage overview</a> for the artifact lifecycle.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="score-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="score-title" class="section-title">What "score" means in SpecScore</h2>
+        <p class="prose-p"><strong>A score you read.</strong> A musical score sets out every part, voice and bar in one structured document. A SpecScore tree does the same for a product: features, their requirements, the acceptance criteria that verify them, and the plans and tasks that cite them, all linked and visible at once.</p>
+        <p class="prose-p"><strong>A score you pass.</strong> <code>specscore spec lint</code> is the deterministic check: it fails when required sections are missing, references are broken or a lifecycle status is wrong. The <a href={href.score} class="xref"><code>/score</code> skill</a> in <a href="/ai/" class="xref">SpecStudio Skills</a> is the AI-judged one: it runs the reviewers configured in <code>specscore.yaml</code> and returns an A–F grade with findings for each artifact.</p>
+        <p class="prose-p">Outside SpecScore, "spec score" can also mean a rating of a device's hardware specifications. This page is about software specifications.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="write-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="write-title" class="section-title">How SpecScore specs are written</h2>
+        <p class="prose-p">A Feature spec is a Markdown file with a short YAML header. Each requirement gets an ID, and each acceptance criterion names the requirement it verifies. Requirements can use EARS (Easy Approach to Requirements Syntax) sentences; see <a href="/articles/ears-requirements/" class="xref">EARS requirements</a>. For a starting point, use the <a href="/articles/feature-spec-template/" class="xref">feature spec template</a> and <a href="/articles/acceptance-criteria/" class="xref">acceptance criteria an agent can verify</a>.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="check-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="check-title" class="section-title">How specs are checked: locally and in CI</h2>
+        <p class="prose-p">Run <code>specscore spec lint</code> on your machine or in a pre-commit hook, then add the same command as a CI step so a pull request with a broken spec fails before it merges. This repository does that in its own <a href={href.dogfood} class="xref">dogfood workflow</a>, with a pinned CLI version. The step-by-step guide is <a href="/articles/lint-specs-in-ci/" class="xref">how to lint specs in CI</a>, and <a href="/cli/install/" class="xref">install the CLI</a> covers macOS, Linux and Windows.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="who-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="who-title" class="section-title">Who SpecScore is for</h2>
+        <p class="prose-p">Teams that write specs for AI coding agents and want those specs to stay correct as the code changes: broken links, missing sections and stale statuses fail the build instead of drifting. It works with any agent, or none, because the specs are ordinary files. To see how it differs from other tools, read <a href="/vs/" class="xref">how SpecScore compares</a> and the <a href="/spec-driven-development/tools/" class="xref">spec-driven development tools</a> roundup.</p>
+        <p class="prose-p">The format is <a href={href.formatRepo} class="xref">open source on GitHub</a> (<a href={href.formatLicense} class="xref">CC BY 4.0</a>), and so is the <a href={href.cliRepo} class="xref">CLI</a> (<a href={href.cliLicense} class="xref">Apache-2.0</a>).</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="faq-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="faq-title" class="section-title">Questions about SpecScore and spec scores</h2>
+        {faqs.map((faq) => <div class="faq-item"><h2 class="faq-item__q">{faq.q}</h2><div class="faq-item__a"><p>{faq.a}</p></div></div>)}
+        <p class="prose-p">More answers: the <a href="/faq/" class="xref">SpecScore FAQ</a>.</p>
+      </div>
+    </section>
+  </main>
+  <SiteFooter />
+</BaseLayout>

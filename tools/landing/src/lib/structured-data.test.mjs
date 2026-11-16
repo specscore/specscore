@@ -103,6 +103,23 @@ describe('injectHtml', () => {
     assert.deepEqual(nodes.find((node) => node['@type'] === 'BreadcrumbList').itemListElement.map((item) => item.name), ['SpecScore.md', 'Сравнения', 'Аналоги OpenSpec в 2026 году']);
   });
 
+  it('gives the what-is-specscore explainer an Article with its date, FAQ and breadcrumbs', () => {
+    const html = `<!doctype html><html lang="en"><head><link rel="canonical" href="https://specscore.md/what-is-specscore/"></head><body>
+<a href="/" class="wordmark">SpecScore.md</a>
+<p class="hero__breadcrumb"><a href="/faq/">FAQ</a></p>
+<h1 class="hero__headline">What is SpecScore? What a spec score means</h1>
+<p class="hero__sub">SpecScore is an open file format for software specifications.</p>
+<p>Published <time datetime="2026-11-16">16 November 2026</time></p>
+<h2 class="faq-item__q">What is SpecScore?</h2><div class="faq-item__a"><p>An open file format.</p></div>
+</body></html>`;
+    const nodes = graph(html)['@graph'];
+    const article = nodes.find((node) => node['@type'] === 'Article');
+    assert.equal(article.url, 'https://specscore.md/what-is-specscore/');
+    assert.equal(article.datePublished, '2026-11-16');
+    assert.equal(nodes.find((node) => node['@type'] === 'FAQPage').mainEntity[0].name, 'What is SpecScore?');
+    assert.deepEqual(nodes.find((node) => node['@type'] === 'BreadcrumbList').itemListElement.map((item) => item.name), ['SpecScore.md', 'FAQ', 'What is SpecScore? What a spec score means']);
+  });
+
   it('gives each competitor alternatives page Article, FAQ and breadcrumbs', () => {
     for (const slug of ['spec-kit', 'kiro', 'tessl', 'bmad-method', 'task-master-ai', 'datarim', 'codespeak']) {
       for (const prefix of ['', '/ru']) {

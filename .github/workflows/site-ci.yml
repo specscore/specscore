@@ -105,6 +105,12 @@ jobs:
             grep -q "https://specscore.md/alternatives/${slug}/" "public/ru/alternatives/${slug}/index.html"
           done
           test -s public/articles/lint-specs-in-ci/index.html
+          test -s public/what-is-specscore/index.html
+          grep -q 'https://specscore.md/what-is-specscore/' public/sitemap.xml
+          grep -q 'https://specscore.md/what-is-specscore.md' public/llms.txt
+          grep -q 'FAQPage' public/what-is-specscore/index.html
+          grep -q '"@type":"Article"' public/what-is-specscore/index.html
+          grep -q '"@type":"BreadcrumbList"' public/what-is-specscore/index.html
           grep -q 'FAQPage' public/index.html
           grep -q 'Organization' public/index.html
           grep -q 'text/markdown' public/index.html
