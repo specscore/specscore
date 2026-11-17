@@ -7,7 +7,9 @@ const changelog = 'https://github.com/bmad-code-org/BMAD-METHOD/blob/main/CHANGE
 const tags = 'https://github.com/bmad-code-org/BMAD-METHOD/tags';
 const docs = 'https://docs.bmad-method.org/';
 const agents = 'https://docs.bmad-method.org/reference/skills-and-agents/';
-const planning = 'https://docs.bmad-method.org/plan/choose-a-planning-path/';
+// The docs-site URL /plan/choose-a-planning-path/ now redirects to /start/how-bmad-works/,
+// which no longer carries the facts cited here; link the page's source on main instead.
+const planning = 'https://github.com/bmad-code-org/BMAD-METHOD/blob/main/docs/plan/choose-a-planning-path.md';
 const build = 'https://docs.bmad-method.org/build/build-a-change/';
 
 const them = (a: string, href: string): Block[number] => ({ a, href, kind: 'them' });
@@ -132,7 +134,7 @@ export const bmad: BmadArticleCopy = {
           { c: 'bmad-qa-generate-e2e-tests' },
           '. Each epic closes with ',
           { c: 'bmad-retrospective' },
-          ', which judges the combined result against the epic’s requirements. The skill names and their purposes are listed in ',
+          ', which reviews the completed epic against its evidence and decides whether to accept it. The skill names and their purposes are listed in ',
           them('Skills and Agents', agents),
           '.',
         ],
@@ -217,7 +219,7 @@ export const bmad: BmadArticleCopy = {
     { href: repo, label: 'BMAD-METHOD repository and README' },
     { href: docs, label: 'BMad documentation: Build Software with BMad' },
     { href: agents, label: 'BMad documentation: Skills and Agents' },
-    { href: planning, label: 'BMad documentation: Choose a Planning Path' },
+    { href: planning, label: 'BMad documentation source: Choose a Planning Path' },
     { href: build, label: 'BMad documentation: Build a Change' },
     { href: changelog, label: 'BMAD-METHOD changelog' },
     { href: tags, label: 'BMAD-METHOD tags' },
