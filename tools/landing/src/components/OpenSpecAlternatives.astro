@@ -88,7 +88,7 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
   <main class="alternatives-page">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__inner">
-        <p class="hero__breadcrumb"><a href={`${prefix}/vs/`} class="xref">{ru ? 'Сравнения' : 'Comparisons'}</a></p>
+        <p class="hero__breadcrumb"><a href={`${prefix}/alternatives/`} class="xref">{ru ? 'Аналоги' : 'Alternatives'}</a></p>
         <h1 id="hero-title" class="hero__headline">{content.h1}</h1>
         <p class="hero__sub">{content.intro}</p>
       </div>
@@ -144,7 +144,7 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
     <section class="section" aria-labelledby="choose-title"><div class="section-inner section-inner--prose">
       <h2 id="choose-title" class="section-title">{content.chooseTitle}</h2>
       <p class="prose-p">{content.choose}</p>
-      <p class="prose-p">{content.related}<a href={vs('openspec')} class="xref">{content.compare}</a>, <a href={`${prefix}/spec-driven-development/tools/`} class="xref">{content.tools}</a>, <a href={`${prefix}/#what-is-title`} class="xref">{content.home}</a>.</p>
+      <p class="prose-p">{content.related}<a href={vs('openspec')} class="xref">{content.compare}</a>, <a href={`${prefix}/spec-driven-development/tools/`} class="xref">{content.tools}</a>, <a href={`${prefix}/alternatives/`} class="xref">{ru ? 'все статьи об аналогах' : 'all alternatives guides'}</a>, <a href={`${prefix}/#what-is-title`} class="xref">{content.home}</a>.</p>
     </div></section>
 
     <section class="section" aria-labelledby="faq-title"><div class="section-inner section-inner--prose">
