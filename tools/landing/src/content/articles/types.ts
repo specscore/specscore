@@ -410,3 +410,24 @@ export interface ArticleLocale {
   manage: ManageArticleCopy;
   index: IndexCopy;
 }
+
+export interface BmadArticleCopy {
+  metaTitle: string;
+  metaDescription: string;
+  h1: string;
+  updated: string;
+  breadcrumb: string;
+  hero: Block;
+  sections: { id: string; title: string; paragraphs: Block[] }[];
+  faqTitle: string;
+  faqs: { q: string; a: Block }[];
+  sourcesTitle: string;
+  sourcesNote: string;
+  sources: { href: string; label: string }[];
+  relatedTitle: string;
+  related: { href: string; label: string }[];
+  ctaTitle: string;
+  ctaInstall: string;
+  ctaSkills: string;
+  ctaGithub: string;
+}

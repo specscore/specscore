@@ -31,7 +31,9 @@ export const bmadMethod: ComparePage = {
     { a: 'command-line interface', href: '/cli/' },
     ' (CLI). ',
     { a: 'Continuous integration', href: '/validators/' },
-    ' (CI) — an automatic check on every proposed change — can fail when a SpecScore file is structurally wrong.',
+    ' (CI) — an automatic check on every proposed change — can fail when a SpecScore file is structurally wrong. ',
+    { a: 'What is the BMAD Method?', href: '/articles/bmad-method/' },
+    ' explains the method on its own.',
   ],
   shared: [
     ['Both refuse to let an agent invent the product while it writes the code.'],

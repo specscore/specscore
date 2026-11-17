@@ -8,6 +8,10 @@ export const lintSlug = 'lint-specs-in-ci';
 export const templateSlug = 'feature-spec-template';
 export const agentsSlug = 'claude-code-specs';
 export const manageSlug = 'spec-management';
+export const bmadSlug = 'bmad-method';
+/** English only: the BMAD Method explainer has no locale copies yet. */
+export const bmadArticleHref = '/articles/bmad-method/';
+export const bmadArticleMdHref = '/articles/bmad-method.md';
 
 export const earsHref = {
   sdd: '/spec-driven-development/',

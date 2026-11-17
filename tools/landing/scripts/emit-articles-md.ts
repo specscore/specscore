@@ -6,6 +6,8 @@ import {
   acceptanceArticleMdHref,
   acceptanceSlug,
   articlesIndexMdHref,
+  bmadArticleMdHref,
+  bmadSlug,
   earsArticleMdHref,
   earsSlug,
   agentsArticleMdHref,
@@ -17,8 +19,8 @@ import {
   templateArticleMdHref,
   templateSlug,
 } from '../src/content/articles/facts.ts';
-import { acceptanceCopy, agentsCopy, earsCopy, indexCopy, lintCopy, manageCopy, templateCopy } from '../src/content/articles/pages.ts';
-import { renderAcceptanceMarkdown, renderAgentsMarkdown, renderEarsMarkdown, renderIndexMarkdown, renderLintMarkdown, renderManageMarkdown, renderTemplateMarkdown } from '../src/content/articles/render-md.ts';
+import { acceptanceCopy, agentsCopy, bmadCopy, earsCopy, indexCopy, lintCopy, manageCopy, templateCopy } from '../src/content/articles/pages.ts';
+import { renderAcceptanceMarkdown, renderAgentsMarkdown, renderBmadMarkdown, renderEarsMarkdown, renderIndexMarkdown, renderLintMarkdown, renderManageMarkdown, renderTemplateMarkdown } from '../src/content/articles/render-md.ts';
 
 function markdownFor(locale: LangCode, slug: string | undefined): string | undefined {
   if (slug === deliverySlug) return deliveryMarkdown(locale);
@@ -45,6 +47,10 @@ function markdownFor(locale: LangCode, slug: string | undefined): string | undef
   if (slug === agentsSlug) {
     const canonical = `https://specscore.md${localeHref(locale, '/articles/claude-code-specs/')}`;
     return renderAgentsMarkdown(agentsCopy(locale), locale, canonical);
+  }
+  if (slug === bmadSlug) {
+    if (locale !== 'en') return undefined;
+    return renderBmadMarkdown(bmadCopy(), 'https://specscore.md/articles/bmad-method/');
   }
   if (slug === manageSlug) {
     const canonical = `https://specscore.md${localeHref(locale, '/articles/spec-management/')}`;
@@ -85,6 +91,7 @@ if (printUrl) {
       [templateArticleMdHref(lang.code), templateSlug],
       [agentsArticleMdHref(lang.code), agentsSlug],
       [manageArticleMdHref(lang.code), manageSlug],
+      ...(lang.code === 'en' ? [[bmadArticleMdHref, bmadSlug] as [string, string]] : []),
     ];
     for (const [relHref, slug] of files) {
       const body = markdownFor(lang.code, slug);

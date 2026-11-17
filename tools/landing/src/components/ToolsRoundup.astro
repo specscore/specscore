@@ -130,6 +130,7 @@ const guideHref = localeHref(locale, '/spec-driven-development/');
             {tool.paragraphs.map((paragraph) => (
               <p class="prose-p"><Inlines parts={localize(paragraph)} /></p>
             ))}
+            {id === 'bmad-method' && locale === 'en' && <p class="prose-p"><a href="/articles/bmad-method/" class="xref">What is the BMAD Method?</a> explains its agents, workflow and documents.</p>}
           </div>
         </section>
       );
