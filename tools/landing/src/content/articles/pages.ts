@@ -1,8 +1,10 @@
 import { deliveryCopy, deliveryRoute } from './delivery.ts';
 import type { LangCode } from '../../lib/languages.ts';
 import { acceptanceHref, agentsHref, earsHref, lintHref, manageHref, patternExample, patternForm, patternOrder, templateHref } from './facts.ts';
+import { bmad } from './locales/bmad/en.ts';
 import type {
   AcceptanceArticleCopy,
+  BmadArticleCopy,
   AgentsArticleCopy,
   ArticleLocale,
   EarsArticleCopy,
@@ -75,6 +77,11 @@ export function templateCopy(code: LangCode): TemplateArticleCopy {
 
 export function agentsCopy(code: LangCode): AgentsArticleCopy {
   return articleLocale(code).agents;
+}
+
+/** The BMAD Method explainer is English only. */
+export function bmadCopy(): BmadArticleCopy {
+  return bmad;
 }
 
 export function manageCopy(code: LangCode): ManageArticleCopy {
