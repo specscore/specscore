@@ -92,7 +92,7 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
   <SiteHeader />
   <main class="alternatives-page">
     <section class="hero" aria-labelledby="hero-title"><div class="hero__inner">
-      <p class="hero__breadcrumb"><a href={`${prefix}/vs/`} class="xref">{ru ? 'Сравнения' : 'Comparisons'}</a></p>
+      <p class="hero__breadcrumb"><a href={`${prefix}/alternatives/`} class="xref">{ru ? 'Аналоги' : 'Alternatives'}</a></p>
       <h1 id="hero-title" class="hero__headline">{headline}</h1>
       <p class="hero__sub">{angle.intro}</p>
     </div></section>
@@ -130,7 +130,7 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
     <section class="section"><div class="section-inner section-inner--prose">
       <h2 class="section-title">{ru ? 'Как выбрать' : 'How to choose'}</h2>
       <p class="prose-p">{angle.choose}</p>
-      <p class="prose-p">{ru ? 'Подробнее: ' : 'Read more: '}<a href={vs(slug)} class="xref">SpecScore vs {target.name}</a>, <a href={`${prefix}/spec-driven-development/tools/`} class="xref">{ru ? 'все инструменты разработки по спецификациям' : 'spec-driven development tools'}</a>, <a href={`${prefix}/#what-is-title`} class="xref">{ru ? 'что такое SpecScore' : 'what SpecScore is'}</a>.</p>
+      <p class="prose-p">{ru ? 'Подробнее: ' : 'Read more: '}<a href={vs(slug)} class="xref">SpecScore vs {target.name}</a>, <a href={`${prefix}/spec-driven-development/tools/`} class="xref">{ru ? 'все инструменты разработки по спецификациям' : 'spec-driven development tools'}</a>, <a href={`${prefix}/alternatives/`} class="xref">{ru ? 'все статьи об аналогах' : 'all alternatives guides'}</a>, <a href={`${prefix}/#what-is-title`} class="xref">{ru ? 'что такое SpecScore' : 'what SpecScore is'}</a>.</p>
     </div></section>
 
     <section class="section"><div class="section-inner section-inner--prose">

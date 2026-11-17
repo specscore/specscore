@@ -1,0 +1,64 @@
+---
+// /alternatives/ and /ru/alternatives/: the hub of the "X alternatives" guides.
+// Each row links the guide and the matching /vs/ comparison. The one-line
+// summaries are the first sentence of each guide's own sourced introduction.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import SiteFooterRu from './SiteFooterRu.astro';
+import { angles, alternativeSlugs } from '../content/alternatives.ts';
+import { pageFor } from '../content/roundup/pages.ts';
+
+const ru = Astro.url.pathname.startsWith('/ru/');
+const locale = ru ? 'ru' : 'en';
+const prefix = ru ? '/ru' : '';
+const page = pageFor(locale);
+const firstSentence = (text: string) => text.split(/(?<=\.)\s/)[0];
+const openspec = ru
+  ? 'OpenSpec — это фреймворк разработки по спецификациям для ИИ-ассистентов, которые пишут код.'
+  : 'OpenSpec is a spec-driven development framework for AI coding assistants.';
+const rows = [
+  { id: 'openspec', summary: openspec },
+  ...alternativeSlugs.map((id) => ({ id, summary: firstSentence(angles[id][locale].intro) })),
+];
+const title = ru
+  ? 'Аналоги инструментов разработки по спецификациям (2026)'
+  : 'Spec-driven development tool alternatives (2026)';
+const description = ru
+  ? 'Аналоги OpenSpec, Spec Kit, Kiro, Tessl, BMAD Method, Task Master AI, Datarim и CodeSpeak: все статьи об альтернативах инструментам разработки по спецификациям.'
+  : 'Spec-driven development alternatives: guides to OpenSpec, Spec Kit, Kiro, Tessl, BMAD, Task Master AI, Datarim and CodeSpeak alternatives, with comparisons.';
+const Footer = ru ? SiteFooterRu : SiteFooter;
+---
+
+<BaseLayout title={title} description={description} canonical={`https://specscore.md${prefix}/alternatives/`} lang={locale} markdownHref={`${prefix}/alternatives.md`}>
+  <SiteHeader />
+  <main class="alternatives-page">
+    <section class="hero" aria-labelledby="hero-title"><div class="hero__inner">
+      <h1 id="hero-title" class="hero__headline">{ru ? 'Аналоги инструментов разработки по спецификациям' : 'Spec-driven development tool alternatives'}</h1>
+      {ru
+        ? <p class="hero__sub"><a href="/ru/spec-driven-development/" class="xref">Разработка по спецификациям</a> (spec-driven development, SDD) означает: сначала записать, что должна делать программа, а затем по этой спецификации писать и проверять код. Статья об аналогах объясняет, что делает один инструмент SDD и какие другие инструменты решают ту же задачу иначе. SpecScore — формат спецификаций на Markdown и YAML с интерфейсом командной строки (CLI), который <a href="/ru/articles/lint-specs-in-ci/" class="xref">проверяет спецификации в непрерывной интеграции (CI)</a>.</p>
+        : <p class="hero__sub"><a href="/spec-driven-development/" class="xref">Spec-driven development</a> (SDD) means writing down what software should do before coding, then using that specification to guide and check the work. An alternatives guide explains what one SDD tool does and which other tools solve the same problem differently. SpecScore is a Markdown and YAML spec format with a command-line interface (CLI) that can <a href="/articles/lint-specs-in-ci/" class="xref">lint specs in continuous integration (CI)</a>.</p>}
+    </div></section>
+
+    <section class="section table-section" aria-labelledby="guides-title"><div class="section-inner">
+      <h2 id="guides-title" class="section-title">{ru ? 'Все статьи об аналогах' : 'All alternatives guides'}</h2>
+      <div class="table-wrap"><table class="compare-table" aria-label={ru ? 'Статьи об аналогах инструментов' : 'Alternatives guides by tool'}>
+        <thead><tr><th scope="col">{ru ? 'Инструмент' : 'Tool'}</th><th scope="col">{ru ? 'Что это' : 'What it is'}</th><th scope="col">{ru ? 'Аналоги' : 'Alternatives'}</th><th scope="col">{ru ? 'Сравнение' : 'Comparison'}</th></tr></thead>
+        <tbody>{rows.map(({ id, summary }) => {
+          const name = page.tools[id].name;
+          return <tr>
+            <th scope="row">{name}</th>
+            <td>{summary}</td>
+            <td><a href={`${prefix}/alternatives/${id}/`} class="xref">{ru ? `Аналоги ${name}` : `${name} alternatives`}</a></td>
+            <td><a href={`${prefix}/vs/${id}/`} class="xref">SpecScore vs {name}</a></td>
+          </tr>;
+        })}</tbody>
+      </table></div>
+    </div></section>
+
+    <section class="section"><div class="section-inner section-inner--prose">
+      <p class="prose-p">{ru ? 'Подробнее: ' : 'Read more: '}<a href={`${prefix}/spec-driven-development/tools/`} class="xref">{ru ? 'все инструменты разработки по спецификациям' : 'spec-driven development tools'}</a>, <a href={`${prefix}/vs/`} class="xref">{ru ? 'все сравнения' : 'all comparisons'}</a>, <a href={`${prefix}/#what-is-title`} class="xref">{ru ? 'что такое SpecScore' : 'what SpecScore is'}</a>.</p>
+    </div></section>
+  </main>
+  <Footer />
+</BaseLayout>

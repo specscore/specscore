@@ -167,6 +167,8 @@ export async function writeLlmsFiles(dir, rootDir) {
     ...localeRoutes('/spec-driven-development/'),
     ...localeRoutes('/cli/install/'),
     ...localeRoutes('/vs/'),
+    '/alternatives/',
+    '/ru/alternatives/',
     ...ALTERNATIVE_SLUGS.flatMap((slug) => [`/alternatives/${slug}/`, `/ru/alternatives/${slug}/`]),
     '/what-is-specscore/',
   ];
@@ -309,7 +311,14 @@ export async function writeLlmsFiles(dir, rootDir) {
       },
     ]],
     ['Articles', articleEntries],
-    ['Alternatives', alternativeEntries],
+    ['Alternatives', [
+      {
+        title: 'Spec-driven development tool alternatives',
+        url: `${ORIGIN}/alternatives.md`,
+        description: 'Index of the alternatives guides, one per spec-driven development tool, each with its comparison page.',
+      },
+      ...alternativeEntries,
+    ]],
     ['Comparisons', [
       {
         title: 'How SpecScore compares',

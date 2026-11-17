@@ -2,6 +2,8 @@
 
 Alternative-tool articles in English.
 
+- [`index.astro`](index.astro) is the hub that lists every guide below.
+
 - [`openspec/`](openspec/) compares OpenSpec alternatives.
 - [`spec-kit/`](spec-kit/) compares GitHub Spec Kit alternatives.
 - [`kiro/`](kiro/) compares Kiro alternatives.
