@@ -27,6 +27,68 @@ describe('_headers', () => {
     assert.match(docs, /Link: <https:\/\/specscore\.md\/docs\/>; rel="canonical"/);
   });
 
+  it('points every markdown twin at its final HTML URL', () => {
+    // Mirrors Workers static-assets _headers matching: rules apply in file
+    // order, "! Link" detaches an earlier Link, :name matches one segment
+    // and * (:splat) matches the rest.
+    const rules = [];
+    let current;
+    for (const line of headers.split('\n')) {
+      if (line.startsWith('/')) {
+        current = { path: line.trim(), lines: [] };
+        rules.push(current);
+      } else if (current && line.startsWith('  ')) {
+        current.lines.push(line.trim());
+      }
+    }
+    function canonical(path) {
+      let link = [];
+      for (const rule of rules) {
+        const names = [];
+        const source = rule.path
+          .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
+          .replace(/\*|:([A-Za-z]\w*)/g, (m, name) => {
+            names.push(name ?? 'splat');
+            return name ? '([^/]+)' : '(.*)';
+          });
+        const match = path.match(new RegExp(`^${source}$`));
+        if (!match) continue;
+        const values = Object.fromEntries(names.map((name, i) => [name, match[i + 1]]));
+        for (const line of rule.lines) {
+          if (line === '! Link') link = [];
+          else if (line.startsWith('Link:')) {
+            link.push(line.slice(5).trim().replace(/:([A-Za-z]\w*)/g, (m, name) => values[name] ?? m));
+          }
+        }
+      }
+      const value = link.find((l) => l.endsWith('rel="canonical"'));
+      return value && value.slice(1, value.indexOf('>'));
+    }
+    const expected = {
+      '/index.md': 'https://specscore.md/',
+      '/what-is-specscore.md': 'https://specscore.md/what-is-specscore/',
+      '/alternatives.md': 'https://specscore.md/alternatives/',
+      '/articles.md': 'https://specscore.md/articles/',
+      '/docs.md': 'https://specscore.md/docs/',
+      '/vs.md': 'https://specscore.md/vs/',
+      '/spec-driven-development.md': 'https://specscore.md/spec-driven-development/',
+      '/spec-driven-development/tools.md': 'https://specscore.md/spec-driven-development/tools/',
+      '/vs/openspec.md': 'https://specscore.md/vs/openspec/',
+      '/articles/acceptance-criteria.md': 'https://specscore.md/articles/acceptance-criteria/',
+      '/alternatives/openspec.md': 'https://specscore.md/alternatives/openspec/',
+      '/cli/install.md': 'https://specscore.md/cli/install/',
+      '/ru/index.md': 'https://specscore.md/ru/',
+      '/ru/what-is-specscore.md': 'https://specscore.md/ru/what-is-specscore/',
+      '/ru/alternatives/openspec.md': 'https://specscore.md/ru/alternatives/openspec/',
+      '/feature-specification.md': 'https://specscore.md/feature-specification',
+      '/for/developers.md': 'https://specscore.md/for/developers',
+      '/new/feature.md': undefined,
+    };
+    for (const [path, url] of Object.entries(expected)) {
+      assert.equal(canonical(path), url, path);
+    }
+  });
+
   it('does not canonicalize raw /new templates onto a missing HTML twin', () => {
     assert.match(block('/new/*'), /! Link/);
   });

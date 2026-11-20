@@ -12,6 +12,34 @@
   Content-Type: text/markdown; charset=utf-8
   Link: <https://specscore.md/:splat>; rel="canonical"
 
+# Pages in a sub-directory (every locale, /vs/, /articles/, /alternatives/,
+# /about/, /cli/, /spec-driven-development/) are Astro directory pages.
+# Their final HTML URL ends with a slash, so point the canonical there
+# instead of at the slashless URL that redirects. Rules apply in file
+# order: the more specific rules below override this one.
+/:dir/*.md
+  ! Link
+  Link: <https://specscore.md/:dir/:splat/>; rel="canonical"
+
+# /for/* pages come from the docs generator as /for/<page>.html. Their
+# final URL has no trailing slash.
+/for/*.md
+  ! Link
+  Link: <https://specscore.md/for/:splat>; rel="canonical"
+
+# Top-level Astro directory pages: canonical is the trailing-slash URL.
+/what-is-specscore.md
+  ! Link
+  Link: <https://specscore.md/what-is-specscore/>; rel="canonical"
+
+/alternatives.md
+  ! Link
+  Link: <https://specscore.md/alternatives/>; rel="canonical"
+
+/articles.md
+  ! Link
+  Link: <https://specscore.md/articles/>; rel="canonical"
+
 # /docs is a directory index. Detach the splat canonical (no slash) and
 # replace it with the trailing-slash HTML URL.
 /docs.md
