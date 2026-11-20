@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { injectHtml } from './structured-data.mjs';
@@ -35,7 +36,24 @@ describe('injectHtml', () => {
     const code = data['@graph'].find((node) => node['@type'] === 'SoftwareSourceCode');
     assert.equal(org.name, 'SpecScore');
     assert.equal(org.url, 'https://specscore.md/');
-    assert.equal(org.logo, undefined);
+    assert.deepEqual(org.logo, {
+      '@type': 'ImageObject',
+      url: 'https://specscore.md/logo-512.png',
+      contentUrl: 'https://specscore.md/logo-512.png',
+      width: 512,
+      height: 512,
+    });
+    const site = data['@graph'].find((node) => node['@type'] === 'WebSite');
+    assert.equal(site.url, 'https://specscore.md/');
+    assert.equal(site.name, 'SpecScore');
+    assert.deepEqual(site.publisher, { '@id': org['@id'] });
+    const studio = data['@graph'].find((node) => node.name === 'SpecScore Studio');
+    assert.equal(studio['@type'], 'SoftwareApplication');
+    assert.equal(studio.url, 'https://specscore.studio/');
+    assert.deepEqual(studio.publisher, { '@id': 'https://specscore.md/#organization' });
+    assert.deepEqual(studio.author, { '@id': 'https://specscore.md/#organization' });
+    assert.equal(studio.offers, undefined);
+    assert.equal(studio.aggregateRating, undefined);
     assert.deepEqual(org.sameAs, ['https://github.com/specscore', 'https://github.com/specscore/specscore']);
     assert.equal(app.name, 'SpecScore');
     assert.equal(app.description, 'SpecScore is an open, lintable file format for specifications — like jq for JSON.');
@@ -48,7 +66,14 @@ describe('injectHtml', () => {
     JSON.parse(JSON.stringify(data));
   });
 
-  it('adds a logo and the CLI repository only when the page links to them', () => {
+  it('ships the Organization logo as a 512x512 PNG', () => {
+    const png = readFileSync(new URL('../../public/logo-512.png', import.meta.url));
+    assert.equal(png.toString('latin1', 1, 4), 'PNG');
+    assert.equal(png.readUInt32BE(16), 512);
+    assert.equal(png.readUInt32BE(20), 512);
+  });
+
+  it('adds the CLI only when the page links to its repository', () => {
     const html = `<!doctype html>
 <html lang="en"><head>
 <link rel="canonical" href="https://specscore.md/">
@@ -63,10 +88,12 @@ describe('injectHtml', () => {
 </body></html>`;
     const data = graph(html);
     const org = data['@graph'].find((node) => node['@type'] === 'Organization');
-    assert.equal(org.logo.url, 'https://specscore.md/favicon.svg');
+    assert.equal(org.logo.url, 'https://specscore.md/logo-512.png');
     const codes = data['@graph'].filter((node) => node['@type'] === 'SoftwareSourceCode');
     assert.equal(codes[0].programmingLanguage, 'Markdown');
     assert.equal(codes[1].name, 'specscore CLI');
+    assert.equal(codes[1].url, 'https://specscore.md/cli/');
+    assert.equal(codes[1].codeRepository, 'https://github.com/specscore/specscore-cli');
     assert.equal(codes[1].programmingLanguage, 'Go');
     const faq = data['@graph'].find((node) => node['@type'] === 'FAQPage');
     assert.equal(faq.mainEntity[0].acceptedAnswer.text, 'CC BY 4.0.');

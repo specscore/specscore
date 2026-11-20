@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ORIGIN = 'https://specscore.md';
+const STUDIO_URL = 'https://specscore.studio/';
 const HOME_URL = /^https:\/\/specscore\.md\/(?:(?:es|de|fr|it|pl|pt-br|ru|tr|uk|ja|zh-cn|zh-tw|ko)\/)?$/;
 const COMPARE_PATH = /\/(?:vs\/(?:[^/]+\/)?|spec-driven-development\/tools\/|articles\/(?:[^/]+\/)?|alternatives\/[^/]+\/|what-is-specscore\/)$/;
 
@@ -140,11 +141,25 @@ export function injectHtml(html) {
       name: 'SpecScore',
       url: `${ORIGIN}/`,
     };
-    if (html.includes('/favicon.svg')) {
-      org.logo = { '@type': 'ImageObject', url: `${ORIGIN}/favicon.svg` };
-    }
+    // Raster logo rendered from favicon.svg: search engines need a PNG of
+    // at least 112x112 for the Organization logo.
+    org.logo = {
+      '@type': 'ImageObject',
+      url: `${ORIGIN}/logo-512.png`,
+      contentUrl: `${ORIGIN}/logo-512.png`,
+      width: 512,
+      height: 512,
+    };
     if (sameAs.length) org.sameAs = sameAs;
     graph.push(org);
+    graph.push({
+      '@type': 'WebSite',
+      '@id': `${ORIGIN}/#website`,
+      name: 'SpecScore',
+      url: `${ORIGIN}/`,
+      inLanguage: lang,
+      publisher: { '@id': `${ORIGIN}/#organization` },
+    });
   }
 
   if (isHome && heroSub) {
@@ -177,7 +192,7 @@ export function injectHtml(html) {
       const cli = {
         '@type': 'SoftwareSourceCode',
         name: 'specscore CLI',
-        url: 'https://github.com/specscore/specscore-cli',
+        url: `${ORIGIN}/cli/`,
         codeRepository: 'https://github.com/specscore/specscore-cli',
         license: 'https://github.com/specscore/specscore-cli/blob/main/LICENSE',
         author: { '@id': `${ORIGIN}/#organization` },
@@ -185,6 +200,16 @@ export function injectHtml(html) {
       if (html.includes('Go CLI')) cli.programmingLanguage = 'Go';
       graph.push(cli);
     }
+    graph.push({
+      '@type': 'SoftwareApplication',
+      '@id': `${STUDIO_URL}#software`,
+      name: 'SpecScore Studio',
+      url: STUDIO_URL,
+      applicationCategory: 'DeveloperApplication',
+      description: 'SpecScore Studio connects the open SpecScore format, agent skills for writing specifications, and a browser workspace for browsing specs in GitHub repositories.',
+      author: { '@id': `${ORIGIN}/#organization` },
+      publisher: { '@id': `${ORIGIN}/#organization` },
+    });
   }
 
   const questions = faqItems(html);
