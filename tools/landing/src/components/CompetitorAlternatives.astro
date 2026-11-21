@@ -101,6 +101,7 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
       <h2 class="section-title">{ru ? `Зачем искать альтернативы ${target.name}` : `Why look for a ${target.name} alternative`}</h2>
       <p class="prose-p">{angle.why}</p>
       {slug === 'bmad-method' && !ru && <p class="prose-p"><a href="/articles/bmad-method/" class="xref">What is the BMAD Method?</a> explains its agents, workflow and documents.</p>}
+      {slug === 'spec-kit' && !ru && <p class="prose-p"><a href="/articles/spec-kit/" class="xref">A spec kit for specifications</a> explains why a format is not enough, and how SpecScore's linter and CLI close the gap.</p>}
       <p class="prose-p">{ru ? 'Факты о продукте и лицензии: ' : 'Product and licence facts: '}<a href={source[slug]} class="xref" target="_blank" rel="nofollow noopener">{ru ? 'официальный источник' : 'official source'}</a>.</p>
     </div></section>
 

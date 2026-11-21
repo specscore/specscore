@@ -431,3 +431,31 @@ export interface BmadArticleCopy {
   ctaSkills: string;
   ctaGithub: string;
 }
+
+/** English-only explainer at /articles/spec-kit/: SpecScore as a specification kit. */
+export interface SpecKitSample {
+  caption: string;
+  code: string;
+}
+
+export interface SpecKitArticleCopy {
+  metaTitle: string;
+  metaDescription: string;
+  h1: string;
+  updated: string;
+  updatedDate: string;
+  breadcrumb: string;
+  hero: Block;
+  sections: { id: string; title: string; paragraphs: Block[]; samples?: SpecKitSample[] }[];
+  faqTitle: string;
+  faqs: { q: string; a: Block }[];
+  sourcesTitle: string;
+  sourcesNote: string;
+  sources: { href: string; label: string }[];
+  relatedTitle: string;
+  related: { href: string; label: string }[];
+  ctaTitle: string;
+  ctaInstall: string;
+  ctaSkills: string;
+  ctaGithub: string;
+}

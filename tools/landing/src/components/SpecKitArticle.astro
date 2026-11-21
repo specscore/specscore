@@ -1,0 +1,196 @@
+---
+// /articles/spec-kit/ — SpecScore as a specification kit. English only.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import Inlines from './Inlines.astro';
+import { articlesIndexHref, specKitArticleHref, specKitArticleMdHref } from '../content/articles/facts.ts';
+import { specKitCopy } from '../content/articles/pages.ts';
+
+const page = specKitCopy();
+const canonical = `https://specscore.md${specKitArticleHref}`;
+---
+
+<BaseLayout title={page.metaTitle} description={page.metaDescription} canonical={canonical} lang="en" ogType="article">
+  <link slot="head" rel="alternate" type="text/markdown" href={specKitArticleMdHref} />
+  <SiteHeader />
+
+  <main>
+    <section class="hero" aria-labelledby="article-title">
+      <div class="hero__inner">
+        <p class="hero__breadcrumb"><a href={articlesIndexHref('en')} class="xref">{page.breadcrumb}</a></p>
+        <h1 id="article-title" class="hero__headline">{page.h1}</h1>
+        <p class="hero__sub"><Inlines parts={page.hero} /></p>
+        <p class="article-updated"><time datetime={page.updatedDate}>{page.updated}</time></p>
+      </div>
+    </section>
+
+    {page.sections.map((section) => (
+      <section class="section" aria-labelledby={`${section.id}-title`}>
+        <div class="section-inner section-inner--prose">
+          <h2 id={`${section.id}-title`} class="section-title">{section.title}</h2>
+          {section.paragraphs.map((paragraph) => (
+            <p class="prose-p"><Inlines parts={paragraph} /></p>
+          ))}
+          {section.samples?.map((sample) => (
+            <figure class="sample">
+              <figcaption class="sample__caption">{sample.caption}</figcaption>
+              <pre class="sample__pre"><code>{sample.code}</code></pre>
+            </figure>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <section class="section" aria-labelledby="faq-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="faq-title" class="section-title">{page.faqTitle}</h2>
+        {page.faqs.map((faq) => (
+          <div class="faq-item">
+            <h2 class="faq-item__q">{faq.q}</h2>
+            <div class="faq-item__a"><p><Inlines parts={faq.a} /></p></div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sources-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="sources-title" class="section-title">{page.sourcesTitle}</h2>
+        <p class="section-note">{page.sourcesNote}</p>
+        <ul class="source-list">
+          {page.sources.map((source) => (
+            <li>
+              <a
+                href={source.href}
+                class="xref"
+                target="_blank"
+                rel={source.href.includes('github.com/specscore/') ? undefined : 'nofollow noopener'}
+              >{source.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="related-title">
+      <div class="section-inner section-inner--prose">
+        <h2 id="related-title" class="section-title">{page.relatedTitle}</h2>
+        <ul class="source-list">
+          {page.related.map((link) => (
+            <li><a href={link.href} class="xref">{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <section class="final-cta" aria-labelledby="cta-title">
+    <div class="final-cta__inner">
+      <h2 id="cta-title" class="final-cta__title">{page.ctaTitle}</h2>
+      <div class="final-cta__buttons">
+        <a href="/cli/install/" class="btn btn--primary">{page.ctaInstall}</a>
+        <a href="/ai/" class="btn btn--secondary">{page.ctaSkills}</a>
+        <a href="https://github.com/specscore/specscore" target="_blank" class="btn btn--tertiary">{page.ctaGithub}</a>
+      </div>
+    </div>
+  </section>
+
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--cream);
+  }
+  .hero__inner {
+    max-width: var(--max-prose);
+    margin: 0 auto;
+  }
+  .hero__breadcrumb {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+    margin-bottom: var(--space-2);
+  }
+  .hero__headline {
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+    text-wrap: balance;
+  }
+  .hero__sub {
+    font-size: 1.125rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+  .article-updated {
+    margin-top: var(--space-3);
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--pale-ink);
+  }
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+    text-wrap: balance;
+  }
+  .prose-p {
+    color: var(--mid-ink);
+    line-height: 1.65;
+    margin-bottom: var(--space-3);
+  }
+  .prose-p:last-child { margin-bottom: 0; }
+  .faq-item {
+    margin-top: var(--space-4);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--hairline);
+  }
+  .sample { margin: var(--space-4) 0; }
+  .sample__caption {
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    color: var(--mid-ink);
+    margin-bottom: var(--space-2);
+    line-height: 1.5;
+  }
+  .sample__pre {
+    overflow-x: auto;
+    background: var(--cream);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    padding: var(--space-3);
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .faq-item__q {
+    font-size: 1.15rem;
+    margin-bottom: var(--space-2);
+  }
+  .faq-item__a {
+    color: var(--mid-ink);
+    line-height: 1.65;
+  }
+  .section-note {
+    color: var(--pale-ink);
+    font-family: var(--font-code);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    margin-bottom: var(--space-3);
+  }
+  .source-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .source-list li {
+    margin-bottom: var(--space-2);
+    line-height: 1.5;
+  }
+</style>
