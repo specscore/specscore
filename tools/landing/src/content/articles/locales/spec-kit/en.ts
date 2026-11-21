@@ -16,7 +16,7 @@ const formatLicense = 'https://github.com/specscore/specscore/blob/main/LICENSE'
 const cliRepo = 'https://github.com/specscore/specscore-cli';
 const cliLicense = 'https://github.com/specscore/specscore-cli/blob/main/LICENSE';
 const cliReadme = 'https://github.com/specscore/specscore-cli/blob/main/README.md';
-const lintRules = 'https://github.com/specscore/specscore-cli/blob/main/docs/lint-rules.md';
+const lintRules = 'https://github.com/specscore/specscore-cli/blob/v0.55.1/docs/lint-rules.md';
 const dogfood = 'https://github.com/specscore/specscore/blob/main/.github/workflows/dogfood.yml';
 const featureSpec = 'https://github.com/specscore/specscore/blob/main/spec/features/feature/README.md';
 const cliRelease = 'https://github.com/specscore/specscore-cli/releases/tag/v0.55.1';
@@ -191,7 +191,7 @@ export const specKit: SpecKitArticleCopy = {
         [
           'The linter does not grade vague prose. It checks structure, identifiers, references and status consistency — the mistakes that are cheap to catch in a program and expensive when an agent implements them. For the wording of a criterion, you still need a human or an AI review. The CI recipe, including this repository’s ',
           us('dogfood workflow', dogfood),
-          ' that pins a CLI version and runs ',
+          ' that pins CLI version v0.39.1 and runs ',
           { c: 'specscore spec lint' },
           ', is in ',
           page('Lint specs in CI', '/articles/lint-specs-in-ci/'),
@@ -217,7 +217,15 @@ export const specKit: SpecKitArticleCopy = {
           { c: 'spec/' },
           ' tree. ',
           { c: 'specscore feature new --title "Checkout validation" --slug checkout-validation' },
-          ' writes a feature directory with the required sections. ',
+          ' writes a feature directory with the required sections. On 21 November 2026, that command (with no ',
+          { c: '--description' },
+          ') pulled the published feature template, which includes the placeholder heading ',
+          { c: '### AC: <ac-slug> (verifies REQ:<req-slug>)' },
+          '; ',
+          { c: 'ac-heading-format' },
+          ' rejected the id ',
+          { c: '<ac-slug>' },
+          ' until it was replaced with a kebab-case id. ',
           { c: 'specscore plan new show-checkout-errors --feature checkout-validation' },
           ' writes a plan that names that feature as its source. ',
           { c: 'specscore agent setup claude' },
@@ -424,8 +432,8 @@ export const specKit: SpecKitArticleCopy = {
     { href: cliReadme, label: 'SpecScore CLI README' },
     { href: cliLicense, label: 'SpecScore CLI licence (Apache-2.0)' },
     { href: cliRelease, label: 'specscore-cli v0.55.1 release' },
-    { href: lintRules, label: 'SpecScore CLI lint rule catalog' },
-    { href: dogfood, label: 'SpecScore dogfood workflow (pinned CLI lint in CI)' },
+    { href: lintRules, label: 'SpecScore CLI lint rule catalog (v0.55.1)' },
+    { href: dogfood, label: 'SpecScore dogfood workflow (pins CLI v0.39.1 and runs spec lint in CI)' },
     { href: specKitRepo, label: 'GitHub Spec Kit repository' },
     { href: specKitDocs, label: 'GitHub Spec Kit documentation' },
     { href: specKitQuickstart, label: 'GitHub Spec Kit: Spec-Driven Development Quickstart' },
