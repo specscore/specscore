@@ -21,7 +21,8 @@ import {
   taskReadme,
 } from './facts.ts';
 import { acceptanceSourcesFor, agentsSourcesFor, earsSourcesFor, lintSourcesFor, manageSourcesFor, patternsFor, templateSourcesFor } from './pages.ts';
-import type { AcceptanceArticleCopy, AgentsArticleCopy, Block, BmadArticleCopy, EarsArticleCopy, IndexCopy, Inline, LintArticleCopy, ManageArticleCopy, TemplateArticleCopy } from './types.ts';
+import type { AcceptanceArticleCopy, AgentsArticleCopy, Block, BmadArticleCopy,
+  SpecKitArticleCopy, EarsArticleCopy, IndexCopy, Inline, LintArticleCopy, ManageArticleCopy, TemplateArticleCopy } from './types.ts';
 
 function isLanding(href: string): boolean {
   return localizedPrefixes.some((prefix) => href === prefix || href.startsWith(prefix));
@@ -419,3 +420,24 @@ export function renderIndexMarkdown(copy: IndexCopy, locale: LangCode, canonical
   }
   return lines.join('\n');
 }
+
+export function renderSpecKitMarkdown(copy: SpecKitArticleCopy, canonical: string): string {
+  const locale: LangCode = 'en';
+  const lines: string[] = [`# ${copy.h1}`, '', `Canonical: ${canonical}`, '', copy.updated, '', block(copy.hero, locale), ''];
+  for (const section of copy.sections) {
+    lines.push(`## ${section.title}`, '');
+    for (const paragraph of section.paragraphs) lines.push(block(paragraph, locale), '');
+    for (const sample of section.samples ?? []) {
+      lines.push(sample.caption, '', fence('text', sample.code), '');
+    }
+  }
+  lines.push(`## ${copy.faqTitle}`, '');
+  for (const faq of copy.faqs) lines.push(`### ${faq.q}`, '', block(faq.a, locale), '');
+  lines.push(`## ${copy.sourcesTitle}`, '', copy.sourcesNote, '');
+  for (const source of copy.sources) lines.push(`- [${source.label}](${linked(source.href, locale)})`);
+  lines.push('', `## ${copy.relatedTitle}`, '');
+  for (const link of copy.related) lines.push(`- [${link.label}](${abs(link.href, locale)})`);
+  lines.push('');
+  return lines.join('\n');
+}
+

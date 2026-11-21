@@ -2,9 +2,11 @@ import { deliveryCopy, deliveryRoute } from './delivery.ts';
 import type { LangCode } from '../../lib/languages.ts';
 import { acceptanceHref, agentsHref, earsHref, lintHref, manageHref, patternExample, patternForm, patternOrder, templateHref } from './facts.ts';
 import { bmad } from './locales/bmad/en.ts';
+import { specKit } from './locales/spec-kit/en.ts';
 import type {
   AcceptanceArticleCopy,
   BmadArticleCopy,
+  SpecKitArticleCopy,
   AgentsArticleCopy,
   ArticleLocale,
   EarsArticleCopy,
@@ -82,6 +84,11 @@ export function agentsCopy(code: LangCode): AgentsArticleCopy {
 /** The BMAD Method explainer is English only. */
 export function bmadCopy(): BmadArticleCopy {
   return bmad;
+}
+
+/** The specification-kit explainer is English only. */
+export function specKitCopy(): SpecKitArticleCopy {
+  return specKit;
 }
 
 export function manageCopy(code: LangCode): ManageArticleCopy {

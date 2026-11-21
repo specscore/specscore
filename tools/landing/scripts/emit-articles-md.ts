@@ -8,6 +8,8 @@ import {
   articlesIndexMdHref,
   bmadArticleMdHref,
   bmadSlug,
+  specKitArticleMdHref,
+  specKitSlug,
   earsArticleMdHref,
   earsSlug,
   agentsArticleMdHref,
@@ -19,8 +21,8 @@ import {
   templateArticleMdHref,
   templateSlug,
 } from '../src/content/articles/facts.ts';
-import { acceptanceCopy, agentsCopy, bmadCopy, earsCopy, indexCopy, lintCopy, manageCopy, templateCopy } from '../src/content/articles/pages.ts';
-import { renderAcceptanceMarkdown, renderAgentsMarkdown, renderBmadMarkdown, renderEarsMarkdown, renderIndexMarkdown, renderLintMarkdown, renderManageMarkdown, renderTemplateMarkdown } from '../src/content/articles/render-md.ts';
+import { acceptanceCopy, agentsCopy, bmadCopy, earsCopy, indexCopy, lintCopy, manageCopy, specKitCopy, templateCopy } from '../src/content/articles/pages.ts';
+import { renderAcceptanceMarkdown, renderAgentsMarkdown, renderBmadMarkdown, renderEarsMarkdown, renderIndexMarkdown, renderLintMarkdown, renderManageMarkdown, renderSpecKitMarkdown, renderTemplateMarkdown } from '../src/content/articles/render-md.ts';
 
 function markdownFor(locale: LangCode, slug: string | undefined): string | undefined {
   if (slug === deliverySlug) return deliveryMarkdown(locale);
@@ -51,6 +53,10 @@ function markdownFor(locale: LangCode, slug: string | undefined): string | undef
   if (slug === bmadSlug) {
     if (locale !== 'en') return undefined;
     return renderBmadMarkdown(bmadCopy(), 'https://specscore.md/articles/bmad-method/');
+  }
+  if (slug === specKitSlug) {
+    if (locale !== 'en') return undefined;
+    return renderSpecKitMarkdown(specKitCopy(), 'https://specscore.md/articles/spec-kit/');
   }
   if (slug === manageSlug) {
     const canonical = `https://specscore.md${localeHref(locale, '/articles/spec-management/')}`;
@@ -91,7 +97,7 @@ if (printUrl) {
       [templateArticleMdHref(lang.code), templateSlug],
       [agentsArticleMdHref(lang.code), agentsSlug],
       [manageArticleMdHref(lang.code), manageSlug],
-      ...(lang.code === 'en' ? [[bmadArticleMdHref, bmadSlug] as [string, string]] : []),
+      ...(lang.code === 'en' ? [[bmadArticleMdHref, bmadSlug] as [string, string], [specKitArticleMdHref, specKitSlug] as [string, string]] : []),
     ];
     for (const [relHref, slug] of files) {
       const body = markdownFor(lang.code, slug);

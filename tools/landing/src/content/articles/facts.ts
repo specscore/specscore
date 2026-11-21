@@ -12,6 +12,10 @@ export const bmadSlug = 'bmad-method';
 /** English only: the BMAD Method explainer has no locale copies yet. */
 export const bmadArticleHref = '/articles/bmad-method/';
 export const bmadArticleMdHref = '/articles/bmad-method.md';
+/** English only: SpecScore as a specification kit, at /articles/spec-kit/. */
+export const specKitSlug = 'spec-kit';
+export const specKitArticleHref = '/articles/spec-kit/';
+export const specKitArticleMdHref = '/articles/spec-kit.md';
 
 export const earsHref = {
   sdd: '/spec-driven-development/',
@@ -632,3 +636,25 @@ export function manageArticleHref(locale: LangCode): string {
 export function manageArticleMdHref(locale: LangCode): string {
   return manageArticleHref(locale).replace(/\/$/, '.md');
 }
+
+/**
+ * Text report captured on 21 November 2026 with the released
+ * specscore 0.55.1 CLI (tag v0.55.1, 30 October 2026).
+ * The feature had a well-formed `### AC: invalid-submission` heading.
+ * Task 1 of plan show-checkout-errors had
+ * `**Verifies:** checkout-validation#ac:invalid-submision` (one "s" missing).
+ * The line shape is the formatter in specscore-cli: file:line [severity] rule: message,
+ * then "N violations found (N errors)". The process exit code is not a line of this report.
+ */
+export const specKitLintFailureOutput = `plans/show-checkout-errors/README.md:5 [error] P-001: AC coverage gap: checkout-validation#ac:invalid-submission is neither covered by any task's **Verifies:** nor listed under ## Deferred AC Coverage
+plans/show-checkout-errors/README.md:26 [error] P-002: Task 1: stale AC reference checkout-validation#ac:invalid-submision (no such AC in source Feature checkout-validation)
+
+2 violations found (2 errors)
+`;
+
+/** The mistyped Verifies line from that 21 November 2026 lint run. */
+export const specKitStaleVerifiesSnippet = `### Task 1: <task name>
+
+**Id:** task-1
+**Verifies:** checkout-validation#ac:invalid-submision
+`;

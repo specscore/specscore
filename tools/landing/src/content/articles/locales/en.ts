@@ -1121,6 +1121,12 @@ export const locale: ArticleLocale = {
     listLabel: 'Published',
     articles: [
       {
+        href: '/articles/spec-kit/',
+        title: 'A spec kit for specifications: format, linter, and CLI',
+        summary:
+          'Why a specification format is not enough, and how a linter and CLI helpers make specs efficient and safe to use with AI agents. SpecScore is that kit. A short disambiguation of GitHub Spec Kit is included.',
+      },
+      {
         href: '/articles/bmad-method/',
         title: 'What is the BMAD Method? Agents, workflow and spec-driven development',
         summary: 'What BMAD (Breakthrough Method for Agile AI-Driven Development) is, its six agents, workflow and documents, v6.12 and v7, and how it relates to spec-driven development.',
