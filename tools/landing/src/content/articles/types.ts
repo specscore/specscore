@@ -432,6 +432,10 @@ export interface BmadArticleCopy {
   ctaGithub: string;
 }
 
+/** English-only explainer at /articles/task-master-ai/. Same shape as the BMAD article, plus a machine-readable updated date. */
+export type TaskMasterArticleCopy = BmadArticleCopy & { updatedDate: string };
+
+
 /** English-only explainer at /articles/spec-kit/: SpecScore as a specification kit. */
 export interface SpecKitSample {
   caption: string;

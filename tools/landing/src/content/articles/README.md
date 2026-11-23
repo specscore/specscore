@@ -14,6 +14,7 @@ Source for `/articles/`. Each locale module holds the acceptance-criteria articl
 
 The BMAD Method explainer (`/articles/bmad-method/`) is English only: its copy is [`locales/bmad/en.ts`](locales/bmad/en.ts), `BmadArticle.astro` renders it, and the emitter writes `/articles/bmad-method.md` for English only.
 The specification-kit explainer (`/articles/spec-kit/`) is English only: its copy is [`locales/spec-kit/en.ts`](locales/spec-kit/en.ts), `SpecKitArticle.astro` renders it, and the emitter writes `/articles/spec-kit.md` for English only.
+The Task Master AI explainer (`/articles/task-master-ai/`) is English only: its copy is [`locales/task-master/en.ts`](locales/task-master/en.ts), `TaskMasterArticle.astro` renders it, and the emitter writes `/articles/task-master-ai.md` for English only.
 
 `delivery.ts` and [`locales/delivery/`](locales/delivery/) own the weekly delivery article and its homepage introduction in all 14 locales. `DeliveryArticle.astro` renders it; the shared emitter produces its Markdown companion and includes it in the localized article indexes.
 

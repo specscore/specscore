@@ -105,6 +105,16 @@ jobs:
             grep -q "https://specscore.md/alternatives/${slug}/" "public/ru/alternatives/${slug}/index.html"
           done
           test -s public/articles/lint-specs-in-ci/index.html
+          test -s public/articles/task-master-ai/index.html
+          test -s public/articles/task-master-ai.md
+          grep -q 'https://specscore.md/articles/task-master-ai/' public/sitemap.xml
+          grep -q 'https://specscore.md/articles/task-master-ai.md' public/llms.txt
+          grep -q 'https://specscore.md/articles/task-master-ai.md' public/llms-full.txt
+          grep -q 'Canonical: https://specscore.md/articles/task-master-ai/' public/articles/task-master-ai.md
+          grep -q 'Task Master AI' public/articles/task-master-ai/index.html
+          grep -q 'FAQPage' public/articles/task-master-ai/index.html
+          grep -q '"@type":"Article"' public/articles/task-master-ai/index.html
+          grep -q '"@type":"BreadcrumbList"' public/articles/task-master-ai/index.html
           test -s public/what-is-specscore/index.html
           grep -q 'https://specscore.md/what-is-specscore/' public/sitemap.xml
           grep -q 'https://specscore.md/what-is-specscore.md' public/llms.txt

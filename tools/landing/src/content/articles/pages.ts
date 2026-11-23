@@ -3,10 +3,12 @@ import type { LangCode } from '../../lib/languages.ts';
 import { acceptanceHref, agentsHref, earsHref, lintHref, manageHref, patternExample, patternForm, patternOrder, templateHref } from './facts.ts';
 import { bmad } from './locales/bmad/en.ts';
 import { specKit } from './locales/spec-kit/en.ts';
+import { taskMaster } from './locales/task-master/en.ts';
 import type {
   AcceptanceArticleCopy,
   BmadArticleCopy,
   SpecKitArticleCopy,
+  TaskMasterArticleCopy,
   AgentsArticleCopy,
   ArticleLocale,
   EarsArticleCopy,
@@ -89,6 +91,11 @@ export function bmadCopy(): BmadArticleCopy {
 /** The specification-kit explainer is English only. */
 export function specKitCopy(): SpecKitArticleCopy {
   return specKit;
+}
+
+/** The Task Master AI explainer is English only. */
+export function taskMasterCopy(): TaskMasterArticleCopy {
+  return taskMaster;
 }
 
 export function manageCopy(code: LangCode): ManageArticleCopy {

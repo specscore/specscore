@@ -22,7 +22,7 @@ import {
 } from './facts.ts';
 import { acceptanceSourcesFor, agentsSourcesFor, earsSourcesFor, lintSourcesFor, manageSourcesFor, patternsFor, templateSourcesFor } from './pages.ts';
 import type { AcceptanceArticleCopy, AgentsArticleCopy, Block, BmadArticleCopy,
-  SpecKitArticleCopy, EarsArticleCopy, IndexCopy, Inline, LintArticleCopy, ManageArticleCopy, TemplateArticleCopy } from './types.ts';
+  SpecKitArticleCopy, TaskMasterArticleCopy, EarsArticleCopy, IndexCopy, Inline, LintArticleCopy, ManageArticleCopy, TemplateArticleCopy } from './types.ts';
 
 function isLanding(href: string): boolean {
   return localizedPrefixes.some((prefix) => href === prefix || href.startsWith(prefix));
@@ -402,6 +402,10 @@ export function renderBmadMarkdown(copy: BmadArticleCopy, canonical: string): st
   for (const link of copy.related) lines.push(`- [${link.label}](${abs(link.href, locale)})`);
   lines.push('');
   return lines.join('\n');
+}
+
+export function renderTaskMasterMarkdown(copy: TaskMasterArticleCopy, canonical: string): string {
+  return renderBmadMarkdown(copy, canonical);
 }
 
 export function renderIndexMarkdown(copy: IndexCopy, locale: LangCode, canonical: string): string {
