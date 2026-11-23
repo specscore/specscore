@@ -56,7 +56,7 @@ export const taskMaster: TaskMasterArticleCopy = {
         [
           'The project is published under the ',
           them('MIT License with Commons Clause', license),
-          '. The README says you may use and modify it, and may not sell Task Master itself or offer it as a hosted service. Any mention of that licence here links to the ',
+          '. The README says you may use and modify it, and may not sell Task Master itself or offer it as a hosted service. The README also says you may not create competing products based on Task Master. Any mention of that licence here links to the ',
           them('public repository', repo),
           '.',
         ],
@@ -236,7 +236,7 @@ export const taskMaster: TaskMasterArticleCopy = {
         them('public repository', repo),
         ' is licensed under the ',
         them('MIT License with Commons Clause', license),
-        '. The README says you may use and modify it, and may not sell Task Master itself or offer it as a hosted service.',
+        '. The README says you may use and modify it, and may not sell Task Master itself or offer it as a hosted service. The README also says you may not create competing products based on Task Master.',
       ],
     },
     {
