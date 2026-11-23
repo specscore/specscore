@@ -32,7 +32,9 @@ export const taskMaster: ComparePage = {
     { a: 'command-line interface', href: '/cli/' },
     ' (CLI) that checks it. ',
     { a: 'Continuous integration', href: '/validators/' },
-    ' (CI) — an automatic check on every proposed change — runs that check in this repository. Task Master does not publish a spec format for CI to lint.',
+    ' (CI) — an automatic check on every proposed change — runs that check in this repository. Task Master does not publish a spec format for CI to lint. ',
+    { a: 'What is Task Master AI?', href: '/articles/task-master-ai/' },
+    ' explains the tool on its own.',
   ],
   shared: [
     ['Both assume an AI agent should not invent the whole job from a one-line prompt.'],

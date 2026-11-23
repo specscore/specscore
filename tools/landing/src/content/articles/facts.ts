@@ -16,6 +16,10 @@ export const bmadArticleMdHref = '/articles/bmad-method.md';
 export const specKitSlug = 'spec-kit';
 export const specKitArticleHref = '/articles/spec-kit/';
 export const specKitArticleMdHref = '/articles/spec-kit.md';
+/** English only: What is Task Master AI? at /articles/task-master-ai/. */
+export const taskMasterSlug = 'task-master-ai';
+export const taskMasterArticleHref = '/articles/task-master-ai/';
+export const taskMasterArticleMdHref = '/articles/task-master-ai.md';
 
 export const earsHref = {
   sdd: '/spec-driven-development/',

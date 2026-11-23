@@ -1121,6 +1121,12 @@ export const locale: ArticleLocale = {
     listLabel: 'Published',
     articles: [
       {
+        href: '/articles/task-master-ai/',
+        title: 'What is Task Master AI? The task-based approach to AI coding explained',
+        summary:
+          'What Task Master AI (the task-master-ai package) is, how it turns a product requirements document into tasks, how it runs as an MCP server in Cursor and with Claude, and how a CI-validated spec format like SpecScore differs or can complement it.',
+      },
+      {
         href: '/articles/spec-kit/',
         title: 'A spec kit for specifications: format, linter, and CLI',
         summary:
