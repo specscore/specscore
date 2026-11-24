@@ -18,7 +18,7 @@ import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
       
       
       <p class="hero__sub">
-        SpecScore es un formato de archivo abierto y lintable para especificaciones, escrito en Markdown y YAML (YAML Ain't Markup Language) — como JSON (JavaScript Object Notation) para los datos — con una interfaz de línea de comandos (CLI) que tus agentes invocan para consultarlas y editarlas, como <code>jq</code> para JSON.
+        SpecScore es un formato de archivo abierto y lintable para especificaciones, escrito en Markdown y YAML (YAML Ain't Markup Language) — como JSON (JavaScript Object Notation) para los datos — con una interfaz de línea de comandos (CLI) que tus agentes invocan para consultarlas y editarlas, como <code>jq</code> para JSON. Un spec score es la comprobación de esos archivos: el linter aprueba o falla una especificación cuando faltan secciones obligatorias o las referencias o el estado del ciclo de vida no son correctos, y puedes ejecutar esa comprobación en CI (continuous integration, integración continua), la compilación automática que se ejecuta en cada cambio. SDD (<a href="/es/spec-driven-development/">spec-driven development, desarrollo guiado por especificaciones</a>) significa escribir esa especificación antes del código y comprobar el código contra ella. <a href="/what-is-specscore/">Qué significa un spec score</a> explica el nombre; <a href="/es/articles/lint-specs-in-ci/">cómo hacer lint de specs en CI</a> muestra la comprobación en la compilación.
       </p>
       <p class="page-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence.es}</time></p>
       <p class="hero__stakes">

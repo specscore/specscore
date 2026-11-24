@@ -18,7 +18,7 @@ import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
       
       
       <p class="hero__sub">
-        SpecScore 是一種用於規格說明的開放、可 lint 的檔案格式，用 Markdown 和 YAML（YAML Ain't Markup Language）寫成，就像 JSON（JavaScript Object Notation）之於資料，並配有命令列介面（CLI），供你的 AI 代理呼叫以查詢和編輯它們，就像 <code>jq</code> 之於 JSON。
+        SpecScore 是一種用於規格說明的開放、可 lint 的檔案格式，用 Markdown 和 YAML（YAML Ain't Markup Language）寫成，就像 JSON（JavaScript Object Notation）之於資料，並配有命令列介面（CLI），供你的 AI 代理呼叫以查詢和編輯它們，就像 <code>jq</code> 之於 JSON。 Spec score（規格評分）是對這些檔案的檢查：當必填章節、引用或生命週期狀態有誤時，檢查器會讓規格說明通過或失敗，而且你可以在 CI（continuous integration，持續整合）——每次變更都會執行的自動建置——中執行這項檢查。 SDD（<a href="/zh-tw/spec-driven-development/">spec-driven development，規格驅動開發</a>）是指在寫程式碼之前先寫該規格說明，並對照規格檢查程式碼。 <a href="/what-is-specscore/">spec score 是什麼意思</a>解釋這個名稱；<a href="/zh-tw/articles/lint-specs-in-ci/">如何在 CI 中檢查規格說明</a>展示建置中的檢查。
       </p>
       <p class="page-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence['zh-tw']}</time></p>
       <p class="hero__stakes">
