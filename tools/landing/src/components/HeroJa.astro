@@ -18,7 +18,7 @@ import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
       
       
       <p class="hero__sub">
-        SpecScoreは、仕様のためのオープンでリント可能なファイル形式です。MarkdownとYAML（YAML Ain't Markup Language）で書かれ、データに対するJSON（JavaScript Object Notation）のように、エージェントが照会と編集のために呼び出すコマンドラインインタフェース（CLI）を備えています。<code>jq</code>がJSONに対するのと同じ関係です。
+        SpecScoreは、仕様のためのオープンでリント可能なファイル形式です。MarkdownとYAML（YAML Ain't Markup Language）で書かれ、データに対するJSON（JavaScript Object Notation）のように、エージェントが照会と編集のために呼び出すコマンドラインインタフェース（CLI）を備えています。<code>jq</code>がJSONに対するのと同じ関係です。 スペックスコア（spec score）は、これらのファイルに対する検査です。必須セクション、参照、ライフサイクルのステータスに誤りがあるとリンターは仕様を合格または不合格にし、その検査はCI（continuous integration、継続的インテグレーション）、つまり変更のたびに走る自動ビルドで実行できます。 SDD（<a href="/ja/spec-driven-development/">spec-driven development、仕様駆動開発</a>）とは、コードの前にその仕様を書き、コードを仕様に照らし合わせて確認することです。 <a href="/what-is-specscore/">スペックスコアの意味</a>で名前を説明し、<a href="/ja/articles/lint-specs-in-ci/">CIで仕様をリントする方法</a>でビルド内の検査を示します。
       </p>
       <p class="page-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence.ja}</time></p>
       <p class="hero__stakes">

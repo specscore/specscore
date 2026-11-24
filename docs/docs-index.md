@@ -22,6 +22,7 @@ The SpecScore format — how to write specs that lint clean.
 Craft guidance for turning requirements into clean specs.
 
 - [Asking Good Questions for Good Specs](/asking-good-questions) — how to question a fuzzy request into complete, unambiguous, verifiable acceptance criteria
+- [What is SpecScore? What a spec score means](/what-is-specscore/) — what the name means, and how the linter and CI check a specification
 - [EARS requirements syntax](/articles/ears-requirements/) — the Easy Approach to Requirements Syntax sentence patterns, and a SpecScore requirement that passes the linter
 - [PRD template in Markdown](/articles/feature-spec-template/) — a feature spec template with requirements, acceptance criteria, a scenario, a plan, and tasks, checked with `specscore spec lint`
 - [Explained by example: a login feature](/example-login) — one feature through the whole model, from Idea to Rehearse proof

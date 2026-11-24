@@ -18,7 +18,7 @@ import { CONTENT_UPDATED, updatedSentence } from '../content/updated.ts';
       
       
       <p class="hero__sub">
-        SpecScore, spesifikasyonlar için açık ve linter ile denetlenebilir bir dosya formatıdır; Markdown ve YAML (YAML Ain't Markup Language) ile yazılır — veriler için JSON (JavaScript Object Notation) neyse öyle — ve ajanlarınızın bunları sorgulamak ve düzenlemek için çağırdığı bir komut satırı arayüzü (CLI) ile birlikte gelir, JSON için <code>jq</code> gibi.
+        SpecScore, spesifikasyonlar için açık ve linter ile denetlenebilir bir dosya formatıdır; Markdown ve YAML (YAML Ain't Markup Language) ile yazılır — veriler için JSON (JavaScript Object Notation) neyse öyle — ve ajanlarınızın bunları sorgulamak ve düzenlemek için çağırdığı bir komut satırı arayüzü (CLI) ile birlikte gelir, JSON için <code>jq</code> gibi. Bir spec score, bu dosyaların denetimidir: zorunlu bölümler, referanslar veya yaşam döngüsü durumu yanlış olduğunda linter spesifikasyonu geçirir veya başarısız kılar; bu denetimi CI (continuous integration, sürekli entegrasyon) içinde, her değişiklikle çalışan otomatik derlemede çalıştırabilirsiniz. SDD (<a href="/tr/spec-driven-development/">spec-driven development, spesifikasyon odaklı geliştirme</a>), o spesifikasyonu koddan önce yazmak ve kodu ona göre denetlemek demektir. <a href="/what-is-specscore/">Spec score ne anlama gelir</a> adı açıklar; <a href="/tr/articles/lint-specs-in-ci/">spesifikasyonları CI'da lint etmek</a> denetimi derlemede gösterir.
       </p>
       <p class="page-updated"><time datetime={CONTENT_UPDATED}>{updatedSentence.tr}</time></p>
       <p class="hero__stakes">
