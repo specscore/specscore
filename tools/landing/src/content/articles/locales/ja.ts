@@ -17,7 +17,7 @@ const ears: EarsArticleCopy = {
     breadcrumb: '記事',
     hero: [
       t('EARS', earsHref.mavin),
-      '（Easy Approach to Requirements Syntax）はEARS記法です。条件、契機、システムの応答を決まった順に置く、英語の文型の小さな集合で、EARS形式またはEARS構文とも呼びます。要件とは、システムが満たさなければならない検証可能な義務が一つあることです。',
+      '（Easy Approach to Requirements Syntax）は、要件を書くための記法（EARS記法）です。条件、契機、システムの応答を決まった順に置く、英語の文型の小さな集合で、EARS形式またはEARS構文とも呼びます。要件とは、システムが満たさなければならない検証可能な義務が一つあることです。',
       t('仕様駆動開発', earsHref.sdd),
       '（SDD、spec-driven development）は、その義務をコードの前に仕様へ書き、仕様を真実の源として扱うやり方です。製品要求文書（PRD、product requirements document）は、作業をタスクに分ける前に問題と範囲を述べる散文です。',
       t('SpecScore', earsHref.home),

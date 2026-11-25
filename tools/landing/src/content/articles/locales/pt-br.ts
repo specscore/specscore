@@ -17,7 +17,7 @@ const ears: EarsArticleCopy = {
     breadcrumb: 'Artigos',
     hero: [
       t('EARS', earsHref.mavin),
-      ' (Easy Approach to Requirements Syntax) é uma notação EARS: um conjunto pequeno de padrões de frase em inglês, um formato de requisitos também chamado de sintaxe EARS, que mantém uma condição, um gatilho e uma resposta do sistema numa ordem fixa. Um requisito é uma obrigação testável que um sistema deve cumprir. O ',
+      ' (Easy Approach to Requirements Syntax), ou notação EARS, é um conjunto pequeno de padrões de frase em inglês, um formato de requisitos também chamado de sintaxe EARS, que mantém uma condição, um gatilho e uma resposta do sistema numa ordem fixa. Um requisito é uma obrigação testável que um sistema deve cumprir. O ',
       t('desenvolvimento guiado por especificação', earsHref.sdd),
       ' (SDD, spec-driven development) é a prática de escrever essa obrigação numa especificação antes do código e tratar a especificação como fonte da verdade. Um documento de requisitos de produto (PRD, product requirements document) é a prosa que enuncia o problema e o escopo antes de partir o trabalho em tarefas. No ',
       t('SpecScore', earsHref.home),
@@ -28,7 +28,7 @@ const ears: EarsArticleCopy = {
       ' (CLI, command-line interface): ',
       { c: 'specscore spec lint' },
       '. ',
-      t('Como fazer lint de especificações no CI', lintHref.article),
+      t('Como lintar especificações na CI', lintHref.article),
       '. ',
       t('O que é o SpecScore', '/what-is-specscore/'),
       '. O ',

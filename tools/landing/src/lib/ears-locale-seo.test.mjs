@@ -14,7 +14,7 @@ const expected = {
       'La notación EARS (Easy Approach to Requirements Syntax) es un formato para requisitos: patrones, ejemplos y un requisito SpecScore que pasa el linter.',
     h1: 'Notación EARS: formato y ejemplos de requisitos',
     term: 'notación EARS',
-    lintAnchor: 'Cómo lintar especificaciones en CI',
+    lintAnchor: 'Cómo lintear especificaciones en CI',
     whatIsAnchor: 'Qué es SpecScore',
   },
   'pt-br': {
@@ -23,7 +23,7 @@ const expected = {
       'A notação EARS (Easy Approach to Requirements Syntax) é um formato para requisitos: padrões, exemplos e um requisito SpecScore que passa no linter.',
     h1: 'Notação EARS: formato e exemplos de requisitos',
     term: 'notação EARS',
-    lintAnchor: 'Como fazer lint de especificações no CI',
+    lintAnchor: 'Como lintar especificações na CI',
     whatIsAnchor: 'O que é o SpecScore',
   },
   'zh-tw': {

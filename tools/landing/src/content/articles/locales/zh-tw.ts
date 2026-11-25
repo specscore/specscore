@@ -17,7 +17,7 @@ const ears: EarsArticleCopy = {
     breadcrumb: '文章',
     hero: [
       t('EARS', earsHref.mavin),
-      '（Easy Approach to Requirements Syntax）是一種 EARS 格式：一小套英語句式，也叫 EARS 記法或 EARS 語法，把條件、觸發和系統回應固定在同一順序裡。需求是系統必須滿足的一條可檢驗義務。',
+      '（Easy Approach to Requirements Syntax）是一種需求記法（EARS 格式）：一小套英語句式，也叫 EARS 記法或 EARS 語法，把條件、觸發和系統回應固定在同一順序裡。需求是系統必須滿足的一條可檢驗義務。',
       t('規範驅動開發', earsHref.sdd),
       '（SDD，spec-driven development）是在寫程式之前把這條義務寫進規範，並把規範當作事實來源。產品需求文件（PRD，product requirements document）是在把工作拆成任務之前，用散文說明問題和範圍。在 ',
       t('SpecScore', earsHref.home),
