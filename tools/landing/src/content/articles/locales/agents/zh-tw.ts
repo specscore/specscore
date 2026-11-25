@@ -499,7 +499,7 @@ export const agents: AgentsArticleCopy = {
     { href: agentsHref.templateArticle, label: '給 AI 寫程式用的 Markdown PRD 範本' },
     { href: agentsHref.lintArticle, label: '在 CI 中用規格檢查器檢查規格' },
     { href: agentsHref.acceptanceArticle, label: '寫出 AI 代理驗得過的驗收標準' },
-    { href: agentsHref.earsArticle, label: 'EARS 需求語法詳解與範例' },
+    { href: agentsHref.earsArticle, label: 'EARS 格式與需求記法：句式與範例' },
     { href: agentsHref.sdd, label: '規範驅動開發' },
     { href: agentsHref.tools, label: '規範驅動開發工具' },
     { href: agentsHref.cliSkills, label: 'CLI Skills' },

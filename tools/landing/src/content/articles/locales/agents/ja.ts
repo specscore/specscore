@@ -497,7 +497,7 @@ export const agents: AgentsArticleCopy = {
     { href: agentsHref.templateArticle, label: 'AIコーディング向けMarkdownのPRDテンプレート' },
     { href: agentsHref.lintArticle, label: 'CIで仕様リンターを使って仕様をリントする' },
     { href: agentsHref.acceptanceArticle, label: 'AIエージェントが検証できる受け入れ基準の書き方' },
-    { href: agentsHref.earsArticle, label: 'EARS要件構文を例で説明する' },
+    { href: agentsHref.earsArticle, label: 'EARS記法とは：要件の書き方と例' },
     { href: agentsHref.sdd, label: '仕様駆動開発' },
     { href: agentsHref.tools, label: '仕様駆動開発ツール' },
     { href: agentsHref.cliSkills, label: 'CLI Skills' },
