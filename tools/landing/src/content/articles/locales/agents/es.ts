@@ -500,7 +500,7 @@ export const agents: AgentsArticleCopy = {
     { href: agentsHref.templateArticle, label: 'Plantilla de PRD en Markdown para programar con IA' },
     { href: agentsHref.lintArticle, label: 'Lintear especificaciones en CI con un linter de especificaciones' },
     { href: agentsHref.acceptanceArticle, label: 'Cómo escribir criterios de aceptación que un agente de IA pueda verificar' },
-    { href: agentsHref.earsArticle, label: 'Sintaxis de requisitos EARS explicada, con ejemplos' },
+    { href: agentsHref.earsArticle, label: 'Notación EARS: formato y ejemplos de requisitos' },
     { href: agentsHref.sdd, label: 'Desarrollo basado en especificaciones' },
     { href: agentsHref.tools, label: 'Herramientas de desarrollo basado en especificaciones' },
     { href: agentsHref.cliSkills, label: 'CLI Skills' },

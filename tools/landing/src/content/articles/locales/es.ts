@@ -9,15 +9,15 @@ const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
 
 const ears: EarsArticleCopy = {
-    metaTitle: 'Sintaxis de requisitos EARS explicada, con ejemplos | SpecScore',
+    metaTitle: 'Notación EARS: formato y ejemplos de requisitos | SpecScore',
     metaDescription:
-      'Notación de requisitos EARS (Easy Approach to Requirements Syntax): patrones de frase, ejemplos, errores habituales, cómo Kiro usa EARS y un REQ de SpecScore que pasa el linter.',
-    h1: 'Sintaxis de requisitos EARS explicada, con ejemplos',
+      'La notación EARS (Easy Approach to Requirements Syntax) es un formato para requisitos: patrones, ejemplos y un requisito SpecScore que pasa el linter.',
+    h1: 'Notación EARS: formato y ejemplos de requisitos',
     updated: 'Última actualización: 2 de noviembre de 2026',
     breadcrumb: 'Artículos',
     hero: [
       t('EARS', earsHref.mavin),
-      ' (Easy Approach to Requirements Syntax) es una notación de requisitos: un conjunto pequeño de patrones de frase en inglés, también llamado sintaxis EARS, que mantiene una condición, un disparador y una respuesta del sistema en un orden fijo. Un requisito es una obligación comprobable que un sistema debe cumplir. El ',
+      ' (Easy Approach to Requirements Syntax), o notación EARS, es un conjunto pequeño de patrones de frase en inglés, un formato de requisitos también llamado sintaxis EARS, que mantiene una condición, un disparador y una respuesta del sistema en un orden fijo. Un requisito es una obligación comprobable que un sistema debe cumplir. El ',
       t('desarrollo basado en especificaciones', earsHref.sdd),
       ' (SDD, spec-driven development) es la práctica de escribir esa obligación en una especificación antes del código, y tratar la especificación como la fuente de verdad. Un documento de requisitos de producto (PRD, product requirements document) es la prosa que enuncia el problema y el alcance antes de partir el trabajo en tareas. En ',
       t('SpecScore', earsHref.home),
@@ -27,6 +27,10 @@ const ears: EarsArticleCopy = {
       t('interfaz de línea de comandos', earsHref.cli),
       ' (CLI, command-line interface): ',
       { c: 'specscore spec lint' },
+      '. ',
+      t('Cómo lintear especificaciones en CI', lintHref.article),
+      '. ',
+      t('Qué es SpecScore', '/what-is-specscore/'),
       '. ',
       t('Kiro', earsHref.kiro, 'them'),
       ', un entorno de desarrollo integrado (IDE, integrated development environment) con agentes de Amazon Web Services (AWS), escribe uno de estos patrones. La notación la publicaron por primera vez Alistair Mavin y colegas de Rolls-Royce en una conferencia de ingeniería de requisitos del Institute of Electrical and Electronics Engineers (IEEE) en 2009.',
@@ -443,7 +447,7 @@ const acceptance: AcceptanceArticleCopy = {
     ears: [
     [
       "Los patrones de frase están descritos en ",
-      t("Sintaxis de requisitos EARS explicada, con ejemplos", acceptanceHref.earsArticle),
+      t("Notación EARS: formato y ejemplos de requisitos", acceptanceHref.earsArticle),
       ".",
     ],
       [
@@ -691,7 +695,7 @@ const acceptance: AcceptanceArticleCopy = {
       gherkin: 'Cucumber — referencia de Gherkin',
       bdd: 'Cucumber — desarrollo guiado por el comportamiento',
       ears: 'Alistair Mavin — EARS',
-      earsArticle: "Sintaxis de requisitos EARS explicada, con ejemplos",
+      earsArticle: "Notación EARS: formato y ejemplos de requisitos",
       acceptance: 'SpecScore — especificación de criterios de aceptación',
       acceptanceRepo: 'specscore/specscore — funcionalidad de criterios de aceptación',
       scenarioRepo: 'specscore/specscore — funcionalidad de escenarios',
@@ -710,7 +714,7 @@ const acceptance: AcceptanceArticleCopy = {
     related: [
       { href: templateHref.article, label: templateLabel },
       { href: lintHref.article, label: relatedLabel },
-      { href: acceptanceHref.earsArticle, label: "Sintaxis de requisitos EARS explicada, con ejemplos" },
+      { href: acceptanceHref.earsArticle, label: "Notación EARS: formato y ejemplos de requisitos" },
       { href: acceptanceHref.sdd, label: 'Desarrollo basado en especificaciones' },
       { href: acceptanceHref.tools, label: 'Herramientas de desarrollo basado en especificaciones' },
       { href: acceptanceHref.acceptance, label: 'Especificación de criterios de aceptación' },
@@ -760,7 +764,7 @@ export const locale: ArticleLocale = {
       },
       {
         href: '/articles/ears-requirements/',
-        title: 'Sintaxis de requisitos EARS explicada, con ejemplos',
+        title: 'Notación EARS: formato y ejemplos de requisitos',
         summary: 'Qué es EARS (Easy Approach to Requirements Syntax), los patrones de frase, cómo Kiro usa la notación EARS y un requisito de SpecScore que pasa el linter.',
       },
     ],

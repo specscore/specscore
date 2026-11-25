@@ -9,15 +9,15 @@ const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
 
 const ears: EarsArticleCopy = {
-    metaTitle: 'EARS要件構文を例で説明する | SpecScore',
+    metaTitle: 'EARS記法とは：要件の書き方と例 | SpecScore',
     metaDescription:
-      'EARS要件記法（Easy Approach to Requirements Syntax）の文型、例、よくある誤り、Kiroでの使い方、リンターを通るSpecScoreのREQ。',
-    h1: 'EARS要件構文を例で説明する',
+      'EARS記法（Easy Approach to Requirements Syntax）とは、要件を書くための文型です。書き方、例、リンターを通るSpecScoreの要件。',
+    h1: 'EARS記法とは：要件の書き方と例',
     updated: '最終更新: 2026年11月2日',
     breadcrumb: '記事',
     hero: [
       t('EARS', earsHref.mavin),
-      '（Easy Approach to Requirements Syntax）は要件記法です。条件、契機、システムの応答を決まった順に置く、英語の文型の小さな集合で、EARS構文とも呼びます。要件とは、システムが満たさなければならない検証可能な義務が一つあることです。',
+      '（Easy Approach to Requirements Syntax）は、要件を書くための記法（EARS記法）です。条件、契機、システムの応答を決まった順に置く、英語の文型の小さな集合で、EARS形式またはEARS構文とも呼びます。要件とは、システムが満たさなければならない検証可能な義務が一つあることです。',
       t('仕様駆動開発', earsHref.sdd),
       '（SDD、spec-driven development）は、その義務をコードの前に仕様へ書き、仕様を真実の源として扱うやり方です。製品要求文書（PRD、product requirements document）は、作業をタスクに分ける前に問題と範囲を述べる散文です。',
       t('SpecScore', earsHref.home),
@@ -28,6 +28,10 @@ const ears: EarsArticleCopy = {
       '（CLI、command-line interface）のコマンド ',
       { c: 'specscore spec lint' },
       ' です。',
+      t('CIで仕様をリントする方法', lintHref.article),
+      '。',
+      t('SpecScoreとは', '/what-is-specscore/'),
+      '。',
       t('Kiro', earsHref.kiro, 'them'),
       'は Amazon Web Services（AWS）のエージェント型統合開発環境（IDE、integrated development environment）で、これらの文型の一つを書きます。記法は2009年、Alistair Mavin と Rolls-Royce の同僚が Institute of Electrical and Electronics Engineers（IEEE）の要求工学会議で初めて発表しました。',
     ],
@@ -437,7 +441,7 @@ const acceptance: AcceptanceArticleCopy = {
     ears: [
     [
       "これらの文型は",
-      t("EARS要件構文を例で説明する", acceptanceHref.earsArticle),
+      t("EARS記法とは：要件の書き方と例", acceptanceHref.earsArticle),
       "に書いてあります。",
     ],
       [
@@ -684,7 +688,7 @@ const acceptance: AcceptanceArticleCopy = {
       gherkin: 'Cucumber — Gherkin リファレンス',
       bdd: 'Cucumber — 振る舞い駆動開発',
       ears: 'Alistair Mavin — EARS',
-      earsArticle: "EARS要件構文を例で説明する",
+      earsArticle: "EARS記法とは：要件の書き方と例",
       acceptance: 'SpecScore — 受け入れ基準の仕様',
       acceptanceRepo: 'specscore/specscore — 受け入れ基準の機能',
       scenarioRepo: 'specscore/specscore — シナリオの機能',
@@ -703,7 +707,7 @@ const acceptance: AcceptanceArticleCopy = {
     related: [
       { href: templateHref.article, label: templateLabel },
       { href: lintHref.article, label: relatedLabel },
-      { href: acceptanceHref.earsArticle, label: "EARS要件構文を例で説明する" },
+      { href: acceptanceHref.earsArticle, label: "EARS記法とは：要件の書き方と例" },
       { href: acceptanceHref.sdd, label: '仕様駆動開発' },
       { href: acceptanceHref.tools, label: '仕様駆動開発ツール' },
       { href: acceptanceHref.acceptance, label: '受け入れ基準の仕様' },
@@ -753,7 +757,7 @@ export const locale: ArticleLocale = {
       },
       {
         href: '/articles/ears-requirements/',
-        title: 'EARS要件構文を例で説明する',
+        title: 'EARS記法とは：要件の書き方と例',
         summary: 'EARS（Easy Approach to Requirements Syntax）とは何か、文型、KiroがEARS記法をどう使うか、リンターを通るSpecScoreの要件。',
       },
     ],

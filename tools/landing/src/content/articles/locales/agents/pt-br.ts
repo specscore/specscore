@@ -504,7 +504,7 @@ export const agents: AgentsArticleCopy = {
       href: agentsHref.acceptanceArticle,
       label: 'Como escrever critérios de aceitação que um agente de IA possa verificar',
     },
-    { href: agentsHref.earsArticle, label: 'Sintaxe de requisitos EARS explicada, com exemplos' },
+    { href: agentsHref.earsArticle, label: 'Notação EARS: formato e exemplos de requisitos' },
     { href: agentsHref.sdd, label: 'Desenvolvimento baseado em especificações' },
     { href: agentsHref.tools, label: 'Ferramentas de desenvolvimento baseado em especificações' },
     { href: agentsHref.cliSkills, label: 'CLI Skills' },

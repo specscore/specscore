@@ -9,15 +9,15 @@ const t = (a: string, url: string, kind?: 'us' | 'them'): Block[number] =>
   kind ? { a, href: url, kind } : { a, href: url };
 
 const ears: EarsArticleCopy = {
-    metaTitle: 'EARS 需求語法詳解與範例 | SpecScore',
+    metaTitle: 'EARS 格式與需求記法：句式與範例 | SpecScore',
     metaDescription:
-      'EARS 需求記法（Easy Approach to Requirements Syntax）：句式、範例、常見錯誤、Kiro 如何使用 EARS，以及能通過檢查器的 SpecScore REQ。',
-    h1: 'EARS 需求語法詳解與範例',
+      'EARS 格式（Easy Approach to Requirements Syntax）是一種需求記法。句式、範例，以及一條能通過檢查器的 SpecScore 需求。',
+    h1: 'EARS 格式與需求記法：句式與範例',
     updated: '最近更新：2026年11月2日',
     breadcrumb: '文章',
     hero: [
       t('EARS', earsHref.mavin),
-      '（Easy Approach to Requirements Syntax）是一種需求記法：一小套英語句式，也叫 EARS 語法，把條件、觸發和系統回應固定在同一順序裡。需求是系統必須滿足的一條可檢驗義務。',
+      '（Easy Approach to Requirements Syntax）是一種需求記法（EARS 格式）：一小套英語句式，也叫 EARS 記法或 EARS 語法，把條件、觸發和系統回應固定在同一順序裡。需求是系統必須滿足的一條可檢驗義務。',
       t('規範驅動開發', earsHref.sdd),
       '（SDD，spec-driven development）是在寫程式之前把這條義務寫進規範，並把規範當作事實來源。產品需求文件（PRD，product requirements document）是在把工作拆成任務之前，用散文說明問題和範圍。在 ',
       t('SpecScore', earsHref.home),
@@ -27,6 +27,10 @@ const ears: EarsArticleCopy = {
       t('命令列介面', earsHref.cli),
       '（CLI，command-line interface）命令 ',
       { c: 'specscore spec lint' },
+      '。',
+      t('如何在 CI 中檢查規格說明', lintHref.article),
+      '。',
+      t('SpecScore 是什麼', '/what-is-specscore/'),
       '。',
       t('Kiro', earsHref.kiro, 'them'),
       ' 是 Amazon Web Services（AWS）的代理式整合開發環境（IDE，integrated development environment），它寫這些句式中的一種。該記法由 Alistair Mavin 與 Rolls-Royce 的同事在 2009 年 Institute of Electrical and Electronics Engineers（IEEE）需求工程會議上首次發表。',
@@ -437,7 +441,7 @@ const acceptance: AcceptanceArticleCopy = {
     ears: [
     [
       "這些句式寫在",
-      t("EARS 需求語法詳解與範例", acceptanceHref.earsArticle),
+      t("EARS 格式與需求記法：句式與範例", acceptanceHref.earsArticle),
       "。",
     ],
       [
@@ -684,7 +688,7 @@ const acceptance: AcceptanceArticleCopy = {
       gherkin: 'Cucumber — Gherkin 參考',
       bdd: 'Cucumber — 行為驅動開發',
       ears: 'Alistair Mavin — EARS',
-      earsArticle: "EARS 需求語法詳解與範例",
+      earsArticle: "EARS 格式與需求記法：句式與範例",
       acceptance: 'SpecScore — 驗收標準規範',
       acceptanceRepo: 'specscore/specscore — 驗收標準功能',
       scenarioRepo: 'specscore/specscore — 情境功能',
@@ -703,7 +707,7 @@ const acceptance: AcceptanceArticleCopy = {
     related: [
       { href: templateHref.article, label: templateLabel },
       { href: lintHref.article, label: relatedLabel },
-      { href: acceptanceHref.earsArticle, label: "EARS 需求語法詳解與範例" },
+      { href: acceptanceHref.earsArticle, label: "EARS 格式與需求記法：句式與範例" },
       { href: acceptanceHref.sdd, label: '規範驅動開發' },
       { href: acceptanceHref.tools, label: '規範驅動開發工具' },
       { href: acceptanceHref.acceptance, label: '驗收標準規範' },
@@ -753,7 +757,7 @@ export const locale: ArticleLocale = {
       },
       {
         href: '/articles/ears-requirements/',
-        title: 'EARS 需求語法詳解與範例',
+        title: 'EARS 格式與需求記法：句式與範例',
         summary: 'EARS（Easy Approach to Requirements Syntax）是什麼、句式、Kiro 如何使用 EARS 記法，以及一條能通過檢查器的 SpecScore 需求。',
       },
     ],
