@@ -68,7 +68,7 @@ export const angles: Record<AlternativeSlug, { en: Angle; ru: Angle }> = {
     en: {
       intro: 'BMAD Method is an agile method for AI-driven development that produces briefs, specifications and architecture. Spec-driven development means recording intended behavior before implementation and using the spec to guide code. These BMAD alternatives range from narrower agent workflows to a checkable spec format.',
       why: 'BMAD covers a broader planning loop and agent roles. If your team needs only a feature workflow, change folder, PRD task breakdown, or a CI check of the specification, a smaller tool may fit.',
-      choose: 'Choose BMAD for an end-to-end agent method. Compare Spec Kit or OpenSpec for narrower workflows, Task Master for PRD decomposition, and SpecScore for the lasting specification and CI checks.',
+      choose: 'Choose BMAD for an end-to-end agent method. Compare Spec Kit or OpenSpec for narrower workflows, Kiro if the work lives in its development environment, Tessl for an agent-skills platform, Task Master for PRD decomposition, plain Markdown if the team will keep the structure itself, and SpecScore for the lasting specification and CI checks.',
       specscore: 'BMAD helps agents produce planning artifacts and can feed another workflow. SpecScore defines the spec artifact and runs deterministic structure, reference and status checks. Choose SpecScore when a pull request must prove that its specification still passes those checks.',
       mechanism: 'BMAD organizes planning artifacts and agent roles across an agile development loop',
     },

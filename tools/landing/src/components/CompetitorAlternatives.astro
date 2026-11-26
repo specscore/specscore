@@ -5,6 +5,7 @@ import SiteFooter from './SiteFooter.astro';
 import SiteFooterRu from './SiteFooterRu.astro';
 import Inlines from './Inlines.astro';
 import { angles, alternativeSlugs, listedAlternatives, type AlternativeSlug } from '../content/alternatives.ts';
+import { bmadEnTitle, bmadEnDescription, bmadEnHero, bmadEnFaqs, bmadEnSourcesNote, bmadEnSources } from '../content/bmad-alternatives-en.ts';
 import { pageFor } from '../content/roundup/pages.ts';
 import { href, type ToolId } from '../content/roundup/facts.ts';
 import type { Block } from '../content/roundup/types.ts';
@@ -21,15 +22,23 @@ const alternatives = listedAlternatives(slug);
 const url = `${prefix}/alternatives/${slug}/`;
 const vs = (id: string) => `${prefix}/vs/${id}/`;
 const alternativeHref = (id: string) => `${prefix}/alternatives/${id}/`;
-const title = ru
-  ? `Аналоги ${target.name} в 2026: SpecScore, OpenSpec и другие`
-  : `${target.name} Alternatives in 2026: SpecScore, OpenSpec and more`;
+const title = !ru && slug === 'bmad-method'
+  ? bmadEnTitle
+  : ru
+    ? `Аналоги ${target.name} в 2026: SpecScore, OpenSpec и другие`
+    : `${target.name} Alternatives in 2026: SpecScore, OpenSpec and more`;
 const examples = ['specscore', ...alternatives.filter((id) => id !== 'specscore').slice(0, 2)]
   .map((id) => page.tools[id].name).join(', ');
-const description = ru
-  ? `Альтернативы ${target.name}: что это за инструмент и как ${examples} отличаются по формату, работе с агентами и проверкам.`
-  : `What ${target.name} is and how ${examples} compare by spec format, agent workflow and validation.`;
-const headline = ru ? `Аналоги ${target.name} в 2026 году` : `${target.name} alternatives in 2026`;
+const description = !ru && slug === 'bmad-method'
+  ? bmadEnDescription
+  : ru
+    ? `Альтернативы ${target.name}: что это за инструмент и как ${examples} отличаются по формату, работе с агентами и проверкам.`
+    : `What ${target.name} is and how ${examples} compare by spec format, agent workflow and validation.`;
+const headline = !ru && slug === 'bmad-method'
+  ? bmadEnTitle
+  : ru
+    ? `Аналоги ${target.name} в 2026 году`
+    : `${target.name} alternatives in 2026`;
 
 const source: Record<AlternativeSlug, string> = {
   'spec-kit': href.specKitRepo,
@@ -94,7 +103,7 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
     <section class="hero" aria-labelledby="hero-title"><div class="hero__inner">
       <p class="hero__breadcrumb"><a href={`${prefix}/alternatives/`} class="xref">{ru ? 'Аналоги' : 'Alternatives'}</a></p>
       <h1 id="hero-title" class="hero__headline">{headline}</h1>
-      <p class="hero__sub">{angle.intro}</p>
+      <p class="hero__sub">{!ru && slug === 'bmad-method' ? <Inlines parts={bmadEnHero} /> : angle.intro}</p>
     </div></section>
 
     <section class="section"><div class="section-inner section-inner--prose">
@@ -138,8 +147,20 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
 
     <section class="section"><div class="section-inner section-inner--prose">
       <h2 class="section-title">{ru ? 'Частые вопросы' : 'Frequently asked questions'}</h2>
-      {faqs.map((faq) => <div class="faq-item"><h2 class="faq-item__q">{faq.q}</h2><div class="faq-item__a"><p>{faq.a}</p></div></div>)}
+      {(!ru && slug === 'bmad-method' ? bmadEnFaqs : faqs.map((faq) => ({ q: faq.q, a: [faq.a] }))).map((faq) => <div class="faq-item"><h2 class="faq-item__q">{faq.q}</h2><div class="faq-item__a"><p><Inlines parts={faq.a} /></p></div></div>)}
     </div></section>
+
+    {!ru && slug === 'bmad-method' && <section class="section" aria-labelledby="sources-title"><div class="section-inner section-inner--prose">
+      <h2 id="sources-title" class="section-title">Sources</h2>
+      <p class="prose-p">{bmadEnSourcesNote}</p>
+      <ul class="sources-list">
+        {bmadEnSources.map((entry) => (
+          <li>
+            <a href={entry.href} class="xref" target="_blank" rel={entry.href.includes('github.com/specscore/') ? undefined : 'nofollow noopener'}>{entry.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div></section>}
 
     <section class="section recommendation"><div class="section-inner section-inner--prose">
       <h2 class="section-title">{ru ? `Почему выбрать SpecScore вместо ${target.name}` : `Why choose SpecScore over ${target.name}`}</h2>
@@ -149,3 +170,28 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
   </main>
   <Footer />
 </BaseLayout>
+
+<style>
+  .sources-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .sources-list li {
+    position: relative;
+    padding-left: 1.15rem;
+    margin-bottom: 0.45rem;
+    color: var(--mid-ink);
+    line-height: 1.55;
+  }
+  .sources-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--accent, currentColor);
+  }
+</style>
