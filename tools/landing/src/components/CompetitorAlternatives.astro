@@ -34,7 +34,11 @@ const description = !ru && slug === 'bmad-method'
   : ru
     ? `Альтернативы ${target.name}: что это за инструмент и как ${examples} отличаются по формату, работе с агентами и проверкам.`
     : `What ${target.name} is and how ${examples} compare by spec format, agent workflow and validation.`;
-const headline = ru ? `Аналоги ${target.name} в 2026 году` : `${target.name} alternatives in 2026`;
+const headline = !ru && slug === 'bmad-method'
+  ? bmadEnTitle
+  : ru
+    ? `Аналоги ${target.name} в 2026 году`
+    : `${target.name} alternatives in 2026`;
 
 const source: Record<AlternativeSlug, string> = {
   'spec-kit': href.specKitRepo,

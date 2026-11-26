@@ -77,6 +77,10 @@ describe('BMAD Method alternatives English SEO', () => {
     assert.match(component, /from '\.\.\/content\/bmad-alternatives-en\.ts'/);
     assert.match(component, /!ru && slug === 'bmad-method'/);
     assert.match(component, /bmadEnTitle/);
+    assert.match(
+      component,
+      /const headline = !ru && slug === 'bmad-method'\s*\? bmadEnTitle/,
+    );
     assert.match(component, /bmadEnDescription/);
     assert.match(component, /bmadEnHero/);
     assert.match(component, /bmadEnFaqs/);
