@@ -25,9 +25,9 @@ const alternativeHref = (id: string) => `${prefix}/alternatives/${id}/`;
 const title = !ru && slug === 'bmad-method'
   ? bmadEnTitle
   : ru
-    ? `Аналоги ${target.name} в 2026: SpecScore, OpenSpec и другие`
+    ? `Аналоги ${target.name} в 2026: SpecScore и другие`
     : `${target.name} Alternatives in 2026: SpecScore, OpenSpec and more`;
-const examples = ['specscore', ...alternatives.filter((id) => id !== 'specscore').slice(0, 2)]
+const examples = ['specscore', ...alternatives.filter((id) => id !== 'specscore' && !(ru && id === 'openspec')).slice(0, 2)]
   .map((id) => page.tools[id].name).join(', ');
 const description = !ru && slug === 'bmad-method'
   ? bmadEnDescription
@@ -37,7 +37,7 @@ const description = !ru && slug === 'bmad-method'
 const headline = !ru && slug === 'bmad-method'
   ? bmadEnTitle
   : ru
-    ? `Аналоги ${target.name} в 2026 году`
+    ? `Аналоги ${target.name} в 2026: SpecScore и другие`
     : `${target.name} alternatives in 2026`;
 
 const source: Record<AlternativeSlug, string> = {
@@ -142,6 +142,7 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
     <section class="section"><div class="section-inner section-inner--prose">
       <h2 class="section-title">{ru ? 'Как выбрать' : 'How to choose'}</h2>
       <p class="prose-p">{angle.choose}</p>
+      {slug === 'bmad-method' && ru && <p class="prose-p">Сравнение аналогов OpenSpec — в отдельной статье: <a href="/ru/alternatives/openspec/" class="xref">Аналоги OpenSpec</a>.</p>}
       <p class="prose-p">{ru ? 'Подробнее: ' : 'Read more: '}<a href={vs(slug)} class="xref">SpecScore vs {target.name}</a>, <a href={`${prefix}/spec-driven-development/tools/`} class="xref">{ru ? 'все инструменты разработки по спецификациям' : 'spec-driven development tools'}</a>, <a href={`${prefix}/alternatives/`} class="xref">{ru ? 'все статьи об аналогах' : 'all alternatives guides'}</a>, <a href={`${prefix}/#what-is-title`} class="xref">{ru ? 'что такое SpecScore' : 'what SpecScore is'}</a>.</p>
     </div></section>
 

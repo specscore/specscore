@@ -3,16 +3,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from './SiteHeader.astro';
 import SiteFooter from './SiteFooter.astro';
 import SiteFooterRu from './SiteFooterRu.astro';
+import Inlines from './Inlines.astro';
 import { href } from '../content/roundup/facts.ts';
+import type { Block } from '../content/compare/types.ts';
 
 const ru = Astro.url.pathname.startsWith('/ru/');
 const prefix = ru ? '/ru' : '';
 const url = `${prefix}/alternatives/openspec/`;
 const vs = (slug: string) => `${prefix}/vs/${slug}/`;
+const ruHero: Block = [
+  'OpenSpec — это фреймворк разработки по спецификациям для ИИ-ассистентов, которые пишут код: он хранит предложения и изменения спецификаций в репозитории и даёт агенту команды для работы с ними. ',
+  { a: 'Разработка по спецификациям', href: '/ru/spec-driven-development/' },
+  ' (spec-driven development, SDD) означает, что команда сначала записывает требования и ожидаемое поведение, а затем по ним создаёт и проверяет код. Непрерывная интеграция (continuous integration, CI) — автоматическая проверка каждого предлагаемого изменения; ',
+  { a: 'линтовать спецификации в CI', href: '/ru/articles/lint-specs-in-ci/' },
+  ' показывает такую проверку для файла спецификации. Документ требований к продукту (product requirements document, PRD) описывает, что нужно сделать и для кого. Если вы ищете, какие есть аналоги OpenSpec, начните с этого различия: одни инструменты задают процесс агенту, другие проверяют сами файлы спецификаций. В этом обзоре сравниваются семь аналогов. Попарное сравнение ',
+  { a: 'SpecScore vs OpenSpec', href: '/ru/vs/openspec/' },
+  ' разбирает, чем они отличаются друг от друга.',
+];
 const content = ru ? {
-  title: 'Аналоги OpenSpec в 2026: SpecScore, Spec Kit, Kiro и другие',
-  description: 'Что такое OpenSpec и какие есть аналоги: сравнение SpecScore, Spec Kit, Kiro, BMAD, Tessl, Task Master AI и обычного Markdown по формату, агентам и лицензии.',
-  h1: 'Аналоги OpenSpec в 2026 году',
+  title: 'Аналоги OpenSpec: 7 инструментов SDD в сравнении',
+  description: 'Аналоги OpenSpec: сравнение SpecScore, Spec Kit, Kiro, BMAD, Tessl, Task Master AI и Markdown по формату, проверке спецификаций в CI и лицензии.',
+  h1: 'Аналоги OpenSpec: 7 инструментов SDD в сравнении',
   intro: 'OpenSpec — это фреймворк разработки по спецификациям для ИИ-ассистентов, которые пишут код. Разработка по спецификациям означает, что команда сначала записывает требования и ожидаемое поведение, а затем по ним создаёт и проверяет код. Если вы ищете аналоги OpenSpec или хотите понять, что такое OpenSpec, начните с этого различия: одни инструменты задают процесс агенту, другие проверяют сами файлы спецификаций.',
   whyTitle: 'Зачем искать альтернативы OpenSpec',
   why: 'OpenSpec хранит изменения в отдельных папках и даёт агенту команды для работы с ними. Другой инструмент может лучше подойти, если вам нужны проверяемый формат для CI, рабочий процесс внутри IDE, разбиение PRD на задачи или просто Markdown без дополнительного инструмента. Выбор зависит от того, какой результат вы хотите сохранять в репозитории.',
@@ -29,6 +40,19 @@ const content = ru ? {
     { q: 'Есть ли бесплатная альтернатива OpenSpec?', a: 'Да. Исходный код GitHub Spec Kit, BMAD Method и SpecScore доступен публично. Обычный Markdown также не требует отдельного продукта. Условия использования каждого инструмента приведены в таблице выше.' },
     { q: 'OpenSpec vs Spec Kit: в чём разница?', a: 'OpenSpec организует изменения в папках с предложением, спецификациями и задачами и проверяет их структуру. GitHub Spec Kit проводит агента через этапы Specify, Plan, Tasks и Implement, оставляя Markdown-артефакты в каталоге функции.' },
     { q: 'Что такое OpenSpec?', a: 'OpenSpec — фреймворк разработки по спецификациям для ИИ-ассистентов. Он хранит предложения и изменения спецификаций в репозитории и даёт команды для работы с ними.' },
+    { q: 'Какие есть аналоги OpenSpec?', a: 'В этом обзоре сравниваются семь аналогов OpenSpec: SpecScore, GitHub Spec Kit, Kiro, BMAD Method, Tessl, Task Master AI и обычный Markdown. Таблица выше показывает формат, интеграцию с агентами и лицензию каждого варианта.' },
+    { q: 'Чем SpecScore отличается от OpenSpec?', a: [
+      'OpenSpec помогает согласовать отдельное изменение с ИИ-агентом и проверяет структуру своих папок изменений. SpecScore задаёт формат спецификации и проверяет обязательные разделы, ссылки и статусы жизненного цикла; эту проверку можно запускать в CI. Подробнее — в сравнении ',
+      { a: 'SpecScore vs OpenSpec', href: '/ru/vs/openspec/' },
+      '.',
+    ] },
+    { q: 'Бесплатен ли OpenSpec, и какая у него лицензия?', a: [
+      'OpenSpec опубликован в репозитории ',
+      { a: 'Fission-AI/OpenSpec', href: href.openSpecRepo, kind: 'them' },
+      ' под лицензией ',
+      { a: 'MIT', href: href.openSpecLicense, kind: 'them' },
+      '.',
+    ] },
   ],
   related: 'Подробнее: ',
   tools: 'все инструменты разработки по спецификациям',
@@ -90,7 +114,7 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
       <div class="hero__inner">
         <p class="hero__breadcrumb"><a href={`${prefix}/alternatives/`} class="xref">{ru ? 'Аналоги' : 'Alternatives'}</a></p>
         <h1 id="hero-title" class="hero__headline">{content.h1}</h1>
-        <p class="hero__sub">{content.intro}</p>
+        <p class="hero__sub">{ru ? <Inlines parts={ruHero} /> : content.intro}</p>
       </div>
     </section>
 
@@ -101,17 +125,7 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
       </div>
     </section>
 
-    {content.sections.map((item) => (
-      <section class="section" id={item.slug} aria-labelledby={`${item.slug}-title`}>
-        <div class="section-inner section-inner--prose">
-          <h2 id={`${item.slug}-title`} class="section-title">{item.name}</h2>
-          <p class="prose-p"><strong>{content.labels[0]}:</strong> {item.what}</p>
-          <p class="prose-p"><strong>{content.labels[1]}:</strong> {item.diff}</p>
-          <p class="prose-p"><strong>{content.labels[2]}:</strong> {item.best} <a href={vs(item.slug === 'specscore' ? 'openspec' : item.slug)} class="xref">{ru ? 'Подробное сравнение' : 'Detailed comparison'}</a>{item.slug !== 'specscore' && item.slug !== 'plain-markdown' && <> · <a href={`${prefix}/alternatives/${item.slug}/`} class="xref">{ru ? `Аналоги ${item.name}` : `${item.name} alternatives`}</a></>}.</p>
-        </div>
-      </section>
-    ))}
-
+{ru && (
     <section class="section table-section" aria-labelledby="table-title">
       <div class="section-inner">
         <h2 id="table-title" class="section-title">{content.tableTitle}</h2>
@@ -141,6 +155,51 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
       </div>
     </section>
 
+)}
+
+    {content.sections.map((item) => (
+      <section class="section" id={item.slug} aria-labelledby={`${item.slug}-title`}>
+        <div class="section-inner section-inner--prose">
+          <h2 id={`${item.slug}-title`} class="section-title">{item.name}</h2>
+          <p class="prose-p"><strong>{content.labels[0]}:</strong> {item.what}</p>
+          <p class="prose-p"><strong>{content.labels[1]}:</strong> {item.diff}</p>
+          <p class="prose-p"><strong>{content.labels[2]}:</strong> {item.best} <a href={vs(item.slug === 'specscore' ? 'openspec' : item.slug)} class="xref">{ru ? 'Подробное сравнение' : 'Detailed comparison'}</a>{item.slug !== 'specscore' && item.slug !== 'plain-markdown' && <> · <a href={`${prefix}/alternatives/${item.slug}/`} class="xref">{ru ? `Аналоги ${item.name}` : `${item.name} alternatives`}</a></>}.</p>
+        </div>
+      </section>
+    ))}
+
+{!ru && (
+    <section class="section table-section" aria-labelledby="table-title">
+      <div class="section-inner">
+        <h2 id="table-title" class="section-title">{content.tableTitle}</h2>
+        <div class="table-wrap">
+          <table class="compare-table">
+            <thead><tr>{content.cols.map((col) => <th scope="col">{col}</th>)}</tr></thead>
+            <tbody>
+              <tr>
+                <th scope="row"><a href={vs('openspec')} class="xref">OpenSpec</a></th>
+                <td>{content.baseline.format}</td>
+                <td>{content.baseline.agent}</td>
+                <td><a href={href.openSpecLicense} rel="nofollow noopener" target="_blank">{content.baseline.license}</a></td>
+                <td>{content.baseline.where}</td>
+              </tr>
+              {content.sections.map((item) => (
+                <tr>
+                  <th scope="row"><a href={vs(item.slug === 'specscore' ? 'openspec' : item.slug)} class="xref">{item.name}</a></th>
+                  <td>{item.format}</td>
+                  <td>{item.agent}</td>
+                  <td>{'licenseUrl' in item ? <a href={item.licenseUrl} rel="nofollow noopener" target="_blank">{item.license}</a> : item.license}{'extraLicense' in item && <> · <a href={item.extraLicense} target="_blank">CLI: Apache-2.0</a></>}</td>
+                  <td>{item.where}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+)}
+
     <section class="section" aria-labelledby="choose-title"><div class="section-inner section-inner--prose">
       <h2 id="choose-title" class="section-title">{content.chooseTitle}</h2>
       <p class="prose-p">{content.choose}</p>
@@ -149,7 +208,7 @@ const Footer = ru ? SiteFooterRu : SiteFooter;
 
     <section class="section" aria-labelledby="faq-title"><div class="section-inner section-inner--prose">
       <h2 id="faq-title" class="section-title">{content.faqTitle}</h2>
-      {content.faqs.map((faq) => <div class="faq-item"><h2 class="faq-item__q">{faq.q}</h2><div class="faq-item__a"><p>{faq.a}</p></div></div>)}
+      {content.faqs.map((faq) => <div class="faq-item"><h2 class="faq-item__q">{faq.q}</h2><div class="faq-item__a"><p>{typeof faq.a === 'string' ? faq.a : <Inlines parts={faq.a} />}</p></div></div>)}
     </div></section>
 
     <section class="section recommendation" aria-labelledby="recommendation-title"><div class="section-inner section-inner--prose">
