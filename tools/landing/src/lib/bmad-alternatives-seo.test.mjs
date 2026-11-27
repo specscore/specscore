@@ -87,6 +87,6 @@ describe('BMAD Method alternatives English SEO', () => {
     assert.match(component, /bmadEnSourcesNote/);
     assert.match(component, /faq-item__q/);
     assert.match(component, /faq-item__a/);
-    assert.match(component, /Аналоги \$\{target\.name\} в 2026: SpecScore, OpenSpec и другие/);
+    assert.match(component, /Аналоги \$\{target\.name\} в 2026: SpecScore и другие/);
   });
 });
